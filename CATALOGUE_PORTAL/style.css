@@ -658,3 +658,41 @@ ul {
         grid-template-columns: 1fr;
     }
 }
+
+@media (max-width: 768px) {
+    .container {
+        padding: 4rem 1.5rem;
+    }
+
+    .hero-head {
+        margin-top: 2rem;
+        margin-bottom: 3rem;
+    }
+
+    .hero-head h1 {
+        font-size: 2.2rem;
+    }
+
+    .site-nav {
+        font-size: 0.70rem;
+        padding: 0.5rem 1.5rem;
+        gap: 1.5rem;
+    }
+
+    .bezel-core {
+        padding: 2rem 1.5rem;
+    }
+
+    .method-step {
+        padding: 2rem 1.5rem;
+    }
+
+    .faq-btn {
+        font-size: 1.1rem;
+        padding: 2rem 0;
+    }
+
+    .step-number {
+        font-size: 2rem;
+    }
+}
