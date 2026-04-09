@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guide Formateur : OUTBOUND HYBRIDE (Launch)</title>
+
+    <!-- Fonts & Icons -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Mermaid JS for schemas -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+
+    <style>
+        :root {
+            --primary-red: #f43f5e;
+            --bg-dark: #f8fafc;
+            --surface: #ffffff;
+            --text-main: #1e293b;
+            --text-secondary: #64748b;
+            --border: #e2e8f0;
+            --border-radius: 12px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* HEADER */
+        .header {
+            background: var(--surface);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            margin-bottom: 40px;
+            text-align: center;
+            border-top: 5px solid var(--primary-red);
+        }
+
+        .header h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin: 0 0 10px 0;
+            color: #0f172a;
+        }
+
+        .header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin: 0;
+        }
+
+        .alert-box {
+            background-color: #fff1f2;
+            color: #be123c;
+            padding: 20px;
+            border-left: 4px solid var(--primary-red);
+            border-radius: 4px;
+            margin-bottom: 40px;
+            font-weight: 500;
+            text-align: left;
+        }
+
+        /* CARD STEPS */
+        .step-card {
+            background: var(--surface);
+            border-radius: var(--border-radius);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+            margin-bottom: 40px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .step-header {
+            background: #f1f5f9;
+            padding: 25px 30px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .step-header h2 {
+            margin: 0;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            color: #0f172a;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .step-header h2 i {
+            color: var(--primary-red);
+        }
+
+        .step-meta {
+            text-align: right;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .step-meta strong {
+            color: #0f172a;
+        }
+
+        .step-content {
+            padding: 30px;
+        }
+
+        .instruction-block {
+            background: #f8fafc;
+            border: 1px dashed #cbd5e1;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+        }
+
+        .instruction-block h4 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: var(--primary-red);
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+        }
+
+        .instruction-list {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .instruction-list li {
+            margin-bottom: 15px;
+        }
+
+        .instruction-list li strong {
+            color: var(--text-main);
+        }
+
+        .instruction-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        .phrase-cle {
+            display: inline-block;
+            background-color: #fff;
+            padding: 8px 12px;
+            border-left: 3px solid var(--primary-red);
+            border-radius: 4px;
+            font-style: italic;
+            color: #881337;
+            margin-top: 8px;
+            font-size: 0.95rem;
+            background: #fff1f2;
+        }
+
+        /* MERMAID SCHEMAS */
+        .schema-container {
+            margin-top: 30px;
+            padding: 20px;
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .schema-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #475569;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .mermaid {
+            display: flex;
+            justify-content: center;
+        }
+
+        /* SUMMARY SECTION */
+        .summary-section {
+            background: #0f172a;
+            color: #f8fafc;
+            padding: 40px;
+            border-radius: var(--border-radius);
+            margin-top: 60px;
+            margin-bottom: 40px;
+        }
+
+        .summary-section h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.8rem;
+            color: #fff;
+            margin-top: 0;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 15px;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .summary-box h3 {
+            color: var(--primary-red);
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .summary-list {
+            padding-left: 20px;
+        }
+
+        .summary-list li {
+            margin-bottom: 10px;
+            color: #cbd5e1;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- HEADER -->
+        <header class="header">
+            <h1>Guide Formateur : OUTBOUND HYBRIDE</h1>
+            <p><strong>Niveau 1 (Launch)</strong> - Guide d'intervention Hyper-Détaillé</p>
+        </header>
+
+        <div class="alert-box">
+            <i class="fa-solid fa-bullseye" style="margin-right: 10px;"></i>
+            <strong>Objectif Pédagogique :</strong> Permettre au formateur de paramétrer l'architecture asynchrone
+            d'acquisition de leads en mode "Done-With-You". <strong>Faites TOUJOURS partager l'écran au client pour
+                qu'il clique lui-même.</strong>
+        </div>
+
+        <!-- TOP 1% ELITE SECTION -->
+        <div class="step-card" style="border-left: 4px solid #f59e0b;">
+            <div class="step-header">
+                <h2><i class="fa-solid fa-gem" style="color: #f59e0b;"></i> Mindset Formateur : Standard "TOP 1% Élite"
+                </h2>
+            </div>
+            <div class="step-content">
+                <div class="instruction-block" style="background: #fffbeb; border-color: #fde68a;">
+                    <h4 style="color: #d97706;">L'Accroche "Machine à Prospection" (Rappel Client) :</h4>
+                    <p style="font-style: italic; color: #92400e;">"Oubliez les appels à froid humiliants et l'espoir
+                        d'attendre un prospect. Grâce à votre budget OPCO, nous allons brancher un réacteur sur votre
+                        entreprise. Les gens qui ont un besoin brûlant aujourd'hui vont tomber dans votre base de
+                        données, et l'IA s'occupera d'eux avant qu'ils n'ouvrent le site de votre concurrent."</p>
+                </div>
+
+                <h4 style="color: #475569; margin-top: 20px;">L'Équation de Valeur (Hormozi) à retransmettre :</h4>
+                <ul class="instruction-list">
+                    <li><strong>Dream Outcome :</strong> Un flux prédictible de rendez-vous B2B exclusifs chaque
+                        semaine.</li>
+                    <li><strong>Likelihood of Achievement :</strong> Les algorithmes (Google Intent, Apollo) sont
+                        infaillibles, contrairement au démarchage "à l'instinct".</li>
+                    <li><strong>Time Delay :</strong> Immédiat. Lancement des Ads à J+1 = Premier Lead le jour même.
+                    </li>
+                    <li><strong>Effort & Sacrifice :</strong> Zéro effort de qualification manuelle pour le client.
+                        L'ingénierie tech le fait pour lui.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- OVERVIEW SCHEMA -->
+        <div class="step-card">
+            <div class="step-header" style="background:#fff;">
+                <h2><i class="fa-solid fa-map"></i> Vue d'Ensemble de l'Intervention</h2>
+            </div>
+            <div class="step-content">
+                <div class="schema-container" style="margin-top: 0; border: none;">
+                    <div class="mermaid">
+                        graph TD
+                        A([Début Intervention]) --> B(1. Stratégie Ads Intent)
+                        B --> C(2. Tracking & Pixel)
+                        C --> D(3. Scraping Apollo/Clay)
+                        D --> E(4. Webhooks Make.com)
+                        E --> F([Fin Niveau 1])
+
+                        style A fill:#0f172a,stroke:#334155,color:#fff
+                        style F fill:#f43f5e,stroke:#be123c,color:#fff
+                        style B fill:#f1f5f9,stroke:#cbd5e1
+                        style C fill:#f1f5f9,stroke:#cbd5e1
+                        style D fill:#f1f5f9,stroke:#cbd5e1
+                        style E fill:#f1f5f9,stroke:#cbd5e1
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 1 -->
+        <div class="step-card">
+            <div class="step-header">
+                <h2><i class="fa-solid fa-bullseye"></i> ÉTAPE 1 : Stratégie d'Acquisition Intentionniste </h2>
+                <div class="step-meta">
+                    Durée: <strong>1h00</strong><br>
+                    <span
+                        style="display:inline-block; margin-top:5px; background:#1e293b; color:#38bdf8; padding:3px 8px; border-radius:4px; font-size:0.75rem; font-weight:600;"><i
+                            class="fa-solid fa-graduation-cap"></i> Valide : SKILL OUTBOUND-1</span>
+                </div>
+            </div>
+            <div class="step-content">
+
+                <div class="instruction-block">
+                    <h4>Actions Directives :</h4>
+                    <ol class="instruction-list">
+                        <li><strong>Partage d'écran :</strong> Demandez toujours au client de partager son écran et de
+                            cliquer lui-même dans le Business Manager.</li>
+                        <li><strong>Architecture du Compte :</strong> Validez l'ouverture du Google Ads Manager et Meta
+                            Business. Forcez la facturation.</li>
+                        <li><strong>Recherche Sémantique B2B :</strong> Utilisez Google Keyword Planner avec le client.
+                            Filtrez uniquement sur les requêtes avec un niveau de chaleur "Tiède / Chaud".</li>
+                        <li><strong>Bidding & Exclusion :</strong> Configurez une enchère "Maximize Conversions / Target
+                            CPA".<br>
+                            <span class="phrase-cle">Directives Exclusives : Faites lui ajouter manuellement les mots
+                                "gratuit", "pas cher", "emploi" en mots-clés à exclure pour économiser 20% du budget
+                                instantanément.</span>
+                        </li>
+                    </ol>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- STEP 2 -->
+        <div class="step-card">
+            <div class="step-header">
+                <h2><i class="fa-solid fa-satellite-dish"></i> ÉTAPE 2 : Ingénierie de Tracking & Pixel</h2>
+                <div class="step-meta">
+                    Durée: <strong>45min</strong><br>
+                    <span
+                        style="display:inline-block; margin-top:5px; background:#f1f5f9; color:#64748b; padding:3px 8px; border-radius:4px; font-size:0.75rem; font-weight:600;"><i
+                            class="fa-solid fa-gear"></i> Ingénierie Active</span>
+                </div>
+            </div>
+            <div class="step-content">
+
+                <div class="instruction-block">
+                    <h4>Actions Directives :</h4>
+                    <ul class="instruction-list">
+                        <li><strong>Conteneur GTM :</strong> Activez ensemble le Google Tag Manager.<br>
+                            <span class="phrase-cle">Langage commun : "GTM cest la multiprise électrique de votre site
+                                web, sur laquelle on branchera tous les autres outils sans toucher au code."</span>
+                        </li>
+                        <li><strong>Conversion API (CAPI) :</strong> Lancez le paramétrage "Serveur-side" (réalisé en
+                            grande partie de notre côté en Mode Phantom).</li>
+                        <li><strong>Trigger d'évènement clé :</strong> Demandez au client de vous montrer où un visiteur
+                            remplit ses informations (Ex : Clic sur bouton Calendly). Simulez l'action pour vérifier que
+                            l'évènement "Lead" s'allume bien en vert.</li>
+                    </ul>
+                </div>
+
+                <div class="schema-container">
+                    <div class="schema-title">Modèle Mental : Tracking Absolu</div>
+                    <div class="mermaid">
+                        mindmap
+                        root((Tracking Absolu))
+                        ["Origine"]
+                        ["Google UTM (Source)"]
+                        ["Coût du Clic"]
+                        ["Comportement"]
+                        ["Profondeur de lecture"]
+                        ["Boutons Actionnés"]
+                        ["Serveur"]
+                        ["Contournement AdBlock (CAPI)"]
+                        ["Match Quality Data"]
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- STEP 3 -->
+        <div class="step-card">
+            <div class="step-header">
+                <h2><i class="fa-solid fa-database"></i> ÉTAPE 3 : Extraction Data B2B (Apollo & Clay)</h2>
+                <div class="step-meta">
+                    Durée: <strong>1h00</strong><br>
+                    <span
+                        style="display:inline-block; margin-top:5px; background:#1e293b; color:#38bdf8; padding:3px 8px; border-radius:4px; font-size:0.75rem; font-weight:600;"><i
+                            class="fa-solid fa-graduation-cap"></i> Valide : SKILL OUTBOUND-2</span>
+                </div>
+            </div>
+            <div class="step-content">
+
+                <div class="instruction-block">
+                    <h4>Actions Directives :</h4>
+                    <ul class="instruction-list">
+                        <li><strong>La Matrice Persona (ICP) :</strong> Ouvrez Apollo.io. Cherchez avec lui par Titre
+                            (Ex: Directeur), Taille de lentreprise, et Technologie (ex: Utilise Shopify).</li>
+                        <li><strong>Enrichissement Waterfall (Clay.com) :</strong> Exportez la liste brute et
+                            injectez-la dans Clay.</li>
+                        <li><strong>Cascade de Vérification :</strong> <br>
+                            <span class="phrase-cle">Montrez la force de la Cascade : Le logiciel cherche l'email via
+                                Hunter, s'il échoue, il tente via Prospeo, etc., jusqu'à obtenir un fichier Excel avec
+                                100% de Validité.</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- STEP 4 -->
+        <div class="step-card">
+            <div class="step-header">
+                <h2><i class="fa-solid fa-bolt"></i> ÉTAPE 4 : Vélocité Absolue (Webhooks Make.com)</h2>
+                <div class="step-meta">
+                    Durée: <strong>45min</strong><br>
+                    <span
+                        style="display:inline-block; margin-top:5px; background:#1e293b; color:#38bdf8; padding:3px 8px; border-radius:4px; font-size:0.75rem; font-weight:600;"><i
+                            class="fa-solid fa-graduation-cap"></i> Valide : SKILL OUTBOUND-3</span>
+                </div>
+            </div>
+            <div class="step-content">
+
+                <div class="instruction-block">
+                    <h4>Actions Directives :</h4>
+                    <ul class="instruction-list">
+                        <li><strong>Architecture No-code :</strong> Ouvrez un compte commun sur Make.com face au client.
+                        </li>
+                        <li><strong>Le Scénario (Routeur) :</strong> Créez un Webhook Custom et connectez-le au
+                            formulaire du site internet. Remplissez avec le client une réponse de test (Prénom : Test /
+                            Téléphone : 060000). Vous devez observer le "flash vert" dans le routeur.</li>
+                        <li><strong>Conditions (Filters) :</strong> Connectez la route vers Slack ou le CRM et appliquez
+                            un filtre : Ne laisser passer que les prospects ayant coché "Budget > 5000€".</li>
+                        <li><strong>Clôture du Niveau 1 :</strong> "Félicitations, l'autoroute technologique est
+                            construite et asphaltée. Au prochain module, nous positionnerons le robot Vapi au bout de la
+                            route pour accueillir vos prospects."</li>
+                    </ul>
+                </div>
+
+                <div class="schema-container">
+                    <div class="schema-title">Le flux "Vitesse de la Lumière" du prospect B2B</div>
+                    <div class="mermaid">
+                        journey
+                        title Cycle de vitesse
+                        section Acquisition Visuelle
+                        "Clic sur l Ads Google": 5: Prospect
+                        "Le GTM valide le cout": 4: Systeme
+                        section Integration Data
+                        "Remplissage Typeform": 5: Prospect
+                        "Make attrape": 5: Infrastructure
+                        section Prise de Decision
+                        "Routage CRM direct" : 5: Agence
+                    </div>
+                </div>
+
+                <!-- RÉSUMÉ DES LIVRABLES -->
+                <div class="summary-section">
+                    <h2>Ce que comprend la formation (Détail point par point)</h2>
+                    <p style="margin-top:-20px; margin-bottom: 30px; color:#cbd5e1; font-style:italic;">
+                        Récapitulatif
+                        contractuel des livrables techniques et pédagogiques à l'issue de l'intervention de niveau
+                        1.</p>
+
+                    <div class="summary-grid">
+                        <div class="summary-box">
+                            <h3><i class="fa-solid fa-server"></i> Architecture & Captation</h3>
+                            <ul class="summary-list">
+                                <li>Business Manager structurés et certifiés.</li>
+                                <li>Campagnes de prospection paramétrées par intention sémantique.</li>
+                                <li>Exclusion massive des audiences non-qualifiées (Mots clés négatifs/IP).</li>
+                                <li>Matrice Persona (ICP) cristallisée sur Apollo et configurée.</li>
+                            </ul>
+                        </div>
+
+                        <div class="summary-box">
+                            <h3><i class="fa-solid fa-network-wired"></i> Engineering & Tracking</h3>
+                            <ul class="summary-list">
+                                <li>Google Tag Manager initié sur les interfaces.</li>
+                                <li>Évènements de "Conversion" déclarés et testés physiquement.</li>
+                                <li>Enrichissement Data (Scraping B2B) en cascade automatisée.</li>
+                                <li>Pont technologique (Webhooks Custom Make.com) actif et validé.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DONE FOR YOU (CRÉÉ PAR LE CENTRE) -->
+                <div class="summary-section" style="background: #1e293b; margin-top: 0;">
+                    <h2 style="color: #38bdf8;">Prestations "Done-For-You" (Réalisées par nos experts)</h2>
+                    <p style="margin-top:-20px; margin-bottom: 30px; color:#cbd5e1; font-style:italic;">Ce que le
+                        centre de
+                        formation paramètre en coulisses et livre "clés en main" à la place du client, pour garantir
+                        la
+                        conformité technique absolue.</p>
+
+                    <div class="summary-grid">
+                        <div class="summary-box">
+                            <h3 style="color: #38bdf8;"><i class="fa-solid fa-code"></i> Ingénierie Conversion API
+                            </h3>
+                            <ul class="summary-list">
+                                <li><strong>Paramétrage CAPI :</strong> Poser les clés secrètes serveur dans GTM
+                                    pour
+                                    contrer les bloqueurs AdBlock & IOS 14+.</li>
+                                <li><strong>Fiabilité Serveur :</strong> Test complet du webhook Make par l'équipe
+                                    Data et
+                                    garantie absolue de non-déperdition de leads via file d'attente (Queuing).</li>
+                            </ul>
+                        </div>
+
+                        <div class="summary-box">
+                            <h3 style="color: #38bdf8;"><i class="fa-solid fa-paintbrush"></i> Chauffage
+                                Infrastructure</h3>
+                            <ul class="summary-list">
+                                <li><strong>Setup DNS Messagerie :</strong> Injection des clés authentifiées (SPF,
+                                    DKIM,
+                                    DMARC) afin de certifier l'envoi des mails froids.</li>
+                                <li><strong>Domain Warm-up :</strong> Activation de l'algorithme de réchauffement
+                                    d'adresse
+                                    IP pour sceller la réputation d'expédition avant le Niveau 2.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Initialize Mermaid -->
+            <script>
+                mermaid.initialize({
+                    startOnLoad: true,
+                    theme: 'base',
+                    themeVariables: {
+                        primaryColor: '#f8fafc',
+                        primaryTextColor: '#1e293b',
+                        primaryBorderColor: '#cbd5e1',
+                        lineColor: '#94a3b8',
+                        secondaryColor: '#f1f5f9',
+                        tertiaryColor: '#fff1f2'
+                    },
+                    fontFamily: 'Inter, sans-serif'
+                });
+            </script>
+</body>
+
+</html>

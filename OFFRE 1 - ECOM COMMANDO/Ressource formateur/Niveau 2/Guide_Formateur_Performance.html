@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guide Formateur : E-COM COMMANDO (Performance)</title>
+
+    <!-- Fonts & Icons -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Mermaid JS for schemas -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+
+    <style>
+        :root {
+            --primary-cyano: #0ea5e9;
+            --secondary-gold: #fbbf24;
+            --bg-dark: #f8fafc;
+            --surface: #ffffff;
+            --text-main: #1e293b;
+            --text-secondary: #64748b;
+            --border: #e2e8f0;
+            --border-radius: 12px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* HEADER */
+        .header {
+            background: var(--surface);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            margin-bottom: 40px;
+            text-align: center;
+            border-top: 5px solid var(--primary-cyano);
+        }
+
+        .header h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin: 0 0 10px 0;
+            color: #0f172a;
+        }
+
+        .header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin: 0;
+        }
+
+        .alert-box {
+            background-color: #f0f9ff;
+            color: #0369a1;
+            padding: 20px;
+            border-left: 4px solid var(--primary-cyano);
+            border-radius: 4px;
+            margin-bottom: 40px;
+            font-weight: 500;
+            text-align: left;
+        }
+
+        /* CARD STEPS */
+        .step-card {
+            background: var(--surface);
+            border-radius: var(--border-radius);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+            margin-bottom: 40px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .step-header {
+            background: #f1f5f9;
+            padding: 25px 30px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .step-header h2 {
+            margin: 0;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            color: #0f172a;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .step-header h2 i {
+            color: var(--primary-cyano);
+        }
+
+        .step-meta {
+            text-align: right;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .step-meta strong {
+            color: #0f172a;
+        }
+
+        .step-content {
+            padding: 30px;
+        }
+
+        .instruction-block {
+            background: #f8fafc;
+            border: 1px dashed #cbd5e1;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+        }
+
+        .instruction-block h4 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: var(--primary-cyano);
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+        }
+
+        .instruction-list {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .instruction-list li {
+            margin-bottom: 15px;
+        }
+
+        .instruction-list li strong {
+            color: var(--text-main);
+        }
+
+        .phrase-cle {
+            display: inline-block;
+            background-color: #f0f9ff;
+            padding: 8px 12px;
+            border-left: 3px solid var(--primary-cyano);
+            border-radius: 4px;
+            font-style: italic;
+            color: #0369a1;
+            margin-top: 8px;
+            font-size: 0.95rem;
+        }
+
+        /* MERMAID SCHEMAS */
+        .schema-container {
+            margin-top: 30px;
+            padding: 20px;
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .schema-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #475569;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .mermaid {
+            display: flex;
+            justify-content: center;
+        }
+
+        /* SUMMARY SECTION */
+        .summary-section {
+            background: #0f172a;
+            color: #f8fafc;
+            padding: 40px;
+            border-radius: var(--border-radius);
+            margin-top: 60px;
+            margin-bottom: 40px;
+        }
+
+        .summary-section h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.8rem;
+            color: #fff;
+            margin-top: 0;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 15px;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .summary-box h3 {
+            color: var(--primary-cyano);
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .summary-list {
+            padding-left: 20px;
+        }
+
+        .summary-list li {
+            margin-bottom: 10px;
+            color: #cbd5e1;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- HEADER -->
+        <header class="header">
+            <h1>Guide Formateur : E-COM COMMANDO</h1>
+            <p><strong>Niveau 2 (Performance)</strong> - Guide d'intervention Hyper-Détaillé</p>
+        </header>
+
+        <div class="alert-box">
+            <i class="fa-solid fa-bullseye" style="margin-right: 10px;"></i>
+            <strong>Objectif Pédagogique :</strong> Permettre au client d'automatiser sa rétention e-mail (Vault System)
+            et bénéficier d'une injection de masse SEO pour démultiplier son trafic organique gratuit.
+        </div>
+
+        <!-- TOP 1% ELITE SECTION -->
+        <div class="step-card" style="border-left: 4px solid #f59e0b;">
+            <div class="step-header">
+                <h2><i class="fa-solid fa-gem" style="color: #f59e0b;"></i> Mindset Formateur : Standard "TOP 1% Élite"
+                </h2>
+            </div>
+            <div class="step-content">
+                <div class="instruction-block" style="background: #fffbeb; border-color: #fde68a;">
+                    <h4 style="color: #d97706;">L'Accroche "Dark Funnel" (Rappel Client) :</h4>
+                    <p style="font-style: italic; color: #92400e;">"Avoir un beau site n'est qu'un socle. L'argent se
+                        trouve dans le trafic qui a failli acheter mais qui est parti. Grâce à l'automatisation IA, nous
+                        allons bloquer vos fuites de CA. Et avec notre système SEO de masse, on inonde Google de 50 de
+                        vos produits sans lever le petit doigt."</p>
+                </div>
+
+                <h4 style="color: #475569; margin-top: 20px;">L'Équation de Valeur (Hormozi) à retransmettre :</h4>
+                <ul class="instruction-list">
+                    <li><strong>Dream Outcome :</strong> Écosystème de rétention étanche et CA sur trafic existant
+                        maximisé.</li>
+                    <li><strong>Likelihood of Achievement :</strong> Alliance parfaite du <strong>Done-With-You</strong>
+                        (Formation Stratégique) et du <strong>Done-For-You</strong> (Exécution des requêtes serveurs).
+                    </li>
+                    <li><strong>Time Delay :</strong> Quick Win de Rétention (CA récupéré automatiquement).</li>
+                    <li><strong>Effort & Sacrifice :</strong> Le client encaisse, le robot Make.com/Klaviyo travaille de
+                        nuit.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- OVERVIEW SCHEMA -->
+        <div class="step-card">
+            <div class="step-header" style="background:#fff;">
+                <h2><i class="fa-solid fa-map"></i> Vue d'Ensemble de l'Intervention (NIVEAU 2)</h2>
+            </div>
+            <div class="step-content">
+                <div class="schema-container" style="margin-top: 0; border: none;">
+                    <div class="mermaid">
+                        graph TD
+                        A([Début Visio]) --> B(1. Déploiement Vault System Klaviyo)
+                        B --> C(2. 50 Fiches Mass-SEO IA)
+                        C --> D(3. Exit Intent / Capture Leads)
+                        D --> E(4. Ingénierie Créative Pub & Hooks)
+                        E --> F(5. Architecte Data LTV/CAC)
+                        F --> G([Fin Niveau 2])
+
+                        style A fill:#0f172a,stroke:#334155,color:#fff
+                        style G fill:#0ea5e9,stroke:#0369a1,color:#fff
+                        style B fill:#f1f5f9,stroke:#cbd5e1
+                        style C fill:#f1f5f9,stroke:#cbd5e1
+                        style D fill:#f1f5f9,stroke:#cbd5e1
+                        style E fill:#f1f5f9,stroke:#cbd5e1
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 1 -->
+        <div class="step-card">
+            <div class="step-header">
+                <h2><i class="fa-solid fa-envelope-open-text"></i> ÉTAPE 1 : Vault System Anti-Abandon (Klaviyo)</h2>
+                <div class="step-meta">
+                    Durée: <strong>1h30</strong><br>
+                    <span
+                        style="display:inline-block; margin-top:5px; background:#1e293b; color:#38bdf8; padding:3px 8px; border-radius:4px; font-size:0.75rem; font-weight:600;"><i
+                            class="fa-solid fa-graduation-cap"></i> Valide : SKILL ECOM-5</span>
+                </div>
+            </div>
+            <div class="step-content">
+                <div class="instruction-block">
+                    <h4>Actions Directives :</h4>
+                    <ul class="instruction-list">
+                        <li><strong>Création compte Klaviyo :</strong> Demandez au client d'ouvrir son espace et le
+                            synchroniser à l'API Shopify.</li>
+                        <li><strong>Structure "Abandon de Panier" :</strong> Modélisez avec lui le flow en 3 temps (H+2
+                            : Rappel Doux / J+1 : Bénéfices & Preuve Sociale / J+2 : Urgence Promo).</li>
+                        <li>
+                            <strong>Tests de Déclenchement :</strong> Simulez ensemble l'abandon réel d'un article et
+                            vérifiez l'entrée du profil dans le logiciel.<br>
+                            <span class="phrase-cle">Langage commun : "Ce robot ne dort jamais. Il piste chaque indécis
+                                et va le chercher gentiment par la main pour qu'il termine son achat."</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 2 -->
+        <div class="step-card">
+            <div class="step-header">
+                <h2><i class="fa-solid fa-bolt"></i> ÉTAPE 2 : Mass-SEO IA & Injection Catalogue</h2>
+                <div class="step-meta">
+                    Durée: <strong>1h00</strong><br>
+                    <span
+                        style="display:inline-block; margin-top:5px; background:#1e293b; color:#38bdf8; padding:3px 8px; border-radius:4px; font-size:0.75rem; font-weight:600;"><i
+                            class="fa-solid fa-graduation-cap"></i> Valide : ECOM-4 & ECOM-2</span>
+                </div>
+            </div>
+            <div class="step-content">
+                <div class="instruction-block">
+                    <h4>Actions Directives :</h4>
+                    <ul class="instruction-list">
+                        <li><strong>Le Fichier Maître :</strong> Présentez le Google Sheets/Airtable contenant les 50
+                            produits, rempli intelligemment : Titres, Images, Prix originaux.</li>
+                        <li><strong>Explication Mécanique :</strong> Montrez la colonne où ChatGPT, instruit pour le
+                            SEO, génère seul la description sémantique et les H2/H3 de masse.</li>
+                        <li>
+                            <strong>Le Magic Trick :</strong> Exécutez le scénario d'automatisation (Make.com). Demandez
+                            au client de rafraîchir son tableau de bord Shopify par lui-même.<br>
+                            <span class="phrase-cle">Langage commun : "Observez. Là où vos concurrents auraient mis 3
+                                nuits blanches à publier 50 fiches à la main, notre module les connecte toutes à vos
+                                rayons physiques en 12 secondes, formatées pour plaire à Google."</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 3 -->
+        <div class="step-card">
+            <div class="step-header">
+                <h2><i class="fa-solid fa-magnet"></i> ÉTAPE 3 : Exit Intent & Capture Leads Pop-up</h2>
+                <div class="step-meta">
+                    Durée: <strong>45min</strong><br>
+                    <span
+                        style="display:inline-block; margin-top:5px; background:#1e293b; color:#38bdf8; padding:3px 8px; border-radius:4px; font-size:0.75rem; font-weight:600;"><i
+                            class="fa-solid fa-graduation-cap"></i> Valide : SKILL ECOM-3</span>
+                </div>
+            </div>
+            <div class="step-content">
+                <div class="instruction-block">
+                    <h4>Actions Directives :</h4>
+                    <ul class="instruction-list">
+                        <li><strong>Design Modal :</strong> Paramétrez dans le thème une "Pop-Up" visuelle en cas de
+                            tentative de fuite (Déclencheur comportemental : perte de focus).</li>
+                        <li><strong>Le "Lead Magnet" :</strong> Rédigez le texte d'offre irréfusable ("Revenez ! Prenez
+                            ces -10% dans votre boîte mail").</li>
+                        <li><strong>Bridge CRM :</strong> Assignez le nouveau mail capturé directement dans la base de
+                            données de Bienvenue Klaviyo.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 4 -->
+        <div class="step-card">
+            <div class="step-header">
+                <h2><i class="fa-solid fa-clapperboard"></i> ÉTAPE 4 : Ingénierie de la Créative Publicitaire (Ads)</h2>
+                <div class="step-meta">
+                    Durée: <strong>1h00</strong><br>
+                    <span
+                        style="display:inline-block; margin-top:5px; background:#1e293b; color:#38bdf8; padding:3px 8px; border-radius:4px; font-size:0.75rem; font-weight:600;"><i
+                            class="fa-solid fa-graduation-cap"></i> Valide : SKILL ECOM-4</span>
+                </div>
+            </div>
+            <div class="step-content">
+                <div class="instruction-block">
+                    <h4>Actions Directives :</h4>
+                    <ul class="instruction-list">
+                        <li><strong>L'Anatomie du Format "UGC" :</strong> Expliquez la structure exacte d'une publicité
+                            qui convertit : Les 3 premières secondes cruciales (Le Hook Visuel + Audio), l'agitation du
+                            problème, le déballage natif (Unboxing), et le Call To Action.</li>
+                        <li><strong>Atelier "Scripting Millimétré" :</strong> Scénarisez DIRECTEMENT avec le client la
+                            publicité de son meilleur produit (Exemple : "0:00 à 0:03 : Plan serré sur la douleur avec
+                            texte choc. 0:03 à 0:08 : L'utilisateur sourit au format POV...").</li>
+                        <li>
+                            <strong>Standards de L'Algorithme :</strong> Formez le client aux règles techniques de
+                            TikTok/Reels :<br>
+                            <span class="phrase-cle">Langage commun : "Si votre vidéo ressemble à une pub TV des années
+                                90, c'est mort. Il faut une musique Tendance, un cut brutal toutes les 2 secondes, et un
+                                sous-titrage généré par l'IA impossible à rater."</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 5 -->
+        <div class="step-card">
+            <div class="step-header">
+                <h2><i class="fa-solid fa-chart-pie"></i> ÉTAPE 5 : Dashboard Décisionnel (Analytics LTV/CAC)</h2>
+                <div class="step-meta">
+                    Durée: <strong>45min</strong><br>
+                    <span
+                        style="display:inline-block; margin-top:5px; background:#1e293b; color:#38bdf8; padding:3px 8px; border-radius:4px; font-size:0.75rem; font-weight:600;"><i
+                            class="fa-solid fa-graduation-cap"></i> Valide : SKILL ECOM-6</span>
+                </div>
+            </div>
+            <div class="step-content">
+                <div class="instruction-block">
+                    <h4>Actions Directives :</h4>
+                    <ul class="instruction-list">
+                        <li><strong>Démonstration Data :</strong> Liez l'interface Google Data Studio (ou Shopify
+                            Reports experts) à la page du client.</li>
+                        <li><strong>Lecture Business :</strong> Apprenez au client à lire deux chiffres cruciaux : le
+                            Coût d'Acquisition (CAC) d'un nouveau, et la valeur à vie (LTV).</li>
+                        <li>
+                            <strong>Rassurez la technologie cachée :</strong><br>
+                            <span class="phrase-cle">Langage commun : "Si ces chiffres s'affichent si clairement, c'est
+                                grâce aux mouchards numériques invisibles (Pixels Meta & GA4) que nous avons branchés
+                                sous le capot du site en amont."</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- DONE FOR YOU SECTION -->
+        <div class="summary-section" style="background: #1e293b; margin-top: 0;">
+            <h2 style="color: #38bdf8;">Prestations "Done-For-You" (Back-Office Ingénierie)</h2>
+            <p style="margin-top:-20px; margin-bottom: 30px; color:#cbd5e1; font-style:italic;">Les infrastructures
+                invisibles livrées clés en main durant ce module pour asseoir la productivité et la captation Data.</p>
+
+            <div class="summary-grid">
+                <div class="summary-box">
+                    <h3 style="color: #38bdf8;"><i class="fa-solid fa-project-diagram"></i> Architecture API (Batch
+                        Processing)</h3>
+                    <ul class="summary-list">
+                        <li><strong>Code Make.com :</strong> Programmation du réseau complexe reliant Airtable, l'API
+                            OpenAI (GPT-4) et l'API native de Shopify (Webhooks).</li>
+                        <li><strong>Sécurité d'envoi mail :</strong> Configuration des protocoles DMARC/SPF/DKIM sur le
+                            gestionnaire DNS hébergeur pour contourner l'ensemble des filtres spams Google ou Outlook
+                            (Délivrabilité e-mail).</li>
+                    </ul>
+                </div>
+
+                <div class="summary-box">
+                    <h3 style="color: #38bdf8;"><i class="fa-solid fa-satellite-dish"></i> Traçage "Pixel Parfait"
+                        Analytics</h3>
+                    <ul class="summary-list">
+                        <li><strong>DataLayer E-Commerce :</strong> Coding pur pour renvoyer précisément le nom du
+                            produit, le prix du panier TTC, et la monnaie vers les plateformes externes.</li>
+                        <li><strong>Intégration balises Head :</strong> Raccordement du Tag de pixelisation Meta CAPI
+                            (Conversion API) et Google Analytics 4 (Purchase events).</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Initialize Mermaid -->
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#f8fafc',
+                primaryTextColor: '#1e293b',
+                primaryBorderColor: '#cbd5e1',
+                lineColor: '#94a3b8',
+                secondaryColor: '#f1f5f9',
+                tertiaryColor: '#f0f9ff'
+            },
+            fontFamily: 'Inter, sans-serif'
+        });
+    </script>
+</body>
+
+</html>

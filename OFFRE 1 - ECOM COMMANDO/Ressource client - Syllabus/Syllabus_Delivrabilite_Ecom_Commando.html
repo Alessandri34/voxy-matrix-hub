@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan de Délivrabilité - ECOM COMMANDO</title>
+    <style>
+        :root {
+            --primary: #000000;
+            --accent: #f43f5e;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --border: #e5e7eb;
+            --bg-gray: #f9fafb;
+        }
+
+        @page {
+            size: A4;
+            margin: 20mm;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            color: var(--text-dark);
+            line-height: 1.5;
+            background-color: #e5e5e5;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .document-a4 {
+            width: 210mm;
+            min-height: 297mm;
+            background: white;
+            margin: auto;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20mm;
+            box-sizing: border-box;
+        }
+
+        .header {
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .title-block h1 {
+            font-size: 24px;
+            margin: 0 0 5px 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .title-block p {
+            margin: 0;
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .meta-info {
+            text-align: right;
+            font-size: 11px;
+            color: var(--text-light);
+        }
+
+        .intro {
+            font-size: 14px;
+            margin-bottom: 30px;
+            font-style: italic;
+            color: var(--text-light);
+        }
+
+        .tier-section {
+            margin-bottom: 30px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            page-break-inside: avoid;
+        }
+
+        .tier-header {
+            background: var(--bg-gray);
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .tier-header h2 {
+            margin: 0;
+            font-size: 18px;
+            color: var(--primary);
+        }
+
+        .tier-analogy {
+            font-size: 12px;
+            color: var(--accent);
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .feature-item {
+            padding: 20px;
+            border-bottom: 1px dashed var(--border);
+        }
+
+        .feature-item:last-child {
+            border-bottom: none;
+        }
+
+        .feature-title {
+            font-weight: bold;
+            font-size: 15px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            color: var(--primary);
+        }
+
+        .feature-title::before {
+            content: '';
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .feature-tech {
+            font-size: 11px;
+            background: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #4b5563;
+            margin-left: 10px;
+            font-weight: normal;
+            border: 1px solid #d1d5db;
+        }
+
+        .detail-list {
+            margin: 0 0 15px 16px;
+            padding-left: 20px;
+            font-size: 13px;
+            color: #374151;
+        }
+
+        .detail-list li {
+            margin-bottom: 5px;
+        }
+
+        .detail-list li strong {
+            color: var(--primary);
+        }
+
+        .feature-vulga {
+            font-size: 13px;
+            padding: 10px 15px;
+            border-left: 3px solid var(--accent);
+            background: #fff1f2;
+            color: #881337;
+            margin-top: 10px;
+            border-radius: 0 4px 4px 0;
+        }
+
+        /* Responsive for viewing on screen */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .document-a4 {
+                box-shadow: none;
+                width: 100%;
+                min-height: auto;
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="document-a4">
+
+        <!-- HEADER -->
+        <div class="header">
+            <div class="title-block">
+                <h1>Syllabus Opérationnel Détaillé</h1>
+                <p>OFFRE 1 : E-COM COMMANDO (Chronologie de Délivrabilité)</p>
+            </div>
+            <div class="meta-info">
+                Document de Référence Technique<br>
+                Révision: 2.0<br>
+                Ingénierie Pédagogique
+            </div>
+        </div>
+
+        <div class="intro">
+            Objectif : Décomposer étape par étape les livrables d'ingénierie et de formation de l'infrastructure E-com
+            Commando, sur les 3 niveaux de l'offre.
+        </div>
+
+        <!-- TIER 1 -->
+        <div class="tier-section">
+            <div class="tier-header">
+                <h2>NIVEAU 1 : E-COM LAUNCH</h2>
+                <span class="tier-analogy">Fondations & Base de Vente</span>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-title">1. Ingénierie & Déploiement CMS Premium <span class="feature-tech">Shopify
+                        Architecture</span></div>
+                <ul class="detail-list">
+                    <li><strong>Création d'instance :</strong> Ouverture de l'espace d'hébergement sécurisé.</li>
+                    <li><strong>Configuration DNS :</strong> Liaison nom de domaine personnalisé et certificats SSL
+                        (Sécurité HTTPS).</li>
+                    <li><strong>Design System :</strong> Intégration d'un thème premium optimisé (Vitesse de chargement
+                        & Mobile First).</li>
+                    <li><strong>Charte Graphique :</strong> Implémentation du logo, typographies et palette de couleurs
+                        de la marque.</li>
+                    <li><strong>Mentions Légales :</strong> Création et intégration des pages obligatoires (CGV,
+                        Mentions Légales, Politique de confidentialité, Retours).</li>
+                    <li><strong>Menu & Navigation :</strong> Structuration des catégories (Header) et bas de page
+                        (Footer).</li>
+                </ul>
+                <div class="feature-vulga"><strong>Langage commun :</strong> On monte les murs de votre boutique, on
+                    pose l'enseigne avec votre logo, on sécurise les portes (SSL) et on organise les rayons pour que les
+                    clients s'y retrouvent facilement, le tout en respectant la loi.</div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-title">2. Intégration Flux Financiers <span class="feature-tech">Stripe & API
+                        Bancaires</span></div>
+                <ul class="detail-list">
+                    <li><strong>Ouverture des comptes :</strong> Création ou liaison des passerelles de paiement (Stripe
+                        / PayPal).</li>
+                    <li><strong>Configuration API :</strong> Liaison cryptée entre le compte bancaire et le site
+                        marchand.</li>
+                    <li><strong>Expérience de Check-out :</strong> Optimisation de la page de caisse (ajouts des logos
+                        de réassurance Visa/Mastercard).</li>
+                    <li><strong>Règles Fiscales :</strong> Paramétrage des taux de TVA applicables selon les zones
+                        géographiques.</li>
+                </ul>
+                <div class="feature-vulga"><strong>Langage commun :</strong> On installe le terminal de carte bleue
+                    "plug-and-play" sur le comptoir, on s'assure que l'argent arrive directement sur votre compte en
+                    banque, et on configure le calcul automatique de la TVA.</div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-title">3. Création de 5 Fiches Produits (Neuro-Copywriting) <span
+                        class="feature-tech">Prompt Engineering / ChatGPT</span></div>
+                <ul class="detail-list">
+                    <li><strong>Sourcing :</strong> Sélection des 5 produits piliers de la marque.</li>
+                    <li><strong>Copywriting Persuasif :</strong> Rédaction de textes utilisant les biais cognitifs
+                        (Bénéfices émotionnels > Caractéristiques).</li>
+                    <li><strong>Structuration Visuelle :</strong> Formatage en H1/H2/H3, listes à puces et mise en gras
+                        des mots d'ancrage.</li>
+                    <li><strong>Optimisation Média :</strong> Redimensionnement technique, compression des images et
+                        nommage des balises ALT pour les malvoyants (Accessibilité).</li>
+                    <li><strong>Mise en ligne :</strong> Injection dans la base de données CMS avec paramètres de stocks
+                        initiaux.</li>
+                </ul>
+                <div class="feature-vulga"><strong>Langage commun :</strong> Au lieu de simplement mettre un article en
+                    rayon avec un prix, on rédige un texte extrêmement vendeur qui donne "physiquement" envie d'acheter,
+                    on ajoute des belles photos fluides à charger, et on gère vos 5 premiers stocks.</div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-title">4. Transfert de Compétence & Pilotage <span class="feature-tech">Processus
+                        Qualiopi</span></div>
+                <ul class="detail-list">
+                    <li><strong>Prise en main CMS :</strong> Formation interface administrateur (Back-office).</li>
+                    <li><strong>Gestion des Commandes :</strong> Processus de préparation, édition des bordereaux et
+                        marquage expédié.</li>
+                    <li><strong>Service Client Basique :</strong> Procédure de remboursement et annulation directe via
+                        l'outil.</li>
+                    <li><strong>Autonomie Catalogue :</strong> Méthodologie autonome pour ajouter / modifier / supprimer
+                        de futurs produits ou changer les prix.</li>
+                </ul>
+                <div class="feature-vulga"><strong>Langage commun :</strong> C’est la phase "Remise des clés". On vous
+                    apprend comment lever le rideau de fer le matin, traiter une commande quand un client a payé, et
+                    comment ajouter d'autres jouets en rayon par vous-même à l'avenir.</div>
+            </div>
+        </div>
+
+        <!-- TIER 2 -->
+        <div class="tier-section">
+            <div class="tier-header">
+                <h2>NIVEAU 2 : E-COM PERFORMANCE (Best-Seller)</h2>
+                <span class="tier-analogy">Conversion & Automatisation de Rétention</span>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-title">5. Déploiement du Vault System Anti-Abandon <span
+                        class="feature-tech">Klaviyo / Automatisation Emailing</span></div>
+                <ul class="detail-list">
+                    <li><strong>Liaison CRM :</strong> Synchronisation des données (Data Layer) entre le site et le
+                        logiciel d'emailing (Klaviyo).</li>
+                    <li><strong>Séquence 1 - Abandon de Panier (Cart Abandonment) :</strong> Architecture de 3 emails
+                        programmés (H+2, J+1, J+2) pour relancer psychologiquement le visiteur n'ayant pas finalisé la
+                        commande.</li>
+                    <li><strong>Séquence 2 - Abandon de Navigation (Browse Abandonment) :</strong> Relance basée sur les
+                        cookies pour un visiteur ayant regardé un produit sans l'ajouter au panier.</li>
+                    <li><strong>Séquence 3 - Bienvenue :</strong> Flux d'emails éducatifs (3 à 5 emails) pour acculturer
+                        un nouveau prospect à la Marque.</li>
+                    <li><strong>Déliverabilité :</strong> Configuration DMARC/SPF/DKIM pour éviter l'onglet SPAM.</li>
+                </ul>
+                <div class="feature-vulga"><strong>Langage commun :</strong> On bloque les fuites de votre chiffre
+                    d'affaires. Si un visiteur part en laissant son caddie plein, notre robot logiciel lui envoie un
+                    mail automatique 2 heures après, puis 1 jour après, pour le faire revenir et finaliser son achat,
+                    sans aucune action de votre part.</div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-title">6. Injection de 50 Fiches Produits (Mass SEO) <span
+                        class="feature-tech">Automatisation Make.com / API / IA</span></div>
+                <ul class="detail-list">
+                    <li><strong>Création d'Ontologie :</strong> Structure arborescente massive du catalogue.</li>
+                    <li><strong>Traitement de masse (Batch Processing) :</strong> Utilisation d'un tableur maître
+                        (Airtable/Google Sheets) couplé à l'API d'Intelligence Artificielle.</li>
+                    <li><strong>SEO Sémantique :</strong> Génération par IA des Balises Title et Meta Descriptions pour
+                        les 50 produits, contenant les mots clés exacts recherchés sur Google.</li>
+                    <li><strong>Injections API :</strong> Import direct automatisé des 50 fiches dans la base de données
+                        du CMS en quelques secondes.</li>
+                </ul>
+                <div class="feature-vulga"><strong>Langage commun :</strong> On remplit entièrement le magasin avec 50
+                    articles. Sauf qu'au lieu de les écrire à la main, on utilise un robot qui rédige pour plaire à
+                    Google, pour s'assurer que quand un inconnu cherche ce produit sur internet, il tombe sur vous.
+                </div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-title">7. Capture de Leads via Pop-Up Exit Intent <span
+                        class="feature-tech">Javascript / Trigger</span></div>
+                <ul class="detail-list">
+                    <li><strong>Conception UI/UX :</strong> Design de la fenêtre modale promotionnelle.</li>
+                    <li><strong>Algorithme de Déclenchement :</strong> Paramétrage Javascript qui détecte la vélocité de
+                        la souris quittant la zone de la page web.</li>
+                    <li><strong>Incentive :</strong> Intégration d'un code de réduction à usage unique en échange de
+                        l'adresse email.</li>
+                    <li><strong>Bridge CRM :</strong> Envoi des données récupérées directement dans le système
+                        d'emailing (Klaviyo).</li>
+                </ul>
+                <div class="feature-vulga"><strong>Langage commun :</strong> Quelques millisecondes avant qu'un visiteur
+                    ne ferme la page frustré, une belle fenêtre s'affiche brusquement : "Attendez ! Prenez ces -10%
+                    contre votre e-mail". Cela permet de récupérer son contact pour le relancer plus tard gratuitement.
+                </div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-title">8. Tableau de Bord (Dashboard Analytics LTV/CAC) <span
+                        class="feature-tech">Google Data Studio / Shopify Analytics</span></div>
+                <ul class="detail-list">
+                    <li><strong>Tracking (Pixellisation) :</strong> Installation du réseau de traçabilité des
+                        conversions.</li>
+                    <li><strong>Centralisation Data :</strong> Remontée des datas depuis la plateforme E-com vers un
+                        Dashboard externe décisionnel.</li>
+                    <li><strong>Calcul KPIs :</strong> Affichage en direct du CAC (Coût d'Acquisition Client), de la LTV
+                        (Valeur à vie du Client), et du taux d'abandon.</li>
+                </ul>
+                <div class="feature-vulga"><strong>Langage commun :</strong> Un écran de contrôle radar. Au lieu de
+                    regarder votre compte en banque, ce tableau vous dit exactement combien vous a coûté un nouveau
+                    client, combien il a rapporté, et où votre magasin perd de sa rentabilité.</div>
+            </div>
+        </div>
+
+        <!-- TIER 3 -->
+        <div class="tier-section" style="page-break-before: always;">
+            <div class="tier-header">
+                <h2>NIVEAU 3 : EMPIRE</h2>
+                <span class="tier-analogy">Domination & Acquisition Explosive</span>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-title">9. Machine à Trafic Payant Automatisé <span class="feature-tech">Meta Ads
+                        Manager (Facebook/Insta) / Google</span></div>
+                <ul class="detail-list">
+                    <li><strong>Configuration Business Manager :</strong> Vérification de l'entreprise, création du
+                        compte publicitaire, liaison de la carte bancaire.</li>
+                    <li><strong>Tracking Avancé (CAPI) :</strong> Installation de l'API de Conversion Meta
+                        (contournement blocages iOS 14).</li>
+                    <li><strong>Stratégie d'Acquisition :</strong> Création de la campagne (Objectif : Ventes), ciblage
+                        de l'audience (Broad + Lookalike).</li>
+                    <li><strong>Retargeting Dynamique (DPA) :</strong> Campagne suivant automatiquement les personnes
+                        ayant vu un produit avec la photo de ce produit précis.</li>
+                </ul>
+                <div class="feature-vulga"><strong>Langage commun :</strong> Le magasin est prêt, il faut du monde
+                    dedans. On paramètre et lance les campagnes de publicité sur Facebook/Instagram pour forcer
+                    algorithmiquement les gens qui ont le profil de vos acheteurs à venir sur votre site.</div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-title">10. Création de VSL (Video Sales Letters) par Intelligence Artificielle <span
+                        class="feature-tech">HeyGen / ElevenLabs</span></div>
+                <ul class="detail-list">
+                    <li><strong>Génération d'Avatars :</strong> Clônage d'un acteur humain via IA pour agir comme
+                        Vendeur Digital.</li>
+                    <li><strong>Scripting Direct Response :</strong> Rédaction du script de vente (Hook percutant, corps
+                        persuasif, appel à l'action fort).</li>
+                    <li><strong>Audio Voice-over :</strong> Synthèse vocale de haute qualité (ElevenLabs) pour un rendu
+                        naturel.</li>
+                    <li><strong>Montage (B-Roll) :</strong> Incrustation textuelle et images d'illustration dynamiques
+                        pour retenir l'attention (Format TikTok / Reels).</li>
+                </ul>
+                <div class="feature-vulga"><strong>Langage commun :</strong> On conçoit les vidéos publicitaires de A à
+                    Z. On utilise un "robot acteur" ultra-réaliste qui lit un texte de vente parfait. Cette publicité
+                    vidéo est ensuite utilisée sur les réseaux sociaux pour attraper massivement l'attention.</div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-title">11. Fractional CMO (Délégation Totale de 30 Jours) <span
+                        class="feature-tech">Media Buying Agency</span></div>
+                <ul class="detail-list">
+                    <li><strong>Prise en main des dépenses :</strong> Notre media-buyer senior pilote votre budget
+                        quotidien pendant 1 mois.</li>
+                    <li><strong>A/B Testing :</strong> Test quotidien de visuels, audiences, textes pour baisser le coût
+                        d'acquisition.</li>
+                    <li><strong>Scale :</strong> Augmentation asymétrique du budget sur les campagnes rentables (Phase
+                        de croissance explosive).</li>
+                    <li><strong>Shadowing / Off-boarding :</strong> Séances d'apprentissage où vous observez le media
+                        buyer agir, jusqu'à la transmission finale des commandes à J+30.</li>
+                </ul>
+                <div class="feature-vulga"><strong>Langage commun :</strong> Pendant le premier mois de lancement, un
+                    pilote de course professionnel de notre agence gère intégralement vos dépenses publicitaires. Il va
+                    tester ce qui fonctionne, couper ce qui perd, et vous former petit à petit pour que vous sachiez
+                    exactement quoi faire au bout de 30 jours.</div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

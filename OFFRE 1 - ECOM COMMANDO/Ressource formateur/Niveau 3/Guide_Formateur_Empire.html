@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guide Formateur : E-COM COMMANDO (Empire)</title>
+
+    <!-- Fonts & Icons -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Mermaid JS for schemas -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+
+    <style>
+        :root {
+            --primary-purple: #9333ea;
+            --secondary-dark: #1e1b4b;
+            --bg-dark: #f8fafc;
+            --surface: #ffffff;
+            --text-main: #1e293b;
+            --text-secondary: #64748b;
+            --border: #e2e8f0;
+            --border-radius: 12px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* HEADER */
+        .header {
+            background: var(--surface);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            margin-bottom: 40px;
+            text-align: center;
+            border-top: 5px solid var(--primary-purple);
+        }
+
+        .header h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin: 0 0 10px 0;
+            color: #0f172a;
+        }
+
+        .header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin: 0;
+        }
+
+        .alert-box {
+            background-color: #faf5ff;
+            color: #7e22ce;
+            padding: 20px;
+            border-left: 4px solid var(--primary-purple);
+            border-radius: 4px;
+            margin-bottom: 40px;
+            font-weight: 500;
+            text-align: left;
+        }
+
+        /* CARD STEPS */
+        .step-card {
+            background: var(--surface);
+            border-radius: var(--border-radius);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+            margin-bottom: 40px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .step-header {
+            background: #f1f5f9;
+            padding: 25px 30px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .step-header h2 {
+            margin: 0;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            color: #0f172a;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .step-header h2 i {
+            color: var(--primary-purple);
+        }
+
+        .step-meta {
+            text-align: right;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .step-meta strong {
+            color: #0f172a;
+        }
+
+        .step-content {
+            padding: 30px;
+        }
+
+        .instruction-block {
+            background: #f8fafc;
+            border: 1px dashed #cbd5e1;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+        }
+
+        .instruction-block h4 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: var(--primary-purple);
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+        }
+
+        .instruction-list {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .instruction-list li {
+            margin-bottom: 15px;
+        }
+
+        .instruction-list li strong {
+            color: var(--text-main);
+        }
+
+        .phrase-cle {
+            display: inline-block;
+            background-color: #faf5ff;
+            padding: 8px 12px;
+            border-left: 3px solid var(--primary-purple);
+            border-radius: 4px;
+            font-style: italic;
+            color: #7e22ce;
+            margin-top: 8px;
+            font-size: 0.95rem;
+        }
+
+        /* MERMAID SCHEMAS */
+        .schema-container {
+            margin-top: 30px;
+            padding: 20px;
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .schema-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #475569;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .mermaid {
+            display: flex;
+            justify-content: center;
+        }
+
+        /* DONE FOR YOU SECTION */
+        .summary-section {
+            background: var(--secondary-dark);
+            color: #f8fafc;
+            padding: 40px;
+            border-radius: var(--border-radius);
+            margin-top: 60px;
+            margin-bottom: 40px;
+        }
+
+        .summary-section h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.8rem;
+            color: #fff;
+            margin-top: 0;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #3730a3;
+            padding-bottom: 15px;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .summary-box h3 {
+            color: #c084fc;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .summary-list {
+            padding-left: 20px;
+        }
+
+        .summary-list li {
+            margin-bottom: 10px;
+            color: #e2e8f0;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- HEADER -->
+        <header class="header">
+            <h1>Guide Formateur : E-COM COMMANDO</h1>
+            <p><strong>Niveau 3 (Empire)</strong> - Guide d'intervention Hyper-Détaillé</p>
+        </header>
+
+        <div class="alert-box">
+            <i class="fa-solid fa-bullseye" style="margin-right: 10px;"></i>
+            <strong>Objectif Pédagogique :</strong> Permettre au client de déployer une stratégie d'acquisition Meta Ads
+            via un modèle de "Shadowing As A Service" et la génération d'assets vidéos propulsés par l'Intelligence
+            Artificielle.
+        </div>
+
+        <!-- TOP 1% ELITE SECTION -->
+        <div class="step-card" style="border-left: 4px solid #c084fc;">
+            <div class="step-header">
+                <h2><i class="fa-solid fa-gem" style="color: #c084fc;"></i> Mindset Formateur : Standard "TOP 1% Élite"
+                </h2>
+            </div>
+            <div class="step-content">
+                <div class="instruction-block" style="background: #faf5ff; border-color: #d8b4fe;">
+                    <h4 style="color: #9333ea;">L'Accroche "Dark Funnel" (Rappel Client) :</h4>
+                    <p style="font-style: italic; color: #6b21a8;">"Votre Machine est prête. Il est l'heure d'ouvrir les
+                        vannes du trafic payant. Nous n'allons pas vous enseigner à bêtement 'booster un post'. Nous
+                        allons implémenter des Vidéos VSL via des IA hyper-réalistes (HeyGen), et laisser l'un de nos
+                        Directeurs Médias propulser vos campagnes quotidiennes de façon scientifique pendant 30 jours."
+                    </p>
+                </div>
+
+                <h4 style="color: #475569; margin-top: 20px;">L'Équation de Valeur (Hormozi) à retransmettre :</h4>
+                <ul class="instruction-list">
+                    <li><strong>Dream Outcome :</strong> Acquisition exponentielle (Scale agressif du CA journalier).
+                    </li>
+                    <li><strong>Likelihood of Achievement :</strong> <strong>Shadowing as a Service</strong> : Le client
+                        observe un professionnel certifié investir et s'enrichir avec le budget, puis reproduit la
+                        tactique algorithmique à J+30.</li>
+                    <li><strong>Time Delay :</strong> Ventes payantes instantanées acquises sous 24h via le réseau
+                        Meta/Google Ads.</li>
+                    <li><strong>Effort & Sacrifice :</strong> Le client apporte son budget média. Nous fournissons le
+                        Cerveau Humain (CMO) et les visages des Acteurs (A.I).</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- OVERVIEW SCHEMA -->
+        <div class="step-card">
+            <div class="step-header" style="background:#fff;">
+                <h2><i class="fa-solid fa-map"></i> Vue d'Ensemble de l'Intervention (NIVEAU 3)</h2>
+            </div>
+            <div class="step-content">
+                <div class="schema-container" style="margin-top: 0; border: none;">
+                    <div class="mermaid">
+                        graph TD
+                        A([Début Visio]) --> B(1. L'Architecte Meta/Google Ads)
+                        B --> C(2. Création Vidéos VSL Intelligence Artificielle)
+                        C --> D(3. Fractional CMO : Expert Délégué 30J)
+                        D --> E([Fin Niveau 3])
+
+                        style A fill:#1e1b4b,stroke:#312e81,color:#fff
+                        style E fill:#9333ea,stroke:#6b21a8,color:#fff
+                        style B fill:#f1f5f9,stroke:#cbd5e1
+                        style C fill:#f1f5f9,stroke:#cbd5e1
+                        style D fill:#f1f5f9,stroke:#cbd5e1
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 1 -->
+        <div class="step-card">
+            <div class="step-header">
+                <h2><i class="fa-solid fa-chart-line"></i> ÉTAPE 1 : Machine à Trafic Payant Automatisé</h2>
+                <div class="step-meta">
+                    Durée: <strong>2h00</strong><br>
+                    <span
+                        style="display:inline-block; margin-top:5px; background:#1e293b; color:#38bdf8; padding:3px 8px; border-radius:4px; font-size:0.75rem; font-weight:600;"><i
+                            class="fa-solid fa-graduation-cap"></i> Valide : SKILL ECOM-6</span>
+                </div>
+            </div>
+            <div class="step-content">
+                <div class="instruction-block">
+                    <h4>Actions Directives :</h4>
+                    <ul class="instruction-list">
+                        <li><strong>Désacraliser l'Acquisition :</strong> Formez le principal intéressé à la hiérarchie
+                            Meta Ads (Campagne, Ensemble, Auditoire).</li>
+                        <li><strong>La Force du CAPI :</strong> Expliquez comment et pourquoi l'agence a configuré la
+                            'Conversion API' (serveur) pour surpasser les boucliers anti-tracking d'Apple IOS14
+                            vis-à-vis des concurrents.</li>
+                        <li>
+                            <strong>La stratégie d'Enseignement :</strong> Paramétrez l'audience Broad (Élargie) vs
+                            l'audience de Retargeting dynamique produit (DPA).<br>
+                            <span class="phrase-cle">Langage commun : "Nous disons simplement à Facebook de trouver ceux
+                                qui ressemblent à vos anciens acheteurs, et de traquer en boucle avec le même T-shirt
+                                ceux qui ont mis au panier sans payer hier."</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 2 -->
+        <div class="step-card">
+            <div class="step-header">
+                <h2><i class="fa-solid fa-video"></i> ÉTAPE 2 : Clônage & Vidéos IA VSL (HeyGen)</h2>
+                <div class="step-meta">
+                    Durée: <strong>1h30</strong><br>
+                    <span
+                        style="display:inline-block; margin-top:5px; background:#1e293b; color:#38bdf8; padding:3px 8px; border-radius:4px; font-size:0.75rem; font-weight:600;"><i
+                            class="fa-solid fa-graduation-cap"></i> Valide : ECOM-4 (Scripting)</span>
+                </div>
+            </div>
+            <div class="step-content">
+                <div class="instruction-block">
+                    <h4>Actions Directives :</h4>
+                    <ul class="instruction-list">
+                        <li><strong>Le "Hook" Script :</strong> Formulez sur ChatGPT 4o le "Direct Response" script
+                            marketing : Arrêter le pouce en 3 secondes (Hook), Agiter le problème, Afficher la solution
+                            irrésistible.</li>
+                        <li><strong>Génération de L'Acteur Digital :</strong> Intégrez ce script dans l'outil de
+                            neuro-synthèse (HeyGen ou ElevenLabs).</li>
+                        <li>
+                            <strong>L'Assemblage visuel (Format Short) :</strong> Apprenez la structure d'édition très
+                            nerveuse de TikTok / Reels avec le séquençage permanent (pas de pause visuelle
+                            autorisée).<br>
+                            <span class="phrase-cle">Langage commun : "Plus besoin de payer des acteurs ou filmer dans
+                                le garage : notre IA neuro-vocale lit le texte de vente avec une persuasion humaine
+                                chirurgicale."</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 3 -->
+        <div class="step-card">
+            <div class="step-header">
+                <h2><i class="fa-solid fa-user-tie"></i> ÉTAPE 3 : Fractional CMO (Délégation sur 30 Jours)</h2>
+                <div class="step-meta">
+                    Durée: <strong>30 Jours (Répartition)</strong><br>
+                    <span
+                        style="display:inline-block; margin-top:5px; background:#1e293b; color:#38bdf8; padding:3px 8px; border-radius:4px; font-size:0.75rem; font-weight:600;"><i
+                            class="fa-solid fa-graduation-cap"></i> Transfert Compétence Actif</span>
+                </div>
+            </div>
+            <div class="step-content">
+                <div class="instruction-block">
+                    <h4>Actions Directives :</h4>
+                    <ul class="instruction-list">
+                        <li><strong>Phase d'Explosion Média :</strong> Un "Traffic Manager" officiel de l'Académie lance
+                            et gère les publicités au quotidien pendant le premier mois du client.</li>
+                        <li><strong>Shadowing Client (L'Outil Pédagogique Formel) :</strong> À distance unitairement (1h
+                            par semaine), le client se connecte avec l'Expert pour comprendre pourquoi la campagne "A" a
+                            été coupée (perte d'argent), et "B" a été scalée (gain majeur).</li>
+                        <li><strong>Le Volant de la Voiture :</strong> À J+30, cession contractuelle de la gestion
+                            exclusive publicitaire au nouveau "chef d'entreprise E-com" autonome, accompagné d'une
+                            charte tarifaire ROAS claire de fonctionnement.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- DONE FOR YOU SECTION -->
+        <div class="summary-section">
+            <h2 style="color: #c084fc;">Prestations "Done-For-You" (Back-Office Ingénierie)</h2>
+            <p style="margin-top:-20px; margin-bottom: 30px; color:#cbd5e1; font-style:italic;">Les actions colossales
+                incombées aux techniciens et Media-Buyers de l'Agence hors-formation pendant ce sprint de 30 Jours.</p>
+
+            <div class="summary-grid">
+                <div class="summary-box">
+                    <h3 style="color: #c084fc;"><i class="fa-solid fa-network-wired"></i> Ingénierie Tracking API (CAPI)
+                    </h3>
+                    <ul class="summary-list">
+                        <li><strong>Setup Serveur Avancé :</strong> Branchement au protocole REST du Pixel Facebook via
+                            Token et validation des noms de domaines vérifiés chez les hébergeurs (Cloudflare/OVH).
+                            L'infrastructure indispensable pour bypass la censure Apple I.T.P.</li>
+                    </ul>
+                </div>
+
+                <div class="summary-box">
+                    <h3 style="color: #c084fc;"><i class="fa-solid fa-chess-knight"></i> Gestion Budgétaire Millimétrée
+                    </h3>
+                    <ul class="summary-list">
+                        <li><strong>Media Buying Quotidien :</strong> Dépense et veille journalière exercée en propre
+                            par un responsable Meta certifié (Media Buyer), opérant la micro-allocation CBO/ABO et l'A/B
+                            Testing multivarié pour diminuer le CPA (Coût par Acquisition).</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Initialize Mermaid -->
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#f8fafc',
+                primaryTextColor: '#1e293b',
+                primaryBorderColor: '#cbd5e1',
+                lineColor: '#94a3b8',
+                secondaryColor: '#f1f5f9',
+                tertiaryColor: '#faf5ff'
+            },
+            fontFamily: 'Inter, sans-serif'
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guide Formateur : OUTBOUND HYBRIDE (Performance)</title>
+
+    <!-- Fonts & Icons -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Mermaid JS for schemas -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+
+    <style>
+        :root {
+            --primary-red: #f43f5e;
+            --bg-dark: #f8fafc;
+            --surface: #ffffff;
+            --text-main: #1e293b;
+            --text-secondary: #64748b;
+            --border: #e2e8f0;
+            --border-radius: 12px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* HEADER */
+        .header {
+            background: var(--surface);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            margin-bottom: 40px;
+            text-align: center;
+            border-top: 5px solid var(--primary-red);
+        }
+
+        .header h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin: 0 0 10px 0;
+            color: #0f172a;
+        }
+
+        .header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin: 0;
+        }
+
+        .alert-box {
+            background-color: #fff1f2;
+            color: #be123c;
+            padding: 20px;
+            border-left: 4px solid var(--primary-red);
+            border-radius: 4px;
+            margin-bottom: 40px;
+            font-weight: 500;
+            text-align: left;
+        }
+
+        /* CARD STEPS */
+        .step-card {
+            background: var(--surface);
+            border-radius: var(--border-radius);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+            margin-bottom: 40px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .step-header {
+            background: #f1f5f9;
+            padding: 25px 30px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .step-header h2 {
+            margin: 0;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            color: #0f172a;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .step-header h2 i {
+            color: var(--primary-red);
+        }
+
+        .step-meta {
+            text-align: right;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .step-meta strong {
+            color: #0f172a;
+        }
+
+        .step-content {
+            padding: 30px;
+        }
+
+        .instruction-block {
+            background: #f8fafc;
+            border: 1px dashed #cbd5e1;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+        }
+
+        .instruction-block h4 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: var(--primary-red);
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+        }
+
+        .instruction-list {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .instruction-list li {
+            margin-bottom: 15px;
+        }
+
+        .instruction-list li strong {
+            color: var(--text-main);
+        }
+
+        .instruction-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        .phrase-cle {
+            display: inline-block;
+            background-color: #fff;
+            padding: 8px 12px;
+            border-left: 3px solid var(--primary-red);
+            border-radius: 4px;
+            font-style: italic;
+            color: #881337;
+            margin-top: 8px;
+            font-size: 0.95rem;
+            background: #fff1f2;
+        }
+
+        /* MERMAID SCHEMAS */
+        .schema-container {
+            margin-top: 30px;
+            padding: 20px;
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .schema-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #475569;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .mermaid {
+            display: flex;
+            justify-content: center;
+        }
+
+        /* SUMMARY SECTION */
+        .summary-section {
+            background: #0f172a;
+            color: #f8fafc;
+            padding: 40px;
+            border-radius: var(--border-radius);
+            margin-top: 60px;
+            margin-bottom: 40px;
+        }
+
+        .summary-section h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.8rem;
+            color: #fff;
+            margin-top: 0;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 15px;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .summary-box h3 {
+            color: var(--primary-red);
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .summary-list {
+            padding-left: 20px;
+        }
+
+        .summary-list li {
+            margin-bottom: 10px;
+            color: #cbd5e1;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- HEADER -->
+        <header class="header">
+            <h1 style="font-family:'Outfit'">Guide Formateur : OUTBOUND HYBRIDE</h1>
+            <p><strong>Niveau 2 (Performance)</strong> - Agent Voice & RAG IA</p>
+        </header>
+
+        <div class="alert-box">
+            <i class="fa-solid fa-bullseye" style="margin-right: 10px;"></i>
+            <strong>Objectif Pédagogique :</strong> Permettre au formateur d'animer les sessions "Done-With-You" du
+            Niveau 2 (Best-Seller). Ce module est le cœur du réacteur : vous allez connecter et éduquer l'Intelligence
+            Artificielle Vocale pour qu'elle remplace le commercial humain dans la qualification.
+        </div>
+
+        <!-- TOP 1% ELITE SECTION -->
+        <div class="step-card" style="border-left: 4px solid #f59e0b;">
+            <div class="step-header">
+                <h2><i class="fa-solid fa-gem" style="color: #f59e0b;"></i> Mindset Formateur : Standard "TOP 1% Élite"
+                </h2>
+            </div>
+            <div class="step-content">
+                <div class="instruction-block" style="background: #fffbeb; border-color: #fde68a;">
+                    <h4 style="color: #d97706;">L'Accroche "Vendeur Synthétique" (Rappel Client) :</h4>
+                    <p style="font-style: italic; color: #92400e;">"Le secret des startups à très forte croissance n'est
+                        pas d'embaucher une armée de commerciaux stagiaires. Nous allons concevoir ensemble le parfait
+                        employé de qualification : une Intelligence Artificielle qui connaît tout de votre entreprise,
+                        appelle vos leads en moins d'une seconde, analyse leurs besoins avec une empathie simulée
+                        parfaite, et vous donne les meilleurs rendez-vous. Le tout sans salaire ni congé."</p>
+                </div>
+
+                <h4 style="color: #475569; margin-top: 20px;">L'Équation de Valeur (Hormozi) à retransmettre :</h4>
+                <ul class="instruction-list">
+                    <li><strong>Dream Outcome :</strong> Une équipe de vente virtuelle qui qualifie automatiquement 24/7
+                        de manière hyper-réaliste.</li>
+                    <li><strong>Likelihood of Achievement :</strong> "Done-With-You" (On choisit les prompts) +
+                        "Done-For-You" (L'agence gère la programmation LLM, limites de token et base vectorielle).</li>
+                    <li><strong>Time Delay :</strong> Résultat dès le premier clic généré au Niveau 1 (Appel en temps
+                        réel).</li>
+                    <li><strong>Effort & Sacrifice :</strong> Le client ne fait plus aucun appel de prospection inutile.
+                        Il ne parle qu'aux "Gros Poissons".</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- OVERVIEW SCHEMA -->
+        <div class="step-card">
+            <div class="step-header" style="background:#fff;">
+                <h2><i class="fa-solid fa-map"></i> Vue d'Ensemble de l'Intervention (NIVEAU 2)</h2>
+            </div>
+            <div class="step-content">
+                <div class="schema-container" style="margin-top: 0; border: none;">
+                    <div class="mermaid">
+                        graph TD
+                        A([Début Intervention]) --> B(5. Synthèse Vocale Vapi)
+                        B --> C(6. Database RAG Vectorielle)
+                        C --> D(7. Prompting BANT)
+                        D --> E(8. Emailing Nurturing PAS)
+                        E --> F([Validation & Fin Niveau 2])
+
+                        style A fill:#0f172a,stroke:#334155,color:#fff
+                        style F fill:#f43f5e,stroke:#be123c,color:#fff
+                        style B fill:#f1f5f9,stroke:#cbd5e1
+                        style C fill:#f1f5f9,stroke:#cbd5e1
+                        style D fill:#f1f5f9,stroke:#cbd5e1
+                        style E fill:#f1f5f9,stroke:#cbd5e1
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 5 -->
+        <div class="step-card">
+            <div class="step-header">
+                <h2><i class="fa-solid fa-microphone-lines"></i> ÉTAPE 5 : Programmation de la Voix IA (Vapi)</h2>
+                <div class="step-meta">
+                    Durée: <strong>1h00</strong><br>
+                    <span
+                        style="display:inline-block; margin-top:5px; background:#1e293b; color:#38bdf8; padding:3px 8px; border-radius:4px; font-size:0.75rem; font-weight:600;"><i
+                            class="fa-solid fa-graduation-cap"></i> Valide : SKILL OUTBOUND-4</span>
+                </div>
+            </div>
+            <div class="step-content">
+                <div class="instruction-block">
+                    <h4>Actions Directives :</h4>
+                    <ol class="instruction-list">
+                        <li><strong>Architecture de l'Agent (Vapi) :</strong> Paramétrez le "System Prompt" central.
+                            Fixez le ton exact en choisissant un Voice ID (ex: <i>Cartwright</i> pour un timbre
+                            jeune/dynamique, <i>Sarah</i> pour un fond empathique/sénior). Expliquez l'ajustement du
+                            Pitch et de la SpeedRate.</li>
+                        <li><strong>Acoustique Neuro-Linguistique (SSML) :</strong> Forcez le client à injecter des
+                            "Filler words" dans la trame d'intro. (Exemple de prompt : <i>*Inspire bruyamment*,
+                                "Écoutez... hmm... je pensais justement à vous"</i>). La machine simulera le souffle
+                            humain et le bégaiement intentionnel pour détruire la barrière "RoboCall".</li>
+                        <li><strong>Guerre de la Latence (Endpoint Optimization) :</strong> Configurez les "Turnaround
+                            Time". Imposez un réglage strict de < 600ms pour l'interruption vocale (TTS/STT
+                                latency).<br>
+                                <span class="phrase-cle">Langage commun : "Si votre robot met 2 secondes à répondre à un
+                                    'Allo ?', le prospect raccroche. Notre ingénierie permet au robot de répondre en
+                                    400ms, c'est plus rapide qu'un vrai standardiste humain."</span></li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 6 -->
+        <div class="step-card">
+            <div class="step-header">
+                <h2><i class="fa-solid fa-brain"></i> ÉTAPE 6 : Injection de Base de Connaissances (Vector DB & RAG)
+                </h2>
+                <div class="step-meta">
+                    Durée: <strong>1h00</strong><br>
+                    <span
+                        style="display:inline-block; margin-top:5px; background:#1e293b; color:#38bdf8; padding:3px 8px; border-radius:4px; font-size:0.75rem; font-weight:600;"><i
+                            class="fa-solid fa-graduation-cap"></i> Valide : SKILL OUTBOUND-5</span>
+                </div>
+            </div>
+            <div class="step-content">
+                <div class="instruction-block">
+                    <h4>Actions Directives :</h4>
+                    <ul class="instruction-list">
+                        <li><strong>Ingestion Vectorielle (Embeddings) :</strong> Rassemblez l'écosystème PDF du client
+                            (Grilles Tarifaires, Objections, Différenciateurs). Expliquez que l'IA va séquencer
+                            (Chunking) ces textes pour les stocker dans une base mémorielle (Vector DB RAG).</li>
+                        <li><strong>Stratégie Anti-Hallucination :</strong> Paramétrez l'hyperparamètre "Temperature" à
+                            0.1 pour figer la créativité mathématique. La machine ne doit inventer **aucune** remise
+                            tarifaire sauvage, sous peine de crash business.</li>
+                        <li><strong>Garde-Fou Cognitif (Grounding) :</strong> Injectez le prompt d'humilité
+                            sécuritaire.<br>
+                            <span class="phrase-cle">Directive Absolue : "Instruction LLM: Si le prospect pose une
+                                question technique absente de la Vector DB, ne mens jamais. Bégaye légèrement, puis dis
+                                : 'C'est une excellente question, je n'ai pas ce chiffre sous les yeux, je préfère que
+                                [Nom Du Commercial] vous appelle lui-même pour en parler'."</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="schema-container">
+                    <div class="schema-title">Le Traitement de l'Information RAG</div>
+                    <div class="mermaid">
+                        journey
+                        title Le Traitement RAG
+                        section Question Complexe
+                        "Prospect pose une question pointue": 5: Prospect
+                        "LLM cherche dans le PDF (Vector DB)": 4: Robot
+                        section Reponse Parfaite
+                        "Robot extrait la reponse sans inventer": 5: Robot
+                        "Formule la reponse orale rassurante": 5: Robot
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- STEP 7 -->
+        <div class="step-card">
+            <div class="step-header">
+                <h2><i class="fa-solid fa-terminal"></i> ÉTAPE 7 : L'Appel Intentionnel (Master Prompting)</h2>
+                <div class="step-meta">
+                    Durée: <strong>1h30</strong><br>
+                    <span
+                        style="display:inline-block; margin-top:5px; background:#1e293b; color:#38bdf8; padding:3px 8px; border-radius:4px; font-size:0.75rem; font-weight:600;"><i
+                            class="fa-solid fa-graduation-cap"></i> Valide : SKILL OUTBOUND-6</span>
+                </div>
+            </div>
+            <div class="step-content">
+                <div class="instruction-block">
+                    <h4>Actions Directives :</h4>
+                    <ul class="instruction-list">
+                        <li><strong>Prompting Cognitif B.A.N.T 2.0 :</strong> Encodez le cadre de qualification stricte.
+                            Interdiction absolue pour le robot de valider un lead s'il ne récolte pas 4 datas : Le
+                            Budget réel, le Pouvoir décisionnel de la cible, le Désespoir (Need), et l'Urgence (Timing).
+                        </li>
+                        <li><strong>Confinement de Polarité :</strong> Contrôlez le "Talk/Listen Ratio". Bride
+                            logicielle : <i>"Tes réponses ne te prennent jamais plus de 10 secondes audios. Ton but est
+                                d'écouter, pas de faire un discours. Relance toujours par une question miroir."</i></li>
+                        <li><strong>Le "Stress-Test" Clinique Live :</strong> Donnez le Endpoint Call Number au client.
+                            Il doit appeler l'IA face au formateur Zoom, en jouant un prospect atrocement pressé ("Allez
+                            vite, c'est quoi le prix ?"). Le formateur débuggue le Prompt Master en temps réel face aux
+                            réactions de la machine.<br>
+                            <span class="phrase-cle">Résultat Escompté : Le client réalise une crise de terreur positive
+                                ("Mon Dieu, ce robot ne s'énerve jamais, il retourne chaque attaque sans trembler
+                                émotionnellement, mieux que moi !").</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 8 -->
+        <div class="step-card">
+            <div class="step-header">
+                <h2><i class="fa-solid fa-envelope-open-text"></i> ÉTAPE 8 : Pré-Cadre Nurturing Silencieux (Emailing)
+                </h2>
+                <div class="step-meta">
+                    Durée: <strong>45min</strong><br>
+                    <span
+                        style="display:inline-block; margin-top:5px; background:#1e293b; color:#38bdf8; padding:3px 8px; border-radius:4px; font-size:0.75rem; font-weight:600;"><i
+                            class="fa-solid fa-graduation-cap"></i> Valide : SKILL OUTBOUND-7</span>
+                </div>
+            </div>
+            <div class="step-content">
+                <div class="instruction-block">
+                    <h4>Actions Directives :</h4>
+                    <ul class="instruction-list">
+                        <li><strong>Protocole Autonome "Ghosted" :</strong> Expliquez la bifurcation de l'API. Si l'IA
+                            vocale détecte un silence serveur ou un répondeur matriciel (Statut: <i>Voicemail
+                                Detect</i>), le webhook coupe l'audio et déclenche la séquence mail de repêchage
+                            (Nurturing).</li>
+                        <li><strong>Atelier d'Hybridation PAS (Problem-Agitate-Solve) :</strong> Générez 3 emails
+                            d'ingénierie sociale (1. Mail Douleur / 2. Mail Preuve Sociale / 3. Mail VSL). Montrez que
+                            le but n'est pas de vendre par mail, mais de pré-vendre le futur appel robotique pour
+                            maximiser le "Pick-Up Rate".<br>
+                            <span class="phrase-cle">Langage commun : "Nous ne forçons jamais la porte. Si le prospect
+                                ne décroche pas, le système glisse une lettre hyper-valuable au format digital. Il
+                                rappellera de lui-même sans se douter de la trame algorithmique derrière."</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="schema-container">
+                    <div class="schema-title">Séquence Nurturing (Framework PAS)</div>
+                    <div class="mermaid">
+                        mindmap
+                        root((Séquence Nurturing))
+                        ["Déclencheur"]
+                        ["Appel manqué (Voicemail)"]
+                        ["Jour 1"]
+                        ["Cibler la Douleur Majeure"]
+                        ["Jour 2"]
+                        ["Agiter la consequence et Preuve"]
+                        ["Jour 3"]
+                        ["Solution ultime et Re appel"]
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- RÉSUMÉ DES LIVRABLES (AJOUT QUALITATIF) -->
+        <div class="summary-section">
+            <h2>Ce que comprend la formation (Détail contractuel)</h2>
+            <p style="margin-top:-20px; margin-bottom: 30px; color:#cbd5e1; font-style:italic;">Récapitulatif des
+                livrables techniques et pédagogiques à l'issue de l'intervention de niveau 2 (Performance).</p>
+
+            <div class="summary-grid">
+                <div class="summary-box">
+                    <h3><i class="fa-solid fa-microchip"></i> Agent Conversatif IA</h3>
+                    <ul class="summary-list">
+                        <li>Paramétrage acoustique (SSML, Synthèse vocale, Filler words).</li>
+                        <li>Formation aux Master Prompts (B.A.N.T 2.0).</li>
+                        <li>Ingestion de la base vectorielle (RAG Database) avec protocoles Anti-Hallucination.</li>
+                    </ul>
+                </div>
+
+                <div class="summary-box">
+                    <h3><i class="fa-solid fa-link"></i> Mécanique de Nurturing</h3>
+                    <ul class="summary-list">
+                        <li>Connexion API d'alerte Webhook sur statut "Voicemail".</li>
+                        <li>Rédaction des 3 séquences fantômes Problem-Agitate-Solve.</li>
+                        <li>Test de tension clinique : Crash-test du robot en direct par le client.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- DONE FOR YOU (CRÉÉ PAR LE CENTRE) -->
+        <div class="summary-section" style="background: #1e293b; margin-top: 0;">
+            <h2 style="color: #38bdf8;">Prestations "Done-For-You" (Réalisées par nos experts)</h2>
+            <p style="margin-top:-20px; margin-bottom: 30px; color:#cbd5e1; font-style:italic;">Travail technique
+                complexe rendu invisible pour garantir un standard Élite lors du Niveau 2.</p>
+
+            <div class="summary-grid">
+                <div class="summary-box">
+                    <h3 style="color: #38bdf8;"><i class="fa-solid fa-server"></i> Ingénierie VoIP (Serveur
+                        Téléphonique)</h3>
+                    <ul class="summary-list">
+                        <li>Achat de numéros virtuels (Twilio/Telnyx) avec score de réputation "High Trust" pour éviter
+                            de tomber automatiquement en SPAM (Marquage "Scam Likely").</li>
+                    </ul>
+                </div>
+
+                <div class="summary-box">
+                    <h3 style="color: #38bdf8;"><i class="fa-solid fa-lock"></i> Configuration Vectorielle Sécurisée
+                    </h3>
+                    <ul class="summary-list">
+                        <li>Nettoyage des données du client, tokenisation via modèle d'Embedding (OpenAI) et
+                            implémentation dans Pinecone/Weaviate pour la récupération de contexte (RAG).</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Initialize Mermaid -->
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#f8fafc',
+                primaryTextColor: '#1e293b',
+                primaryBorderColor: '#cbd5e1',
+                lineColor: '#94a3b8',
+                secondaryColor: '#f1f5f9',
+                tertiaryColor: '#fff1f2'
+            },
+            fontFamily: 'Inter, sans-serif'
+        });
+    </script>
+</body>
+
+</html>

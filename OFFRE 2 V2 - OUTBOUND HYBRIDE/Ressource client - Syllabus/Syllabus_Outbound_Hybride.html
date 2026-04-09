@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan de Délivrabilité - OUTBOUND HYBRIDE</title>
+    <style>
+        :root {
+            --primary: #0f172a;
+            --accent: #0ea5e9;
+            /* Cyan Outbound */
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+            --bg-gray: #f8fafc;
+        }
+
+        @page {
+            size: A4;
+            margin: 20mm;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            color: var(--text-dark);
+            line-height: 1.5;
+            background-color: #e5e5e5;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .document-a4 {
+            width: 210mm;
+            min-height: 297mm;
+            background: white;
+            margin: auto;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20mm;
+            box-sizing: border-box;
+        }
+
+        .header {
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .title-block h1 {
+            font-size: 24px;
+            margin: 0 0 5px 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--primary);
+        }
+
+        .title-block p {
+            margin: 0;
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .meta-info {
+            text-align: right;
+            font-size: 11px;
+            color: var(--text-light);
+        }
+
+        .intro {
+            font-size: 14px;
+            margin-bottom: 30px;
+            font-style: italic;
+            color: var(--text-light);
+        }
+
+        .tier-section {
+            margin-bottom: 30px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            page-break-inside: avoid;
+        }
+
+        .tier-header {
+            background: var(--bg-gray);
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .tier-header h2 {
+            margin: 0;
+            font-size: 18px;
+            color: var(--primary);
+        }
+
+        .tier-analogy {
+            font-size: 12px;
+            color: var(--accent);
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .feature-item {
+            padding: 20px;
+            border-bottom: 1px dashed var(--border);
+        }
+
+        .feature-item:last-child {
+            border-bottom: none;
+        }
+
+        .feature-title {
+            font-weight: bold;
+            font-size: 15px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            color: var(--primary);
+        }
+
+        .feature-title::before {
+            content: '';
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .feature-tech {
+            font-size: 11px;
+            background: #f0f9ff;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #0369a1;
+            margin-left: 10px;
+            font-weight: normal;
+            border: 1px solid #bae6fd;
+        }
+
+        .detail-list {
+            margin: 0 0 15px 16px;
+            padding-left: 20px;
+            font-size: 13px;
+            color: #334155;
+        }
+
+        .detail-list li {
+            margin-bottom: 5px;
+        }
+
+        .detail-list li strong {
+            color: var(--primary);
+        }
+
+        .feature-vulga {
+            font-size: 13px;
+            padding: 10px 15px;
+            border-left: 3px solid var(--accent);
+            background: #f0f9ff;
+            color: #0c4a6e;
+            margin-top: 10px;
+            border-radius: 0 4px 4px 0;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .document-a4 {
+                box-shadow: none;
+                width: 100%;
+                min-height: auto;
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="document-a4">
+
+        <!-- HEADER -->
+        <div class="header">
+            <div class="title-block">
+                <h1>Syllabus Opérationnel Détaillé</h1>
+                <p>OFFRE 2 : OUTBOUND HYBRIDE (Chronologie de Délivrabilité)</p>
+            </div>
+            <div class="meta-info">
+                Document de Référence Technique<br>
+                Révision: 2.0<br>
+                Ingénierie Pédagogique
+            </div>
+        </div>
+
+        <div class="intro">
+            Objectif : Décomposer étape par étape les livrables d'ingénierie et de formation de l'infrastructure de
+            prospection Outbound B2B, sur les 3 niveaux de l'offre.
+        </div>
+
+        <!-- TIER 1 -->
+        <div class="tier-section">
+            <div class="tier-header">
+                <h2>NIVEAU 1 : ACQUISITION & INFRASTRUCTURE</h2>
+                <span class="tier-analogy">Trafic B2B & Vitesse de Capture</span>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-title">1. Stratégie d'Acquisition Intentionniste <span class="feature-tech">Search
+                        Intent / LinkedIn</span></div>
+                <ul class="detail-list">
+                    <li><strong>Architecture Campagne :</strong> Déploiement du réseau "Search Intent" (Google Ads)
+                        ciblant exclusivement les requêtes tièdes de vos futurs clients B2B.</li>
+                    <li><strong>Pilotage CPA :</strong> Analyse du Coût par Acquisition pour garantir la rentabilité
+                        algorithmique.</li>
+                </ul>
+                <div class="feature-vulga"><strong>Langage commun :</strong> On se place en plein milieu du chemin de
+                    vos clients. Quelqu'un tape vos mots-clés sur Google ? On s'assure que vous apparaissiez
+                    instantanément et qu'ils cliquent chez vous, au coût le plus bas possible.</div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-title">2. Ingénierie de Tracking & Architecture Technique <span
+                        class="feature-tech">Google Tag Manager / Pixel</span></div>
+                <ul class="detail-list">
+                    <li><strong>Balises et Triggers :</strong> Paramétrage intégral des Trackings Tiers (Pixels, Google
+                        Analytics 4) par nos ingénieurs.</li>
+                    <li><strong>Data Layer Local :</strong> Interconnexion entre les visites du site et l'attribution
+                        publicitaire.</li>
+                </ul>
+                <div class="feature-vulga"><strong>Langage commun :</strong> Chaque clic coûte de l'argent. Notre équipe
+                    technique pose des "capteurs" informatiques complexes sur votre site pour s'assurer que notre pub
+                    est capable de traquer l'origine exacte des prospects qui cliquent.</div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-title">3. Extraction Data B2B & Enrichissement IA <span
+                        class="feature-tech">Apollo.io / Clay</span></div>
+                <ul class="detail-list">
+                    <li><strong>Matrice Persona :</strong> Définition mathématique du client idéal (Titre, Taille
+                        Entreprise, Technologies utilisées).</li>
+                    <li><strong>Enrichissement Cascade (Waterfall) :</strong> Nettoyage de la base de prospection pour
+                        ne garder que des numéros de téléphone et emails professionnels vérifiés.</li>
+                </ul>
+                <div class="feature-vulga"><strong>Langage commun :</strong> Plutôt que de chercher vos clients à la
+                    main sur internet, on connecte un extracteur de données qui va puiser 2000 contacts parfaits dans la
+                    base de données mondiale, garantissant des numéros valides.</div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-title">4. La Vélocité Absolue (Speed-to-Lead) <span class="feature-tech">Make.com /
+                        Webhooks No-Code</span></div>
+                <ul class="detail-list">
+                    <li><strong>Loi d'usure d'intention :</strong> Dès la capture d'un lead via les publicités ou le
+                        trafic, la fiche est transmise en &lt; 200 millisecondes.</li>
+                    <li><strong>Architecte No-Code :</strong> Création d'une matrice API instantanée reliant le
+                        formulaire à l'Intelligence Artificielle.</li>
+                </ul>
+                <div class="feature-vulga"><strong>Langage commun :</strong> Dans le B2B, si on rappelle un prospect 5
+                    minutes trop tard, il est glacé. On installe un tuyau invisible : le prospect laisse ses
+                    coordonnées, et pouf, elles sont transférées en 1 seconde vers l'IA qui va l'appeler.</div>
+            </div>
+        </div>
+
+        <!-- TIER 2 -->
+        <div class="tier-section">
+            <div class="tier-header">
+                <h2>NIVEAU 2 : PERFORMANCE (Best-Seller)</h2>
+                <span class="tier-analogy">Qualification par Intelligence Artificielle Vocale</span>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-title">5. Programmation de la Voix & Synthèse (SSML) <span class="feature-tech">Vapi
+                        / Bland AI</span></div>
+                <ul class="detail-list">
+                    <li><strong>Acoustique :</strong> Choix spécifique d'un timbre de voix hyper-réaliste avec ajout de
+                        modulations (Hésitations, souffles, silences).</li>
+                    <li><strong>Latence :</strong> Optimisation serveur pour obtenir un temps de réponse &lt; 800ms à la
+                        voix humaine (Illusion totale).</li>
+                </ul>
+                <div class="feature-vulga"><strong>Langage commun :</strong> On sélectionne le standardiste parfait. Pas
+                    de robot saccadé. Cette intelligence artificielle respire, rigole, hésite, au point qu'aucun
+                    prospect ne se rendra compte qu'il parle à une machine.</div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-title">6. Injection de Base de Connaissances (RAG) <span class="feature-tech">Vector
+                        Database</span></div>
+                <ul class="detail-list">
+                    <li><strong>Contexte Entreprise :</strong> Scraping et injection de la documentation interne, des
+                        FAQs, et des tarifs de votre entreprise dans le "cerveau" du LLM vocal.</li>
+                    <li><strong>Traitement des Objections :</strong> Le robot est capable d'improviser une réponse
+                        cohérente sur votre produit si le client pose une question piège.</li>
+                </ul>
+                <div class="feature-vulga"><strong>Langage commun :</strong> On fait lire l'encyclopédie de votre
+                    entreprise au robot. S'il appelle pour vous, il doit tout savoir : vos tarifs, votre adresse, et ce
+                    qui vous différencie de la concurrence. Il ne bloquera sur aucune question.</div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-title">7. L'Appel Intentionnel de Qualification <span class="feature-tech">Prompt
+                        Injection</span></div>
+                <ul class="detail-list">
+                    <li><strong>Master Prompts Agence :</strong> Application de nos scripts pré-calibrés testés sur le
+                        terrain.</li>
+                    <li><strong>Filtrage Actif :</strong> Le robot ausculte, pose les 3 questions bloquantes (Budget,
+                        Timing, Besoin), et réduit le volume de prospects inutiles.</li>
+                </ul>
+                <div class="feature-vulga"><strong>Langage commun :</strong> Le robot appelle instantanément la personne
+                    qui a cliqué sur votre pub. Il va papoter 3 minutes avec elle. Son seul but : vérifier que la
+                    personne a un vrai besoin et l'argent nécessaire. S'il détecte un "touriste", il s'en débarrasse
+                    poliment.</div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-title">8. Le Pré-cadre Nurturing Silencieux <span class="feature-tech">Framework PAS
+                        / Emailing</span></div>
+                <ul class="detail-list">
+                    <li><strong>Pré-chauffe Asynchrone :</strong> Pour les prospects qui ne répondent pas à l'appel,
+                        enclenchement d'une séquence de 3 e-mails automatisés asymétriques.</li>
+                    <li><strong>Copywriting Persuasif :</strong> E-mails axés "Proof of Concept" pour élever le niveau
+                        d'intérêt avant le nouvel appel du robot.</li>
+                </ul>
+                <div class="feature-vulga"><strong>Langage commun :</strong> Si le décideur ne décroche pas son
+                    téléphone, la machine ne l'abandonne pas. Elle envoie 3 e-mails passionnants et très éducatifs sur
+                    votre entreprise. Quand elle le rappellera demain, il sera ravi de décrocher.</div>
+            </div>
+        </div>
+
+        <!-- TIER 3 -->
+        <div class="tier-section" style="page-break-before: always;">
+            <div class="tier-header">
+                <h2>NIVEAU 3 : EMPIRE</h2>
+                <span class="tier-analogy">Closing Humain d'Intention Supérieure</span>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-title">9. Routage CRM & Alerting "Push" <span class="feature-tech">Webhooks / Slack
+                        / Discord</span></div>
+                <ul class="detail-list">
+                    <li><strong>Synchronisation Système :</strong> Création de la fiche "Opportunité Chaude" dans
+                        Pipedrive ou HubSpot sitôt l'appel de l'IA terminé positivement.</li>
+                    <li><strong>Notification Instantanée :</strong> Envoi d'un message direct sur le smartphone du
+                        commercial avec l'heure du RDV réservé.</li>
+                </ul>
+                <div class="feature-vulga"><strong>Langage commun :</strong> On relie les fils. Le robot vient de
+                    valider et prendre rendez-vous avec un gros client ? Votre téléphone humain vibre immédiatement, et
+                    votre calendrier de demain est rempli tout seul.</div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-title">10. Data Analytics & Lecture du "Score Serenity" <span
+                        class="feature-tech">Dashboard / Summarization</span></div>
+                <ul class="detail-list">
+                    <li><strong>Audit de Call :</strong> L'intelligence artificielle fournit une synthèse écrite
+                        (transcript post-appel) des douleurs détectées.</li>
+                    <li><strong>Analyse Predictive :</strong> Transmission du "Score de Fiabilité" pour que le
+                        commercial humain attaque la visio avec l'angle parfait.</li>
+                </ul>
+                <div class="feature-vulga"><strong>Langage commun :</strong> La machine va plus loin : elle vous fait
+                    une fiche résumé sur la psychologie du client. Avant même d'allumer votre caméra pour le
+                    rendez-vous, vous savez exactement sur quel levier appuyer pour le faire acheter.</div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-title">11. Transition Symbiotique & Neuro-Closing <span
+                        class="feature-tech">Shadowing Exécutif</span></div>
+                <ul class="detail-list">
+                    <li><strong>Hand-off (Passation) :</strong> Apprendre au composant Humain (Vos vendeurs) à recevoir
+                        le relais sans friction.</li>
+                    <li><strong>Désamorçage Clinique :</strong> Script de "Neuro-Closing" pour empêcher les "Je vais
+                        réfléchir" ou "Envoyez-moi un devis" en fin de visio.</li>
+                </ul>
+                <div class="feature-vulga"><strong>Langage commun :</strong> Vous avez des prospects motivés, qui ont
+                    l'argent, devant vous en face à face. Ce module final vous apprend à transformer cet échange en
+                    signature instantanée.</div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

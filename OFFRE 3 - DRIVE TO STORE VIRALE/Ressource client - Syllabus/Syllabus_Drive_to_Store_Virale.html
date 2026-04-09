@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan de Délivrabilité - DRIVE-TO-STORE VIRALE</title>
+    <style>
+        :root {
+            --primary: #064e3b;
+            --accent: #22c55e;
+            /* Vert Virale */
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+            --bg-gray: #f8fafc;
+        }
+
+        @page {
+            size: A4;
+            margin: 20mm;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            color: var(--text-dark);
+            line-height: 1.5;
+            background-color: #e5e5e5;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .document-a4 {
+            width: 210mm;
+            min-height: 297mm;
+            background: white;
+            margin: auto;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20mm;
+            box-sizing: border-box;
+        }
+
+        .header {
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .title-block h1 {
+            font-size: 24px;
+            margin: 0 0 5px 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--primary);
+        }
+
+        .title-block p {
+            margin: 0;
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .meta-info {
+            text-align: right;
+            font-size: 11px;
+            color: var(--text-light);
+        }
+
+        .intro {
+            font-size: 14px;
+            margin-bottom: 30px;
+            font-style: italic;
+            color: var(--text-light);
+        }
+
+        .tier-section {
+            margin-bottom: 30px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            page-break-inside: avoid;
+        }
+
+        .tier-header {
+            background: var(--bg-gray);
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .tier-header h2 {
+            margin: 0;
+            font-size: 18px;
+            color: var(--primary);
+        }
+
+        .tier-analogy {
+            font-size: 12px;
+            color: var(--accent);
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .feature-item {
+            padding: 20px;
+            border-bottom: 1px dashed var(--border);
+        }
+
+        .feature-item:last-child {
+            border-bottom: none;
+        }
+
+        .feature-title {
+            font-weight: bold;
+            font-size: 15px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            color: var(--primary);
+        }
+
+        .feature-title::before {
+            content: '';
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .feature-tech {
+            font-size: 11px;
+            background: #f0fdf4;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #166534;
+            margin-left: 10px;
+            font-weight: normal;
+            border: 1px solid #bbf7d0;
+        }
+
+        .detail-list {
+            margin: 0 0 15px 16px;
+            padding-left: 20px;
+            font-size: 13px;
+            color: #334155;
+        }
+
+        .detail-list li {
+            margin-bottom: 5px;
+        }
+
+        .detail-list li strong {
+            color: var(--primary);
+        }
+
+        .feature-vulga {
+            font-size: 13px;
+            padding: 10px 15px;
+            border-left: 3px solid var(--accent);
+            background: #f0fdf4;
+            color: #14532d;
+            margin-top: 10px;
+            border-radius: 0 4px 4px 0;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .document-a4 {
+                box-shadow: none;
+                width: 100%;
+                min-height: auto;
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="document-a4">
+
+        <!-- HEADER -->
+        <div class="header">
+            <div class="title-block">
+                <h1>Syllabus Opérationnel Détaillé</h1>
+                <p>OFFRE 3 : DRIVE-TO-STORE VIRALE (Chronologie de Délivrabilité)</p>
+            </div>
+            <div class="meta-info">
+                Document de Référence Technique<br>
+                Révision: 2.0<br>
+                Ingénierie Pédagogique
+            </div>
+        </div>
+
+        <div class="intro">
+            Objectif : Décomposer étape par étape les livrables du processus "Machine à Contenu", permettant de
+            transformer un trafic digital d'algorithme en acheteurs physiques dans un point de vente.
+        </div>
+
+        <!-- TIER 1 -->
+        <div class="tier-section">
+            <div class="tier-header">
+                <h2>NIVEAU 1 : LES FONDATIONS</h2>
+                <span class="tier-analogy">Référencement, Écosystème & Captation In-Vivo</span>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-title">1. Ingénierie SEO Local & Audit Google Maps <span class="feature-tech">Google
+                        My Business</span></div>
+                <ul class="detail-list">
+                    <li><strong>Refonte de la Fiche GMB :</strong> Déploiement des catégories secondaires cachées et
+                        structuration sémantique de la description.</li>
+                    <li><strong>Géolocalisation d'Images :</strong> Ajout des métadonnées (EXIF GPS) sur les
+                        photographies HD de l'établissement.</li>
+                    <li><strong>Nettoyage de Réputation :</strong> Stratégie de réponse algorithmique aux avis négatifs
+                        historiques.</li>
+                </ul>
+                <div class="feature-vulga"><strong>Langage commun :</strong> On reconstruit la vitrine numérique de
+                    votre entreprise. Quand un prospect cherche votre service dans un rayon de 10km, vous devez
+                    apparaître premier sur Google Maps. On s'occupe de faire de vous le roi du quartier.</div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-title">2. Déploiement du "Local Trust Engine" <span class="feature-tech">Plaques NFC
+                        / QR Codes</span></div>
+                <ul class="detail-list">
+                    <li><strong>Système d'Acquisition d'Avis :</strong> Conception et intégration dans votre parcours
+                        client (en caisse ou sur tables) de notre système de validation rapide d'avis.</li>
+                    <li><strong>Algorithme de Confiance :</strong> Augmentation mathématique de votre note de 4.1 à 4.8
+                        en forçant la satisfaction.</li>
+                </ul>
+                <div class="feature-vulga"><strong>Langage commun :</strong> Au lieu d'espérer que les clients contents
+                    vous laissent un avis, on place une petite technologie (QR Code ou Sans-Contact) sur votre comptoir.
+                    Le client pose son téléphone et paf, la page des 5 étoiles s'ouvre.</div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-title">3. Création de l'Écosystème Vidéo Algorithmique <span
+                        class="feature-tech">TikTok / IG Reels</span></div>
+                <ul class="detail-list">
+                    <li><strong>Ouverture Business :</strong> Paramétrage strict des comptes TikTok et Instagram en
+                        profil "Creator/Business".</li>
+                    <li><strong>Bio "Drive-To-Store" :</strong> Copywriting ultra-localisé des biographies avec
+                        intégration des liens de réservation.</li>
+                </ul>
+                <div class="feature-vulga"><strong>Langage commun :</strong> On pose les fondations de votre chaîne de
+                    télévision privée. Vos profils sur les réseaux deviennent des "entonnoirs", conçus non pas pour
+                    avoir des likes d'inconnus, mais pour amener les gens à réserver.</div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-title">4. Atelier de Mise en Scène & Captation In-Vivo <span
+                        class="feature-tech">Cadrage Cinéma / Action Phantom</span></div>
+                <ul class="detail-list">
+                    <li><strong>Coaching "Visual Hooks" :</strong> Entraînement sur place à la captation absolue des
+                        algorithmes (mouvement, lumière).</li>
+                    <li><strong>Tournage Professionnel (Livrable) :</strong> Notre expert filme 2 heures complètes de
+                        rushs avec stabilisateurs et micros HF. Vous apprenez en pratiquant.</li>
+                </ul>
+                <div class="feature-vulga"><strong>Langage commun :</strong> La pub "à l'ancienne" ne marche plus. Notre
+                    professionnel vient chez vous, avec son matériel de cinéma, et tourne en 2h chrono les meilleures
+                    vidéos possibles de votre commerce. Vous nous regardez faire, on sécurise la matière première.</div>
+            </div>
+        </div>
+
+        <!-- TIER 2 -->
+        <div class="tier-section">
+            <div class="tier-header">
+                <h2>NIVEAU 2 : PERFORMANCE (Best-Seller)</h2>
+                <span class="tier-analogy">Usine à Contenu par Intelligence Artificielle</span>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-title">5. Processing Asynchrone des Rushs <span class="feature-tech">Drive Cloud /
+                        Dérushage</span></div>
+                <ul class="detail-list">
+                    <li><strong>Upload Sécurisé :</strong> Nettoyage direct de l'audio et transmission vers nos serveurs
+                        cloud haut débit.</li>
+                    <li><strong>Catégorisation :</strong> Séparation des prises de vues "B-Roll" et des "A-Roll" parlés.
+                    </li>
+                </ul>
+                <div class="feature-vulga"><strong>Langage commun :</strong> On centralise les gigantesques fichiers
+                    vidéos tournés lors du "Tier 1" de façon hyper sécurisée pour les envoyer sans aucune perte de
+                    qualité dans notre usine de traitement informatique.</div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-title">6. L'Intelligence Artificielle de Montage Spatial <span
+                        class="feature-tech">Opus Clip IA</span></div>
+                <ul class="detail-list">
+                    <li><strong>Découpe Algorithmique :</strong> Le LLM visionne les 2 heures de vidéos et extrait
+                        chirurgicalement les 30 "Shorts" les plus pertinents (+90% score de rétention).</li>
+                    <li><strong>Recadrage Vertical :</strong> Suivi du visage ("Face Tracking") pour assurer le format
+                        parfait pour les écrans de téléphone iOS/Androïd.</li>
+                </ul>
+                <div class="feature-vulga"><strong>Langage commun :</strong> Un monteur humain mettrait 3 jours complets
+                    pour trier les vidéos. Notre intelligence artificielle s'en charge en quelques minutes : elle trouve
+                    vos meilleures phrases, coupe les silences, et fabrique 30 vidéos prêtes à faire exploser internet.
+                </div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-title">7. Neuro-Copywriting & Sous-Titres Dynamiques <span
+                        class="feature-tech">Motion Design IA</span></div>
+                <ul class="detail-list">
+                    <li><strong>Incustation de Style "Hormozi" :</strong> Génération de sous-titres jaune/blanc ultra
+                        rapides (Bouncy Text).</li>
+                    <li><strong>Focus Mots-clés :</strong> Mise en gras et ajout d'émojis sur les termes cognitifs
+                        ("Attention", "Secret", "Local").</li>
+                </ul>
+                <div class="feature-vulga"><strong>Langage commun :</strong> 80% des utilisateurs regardent les vidéos
+                    sans le son. On intègre donc sur vos vidéos de magnifiques sous-titres qui bondissent au rythme de
+                    votre voix pour hypnotiser littéralement l'œil du cerveau humain.</div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-title">8. SEO Social & Génération de Métadonnées <span
+                        class="feature-tech">Sémantique / ChatGPT</span></div>
+                <ul class="detail-list">
+                    <li><strong>Hashtags Locaux :</strong> Analyse des Mots-clés ciblés par quartier / ville (ex:
+                        #RestaurantParis11).</li>
+                    <li><strong>Copywriting des Posts :</strong> Rédaction automatique de 30 textes accrocheurs pour
+                        accompagner chaque vidéo.</li>
+                </ul>
+                <div class="feature-vulga"><strong>Langage commun :</strong> Une vidéo brillante sans nom, personne ne
+                    la voit. On rédige techniquement le petit texte sous la vidéo avec les bons "mots-dièse" de votre
+                    géographie pour cibler uniquement des gens proches de votre boutique physique.</div>
+            </div>
+        </div>
+
+        <!-- TIER 3 -->
+        <div class="tier-section" style="page-break-before: always;">
+            <div class="tier-header">
+                <h2>NIVEAU 3 : EMPIRE</h2>
+                <span class="tier-analogy">Pilotage Autonome & Distribution Programmatique</span>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-title">9. Connectivité API & Hub de Publication <span class="feature-tech">Metricool
+                        / Buffer</span></div>
+                <ul class="detail-list">
+                    <li><strong>Architecture du Hub :</strong> Liaison sécurisée des 3 réseaux sociaux
+                        (TikTok/Insta/Google) au poste de contrôle centralisé.</li>
+                    <li><strong>Synchronisation "Cross-Platform" :</strong> Formatage pour ne pas que l'algorithme
+                        d'Instagram détecte le filigrane TikTok.</li>
+                </ul>
+                <div class="feature-vulga"><strong>Langage commun :</strong> Au lieu d'avoir trois applications ouvertes
+                    sur votre téléphone, on connecte tout à une télécommande centrale. Une seule interface pour régner
+                    sur l'ensemble de votre image publique en ligne.</div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-title">10. Séquençage Temporel & Batching sur 90 Jours <span
+                        class="feature-tech">Phantom Agency</span></div>
+                <ul class="detail-list">
+                    <li><strong>Analyse Horaire :</strong> Sélection systématique du pic de présence d'audience locale
+                        (généralement 18h30-20h).</li>
+                    <li><strong>Scheduling :</strong> L'Agence planifie méthodiquement sous vos yeux l'intégralité du
+                        stock de créatives, à raison de 2-3 publications par semaine pour le trimestre complet.</li>
+                </ul>
+                <div class="feature-vulga"><strong>Langage commun :</strong> On charge le barillet en entier. Les 30
+                    vidéos sont programmées. Vous n'avez strictement plus rien à faire : chaque mardi, jeudi et samedi,
+                    une vidéo sera publiée sans aucune action de votre part, pour les 3 prochains mois.</div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-title">11. Data Analytics & Hand-Off (Passation) <span class="feature-tech">Tableaux
+                        de bord Locaux</span></div>
+                <ul class="detail-list">
+                    <li><strong>Lecture de Taux de Portée (Reach) :</strong> Formation à la lecture des graphes :
+                        Distinguer le "Trafic de Vanité" de la conversion locale en point de vente.</li>
+                    <li><strong>Transfert Clé :</strong> Le client maîtrise le cockpit complet de sa machine de
+                        visibilité et encaisse les résultats.</li>
+                </ul>
+                <div class="feature-vulga"><strong>Langage commun :</strong> C'est la remise des clés de l'appareil
+                    automatisé. On vous montre comment vérifier si la vidéo ramène concrètement des clients dans le
+                    commerce, et vous voilà le patron absolu de votre ville sur les réseaux.</div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

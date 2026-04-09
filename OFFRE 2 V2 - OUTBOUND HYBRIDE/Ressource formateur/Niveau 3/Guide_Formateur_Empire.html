@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guide Formateur : OUTBOUND HYBRIDE (Empire)</title>
+
+    <!-- Fonts & Icons -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Mermaid JS for schemas -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+
+    <style>
+        :root {
+            --primary-purple: #9333ea;
+            --secondary-dark: #1e1b4b;
+            --bg-dark: #f8fafc;
+            --surface: #ffffff;
+            --text-main: #1e293b;
+            --text-secondary: #64748b;
+            --border: #e2e8f0;
+            --border-radius: 12px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* HEADER */
+        .header {
+            background: var(--surface);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            margin-bottom: 40px;
+            text-align: center;
+            border-top: 5px solid var(--primary-purple);
+        }
+
+        .header h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin: 0 0 10px 0;
+            color: #0f172a;
+        }
+
+        .header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin: 0;
+        }
+
+        .alert-box {
+            background-color: #faf5ff;
+            color: #7e22ce;
+            padding: 20px;
+            border-left: 4px solid var(--primary-purple);
+            border-radius: 4px;
+            margin-bottom: 40px;
+            font-weight: 500;
+            text-align: left;
+        }
+
+        /* CARD STEPS */
+        .step-card {
+            background: var(--surface);
+            border-radius: var(--border-radius);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+            margin-bottom: 40px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .step-header {
+            background: #f1f5f9;
+            padding: 25px 30px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .step-header h2 {
+            margin: 0;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            color: #0f172a;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .step-header h2 i {
+            color: var(--primary-purple);
+        }
+
+        .step-meta {
+            text-align: right;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .step-meta strong {
+            color: #0f172a;
+        }
+
+        .step-content {
+            padding: 30px;
+        }
+
+        .instruction-block {
+            background: #f8fafc;
+            border: 1px dashed #cbd5e1;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+        }
+
+        .instruction-block h4 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: var(--primary-purple);
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+        }
+
+        .instruction-list {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .instruction-list li {
+            margin-bottom: 15px;
+        }
+
+        .instruction-list li strong {
+            color: var(--text-main);
+        }
+
+        .phrase-cle {
+            display: inline-block;
+            background-color: #faf5ff;
+            padding: 8px 12px;
+            border-left: 3px solid var(--primary-purple);
+            border-radius: 4px;
+            font-style: italic;
+            color: #7e22ce;
+            margin-top: 8px;
+            font-size: 0.95rem;
+        }
+
+        /* MERMAID SCHEMAS */
+        .schema-container {
+            margin-top: 30px;
+            padding: 20px;
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .schema-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #475569;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .mermaid {
+            display: flex;
+            justify-content: center;
+        }
+
+        /* SUMMARY SECTION */
+        .summary-section {
+            background: #0f172a;
+            color: #f8fafc;
+            padding: 40px;
+            border-radius: var(--border-radius);
+            margin-top: 60px;
+            margin-bottom: 40px;
+        }
+
+        .summary-section h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.8rem;
+            color: #fff;
+            margin-top: 0;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 15px;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .summary-box h3 {
+            color: var(--primary-purple);
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .summary-list {
+            padding-left: 20px;
+        }
+
+        .summary-list li {
+            margin-bottom: 10px;
+            color: #cbd5e1;
+            font-size: 0.95rem;
+        }
+
+        /* DONE FOR YOU SECTION (EMPIRE DARK) */
+        .dfy-section {
+            background: var(--secondary-dark);
+            color: #f8fafc;
+            padding: 40px;
+            border-radius: var(--border-radius);
+            margin-top: 0;
+            margin-bottom: 40px;
+        }
+
+        .dfy-section h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.8rem;
+            color: #fff;
+            margin-top: 0;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #3730a3;
+            padding-bottom: 15px;
+        }
+
+        .dfy-section .summary-box h3 {
+            color: #c084fc;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- HEADER -->
+        <header class="header">
+            <h1 style="font-family:'Outfit'">Guide Formateur : OUTBOUND HYBRIDE</h1>
+            <p><strong>Niveau 3 (Empire)</strong> - Scaling, CRM Live & Neuro-Closing</p>
+        </header>
+
+        <div class="alert-box">
+            <i class="fa-solid fa-bullseye" style="margin-right: 10px;"></i>
+            <strong>Objectif Pédagogique :</strong> Permettre au formateur d'animer les sessions expertes de "Scale"
+            (Niveau 3 - Empire), axées sur la synchronisation des données CRM en direct, l'analyse prédictive du Score
+            Serenity, et le transfert de compétences en Neuro-Closing.
+        </div>
+
+        <!-- TOP 1% ELITE SECTION -->
+        <div class="step-card" style="border-left: 4px solid #c084fc;">
+            <div class="step-header">
+                <h2><i class="fa-solid fa-gem" style="color: #c084fc;"></i> Mindset Formateur : Standard "TOP 1% Élite"
+                </h2>
+            </div>
+            <div class="step-content">
+                <div class="instruction-block" style="background: #faf5ff; border-color: #d8b4fe;">
+                    <h4 style="color: #9333ea;">L'Accroche "Délégation Absolue" (Rappel Client) :</h4>
+                    <p style="font-style: italic; color: #6b21a8;">"L'Intelligence Artificielle vous trouve des clients,
+                        mais c'est l'Intelligence Humaine qui signe les contrats. Nous allons fusionner la machine avec
+                        votre agenda. À chaque prospect qualifié par le robot, votre système CRM va s'illuminer, et vous
+                        y trouverez une analyse psychologique complète du prospect avant même de lui parler. Vous
+                        n'aurez plus qu'à cueillir avec nos méthodes de neuro-vente."</p>
+                </div>
+
+                <h4 style="color: #475569; margin-top: 20px;">L'Équation de Valeur (Hormozi) à retransmettre :</h4>
+                <ul class="instruction-list">
+                    <li><strong>Dream Outcome :</strong> Un taux de closing (signature) doublé sans augmenter le volume
+                        d'appels manuels.</li>
+                    <li><strong>Likelihood of Achievement :</strong> "Shadowing as a Service" = Entraînement en direct
+                        aux scripts de closing hyper efficaces de l'Agence.</li>
+                    <li><strong>Time Delay :</strong> Signature du premier contrat post-IA dans les jours qui suivent
+                        l'activation et le coaching mental.</li>
+                    <li><strong>Effort & Sacrifice :</strong> Plus aucune saisie manuelle de données, le CRM se remplit
+                        tout seul et le commercial est guidé par l'analyse.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- OVERVIEW SCHEMA -->
+        <div class="step-card">
+            <div class="step-header" style="background:#fff;">
+                <h2><i class="fa-solid fa-map"></i> Vue d'Ensemble de l'Intervention (NIVEAU 3)</h2>
+            </div>
+            <div class="step-content">
+                <div class="schema-container" style="margin-top: 0; border: none;">
+                    <div class="mermaid">
+                        graph TD
+                        A([Début Intervention]) --> B(9. Push Notification et CRM)
+                        B --> C(10. Analyse Score Serenity)
+                        C --> D(11. Shadowing Neuro-Closing)
+                        D --> E([Validation et Fin])
+
+                        style A fill:#1e1b4b,stroke:#312e81,color:#fff
+                        style E fill:#9333ea,stroke:#6b21a8,color:#fff
+                        style B fill:#f1f5f9,stroke:#cbd5e1
+                        style C fill:#f1f5f9,stroke:#cbd5e1
+                        style D fill:#f1f5f9,stroke:#cbd5e1
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 9 -->
+        <div class="step-card">
+            <div class="step-header">
+                <h2><i class="fa-solid fa-bell"></i> ÉTAPE 9 : Routage CRM & Alerting "Push"</h2>
+                <div class="step-meta">
+                    Durée: <strong>1h00</strong><br>
+                    <span
+                        style="display:inline-block; margin-top:5px; background:#1e293b; color:#38bdf8; padding:3px 8px; border-radius:4px; font-size:0.75rem; font-weight:600;"><i
+                            class="fa-solid fa-graduation-cap"></i> Valide : SKILL OUTBOUND-8</span>
+                </div>
+            </div>
+            <div class="step-content">
+                <div class="instruction-block">
+                    <h4>Actions Directives :</h4>
+                    <ol class="instruction-list">
+                        <li><strong>Architecture de la Pipeline Sales :</strong> Connectez l'API de Pipedrive (ou
+                            GoHighLevel). Paramétrez un "Stage" dédié nommé <i>"🔥 Lead Sécurisé par IA"</i>. Exigez que
+                            ce canal soit sanctuarisé (aucune entrée manuelle humaine autorisée).</li>
+                        <li><strong>Webhooks Sortants (Vapi -> CRM) :</strong> Paramétrez l'évènement "End of Call" dans
+                            le système vocal. Extrayez le JSON contenant le "Call Summary" et dispatchez-le vers les
+                            champs personnalisés créés dans le CRM (Notes de qualification, Budget, Intérêt).</li>
+                        <li><strong>Notification Instantanée (Make.com) :</strong> Construisez le pont d'alerte :
+                            <code>Vapi API -> Make.com -> Slack/Discord/App</code>. Configurez des filtres (Router Make)
+                            pour que seules les fiches ayant passé le "BANT" déclenchent le son d'alerte sur le
+                            smartphone du client.</li>
+                        <li><strong>Simulation & Ancrage Psychologique :</strong> Déclenchez une attaque de webhook
+                            factice (Postman) en direct lors de la visio.<br>
+                            <span class="phrase-cle">Langage commun : "Entendez-vous ce son ? C'est le bruit d'une
+                                opportunité financière qualifiée par une machine alors que vous étiez occupé. C'est ça,
+                                le vrai levier."</span>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 10 -->
+        <div class="step-card">
+            <div class="step-header">
+                <h2><i class="fa-solid fa-magnifying-glass-chart"></i> ÉTAPE 10 : Data Analytics & "Score Serenity"</h2>
+                <div class="step-meta">
+                    Durée: <strong>1h00</strong><br>
+                    <span
+                        style="display:inline-block; margin-top:5px; background:#1e293b; color:#38bdf8; padding:3px 8px; border-radius:4px; font-size:0.75rem; font-weight:600;"><i
+                            class="fa-solid fa-graduation-cap"></i> Valide : SKILL OUTBOUND-9</span>
+                </div>
+            </div>
+            <div class="step-content">
+                <div class="instruction-block">
+                    <h4>Actions Directives :</h4>
+                    <ul class="instruction-list">
+                        <li><strong>Désossage du Transcript (NLP) :</strong> Affichez un compte-rendu JSON post-appel
+                            réel. Formez le client à ignorer l'onglet basique "Transcription littérale" pour exploiter
+                            le "Structured Data" (points de blocage extraits automatiquement, budget implicitement
+                            avoué).</li>
+                        <li><strong>Algorithme "Score Serenity" :</strong> L'IA utilise le prompt interne
+                            <i>Evaluator</i> pour noter le prospect de 1 à 100 sur un triptyque : Axe d'Urgence, Axe
+                            Financier (Autorité), et Axe de Résistance psychologique.</li>
+                        <li><strong>Calibration "Cinq Minutes Chrono" :</strong> Enseignez la routine de l'Élite avant
+                            la visio.<br>
+                            <span class="phrase-cle">Directive Absolue : Forcez le client à utiliser cette arme
+                                d'ingénierie sociale. S'il découvre dans la fiche générée que la frustration du "manque
+                                de temps" est à 90/100, la première phrase du Zoom devra être : <i>"Vous m'avez semblé
+                                    être quelqu'un dont le temps est précieux, allons à l'essentiel."</i> Effet magique
+                                d'alignement immédiat.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="schema-container">
+                    <div class="schema-title">Le Circuit du Renseignement (IA vers Humain)</div>
+                    <div class="mermaid">
+                        journey
+                        title Circuit Renseignement
+                        section Recolte Automatisee
+                        "Robot interroge les douleurs": 5: Robot
+                        "IA redige la Fiche Psycho": 4: Algorithme
+                        section Frappe Chirurgicale
+                        "Le commercial lit la fiche": 5: Client
+                        "Le prospect se sent compris": 5: Prospect
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 11 -->
+        <div class="step-card">
+            <div class="step-header">
+                <h2><i class="fa-solid fa-handshake-angle"></i> ÉTAPE 11 : Transition Symbiotique & Neuro-Closing</h2>
+                <div class="step-meta">
+                    Durée: <strong>2h00</strong><br>
+                    <span
+                        style="display:inline-block; margin-top:5px; background:#1e293b; color:#38bdf8; padding:3px 8px; border-radius:4px; font-size:0.75rem; font-weight:600;"><i
+                            class="fa-solid fa-star"></i> Masterclass Transversale</span>
+                </div>
+            </div>
+            <div class="step-content">
+                <div class="instruction-block">
+                    <h4>Actions Directives :</h4>
+                    <ul class="instruction-list">
+                        <li><strong>Le "Hand-Off" Magistral :</strong> Transmettez l'architecture verbale d'introduction
+                            de closing (Vente High-Ticket). Le commercial ne doit <b>jamais</b> avouer "mon robot vous a
+                            appelé hier". Il assoit son autorité par stature : <i>"J'ai pris connaissance de l'excellent
+                                compte rendu rédigé par mon assistant stratégique de présélection, et il semblerait que
+                                le goulot d'étranglement soit X..."</i></li>
+                        <li><strong>Jeu de Rôle Clinique ("Shadowing" Objections) :</strong> Allouez 45 min pour frapper
+                            le client avec de fausses objections pures ("C'est trop cher", "Il faut que j'en parle à mon
+                            associé", "On a déjà une agence"). Le formateur corrige le langage corporel, le ton, et la
+                            boucle de rétention.</li>
+                        <li><strong>Passation Média & Gouvernance :</strong> Remettez solennellement les "Clés du
+                            Château" (Logins d'Architectures Make, Admin Vapi Central, Dashboards). Formez-le sur les
+                            killswitches (boutons d'arrêt d'urgence IA). Clôturez l'accompagnement d'excellence.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- RÉSUMÉ DES LIVRABLES (AJOUT QUALITATIF PAR RAPPORT AU MD POUR ÉGALER N1) -->
+        <div class="summary-section">
+            <h2>Ce que comprend la formation (Détail contractuel)</h2>
+            <p style="margin-top:-20px; margin-bottom: 30px; color:#cbd5e1; font-style:italic;">Récapitulatif des
+                livrables techniques et pédagogiques à l'issue de l'intervention de niveau 3 (Accélération).</p>
+
+            <div class="summary-grid">
+                <div class="summary-box">
+                    <h3><i class="fa-solid fa-bolt"></i> Infrastructures Autonomes</h3>
+                    <ul class="summary-list">
+                        <li>Automatisation de synchronisation Pipedrive / HubSpot / GHL.</li>
+                        <li>Système d'alerting (Slack/App Push) branché aux prises de Rendez-vous.</li>
+                        <li>Formation analytique à la lecture synthétisée par Intelligence Artificielle.</li>
+                    </ul>
+                </div>
+
+                <div class="summary-box">
+                    <h3><i class="fa-solid fa-brain"></i> Neuro-Vente Appliquée</h3>
+                    <ul class="summary-list">
+                        <li>Protocoles d'analyse psycho-profil (Serenity Score).</li>
+                        <li>Formation aux scripts de closing (Traitements des objections premium).</li>
+                        <li>Jeu de Rôle Clinique en temps réel (Shadowing Formateur) pour valider l'aisance.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- DONE FOR YOU (CRÉÉ PAR LE CENTRE) -->
+        <div class="dfy-section">
+            <h2 style="color: #c084fc;">Prestations "Done-For-You" (Réalisées par nos experts)</h2>
+            <p style="margin-top:-20px; margin-bottom: 30px; color:#cbd5e1; font-style:italic;">Les infrastructures
+                invisibles livrées clés en main en Back-office pour la souveraineté complète de l'architecture.</p>
+
+            <div class="summary-grid">
+                <div class="summary-box">
+                    <h3 style="color: #c084fc;"><i class="fa-solid fa-shield-halved"></i> Architecture Sécurisée des
+                        Flux</h3>
+                    <ul class="summary-list">
+                        <li><strong>API Rate Limits :</strong> Déploiement en backend d'un "middleware" tampon qui
+                            empêche les limites de serveurs (CRM) de refuser des leads lors d'un afflux massif généré
+                            par l'IA le week-end.</li>
+                    </ul>
+                </div>
+
+                <div class="summary-box">
+                    <h3 style="color: #c084fc;"><i class="fa-solid fa-microchip"></i> "Custom Prompts Evaluators"</h3>
+                    <ul class="summary-list">
+                        <li><strong>Self-Reflection LLM :</strong> Paramétrage d'un système secret par l'agence où un
+                            deuxième cerveau IA évalue et corrige le Score généré par le premier cerveau, augmentant la
+                            précision algorithmique à plus de 98% pour le commercial.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Initialize Mermaid -->
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#f8fafc',
+                primaryTextColor: '#1e293b',
+                primaryBorderColor: '#cbd5e1',
+                lineColor: '#94a3b8',
+                secondaryColor: '#f1f5f9',
+                tertiaryColor: '#faf5ff'
+            },
+            fontFamily: 'Inter, sans-serif'
+        });
+    </script>
+</body>
+
+</html>
