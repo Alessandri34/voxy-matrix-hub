@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VOXY MATRIX | Command Center Élite</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant:ital@1&family=Outfit:wght@300;400;500;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- DESIGN TOKENS (Extract from Ethereal Glass / Catalogue Portal) --- */
+        :root {
+            --bg-oled: #050505;
+            --bg-core: #09090a;
+
+            --glass-shell: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.05);
+            --glass-border-hover: rgba(255, 255, 255, 0.15);
+
+            --text-primary: #FAFAFA;
+            --text-secondary: #A1A1A9;
+            --text-muted: #52525B;
+
+            --font-sans: 'Outfit', sans-serif;
+            --font-serif: 'Cormorant', serif;
+
+            /* THEME 1 : ECOM */
+            --theme1-accent: #f43f5e;
+            --theme1-grad: linear-gradient(135deg, #f43f5e 0%, #ff7e67 100%);
+            --theme1-glow: rgba(244, 63, 94, 0.15);
+            --theme1-glow-strong: rgba(244, 63, 94, 0.4);
+            --theme1-dark: linear-gradient(180deg, #180a0d 0%, #170707 100%);
+
+            /* THEME 2 : OUTBOUND */
+            --theme2-accent: #0ea5e9;
+            --theme2-grad: linear-gradient(135deg, #fbbf24 0%, #0ea5e9 100%);
+            --theme2-glow: rgba(14, 165, 233, 0.15);
+            --theme2-glow-strong: rgba(14, 165, 233, 0.4);
+            --theme2-dark: linear-gradient(180deg, #09121a 0%, #060a0f 100%);
+
+            /* THEME 3 : VIRAL */
+            --theme3-accent: #22c55e;
+            --theme3-grad: linear-gradient(135deg, #22c55e 0%, #f59e0b 100%);
+            --theme3-glow: rgba(34, 197, 94, 0.15);
+            --theme3-glow-strong: rgba(34, 197, 94, 0.4);
+            --theme3-dark: linear-gradient(180deg, #07170a 0%, #050a05 100%);
+
+            /* THEME PORTAL */
+            --theme-portal-grad: linear-gradient(135deg, #fbbf24 0%, #ea580c 100%);
+            --theme-portal-glow: rgba(245, 158, 11, 0.2);
+
+            --spring-gentle: cubic-bezier(0.16, 1, 0.3, 1);
+            --rad-shell: 32px;
+            --rad-core: 28px;
+            --rad-pill: 9999px;
+
+            /* Hub Levels Mapping */
+            --n1-color: #f43f5e;
+            --n2-color: #38bdf8;
+            --n3-color: #c084fc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-oled);
+            color: var(--text-primary);
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* --- AMBIENT TEXTURE --- */
+        .ambient-glow {
+            position: fixed;
+            top: 30vh;
+            left: 50vw;
+            transform: translate(-50%, -50%);
+            width: 70vw;
+            height: 70vw;
+            background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.02) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: 0;
+            filter: blur(120px);
+        }
+
+        .noise-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            pointer-events: none;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.5' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+        }
+
+        .container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 5rem 4vw;
+            position: relative;
+            z-index: 10;
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .serif-italic {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-weight: 400;
+            padding: 0 0.2em;
+            color: var(--text-primary);
+        }
+
+        /* --- HEADER NAVIGATION --- */
+        .site-nav {
+            position: fixed;
+            top: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(10, 10, 10, 0.4);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--rad-pill);
+            padding: 0.75rem 2rem;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            white-space: nowrap;
+        }
+
+        .logo-type {
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+        }
+
+        .logo-type span {
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .status-pill {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+        }
+
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--theme3-accent);
+            box-shadow: 0 0 8px var(--theme3-accent);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.4;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .hero-head {
+            text-align: center;
+            margin-top: 4rem;
+            margin-bottom: 6rem;
+        }
+
+        .hero-head h1 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 300;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-head p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .section-separator {
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            font-weight: 300;
+            color: var(--text-primary);
+            margin: 4rem 0 3rem 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* --- BENTO GRID SYSTEM RESPONSIVE --- */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 2rem;
+            align-items: stretch;
+            margin-bottom: 6rem;
+        }
+
+        .bento-grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        /* THEMED BEZELS (Catalogue Portal Style) */
+        .bezel-shell {
+            padding: 4px;
+            background: var(--glass-shell);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--rad-shell);
+            transition: transform 0.6s var(--spring-gentle), border-color 0.6s var(--spring-gentle), box-shadow 0.6s var(--spring-gentle);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .bezel-core {
+            border-radius: var(--rad-core);
+            padding: 3rem 2.5rem;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .badge-top {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 4px 16px;
+            border-radius: 0 0 8px 8px;
+            font-size: 0.70rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        /* Hover States for Cards */
+        .bezel-shell:hover {
+            transform: translateY(-8px);
+        }
+
+        .theme-ecom:hover {
+            border-color: var(--theme1-glow-strong);
+            box-shadow: 0 20px 60px var(--theme1-glow);
+        }
+
+        .theme-outbound:hover {
+            border-color: var(--theme2-glow-strong);
+            box-shadow: 0 20px 60px var(--theme2-glow);
+        }
+
+        .theme-viral:hover {
+            border-color: var(--theme3-glow-strong);
+            box-shadow: 0 20px 60px var(--theme3-glow);
+        }
+
+        .theme-portal:hover {
+            border-color: var(--theme-portal-glow);
+            box-shadow: 0 20px 60px var(--theme-portal-glow);
+        }
+
+        .theme-ecom .bezel-core {
+            background: var(--theme1-dark);
+        }
+
+        .theme-outbound .bezel-core {
+            background: var(--theme2-dark);
+        }
+
+        .theme-viral .bezel-core {
+            background: var(--theme3-dark);
+        }
+
+        .theme-portal .bezel-core {
+            background: rgba(15, 23, 42, 0.4);
+        }
+
+        .theme-ecom .badge-top {
+            background: var(--theme1-grad);
+            color: #fff;
+        }
+
+        .theme-outbound .badge-top {
+            background: var(--theme2-grad);
+            color: #000;
+        }
+
+        .theme-viral .badge-top {
+            background: var(--theme3-grad);
+            color: #000;
+        }
+
+        .theme-portal .badge-top {
+            background: var(--theme-portal-grad);
+            color: #000;
+        }
+
+        .item-id {
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            margin-top: 1rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .theme-ecom .item-id {
+            color: var(--theme1-accent);
+        }
+
+        .theme-outbound .item-id {
+            color: var(--theme2-accent);
+        }
+
+        .theme-viral .item-id {
+            color: var(--theme3-accent);
+        }
+
+        .bezel-core h3 {
+            font-size: 2rem;
+            font-weight: 300;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+        }
+
+        .item-tagline {
+            font-family: var(--font-serif);
+            font-style: italic;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Document Links Styling */
+        .doc-group-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            margin-top: 20px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .doc-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 18px;
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--text-main);
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            font-size: 0.95rem;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .doc-link:hover {
+            background: rgba(255, 255, 255, 0.05);
+            padding-left: 24px;
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .doc-link i.file-icon {
+            width: 24px;
+            text-align: center;
+            margin-right: 12px;
+            font-size: 1.1rem;
+        }
+
+        .doc-link.pdf i.file-icon {
+            color: #f87171;
+        }
+
+        .doc-link.web i.file-icon {
+            color: #38bdf8;
+        }
+
+        .tag-pill {
+            font-size: 0.65rem;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 6px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .tag-pill.n1 {
+            color: var(--n1-color);
+            border: 1px solid rgba(244, 63, 94, 0.3);
+        }
+
+        .tag-pill.n2 {
+            color: var(--n2-color);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+        }
+
+        .tag-pill.n3 {
+            color: var(--n3-color);
+            border: 1px solid rgba(192, 132, 252, 0.3);
+        }
+
+        .btn-launch {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 12px 20px;
+            background: var(--text-primary);
+            color: var(--bg-oled);
+            border-radius: var(--rad-pill);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-top: auto;
+            transition: transform 0.4s var(--spring-gentle);
+        }
+
+        .btn-launch:hover {
+            transform: scale(0.98);
+        }
+
+        .btn-portal-launch {
+            background: var(--theme-portal-grad);
+            color: #000;
+            border: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            padding: 14px 24px;
+        }
+
+        .empty-state {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px dashed rgba(255, 255, 255, 0.1);
+            text-align: center;
+            border-radius: 12px;
+        }
+
+        /* ANIMATIONS */
+        .ethereal-reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            filter: blur(10px);
+            animation: revealUp 1s var(--spring-gentle) forwards;
+        }
+
+        .delay-1 {
+            animation-delay: 0.1s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-3 {
+            animation-delay: 0.3s;
+        }
+
+        .delay-4 {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes revealUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+                filter: blur(0);
+            }
+        }
+
+        /* RESPONSIVE AJUSTEMENTS */
+        @media (max-width: 1200px) {
+            .site-nav {
+                width: 90%;
+                justify-content: space-between;
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 4rem 1.5rem;
+            }
+
+            .hero-head {
+                margin-top: 2rem;
+                margin-bottom: 3rem;
+            }
+
+            .hero-head h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero-head p {
+                font-size: 0.95rem;
+            }
+
+            .site-nav {
+                font-size: 0.70rem;
+                padding: 0.5rem 1.5rem;
+                top: 1rem;
+            }
+
+            .bento-grid,
+            .bento-grid-2 {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .bezel-core {
+                padding: 2rem 1.5rem;
+            }
+
+            .section-separator {
+                font-size: 1.3rem;
+                justify-content: center;
+                text-align: center;
+                margin: 3rem 0 2rem 0;
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .btn-launch {
+                font-size: 0.8rem;
+                padding: 12px 16px;
+            }
+
+            .doc-link {
+                padding: 12px 14px;
+                font-size: 0.85rem;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+
+            .doc-link i.fa-arrow-right {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="ambient-glow"></div>
+    <div class="noise-overlay"></div>
+
+    <!-- Navigation -->
+    <nav class="site-nav">
+        <div class="logo-type">VOXY<span>MATRIX</span></div>
+        <div class="status-pill">
+            <div class="status-dot"></div>
+            SYSTEM ONLINE
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="hero-head ethereal-reveal">
+            <h1>Command Center <span class="serif-italic" style="color:var(--text-muted);">Élite.</span></h1>
+            <p>Le Hub central de l'architecture pédagogique. Retrouvez ici 100% de la matrice documentaire (Syllabus,
+                Guides Formateurs Secrets, Sites de Vente).</p>
+        </div>
+
+        <!-- MODULE 1 : BASE DOCUMENTAIRE (LES 3 OFFRES) -->
+        <div class="section-separator ethereal-reveal delay-1">
+            <i class="fa-solid fa-folder-tree"></i> Matrice <span class="serif-italic text-gradient">Pédagogique</span>
+        </div>
+
+        <div class="bento-grid">
+            <!-- OFFRE 1 -->
+            <div class="bezel-shell theme-ecom ethereal-reveal delay-1">
+                <div class="bezel-core">
+                    <div class="badge-top">FORMATION_01</div>
+                    <div class="item-id">E-COMMERCE</div>
+                    <h3>E-Com Commando</h3>
+                    <div class="item-tagline">Boutique & SEO Autonome</div>
+
+                    <div class="doc-group-title"><i class="fa-solid fa-user-shield"></i> Côté Client</div>
+                    <a href="./OFFRE 1 - ECOM COMMANDO/Ressource client - Syllabus/Syllabus_Delivrabilite_Ecom_Commando.html"
+                        class="doc-link web" target="_blank">
+                        <div><i class="fa-solid fa-file-invoice file-icon"></i>Syllabus Détaillé</div>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+
+                    <div class="doc-group-title"><i class="fa-solid fa-user-ninja"></i> Côté Formateur (Classifié)</div>
+                    <a href="./OFFRE 1 - ECOM COMMANDO/Ressource formateur/Niveau 1/Guide_Formateur_Launch.html"
+                        class="doc-link web" target="_blank">
+                        <div><i class="fa-solid fa-book-journal-whills file-icon"></i>Niveau 1 : Launch</div>
+                        <span class="tag-pill n1">Red</span>
+                    </a>
+                    <a href="./OFFRE 1 - ECOM COMMANDO/Ressource formateur/Niveau 2/Guide_Formateur_Performance.html"
+                        class="doc-link web" target="_blank">
+                        <div><i class="fa-solid fa-book-journal-whills file-icon"></i>Niveau 2 : Performance</div>
+                        <span class="tag-pill n2">Blue</span>
+                    </a>
+                    <a href="./OFFRE 1 - ECOM COMMANDO/Ressource formateur/Niveau 3/Guide_Formateur_Empire.html"
+                        class="doc-link web" target="_blank">
+                        <div><i class="fa-solid fa-book-journal-whills file-icon"></i>Niveau 3 : Empire</div>
+                        <span class="tag-pill n3">Purple</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- OFFRE 2 -->
+            <div class="bezel-shell theme-outbound ethereal-reveal delay-2">
+                <div class="bezel-core">
+                    <div class="badge-top">FORMATION_02</div>
+                    <div class="item-id">PROSPECTION B2B</div>
+                    <h3>Outbound Hybride</h3>
+                    <div class="item-tagline">Usine à Leads Symbiotique</div>
+
+                    <div class="doc-group-title"><i class="fa-solid fa-user-shield"></i> Côté Client</div>
+                    <a href="./OFFRE 2 V2 - OUTBOUND HYBRIDE/Ressource client - Syllabus/Syllabus_Outbound_Hybride.html"
+                        class="doc-link web" target="_blank">
+                        <div><i class="fa-solid fa-file-invoice file-icon"></i>Syllabus Détaillé</div>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+
+                    <div class="doc-group-title"><i class="fa-solid fa-user-ninja"></i> Côté Formateur (Classifié)</div>
+                    <a href="./OFFRE 2 V2 - OUTBOUND HYBRIDE/Ressource formateur/Niveau 1/Guide_Formateur_Launch.html"
+                        class="doc-link web" target="_blank">
+                        <div><i class="fa-solid fa-book-journal-whills file-icon"></i>Niveau 1 : Launch</div>
+                        <span class="tag-pill n1">Red</span>
+                    </a>
+                    <a href="./OFFRE 2 V2 - OUTBOUND HYBRIDE/Ressource formateur/Niveau 2/Guide_Formateur_Performance.html"
+                        class="doc-link web" target="_blank">
+                        <div><i class="fa-solid fa-book-journal-whills file-icon"></i>Niveau 2 : Performance</div>
+                        <span class="tag-pill n2">Blue</span>
+                    </a>
+                    <a href="./OFFRE 2 V2 - OUTBOUND HYBRIDE/Ressource formateur/Niveau 3/Guide_Formateur_Empire.html"
+                        class="doc-link web" target="_blank">
+                        <div><i class="fa-solid fa-book-journal-whills file-icon"></i>Niveau 3 : Empire</div>
+                        <span class="tag-pill n3">Purple</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- OFFRE 3 -->
+            <div class="bezel-shell theme-viral ethereal-reveal delay-3">
+                <div class="bezel-core">
+                    <div class="badge-top">FORMATION_03</div>
+                    <div class="item-id">VISIBILITÉ D2S</div>
+                    <h3>Drive-to-Store</h3>
+                    <div class="item-tagline">Viralité Locale Absolue</div>
+
+                    <div class="doc-group-title"><i class="fa-solid fa-user-shield"></i> Côté Client</div>
+                    <a href="./OFFRE 3 - DRIVE TO STORE VIRALE/Ressource client - Syllabus/Syllabus_Drive_to_Store_Virale.html"
+                        class="doc-link web" target="_blank">
+                        <div><i class="fa-solid fa-file-invoice file-icon"></i>Syllabus Détaillé</div>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+
+                    <div class="doc-group-title"><i class="fa-solid fa-user-ninja"></i> Côté Formateur (Classifié)</div>
+                    <div class="empty-state">
+                        <i class="fa-solid fa-clock"
+                            style="font-size: 1.5rem; margin-bottom:10px; display:block; color:#475569;"></i>
+                        Guides Formateurs Launch, Performance et Empire en cours d'industrialisation dans l'itération
+                        actuelle.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODULE 2 : SYSTEME DE CONVERSION (PORTAIL ET LANDING PAGES) -->
+        <div class="section-separator ethereal-reveal delay-2">
+            <i class="fa-solid fa-globe"></i> Infrastructure <span class="serif-italic text-gradient">Front-End</span>
+        </div>
+
+        <div class="bento-grid-2">
+
+            <!-- GLOBAL PORTAL -->
+            <div class="bezel-shell theme-portal ethereal-reveal delay-3" style="grid-column: 1 / -1;">
+                <div class="bezel-core" style="align-items: center; text-align: center;">
+                    <div class="badge-top">GLOBAL HUB</div>
+                    <div class="item-id" style="color:#f59e0b; margin-top:2rem;"><i class="fa-solid fa-cubes-stacked"
+                            style="font-size:2rem; margin-bottom:1rem; display:block;"></i>FRONT-FACING CLIENTS</div>
+                    <h3>Le Portail Catalogue Voxy</h3>
+                    <p style="color:var(--text-secondary); max-width:600px; margin-bottom:2rem;">Ceci est la porte
+                        d'entrée de la "Voxy Matrix". Le prospect arrive ici pour comprendre la méthode Qualiopi et
+                        sélectionner son Arsenal Technologie.</p>
+
+                    <a href="./CATALOGUE_PORTAL/index.html" class="btn-launch btn-portal-launch"
+                        style="max-width: 300px;" target="_blank">
+                        Ouvrir le Portail Principal <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- LANDING PAGE ECOM -->
+            <div class="bezel-shell theme-ecom ethereal-reveal delay-4">
+                <div class="bezel-core">
+                    <div class="item-id">LANDING PAGE 01</div>
+                    <h3>Funnel Shopify</h3>
+                    <div class="item-tagline" style="margin-bottom: auto;">Site Unique E-Com Commando</div>
+                    <a href="./OFFRE 1 - ECOM COMMANDO/landing_page/index.html" class="btn-launch" target="_blank">
+                        Voir la Landing Page E-Com
+                    </a>
+                </div>
+            </div>
+
+            <!-- LANDING PAGE OUTBOUND -->
+            <div class="bezel-shell theme-outbound ethereal-reveal delay-4">
+                <div class="bezel-core">
+                    <div class="item-id">LANDING PAGE 02</div>
+                    <h3>Funnel Outbound</h3>
+                    <div class="item-tagline" style="margin-bottom: auto;">Site Unique Voice IA Outbound</div>
+                    <a href="./OFFRE 2 V2 - OUTBOUND HYBRIDE/landing_page/index.html" class="btn-launch"
+                        target="_blank">
+                        Voir la Landing Page Outbound
+                    </a>
+                </div>
+            </div>
+
+            <!-- LANDING PAGE VIRAL -->
+            <div class="bezel-shell theme-viral ethereal-reveal delay-4">
+                <div class="bezel-core">
+                    <div class="item-id">LANDING PAGE 03</div>
+                    <h3>Funnel Viralité</h3>
+                    <div class="item-tagline" style="margin-bottom: auto;">Site Unique Drive-To-Store</div>
+                    <a href="./OFFRE 3 - DRIVE TO STORE VIRALE/landing_page/index.html" class="btn-launch"
+                        target="_blank">
+                        Voir la Landing Page Virale
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+</html>
