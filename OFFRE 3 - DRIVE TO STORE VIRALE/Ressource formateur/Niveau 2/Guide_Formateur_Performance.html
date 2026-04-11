@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guide Formateur : DRIVE-TO-STORE VIRALE (Performance)</title>
+
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Mermaid JS for schemas -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+
+    <style>
+        :root {
+            --primary-color: #22c55e;
+            --bg-dark: #f8fafc;
+            --surface: #ffffff;
+            --text-main: #1e293b;
+            --text-secondary: #64748b;
+            --border: #e2e8f0;
+            --border-radius: 12px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* HEADER */
+        .header {
+            background: var(--surface);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            margin-bottom: 40px;
+            text-align: center;
+            border-top: 5px solid var(--primary-color);
+        }
+
+        .header h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin: 0 0 10px 0;
+            color: #0f172a;
+        }
+
+        .header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin: 0;
+        }
+
+        .alert-box {
+            background-color: #f0fdf4;
+            color: #166534;
+            padding: 20px;
+            border-left: 4px solid var(--primary-color);
+            border-radius: 4px;
+            margin-bottom: 40px;
+            font-weight: 500;
+            text-align: left;
+        }
+
+        /* CARD STEPS */
+        .step-card {
+            background: var(--surface);
+            border-radius: var(--border-radius);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+            margin-bottom: 40px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .step-header {
+            background: #f1f5f9;
+            padding: 25px 30px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .step-header h2 {
+            margin: 0;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            color: #0f172a;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .step-header h2 i {
+            color: var(--primary-color);
+        }
+
+        .step-meta {
+            text-align: right;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .step-meta strong {
+            color: #0f172a;
+        }
+
+        .step-content {
+            padding: 30px;
+        }
+
+        .instruction-block {
+            background: #f8fafc;
+            border: 1px dashed #cbd5e1;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+        }
+
+        .instruction-block h4 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+        }
+
+        .instruction-list {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .instruction-list li {
+            margin-bottom: 15px;
+        }
+
+        .instruction-list li strong {
+            color: var(--text-main);
+        }
+
+        .instruction-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        .phrase-cle {
+            display: inline-block;
+            background-color: #f0fdf4;
+            padding: 8px 12px;
+            border-left: 3px solid var(--primary-color);
+            border-radius: 4px;
+            font-style: italic;
+            color: #14532d;
+            margin-top: 8px;
+            font-size: 0.95rem;
+        }
+
+        /* MERMAID SCHEMAS */
+        .schema-container {
+            margin-top: 30px;
+            padding: 20px;
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .schema-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #475569;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .mermaid {
+            display: flex;
+            justify-content: center;
+        }
+
+        /* SUMMARY SECTION */
+        .summary-section {
+            background: #0f172a;
+            color: #f8fafc;
+            padding: 40px;
+            border-radius: var(--border-radius);
+            margin-top: 60px;
+            margin-bottom: 40px;
+        }
+
+        .summary-section h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.8rem;
+            color: #fff;
+            margin-top: 0;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 15px;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .summary-box h3 {
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .summary-list {
+            padding-left: 20px;
+        }
+
+        .summary-list li {
+            margin-bottom: 10px;
+            color: #cbd5e1;
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 768px) {
+            .header { padding: 30px 15px; }
+            .step-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+            .step-meta { text-align: left; }
+            .summary-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- HEADER -->
+        <header class="header">
+            <h1>Guide Formateur : DRIVE-TO-STORE VIRALE</h1>
+            <p>NIVEAU 2 : Performance (Usine à Contenu IA)</p>
+        </header>
+
+        <div class="alert-box">
+            <strong><i class="fa-solid fa-triangle-exclamation"></i> DIRECTIVE TOP 1% :</strong><br>
+            Le client de l'offre "Drive-To-Store" est un artisan/commerçant surchargé. Ce Niveau 2 est magique pour lui car il s'agit d'une phase de <strong>"Récolte"</strong>. L'Agence utilise l'automatisation IA pour transformer le tournage du Niveau 1 en 30 actifs viraux. L'enjeu est de lui faire comprendre la puissance de l'IA (Opus Clip) afin de justifier le ticket d'entrée élevé, tout en conservant une fluidité "Plug & Play".
+        </div>
+
+        <!-- SCHÉMA ARCHITECTURE -->
+        <div class="schema-container">
+            <div class="schema-title"><i class="fa-solid fa-robot"></i> Pipeline de Production IA (Asynchrone)</div>
+            <div class="mermaid">
+graph TD
+    A[Rushs Bruts 2h] -->|Phase 1| B(Dérushage & Nettoyage Audio)
+    B -->|Phase 2| C{Opus Clip IA}
+    C -->|Découpe| D(30 Shorts Verticaux)
+    C -->|Score Viralité| E(B-roll matching)
+    D -->|Phase 3| F(Sous-Titrage Hormozi)
+    F -->|Phase 4| G((30 Assets Prêts à Publiser))
+            </div>
+        </div>
+
+        <!-- STEP 1 -->
+        <div class="step-card">
+            <div class="step-header">
+                <h2><i class="fa-solid fa-cloud-arrow-up"></i> ÉTAPE 1 : Processing Asynchrone des Rushs</h2>
+                <div class="step-meta">
+                    Durée: <strong>30min</strong><br>
+                    <span style="display:inline-block; margin-top:5px; background:#1e293b; color:var(--primary-color); padding:3px 8px; border-radius:4px; font-size:0.75rem; font-weight:600;"><i class="fa-solid fa-graduation-cap"></i> Valide : SKILL D2S-5</span>
+                </div>
+            </div>
+            <div class="step-content">
+                <div class="instruction-block">
+                    <h4>Actions Directives :</h4>
+                    <ul class="instruction-list">
+                        <li><strong>Démonstration de Force Cloud :</strong> Expliquez au client le transfert massif des fichiers lourds vers nos serveurs. Montrez-lui éventuellement le logiciel de nettoyage audio (Adobe Podcast) supprimant les bruits de circulation ou de casseroles.</li>
+                        <li><strong>Catégorisation A-Roll / B-Roll :</strong> Éduquez le client sur la différence entre "l'image principale où l'on parle" (A-roll) et "l'image de couverture d'action" (B-roll) qui garde le spectateur accroché.</li>
+                    </ul>
+                </div>
+                <div style="padding: 15px; background: rgba(34, 197, 94, 0.1); border-left: 3px solid var(--primary-color); border-radius: 4px; font-size: 0.95rem;">
+                    <strong><i class="fa-solid fa-bolt"></i> Angle Vente & Rétention :</strong><br>
+                    "On a sorti le brut de notre caméra. Mais pour que vos vidéos soient regardées jusqu'au bout, on doit supprimer le moindre millième de seconde de blanc ou de bégaiement."
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 2 -->
+        <div class="step-card">
+            <div class="step-header">
+                <h2><i class="fa-solid fa-microchip"></i> ÉTAPE 2 : Démonstration Opus Clip (Montage Spatial IA)</h2>
+                <div class="step-meta">
+                    Durée: <strong>1h00</strong><br>
+                    <span style="display:inline-block; margin-top:5px; background:#1e293b; color:var(--primary-color); padding:3px 8px; border-radius:4px; font-size:0.75rem; font-weight:600;"><i class="fa-solid fa-graduation-cap"></i> Valide : SKILL D2S-6</span>
+                </div>
+            </div>
+            <div class="step-content">
+                <div class="instruction-block">
+                    <h4>Actions Directives :</h4>
+                    <ul class="instruction-list">
+                        <li><strong>L'Effet "Wait & See" :</strong> Partagez votre écran et montrez au client le LLM (Intelligence Artificielle) ingérer sa vidéo de 2 heures. Regardez la machine découper, analyser et scorer mathématiquement la "viralité" des moments clés.</li>
+                        <li><strong>Tracking Vertical :</strong> Prouvez la notion de "Face Tracking". Si le client bouge, le recadrage IA garde le focus sur le centre de son visage pour les vidéos TikTok/IG.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 3 -->
+        <div class="step-card">
+            <div class="step-header">
+                <h2><i class="fa-solid fa-closed-captioning"></i> ÉTAPE 3 : Sous-Titrage Dynamique & Effets (Hormozi)</h2>
+                <div class="step-meta">
+                    Durée: <strong>45min</strong><br>
+                    <span style="display:inline-block; margin-top:5px; background:#1e293b; color:var(--primary-color); padding:3px 8px; border-radius:4px; font-size:0.75rem; font-weight:600;"><i class="fa-solid fa-graduation-cap"></i> Valide : SKILL D2S-7</span>
+                </div>
+            </div>
+            <div class="step-content">
+                <div class="instruction-block">
+                    <h4>Actions Directives :</h4>
+                    <ul class="instruction-list">
+                        <li><strong>Le Concept du "Zero-Audio" :</strong> Rappelez violemment la statistique : 80% des utilisateurs de réseaux sociaux scrollent dans les transports ou en réunion avec le son coupé.</li>
+                        <li><strong>Neuro-Design Appliqué :</strong> Montrez la différence entre un sous-titre TV statique et un "Bouncy Text" avec couleurs d'identification (Jaune/Vert) couplé aux emojis forçant la mémorisation cognitive.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 4 -->
+        <div class="step-card">
+            <div class="step-header">
+                <h2><i class="fa-solid fa-hashtag"></i> ÉTAPE 4 : SEO Social & Méta-Données</h2>
+                <div class="step-meta">
+                    Durée: <strong>45min</strong><br>
+                    <span style="display:inline-block; margin-top:5px; background:#1e293b; color:var(--primary-color); padding:3px 8px; border-radius:4px; font-size:0.75rem; font-weight:600;"><i class="fa-solid fa-graduation-cap"></i> Valide : SKILL D2S-8</span>
+                </div>
+            </div>
+            <div class="step-content">
+                <div class="instruction-block">
+                    <h4>Actions Directives :</h4>
+                    <ul class="instruction-list">
+                        <li><strong>L'Équation Géographique :</strong> Formez le gérant au "Hacking" des hashtags géolocalisés (ex: #MarseilleFood au lieu de #Nourriture). Plus la portée est locale, plus la conversion au tiroir-caisse augmente.</li>
+                        <li><strong>Pack IA Sémantique :</strong> Rédigez avec ChatGPT les 30 descriptions (Captions) qui accompagneront chaque clip, avec du copywriting "Drive-To-Store" clair (ex: "Lien dans ma Bio pour réserver").</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- NOUVELLE SECTION : RÉSUMÉ DES LIVRABLES (CE QUE COMPREND LA FORMATION) -->
+        <div class="summary-section">
+            <h2>Ce que comprend la formation (Détail point par point)</h2>
+            <p style="margin-top:-20px; margin-bottom: 30px; color:#cbd5e1; font-style:italic;">Récapitulatif contractuel des livrables techniques et pédagogiques à l'issue de l'intervention de niveau 2.</p>
+
+            <div class="summary-grid">
+                <div class="summary-box">
+                    <h3><i class="fa-solid fa-cloud"></i> Gestion Asynchrone des Assets</h3>
+                    <ul class="summary-list">
+                        <li>Stockage sécurisé et catégorisation sémantique des rushs bruts.</li>
+                        <li>Sensibilisation au tri A-Roll / B-Roll.</li>
+                        <li>Nettoyage automatisé de la piste audio ("Studio Voice").</li>
+                    </ul>
+                </div>
+
+                <div class="summary-box">
+                    <h3><i class="fa-solid fa-robot"></i> Découpe Algorithmique IA</h3>
+                    <ul class="summary-list">
+                        <li>Processing Opus Clip pour la découpe de 30 capsules courtes (Shorts/Reels).</li>
+                        <li>Formatage et Tracking Vertical intelligent adapté aux mobiles (9:16).</li>
+                        <li>Analyse de score de rétention algorithmique sur chaque capsule.</li>
+                    </ul>
+                </div>
+
+                <div class="summary-box">
+                    <h3><i class="fa-solid fa-closed-captioning"></i> Motion Design Adaptatif</h3>
+                    <ul class="summary-list">
+                        <li>Création et incrustation de "Bouncy Texts" percutants.</li>
+                        <li>Neuro-Copywriting : Emojis et coloration (ancrage cognitif).</li>
+                        <li>Optimisation 100% lisible pour les spectateurs coupant l'audio (Zero-Audio).</li>
+                    </ul>
+                </div>
+
+                <div class="summary-box">
+                    <h3><i class="fa-solid fa-magnifying-glass-location"></i> SEO Social</h3>
+                    <ul class="summary-list">
+                        <li>Pack sémantique de +30 descriptions générées par l'Intelligence Artificielle.</li>
+                        <li>Ingénierie des Hashtags purement Locaux (#City #Neighborhood).</li>
+                        <li>Appels à l'action orientés visite physique / réservation.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- DONE FOR YOU SECTION -->
+        <div class="summary-section" style="background: #1e293b; margin-top: 0;">
+            <h2 style="color: var(--primary-color);">Prestations "Done-For-You" (Back-Office Ingénierie)</h2>
+            <p style="margin-top:-20px; margin-bottom: 30px; color:#cbd5e1; font-style:italic;">Ce que l'Agence produit entièrement à la place du client en coulisses, pour livrer une matière prête à publier.</p>
+
+            <div class="summary-grid">
+                <div class="summary-box">
+                    <h3 style="color: var(--primary-color);"><i class="fa-solid fa-bolt"></i> Rendus Finaux (Batch Processing)</h3>
+                    <ul class="summary-list">
+                        <li><strong>Fabrication Usine IA :</strong> La validation humaine, le contrôle qualité et l'export brut des 30 vidéos formatées avec incrustation B-Roll sur les "moments lents".</li>
+                        <li><strong>Drive Sécurisé "30 Jours" :</strong> Livraison d'un espace Cloud clé de main contenant l'intégralité du pack (30 vidéos + document Excel listant les descriptions textes et hashtags pour chaque jour).</li>
+                    </ul>
+                </div>
+
+                <div class="summary-box">
+                    <h3 style="color: var(--primary-color);"><i class="fa-solid fa-server"></i> Optimisation SEO & Sémantique</h3>
+                    <ul class="summary-list">
+                        <li><strong>Prompt Engineering :</strong> L'utilisation par nos experts des Prompts ChatGPT Ultra-locaux (Masqués au client) pour maximiser l'algorithme des métadonnées TikTok en fonction du secteur géographique ciblé.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Initialize Mermaid -->
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#f8fafc',
+                primaryTextColor: '#1e293b',
+                primaryBorderColor: '#cbd5e1',
+                lineColor: '#94a3b8',
+                secondaryColor: '#f1f5f9',
+                tertiaryColor: '#f0fdf4'
+            },
+            fontFamily: 'Inter, sans-serif'
+        });
+    </script>
+</body>
+
+</html>
