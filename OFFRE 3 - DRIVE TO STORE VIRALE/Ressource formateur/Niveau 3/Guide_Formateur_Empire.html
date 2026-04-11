@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guide Formateur : DRIVE-TO-STORE VIRALE (Empire)</title>
+
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Mermaid JS for schemas -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+
+    <style>
+        :root {
+            --primary-color: #22c55e;
+            --bg-dark: #f8fafc;
+            --surface: #ffffff;
+            --text-main: #1e293b;
+            --text-secondary: #64748b;
+            --border: #e2e8f0;
+            --border-radius: 12px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* HEADER */
+        .header {
+            background: var(--surface);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            margin-bottom: 40px;
+            text-align: center;
+            border-top: 5px solid var(--primary-color);
+        }
+
+        .header h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin: 0 0 10px 0;
+            color: #0f172a;
+        }
+
+        .header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin: 0;
+        }
+
+        .alert-box {
+            background-color: #f0fdf4;
+            color: #166534;
+            padding: 20px;
+            border-left: 4px solid var(--primary-color);
+            border-radius: 4px;
+            margin-bottom: 40px;
+            font-weight: 500;
+            text-align: left;
+        }
+
+        /* CARD STEPS */
+        .step-card {
+            background: var(--surface);
+            border-radius: var(--border-radius);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+            margin-bottom: 40px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .step-header {
+            background: #f1f5f9;
+            padding: 25px 30px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .step-header h2 {
+            margin: 0;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            color: #0f172a;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .step-header h2 i {
+            color: var(--primary-color);
+        }
+
+        .step-meta {
+            text-align: right;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .step-meta strong {
+            color: #0f172a;
+        }
+
+        .step-content {
+            padding: 30px;
+        }
+
+        .instruction-block {
+            background: #f8fafc;
+            border: 1px dashed #cbd5e1;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+        }
+
+        .instruction-block h4 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+        }
+
+        .instruction-list {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .instruction-list li {
+            margin-bottom: 15px;
+        }
+
+        .instruction-list li strong {
+            color: var(--text-main);
+        }
+
+        .instruction-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        .phrase-cle {
+            display: inline-block;
+            background-color: #f0fdf4;
+            padding: 8px 12px;
+            border-left: 3px solid var(--primary-color);
+            border-radius: 4px;
+            font-style: italic;
+            color: #14532d;
+            margin-top: 8px;
+            font-size: 0.95rem;
+        }
+
+        /* MERMAID SCHEMAS */
+        .schema-container {
+            margin-top: 30px;
+            padding: 20px;
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .schema-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #475569;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .mermaid {
+            display: flex;
+            justify-content: center;
+        }
+
+        /* SUMMARY SECTION */
+        .summary-section {
+            background: #0f172a;
+            color: #f8fafc;
+            padding: 40px;
+            border-radius: var(--border-radius);
+            margin-top: 60px;
+            margin-bottom: 40px;
+        }
+
+        .summary-section h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.8rem;
+            color: #fff;
+            margin-top: 0;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 15px;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .summary-box h3 {
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .summary-list {
+            padding-left: 20px;
+        }
+
+        .summary-list li {
+            margin-bottom: 10px;
+            color: #cbd5e1;
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 768px) {
+            .header { padding: 30px 15px; }
+            .step-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+            .step-meta { text-align: left; }
+            .summary-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- HEADER -->
+        <header class="header">
+            <h1>Guide Formateur : DRIVE-TO-STORE VIRALE</h1>
+            <p>NIVEAU 3 : Empire (Pilotage & Distribution Programmatique)</p>
+        </header>
+
+        <div class="alert-box">
+            <strong><i class="fa-solid fa-triangle-exclamation"></i> DIRECTIVE TOP 1% :</strong><br>
+            Le Niveau 3 marque le point où la théorie se transforme en une machine de guerre automatisée. Après avoir filmé (Niveau 1) et monté (Niveau 2), il s'agit de <strong>"Livrer"</strong> à internet de façon agressive sans surcharger l'emploi du temps du client. L'attention doit donc se porter sur le transfert de charge (Metricool) et la métrique de succès (Trafic local vs Vanité).
+        </div>
+
+        <!-- SCHÉMA ARCHITECTURE -->
+        <div class="schema-container">
+            <div class="schema-title"><i class="fa-solid fa-network-wired"></i> Architecture de Distribution Asynchrone</div>
+            <div class="mermaid">
+graph TD
+    A[Silo de Contenus IA] -->|Batch Upload| B(Hub Metricool / Buffer)
+    B -->|API Authorization| C{Poste de Contrôle API}
+    C -->|Mardi 18h30| D(TikTok Local)
+    C -->|Jeudi 19h00| E(Instagram Reels)
+    C -->|Samedi 10h00| F(Google Business Posts)
+    D --> G[(Data & Portée)]
+    E --> G
+    F --> G
+    G --> H[Dashboard Client & ROI]
+            </div>
+        </div>
+
+        <!-- STEP 1 -->
+        <div class="step-card">
+            <div class="step-header">
+                <h2><i class="fa-solid fa-plug"></i> ÉTAPE 1 : Connectivité API & Hub de Publication</h2>
+                <div class="step-meta">
+                    Durée: <strong>45min</strong><br>
+                    <span style="display:inline-block; margin-top:5px; background:#1e293b; color:var(--primary-color); padding:3px 8px; border-radius:4px; font-size:0.75rem; font-weight:600;"><i class="fa-solid fa-graduation-cap"></i> Valide : SKILL D2S-9</span>
+                </div>
+            </div>
+            <div class="step-content">
+                <div class="instruction-block">
+                    <h4>Actions Directives :</h4>
+                    <ul class="instruction-list">
+                        <li><strong>Démystification de l'Omniprésence :</strong> Brisez la croyance du client : "Je dois aller sur 3 applis différentes tous les matins". Présentez-lui Metricool/Buffer comme une "télécommande universelle".</li>
+                        <li><strong>Architecture de Liaison :</strong> Effectuez (ou validez) l'authentification OAuth2 sécurisant le lien entre son outil centralisé et les bases de données TikTok/Instagram/Google.</li>
+                        <li><strong>Formatage Cross-Platform :</strong> Éduquez le client sur un dogme algorithmique : "Instagram shadow-ban (cache) les vidéos avec un logo TikTok". On publie la source vierge simultanément partout.</li>
+                    </ul>
+                </div>
+                <div style="padding: 15px; background: rgba(34, 197, 94, 0.1); border-left: 3px solid var(--primary-color); border-radius: 4px; font-size: 0.95rem;">
+                    <strong><i class="fa-solid fa-bolt"></i> Angle Vente & Rétention :</strong><br>
+                    "Être partout sur internet prend 4 heures par jour pour un restaurateur normal. Avec cette télécommande, vous devenez virtuellement omniprésent en 1 seul clic."
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 2 -->
+        <div class="step-card">
+            <div class="step-header">
+                <h2><i class="fa-solid fa-calendar-check"></i> ÉTAPE 2 : Séquençage Temporel & Batching (90 Jours)</h2>
+                <div class="step-meta">
+                    Durée: <strong>1h00</strong><br>
+                    <span style="display:inline-block; margin-top:5px; background:#1e293b; color:var(--primary-color); padding:3px 8px; border-radius:4px; font-size:0.75rem; font-weight:600;"><i class="fa-solid fa-graduation-cap"></i> Valide : SKILL D2S-10</span>
+                </div>
+            </div>
+            <div class="step-content">
+                <div class="instruction-block">
+                    <h4>Actions Directives :</h4>
+                    <ul class="instruction-list">
+                        <li><strong>Analyse des Horaires de Pic :</strong> Formez le client à lire les graphiques d'activité réseau. On ne poste pas le matin, mais typiquement entre 18h30 et 20h quand la cible "sort du travail et regarde où manger/acheter".</li>
+                        <li><strong>La Démonstration du "Barillet" :</strong> Devant le client, effectuez le "Drag & Drop" des 30 vidéos produites au Niveau 2 sur un calendrier visuel (2 à 3 publications par semaine).</li>
+                    </ul>
+                </div>
+                <div style="padding: 15px; background: rgba(34, 197, 94, 0.1); border-left: 3px solid var(--primary-color); border-radius: 4px; font-size: 0.95rem;">
+                    <strong><i class="fa-solid fa-bolt"></i> Angle Vente & Rétention :</strong><br>
+                    "On charge le barillet ce matin. Et pendant les 3 prochains mois de votre vie, sans que vous n'ayez rien à toucher sur votre téléphone, votre marque fera parler d'elle trois fois par semaine sur internet."
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 3 -->
+        <div class="step-card">
+            <div class="step-header">
+                <h2><i class="fa-solid fa-chart-line"></i> ÉTAPE 3 : Data Analytics & Passation (Hand-Off)</h2>
+                <div class="step-meta">
+                    Durée: <strong>45min</strong><br>
+                    <span style="display:inline-block; margin-top:5px; background:#1e293b; color:var(--primary-color); padding:3px 8px; border-radius:4px; font-size:0.75rem; font-weight:600;"><i class="fa-solid fa-graduation-cap"></i> Valide : SKILL D2S-11</span>
+                </div>
+            </div>
+            <div class="step-content">
+                <div class="instruction-block">
+                    <h4>Actions Directives :</h4>
+                    <ul class="instruction-list">
+                        <li><strong>Détruire la Métrique de Vanité :</strong> Apprenez au client à repérer les "Likes" d'Asie et expliquez que seul compte le "Reach Local" ou le volume de clics sur le lien de réservation / les appels téléphoniques GMB.</li>
+                        <li><strong>Le Poste de Pilotage :</strong> Effectuez la passation. Montrez où se trouvent les métriques clés de croissance sur l'outil Metricool. Validation formelle que le client a les clés de sa machine de visibilité automatique.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- NOUVELLE SECTION : RÉSUMÉ DES LIVRABLES (CE QUE COMPREND LA FORMATION) -->
+        <div class="summary-section">
+            <h2>Ce que comprend la formation (Détail point par point)</h2>
+            <p style="margin-top:-20px; margin-bottom: 30px; color:#cbd5e1; font-style:italic;">Récapitulatif contractuel des livrables techniques et pédagogiques à l'issue de l'intervention de niveau 3.</p>
+
+            <div class="summary-grid">
+                <div class="summary-box">
+                    <h3><i class="fa-solid fa-sitemap"></i> Hub de Publication Multi-Canal</h3>
+                    <ul class="summary-list">
+                        <li>Connexion certifiée API (OAuth2) entre le Hub et les plateformes natives (Meta/TikTok/Google).</li>
+                        <li>Configuration de la syndication de contenu (1 vidéo poussée sur 3 algorithmes distincts).</li>
+                    </ul>
+                </div>
+
+                <div class="summary-box">
+                    <h3><i class="fa-solid fa-calendar-days"></i> Calendrier Programmatique (90 Jours)</h3>
+                    <ul class="summary-list">
+                        <li>Analyse granulaire et sélection algorithmique des "heures chaudes" pour le marché local.</li>
+                        <li>Stratégie de Batching (Planification de 30 actifs couvrant tout un trimestre).</li>
+                    </ul>
+                </div>
+
+                <div class="summary-box">
+                    <h3><i class="fa-solid fa-chart-pie"></i> Reporting KPI</h3>
+                    <ul class="summary-list">
+                        <li>Formation à l'identification de la donnée vitale (Clics vers adresse map, réservations effectives).</li>
+                        <li>Délivrance de l'accès Administrateur du cockpit d'automatisation.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- DONE FOR YOU SECTION -->
+        <div class="summary-section" style="background: #1e293b; margin-top: 0;">
+            <h2 style="color: var(--primary-color);">Prestations "Done-For-You" (Back-Office Ingénierie)</h2>
+            <p style="margin-top:-20px; margin-bottom: 30px; color:#cbd5e1; font-style:italic;">Ce que l'Agence produit entièrement à la place du client en coulisses, pour assurer une diffusion fluide (Scheduling).</p>
+
+            <div class="summary-grid">
+                <div class="summary-box">
+                    <h3 style="color: var(--primary-color);"><i class="fa-solid fa-robot"></i> Déploiement Programmatique Complexe</h3>
+                    <ul class="summary-list">
+                        <li><strong>Encodage du Séquençage :</strong> Le temps humain nécessaire par un expert de l'Agence pour intégrer manuellement les 30 vidéos produites au Niveau 2, avec leurs métadonnées exactes et hashtags ciblés, au sein de l'interface de l'agrégateur (Type Metricool). Couverture totale et silencieuse des 90 prochains jours pour le client.</li>
+                    </ul>
+                </div>
+
+                <div class="summary-box">
+                    <h3 style="color: var(--primary-color);"><i class="fa-solid fa-shield-halved"></i> Audit Sécurité Comptes API</h3>
+                    <ul class="summary-list">
+                        <li><strong>Validation des Jetons (Tokens) :</strong> Résolution proactive des bugs de déconnexion native entre Facebook Business Suite et les comptes Instagram professionnels afin de sécuriser le flux d'automatisation API programmé.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Initialize Mermaid -->
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#f8fafc',
+                primaryTextColor: '#1e293b',
+                primaryBorderColor: '#cbd5e1',
+                lineColor: '#94a3b8',
+                secondaryColor: '#f1f5f9',
+                tertiaryColor: '#f0fdf4'
+            },
+            fontFamily: 'Inter, sans-serif'
+        });
+    </script>
+</body>
+
+</html>
