@@ -1,18 +1,19 @@
 :root {
-    --bg-color: #050506;
-    --surface-color: rgba(18, 18, 22, 0.6);
-    --surface-solid: #121216;
-    --text-primary: #f8f8fa;
-    --text-secondary: #94a3b8;
+    --bg-color: #030305;
+    --surface-color: rgba(15, 15, 25, 0.4);
+    --surface-solid: #0A0A10;
+    --text-primary: #f0f0f5;
+    --text-secondary: #8b8b9e;
 
-    --accent-gold: #fbbf24;
-    --accent-orange: #f59e0b;
-    --accent-cyan: #0ea5e9;
+    --accent-blue: #3b82f6;
+    --accent-cyan: #06b6d4;
+    --accent-purple: #8b5cf6;
 
-    --gradient-primary: linear-gradient(135deg, #fbbf24 0%, #0ea5e9 100%);
-    --gradient-glow: rgba(251, 191, 36, 0.25);
+    --gradient-primary: linear-gradient(135deg, #06b6d4 0%, #8b5cf6 100%);
+    --gradient-glow: rgba(6, 182, 212, 0.3);
+    --gradient-glow-purple: rgba(139, 92, 246, 0.3);
 
-    --border-color: rgba(255, 255, 255, 0.06);
+    --border-color: rgba(255, 255, 255, 0.05);
     --glass-border: 1px solid rgba(255, 255, 255, 0.08);
     --glass-blur: blur(16px);
 
@@ -20,7 +21,7 @@
     --font-serif: 'Cormorant', serif;
     --font-body: 'Outfit', sans-serif;
     --border-radius: 12px;
-    --transition: all 0.3s ease;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 * {
@@ -72,8 +73,12 @@ body {
     display: inline-block;
 }
 
-.text-gold {
-    color: var(--accent-gold);
+.text-cyan {
+    color: var(--accent-cyan);
+}
+
+.text-purple {
+    color: var(--accent-purple);
 }
 
 .section {
@@ -113,7 +118,7 @@ body {
 }
 
 .logo span {
-    color: var(--accent-gold);
+    color: var(--accent-cyan);
 }
 
 /* Buttons */
@@ -133,7 +138,7 @@ body {
 
 .btn-primary {
     background: var(--gradient-primary);
-    color: #000;
+    color: #fff;
     font-weight: 700;
     box-shadow: 0 4px 20px var(--gradient-glow);
 }
@@ -211,9 +216,9 @@ body {
 }
 
 .fusion-badge {
-    background: rgba(251, 191, 36, 0.1);
-    color: var(--accent-gold);
-    border: 1px solid rgba(251, 191, 36, 0.3);
+    background: rgba(6, 182, 212, 0.1);
+    color: var(--accent-cyan);
+    border: 1px solid rgba(6, 182, 212, 0.3);
     padding: 6px 14px;
     border-radius: 4px;
     font-size: 0.8rem;
@@ -265,7 +270,7 @@ body {
 }
 
 .pipeline-step.human i {
-    color: var(--accent-gold);
+    color: var(--accent-purple);
 }
 
 .pipeline-step.ai i {
@@ -330,7 +335,7 @@ body {
 
 .fusion-panel:hover {
     transform: translateY(-5px);
-    border-color: rgba(251, 191, 36, 0.4);
+    border-color: rgba(6, 182, 212, 0.4);
 }
 
 .active-feature {
@@ -339,7 +344,7 @@ body {
 
 .feature-icon {
     font-size: 2.5rem;
-    color: var(--accent-gold);
+    color: var(--accent-cyan);
     margin-bottom: 20px;
 }
 
@@ -369,9 +374,9 @@ body {
 }
 
 .pricing-card.best-seller {
-    background: linear-gradient(180deg, #181820 0%, #0a0a0f 100%);
-    border: 1px solid rgba(251, 191, 36, 0.5);
-    box-shadow: 0 10px 40px rgba(251, 191, 36, 0.1);
+    background: linear-gradient(180deg, #10101c 0%, #050508 100%);
+    border: 1px solid rgba(6, 182, 212, 0.5);
+    box-shadow: 0 10px 40px rgba(6, 182, 212, 0.15);
     transform: translateY(-20px);
     border-radius: var(--border-radius);
     padding: 40px 30px;
@@ -383,7 +388,7 @@ body {
     left: 50%;
     transform: translateX(-50%);
     background: var(--gradient-primary);
-    color: #000;
+    color: #fff;
     padding: 6px 16px;
     border-radius: 4px;
     font-size: 0.8rem;
@@ -422,7 +427,7 @@ body {
 
 .sub-asterisk {
     font-size: 0.8rem;
-    color: var(--accent-gold);
+    color: var(--accent-cyan);
     margin-bottom: 30px;
 }
 
@@ -442,7 +447,7 @@ body {
 }
 
 .features-list i {
-    color: var(--accent-cyan);
+    color: var(--accent-purple);
     margin-top: 4px;
     font-size: 0.9rem;
 }
