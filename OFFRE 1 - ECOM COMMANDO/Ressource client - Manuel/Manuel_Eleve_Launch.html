@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manuel Élève : E-COM COMMANDO (Launch)</title>
+
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Mermaid JS -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+
+    <style>
+        :root {
+            --primary: #f43f5e;
+            --primary-dark: #be123c;
+            --accent: #ff7e67;
+            --bg-body: #e5e5e5;
+            --surface: #ffffff;
+            --text-main: #1e293b;
+            --text-secondary: #64748b;
+            --border: #e2e8f0;
+        }
+
+        @page {
+            size: A4;
+            margin: 15mm;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .document-a4 {
+            width: 210mm;
+            min-height: 297mm;
+            background: var(--surface);
+            margin: auto;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20mm;
+            box-sizing: border-box;
+        }
+
+        /* HEADER */
+        .header {
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .title-block h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            margin: 0 0 5px 0;
+            text-transform: uppercase;
+            color: #0f172a;
+        }
+
+        .title-block p {
+            margin: 0;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 16px;
+            letter-spacing: 1px;
+        }
+
+        .meta-info {
+            text-align: right;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        /* INTRO */
+        .intro-box {
+            background-color: #fff1f2;
+            padding: 20px;
+            border-left: 4px solid var(--primary);
+            border-radius: 4px;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .intro-box h3 {
+            margin-top: 0;
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* MODULES */
+        .module-section {
+            margin-bottom: 40px;
+            page-break-inside: avoid;
+        }
+
+        .module-header {
+            background: #0f172a;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px 8px 0 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .module-header h2 {
+            margin: 0;
+            font-family: 'Outfit', sans-serif;
+            font-size: 18px;
+        }
+
+        .module-content {
+            border: 1px solid var(--border);
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            padding: 20px;
+        }
+
+        /* CHECKLISTS */
+        .checklist {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .checklist li {
+            position: relative;
+            padding-left: 35px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: #334155;
+            page-break-inside: avoid;
+        }
+
+        .checklist li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 2px;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #cbd5e1;
+            border-radius: 4px;
+            background: white;
+        }
+
+        .checklist li strong {
+            color: #0f172a;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        /* PLACEHOLDERS IMAGES */
+        .image-placeholder {
+            background: #f1f5f9;
+            border: 2px dashed #cbd5e1;
+            border-radius: 8px;
+            height: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #94a3b8;
+            margin: 15px 0;
+            font-size: 13px;
+        }
+
+        .image-placeholder i {
+            font-size: 24px;
+            margin-bottom: 5px;
+            color: #cbd5e1;
+        }
+
+        /* PROMPT BOX */
+        .prompt-box {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 13px;
+            position: relative;
+            margin-bottom: 15px;
+            white-space: pre-wrap;
+        }
+
+        .prompt-box::before {
+            content: 'PROMPT À COPIER :';
+            display: block;
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            color: #38bdf8;
+            font-weight: bold;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 5px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            body { padding: 0; }
+            .document-a4 {
+                width: 100%;
+                min-height: auto;
+                box-shadow: none;
+                margin: 0;
+                padding: 15px;
+            }
+            .header { flex-direction: column; align-items: flex-start; gap: 15px; }
+            .meta-info { text-align: left; }
+        }
+
+        /* PRINT */
+        @media print {
+            body { background: white; padding: 0; }
+            .document-a4 { box-shadow: none; width: 100%; padding: 0; }
+            .module-section { page-break-inside: avoid; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="document-a4">
+
+        <!-- HEADER -->
+        <div class="header">
+            <div class="title-block">
+                <h1>Manuel Opérationnel Élève</h1>
+                <p>E-COM COMMANDO : NIVEAU 1 (LAUNCH)</p>
+            </div>
+            <div class="meta-info">
+                Cahier de Laboratoire Numérique<br>
+                Suivi d'Acquisition Qualiopi<br>
+                Confidentiel Agence
+            </div>
+        </div>
+
+        <div class="intro-box">
+            <h3><i class="fa-solid fa-bullseye"></i> Objectif de ce Cahier</h3>
+            <p style="margin: 0;">Ce document est votre feuille de route. Il vous permet de refaire exactement les manipulations montrées par votre expert. Ne passez à l'étape suivante que si la case précédente est cochée de façon certaine. Votre fondation technique en dépend.</p>
+        </div>
+
+        <!-- MODULE 1 -->
+        <div class="module-section">
+            <div class="module-header">
+                <i class="fa-brands fa-shopify" style="font-size: 24px; color: #a7f3d0;"></i>
+                <h2>MODULE 1 : Ingénierie & Déploiement CMS Premium</h2>
+            </div>
+            <div class="module-content">
+                <ul class="checklist">
+                    <li>
+                        <strong>Création de l'Espace d'Hébergement</strong>
+                        Rendez-vous sur Shopify.com et créez un compte sécurisé. Validez votre adresse email commerciale.
+                        <div class="image-placeholder">
+                            <i class="fa-solid fa-image"></i>
+                            [Espace Réservé : Capture écran "Paramètres > Détails du compte"]
+                        </div>
+                    </li>
+                    <li>
+                        <strong>Liaison des Serveurs DNS & HTTPS</strong>
+                        Allez dans Paramètres > Domaines. Entrez le nom de domaine acheté et modifiez les enregistrements A et CNAME chez votre hébergeur (OVH/Hostinger).
+                        <div class="image-placeholder">
+                            <i class="fa-solid fa-image"></i>
+                            [Espace Réservé : Capture écran "Serveurs DNS OVH"]
+                        </div>
+                    </li>
+                    <li>
+                        <strong>Génération des Pages Légales obligatoires</strong>
+                        Allez dans Paramètres > Politiques. Utilisez le générateur automatique, relisez-les et rendez-les visibles dans la navigation Footer de la boutique.
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- MODULE 2 -->
+        <div class="module-section">
+            <div class="module-header">
+                <i class="fa-solid fa-credit-card" style="font-size: 24px; color: #bae6fd;"></i>
+                <h2>MODULE 2 : Intégration des Flux Financiers (Stripe)</h2>
+            </div>
+            <div class="module-content">
+                <div style="margin-bottom: 20px; text-align: center;">
+                    <span style="font-size: 13px; font-weight: bold; color: #64748b; text-transform: uppercase;">Cinématique des transferts :</span>
+                    <div class="mermaid">
+                        graph LR
+                        A[Acheteur] -->|Carte Bancaire| B(Stripe API)
+                        B -->|Confirmation Instantanée| C[CMS Shopify]
+                        B -->|Virement 3 Jours| D[(Banque Entreprise)]
+                    </div>
+                </div>
+
+                <ul class="checklist">
+                    <li>
+                        <strong>Ouverture et Vérification Stripe</strong>
+                        Créez votre compte sur Stripe.com. Soumettez votre Kbis, Pièce d'Identité et RIB d'entreprise pour lever les limites de blocage.
+                    </li>
+                    <li>
+                        <strong>Liaison API Caisse</strong>
+                        Sur Shopify : Paramètres > Fournisseurs de paiement > Activer Shopify Payments ou Stripe directement.
+                        <div class="image-placeholder">
+                            <i class="fa-solid fa-image"></i>
+                            [Espace Réservé : Capture écran "Fournisseurs de Paiement"]
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- MODULE 3 -->
+        <div class="module-section" style="page-break-before: always;">
+            <div class="module-header">
+                <i class="fa-solid fa-robot" style="font-size: 24px; color: #fca5a5;"></i>
+                <h2>MODULE 3 : Création Produit (Neuro-Copywriting IA)</h2>
+            </div>
+            <div class="module-content">
+                <p style="font-size: 14px; margin-top:0;">L'objectif est d'injecter dans la base de données 5 produits hyper-optimisés émotionnellement. Nous utiliserons ChatGPT.</p>
+                
+                <ul class="checklist">
+                    <li>
+                        <strong>Génération du Copywriting (Bénéfice Émotionnel)</strong>
+                        Ouvrez ChatGPT-4 et collez l'ingénierie de prompt suivante en modifiant les variables [Entre crochets].
+                        <div class="prompt-box">Agis comme un copywriter e-commerce expert en science comportementale.
+Rédige une fiche produit pour mon article : [Nom du Produit].
+Ma cible principale est : [Décrire le client, ex: Femmes de 40 ans cherchant le confort].
+
+Règles de rédaction :
+1. Crée un Titre (Titre 1) captivant centré sur le résultat émotionnel, non pas l'objet.
+2. Introduction : Appuie sur la douleur actuelle du client.
+3. Corps : Explique comment le produit résout la douleur grâce à 3 listes à puces dynamiques.
+4. N'utilise pas de mots génériques (qualité, innovation). Utilise des mots viscéraux.</div>
+                    </li>
+                    <li>
+                        <strong>Intégration Sémantique & Média</strong>
+                        Dans Shopify (Produits > Ajouter), collez le résultat. Appliquez les balises **Titre 2 (H2)** sur vos sous-titres. Importez vos images compressées (moins de 200ko).
+                    </li>
+                    <li>
+                        <strong>Accessibilité Balises ALT</strong>
+                        Cliquez sur chaque image produit, naviguez vers "Modifier le texte alternatif" et décrivez physiquement l'image pour l'algorithme Google.
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- MODULE 4 -->
+        <div class="module-section">
+            <div class="module-header">
+                <i class="fa-solid fa-truck-fast" style="font-size: 24px; color: #fde047;"></i>
+                <h2>MODULE 4 : Transfert de Compétence & Pilotage Quotidien</h2>
+            </div>
+            <div class="module-content">
+                <p style="font-size: 14px; margin-top:0;">Le "Run" quotidien de votre boutique. Vous êtes maintenant prêt à opérer de manière autonome.</p>
+                
+                <ul class="checklist">
+                    <li>
+                        <strong>Traitement Logistique (Fulfillment)</strong>
+                        À la réception d'une commande (Onglet Commandes), sélectionnez la commande, préparez le colis, et cliquez sur le bouton "Traiter la commande" (Fulfill) pour informer automatiquement le client de l'expédition et fournir le n° de suivi.
+                        <div class="image-placeholder">
+                            <i class="fa-solid fa-image"></i>
+                            [Espace Réservé : Capture écran "Bouton Traiter la commande"]
+                        </div>
+                    </li>
+                    <li>
+                        <strong>Autonomie SAV : Le Remboursement Total/Partiel</strong>
+                        Pour rembourser un client (annulation avant envoi) : Ouvrez la commande > Bouton "Rembourser" > Sélectionnez le montant > Cochez l'envoi de l'email de notification automatique. Ce bouton donne directement l'ordre à Stripe sans login bancaire.
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Initialize Mermaid -->
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#f8fafc',
+                primaryTextColor: '#1e293b',
+                primaryBorderColor: '#cbd5e1',
+                lineColor: '#94a3b8',
+                secondaryColor: '#f1f5f9',
+                tertiaryColor: '#fff1f2'
+            },
+            fontFamily: 'Inter, sans-serif'
+        });
+    </script>
+</body>
+
+</html>

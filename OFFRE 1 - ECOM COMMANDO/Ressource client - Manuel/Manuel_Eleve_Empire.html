@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manuel Élève : E-COM COMMANDO (Empire)</title>
+
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Mermaid JS -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+
+    <style>
+        :root {
+            --primary: #f43f5e;
+            --primary-dark: #be123c;
+            --accent: #ff7e67;
+            --bg-body: #e5e5e5;
+            --surface: #ffffff;
+            --text-main: #1e293b;
+            --text-secondary: #64748b;
+            --border: #e2e8f0;
+        }
+
+        @page {
+            size: A4;
+            margin: 15mm;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .document-a4 {
+            width: 210mm;
+            min-height: 297mm;
+            background: var(--surface);
+            margin: auto;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20mm;
+            box-sizing: border-box;
+        }
+
+        /* HEADER */
+        .header {
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .title-block h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            margin: 0 0 5px 0;
+            text-transform: uppercase;
+            color: #0f172a;
+        }
+
+        .title-block p {
+            margin: 0;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 16px;
+            letter-spacing: 1px;
+        }
+
+        .meta-info {
+            text-align: right;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        /* INTRO */
+        .intro-box {
+            background-color: #fff1f2;
+            padding: 20px;
+            border-left: 4px solid var(--primary);
+            border-radius: 4px;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .intro-box h3 {
+            margin-top: 0;
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* MODULES */
+        .module-section {
+            margin-bottom: 40px;
+            page-break-inside: avoid;
+        }
+
+        .module-header {
+            background: #0f172a;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px 8px 0 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .module-header h2 {
+            margin: 0;
+            font-family: 'Outfit', sans-serif;
+            font-size: 18px;
+        }
+
+        .module-content {
+            border: 1px solid var(--border);
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            padding: 20px;
+        }
+
+        /* CHECKLISTS */
+        .checklist {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .checklist li {
+            position: relative;
+            padding-left: 35px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: #334155;
+            page-break-inside: avoid;
+        }
+
+        .checklist li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 2px;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #cbd5e1;
+            border-radius: 4px;
+            background: white;
+        }
+
+        .checklist li strong {
+            color: #0f172a;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        /* PLACEHOLDERS IMAGES */
+        .image-placeholder {
+            background: #f1f5f9;
+            border: 2px dashed #cbd5e1;
+            border-radius: 8px;
+            height: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #94a3b8;
+            margin: 15px 0;
+            font-size: 13px;
+        }
+
+        .image-placeholder i {
+            font-size: 24px;
+            margin-bottom: 5px;
+            color: #cbd5e1;
+        }
+
+        /* PROMPT BOX */
+        .prompt-box {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 13px;
+            position: relative;
+            margin-bottom: 15px;
+            white-space: pre-wrap;
+        }
+
+        .prompt-box::before {
+            content: 'SCRIPT / PROMPT :';
+            display: block;
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            color: #38bdf8;
+            font-weight: bold;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 5px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            body { padding: 0; }
+            .document-a4 {
+                width: 100%;
+                min-height: auto;
+                box-shadow: none;
+                margin: 0;
+                padding: 15px;
+            }
+            .header { flex-direction: column; align-items: flex-start; gap: 15px; }
+            .meta-info { text-align: left; }
+        }
+
+        /* PRINT */
+        @media print {
+            body { background: white; padding: 0; }
+            .document-a4 { box-shadow: none; width: 100%; padding: 0; }
+            .module-section { page-break-inside: avoid; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="document-a4">
+
+        <!-- HEADER -->
+        <div class="header">
+            <div class="title-block">
+                <h1>Manuel Opérationnel Élève</h1>
+                <p>E-COM COMMANDO : NIVEAU 3 (EMPIRE)</p>
+            </div>
+            <div class="meta-info">
+                Cahier de Laboratoire Numérique<br>
+                Acquisition Explosive & Domination<br>
+                Confidentiel Agence
+            </div>
+        </div>
+
+        <div class="intro-box">
+            <h3><i class="fa-solid fa-crown"></i> Phase d'expansion</h3>
+            <p style="margin: 0;">Le niveau Empire est le stade final. Nous passons de la boutique optimisée à la boutique qui domine son marché. L'objectif est d'injecter du trafic payant via Meta Ads et de créer des commerciaux virtuels via l'IA.</p>
+        </div>
+
+        <!-- MODULE 9 -->
+        <div class="module-section">
+            <div class="module-header">
+                <i class="fa-solid fa-bullhorn" style="font-size: 24px; color: #f9a8d4;"></i>
+                <h2>MODULE 9 : Machine à Trafic Payant (Meta Ads)</h2>
+            </div>
+            <div class="module-content">
+                <div style="margin-bottom: 20px; text-align: center;">
+                    <span style="font-size: 13px; font-weight: bold; color: #64748b; text-transform: uppercase;">Entonnoir Publicitaire :</span>
+                    <div class="mermaid">
+                        graph TD
+                        A[Audience Broad] -->|Publicité Meta| B(Landing Page)
+                        B -->|Ajout Panier| C(Retargeting DPA)
+                        C -->|Vente| D[(Client Loyal)]
+                    </div>
+                </div>
+
+                <ul class="checklist">
+                    <li>
+                        <strong>Configuration du Business Manager</strong>
+                        Vérifiez votre entreprise sur Meta Business Suite. Créez un compte publicitaire dédié et liez votre carte bancaire.
+                    </li>
+                    <li>
+                        <strong>Installation de l'API de Conversion (CAPI)</strong>
+                        Allez dans Settings > Customer Events sur Shopify. Liez le tunnel Meta pour contourner les blocages iOS et suivre 100% de vos ventes.
+                    </li>
+                    <li>
+                        <strong>Lancement de la Campagne "Sales"</strong>
+                        Créez une campagne avec l'objectif "Ventes". Utilisez un ciblage "Broad" (large) pour laisser l'IA de Meta trouver vos acheteurs.
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- MODULE 10 -->
+        <div class="module-section" style="page-break-before: always;">
+            <div class="module-header">
+                <i class="fa-solid fa-video" style="font-size: 24px; color: #ddd6fe;"></i>
+                <h2>MODULE 10 : VSL (Video Sales Letters) par IA</h2>
+            </div>
+            <div class="module-content">
+                <p style="font-size: 14px; margin-top:0;">Création de vidéos publicitaires haute conversion sans montrer votre visage.</p>
+                
+                <ul class="checklist">
+                    <li>
+                        <strong>Avatar Clone (HeyGen)</strong>
+                        Sélectionnez un avatar hyper-réaliste. Uploadez votre script préparé ci-dessous.
+                    </li>
+                    <li>
+                        <strong>Scripting Direct Response</strong>
+                        <div class="prompt-box">Hook (0-3s) : Arrêtez de [Problème] !
+Body (3-15s) : Découvrez comment [Produit] change tout.
+CTA (15-30s) : Cliquez sur le lien pour profiter de l'offre limitée.</div>
+                    </li>
+                    <li>
+                        <strong>Voice-over & Montage</strong>
+                        Utilisez ElevenLabs pour une voix humaine crédible. Ajoutez des sous-titres dynamiques couvrants pour capturer l'attention.
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- MODULE 11 -->
+        <div class="module-section">
+            <div class="module-header">
+                <i class="fa-solid fa-handshake" style="font-size: 24px; color: #99f6e4;"></i>
+                <h2>MODULE 11 : Fractional CMO & Passation</h2>
+            </div>
+            <div class="module-content">
+                <p style="font-size: 14px; margin-top:0;">Le mois de pilotage assisté. Vous n'êtes plus seul pour dépenser vos premiers budgets.</p>
+                
+                <ul class="checklist">
+                    <li>
+                        <strong>Prise en main du Pilotage</strong>
+                        Chaque semaine, analysez vos ROAS (Return on Ad Spend). Si ROAS > 3, on augmente le budget de 20%.
+                    </li>
+                    <li>
+                        <strong>A/B Testing de Créatives</strong>
+                        Testez 3 vidéos différentes tous les 7 jours. Coupez celles qui ne génèrent pas de clics à moins de 0,50€.
+                    </li>
+                    <li>
+                        <strong>Transmission des Commandes</strong>
+                        À J+30, vous reprenez les commandes totales. L'agence reste en support audit, mais vous êtes désormais le Capitaine de votre Empire.
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Initialize Mermaid -->
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#f8fafc',
+                primaryTextColor: '#1e293b',
+                primaryBorderColor: '#cbd5e1',
+                lineColor: '#94a3b8',
+                secondaryColor: '#f1f5f9',
+                tertiaryColor: '#fff1f2'
+            },
+            fontFamily: 'Inter, sans-serif'
+        });
+    </script>
+</body>
+
+</html>

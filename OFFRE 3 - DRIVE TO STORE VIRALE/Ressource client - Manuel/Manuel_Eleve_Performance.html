@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manuel Élève : DRIVE-TO-STORE VIRALE (Performance)</title>
+
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Mermaid JS -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+
+    <style>
+        :root {
+            --primary: #22c55e;
+            --primary-dark: #166534;
+            --accent: #4ade80;
+            --bg-body: #f0fdf4;
+            --surface: #ffffff;
+            --text-main: #1e293b;
+            --text-secondary: #64748b;
+            --border: #e2e8f0;
+        }
+
+        @page {
+            size: A4;
+            margin: 15mm;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .document-a4 {
+            width: 210mm;
+            min-height: 297mm;
+            background: var(--surface);
+            margin: auto;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20mm;
+            box-sizing: border-box;
+        }
+
+        /* HEADER */
+        .header {
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .title-block h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            margin: 0 0 5px 0;
+            text-transform: uppercase;
+            color: #0f172a;
+        }
+
+        .title-block p {
+            margin: 0;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 16px;
+            letter-spacing: 1px;
+        }
+
+        .meta-info {
+            text-align: right;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        /* INTRO */
+        .intro-box {
+            background-color: #f0fdf4;
+            padding: 20px;
+            border-left: 4px solid var(--primary);
+            border-radius: 4px;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .intro-box h3 {
+            margin-top: 0;
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* MODULES */
+        .module-section {
+            margin-bottom: 40px;
+            page-break-inside: avoid;
+        }
+
+        .module-header {
+            background: #0f172a;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px 8px 0 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .module-header h2 {
+            margin: 0;
+            font-family: 'Outfit', sans-serif;
+            font-size: 18px;
+        }
+
+        .module-content {
+            border: 1px solid var(--border);
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            padding: 20px;
+        }
+
+        /* CHECKLISTS */
+        .checklist {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .checklist li {
+            position: relative;
+            padding-left: 35px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: #334155;
+            page-break-inside: avoid;
+        }
+
+        .checklist li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 2px;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #cbd5e1;
+            border-radius: 4px;
+            background: white;
+        }
+
+        .checklist li strong {
+            color: #0f172a;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        /* PLACEHOLDERS IMAGES */
+        .image-placeholder {
+            background: #f1f5f9;
+            border: 2px dashed #cbd5e1;
+            border-radius: 8px;
+            height: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #94a3b8;
+            margin: 15px 0;
+            font-size: 13px;
+        }
+
+        .image-placeholder i {
+            font-size: 24px;
+            margin-bottom: 5px;
+            color: #cbd5e1;
+        }
+
+        /* PROMPT BOX */
+        .prompt-box {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 13px;
+            position: relative;
+            margin-bottom: 15px;
+            white-space: pre-wrap;
+        }
+
+        .prompt-box::before {
+            content: 'LOGIQUE / PROMPT :';
+            display: block;
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            color: #38bdf8;
+            font-weight: bold;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 5px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            body { padding: 0; }
+            .document-a4 {
+                width: 100%;
+                min-height: auto;
+                box-shadow: none;
+                margin: 0;
+                padding: 15px;
+            }
+            .header { flex-direction: column; align-items: flex-start; gap: 15px; }
+            .meta-info { text-align: left; }
+        }
+
+        /* PRINT */
+        @media print {
+            body { background: white; padding: 0; }
+            .document-a4 { box-shadow: none; width: 100%; padding: 0; }
+            .module-section { page-break-inside: avoid; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="document-a4">
+
+        <!-- HEADER -->
+        <div class="header">
+            <div class="title-block">
+                <h1>Manuel Opérationnel Élève</h1>
+                <p>DRIVE-TO-STORE VIRALE : NIVEAU 2 (PERFORMANCE)</p>
+            </div>
+            <div class="meta-info">
+                Cahier de Laboratoire Numérique<br>
+                Usine à Contenu par Intelligence Artificielle<br>
+                Confidentiel Agence
+            </div>
+        </div>
+
+        <div class="intro-box">
+            <h3><i class="fa-solid fa-wand-magic-sparkles"></i> L'automatisation créative</h3>
+            <p style="margin: 0;">Ce niveau transforme vos rushs bruts en 30 vidéos prêtes à l'emploi. L'objectif est de déléguer la partie technique du montage à l'intelligence artificielle pour obtenir un résultat "Top 1%" sans effort manuel.</p>
+        </div>
+
+        <!-- MODULE 5 -->
+        <div class="module-section">
+            <div class="module-header">
+                <i class="fa-solid fa-cloud-arrow-up" style="font-size: 24px; color: #bae6fd;"></i>
+                <h2>MODULE 5 : Processing Asynchrone des Rushs</h2>
+            </div>
+            <div class="module-content">
+                <ul class="checklist">
+                    <li>
+                        <strong>Nettoyage Audio (Adobe Podcast)</strong>
+                        Passez vos fichiers audio bruts dans l'outil d'IA pour supprimer les bruits de fond et obtenir un son de qualité studio.
+                    </li>
+                    <li>
+                        <strong>Dérushage & Catégorisation</strong>
+                        Triez vos clips entre A-Roll (Sujet principal) et B-Roll (Images d'illustration). Uploadez le tout sur le serveur Cloud sécurisé.
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- MODULE 6 -->
+        <div class="module-section">
+            <div class="module-header">
+                <i class="fa-solid fa-scissors" style="font-size: 24px; color: #7dd3fc;"></i>
+                <h2>MODULE 6 : Montage Spatial IA (Opus Clip)</h2>
+            </div>
+            <div class="module-content">
+                <div style="margin-bottom: 20px; text-align: center;">
+                    <span style="font-size: 13px; font-weight: bold; color: #64748b; text-transform: uppercase;">Pipeline de Montage IA :</span>
+                    <div class="mermaid">
+                        graph LR
+                        A[Rush 2h] -->|IA Analysis| B(Découpe 30 Clips)
+                        B -->|Face Tracking| C[Format Vertical 9:16]
+                        C -->|Score Viral| D[(Top 10 à publier)]
+                    </div>
+                </div>
+
+                <ul class="checklist">
+                    <li>
+                        <strong>Génération des Shorts/Reels</strong>
+                        Liez votre vidéo longue à Opus Clip. Laissez l'IA extraire les moments les plus impactants basés sur le taux de rétention.
+                    </li>
+                    <li>
+                        <strong>Vérification du Recadrage vertical</strong>
+                        Assurez-vous que l'option "Face Tracking" est active pour que le sujet reste toujours au centre de l'écran.
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- MODULE 7 -->
+        <div class="module-section" style="page-break-before: always;">
+            <div class="module-header">
+                <i class="fa-solid fa-closed-captioning" style="font-size: 24px; color: #38bdf8;"></i>
+                <h2>MODULE 7 : Sous-Titres Dynamiques & Motion Design</h2>
+            </div>
+            <div class="module-content">
+                <p style="font-size: 14px; margin-top:0;">Optimisation pour le visionnage sans son (Zero-Audio).</p>
+                
+                <ul class="checklist">
+                    <li>
+                        <strong>Incrustation styles "Hormozi"</strong>
+                        Appliquez le template de sous-titres "Bouncy". Utilisez des couleurs d'ancrage (Jaune/Vert) sur les mots-clés importants.
+                    </li>
+                    <li>
+                        <strong>Injection d'Emojis Cognitifs</strong>
+                        Assurez-vous que l'IA place des emojis visuels en rapport avec ce qui est dit pour doubler le taux de mémorisation.
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- MODULE 8 -->
+        <div class="module-section">
+            <div class="module-header">
+                <i class="fa-solid fa-hashtag" style="font-size: 24px; color: #0ea5e9;"></i>
+                <h2>MODULE 8 : SEO Social & Métadonnées</h2>
+            </div>
+            <div class="module-content">
+                <p style="font-size: 14px; margin-top:0;">Le contenu est prêt, il doit maintenant être trouvé par les clients locaux.</p>
+                
+                <ul class="checklist">
+                    <li>
+                        <strong>Génération des Captions par IA</strong>
+                        Utilisez ChatGPT pour rédiger les 30 descriptions (Captions) optimisées pour le SEO TikTok/IG.
+                        <div class="prompt-box">Prompt Sémantique :
+"Rédige une caption TikTok pour un restaurant à [Ville]. 
+Inclus 3 hashtags locaux précis et un Appel à l'Action vers la Bio."</div>
+                    </li>
+                    <li>
+                        <strong>Hacking des Hashtags géo-localisés</strong>
+                        N'utilisez pas de hashtags génériques mondiaux. Priorisez : #[Ville]Food, #[Quartier], #[Activité][Ville].
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Initialize Mermaid -->
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#f8fafc',
+                primaryTextColor: '#1e293b',
+                primaryBorderColor: '#cbd5e1',
+                lineColor: '#94a3b8',
+                secondaryColor: '#f1f5f9',
+                tertiaryColor: '#f0fdf4'
+            },
+            fontFamily: 'Inter, sans-serif'
+        });
+    </script>
+</body>
+
+</html>

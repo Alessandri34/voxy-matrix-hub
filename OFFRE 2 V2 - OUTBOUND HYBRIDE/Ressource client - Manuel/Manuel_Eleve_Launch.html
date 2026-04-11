@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manuel Élève : OUTBOUND HYBRIDE (Launch)</title>
+
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Mermaid JS -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+
+    <style>
+        :root {
+            --primary: #0ea5e9;
+            --primary-dark: #0369a1;
+            --accent: #38bdf8;
+            --bg-body: #f1f5f9;
+            --surface: #ffffff;
+            --text-main: #1e293b;
+            --text-secondary: #64748b;
+            --border: #e2e8f0;
+        }
+
+        @page {
+            size: A4;
+            margin: 15mm;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .document-a4 {
+            width: 210mm;
+            min-height: 297mm;
+            background: var(--surface);
+            margin: auto;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20mm;
+            box-sizing: border-box;
+        }
+
+        /* HEADER */
+        .header {
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .title-block h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            margin: 0 0 5px 0;
+            text-transform: uppercase;
+            color: #0f172a;
+        }
+
+        .title-block p {
+            margin: 0;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 16px;
+            letter-spacing: 1px;
+        }
+
+        .meta-info {
+            text-align: right;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        /* INTRO */
+        .intro-box {
+            background-color: #f0f9ff;
+            padding: 20px;
+            border-left: 4px solid var(--primary);
+            border-radius: 4px;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .intro-box h3 {
+            margin-top: 0;
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* MODULES */
+        .module-section {
+            margin-bottom: 40px;
+            page-break-inside: avoid;
+        }
+
+        .module-header {
+            background: #0f172a;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px 8px 0 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .module-header h2 {
+            margin: 0;
+            font-family: 'Outfit', sans-serif;
+            font-size: 18px;
+        }
+
+        .module-content {
+            border: 1px solid var(--border);
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            padding: 20px;
+        }
+
+        /* CHECKLISTS */
+        .checklist {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .checklist li {
+            position: relative;
+            padding-left: 35px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: #334155;
+            page-break-inside: avoid;
+        }
+
+        .checklist li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 2px;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #cbd5e1;
+            border-radius: 4px;
+            background: white;
+        }
+
+        .checklist li strong {
+            color: #0f172a;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        /* PLACEHOLDERS IMAGES */
+        .image-placeholder {
+            background: #f1f5f9;
+            border: 2px dashed #cbd5e1;
+            border-radius: 8px;
+            height: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #94a3b8;
+            margin: 15px 0;
+            font-size: 13px;
+        }
+
+        .image-placeholder i {
+            font-size: 24px;
+            margin-bottom: 5px;
+            color: #cbd5e1;
+        }
+
+        /* PROMPT BOX */
+        .prompt-box {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 13px;
+            position: relative;
+            margin-bottom: 15px;
+            white-space: pre-wrap;
+        }
+
+        .prompt-box::before {
+            content: 'CRITÈRES / PARAMÈTRES :';
+            display: block;
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            color: #38bdf8;
+            font-weight: bold;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 5px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            body { padding: 0; }
+            .document-a4 {
+                width: 100%;
+                min-height: auto;
+                box-shadow: none;
+                margin: 0;
+                padding: 15px;
+            }
+            .header { flex-direction: column; align-items: flex-start; gap: 15px; }
+            .meta-info { text-align: left; }
+        }
+
+        /* PRINT */
+        @media print {
+            body { background: white; padding: 0; }
+            .document-a4 { box-shadow: none; width: 100%; padding: 0; }
+            .module-section { page-break-inside: avoid; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="document-a4">
+
+        <!-- HEADER -->
+        <div class="header">
+            <div class="title-block">
+                <h1>Manuel Opérationnel Élève</h1>
+                <p>OUTBOUND HYBRIDE : NIVEAU 1 (LAUNCH)</p>
+            </div>
+            <div class="meta-info">
+                Cahier de Laboratoire Numérique<br>
+                Infrastructure B2B & Data Processing<br>
+                Confidentiel Agence
+            </div>
+        </div>
+
+        <div class="intro-box">
+            <h3><i class="fa-solid fa-satellite-dish"></i> Objectif du niveau 기초</h3>
+            <p style="margin: 0;">Ce premier niveau pose les fondations de votre machine à prospects. L'objectif est de mettre en place les capteurs (Tracking), d'activer la capture d'intention sur Google et d'extraire vos 2000 premiers contacts parfaits.</p>
+        </div>
+
+        <!-- MODULE 1 -->
+        <div class="module-section">
+            <div class="module-header">
+                <i class="fa-solid fa-magnifying-glass-chart" style="font-size: 24px; color: #bae6fd;"></i>
+                <h2>MODULE 1 : Stratégie d'Acquisition Intentionniste</h2>
+            </div>
+            <div class="module-content">
+                <ul class="checklist">
+                    <li>
+                        <strong>Configuration Google Ads "Search Intent"</strong>
+                        Créez votre compte publicitaire. Définissez vos 10 mots-clés "Achat immédiat" (ex: "expert fiscalité b2b marseille").
+                        <div class="image-placeholder">
+                            <i class="fa-solid fa-image"></i>
+                            [Capture Écran : Liste des mots-clés Google Ads]
+                        </div>
+                    </li>
+                    <li>
+                        <strong>Définition du Budget & CPA Cible</strong>
+                        Paramétrez votre budget quotidien. Commencez avec un test de 20€/jour et surveillez votre coût par lead.
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- MODULE 2 -->
+        <div class="module-section">
+            <div class="module-header">
+                <i class="fa-solid fa-code" style="font-size: 24px; color: #7dd3fc;"></i>
+                <h2>MODULE 2 : Ingénierie de Tracking (GTM / Pixel)</h2>
+            </div>
+            <div class="module-content">
+                <div style="margin-bottom: 20px; text-align: center;">
+                    <span style="font-size: 13px; font-weight: bold; color: #64748b; text-transform: uppercase;">Flux de Données :</span>
+                    <div class="mermaid">
+                        graph LR
+                        A[Visiteur] -->|Clic| B(GTM)
+                        B -->|Trigger| C[Pixel Meta]
+                        B -->|Conversion| D[Google Analytics 4]
+                    </div>
+                </div>
+
+                <ul class="checklist">
+                    <li>
+                        <strong>Installation de Google Tag Manager (GTM)</strong>
+                        Copiez le script GTM et injectez-le dans le &lt;head&gt; de votre site web.
+                    </li>
+                    <li>
+                        <strong>Configuration du Pixel de Conversion</strong>
+                        Créez un "Trigger" qui se déclenche uniquement sur la page "Merci" ou "Confirmation de RDV". Vérifiez avec l'extension Tag Assistant.
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- MODULE 3 -->
+        <div class="module-section" style="page-break-before: always;">
+            <div class="module-header">
+                <i class="fa-solid fa-database" style="font-size: 24px; color: #38bdf8;"></i>
+                <h2>MODULE 3 : Extraction & Enrichissement Data (Apollo)</h2>
+            </div>
+            <div class="module-content">
+                <p style="font-size: 14px; margin-top:0;">Nous allons puiser dans la base de données mondiale pour extraire vos futurs clients.</p>
+                
+                <ul class="checklist">
+                    <li>
+                        <strong>Matrice Persona (Ciblage)</strong>
+                        Dans Apollo.io, entrez vos critères : Taille d'entreprise, Poste précis, Secteur, Chiffre d'affaires.
+                        <div class="prompt-box">Paramètres recommandés :
+- Titre : CEO, Fondateur, Responsable IT
+- Taille : 11-50 employés
+- Signal de croissance : Recrutement en cours</div>
+                    </li>
+                    <li>
+                        <strong>Extraction & Nettoyage des Emails</strong>
+                        Exportez la liste en CSV. Passez-la dans un outil de vérification (NeverBounce) pour éliminer les adresses invalides et protéger votre réputation d'envoi.
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- MODULE 4 -->
+        <div class="module-section">
+            <div class="module-header">
+                <i class="fa-solid fa-bolt" style="font-size: 24px; color: #0ea5e9;"></i>
+                <h2>MODULE 4 : Speed-to-Lead (Automatisation Make)</h2>
+            </div>
+            <div class="module-content">
+                <p style="font-size: 14px; margin-top:0;">Réactivité maximale : transférer les leads en moins de 1 seconde.</p>
+                
+                <ul class="checklist">
+                    <li>
+                        <strong>Configuration du Webhook</strong>
+                        Créez un scénario Make.com. Connectez votre formulaire de site (Typeform/WPForms) au Webhook d'entrée. 
+                    </li>
+                    <li>
+                        <strong>Alerte Immédiate</strong>
+                        Ajoutez un module Slack ou Email à la fin du scénario pour être prévenu sur votre téléphone à la milliseconde près dès qu'un prospect s'inscrit.
+                        <div class="image-placeholder">
+                            <i class="fa-solid fa-image"></i>
+                            [Capture : Scénario Make complet]
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Initialize Mermaid -->
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#f8fafc',
+                primaryTextColor: '#1e293b',
+                primaryBorderColor: '#cbd5e1',
+                lineColor: '#94a3b8',
+                secondaryColor: '#f1f5f9',
+                tertiaryColor: '#f0f9ff'
+            },
+            fontFamily: 'Inter, sans-serif'
+        });
+    </script>
+</body>
+
+</html>

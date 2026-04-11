@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manuel Élève : DRIVE-TO-STORE VIRALE (Launch)</title>
+
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Mermaid JS -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+
+    <style>
+        :root {
+            --primary: #22c55e;
+            --primary-dark: #166534;
+            --accent: #4ade80;
+            --bg-body: #f0fdf4;
+            --surface: #ffffff;
+            --text-main: #1e293b;
+            --text-secondary: #64748b;
+            --border: #e2e8f0;
+        }
+
+        @page {
+            size: A4;
+            margin: 15mm;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .document-a4 {
+            width: 210mm;
+            min-height: 297mm;
+            background: var(--surface);
+            margin: auto;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20mm;
+            box-sizing: border-box;
+        }
+
+        /* HEADER */
+        .header {
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .title-block h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            margin: 0 0 5px 0;
+            text-transform: uppercase;
+            color: #0f172a;
+        }
+
+        .title-block p {
+            margin: 0;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 16px;
+            letter-spacing: 1px;
+        }
+
+        .meta-info {
+            text-align: right;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        /* INTRO */
+        .intro-box {
+            background-color: #f0fdf4;
+            padding: 20px;
+            border-left: 4px solid var(--primary);
+            border-radius: 4px;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .intro-box h3 {
+            margin-top: 0;
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* MODULES */
+        .module-section {
+            margin-bottom: 40px;
+            page-break-inside: avoid;
+        }
+
+        .module-header {
+            background: #0f172a;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px 8px 0 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .module-header h2 {
+            margin: 0;
+            font-family: 'Outfit', sans-serif;
+            font-size: 18px;
+        }
+
+        .module-content {
+            border: 1px solid var(--border);
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            padding: 20px;
+        }
+
+        /* CHECKLISTS */
+        .checklist {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .checklist li {
+            position: relative;
+            padding-left: 35px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: #334155;
+            page-break-inside: avoid;
+        }
+
+        .checklist li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 2px;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #cbd5e1;
+            border-radius: 4px;
+            background: white;
+        }
+
+        .checklist li strong {
+            color: #0f172a;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        /* PLACEHOLDERS IMAGES */
+        .image-placeholder {
+            background: #f1f5f9;
+            border: 2px dashed #cbd5e1;
+            border-radius: 8px;
+            height: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #94a3b8;
+            margin: 15px 0;
+            font-size: 13px;
+        }
+
+        .image-placeholder i {
+            font-size: 24px;
+            margin-bottom: 5px;
+            color: #cbd5e1;
+        }
+
+        /* PROMPT BOX */
+        .prompt-box {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 13px;
+            position: relative;
+            margin-bottom: 15px;
+            white-space: pre-wrap;
+        }
+
+        .prompt-box::before {
+            content: 'DÉFINITION / HACK :';
+            display: block;
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            color: #38bdf8;
+            font-weight: bold;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 5px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            body { padding: 0; }
+            .document-a4 {
+                width: 100%;
+                min-height: auto;
+                box-shadow: none;
+                margin: 0;
+                padding: 15px;
+            }
+            .header { flex-direction: column; align-items: flex-start; gap: 15px; }
+            .meta-info { text-align: left; }
+        }
+
+        /* PRINT */
+        @media print {
+            body { background: white; padding: 0; }
+            .document-a4 { box-shadow: none; width: 100%; padding: 0; }
+            .module-section { page-break-inside: avoid; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="document-a4">
+
+        <!-- HEADER -->
+        <div class="header">
+            <div class="title-block">
+                <h1>Manuel Opérationnel Élève</h1>
+                <p>DRIVE-TO-STORE VIRALE : NIVEAU 1 (LAUNCH)</p>
+            </div>
+            <div class="meta-info">
+                Cahier de Laboratoire Numérique<br>
+                Référencement Local & Captation In-Vivo<br>
+                Confidentiel Agence
+            </div>
+        </div>
+
+        <div class="intro-box">
+            <h3><i class="fa-solid fa-location-dot"></i> Dominer votre zone de chalandise</h3>
+            <p style="margin: 0;">Ce premier niveau prépare votre commerce physique à recevoir l'afflux de clients généré par les réseaux sociaux. Nous réparerons votre réputation sur Google Maps et poserons les bases de votre communication vidéo.</p>
+        </div>
+
+        <!-- MODULE 1 -->
+        <div class="module-section">
+            <div class="module-header">
+                <i class="fa-solid fa-map-location-dot" style="font-size: 24px; color: #86efac;"></i>
+                <h2>MODULE 1 : Audit SEO Local & Google Maps</h2>
+            </div>
+            <div class="module-content">
+                <ul class="checklist">
+                    <li>
+                        <strong>Récupération de la Fiche GMB</strong>
+                        Assurez-vous d'être l'administrateur principal de votre fiche Google My Business. Validez toutes les infos (Horaires, Adresse, Tel).
+                    </li>
+                    <li>
+                        <strong>Le Hack "EXIF" (Géolocalisation des photos)</strong>
+                        Utilisez un outil de tagging EXIF pour injecter les coordonnées GPS exactes de votre magasin dans vos photos HD avant de les mettre sur Google.
+                        <div class="prompt-box">Hack EXIF : 
+Google privilégie les photos dont les métadonnées prouvent qu'elles ont été prises physiquement sur le lieu du commerce.</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- MODULE 2 -->
+        <div class="module-section">
+            <div class="module-header">
+                <i class="fa-solid fa-nfc-symbol" style="font-size: 24px; color: #4ade80;"></i>
+                <h2>MODULE 2 : Déploiement du Local Trust Engine (NFC)</h2>
+            </div>
+            <div class="module-content">
+                <div style="margin-bottom: 20px; text-align: center;">
+                    <span style="font-size: 13px; font-weight: bold; color: #64748b; text-transform: uppercase;">Mécanique de la Note 5 Étoiles :</span>
+                    <div class="mermaid">
+                        graph LR
+                        A[Client à la caisse] -->|Tap Phone| B(Puce NFC)
+                        B -->|Ouverture directe| C[Fiche Avis Google]
+                        C -->|Note 5/5| D[(Boost SEO Local)]
+                    </div>
+                </div>
+
+                <ul class="checklist">
+                    <li>
+                        <strong>Paramétrage des Plaques NFC</strong>
+                        Encodez vos plaques ou flyers avec l'URL directe de votre formulaire d'avis Google. Testez avec votre propre téléphone.
+                    </li>
+                    <li>
+                        <strong>Entraînement du Staff</strong>
+                        Mémorisez la phrase magique : "Si vous avez passé un bon moment, ça m'aiderait beaucoup si vous approchiez votre téléphone d'ici juste une seconde."
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- MODULE 3 -->
+        <div class="module-section" style="page-break-before: always;">
+            <div class="module-header">
+                <i class="fa-solid fa-share-nodes" style="font-size: 24px; color: #22c55e;"></i>
+                <h2>MODULE 3 : Écosystème Vidéo de Marque</h2>
+            </div>
+            <div class="module-content">
+                <p style="font-size: 14px; margin-top:0;">Vos réseaux sociaux ne sont plus un journal intime, c'est votre devanture digitale.</p>
+                
+                <ul class="checklist">
+                    <li>
+                        <strong>Configuration Comptes Business</strong>
+                        Passez vos profils Instagram et TikTok en mode "Professionnel". Cela débloque les statistiques et les boutons de contact.
+                    </li>
+                    <li>
+                        <strong>Optimisation de la Bio & CTA</strong>
+                        Structurez votre biographie : 1. Ce que vous faites, 2. Où vous êtes, 3. Comment réserver (Lien).
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- MODULE 4 -->
+        <div class="module-section">
+            <div class="module-header">
+                <i class="fa-solid fa-camera-retro" style="font-size: 24px; color: #16a34a;"></i>
+                <h2>MODULE 4 : Atelier Captation In-Vivo</h2>
+            </div>
+            <div class="module-content">
+                <p style="font-size: 14px; margin-top:0;">La récolte de la matière brute pour vos futures vidéos virales.</p>
+                
+                <ul class="checklist">
+                    <li>
+                        <strong>Session de Tournage 2h</strong>
+                        Avec l'expert, tournez vos 2 heures de rushs. Focus sur l'authenticité (Vlog-style) et les plans d'illustration (B-Roll) de vos produits phares.
+                    </li>
+                    <li>
+                        <strong>Démystification Caméra</strong>
+                        Oubliez la perfection. Le but est de créer un lien direct et humain avec votre audience locale.
+                        <div class="image-placeholder">
+                            <i class="fa-solid fa-image"></i>
+                            [Capture : Exemples de plans B-Roll réussis]
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Initialize Mermaid -->
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#f8fafc',
+                primaryTextColor: '#1e293b',
+                primaryBorderColor: '#cbd5e1',
+                lineColor: '#94a3b8',
+                secondaryColor: '#f1f5f9',
+                tertiaryColor: '#f0fdf4'
+            },
+            fontFamily: 'Inter, sans-serif'
+        });
+    </script>
+</body>
+
+</html>

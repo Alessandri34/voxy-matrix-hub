@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manuel Élève : E-COM COMMANDO (Performance)</title>
+
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Mermaid JS -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+
+    <style>
+        :root {
+            --primary: #f43f5e;
+            --primary-dark: #be123c;
+            --accent: #ff7e67;
+            --bg-body: #e5e5e5;
+            --surface: #ffffff;
+            --text-main: #1e293b;
+            --text-secondary: #64748b;
+            --border: #e2e8f0;
+        }
+
+        @page {
+            size: A4;
+            margin: 15mm;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .document-a4 {
+            width: 210mm;
+            min-height: 297mm;
+            background: var(--surface);
+            margin: auto;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20mm;
+            box-sizing: border-box;
+        }
+
+        /* HEADER */
+        .header {
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .title-block h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            margin: 0 0 5px 0;
+            text-transform: uppercase;
+            color: #0f172a;
+        }
+
+        .title-block p {
+            margin: 0;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 16px;
+            letter-spacing: 1px;
+        }
+
+        .meta-info {
+            text-align: right;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        /* INTRO */
+        .intro-box {
+            background-color: #fff1f2;
+            padding: 20px;
+            border-left: 4px solid var(--primary);
+            border-radius: 4px;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .intro-box h3 {
+            margin-top: 0;
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* MODULES */
+        .module-section {
+            margin-bottom: 40px;
+            page-break-inside: avoid;
+        }
+
+        .module-header {
+            background: #0f172a;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px 8px 0 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .module-header h2 {
+            margin: 0;
+            font-family: 'Outfit', sans-serif;
+            font-size: 18px;
+        }
+
+        .module-content {
+            border: 1px solid var(--border);
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            padding: 20px;
+        }
+
+        /* CHECKLISTS */
+        .checklist {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .checklist li {
+            position: relative;
+            padding-left: 35px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: #334155;
+            page-break-inside: avoid;
+        }
+
+        .checklist li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 2px;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #cbd5e1;
+            border-radius: 4px;
+            background: white;
+        }
+
+        .checklist li strong {
+            color: #0f172a;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        /* PLACEHOLDERS IMAGES */
+        .image-placeholder {
+            background: #f1f5f9;
+            border: 2px dashed #cbd5e1;
+            border-radius: 8px;
+            height: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #94a3b8;
+            margin: 15px 0;
+            font-size: 13px;
+        }
+
+        .image-placeholder i {
+            font-size: 24px;
+            margin-bottom: 5px;
+            color: #cbd5e1;
+        }
+
+        /* PROMPT BOX */
+        .prompt-box {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 13px;
+            position: relative;
+            margin-bottom: 15px;
+            white-space: pre-wrap;
+        }
+
+        .prompt-box::before {
+            content: 'PROMPT / LOGIQUE :';
+            display: block;
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            color: #38bdf8;
+            font-weight: bold;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 5px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            body { padding: 0; }
+            .document-a4 {
+                width: 100%;
+                min-height: auto;
+                box-shadow: none;
+                margin: 0;
+                padding: 15px;
+            }
+            .header { flex-direction: column; align-items: flex-start; gap: 15px; }
+            .meta-info { text-align: left; }
+        }
+
+        /* PRINT */
+        @media print {
+            body { background: white; padding: 0; }
+            .document-a4 { box-shadow: none; width: 100%; padding: 0; }
+            .module-section { page-break-inside: avoid; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="document-a4">
+
+        <!-- HEADER -->
+        <div class="header">
+            <div class="title-block">
+                <h1>Manuel Opérationnel Élève</h1>
+                <p>E-COM COMMANDO : NIVEAU 2 (PERFORMANCE)</p>
+            </div>
+            <div class="meta-info">
+                Cahier de Laboratoire Numérique<br>
+                Optimisation Conversion & Rétention<br>
+                Confidentiel Agence
+            </div>
+        </div>
+
+        <div class="intro-box">
+            <h3><i class="fa-solid fa-gauge-high"></i> Objectif de performance</h3>
+            <p style="margin: 0;">Maintenant que votre boutique est ouverte, nous allons colmater les fuites de profit. Le niveau Performance se concentre sur l'automatisation de la relance client et l'expansion massive de votre catalogue via l'IA.</p>
+        </div>
+
+        <!-- MODULE 5 -->
+        <div class="module-section">
+            <div class="module-header">
+                <i class="fa-solid fa-envelope-open-text" style="font-size: 24px; color: #a5f3fc;"></i>
+                <h2>MODULE 5 : Vault System Anti-Abandon (Klaviyo)</h2>
+            </div>
+            <div class="module-content">
+                <div style="margin-bottom: 20px; text-align: center;">
+                    <span style="font-size: 13px; font-weight: bold; color: #64748b; text-transform: uppercase;">Flux de Rétention Automatique :</span>
+                    <div class="mermaid">
+                        graph TD
+                        A[Panier Abandonné] -->|H+2| B(Email 1: Rappel Emotionnel)
+                        B -->|J+1| C(Email 2: Preuve Sociale)
+                        C -->|J+2| D(Email 3: Coupon d'Urgence)
+                    </div>
+                </div>
+
+                <ul class="checklist">
+                    <li>
+                        <strong>Liaison Klaviyo <> Shopify</strong>
+                        Installez l'application Klaviyo sur Shopify. Autorisez la synchronisation du "Data Layer" pour que Klaviyo sache exactement ce que fait le visiteur.
+                    </li>
+                    <li>
+                        <strong>Configuration SPF/DKIM (Délivrabilité)</strong>
+                        Allez dans Settings > Email Custom Domain dans Klaviyo. Copiez les enregistrements DNS et collez-les dans votre hébergeur pour éviter de finir en SPAM.
+                    </li>
+                    <li>
+                        <strong>Activation du "Abandoned Cart Flow"</strong>
+                        Utilisez le template standard "Abandoned Cart". Personnalisez le texte avec votre ton de marque. Activez le mode "Live".
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- MODULE 6 -->
+        <div class="module-section" style="page-break-before: always;">
+            <div class="module-header">
+                <i class="fa-solid fa-layer-group" style="font-size: 24px; color: #fde68a;"></i>
+                <h2>MODULE 6 : Injection Massive (50 Fiches SEO IA)</h2>
+            </div>
+            <div class="module-content">
+                <p style="font-size: 14px; margin-top:0;">Nous allons passer de 5 à 50 produits en exploitant la puissance des automates Make.com et GPT.</p>
+                
+                <ul class="checklist">
+                    <li>
+                        <strong>Préparation du Master Sheet</strong>
+                        Utilisez le modèle Google Sheets fourni. Listez vos 50 produits (Noms et caractéristiques brutes).
+                    </li>
+                    <li>
+                        <strong>Scénario d'automatisation Make.com</strong>
+                        Liez votre Google Sheets à l'API OpenAI. 
+                        <div class="prompt-box">Logique Make : 
+Trigger (Nouveau rang Sheet) -> OpenAI (Générer Title/Description/SEO) -> Shopify API (Créer Produit)</div>
+                    </li>
+                    <li>
+                        <strong>Vérification SEO Sémantique</strong>
+                        Assurez-vous que chaque "Meta Description" générée contient au moins 2 mots-clés de votre secteur géographique ou de votre niche technique.
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- MODULE 7 -->
+        <div class="module-section">
+            <div class="module-header">
+                <i class="fa-solid fa-window-restore" style="font-size: 24px; color: #c7d2fe;"></i>
+                <h2>MODULE 7 : Capture de Leads (Pop-Up Exit Intent)</h2>
+            </div>
+            <div class="module-content">
+                <ul class="checklist">
+                    <li>
+                        <strong>Design de la Modale</strong>
+                        Créez un visuel impactant : "Attendez ! Ne partez pas les mains vides". Proposez un code de -10% immédiat en échange de l'email.
+                    </li>
+                    <li>
+                        <strong>Paramétrage du "Trigger" (Déclenchement)</strong>
+                        Réglez l'affichage sur "Show on exit intent" (vitesse de souris vers le haut). Limitez l'affichage à 1 fois par visiteur tous les 30 jours.
+                        <div class="image-placeholder">
+                            <i class="fa-solid fa-image"></i>
+                            [Capture : Paramètres de déclenchement Pop-up]
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- MODULE 8 -->
+        <div class="module-section">
+            <div class="module-header">
+                <i class="fa-solid fa-chart-pie" style="font-size: 24px; color: #86efac;"></i>
+                <h2>MODULE 8 : Tableau de Bord Analytics (Dashboard)</h2>
+            </div>
+            <div class="module-content">
+                <p style="font-size: 14px; margin-top:0;">Le pilotage par les chiffres. Ne gérez pas votre boutique à l'aveugle.</p>
+                
+                <ul class="checklist">
+                    <li>
+                        <strong>Installation des Pixels de Tracking</strong>
+                        Allez dans Paramètres > Applications et canaux de vente > Facebook/Google. Liez vos comptes pour que les données remontent correctement.
+                    </li>
+                    <li>
+                        <strong>Lecture du Dashboard Maître</strong>
+                        Apprenez à identifier le **CAC** (Coût d'Acquisition Client). Si votre produit coûte 50€ et que le CAC est de 40€, vous êtes rentable. 
+                        <div class="image-placeholder">
+                            <i class="fa-solid fa-image"></i>
+                            [Capture : Dashboard Centralisé LTV/CAC]
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Initialize Mermaid -->
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#f8fafc',
+                primaryTextColor: '#1e293b',
+                primaryBorderColor: '#cbd5e1',
+                lineColor: '#94a3b8',
+                secondaryColor: '#f1f5f9',
+                tertiaryColor: '#fff1f2'
+            },
+            fontFamily: 'Inter, sans-serif'
+        });
+    </script>
+</body>
+
+</html>

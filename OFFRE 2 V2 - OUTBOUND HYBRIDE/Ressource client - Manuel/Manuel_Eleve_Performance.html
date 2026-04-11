@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manuel Élève : OUTBOUND HYBRIDE (Performance)</title>
+
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Mermaid JS -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+
+    <style>
+        :root {
+            --primary: #0ea5e9;
+            --primary-dark: #0369a1;
+            --accent: #38bdf8;
+            --bg-body: #f1f5f9;
+            --surface: #ffffff;
+            --text-main: #1e293b;
+            --text-secondary: #64748b;
+            --border: #e2e8f0;
+        }
+
+        @page {
+            size: A4;
+            margin: 15mm;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .document-a4 {
+            width: 210mm;
+            min-height: 297mm;
+            background: var(--surface);
+            margin: auto;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20mm;
+            box-sizing: border-box;
+        }
+
+        /* HEADER */
+        .header {
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .title-block h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            margin: 0 0 5px 0;
+            text-transform: uppercase;
+            color: #0f172a;
+        }
+
+        .title-block p {
+            margin: 0;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 16px;
+            letter-spacing: 1px;
+        }
+
+        .meta-info {
+            text-align: right;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        /* INTRO */
+        .intro-box {
+            background-color: #f0f9ff;
+            padding: 20px;
+            border-left: 4px solid var(--primary);
+            border-radius: 4px;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .intro-box h3 {
+            margin-top: 0;
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* MODULES */
+        .module-section {
+            margin-bottom: 40px;
+            page-break-inside: avoid;
+        }
+
+        .module-header {
+            background: #0f172a;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px 8px 0 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .module-header h2 {
+            margin: 0;
+            font-family: 'Outfit', sans-serif;
+            font-size: 18px;
+        }
+
+        .module-content {
+            border: 1px solid var(--border);
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            padding: 20px;
+        }
+
+        /* CHECKLISTS */
+        .checklist {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .checklist li {
+            position: relative;
+            padding-left: 35px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: #334155;
+            page-break-inside: avoid;
+        }
+
+        .checklist li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 2px;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #cbd5e1;
+            border-radius: 4px;
+            background: white;
+        }
+
+        .checklist li strong {
+            color: #0f172a;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        /* PLACEHOLDERS IMAGES */
+        .image-placeholder {
+            background: #f1f5f9;
+            border: 2px dashed #cbd5e1;
+            border-radius: 8px;
+            height: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #94a3b8;
+            margin: 15px 0;
+            font-size: 13px;
+        }
+
+        .image-placeholder i {
+            font-size: 24px;
+            margin-bottom: 5px;
+            color: #cbd5e1;
+        }
+
+        /* PROMPT BOX */
+        .prompt-box {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 13px;
+            position: relative;
+            margin-bottom: 15px;
+            white-space: pre-wrap;
+        }
+
+        .prompt-box::before {
+            content: 'LOGIQUE / SCRIPT :';
+            display: block;
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            color: #38bdf8;
+            font-weight: bold;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 5px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            body { padding: 0; }
+            .document-a4 {
+                width: 100%;
+                min-height: auto;
+                box-shadow: none;
+                margin: 0;
+                padding: 15px;
+            }
+            .header { flex-direction: column; align-items: flex-start; gap: 15px; }
+            .meta-info { text-align: left; }
+        }
+
+        /* PRINT */
+        @media print {
+            body { background: white; padding: 0; }
+            .document-a4 { box-shadow: none; width: 100%; padding: 0; }
+            .module-section { page-break-inside: avoid; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="document-a4">
+
+        <!-- HEADER -->
+        <div class="header">
+            <div class="title-block">
+                <h1>Manuel Opérationnel Élève</h1>
+                <p>OUTBOUND HYBRIDE : NIVEAU 2 (PERFORMANCE)</p>
+            </div>
+            <div class="meta-info">
+                Cahier de Laboratoire Numérique<br>
+                Automatisation Vocale & Intelligence IA<br>
+                Confidentiel Agence
+            </div>
+        </div>
+
+        <div class="intro-box">
+            <h3><i class="fa-solid fa-microchip"></i> L'Intelligence Vocale au service de la vente</h3>
+            <p style="margin: 0;">Ce niveau transforme votre infrastructure en une force de frappe autonome. Votre IA ne se contente plus de capturer des leads, elle les appelle, les qualifie et gère les objections comme un humain le ferait.</p>
+        </div>
+
+        <!-- MODULE 5 -->
+        <div class="module-section">
+            <div class="module-header">
+                <i class="fa-solid fa-microphone-lines" style="font-size: 24px; color: #bae6fd;"></i>
+                <h2>MODULE 5 : Programmation de la Voix & Synthèse</h2>
+            </div>
+            <div class="module-content">
+                <ul class="checklist">
+                    <li>
+                        <strong>Sélection du Timbre de Voix (Vapi/Bland)</strong>
+                        Choisissez une voix avec un accent neutre et une intonation chaleureuse. Testez la latence : elle doit être inférieure à 800ms pour une conversation naturelle.
+                    </li>
+                    <li>
+                        <strong>Paramétrage du SSML (Pauses et Souffles)</strong>
+                        Injectez des balises de respiration et d'hésitation pour briser le côté robotique.
+                        <div class="prompt-box">&lt;speak&gt;
+  Bonjour, je suis... &lt;break time="200ms"/&gt; l'assistant de [Entreprise]... 
+&lt;/speak&gt;</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- MODULE 6 -->
+        <div class="module-section">
+            <div class="module-header">
+                <i class="fa-solid fa-brain" style="font-size: 24px; color: #7dd3fc;"></i>
+                <h2>MODULE 6 : Injection de Base de Connaissances (RAG)</h2>
+            </div>
+            <div class="module-content">
+                <p style="font-size: 14px; margin-top:0;">Votre robot doit tout savoir sur votre entreprise pour répondre aux questions imprévues.</p>
+                
+                <ul class="checklist">
+                    <li>
+                        <strong>Scraping et Injection de Documentation</strong>
+                        Uploadez vos PDFs de tarifs, vos FAQs et l'historique de vos meilleures ventes dans la "Vector Database" du robot.
+                    </li>
+                    <li>
+                        <strong>Test d'Objection</strong>
+                        Appelez votre propre robot et posez une question complexe (ex: "Quelle est votre politique de garantie ?"). Ajustez ses réponses si nécessaire.
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- MODULE 7 -->
+        <div class="module-section" style="page-break-before: always;">
+            <div class="module-header">
+                <i class="fa-solid fa-phone-volume" style="font-size: 24px; color: #38bdf8;"></i>
+                <h2>MODULE 7 : L'Appel Intentionnel de Qualification</h2>
+            </div>
+            <div class="module-content">
+                <div style="margin-bottom: 20px; text-align: center;">
+                    <span style="font-size: 13px; font-weight: bold; color: #64748b; text-transform: uppercase;">Cinématique de l'Appel :</span>
+                    <div class="mermaid">
+                        graph TD
+                        A[Décrochage Patient] -->|Hook 3s| B(Validation Intention)
+                        B -->|Questions Clés| C{Qualifié ?}
+                        C -->|Oui| D[Booking RDV Humain]
+                        C -->|Non| E[Désengagement Poli]
+                    </div>
+                </div>
+
+                <ul class="checklist">
+                    <li>
+                        <strong>Configuration du Master Prompt</strong>
+                        Injectez le script de qualification. Le robot doit poser les 3 questions bloquantes : Budget, Besoins, Timing.
+                        <div class="prompt-box">System Instructions :
+Tu es un assistant de qualification. Ton but est de déterminer si le prospect a un budget de plus de [Montant] et s'il souhaite démarrer dans les 30 jours.</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- MODULE 8 -->
+        <div class="module-section">
+            <div class="module-header">
+                <i class="fa-solid fa-envelope-circle-check" style="font-size: 24px; color: #0ea5e9;"></i>
+                <h2>MODULE 8 : Le Pré-cadre Nurturing Silencieux</h2>
+            </div>
+            <div class="module-content">
+                <p style="font-size: 14px; margin-top:0;">Si le client ne répond pas, la machine continue de travailler par email.</p>
+                
+                <ul class="checklist">
+                    <li>
+                        <strong>Séquence de Relance Automatique</strong>
+                        Configurez une séquence de 3 emails dans votre CRM ou outil d'envoi. Focus sur la preuve sociale (Cas clients) pour chauffer le prospect.
+                    </li>
+                    <li>
+                        <strong>Liaison Call -> Email</strong>
+                        Si le statut de l'appel est "No Answer", déclenchez immédiatement le premier email de la séquence via Make.com.
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Initialize Mermaid -->
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#f8fafc',
+                primaryTextColor: '#1e293b',
+                primaryBorderColor: '#cbd5e1',
+                lineColor: '#94a3b8',
+                secondaryColor: '#f1f5f9',
+                tertiaryColor: '#f0f9ff'
+            },
+            fontFamily: 'Inter, sans-serif'
+        });
+    </script>
+</body>
+
+</html>
