@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guide Formateur : DRIVE-TO-STORE VIRALE (Launch)</title>
+
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Mermaid JS for schemas -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+
+    <style>
+        :root {
+            --primary-color: #22c55e;
+            --bg-dark: #f8fafc;
+            --surface: #ffffff;
+            --text-main: #1e293b;
+            --text-secondary: #64748b;
+            --border: #e2e8f0;
+            --border-radius: 12px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* HEADER */
+        .header {
+            background: var(--surface);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            margin-bottom: 40px;
+            text-align: center;
+            border-top: 5px solid var(--primary-color);
+        }
+
+        .header h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin: 0 0 10px 0;
+            color: #0f172a;
+        }
+
+        .header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin: 0;
+        }
+
+        .alert-box {
+            background-color: #f0fdf4;
+            color: #166534;
+            padding: 20px;
+            border-left: 4px solid var(--primary-color);
+            border-radius: 4px;
+            margin-bottom: 40px;
+            font-weight: 500;
+            text-align: left;
+        }
+
+        /* CARD STEPS */
+        .step-card {
+            background: var(--surface);
+            border-radius: var(--border-radius);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+            margin-bottom: 40px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .step-header {
+            background: #f1f5f9;
+            padding: 25px 30px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .step-header h2 {
+            margin: 0;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            color: #0f172a;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .step-header h2 i {
+            color: var(--primary-color);
+        }
+
+        .step-meta {
+            text-align: right;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .step-meta strong {
+            color: #0f172a;
+        }
+
+        .step-content {
+            padding: 30px;
+        }
+
+        .instruction-block {
+            background: #f8fafc;
+            border: 1px dashed #cbd5e1;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+        }
+
+        .instruction-block h4 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+        }
+
+        .instruction-list {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .instruction-list li {
+            margin-bottom: 15px;
+        }
+
+        .instruction-list li strong {
+            color: var(--text-main);
+        }
+
+        .instruction-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        .phrase-cle {
+            display: inline-block;
+            background-color: #f0fdf4;
+            padding: 8px 12px;
+            border-left: 3px solid var(--primary-color);
+            border-radius: 4px;
+            font-style: italic;
+            color: #14532d;
+            margin-top: 8px;
+            font-size: 0.95rem;
+        }
+
+        /* MERMAID SCHEMAS */
+        .schema-container {
+            margin-top: 30px;
+            padding: 20px;
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .schema-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #475569;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .mermaid {
+            display: flex;
+            justify-content: center;
+        }
+
+        /* SUMMARY SECTION */
+        .summary-section {
+            background: #0f172a;
+            color: #f8fafc;
+            padding: 40px;
+            border-radius: var(--border-radius);
+            margin-top: 60px;
+            margin-bottom: 40px;
+        }
+
+        .summary-section h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.8rem;
+            color: #fff;
+            margin-top: 0;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 15px;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .summary-box h3 {
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .summary-list {
+            padding-left: 20px;
+        }
+
+        .summary-list li {
+            margin-bottom: 10px;
+            color: #cbd5e1;
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 768px) {
+            .header { padding: 30px 15px; }
+            .step-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+            .step-meta { text-align: left; }
+            .summary-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- HEADER -->
+        <header class="header">
+            <h1>Guide Formateur : DRIVE-TO-STORE VIRALE</h1>
+            <p>NIVEAU 1 : Les Fondations (Référencement, Écosystème & Captation In-Vivo)</p>
+        </header>
+
+        <div class="alert-box">
+            <strong><i class="fa-solid fa-triangle-exclamation"></i> DIRECTIVE TOP 1% :</strong><br>
+            Le client d'une offre Drive-To-Store n'a qu'un seul objectif : remplir son établissement physique (Restaurant, Clinique, Cabinet). Il n'a que faire des "likes". Ce module de fondation (Launch) est critique pour implanter la logistique absolue qui convertira plus tard les vues en trafic piéton. Focus sur l'ingénierie Google Maps, la notation poussée et la récolte des vidéos (Rushs).
+        </div>
+
+        <!-- SCHÉMA ARCHITECTURE -->
+        <div class="schema-container">
+            <div class="schema-title"><i class="fa-solid fa-sitemap"></i> Logistique de Captation "Viralité" (Flux)</div>
+            <div class="mermaid">
+graph TD
+    A[Client] -->|Étape 1| B(Refonte Google Maps)
+    A -->|Étape 2| C(Déploiement NFC)
+    C --> D[Objectif : Forcer la Note à 4.8+]
+    A -->|Étape 3| E(Création Comptes TikTok/IG)
+    E -->|Étape 4| F[Tournage Master In-Vivo 2h]
+    F -->|Rushs Brut| G((Serveurs Agence))
+            </div>
+        </div>
+
+        <!-- STEP 1 -->
+        <div class="step-card">
+            <div class="step-header">
+                <h2><i class="fa-solid fa-map-location-dot"></i> ÉTAPE 1 : Audit SEO Local & Google Maps</h2>
+                <div class="step-meta">
+                    Durée: <strong>1h00</strong><br>
+                    <span style="display:inline-block; margin-top:5px; background:#1e293b; color:var(--primary-color); padding:3px 8px; border-radius:4px; font-size:0.75rem; font-weight:600;"><i class="fa-solid fa-graduation-cap"></i> Valide : SKILL D2S-1</span>
+                </div>
+            </div>
+            <div class="step-content">
+                <div class="instruction-block">
+                    <h4>Actions Directives :</h4>
+                    <ul class="instruction-list">
+                        <li><strong>Désincarcération du Compte :</strong> Assurez-vous que le gérant possède toutes les clés administrateurs de sa propre fiche Google My Business (souvent perdue ou réclamée).</li>
+                        <li><strong>Audit Sémantique & Catégorisation :</strong> Revoyez la "description" pour intégrer les requêtes vocales (Ex: "Où manger les meilleures pâtes autour de moi à Paris"). Renseignez jusqu'à 5 catégories secondaires.</li>
+                        <li><strong>Le Hack "EXIF" :</strong> Formez le client à ne plus jamais uploader de photos "classiques" sur sa fiche, mais d'utiliser des photos dont les métadonnées géotaggées (Latitude/Longitude) correspondent exactement à son établissement.</li>
+                    </ul>
+                </div>
+                <div style="padding: 15px; background: rgba(34, 197, 94, 0.1); border-left: 3px solid var(--primary-color); border-radius: 4px; font-size: 0.95rem;">
+                    <strong><i class="fa-solid fa-bolt"></i> Angle Vente & Rétention :</strong><br>
+                    "Tirer des milliers de vues sur TikTok c'est drôle, mais si le prospect tape votre nom sur Google ensuite, et voit 3,2 étoiles avec des photos sombres, il ira chez le voisin. On répare le tiroir-caisse d'abord."
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 2 -->
+        <div class="step-card">
+            <div class="step-header">
+                <h2><i class="fa-solid fa-mobile-retro"></i> ÉTAPE 2 : Déploiement du "Local Trust Engine" (NFC)</h2>
+                <div class="step-meta">
+                    Durée: <strong>45min</strong><br>
+                    <span style="display:inline-block; margin-top:5px; background:#1e293b; color:var(--primary-color); padding:3px 8px; border-radius:4px; font-size:0.75rem; font-weight:600;"><i class="fa-solid fa-graduation-cap"></i> Valide : SKILL D2S-2</span>
+                </div>
+            </div>
+            <div class="step-content">
+                <div class="instruction-block">
+                    <h4>Actions Directives :</h4>
+                    <ul class="instruction-list">
+                        <li><strong>Liaison Matérielle NFC :</strong> Opérez devant le client le paramétrage (ou expliquez-lui comment le Centre a paramétré) la technologie Sans-Contact des plaques physiques avec le lien exact "Laisser un avis" de sa fiche GMB.</li>
+                        <li><strong>Processus d'Interception du Staff :</strong> Entraînez le client (jeu de rôle de 10 min) à sortir la "phrase magique" au comptoir :<br>
+                        <span class="phrase-cle">"Si vous avez passé un bon moment, ça m'aiderait beaucoup si vous approchiez votre téléphone d'ici juste une seconde."</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 3 -->
+        <div class="step-card">
+            <div class="step-header">
+                <h2><i class="fa-brands fa-tiktok"></i> ÉTAPE 3 : Écosystème Vidéo Algorithmique</h2>
+                <div class="step-meta">
+                    Durée: <strong>45min</strong><br>
+                    <span style="display:inline-block; margin-top:5px; background:#1e293b; color:var(--primary-color); padding:3px 8px; border-radius:4px; font-size:0.75rem; font-weight:600;"><i class="fa-solid fa-graduation-cap"></i> Valide : SKILL D2S-3</span>
+                </div>
+            </div>
+            <div class="step-content">
+                <div class="instruction-block">
+                    <h4>Actions Directives :</h4>
+                    <ul class="instruction-list">
+                        <li><strong>Standardisation "Business" :</strong> Passez obligatoirement les profils Instagram et TikTok du client en "Mode Professionnel / Créateur" pour accéder aux métriques.</li>
+                        <li><strong>Ingénierie de la Bio :</strong> Rédigez avec le client une biographie ultra-lucrative avec l'architecture : (1) Autorité, (2) Emplacement direct (Ville), (3) CTA vers outil de réservation (Zenchef/Planity/Site).</li>
+                        <li><strong>L'URL Parfaite :</strong> Installez un agrégateur de liens propre (Linktree ou page dédiée) si le client a plusieurs points de chute obligatoires.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 4 -->
+        <div class="step-card">
+            <div class="step-header">
+                <h2><i class="fa-solid fa-video"></i> ÉTAPE 4 : Atelier Mise en Scène & Tournage 2h (In-Vivo)</h2>
+                <div class="step-meta">
+                    Durée: <strong>2h30 (Sur site)</strong><br>
+                    <span style="display:inline-block; margin-top:5px; background:#1e293b; color:var(--primary-color); padding:3px 8px; border-radius:4px; font-size:0.75rem; font-weight:600;"><i class="fa-solid fa-graduation-cap"></i> Valide : SKILL D2S-4</span>
+                </div>
+            </div>
+            <div class="step-content">
+                <div class="instruction-block">
+                    <h4>Actions Directives :</h4>
+                    <ul class="instruction-list">
+                        <li><strong>Démystification Caméra :</strong> Traitez l'anxiété du client ("Je ne suis pas photogénique"). Apprenez-lui que l'audience de consommation sociale veut du réel, du granuleux, et de l'authentique plutôt que du TF1 sur-éclairé.</li>
+                        <li><strong>Tournage Actif :</strong> L'Expert filme avec son équipement (Stabilisateur DJI, Micros Sans-fil). Le formateur doit extraire les "Soundbites" (phrases puissantes) du client par des jeux de questions incisives.</li>
+                        <li><strong>Banque B-Roll :</strong> Assurez-vous de capturer 60% d'images d'illustration (B-Roll) : le produit fumant, l'équipe qui sourit, les détails du point de vente, le bruit de la caisse ou de la machine à café.</li>
+                    </ul>
+                </div>
+                <div style="padding: 15px; background: rgba(34, 197, 94, 0.1); border-left: 3px solid var(--primary-color); border-radius: 4px; font-size: 0.95rem;">
+                    <strong><i class="fa-solid fa-bolt"></i> Angle Vente & Rétention :</strong><br>
+                    "Ne réfléchissez pas, soyez vous-même, racontez l'histoire de la création de cet établissement. Je gère l'image et le son. Dans notre usine de montage (Tier 2), on coupera les hésitations. Parlez avec les tripes."
+                </div>
+            </div>
+        </div>
+
+        <!-- NOUVELLE SECTION : RÉSUMÉ DES LIVRABLES (CE QUE COMPREND LA FORMATION) -->
+        <div class="summary-section">
+            <h2>Ce que comprend la formation (Détail point par point)</h2>
+            <p style="margin-top:-20px; margin-bottom: 30px; color:#cbd5e1; font-style:italic;">Récapitulatif contractuel des livrables techniques et pédagogiques à l'issue de l'intervention de niveau 1.</p>
+
+            <div class="summary-grid">
+                <div class="summary-box">
+                    <h3><i class="fa-solid fa-map-location-dot"></i> Base Sémantique & Géographique (GMB)</h3>
+                    <ul class="summary-list">
+                        <li>Audit initial et récupération de la propriété de la Fiche Google.</li>
+                        <li>Refonte sémantique des descriptions orientée requêtes vocales.</li>
+                        <li>Processus de réponse IA aux historiques d'avis clients.</li>
+                        <li>Méthodologie d'encodage EXIF pour la géolocalisation des photos HD.</li>
+                    </ul>
+                </div>
+
+                <div class="summary-box">
+                    <h3><i class="fa-solid fa-qrcode"></i> Local Trust Engine (Machine à Avis)</h3>
+                    <ul class="summary-list">
+                        <li>Infrastructure NFC déployée en point de vente ou flyers d'interception.</li>
+                        <li>Système psychologique de déviation des retours négatifs.</li>
+                        <li>Protocoles d'éléments de langage (phrases types) pour le Staff de caisse.</li>
+                    </ul>
+                </div>
+
+                <div class="summary-box">
+                    <h3><i class="fa-brands fa-tiktok"></i> Écosystème Vidéo de Marque</h3>
+                    <ul class="summary-list">
+                        <li>Configurations officielles "Business" sur Meta/Instagram et TikTok.</li>
+                        <li>Copywriting neuro-scientifique des biographies des réseaux.</li>
+                        <li>Architecture des liens de conversion (Redirection Réservations).</li>
+                    </ul>
+                </div>
+
+                <div class="summary-box">
+                    <h3><i class="fa-solid fa-video"></i> Production In-Vivo "Top 1%"</h3>
+                    <ul class="summary-list">
+                        <li>Coaching en expression physique et orale (visual hooks).</li>
+                        <li>Set-up professionnel sur place (Micro HF, Cadrage, Stabilisation).</li>
+                        <li>Tournage de 2h de matériel brut "Direct-Response".</li>
+                        <li>Constitution d'une banque d'images B-Roll pour le montage asynchrone de Niveau 2.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- DONE FOR YOU SECTION -->
+        <div class="summary-section" style="background: #0f172a; margin-top: 0; border-top: 2px solid #334155;">
+            <h2 style="color: var(--primary-color);">Prestations "Done-For-You" (Back-Office Ingénierie)</h2>
+            <p style="margin-top:-20px; margin-bottom: 30px; color:#cbd5e1; font-style:italic;">Les actions déléguées 100% au centre de formation, opérées en coulisses pour verrouiller l'infrastructure sans effort client.</p>
+
+            <div class="summary-grid">
+                <div class="summary-box">
+                    <h3 style="color: var(--primary-color);"><i class="fa-solid fa-code"></i> Engineering Système Local</h3>
+                    <ul class="summary-list">
+                        <li><strong>Fabrication d'Assets :</strong> Encodage manuel des puces NFC et génération des QR Codes dynamiques pointant vers l'URL d'avis à 5 étoiles (Bypass des fermes de clics).</li>
+                        <li><strong>Désinfection E-Réputation :</strong> Action de "Flag" massive sur les anciens avis illégitimes Google pour restauration de la note moyenne via un ticket au support central.</li>
+                    </ul>
+                </div>
+
+                <div class="summary-box">
+                    <h3 style="color: var(--primary-color);"><i class="fa-solid fa-microchip"></i> Traitement Brut In-Vivo</h3>
+                    <ul class="summary-list">
+                        <li><strong>Synchro Auditive :</strong> Nettoyage logiciel des bruits ambiants du restaurant/cabinet sur les clips de 2h récupérés via intelligence artificielle (Adobe Podcast).</li>
+                        <li><strong>Ingestion Cloud :</strong> Sécurisation du transfert de Téraoctets de vidéos brutes (A-Roll + B-Roll) vers les serveurs de traitement asynchrones haute disponibilité de l'Agence.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Initialize Mermaid -->
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#f8fafc',
+                primaryTextColor: '#1e293b',
+                primaryBorderColor: '#cbd5e1',
+                lineColor: '#94a3b8',
+                secondaryColor: '#f1f5f9',
+                tertiaryColor: '#f0fdf4'
+            },
+            fontFamily: 'Inter, sans-serif'
+        });
+    </script>
+</body>
+
+</html>
