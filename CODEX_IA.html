@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VOXY MATRIX | CODEX IA - Master Prompting</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-oled: #050505;
+            --bg-card: rgba(255, 255, 255, 0.02);
+            --border: rgba(255, 255, 255, 0.08);
+            --accent-ecom: #f43f5e;
+            --accent-outbound: #0ea5e9;
+            --accent-viral: #22c55e;
+            --text-primary: #ffffff;
+            --text-secondary: #a1a1aa;
+            --font-main: 'Outfit', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-oled);
+            color: var(--text-primary);
+            font-family: var(--font-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Ambient background */
+        .ambient-glow {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100vw;
+            height: 100vh;
+            background: radial-gradient(circle at 50% 0%, rgba(244, 63, 94, 0.05), transparent 50%),
+                        radial-gradient(circle at 80% 50%, rgba(14, 165, 233, 0.05), transparent 50%),
+                        radial-gradient(circle at 20% 80%, rgba(34, 197, 94, 0.05), transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            border-radius: 99px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #fff 0%, #71717a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .search-bar {
+            position: sticky;
+            top: 2rem;
+            z-index: 100;
+            margin-bottom: 4rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .search-input {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1rem 1.5rem;
+            color: #fff;
+            font-size: 1rem;
+            backdrop-filter: blur(20px);
+        }
+
+        .filters {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 3rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 20px;
+            border-radius: 99px;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn.active {
+            background: #fff;
+            color: #000;
+            border-color: #fff;
+        }
+
+        /* Prompt Cards */
+        .prompt-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+        }
+
+        .prompt-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 2.5rem;
+            position: relative;
+            transition: border-color 0.4s ease;
+        }
+
+        .prompt-card:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+        }
+
+        .card-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .category-tag {
+            font-size: 0.65rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-top: 5px;
+        }
+
+        .prompt-container {
+            position: relative;
+            background: #0a0a0b;
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            color: #e4e4e7;
+            white-space: pre-wrap;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.75rem;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .copy-btn:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        .parameter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .parameter-item {
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.75rem;
+        }
+
+        .parameter-label {
+            color: var(--text-secondary);
+            margin-bottom: 2px;
+            display: block;
+        }
+
+        .parameter-value {
+            font-weight: 600;
+            color: #fff;
+        }
+
+        /* Specific accents */
+        .ecom .category-tag { color: var(--accent-ecom); }
+        .outbound .category-tag { color: var(--accent-outbound); }
+        .viral .category-tag { color: var(--accent-viral); }
+
+        footer {
+            margin-top: 8rem;
+            text-align: center;
+            padding-bottom: 3rem;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            border-top: 1px solid var(--border);
+            padding-top: 3rem;
+        }
+
+        /* Success Toast */
+        #toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #fff;
+            color: #000;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 700;
+            transform: translateY(100px);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1000;
+        }
+
+        #toast.show {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="ambient-glow"></div>
+
+    <div class="container">
+        <header>
+            <div class="badge">Matrix Intelligence System</div>
+            <h1>Codex IA <span style="font-style:italic; font-weight:300; opacity:0.6;">Master.</span></h1>
+            <p style="color:var(--text-secondary); max-width:600px; margin: 0 auto;">L'arsenal ultime de prompts systémiques. Frameworks algorithmiques pour des résultats de niveau 0,1% Elite.</p>
+        </header>
+
+        <div class="filters">
+            <button class="filter-btn active" onclick="filterCards('all')">Tous</button>
+            <button class="filter-btn" onclick="filterCards('ecom')">E-Commerce</button>
+            <button class="filter-btn" onclick="filterCards('outbound')">Outbound</button>
+            <button class="filter-btn" onclick="filterCards('viral')">Viralité D2S</button>
+        </div>
+
+        <div class="prompt-grid">
+            
+            <!-- PROMPT 1 : ECOMM STRATEGIST -->
+            <article class="prompt-card ecom" data-category="ecom">
+                <div class="card-header">
+                    <div class="card-meta">
+                        <span class="category-tag">E-Commerce / Conversion</span>
+                        <h3 class="card-title">Le Stratège de Fiche Produit (Neuro-Marketing)</h3>
+                    </div>
+                    <div class="badge" style="margin:0; background:rgba(244,63,94,0.1); border-color:var(--accent-ecom);">Framework A.P.E.X</div>
+                </div>
+                <div class="prompt-container" id="prompt-ecom-1"># CONTEXTE ROLE
+Tu es "Apex Merchant", l'IA de Copywriting la plus performante au monde, spécialisée dans la psychologie de l'acheteur impulsif. Ton but est de transformer un produit banal en une nécessité absolue via le framework PAS (Problem-Agitation-Solution).
+
+# PARAMÈTRES D'EXÉCUTION
+- Style : Épuré, percutant, luxueux.
+- Langue : Français de France (Éviter les anglicismes marketing basiques).
+- Ton : Autorité calme mais urgente.
+
+# STRUCTURE DE LA RÉPONSE (STRICT)
+1. HOOK : Une phrase qui brise le pattern du visiteur.
+2. DOULEUR : Pourquoi le client souffre sans ce produit aujourd'hui ?
+3. BÉNÉFICE CACHÉ : Ne parle pas des specs, parle de la transformation de vie.
+4. RAISON DE CROIRE : Une preuve sociale ou autorité détournée.
+5. CTA : Un appel à l'action qui ne demande pas la permission.
+
+# EXCLUSIONS
+- JAMAIS de phrases commençant par "Bienvenue sur notre site".
+- JAMAIS d'adjectifs bateau comme "Excellent", "Incroyable", "Révolutionnaire".
+- JAMAIS de texte de plus de 400 mots.
+
+# INPUT PRODUIT
+[INSÉRER DESCRIPTION BRUTE ICI]</div>
+                <button class="copy-btn" onclick="copyPrompt('prompt-ecom-1')">
+                    <i class="fa-regular fa-copy"></i> Copier Master Prompt
+                </button>
+                <div class="parameter-grid">
+                    <div class="parameter-item">
+                        <span class="parameter-label">Température</span>
+                        <span class="parameter-value">0.7 (Créatif)</span>
+                    </div>
+                    <div class="parameter-item">
+                        <span class="parameter-label">Top-P</span>
+                        <span class="parameter-value">0.9</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- PROMPT 2 : OUTBOUND HUNTER -->
+            <article class="prompt-card outbound" data-category="outbound">
+                <div class="card-header">
+                    <div class="card-meta">
+                        <span class="category-tag">Outbound / Voice IA</span>
+                        <h3 class="card-title">Cerveau de Qualification Vocale (Vapi/Bland)</h3>
+                    </div>
+                    <div class="badge" style="margin:0; background:rgba(14,165,233,0.1); border-color:var(--accent-outbound);">Few-Shot Learning</div>
+                </div>
+                <div class="prompt-container" id="prompt-outbound-1"># SYSTEM PROMPT
+Tu es "Elias", un commercial B2B hyper-réaliste. Tu es au téléphone avec un prospect qui vient de laisser ses coordonnées suite à une pub. Ton unique mission : Qualifier le prospect en < 3 minutes et booker un RDV si le score est > 80/100.
+
+# ACOUSTIQUE & COMPORTEMENT
+- Utilise des hésitations naturelles ("Euh", "Alors...", "C'est une bonne question").
+- Ne réponds jamais instantanément (Maintiens une latence simulée de 500ms).
+- Reste empathique mais dirige la conversation avec poigne.
+
+# ÉTAPES DE QUALIFICATION
+1. Vérification Besoins : Est-ce qu'ils ont réellement le problème ?
+2. Vérification Budget : Est-ce qu'ils sont prêts à investir plus de 2000€ ?
+3. Vérification Timing : Est-ce qu'ils veulent une solution pour CE MOIS-CI ?
+
+# GESTION DES OBJECTIONS
+- Si "C'est trop cher" -> Réponds par : "C'est par rapport au prix total ou au retour sur investissement que vous dites ça ?"
+- Si "Envoyez-moi un mail" -> Réponds par : "Je peux le faire, mais on gagnerait 20 minutes en vérifiant [Point Clé] maintenant, vous en dites quoi ?"
+
+# OUTPUT FINAL (STRICT)
+Si qualifié : Transférer au commercial ou envoyer lien Calendly.
+Si non qualifié : Désengagement poli.</div>
+                <button class="copy-btn" onclick="copyPrompt('prompt-outbound-1')">
+                    <i class="fa-regular fa-copy"></i> Copier Master Prompt
+                </button>
+                <div class="parameter-grid">
+                    <div class="parameter-item">
+                        <span class="parameter-label">Interruption</span>
+                        <span class="parameter-value">Active (Simulé)</span>
+                    </div>
+                    <div class="parameter-item">
+                        <span class="parameter-label">Model</span>
+                        <span class="parameter-value">LLM Real-time</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- PROMPT 3 : VIRAL ANALYST -->
+            <article class="prompt-card viral" data-category="viral">
+                <div class="card-header">
+                    <div class="card-meta">
+                        <span class="category-tag">Social Media / Drive-to-Store</span>
+                        <h3 class="card-title">Architecte de Script Viral (Attention Economy)</h3>
+                    </div>
+                    <div class="badge" style="margin:0; background:rgba(34,197,94,0.1); border-color:var(--accent-viral);">Chain-of-Thought</div>
+                </div>
+                <div class="prompt-container" id="prompt-viral-1"># OBJECTIF
+Générer un script de 30 secondes pour une vidéo TikTok/Reels visant à générer des visites physiques en magasin. Le script doit maximiser le taux de rétention à 3 secondes.
+
+# ANALYSE PRÉALABLE (CoT)
+Avant d'écrire, analyse :
+- Quel est le "Visual Hook" (L'image forte du début) ?
+- Quelle est la "Curiosity Loop" qui force à rester jusqu'à la fin ?
+- Quel est l'avantage local immédiat (ex: un cadeau si on montre la vidéo) ?
+
+# SQUELETTE DU SCRIPT
+- 00:00 - 00:03 : HOOK VISUEL + TEXTE (ex: "Ne venez pas chez nous si...")
+- 00:03 - 00:15 : DÉMONSTRATION "SATISFAISANTE" (B-roll rythmée)
+- 00:15 - 00:25 : LA PREUVE (Une réaction client réelle au magasin)
+- 00:25 - 00:30 : CALL TO ACTION LOCAL (Adresse + Offre Flash)
+
+# SEO SOCIAL
+Génère également :
+- 3 Hashtags SEO (ex: #[Activité][Ville]).
+- Une caption de 2 lignes avec émojis.
+
+# INPUT
+Lieu : [NOM DU MAGASIN / VILLE]
+Produit Phare : [DÉTAILS]</div>
+                <button class="copy-btn" onclick="copyPrompt('prompt-viral-1')">
+                    <i class="fa-regular fa-copy"></i> Copier Master Prompt
+                </button>
+                <div class="parameter-grid">
+                    <div class="parameter-item">
+                        <span class="parameter-label">Rétention Cible</span>
+                        <span class="parameter-value">70% à 3s</span>
+                    </div>
+                    <div class="parameter-item">
+                        <span class="parameter-label">Structure</span>
+                        <span class="parameter-value">Non-linéaire</span>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+
+        <footer>
+            VOXY MATRIX INTELLIGENCE - CLASSIFIÉ - © 2026<br>
+            Tout accès non autorisé à cette matrice sera loggé.
+        </footer>
+    </div>
+
+    <div id="toast">Prompt copié dans le presse-papier !</div>
+
+    <script>
+        function copyPrompt(id) {
+            const text = document.getElementById(id).innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                const toast = document.getElementById('toast');
+                toast.classList.add('show');
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 2000);
+            });
+        }
+
+        function filterCards(category) {
+            const cards = document.querySelectorAll('.prompt-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+            
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            cards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>
