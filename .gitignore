@@ -1,0 +1,20 @@
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Secrets / environnement (règle 9 : jamais dans Git)
+.env
+.env.*
+*.key
+*.pem
+
+# Dépendances / build (à venir chantiers C/D)
+node_modules/
+dist/
+build/
+.next/
+
+# Éditeurs
+.vscode/
+.idea/
+*.swp
