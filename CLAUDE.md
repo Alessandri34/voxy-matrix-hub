@@ -34,7 +34,11 @@ Formulations **bannies** : « gratuit », « 100 % financé », « sans reste à
 → **Ne jamais vendre « financé à 100 % »** : le reste à charge est réel.
 
 ## 6. Livrables (branche `claude/new-session-nefcch`)
-`00_cadrage.md` · `B_pilotage.md` · `B1_Programme_AFEST_Visibilite_Locale.md` · `B2_Modele_Contrat_Sous_Traitance.md` · `B3_Grilles_Pedagogiques.md` · `B4_Programmes_Commercialisables_Qualiopi.md` · `A0_Marche_et_Personas.md` · `A_scripts_ugc.md`
+> **Tout est consolidé dans `livrables/`** (dossier indépendant, voir `livrables/README.md`).
+- `livrables/00-cadrage/` : `00_cadrage.md`
+- `livrables/A-marketing/` : `A0_Marche_et_Personas.md` · `A_scripts_ugc.md` · `A_scripts_ugc_v2.md`
+- `livrables/B-socle/` : `B_pilotage.md` · `B1_Programme_AFEST_Visibilite_Locale.md` · `B2_Modele_Contrat_Sous_Traitance.md` · `B3_Grilles_Pedagogiques.md` · `B4_Programmes_Commercialisables_Qualiopi.md` · `Referentiel_Competences_Qualiopi.md`
+- `livrables/C-site/` : `C_architecture_site.md` · `maquette.html` · `apercus/`
 
 ## 7. Chantiers (master prompt)
 A = 10 scripts UGC (**fait** : fiche signal + 10 angles + 10 scripts + plan de test) · B = pilotage (**socle fait**) · C = site vitrine · D = plateforme de gestion.

@@ -1,0 +1,464 @@
+<title>Voxy Formations</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Clone Cegos — palette Cegos (violets passés en bleu), typo pro (Poppins/Figtree), auto-layout 100% fluide.
+   Tout le sizing (typo + espacements) est piloté par des tokens clamp(). Mono-thème clair. */
+
+:root {
+  /* ----- Couleurs (Cegos) ----- */
+  --white:#FFFFFF; --cream:#F5F3F1; --cream2:#EFECE8;
+  --ink:#201C24; --head:#2A2030; --muted:#6E6670; --line:#E6E1DE;
+  --charcoal:#263238;
+  --wine:#4C122A; --wine-dark:#380B1E;
+  --plum:#1A3C86; --plum-deep:#0F2A63;
+  --green:#0E4A3B; --red:#E4002B; --stars:#2F6BD8;
+  --mint:#9EE7D4; --mint-ink:#0B5240;
+  --lav:#C8D4F5; --lav-ink:#243C8F;
+  --sky:#AEDCF6; --sky-ink:#0E4C7A;
+  --orange:#F3A63D; --orange-ink:#6E3C00;
+
+  /* ----- Échelle typographique fluide ----- */
+  --fs-display: clamp(1.95rem, 1.1rem + 4.2vw, 3.4rem);   /* H1 hero */
+  --fs-h2:      clamp(1.45rem, 1.05rem + 1.9vw, 2.15rem); /* titres de section */
+  --fs-h3:      clamp(1.05rem, 0.95rem + 0.55vw, 1.2rem); /* titres de card */
+  --fs-feature: clamp(1.4rem, 1.0rem + 1.8vw, 2.1rem);    /* bloc signature */
+  --fs-lead:    clamp(1rem, 0.94rem + 0.45vw, 1.2rem);    /* chapô */
+  --fs-body:    clamp(0.9rem, 0.86rem + 0.22vw, 1rem);
+  --fs-sm:      clamp(0.8rem, 0.77rem + 0.16vw, 0.875rem);
+  --fs-xs:      clamp(0.68rem, 0.64rem + 0.14vw, 0.75rem);
+  --fs-tile:    clamp(1.6rem, 1.0rem + 2.6vw, 2.25rem);   /* gros chiffres tuiles */
+  --fs-flogo:   clamp(2.8rem, 1.5rem + 6vw, 5.4rem);      /* gros logo bloc signature */
+
+  /* ----- Espacements fluides ----- */
+  --gutter:     clamp(1rem, 0.5rem + 2vw, 1.5rem);
+  --section-y:  clamp(2.75rem, 1.4rem + 5vw, 4.5rem);
+  --gap:        clamp(1rem, 0.6rem + 1.6vw, 1.6rem);
+  --gap-sm:     clamp(0.75rem, 0.5rem + 1vw, 1rem);
+  --box-pad:    clamp(1.6rem, 0.9rem + 3.2vw, 3.5rem);
+  --card-pad:   clamp(1.1rem, 0.8rem + 1.4vw, 1.4rem);
+
+  /* ----- Rayons / ombres ----- */
+  --r-sm:10px; --r:16px; --r-lg:24px; --r-pill:100px;
+  --sh:0 12px 40px rgba(30,20,25,.10); --sh-sm:0 6px 20px rgba(30,20,25,.07);
+
+  --fg:var(--ink); --bg:var(--white);
+  color-scheme: light;
+  font-family:'Figtree', system-ui, -apple-system, sans-serif;
+  font-size: 16px;
+}
+
+*{margin:0;box-sizing:border-box;min-width:0;}
+body{background:var(--bg);color:var(--fg);font-size:var(--fs-body);line-height:1.6;overflow-x:hidden;}
+h1,h2,h3,h4{font-family:'Poppins',system-ui,sans-serif;font-weight:500;color:var(--head);line-height:1.15;letter-spacing:-.02em;text-wrap:balance;}
+img{max-width:100%;display:block;}
+a{color:inherit;}
+[hidden]{display:none!important;}
+.wrap{width:100%;max-width:1200px;margin-inline:auto;padding-inline:var(--gutter);}
+
+/* ─── Buttons ─── */
+.btn{display:inline-flex;align-items:center;gap:.5em;font-family:'Poppins',sans-serif;font-weight:500;font-size:var(--fs-body);
+  padding:.8em 1.6em;border-radius:var(--r-pill);text-decoration:none;border:none;cursor:pointer;white-space:nowrap;
+  transition:transform .14s, box-shadow .18s, background .18s;}
+.btn-wine{background:var(--wine);color:#fff;}
+.btn-wine:hover{background:var(--wine-dark);transform:translateY(-2px);box-shadow:0 10px 24px rgba(76,18,42,.35);}
+.btn-white{background:#fff;color:var(--wine);}
+.btn-white:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(0,0,0,.2);}
+.btn-outline-w{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.55);}
+.btn-outline-w:hover{border-color:#fff;background:rgba(255,255,255,.08);}
+
+/* ─── Red line ─── */
+.redline{height:4px;background:var(--red);}
+
+/* ─── HEADER ─── */
+.header{position:sticky;top:env(safe-area-inset-top,0px);z-index:100;background:#fff;}
+.header-top{border-bottom:1px solid var(--line);}
+.header-top .wrap{display:flex;align-items:center;gap:var(--gap-sm);padding-block:clamp(.6rem,.4rem + .6vw,.9rem);flex-wrap:nowrap;}
+.burger{display:none;width:42px;height:42px;border:1px solid var(--line);border-radius:12px;background:#fff;cursor:pointer;
+  align-items:center;justify-content:center;flex-shrink:0;color:var(--head);}
+.brand{display:flex;align-items:center;gap:clamp(.6rem,.4rem + .6vw,.9rem);text-decoration:none;flex-shrink:0;margin-right:auto;}
+.brand-logo{font-family:'Poppins',sans-serif;font-weight:600;font-size:clamp(1.5rem,1.2rem + 1vw,1.85rem);color:var(--head);line-height:1;position:relative;}
+.brand-logo::before{content:'';position:absolute;top:1px;left:4px;width:6px;height:6px;border-radius:50%;background:var(--red);}
+.brand-tag{border-left:2px solid var(--line);padding-left:clamp(.6rem,.4rem + .5vw,.9rem);font-family:'Poppins',sans-serif;font-weight:500;
+  font-size:var(--fs-xs);line-height:1.25;color:var(--head);max-width:200px;}
+.brand-tag span{color:var(--muted);font-weight:400;}
+
+.hsearch{flex:1 1 180px;max-width:360px;display:flex;align-items:center;gap:.5rem;background:var(--cream);border-radius:var(--r-pill);padding:.3rem .3rem .3rem 1.1rem;}
+.hsearch input{flex:1;min-width:0;border:none;background:none;outline:none;font-family:inherit;font-size:var(--fs-sm);color:var(--ink);}
+.hsearch input::placeholder{color:var(--muted);}
+.hsearch button{width:40px;height:40px;border-radius:50%;background:var(--wine);color:#fff;border:none;cursor:pointer;display:grid;place-items:center;flex-shrink:0;}
+
+.hutil{display:flex;align-items:center;gap:clamp(1rem,.5rem + 1.5vw,1.4rem);flex-shrink:0;}
+.hutil a{display:inline-flex;align-items:center;gap:.5rem;text-decoration:none;color:var(--head);font-family:'Poppins',sans-serif;font-weight:500;font-size:var(--fs-sm);white-space:nowrap;}
+.hutil a:hover{color:var(--wine);}
+.cart{position:relative;}
+.cart .badge{position:absolute;top:-7px;right:-9px;background:var(--red);color:#fff;font-size:10px;font-weight:700;min-width:16px;height:16px;border-radius:50%;display:grid;place-items:center;padding:0 3px;font-family:'Figtree',sans-serif;}
+
+.header-nav{border-bottom:1px solid var(--line);}
+.header-nav .wrap{display:flex;align-items:center;justify-content:center;gap:clamp(1.2rem,.5rem + 2.5vw,2.2rem);min-height:54px;flex-wrap:wrap;padding-block:.4rem;}
+.header-nav a{font-family:'Poppins',sans-serif;font-weight:500;font-size:var(--fs-body);color:var(--head);text-decoration:none;white-space:nowrap;display:inline-flex;align-items:center;gap:.35em;}
+.header-nav a:hover{color:var(--wine);}
+.header-nav .caret{width:9px;height:9px;}
+.header-nav .lemag{background:var(--wine);color:#fff;padding:.5em 1.25em;border-radius:var(--r-pill);}
+.header-nav .lemag:hover{background:var(--wine-dark);color:#fff;}
+
+/* Mobile nav panel */
+.mnav{display:none;border-bottom:1px solid var(--line);background:#fff;}
+.mnav .wrap{display:flex;flex-direction:column;gap:2px;padding-block:.5rem 1rem;}
+.mnav a{font-family:'Poppins',sans-serif;font-weight:500;font-size:1.05rem;color:var(--head);text-decoration:none;padding:.7rem .2rem;border-bottom:1px solid var(--line);}
+.mnav a.lemag{color:var(--wine);border-bottom:none;}
+
+@media(max-width:1040px){ .hsearch{display:none;} .hutil a span.lbl{display:none;} }
+@media(max-width:860px){
+  .burger{display:flex;}
+  .header-nav{display:none;}
+  .brand-tag{display:none;}
+  .hutil{gap:1rem;}
+  .mnav[data-open="1"]{display:block;}
+}
+
+/* ─── HERO ─── */
+.hero{background:var(--charcoal);position:relative;overflow:hidden;isolation:isolate;}
+.hero-photo{position:absolute;inset:0 0 0 auto;width:min(52%,680px);z-index:-1;
+  background:
+    radial-gradient(120% 120% at 80% 20%, rgba(243,166,61,.28), transparent 55%),
+    radial-gradient(100% 100% at 70% 90%, rgba(76,18,42,.5), transparent 60%),
+    linear-gradient(120deg,#2d3a40 0%, #3a4a44 45%, #5a4a3a 100%);}
+.hero-photo::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,var(--charcoal) 0%, rgba(38,50,56,.75) 24%, transparent 55%);}
+.hero-photo .dots{position:absolute;top:clamp(16px,3vw,30px);right:clamp(16px,4vw,40px);width:clamp(70px,12vw,120px);height:clamp(70px,12vw,120px);opacity:.25;
+  background-image:radial-gradient(#fff 1.4px, transparent 1.4px);background-size:14px 14px;}
+/* padding bas renforcé : la barre de recherche ne touche jamais la section suivante */
+.hero .wrap{position:relative;z-index:1;padding-block:clamp(3rem,2rem + 5vw,5.4rem) clamp(4.5rem,3rem + 6vw,7.5rem);}
+.hero-inner{max-width:min(620px,100%);display:flex;flex-direction:column;gap:clamp(1.5rem,1rem + 2vw,2.1rem);}
+.hero h1{color:#fff;font-size:var(--fs-display);font-weight:600;}
+.hero-search{display:flex;align-items:center;gap:.6rem;background:#fff;border-radius:var(--r-pill);padding:.55rem .55rem .55rem 1.3rem;box-shadow:0 18px 50px rgba(0,0,0,.3);max-width:560px;margin-bottom:clamp(.5rem,.3rem + 1vw,1.25rem);}
+.hero-search .mg{color:var(--wine);flex-shrink:0;}
+.hero-search input{flex:1;min-width:0;border:none;outline:none;background:none;font-family:'Figtree',sans-serif;font-size:var(--fs-lead);color:var(--ink);}
+.hero-search input::placeholder{color:var(--muted);}
+
+/* ─── SECTION shell ─── */
+section.sec{padding-block:var(--section-y);}
+.sec-title{font-size:var(--fs-h2);font-weight:600;margin-bottom:clamp(1.3rem,.8rem + 2vw,1.9rem);}
+.sec-title.c{text-align:center;}
+
+/* ─── Actualités ─── */
+.news{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:var(--gap);}
+.ncard{border-radius:var(--r);overflow:hidden;background:var(--cream);text-decoration:none;color:inherit;box-shadow:var(--sh-sm);transition:transform .2s, box-shadow .2s;display:flex;flex-direction:column;}
+.ncard:hover{transform:translateY(-4px);box-shadow:var(--sh);}
+.ncard .media{aspect-ratio:16/9;width:100%;}
+.ncard .media.a{background:linear-gradient(135deg,#3a4a52,#5a6a5a);}
+.ncard .media.b{background:linear-gradient(135deg,#4a3a52,#6a5a7a);}
+.ncard.dark{background:var(--charcoal);color:#fff;}
+.ncard.dark .media{background:linear-gradient(135deg,#1f2a30,#2e3b42);display:grid;place-items:center;}
+.ncard.dark .media svg{width:clamp(44px,8vw,64px);height:clamp(44px,8vw,64px);color:rgba(255,255,255,.5);}
+.ncard .nbody{padding:var(--card-pad);display:flex;flex-direction:column;gap:.5rem;}
+.ncard .ntag{font-family:'Poppins',sans-serif;font-weight:500;font-size:var(--fs-xs);letter-spacing:.06em;text-transform:uppercase;color:var(--wine);}
+.ncard.dark .ntag{color:var(--orange);}
+.ncard h3{font-size:var(--fs-h3);font-weight:500;}
+.ncard.dark h3{color:#fff;}
+
+/* ─── Domaines (green) ─── */
+.domaines{background:var(--green);border-radius:var(--r-lg);padding:var(--box-pad);position:relative;overflow:hidden;}
+.domaines::after{content:'';position:absolute;right:-60px;bottom:-80px;width:280px;height:280px;border-radius:50%;background:rgba(255,255,255,.04);}
+.dpills{display:flex;flex-wrap:wrap;gap:var(--gap-sm);justify-content:center;position:relative;z-index:1;}
+.dpill{display:inline-flex;align-items:center;gap:.6em;background:#fff;color:var(--head);padding:.75em 1.25em;border-radius:var(--r-pill);
+  font-family:'Poppins',sans-serif;font-weight:500;font-size:var(--fs-sm);text-decoration:none;transition:transform .14s, box-shadow .18s;}
+.dpill:hover{transform:translateY(-3px);box-shadow:0 10px 22px rgba(0,0,0,.25);}
+.dpill svg{width:18px;height:18px;color:var(--green);flex-shrink:0;}
+.domaines .all{display:block;text-align:center;margin-top:clamp(1.2rem,.8rem + 1.5vw,1.8rem);color:#fff;font-family:'Poppins',sans-serif;font-weight:500;text-decoration:underline;text-underline-offset:4px;position:relative;z-index:1;}
+
+/* ─── Feature (signature) ─── */
+.feature{background:var(--plum);border-radius:var(--r-lg);padding:var(--box-pad);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:var(--gap);align-items:center;position:relative;overflow:hidden;}
+.feature::before{content:'';position:absolute;left:-10%;top:-40%;width:420px;height:420px;border-radius:50%;background:rgba(255,255,255,.04);}
+.feature-txt{position:relative;z-index:1;display:flex;flex-direction:column;gap:clamp(.8rem,.5rem + 1vw,1.3rem);align-items:flex-start;}
+.feature h2{color:#fff;font-size:var(--fs-feature);}
+.feature p{color:rgba(255,255,255,.8);max-width:420px;}
+.feature-logo{position:relative;z-index:1;text-align:center;font-family:'Poppins',sans-serif;}
+.feature-logo .big{font-size:var(--fs-flogo);font-weight:600;color:rgba(197,215,248,.9);letter-spacing:-.02em;line-height:1;}
+.feature-logo .sub{color:rgba(197,215,248,.7);font-weight:500;font-size:var(--fs-sm);margin-top:.4rem;}
+
+/* ─── Formations du moment (purple) ─── */
+.formasec{background:var(--plum);}
+.formasec .sec-title{color:#fff;}
+.fcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));gap:var(--gap);}
+.fcard{background:#fff;border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;box-shadow:0 14px 40px rgba(0,0,0,.25);}
+.fcard .media{aspect-ratio:16/8;display:grid;place-items:center;}
+.fcard .media.m1{background:linear-gradient(135deg,#263238,#3a4a52);}
+.fcard .media.m2{background:linear-gradient(135deg,#4C122A,#7a2a48);}
+.fcard .media.m3{background:linear-gradient(135deg,#0E4A3B,#1a6a54);}
+.fcard .media svg{width:clamp(42px,7vw,52px);height:clamp(42px,7vw,52px);color:rgba(255,255,255,.9);}
+.fcard .fb{padding:var(--card-pad);padding-bottom:0;flex:1;display:flex;flex-direction:column;gap:.5rem;}
+.fcard h3{font-size:var(--fs-h3);font-weight:500;}
+.fcard .subt{color:var(--muted);font-size:var(--fs-sm);}
+.fcard .rate{display:flex;align-items:center;gap:.5rem;font-size:var(--fs-sm);color:var(--muted);}
+.fcard .rate .st{color:var(--stars);letter-spacing:1px;}
+.fcard .dur{display:flex;align-items:center;gap:.5rem;font-size:var(--fs-sm);color:var(--ink);font-weight:500;margin-top:auto;padding-top:.9rem;border-top:1px solid var(--line);}
+.fcard .ff{padding:var(--card-pad);padding-top:.9rem;display:flex;align-items:center;justify-content:space-between;gap:.75rem;flex-wrap:wrap;}
+.fcard .ff .btn{padding:.65em 1.2em;font-size:var(--fs-sm);}
+.fcard .price{font-family:'Poppins',sans-serif;font-weight:600;font-size:var(--fs-body);color:var(--head);text-align:right;}
+.fcard .price small{display:block;font-weight:400;font-size:var(--fs-xs);color:var(--muted);font-family:'Figtree',sans-serif;}
+
+/* ─── Logos / financements ─── */
+.logos{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:clamp(1rem,.5rem + 2vw,2.75rem);margin-bottom:clamp(1.5rem,1rem + 2vw,2.2rem);}
+.logos .lg{font-family:'Poppins',sans-serif;font-weight:500;font-size:clamp(1rem,.8rem + .8vw,1.2rem);color:#9a9298;}
+.cbtn{display:flex;justify-content:center;}
+
+/* ─── Tuiles ─── */
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:var(--gap-sm);}
+.tile{border-radius:var(--r);padding:clamp(1.2rem,.8rem + 1.5vw,1.6rem) 1.1rem;min-height:clamp(140px,20vw,180px);display:flex;flex-direction:column;justify-content:center;text-align:center;gap:.4rem;}
+.tile .num{font-family:'Poppins',sans-serif;font-weight:600;font-size:var(--fs-tile);line-height:1;}
+.tile .lbl{font-size:var(--fs-sm);font-weight:500;line-height:1.4;}
+.tile.t1{background:var(--mint);} .tile.t1 .num,.tile.t1 .lbl{color:var(--mint-ink);}
+.tile.t2{background:var(--lav);} .tile.t2 .num,.tile.t2 .lbl{color:var(--lav-ink);}
+.tile.t3{background:#fff;border:1px solid var(--line);} .tile.t3 .num{color:var(--head);font-size:clamp(1.1rem,.9rem + 1vw,1.35rem);} .tile.t3 .lbl{color:var(--muted);}
+.tile.t3 .st{color:var(--stars);font-size:1.05rem;letter-spacing:1px;}
+.tile.t4{background:var(--sky);} .tile.t4 .num,.tile.t4 .lbl{color:var(--sky-ink);}
+.tile.t5{background:var(--orange);} .tile.t5 .num,.tile.t5 .lbl{color:var(--orange-ink);}
+
+/* ─── Présence / map ─── */
+.presence{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:var(--gap);align-items:center;}
+.mapbox{background:var(--plum-deep);border-radius:var(--r-lg);padding:clamp(1.2rem,.8rem + 1.5vw,1.9rem);display:grid;place-items:center;}
+.mapbox svg{width:100%;max-width:340px;height:auto;}
+.presence-txt{display:flex;flex-direction:column;gap:clamp(.8rem,.5rem + 1vw,1.3rem);align-items:flex-start;}
+.presence-txt h3{font-size:var(--fs-h3);}
+.presence-txt p{color:var(--ink);max-width:440px;}
+
+/* ─── Footer ─── */
+.footer{background:var(--plum-deep);color:rgba(255,255,255,.66);padding-block:clamp(2.5rem,1.5rem + 3vw,3.25rem);}
+.footer-cert{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:var(--gap);padding-bottom:clamp(1.8rem,1rem + 2vw,2.5rem);border-bottom:1px solid rgba(255,255,255,.1);}
+.footer h4{font-family:'Poppins',sans-serif;color:#fff;font-size:var(--fs-sm);font-weight:500;letter-spacing:.06em;text-transform:uppercase;margin-bottom:clamp(.8rem,.5rem + 1vw,1rem);}
+.certbox{display:flex;gap:.9rem;align-items:center;background:#fff;border-radius:12px;padding:.9rem 1.1rem;max-width:460px;flex-wrap:wrap;}
+.certbox .afaq{font-family:'Poppins',sans-serif;font-weight:600;color:#333;font-size:.8rem;text-align:center;border-right:1px solid #ddd;padding-right:.9rem;line-height:1.2;}
+.certbox .q b{color:var(--wine);font-size:1rem;display:block;font-family:'Poppins',sans-serif;}
+.certbox .q small{color:#555;font-size:var(--fs-xs);}
+.socials{display:flex;gap:.6rem;flex-wrap:wrap;}
+.socials a{width:40px;height:40px;border-radius:50%;background:var(--wine);display:grid;place-items:center;color:#fff;text-decoration:none;}
+.socials a:hover{background:var(--red);}
+.footer-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,160px),1fr));gap:var(--gap);padding-top:clamp(1.8rem,1rem + 2vw,2.5rem);}
+.footer-cols a{display:block;color:rgba(255,255,255,.62);text-decoration:none;font-size:var(--fs-sm);padding:.3rem 0;}
+.footer-cols a:hover{color:#fff;}
+.footer-bottom{margin-top:clamp(1.8rem,1rem + 2vw,2.25rem);padding-top:1.4rem;border-top:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-between;flex-wrap:wrap;gap:.75rem;font-size:var(--fs-sm);color:rgba(255,255,255,.5);}
+.footer-bottom a{color:rgba(255,255,255,.5);text-decoration:none;}
+.footer-bottom a:hover{color:#fff;}
+
+/* ─── Maquette bar ─── */
+.mbar{position:fixed;bottom:0;left:0;right:0;z-index:300;background:var(--red);color:#fff;text-align:center;
+  font-family:'Poppins',sans-serif;font-weight:500;font-size:var(--fs-sm);padding:.6rem 1rem;
+  padding-bottom:calc(.6rem + env(safe-area-inset-bottom,0px));}
+body{padding-bottom:3rem;}
+</style>
+
+<div class="redline"></div>
+
+<!-- ═══ HEADER ═══ -->
+<header class="header">
+  <div class="header-top">
+    <div class="wrap">
+      <button class="burger" aria-label="Menu" onclick="var m=document.getElementById('mnav');m.dataset.open=m.dataset.open==='1'?'0':'1';">
+        <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 6h16M3 11h16M3 16h16"/></svg>
+      </button>
+      <a class="brand" href="#">
+        <span class="brand-logo">voxy</span>
+        <span class="brand-tag">Formation professionnelle<br><span>Digital · Vente · Vidéo — Hérault</span></span>
+      </a>
+      <form class="hsearch" onsubmit="return false">
+        <input type="text" placeholder="Rechercher une formation…" aria-label="Rechercher">
+        <button type="submit" aria-label="Rechercher"><svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.3"><circle cx="7" cy="7" r="5"/><path d="M11 11l4 4"/></svg></button>
+      </form>
+      <div class="hutil">
+        <a href="#"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4c0 7 6 11 11 11l1-3-3-1-1 1c-2-1-4-3-5-5l1-1-1-3z"/></svg> <span class="lbl">04 00 00 00 00</span></a>
+        <a href="#"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="14" height="10" rx="1.5"/><path d="M2 5l7 5 7-5"/></svg> <span class="lbl">Nous contacter</span></a>
+        <a href="#"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="5.5" r="3"/><path d="M2.5 15c0-3 2.8-4.5 5.5-4.5S13.5 12 13.5 15"/></svg> <span class="lbl">Espace client</span></a>
+        <a class="cart" href="#"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 2h2l1.5 9h8L16 5H5"/><circle cx="7" cy="15" r="1.2"/><circle cx="13" cy="15" r="1.2"/></svg><span class="badge">0</span></a>
+      </div>
+    </div>
+  </div>
+  <nav class="header-nav">
+    <div class="wrap">
+      <a href="#domaines">Domaines de formation <svg class="caret" viewBox="0 0 10 10" fill="currentColor"><path d="M1 3l4 4 4-4z"/></svg></a>
+      <a href="#methode">Solutions <svg class="caret" viewBox="0 0 10 10" fill="currentColor"><path d="M1 3l4 4 4-4z"/></svg></a>
+      <a href="#formations">Vous êtes <svg class="caret" viewBox="0 0 10 10" fill="currentColor"><path d="M1 3l4 4 4-4z"/></svg></a>
+      <a href="#financement">Financements <svg class="caret" viewBox="0 0 10 10" fill="currentColor"><path d="M1 3l4 4 4-4z"/></svg></a>
+      <a href="#presence">Ressources <svg class="caret" viewBox="0 0 10 10" fill="currentColor"><path d="M1 3l4 4 4-4z"/></svg></a>
+      <a class="lemag" href="#">Le Mag</a>
+    </div>
+  </nav>
+  <div class="mnav" id="mnav" data-open="0">
+    <div class="wrap">
+      <a href="#domaines">Domaines de formation</a>
+      <a href="#methode">Solutions</a>
+      <a href="#formations">Vous êtes</a>
+      <a href="#financement">Financements</a>
+      <a href="#presence">Ressources</a>
+      <a class="lemag" href="#">Le Mag →</a>
+    </div>
+  </div>
+</header>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-photo"><div class="dots"></div></div>
+  <div class="wrap">
+    <div class="hero-inner">
+      <h1>Trouvez la formation qui fait décoller votre activité</h1>
+      <form class="hero-search" onsubmit="return false">
+        <svg class="mg" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="9" cy="9" r="6"/><path d="M14 14l5 5"/></svg>
+        <input type="text" placeholder="Je souhaite me former à la vidéo…" aria-label="Rechercher">
+        <button type="submit" class="btn btn-wine">Rechercher</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ACTUALITÉS ═══ -->
+<section class="sec">
+  <div class="wrap">
+    <h2 class="sec-title">Nos dernières actualités</h2>
+    <div class="news">
+      <a class="ncard" href="#"><div class="media a"></div><div class="nbody"><span class="ntag">Visibilité</span><h3>Filmer son commerce : 3 erreurs qui plombent vos vidéos</h3></div></a>
+      <a class="ncard" href="#"><div class="media b"></div><div class="nbody"><span class="ntag">Financement</span><h3>AGEFICE, FAFCEA : comment financer sa formation en 2026</h3></div></a>
+      <a class="ncard dark" href="#"><div class="media"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M4 4h12l4 4v12H4z"/><path d="M8 11h8M8 15h5"/></svg></div><div class="nbody"><span class="ntag">Catalogue</span><h3>Découvrez le catalogue de formations 2026</h3></div></a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ DOMAINES ═══ -->
+<section class="sec" id="domaines">
+  <div class="wrap">
+    <h2 class="sec-title">Retrouvez tous nos domaines de formation</h2>
+    <div class="domaines">
+      <div class="dpills">
+        <a class="dpill" href="#"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 20 20"><rect x="2" y="4" width="12" height="11" rx="1.5"/><path d="M14 8l4-2v8l-4-2z"/></svg>Visibilité & vidéo</a>
+        <a class="dpill" href="#"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 20 20"><circle cx="7" cy="7" r="3"/><circle cx="14" cy="13" r="3"/><path d="M9 9l3 2"/></svg>Réseaux sociaux</a>
+        <a class="dpill" href="#"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 20 20"><path d="M3 6h14M6 6l1 9h6l1-9"/><path d="M8 6V4a2 2 0 014 0v2"/></svg>Boutique en ligne</a>
+        <a class="dpill" href="#"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 20 20"><path d="M3 11l5-6 4 4 5-6"/><path d="M14 3h3v3"/></svg>Prospection B2B</a>
+        <a class="dpill" href="#"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 20 20"><path d="M10 3l2 4 4 .5-3 3 .8 4L10 12.7 6.2 14.5 7 10.5 4 7.5 8 7z"/></svg>Publicité locale</a>
+        <a class="dpill" href="#"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 2"/></svg>Acquisition client</a>
+        <a class="dpill" href="#"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 20 20"><path d="M4 16V8M10 16V4M16 16v-6"/></svg>Pilotage & data</a>
+        <a class="dpill" href="#"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 20 20"><circle cx="10" cy="10" r="3"/><path d="M10 2v2M10 16v2M2 10h2M16 10h2M4 4l1.5 1.5M14.5 14.5L16 16"/></svg>IA & outils</a>
+      </div>
+      <a class="all" href="#">Tous les domaines</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FEATURE ═══ -->
+<section class="sec">
+  <div class="wrap">
+    <div class="feature">
+      <div class="feature-txt">
+        <h2>Au plus près des pros de l'Hérault</h2>
+        <p>On se déplace dans votre commerce pour vous former sur votre vrai cas. Vous repartez autonome, avec vos propres outils — pas dépendant d'une agence.</p>
+        <a class="btn btn-outline-w" href="#methode">Découvrir notre méthode</a>
+      </div>
+      <div class="feature-logo"><div class="big">voxy</div><div class="sub">Beyond the agency</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FORMATIONS ═══ -->
+<section class="sec formasec" id="formations">
+  <div class="wrap">
+    <h2 class="sec-title">Nos formations du moment</h2>
+    <div class="fcards">
+      <article class="fcard">
+        <div class="media m1"><svg fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><rect x="2" y="5" width="15" height="14" rx="2"/><path d="M17 9l5-3v12l-5-3z"/></svg></div>
+        <div class="fb"><h3>Visibilité locale par la vidéo</h3><div class="subt">Filmer, monter et diffuser pour attirer des clients locaux</div><div class="rate"><span class="st">★★★★★</span> Nouvelle formation</div><div class="dur"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg> 14 h à 60 h · présentiel</div></div>
+        <div class="ff"><a class="btn btn-wine" href="#">Voir la formation</a><div class="price">dès 35 €/h<small>finançable</small></div></div>
+      </article>
+      <article class="fcard">
+        <div class="media m2"><svg fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path d="M3 7h18l-1.5 11H4.5z"/><path d="M8 7V5a4 4 0 018 0v2"/></svg></div>
+        <div class="fb"><h3>Créer et piloter sa boutique en ligne</h3><div class="subt">De la création du site à la première vente</div><div class="rate"><span class="st">★★★★★</span> Nouvelle formation</div><div class="dur"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg> 14 h à 35 h · présentiel</div></div>
+        <div class="ff"><a class="btn btn-wine" href="#">Voir la formation</a><div class="price">dès 35 €/h<small>finançable</small></div></div>
+      </article>
+      <article class="fcard">
+        <div class="media m3"><svg fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path d="M3 11l5-6 4 4 5-6"/><path d="M15 3h4v4"/></svg></div>
+        <div class="fb"><h3>Structurer sa prospection B2B</h3><div class="subt">Ciblage, prise de contact, relance, outils</div><div class="rate"><span class="st">★★★★★</span> Nouvelle formation</div><div class="dur"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg> 14 h à 35 h · présentiel</div></div>
+        <div class="ff"><a class="btn btn-wine" href="#">Voir la formation</a><div class="price">dès 35 €/h<small>finançable</small></div></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FINANCEMENTS ═══ -->
+<section class="sec" id="financement">
+  <div class="wrap">
+    <h2 class="sec-title c">Financements & certifications</h2>
+    <div class="logos">
+      <span class="lg">Qualiopi</span><span class="lg">AFAQ ISO</span><span class="lg">AGEFICE</span><span class="lg">FAFCEA</span><span class="lg">OPCO EP</span><span class="lg">Constructys</span>
+    </div>
+    <div class="cbtn"><a class="btn btn-wine" href="#">Voir comment financer ma formation</a></div>
+  </div>
+</section>
+
+<!-- ═══ TUILES ═══ -->
+<section class="sec" style="padding-top:0;">
+  <div class="wrap">
+    <div class="tiles">
+      <div class="tile t1"><div class="num">100 %</div><div class="lbl">des parcours sur votre cas réel</div></div>
+      <div class="tile t2"><div class="num">90 j</div><div class="lbl">suivi & évaluation à froid</div></div>
+      <div class="tile t3"><div class="st">★★★★★</div><div class="num">Qualiopi</div><div class="lbl">processus certifié</div></div>
+      <div class="tile t4"><div class="num">34</div><div class="lbl">Hérault — déplacement inclus</div></div>
+      <div class="tile t5"><div class="num">3</div><div class="lbl">parcours finançables (AGEFICE · FAFCEA · OPCO)</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PRÉSENCE ═══ -->
+<section class="sec" id="presence">
+  <div class="wrap">
+    <h2 class="sec-title">Une présence dans l'Hérault</h2>
+    <div class="presence">
+      <div class="mapbox">
+        <svg viewBox="0 0 300 280" fill="none" role="img" aria-label="Carte Occitanie">
+          <path d="M70 40 L120 30 L150 45 L190 38 L220 60 L245 55 L255 90 L235 120 L250 150 L225 180 L235 215 L195 230 L180 255 L150 240 L120 250 L90 230 L60 235 L45 200 L60 165 L40 135 L55 100 L50 70 Z" fill="#21457F" stroke="rgba(255,255,255,.15)" stroke-width="1.5"/>
+          <circle cx="165" cy="205" r="9" fill="#E4002B"/><circle cx="165" cy="205" r="16" fill="#E4002B" opacity=".25"/>
+          <circle cx="140" cy="215" r="6" fill="#ff5c7a"/><circle cx="188" cy="195" r="6" fill="#ff5c7a"/>
+          <text x="150" y="150" fill="rgba(255,255,255,.4)" font-size="11" font-family="Poppins" text-anchor="middle">Occitanie</text>
+        </svg>
+      </div>
+      <div class="presence-txt">
+        <h3>Montpellier · Béziers · Sète et environs</h3>
+        <p>Vos formations se déroulent directement dans votre commerce ou sur site. Le formateur se déplace dans tout le département de l'Hérault (34), avec le même niveau d'exigence et de suivi.</p>
+        <a class="btn btn-wine" href="#contact">Réserver un diagnostic</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="footer" id="contact">
+  <div class="wrap">
+    <div class="footer-cert">
+      <div>
+        <h4>Qualité et certification</h4>
+        <div class="certbox">
+          <div class="afaq">AFAQ<br><span style="font-size:10px;font-weight:500;">ISO 9001</span></div>
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none"><path d="M3 10l5-2 5 3 3-5" stroke="#1E54D6" stroke-width="2.5" stroke-linecap="round"/><path d="M14 6h4v4" stroke="#E4002B" stroke-width="2.5" stroke-linecap="round"/></svg>
+          <div class="q"><b>Qualiopi</b><small>Délivrée au titre de la catégorie : actions de formation.</small></div>
+        </div>
+      </div>
+      <div>
+        <h4>Rejoignez-nous</h4>
+        <div class="socials">
+          <a href="#" aria-label="LinkedIn"><svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M4 4a2 2 0 110 4 2 2 0 010-4zM2 9h4v11H2zM9 9h4v2a4 4 0 017 3v6h-4v-5c0-1-1-2-2-2s-2 1-2 2v5H9z"/></svg></a>
+          <a href="#" aria-label="Instagram"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17" cy="7" r="1" fill="currentColor"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M14 9V7c0-1 .5-1.5 1.5-1.5H17V2h-3c-2.5 0-4 1.5-4 4v3H7v4h3v9h4v-9h3l1-4z"/></svg></a>
+          <a href="#" aria-label="YouTube"><svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M22 8s-.2-1.5-.8-2.1c-.8-.8-1.6-.8-2-.9C16.4 4.7 12 4.7 12 4.7s-4.4 0-7.2.3c-.4 0-1.2.1-2 .9C2.2 6.5 2 8 2 8S1.8 9.8 1.8 11.5v1C1.8 14.2 2 16 2 16s.2 1.5.8 2.1c.8.8 1.8.8 2.3.9 1.7.2 7 .3 7 .3s4.4 0 7.2-.3c.4 0 1.2-.1 2-.9.6-.6.8-2.1.8-2.1s.2-1.8.2-3.5v-1C22.2 9.8 22 8 22 8zM10 15V9l5 3z"/></svg></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-cols">
+      <div><h4>Nos offres</h4><a href="#">Visibilité & vidéo</a><a href="#">Boutique en ligne</a><a href="#">Prospection B2B</a><a href="#">Intra / sur-mesure</a><a href="#">Catalogue PDF</a></div>
+      <div><h4>À propos</h4><a href="#">Notre méthode AFEST</a><a href="#">L'équipe</a><a href="#">Qualité & indicateurs</a><a href="#">Accessibilité (PSH)</a></div>
+      <div><h4>Aides</h4><a href="#">Comment financer</a><a href="#">FAQ</a><a href="#">Nous contacter</a><a href="#">Bulletin d'inscription</a></div>
+      <div><h4>Ressources</h4><a href="#">Le Mag</a><a href="#">Personas & cas</a><a href="#">Mentions légales</a><a href="#">CGV</a></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Voxy Formations — NDA [à compléter] · Qualiopi n° [à compléter]</span>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;"><a href="#">Mentions légales</a><a href="#">Confidentialité</a><a href="#">CGV</a></div>
+    </div>
+  </div>
+</footer>
+
+<div class="mbar">⚠ MAQUETTE — gabarit Cegos (couleurs Cegos), responsive fluide. Rebranding bleu/jaune à l'étape suivante.</div>
