@@ -348,6 +348,25 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
 .footer-bottom a{color:rgba(255,255,255,.5);text-decoration:none;cursor:pointer;}
 .footer-bottom a:hover{color:#fff;}
 
+/* MAG — listing covers + article */
+.ncard .cover{aspect-ratio:16/9;width:100%;object-fit:cover;display:block;}
+.article{max-width:760px;margin-inline:auto;}
+.article-cover{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:var(--r);margin-bottom:1.5rem;box-shadow:var(--sh-sm);}
+.ameta{display:flex;flex-wrap:wrap;gap:.4rem 1rem;align-items:center;font-size:var(--fs-sm);color:var(--muted);margin-bottom:1.2rem;}
+.ameta .cat{font-family:'Poppins',sans-serif;font-weight:500;color:var(--wine);text-transform:uppercase;letter-spacing:.05em;font-size:var(--fs-xs);}
+.article h2{font-size:var(--fs-h3);font-weight:600;margin:1.8rem 0 .7rem;padding-left:.7rem;border-left:4px solid var(--orange);}
+.article h3{font-size:1.05rem;font-weight:600;margin:1.2rem 0 .5rem;}
+.article p{margin-bottom:1rem;}
+.article ul,.article ol{padding-left:1.3rem;margin-bottom:1rem;}
+.article li{margin-bottom:.45rem;}
+.article a.inl{color:var(--plum);text-decoration:underline;text-underline-offset:2px;font-weight:500;cursor:pointer;}
+.article a.inl:hover{color:var(--blue-brand);}
+.article .lead{font-size:var(--fs-lead);color:var(--ink);}
+.related{margin-top:2.5rem;}
+.related h2{font-size:var(--fs-h2);font-weight:600;margin-bottom:1.2rem;}
+.maillage{margin-top:2rem;border-top:1px solid var(--line);padding-top:1.5rem;}
+.maillage .k{font-family:'Poppins',sans-serif;font-weight:500;font-size:var(--fs-xs);text-transform:uppercase;letter-spacing:.05em;color:var(--plum);margin-bottom:.7rem;}
+
 /* Maquette bar */
 .mbar{position:fixed;bottom:0;left:0;right:0;z-index:300;background:var(--red);color:#fff;text-align:center;font-family:'Poppins',sans-serif;font-weight:500;font-size:var(--fs-sm);padding:.6rem 1rem;padding-bottom:calc(.6rem + env(safe-area-inset-bottom,0px));}
 body{padding-bottom:3rem;}
@@ -422,9 +441,9 @@ body{padding-bottom:3rem;}
     <div class="wrap">
       <h2 class="sec-title">Nos dernières actualités</h2>
       <div class="news">
-        <a class="ncard" href="#lemag"><div class="media a"></div><div class="nbody"><span class="ntag">Visibilité</span><h3>Filmer son commerce : 3 erreurs qui plombent vos vidéos</h3></div></a>
-        <a class="ncard" href="#financements"><div class="media b"></div><div class="nbody"><span class="ntag">Financement</span><h3>AGEFICE, FAFCEA : comment financer sa formation en 2026</h3></div></a>
-        <a class="ncard dark" href="#formations"><div class="media"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M4 4h12l4 4v12H4z"/><path d="M8 11h8M8 15h5"/></svg></div><div class="nbody"><span class="ntag">Catalogue</span><h3>Découvrez le catalogue de formations 2026</h3></div></a>
+        <a class="ncard" href="#art-smartphone"><img class="cover" src="img/mag-filmer-smartphone.jpg" alt="Filmer son commerce avec un smartphone" loading="lazy"><div class="nbody"><span class="ntag">Vidéo</span><h3>Filmer son commerce au smartphone : le guide 2026</h3></div></a>
+        <a class="ncard" href="#art-financement"><img class="cover" src="img/mag-financement.jpg" alt="Financer sa formation AGEFICE FAFCEA" loading="lazy"><div class="nbody"><span class="ntag">Financement</span><h3>AGEFICE, FAFCEA, OPCO : financer sa formation en 2026</h3></div></a>
+        <a class="ncard" href="#art-google-business"><img class="cover" src="img/mag-google-business.jpg" alt="Créer sa fiche Google Business" loading="lazy"><div class="nbody"><span class="ntag">Visibilité locale</span><h3>Créer sa fiche Google Business : le guide pas à pas</h3></div></a>
       </div>
     </div>
   </section>
@@ -640,6 +659,10 @@ body{padding-bottom:3rem;}
           <h2>Financement</h2>
           <p class="prose">Cette formation peut être prise en charge selon votre statut : <b>FAFCEA</b> (artisans), <b>AGEFICE</b> (commerce/services), <b>OPCO</b> (salariés).</p>
           <div class="callout blue"><b>Transparence :</b> le montant pris en charge dépend de votre situation et des plafonds annuels. Le <b>reste à votre charge vous est annoncé sur le devis, avant toute inscription</b>. Nous ne promettons jamais « 100 % financé ».</div>
+          <div class="maillage"><div class="k">Pour aller plus loin — Le Mag</div><div class="grid3">
+            <a class="card-blank" href="#art-google-business"><span class="k">Article</span><h4>Créer sa fiche Google Business</h4><span class="m">Être visible localement</span></a>
+            <a class="card-blank" href="#art-clients-locaux"><span class="k">Article</span><h4>Attirer plus de clients locaux</h4><span class="m">Par métier</span></a>
+          </div></div>
         </div>
       </div>
       <aside class="rail">
@@ -735,6 +758,10 @@ body{padding-bottom:3rem;}
           <h2>Financement</h2>
           <p class="prose">Prise en charge possible selon votre statut : <b>AGEFICE</b>, <b>FAFCEA</b>, <b>OPCO</b>.</p>
           <div class="callout blue"><b>Transparence :</b> part financée et <b>reste à charge indiqués au devis, avant inscription</b>. Jamais « gratuit » ni « 100 % financé ».</div>
+          <div class="maillage"><div class="k">Pour aller plus loin — Le Mag</div><div class="grid3">
+            <a class="card-blank" href="#art-financement"><span class="k">Article</span><h4>Financer sa formation en 2026</h4><span class="m">AGEFICE · FAFCEA · OPCO</span></a>
+            <a class="card-blank" href="#art-clients-locaux"><span class="k">Article</span><h4>Attirer plus de clients locaux</h4><span class="m">Guide commerce</span></a>
+          </div></div>
         </div>
       </div>
       <aside class="rail">
@@ -822,6 +849,10 @@ body{padding-bottom:3rem;}
           <h2>Financement</h2>
           <p class="prose">Prise en charge possible selon votre statut : <b>AGEFICE</b>, <b>OPCO</b>.</p>
           <div class="callout blue"><b>Transparence :</b> part financée et <b>reste à charge indiqués au devis, avant inscription</b>.</div>
+          <div class="maillage"><div class="k">Pour aller plus loin — Le Mag</div><div class="grid3">
+            <a class="card-blank" href="#art-financement"><span class="k">Article</span><h4>Financer sa formation en 2026</h4><span class="m">AGEFICE · OPCO</span></a>
+            <a class="card-blank" href="#art-qualiopi"><span class="k">Article</span><h4>Qualiopi, c'est quoi ?</h4><span class="m">Condition du financement</span></a>
+          </div></div>
         </div>
       </div>
       <aside class="rail">
@@ -916,6 +947,10 @@ body{padding-bottom:3rem;}
           <h2>Financement</h2>
           <p class="prose">Prise en charge possible selon votre statut : <b>AGEFICE</b> (commerce/restauration), <b>FAFCEA</b> (artisans du bâtiment), <b>OPCO</b> (salariés).</p>
           <div class="callout blue"><b>Transparence :</b> le reste à charge dépend des plafonds annuels et vous est <b>annoncé au devis, avant inscription</b>. Jamais « 100 % financé ».</div>
+          <div class="maillage"><div class="k">Pour aller plus loin — Le Mag</div><div class="grid3">
+            <a class="card-blank" href="#art-smartphone"><span class="k">Article</span><h4>Filmer son commerce au smartphone</h4><span class="m">Le guide 2026</span></a>
+            <a class="card-blank" href="#art-reels"><span class="k">Article</span><h4>Reels, TikTok, Shorts</h4><span class="m">Quelle vidéo choisir</span></a>
+          </div></div>
         </div>
       </div>
       <aside class="rail">
@@ -1097,23 +1132,230 @@ body{padding-bottom:3rem;}
   </div></section>
 </section>
 
-<!-- ═══════════ PAGE : LE MAG ═══════════ -->
+<!-- ═══════════ PAGE : LE MAG (listing) ═══════════ -->
 <section class="page" data-page="lemag" hidden>
   <section class="phero">
     <div class="wrap">
       <div class="breadcrumb"><a href="#accueil">Accueil</a><span class="sep">›</span><span>Le Mag</span></div>
-      <h1>Le Mag</h1>
-      <p class="lead">Conseils concrets sur la visibilité locale, la vidéo, le web et le financement de la formation.</p>
+      <h1>Le Mag — visibilité, vidéo & financement</h1>
+      <p class="lead">Conseils concrets pour les pros de l'Hérault : attirer des clients locaux, filmer soi-même, créer sa présence en ligne et financer sa formation.</p>
     </div>
   </section>
   <section class="sec"><div class="wrap">
     <div class="news">
-      <a class="ncard" href="#lemag"><div class="media a"></div><div class="nbody"><span class="ntag">Visibilité</span><h3>Filmer son commerce : 3 erreurs qui plombent vos vidéos</h3></div></a>
-      <a class="ncard" href="#financements"><div class="media b"></div><div class="nbody"><span class="ntag">Financement</span><h3>AGEFICE, FAFCEA : comment financer sa formation en 2026</h3></div></a>
-      <a class="ncard" href="#formation-site"><div class="media a"></div><div class="nbody"><span class="ntag">Web</span><h3>Site vitrine : les 5 pages qui vous amènent des clients</h3></div></a>
+      <a class="ncard" href="#art-smartphone"><img class="cover" src="img/mag-filmer-smartphone.jpg" alt="Filmer son commerce avec un smartphone" loading="lazy"><div class="nbody"><span class="ntag">Vidéo</span><h3>Comment filmer son commerce au smartphone (guide 2026)</h3></div></a>
+      <a class="ncard" href="#art-google-business"><img class="cover" src="img/mag-google-business.jpg" alt="Créer sa fiche Google Business" loading="lazy"><div class="nbody"><span class="ntag">Visibilité locale</span><h3>Créer sa fiche Google Business : le guide pas à pas</h3></div></a>
+      <a class="ncard" href="#art-financement"><img class="cover" src="img/mag-financement.jpg" alt="Financer sa formation" loading="lazy"><div class="nbody"><span class="ntag">Financement</span><h3>AGEFICE, FAFCEA, OPCO : financer sa formation en 2026</h3></div></a>
+      <a class="ncard" href="#art-reels"><img class="cover" src="img/mag-reels-social.jpg" alt="Reels TikTok Shorts pour commerce" loading="lazy"><div class="nbody"><span class="ntag">Vidéo</span><h3>Reels, TikTok, Shorts : quelle vidéo pour attirer des clients</h3></div></a>
+      <a class="ncard" href="#art-clients-locaux"><img class="cover" src="img/mag-clients-locaux.jpg" alt="Attirer des clients locaux" loading="lazy"><div class="nbody"><span class="ntag">Local</span><h3>Restaurant, artisan, salon : attirer plus de clients locaux</h3></div></a>
+      <a class="ncard" href="#art-qualiopi"><img class="cover" src="img/mag-qualiopi.jpg" alt="Qualiopi expliqué" loading="lazy"><div class="nbody"><span class="ntag">Financement</span><h3>Qualiopi, c'est quoi ? Ce que ça change pour votre formation</h3></div></a>
     </div>
-    <p class="form-note" style="text-align:center;margin-top:1.5rem;">Articles de démonstration — contenus réels à venir.</p>
   </div></section>
+</section>
+
+<!-- ═══════════ ARTICLE 1 : SMARTPHONE ═══════════ -->
+<section class="page" data-page="art-smartphone" hidden>
+  <section class="phero"><div class="wrap">
+    <div class="breadcrumb"><a href="#accueil">Accueil</a><span class="sep">›</span><a href="#lemag">Le Mag</a><span class="sep">›</span><span>Filmer au smartphone</span></div>
+    <h1>Comment filmer son commerce avec un smartphone (guide 2026)</h1>
+  </div></section>
+  <section class="sec"><div class="wrap"><article class="article">
+    <img class="article-cover" src="img/mag-filmer-smartphone.jpg" alt="Commerçant qui filme son activité avec un smartphone">
+    <div class="ameta"><span class="cat">Vidéo</span><span>· 6 min de lecture</span><span>· Voxy Formations</span></div>
+    <p class="lead">Pas besoin d'un matériel de cinéma pour attirer des clients locaux. Avec un smartphone récent et quelques règles simples, vous pouvez filmer votre commerce et donner envie qu'on pousse votre porte. Voici comment.</p>
+    <h2>1. Préparez votre plan avant d'appuyer sur « enregistrer »</h2>
+    <p>Une bonne vidéo courte commence par une idée claire : qu'est-ce que vous montrez, et à qui ? Un plat qui sort de la cuisine, un chantier avant/après, une nouveauté en boutique. Écrivez votre accroche (les 3 premières secondes) : c'est elle qui décide si on continue à regarder.</p>
+    <h2>2. Lumière, cadrage, stabilité : les 3 réflexes</h2>
+    <ul>
+      <li><b>Lumière</b> : filmez face à la lumière du jour, jamais à contre-jour. Près d'une fenêtre, c'est idéal.</li>
+      <li><b>Cadrage</b> : filmez à la verticale pour les réseaux, la caméra à hauteur du sujet.</li>
+      <li><b>Stabilité</b> : calez vos coudes, ou posez le téléphone. Un petit trépied à 20 € change tout.</li>
+    </ul>
+    <h2>3. Le son compte plus que l'image</h2>
+    <p>Une image moyenne avec un bon son passe ; l'inverse, non. Filmez dans un endroit calme, rapprochez-vous, et ajoutez toujours des <b>sous-titres</b> (la majorité des vidéos sont regardées sans le son).</p>
+    <h2>4. Montez simplement, publiez régulièrement</h2>
+    <p>Un montage court (coupes, sous-titres, une musique) suffit, directement sur votre téléphone. La régularité bat la perfection : mieux vaut une vidéo correcte par semaine qu'une vidéo parfaite par trimestre.</p>
+    <div class="callout blue" style="margin:1.5rem 0;"><b>Envie d'apprendre à le faire sur votre vrai commerce ?</b> Notre <a class="inl" href="#formation-video">formation « Visibilité locale par la vidéo »</a> se déroule chez vous : on filme ensemble, et vous repartez autonome.</div>
+    <p>Une fois vos vidéos prêtes, encore faut-il choisir le bon format selon le réseau : on en parle dans <a class="inl" href="#art-reels">Reels, TikTok, Shorts : quelle vidéo pour attirer des clients</a>.</p>
+    <div class="maillage"><div class="k">Pour aller plus loin</div>
+      <div class="grid3">
+        <a class="card-blank" href="#formation-video"><span class="k">Formation</span><h4>Visibilité locale par la vidéo</h4><span class="m">On filme chez vous · finançable</span></a>
+        <a class="card-blank" href="#art-reels"><span class="k">Article</span><h4>Quelle vidéo pour quel réseau</h4><span class="m">Reels · TikTok · Shorts</span></a>
+        <a class="card-blank" href="#art-clients-locaux"><span class="k">Article</span><h4>Attirer plus de clients locaux</h4><span class="m">Restaurant · artisan · salon</span></a>
+      </div>
+    </div>
+  </article></div></section>
+</section>
+
+<!-- ═══════════ ARTICLE 2 : GOOGLE BUSINESS ═══════════ -->
+<section class="page" data-page="art-google-business" hidden>
+  <section class="phero"><div class="wrap">
+    <div class="breadcrumb"><a href="#accueil">Accueil</a><span class="sep">›</span><a href="#lemag">Le Mag</a><span class="sep">›</span><span>Fiche Google Business</span></div>
+    <h1>Créer sa fiche Google Business : le guide pas à pas</h1>
+  </div></section>
+  <section class="sec"><div class="wrap"><article class="article">
+    <img class="article-cover" src="img/mag-google-business.jpg" alt="Fiche Google Business sur un smartphone">
+    <div class="ameta"><span class="cat">Visibilité locale</span><span>· 7 min de lecture</span><span>· Voxy Formations</span></div>
+    <p class="lead">Quand un client cherche « restaurant » ou « plombier » près de chez lui, c'est votre fiche Google qui apparaît en premier — avant même votre site. La créer et la soigner est le levier de visibilité locale le plus rentable. Voici les étapes.</p>
+    <h2>Qu'est-ce qu'une fiche Google Business ?</h2>
+    <p>C'est la fiche gratuite qui affiche votre établissement sur Google et Google Maps : nom, adresse, horaires, téléphone, photos et avis. Elle vous rend visible sur les recherches locales, même sans site internet.</p>
+    <h2>Comment créer sa fiche, étape par étape</h2>
+    <ol>
+      <li>Rendez-vous sur Google Business Profile et connectez-vous avec un compte Google.</li>
+      <li>Saisissez le nom exact de votre établissement et choisissez la <b>bonne catégorie</b> (déterminante pour être trouvé).</li>
+      <li>Renseignez adresse, zone desservie, horaires et téléphone — les mêmes partout (cohérence « NAP »).</li>
+      <li>Validez la fiche (par courrier, téléphone ou vidéo selon les cas).</li>
+      <li>Ajoutez des <b>photos</b> et une description claire avec vos services.</li>
+    </ol>
+    <h2>Être visible sur Google Maps sans site internet, c'est possible</h2>
+    <p>Une fiche bien remplie suffit pour apparaître sur Maps. Mais pour convertir ceux qui veulent en savoir plus, un site reste un vrai plus : voyez notre <a class="inl" href="#formation-site">formation création de site internet</a>.</p>
+    <h2>Les 3 leviers pour remonter dans les résultats locaux</h2>
+    <ul>
+      <li><b>La régularité</b> : publiez des actus et de nouvelles photos (vos vidéos font parfaitement l'affaire).</li>
+      <li><b>Les avis</b> : demandez-en à vos clients satisfaits et répondez-y.</li>
+      <li><b>La cohérence</b> : mêmes coordonnées sur la fiche, le site et les réseaux.</li>
+    </ul>
+    <div class="callout blue" style="margin:1.5rem 0;"><b>On met tout ça en place avec vous.</b> Notre <a class="inl" href="#formation-video">formation visibilité locale</a> inclut l'optimisation de votre fiche Google — <a class="inl" href="#diagnostic">réservez un diagnostic</a> pour en parler.</div>
+    <div class="maillage"><div class="k">Pour aller plus loin</div>
+      <div class="grid3">
+        <a class="card-blank" href="#formation-video"><span class="k">Formation</span><h4>Visibilité locale par la vidéo</h4><span class="m">Fiche Google incluse</span></a>
+        <a class="card-blank" href="#formation-site"><span class="k">Formation</span><h4>Créer un site internet</h4><span class="m">Présentiel · finançable</span></a>
+        <a class="card-blank" href="#art-clients-locaux"><span class="k">Article</span><h4>Attirer plus de clients locaux</h4><span class="m">Guide par métier</span></a>
+      </div>
+    </div>
+  </article></div></section>
+</section>
+
+<!-- ═══════════ ARTICLE 3 : FINANCEMENT ═══════════ -->
+<section class="page" data-page="art-financement" hidden>
+  <section class="phero"><div class="wrap">
+    <div class="breadcrumb"><a href="#accueil">Accueil</a><span class="sep">›</span><a href="#lemag">Le Mag</a><span class="sep">›</span><span>Financer sa formation</span></div>
+    <h1>AGEFICE, FAFCEA, OPCO : financer sa formation en 2026</h1>
+  </div></section>
+  <section class="sec"><div class="wrap"><article class="article">
+    <img class="article-cover" src="img/mag-financement.jpg" alt="Calculer le financement d'une formation">
+    <div class="ameta"><span class="cat">Financement</span><span>· 8 min de lecture</span><span>· Voxy Formations</span></div>
+    <p class="lead">En tant que dirigeant, vous cotisez déjà à un fonds de formation — et la plupart ne l'utilisent jamais. Voici qui finance quoi en 2026, et comment comprendre votre reste à charge, sans promesse trompeuse.</p>
+    <h2>Qui finance quoi ?</h2>
+    <ul>
+      <li><b>AGEFICE</b> — dirigeants du commerce, des services et de la restauration.</li>
+      <li><b>FAFCEA</b> — artisans (immatriculés au répertoire des métiers).</li>
+      <li><b>OPCO</b> — salariés, via le plan de développement des compétences.</li>
+      <li><b>Constructys</b> — entreprises du BTP.</li>
+    </ul>
+    <p>Chaque fonds a ses <b>plafonds annuels</b> et ses taux de prise en charge, qui évoluent chaque année. Les montants exacts sont à vérifier sur les sites officiels au moment de votre demande.</p>
+    <h2>Comprendre le « reste à charge »</h2>
+    <p>Le reste à charge, c'est la part qui n'est pas couverte par votre fonds et que vous payez. <b>Il est presque toujours réel.</b> Méfiez-vous des « 100 % financé, 0 € » : c'est rarement vrai, et c'est encadré par la loi. Chez nous, le reste à charge est <b>écrit sur le devis avant toute inscription</b>.</p>
+    <h2>Les étapes pour faire financer sa formation</h2>
+    <ol>
+      <li>On vérifie votre éligibilité et votre fonds lors d'un <a class="inl" href="#diagnostic">diagnostic</a>.</li>
+      <li>On monte ensemble le dossier (devis, programme, convention).</li>
+      <li>Vous recevez l'accord de prise en charge et connaissez votre reste à charge.</li>
+      <li>La formation démarre, dans les délais d'accès annoncés.</li>
+    </ol>
+    <div class="callout blue" style="margin:1.5rem 0;">Détail des financeurs et exemple chiffré sur notre page <a class="inl" href="#financements">Financements</a>. Pour estimer votre cas précis, <a class="inl" href="#diagnostic">réservez un diagnostic</a>.</div>
+    <p>Bon à savoir : seule une formation dispensée par un organisme certifié peut être financée. On explique pourquoi dans <a class="inl" href="#art-qualiopi">Qualiopi, c'est quoi ?</a></p>
+    <div class="maillage"><div class="k">Pour aller plus loin</div>
+      <div class="grid3">
+        <a class="card-blank" href="#financements"><span class="k">Page</span><h4>Financements & reste à charge</h4><span class="m">AGEFICE · FAFCEA · OPCO</span></a>
+        <a class="card-blank" href="#diagnostic"><span class="k">Action</span><h4>Réserver un diagnostic</h4><span class="m">Estimer votre prise en charge</span></a>
+        <a class="card-blank" href="#art-qualiopi"><span class="k">Article</span><h4>Qualiopi, c'est quoi ?</h4><span class="m">Condition du financement</span></a>
+      </div>
+    </div>
+  </article></div></section>
+</section>
+
+<!-- ═══════════ ARTICLE 4 : REELS ═══════════ -->
+<section class="page" data-page="art-reels" hidden>
+  <section class="phero"><div class="wrap">
+    <div class="breadcrumb"><a href="#accueil">Accueil</a><span class="sep">›</span><a href="#lemag">Le Mag</a><span class="sep">›</span><span>Reels, TikTok, Shorts</span></div>
+    <h1>Reels, TikTok, Shorts : quelle vidéo pour attirer des clients</h1>
+  </div></section>
+  <section class="sec"><div class="wrap"><article class="article">
+    <img class="article-cover" src="img/mag-reels-social.jpg" alt="Créer des vidéos courtes pour les réseaux sociaux">
+    <div class="ameta"><span class="cat">Vidéo</span><span>· 5 min de lecture</span><span>· Voxy Formations</span></div>
+    <p class="lead">Reels Instagram, TikTok, Shorts YouTube : ce sont les mêmes vidéos verticales courtes, mais chaque réseau a ses codes et son public. Lequel choisir pour votre commerce ? Voici comment décider.</p>
+    <h2>La même vidéo, trois réseaux</h2>
+    <p>Une vidéo verticale de 15 à 45 secondes peut être publiée sur les trois. L'erreur est de croire qu'il faut tout refaire à chaque fois : filmez une fois, adaptez le format et la légende.</p>
+    <h2>Quel réseau pour quel commerce ?</h2>
+    <ul>
+      <li><b>Instagram (Reels)</b> : restaurants, salons, boutiques — public local, visuel, 25-45 ans.</li>
+      <li><b>TikTok</b> : si vous visez un public jeune ou un effet « découverte » large.</li>
+      <li><b>YouTube Shorts</b> : utile pour durer dans le temps et être trouvé via la recherche.</li>
+    </ul>
+    <h2>Pourquoi faire des Reels quand on a un commerce local ?</h2>
+    <p>Parce que l'algorithme montre vos vidéos à des gens <b>près de chez vous</b> qui ne vous connaissent pas encore. C'est de la publicité gratuite et ciblée — à condition de publier régulièrement.</p>
+    <div class="callout blue" style="margin:1.5rem 0;">Avant de choisir le réseau, il faut savoir filmer : lisez <a class="inl" href="#art-smartphone">Comment filmer son commerce au smartphone</a>, ou formez-vous avec notre <a class="inl" href="#formation-video">formation visibilité par la vidéo</a>.</div>
+    <div class="maillage"><div class="k">Pour aller plus loin</div>
+      <div class="grid3">
+        <a class="card-blank" href="#formation-video"><span class="k">Formation</span><h4>Visibilité locale par la vidéo</h4><span class="m">Filmer, monter, diffuser</span></a>
+        <a class="card-blank" href="#art-smartphone"><span class="k">Article</span><h4>Filmer au smartphone</h4><span class="m">Le guide complet</span></a>
+        <a class="card-blank" href="#art-google-business"><span class="k">Article</span><h4>Fiche Google Business</h4><span class="m">Être visible localement</span></a>
+      </div>
+    </div>
+  </article></div></section>
+</section>
+
+<!-- ═══════════ ARTICLE 5 : CLIENTS LOCAUX ═══════════ -->
+<section class="page" data-page="art-clients-locaux" hidden>
+  <section class="phero"><div class="wrap">
+    <div class="breadcrumb"><a href="#accueil">Accueil</a><span class="sep">›</span><a href="#lemag">Le Mag</a><span class="sep">›</span><span>Attirer des clients locaux</span></div>
+    <h1>Restaurant, artisan, salon : attirer plus de clients locaux</h1>
+  </div></section>
+  <section class="sec"><div class="wrap"><article class="article">
+    <img class="article-cover" src="img/mag-clients-locaux.jpg" alt="Commerce local qui attire des clients">
+    <div class="ameta"><span class="cat">Local</span><span>· 7 min de lecture</span><span>· Voxy Formations · Hérault</span></div>
+    <p class="lead">Terrasse vide le mardi, fauteuils libres en semaine, carnet de commandes creux l'hiver ? La visibilité locale se travaille. Voici des leviers concrets, par métier, pour les pros de l'Hérault.</p>
+    <h2>Pour un restaurant : montrer, donner faim, donner envie</h2>
+    <p>Filmez vos plats, l'ambiance, l'équipe. Publiez aux bons moments (avant les services). Soignez votre <a class="inl" href="#art-google-business">fiche Google Business</a> avec de belles photos et répondez aux avis.</p>
+    <h2>Pour un artisan : la preuve par le chantier</h2>
+    <p>Les avant/après de chantier rassurent et donnent envie d'appeler. Une courte vidéo d'un travail bien fait vaut mieux qu'un long discours. Beaucoup de vos futurs clients regardent des vidéos avant de demander un devis.</p>
+    <h2>Pour un salon (coiffure, esthétique) : la transformation</h2>
+    <p>Les transformations client sont votre meilleure publicité. Filmées simplement, publiées en Reels, elles font venir une clientèle de proximité.</p>
+    <h2>Le point commun : régularité + local</h2>
+    <p>Dans tous les cas, c'est la <b>régularité</b> et l'<b>ancrage local</b> qui paient. Et la bonne nouvelle : vous pouvez apprendre à tout faire vous-même.</p>
+    <div class="callout blue" style="margin:1.5rem 0;"><b>On vient filmer chez vous, dans l'Hérault.</b> Découvrez la <a class="inl" href="#formation-video">formation visibilité par la vidéo</a> ou <a class="inl" href="#diagnostic">réservez un diagnostic</a> adapté à votre métier.</div>
+    <div class="maillage"><div class="k">Pour aller plus loin</div>
+      <div class="grid3">
+        <a class="card-blank" href="#formation-video"><span class="k">Formation</span><h4>Visibilité locale par la vidéo</h4><span class="m">Offre pilote · Hérault</span></a>
+        <a class="card-blank" href="#formation-site"><span class="k">Formation</span><h4>Créer un site internet</h4><span class="m">Pour aller plus loin</span></a>
+        <a class="card-blank" href="#art-smartphone"><span class="k">Article</span><h4>Filmer au smartphone</h4><span class="m">Le guide pratique</span></a>
+      </div>
+    </div>
+  </article></div></section>
+</section>
+
+<!-- ═══════════ ARTICLE 6 : QUALIOPI ═══════════ -->
+<section class="page" data-page="art-qualiopi" hidden>
+  <section class="phero"><div class="wrap">
+    <div class="breadcrumb"><a href="#accueil">Accueil</a><span class="sep">›</span><a href="#lemag">Le Mag</a><span class="sep">›</span><span>Qualiopi</span></div>
+    <h1>Qualiopi, c'est quoi ? Ce que ça change pour votre formation</h1>
+  </div></section>
+  <section class="sec"><div class="wrap"><article class="article">
+    <img class="article-cover" src="img/mag-qualiopi.jpg" alt="Certification Qualiopi et documents de formation">
+    <div class="ameta"><span class="cat">Financement</span><span>· 5 min de lecture</span><span>· Voxy Formations</span></div>
+    <p class="lead">Vous avez vu le logo « Qualiopi » sur des pages de formation sans savoir ce que ça veut dire ? C'est pourtant la clé qui conditionne le financement de votre formation. Explications simples.</p>
+    <h2>Qualiopi, une certification qualité</h2>
+    <p>Qualiopi est la certification nationale qui atteste de la <b>qualité du processus</b> d'un organisme de formation. Elle est délivrée après un audit, au titre d'une ou plusieurs catégories d'actions (pour nous : les actions de formation).</p>
+    <h2>Pourquoi c'est important pour vous</h2>
+    <p>Depuis 2022, <b>seules les formations dispensées par un organisme certifié Qualiopi peuvent être financées</b> par les fonds publics et mutualisés (AGEFICE, FAFCEA, OPCO…). Sans Qualiopi, pas de prise en charge.</p>
+    <h2>Ce que ça garantit concrètement</h2>
+    <ul>
+      <li>Des objectifs et un programme clairs et adaptés.</li>
+      <li>Des moyens pédagogiques et un encadrement qualifiés.</li>
+      <li>Des évaluations des acquis et un suivi.</li>
+      <li>Une prise en compte du handicap (accessibilité).</li>
+    </ul>
+    <p>Voxy Formations est un organisme <b>certifié Qualiopi</b> : vos formations sont donc éligibles au financement. On vous accompagne pour le dossier — voir la page <a class="inl" href="#financements">Financements</a>.</p>
+    <div class="callout blue" style="margin:1.5rem 0;">Une question sur votre éligibilité ? <a class="inl" href="#diagnostic">Réservez un diagnostic</a> : on vérifie votre financeur et votre reste à charge.</div>
+    <div class="maillage"><div class="k">Pour aller plus loin</div>
+      <div class="grid3">
+        <a class="card-blank" href="#financements"><span class="k">Page</span><h4>Financements</h4><span class="m">AGEFICE · FAFCEA · OPCO</span></a>
+        <a class="card-blank" href="#apropos"><span class="k">Page</span><h4>Qualité & indicateurs</h4><span class="m">Notre certification</span></a>
+        <a class="card-blank" href="#art-financement"><span class="k">Article</span><h4>Financer sa formation</h4><span class="m">Le guide 2026</span></a>
+      </div>
+    </div>
+  </article></div></section>
 </section>
 
 <!-- ═══════════ PAGES LÉGALES ═══════════ -->
@@ -1187,7 +1429,7 @@ body{padding-bottom:3rem;}
 
 <script>
 (function(){
-  var PAGES = ['accueil','formations','formation-site','formation-boutique','formation-prospection','formation-video','methode','financements','diagnostic','apropos','contact','lemag','mentions','cgv','confidentialite'];
+  var PAGES = ['accueil','formations','formation-site','formation-boutique','formation-prospection','formation-video','methode','financements','diagnostic','apropos','contact','lemag','art-smartphone','art-google-business','art-financement','art-reels','art-clients-locaux','art-qualiopi','mentions','cgv','confidentialite'];
   function route(){
     var h = (location.hash || '#accueil').replace('#','');
     if (PAGES.indexOf(h) === -1) h = 'accueil';
