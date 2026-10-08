@@ -46,7 +46,8 @@ Les **fonds de formation ne financent que de la formation réelle**. Toute prest
 
 ### `C-site/`
 - **[C_architecture_site.md](C-site/C_architecture_site.md)** — Cartographie du site : arborescence, modules par page, design system CSS, modules JS, reco de stack.
-- **[maquette.html](C-site/maquette.html)** — Maquette front (gabarit calé sur Cegos, couleurs bleu/jaune, responsive fluide `clamp()`). Ouvrir dans un navigateur.
+- **[site.html](C-site/site.html)** — **Site multi-pages complet** : accueil + catalogue + 4 fiches formation (structure Qualiopi) + méthode, financements, diagnostic, à-propos, contact, Le Mag, légales. Navigation par ancres, tous boutons cliquables.
+- **[maquette.html](C-site/maquette.html)** — Première maquette (accueil seul), conservée pour historique.
 - **`apercus/`** — Rendus vérifiés (desktop 1280, tablette 768, mobile 360, pleine page).
 - Version interactive en ligne : maquette publiée en artefact Claude (lien partagé séparément).
 
