@@ -1,8 +1,8 @@
 <title>Voxy Formations</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Raleway:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-/* Clone Cegos — palette Cegos (violets passés en bleu), typo pro (Poppins/Figtree), auto-layout 100% fluide.
+/* Clone Cegos — palette Cegos (violets passés en bleu), typo (Poppins titres / Raleway corps — relevé Cegos), auto-layout 100% fluide.
    Tout le sizing (typo + espacements) est piloté par des tokens clamp(). Mono-thème clair. */
 
 :root {
@@ -44,7 +44,7 @@
 
   --fg:var(--ink); --bg:var(--white);
   color-scheme: light;
-  font-family:'Figtree', system-ui, -apple-system, sans-serif;
+  font-family:'Raleway', system-ui, -apple-system, sans-serif;
   font-size: 16px;
 }
 
@@ -92,7 +92,7 @@ a{color:inherit;}
 .hutil a{display:inline-flex;align-items:center;gap:.5rem;text-decoration:none;color:var(--head);font-family:'Poppins',sans-serif;font-weight:500;font-size:var(--fs-sm);white-space:nowrap;}
 .hutil a:hover{color:var(--wine);}
 .cart{position:relative;}
-.cart .badge{position:absolute;top:-7px;right:-9px;background:var(--red);color:#fff;font-size:10px;font-weight:700;min-width:16px;height:16px;border-radius:50%;display:grid;place-items:center;padding:0 3px;font-family:'Figtree',sans-serif;}
+.cart .badge{position:absolute;top:-7px;right:-9px;background:var(--red);color:#fff;font-size:10px;font-weight:700;min-width:16px;height:16px;border-radius:50%;display:grid;place-items:center;padding:0 3px;font-family:'Raleway',sans-serif;}
 
 .header-nav{border-bottom:1px solid var(--line);}
 .header-nav .wrap{display:flex;align-items:center;justify-content:center;gap:clamp(1.2rem,.5rem + 2.5vw,2.2rem);min-height:54px;flex-wrap:wrap;padding-block:.4rem;}
@@ -133,7 +133,7 @@ a{color:inherit;}
 .hero h1{color:#fff;font-size:var(--fs-display);font-weight:600;}
 .hero-search{display:flex;align-items:center;gap:.6rem;background:#fff;border-radius:var(--r-pill);padding:.55rem .55rem .55rem 1.3rem;box-shadow:0 18px 50px rgba(0,0,0,.3);max-width:560px;margin-bottom:clamp(.5rem,.3rem + 1vw,1.25rem);}
 .hero-search .mg{color:var(--wine);flex-shrink:0;}
-.hero-search input{flex:1;min-width:0;border:none;outline:none;background:none;font-family:'Figtree',sans-serif;font-size:var(--fs-lead);color:var(--ink);}
+.hero-search input{flex:1;min-width:0;border:none;outline:none;background:none;font-family:'Raleway',sans-serif;font-size:var(--fs-lead);color:var(--ink);}
 .hero-search input::placeholder{color:var(--muted);}
 
 /* ─── SECTION shell ─── */
@@ -196,7 +196,7 @@ section.sec{padding-block:var(--section-y);}
 .fcard .ff{padding:var(--card-pad);padding-top:.9rem;display:flex;align-items:center;justify-content:space-between;gap:.75rem;flex-wrap:wrap;}
 .fcard .ff .btn{padding:.65em 1.2em;font-size:var(--fs-sm);}
 .fcard .price{font-family:'Poppins',sans-serif;font-weight:600;font-size:var(--fs-body);color:var(--head);text-align:right;}
-.fcard .price small{display:block;font-weight:400;font-size:var(--fs-xs);color:var(--muted);font-family:'Figtree',sans-serif;}
+.fcard .price small{display:block;font-weight:400;font-size:var(--fs-xs);color:var(--muted);font-family:'Raleway',sans-serif;}
 
 /* ─── Logos / financements ─── */
 .logos{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:clamp(1rem,.5rem + 2vw,2.75rem);margin-bottom:clamp(1.5rem,1rem + 2vw,2.2rem);}

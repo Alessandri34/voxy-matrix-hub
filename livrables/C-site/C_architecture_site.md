@@ -1,7 +1,7 @@
 # C — Architecture & cartographie du site (Chantier C)
 
 > **Casquette : CPO + CTO.** Gabarit de référence : **cegos.fr** (leader formation). Objectif : reproduire structure, UI et modules, en version Voxy.
-> **Statut des sources :** `www.cegos.fr` est **bloqué par la politique réseau de l'environnement** (403 au CONNECT) — cartographie reconstruite à partir des **7 captures fournies** (toute la home, header → footer), de l'**architecture d'information connue de Cegos** et de la **maquette V3 déjà validée**. Pour un crawl réel : autoriser `www.cegos.fr` dans *Network access* de l'environnement.
+> **Statut des sources :** ✅ **Relevé réel réalisé sur `www.cegos.fr` le 2026-10-08** (navigateur headless : DOM, styles calculés, 189 variables CSS, arborescence, scripts, captures desktop + mobile). Le **§8 — Design system réel Cegos** ci-dessous contient les valeurs exactes.
 > **Conformité (rappel `CLAUDE.md` §4) :** jamais « gratuit / 100 % financé / sans reste à charge », pas d'avis/chiffres inventés, cible 100 % pro, mention Qualiopi selon charte.
 
 ---
@@ -191,6 +191,52 @@ Modules :
 3. **Choisir la stack** (A ou B ci-dessus).
 4. **Récupérer les vrais contenus** : textes des 3 fiches (depuis `B4`), vrais délais d'accès, indicateurs Qualiopi, mentions légales (SIRET, NDA, Qualiopi n°), coordonnées, vrais visuels/photos (le hero Cegos utilise une vraie photo — prévoir shooting ou banque d'images).
 5. **Brancher** le formulaire diagnostic (sans secret côté client).
-6. **Autoriser `www.cegos.fr`** dans le réseau de l'environnement si tu veux que je fasse un relevé pixel réel (espacements, tailles exactes, interactions).
+6. ✅ **Relevé pixel réel cegos.fr fait** (voir §8).
+
+---
+
+## 8. Design system réel Cegos (relevé DOM — 2026-10-08)
+
+> Valeurs **exactes** extraites de cegos.fr. À côté : la **correspondance Voxy** (palette bleue déjà appliquée dans `maquette.html`).
+
+### 8.1 Polices
+| Usage | Cegos (réel) | Dispo Google Fonts ? | Choix Voxy |
+|---|---|---|---|
+| Titres (H1/H2) | **Ryker** (poids 500) | ❌ propriétaire (Positype) | **Poppins** (demandé — plus pro) ; alt. proche de Ryker = Fredoka/Baloo 2 |
+| Corps / sans | **Raleway** | ✅ oui | **Raleway** (appliqué, fidèle) |
+
+Tailles réelles : H1 = `2.5rem` (40px, line-height 58px), hero H1 = `3.125rem` (50px), H2 = `1.5rem`, H3 = `1.25rem`, corps = `.875rem` (14px). Poids : regular 400, semibold 600, bold 700. Typo **responsive en `calc(rem + vw)`** (même logique que nos `clamp()`).
+
+### 8.2 Palette réelle Cegos → correspondance Voxy
+| Rôle | Cegos (hex réel) | Voxy (bleu appliqué) |
+|---|---|---|
+| Encre primaire (texte, boutons) | **`#1d0000`** (quasi-noir bordeaux) | `#14161C` (encre) / boutons `#4C122A` |
+| Vert (boîte domaines) | **`#004641`** / `#003e00` | inchangé `#0E4A3B` |
+| Violet (sections signature) | **`#2d0051`** | **remplacé par bleu `#1A3C86`** |
+| Rouge (filet, badge, pins) | **`#e6233a`** | `#E4002B` |
+| Magenta profond | `#62003b` | — |
+| Bleu profond (dispo dans leur palette) | **`#001b71`** | base idéale pour notre bannière |
+| Fond card clair | `#f4f2f2` | `#F5F3F1` |
+| **Tuiles** menthe / lavande / bleu clair / orange / crème | `#a1eae6` · `#dec5ff` · `#b3dfff` · `#ffb93e` · `#fff0c6` | menthe gardée, lavande→bleu pervenche, bleu ciel gardé, orange gardé |
+
+> Remarque : Cegos **n'a pas un seul bleu dominant** — sa bannière est charcoal `#1d282e` + photo. Notre choix (bannière bleue) est un parti pris Voxy ; le `#001b71` de leur propre palette est le meilleur bleu « marque » à reprendre.
+
+### 8.3 Rayons & espacements (réels)
+- Rayons : `sm .25rem` · `md .375rem` · `lg .5rem` · `2xl 1rem` · `3xl 1.5rem`. Les pills (boutons, chips) sont en rayon plein. Cards ≈ `lg`/`2xl`.
+- Espacements : `small 1.25rem` · `big 3.125rem`, + versions **responsive** `calc(rem + vw)`.
+
+### 8.4 Stack technique (réel)
+- **Tailwind CSS v4** (CSS-first `@theme` : 189 variables `--color-*`, `--space-*`, `--radius-*`, `--font-*` ; couleurs modernes en `lab()`/`oklab()`, `color-mix()`).
+- Rendu **server-side** (pas de SPA lourde visible) ; JS maison sous `/assets/js/`.
+- Tiers : Google Tag Manager, Microsoft Clarity (heatmaps), Bing Ads, cookie consent (OneTrust).
+- → **Reco build Voxy confirmée** : Astro + **Tailwind v4** reproduit ce design system à l'identique (tokens `@theme`), avec contenus en Markdown. C'est exactement le modèle Cegos, en plus léger.
+
+### 8.5 Arborescence réelle (confirmée)
+- **`/formations`** = hub catalogue. Mega-menu « Domaines de formation » listant ~30 domaines, chacun en **`/formations/{slug-domaine}`** (ex. `/formations/commercial-ventes`, `/formations/communication`, `/formations/digital`, `/formations/management`…).
+- Nav principale : **Domaines de formation · Solutions · Vous êtes · CPF | Financements · Ressources · Le Mag**.
+- Utilitaires header : recherche · téléphone · Nous contacter · Espace client · panier (badge) · « Ma sélection ».
+- → Pour Voxy (catalogue réduit) : garder la **même ossature de nav** mais 1 seul niveau de domaines (nos 3 offres), le mega-menu devient un simple menu.
+
+---
 
 > Rien n'est poussé sur Git sans ton accord (règle `CLAUDE.md §8`).
