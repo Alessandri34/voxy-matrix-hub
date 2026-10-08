@@ -160,7 +160,13 @@ Idées de longue traîne pour la suite : « comment modifier sa fiche google bus
 
 **Enseignement du relevé Suggest :** « formation restaurateur / coiffeur » dérive vers les **métiers** (CAP coiffure, restauration d'art) → on cible donc explicitement **« formation vidéo / digitale / visibilité POUR [métier] »** (notre angle, faible concurrence), jamais « formation [métier] ».
 
-**À répliquer (même gabarit) :** Sète, Lunel, Agde (villes) · taxi/VTC, bien-être, commerce de bouche, auto-entrepreneurs (métiers). 1 page = 1 combinaison ville×métier à fort potentiel (ex. « formation vidéo restaurateur Montpellier »).
+**Ajouts 2ᵉ passe (contenu unique, pas de doorway pages) :** page **Sète** (angle saisonnalité port/tourisme) + 3 combos ville×métier à contenu différencié : **Restaurateurs à Montpellier** (AGEFICE), **Artisans à Béziers** (FAFCEA), **Commerçants/réseaux sociaux à Montpellier**.
+
+**Articles MAG passés en long-form (qualité SEO) :** les 6 articles sont désormais des guides complets (~1 200-1 700 mots) avec **sommaire ancré**, 6-8 sections H2/H3 couvrant les sous-questions longue traîne, **bloc FAQ** (People Also Ask → éligible `FAQPage` schema), exemples concrets et angle local. C'est le principal levier « helpful content » de Google.
+
+**⚠️ Garde-fou anti-pénalité :** ne pas générer en masse des pages locales quasi-identiques (« doorway pages » sanctionnées). Chaque nouvelle page ville/métier doit apporter un **contenu unique et utile** (contexte local réel, enjeux du métier). Mieux vaut 6 pages riches que 15 pages creuses.
+
+**Roadmap de réplication (1 page = 1 combinaison à fort potentiel, avec contenu unique) :** villes — Lunel, Agde, Frontignan, Lattes ; métiers — commerce de bouche, bien-être, auto-entrepreneurs, professions libérales (hors santé/droit réglementés) ; combos — « formation vidéo salon Sète », « site internet artisan Montpellier », etc.
 
 **Maillage des pages locales :** hub `Près de chez vous` (footer + section accueil) → pages ville/métier → fiches formation + articles MAG + diagnostic. Chaque page locale pointe vers la fiche pertinente et 1-2 articles de soutien.
 

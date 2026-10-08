@@ -366,6 +366,21 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
 .related h2{font-size:var(--fs-h2);font-weight:600;margin-bottom:1.2rem;}
 .maillage{margin-top:2rem;border-top:1px solid var(--line);padding-top:1.5rem;}
 .maillage .k{font-family:'Poppins',sans-serif;font-weight:500;font-size:var(--fs-xs);text-transform:uppercase;letter-spacing:.05em;color:var(--plum);margin-bottom:.7rem;}
+.article h2{scroll-margin-top:84px;}
+.toc{background:var(--cream);border:1px solid var(--line);border-radius:var(--r-sm);padding:1.1rem 1.3rem;margin:1.5rem 0;}
+.toc b{font-family:'Poppins',sans-serif;font-weight:500;font-size:var(--fs-sm);display:block;margin-bottom:.5rem;color:var(--head);}
+.toc ol{list-style:decimal;padding-left:1.2rem;margin:0;display:flex;flex-direction:column;gap:.15rem;}
+.toc li{margin:0;}
+.toc button{background:none;border:none;cursor:pointer;color:var(--plum);font-family:'Raleway',sans-serif;font-size:var(--fs-sm);text-align:left;padding:.15rem 0;text-decoration:underline;text-underline-offset:2px;}
+.toc button:hover{color:var(--blue-brand);}
+.faq summary{font-size:var(--fs-body);}
+.article .tldr{background:#EEF2FC;border-left:4px solid var(--plum);border-radius:var(--r-sm);padding:1rem 1.2rem;margin:1.3rem 0;font-size:var(--fs-sm);}
+.article .tldr b{font-family:'Poppins',sans-serif;}
+.article figure{margin:1.3rem 0;}
+.article .stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,140px),1fr));gap:.8rem;margin:1.3rem 0;}
+.article .stat{background:var(--cream);border-radius:var(--r-sm);padding:1rem;text-align:center;}
+.article .stat b{font-family:'Poppins',sans-serif;font-weight:600;font-size:1.3rem;color:var(--plum);display:block;}
+.article .stat span{font-size:var(--fs-xs);color:var(--muted);}
 
 /* Maquette bar */
 .mbar{position:fixed;bottom:0;left:0;right:0;z-index:300;background:var(--red);color:#fff;text-align:center;font-family:'Poppins',sans-serif;font-weight:500;font-size:var(--fs-sm);padding:.6rem 1rem;padding-bottom:calc(.6rem + env(safe-area-inset-bottom,0px));}
@@ -1157,26 +1172,79 @@ body{padding-bottom:3rem;}
 <section class="page" data-page="art-smartphone" hidden>
   <section class="phero"><div class="wrap">
     <div class="breadcrumb"><a href="#accueil">Accueil</a><span class="sep">›</span><a href="#lemag">Le Mag</a><span class="sep">›</span><span>Filmer au smartphone</span></div>
-    <h1>Comment filmer son commerce avec un smartphone (guide 2026)</h1>
+    <h1>Comment filmer son commerce avec un smartphone : le guide complet 2026</h1>
   </div></section>
   <section class="sec"><div class="wrap"><article class="article">
-    <img class="article-cover" src="img/mag-filmer-smartphone.jpg" alt="Commerçant qui filme son activité avec un smartphone">
-    <div class="ameta"><span class="cat">Vidéo</span><span>· 6 min de lecture</span><span>· Voxy Formations</span></div>
-    <p class="lead">Pas besoin d'un matériel de cinéma pour attirer des clients locaux. Avec un smartphone récent et quelques règles simples, vous pouvez filmer votre commerce et donner envie qu'on pousse votre porte. Voici comment.</p>
-    <h2>1. Préparez votre plan avant d'appuyer sur « enregistrer »</h2>
-    <p>Une bonne vidéo courte commence par une idée claire : qu'est-ce que vous montrez, et à qui ? Un plat qui sort de la cuisine, un chantier avant/après, une nouveauté en boutique. Écrivez votre accroche (les 3 premières secondes) : c'est elle qui décide si on continue à regarder.</p>
-    <h2>2. Lumière, cadrage, stabilité : les 3 réflexes</h2>
+    <img class="article-cover" src="img/mag-filmer-smartphone.jpg" alt="Commerçant de l'Hérault qui filme son activité avec un smartphone">
+    <div class="ameta"><span class="cat">Vidéo</span><span>· 10 min de lecture</span><span>· Voxy Formations</span><span>· Hérault</span></div>
+    <p class="lead">Vous n'avez pas besoin d'un matériel de cinéma ni d'un budget d'agence pour attirer des clients près de chez vous. Avec le smartphone que vous avez déjà dans la poche et une poignée de règles simples, vous pouvez filmer votre commerce, montrer votre savoir-faire et donner envie qu'on pousse votre porte. Ce guide détaille tout, étape par étape, de la préparation à la publication.</p>
+
+    <div class="tldr"><b>En résumé :</b> une bonne vidéo de commerce tient en 4 piliers — une idée claire, une lumière correcte, un son propre, des sous-titres — puis de la régularité. Le matériel compte beaucoup moins que la méthode. Et tout cela s'apprend en une à deux journées sur votre propre activité.</div>
+
+    <nav class="toc"><b>Ce que vous allez apprendre</b><ol>
+      <li><button data-target="a1-pourquoi">Pourquoi la vidéo au smartphone marche pour un commerce local</button></li>
+      <li><button data-target="a1-materiel">Le matériel minimum (et ce qui est inutile)</button></li>
+      <li><button data-target="a1-plan">Préparer son plan avant de filmer</button></li>
+      <li><button data-target="a1-regles">Lumière, cadrage, stabilité : les 3 réflexes</button></li>
+      <li><button data-target="a1-son">Le son et les sous-titres</button></li>
+      <li><button data-target="a1-montage">Monter simplement sur son téléphone</button></li>
+      <li><button data-target="a1-erreurs">Les 5 erreurs qui plombent une vidéo</button></li>
+      <li><button data-target="a1-faq">Questions fréquentes</button></li>
+    </ol></nav>
+
+    <h2 id="a1-pourquoi">Pourquoi la vidéo au smartphone marche pour un commerce local</h2>
+    <p>Aujourd'hui, un client potentiel se fait une idée de votre établissement <b>avant même de vous contacter</b> : il regarde vos photos, vos vidéos, vos avis. Pour un restaurant, un salon, un artisan ou une boutique de l'Hérault, la vidéo courte est devenue le moyen le plus efficace de montrer concrètement ce que vous faites — bien plus parlant qu'un texte ou une photo figée.</p>
+    <p>La bonne nouvelle, c'est que les réseaux sociaux favorisent le contenu <b>authentique</b>, filmé sur le vif, plutôt que les productions léchées. Une vidéo tournée par le commerçant lui-même, dans son vrai décor, inspire souvent plus confiance qu'une publicité. Et l'algorithme la montre en priorité à des personnes <b>géographiquement proches</b> de vous : c'est de la visibilité locale, gratuite et ciblée.</p>
+
+    <h2 id="a1-materiel">Le matériel minimum (et ce qui est inutile)</h2>
+    <p>Inutile d'investir des centaines d'euros. Voici ce qui change vraiment la qualité, par ordre de priorité :</p>
     <ul>
-      <li><b>Lumière</b> : filmez face à la lumière du jour, jamais à contre-jour. Près d'une fenêtre, c'est idéal.</li>
-      <li><b>Cadrage</b> : filmez à la verticale pour les réseaux, la caméra à hauteur du sujet.</li>
-      <li><b>Stabilité</b> : calez vos coudes, ou posez le téléphone. Un petit trépied à 20 € change tout.</li>
+      <li><b>Un smartphone des 4-5 dernières années</b> : sa caméra suffit largement.</li>
+      <li><b>Un petit trépied ou un support</b> (15 à 30 €) : il supprime le tremblement, le défaut n°1 des vidéos amateurs.</li>
+      <li><b>Un micro-cravate</b> (20 à 40 €) si vous parlez : il améliore le son plus que n'importe quel réglage d'image.</li>
+      <li><b>De la lumière naturelle</b> : gratuite, et meilleure que la plupart des éclairages d'appoint.</li>
     </ul>
-    <h2>3. Le son compte plus que l'image</h2>
-    <p>Une image moyenne avec un bon son passe ; l'inverse, non. Filmez dans un endroit calme, rapprochez-vous, et ajoutez toujours des <b>sous-titres</b> (la majorité des vidéos sont regardées sans le son).</p>
-    <h2>4. Montez simplement, publiez régulièrement</h2>
-    <p>Un montage court (coupes, sous-titres, une musique) suffit, directement sur votre téléphone. La régularité bat la perfection : mieux vaut une vidéo correcte par semaine qu'une vidéo parfaite par trimestre.</p>
-    <div class="callout blue" style="margin:1.5rem 0;"><b>Envie d'apprendre à le faire sur votre vrai commerce ?</b> Notre <a class="inl" href="#formation-video">formation « Visibilité locale par la vidéo »</a> se déroule chez vous : on filme ensemble, et vous repartez autonome.</div>
-    <p>Une fois vos vidéos prêtes, encore faut-il choisir le bon format selon le réseau : on en parle dans <a class="inl" href="#art-reels">Reels, TikTok, Shorts : quelle vidéo pour attirer des clients</a>.</p>
+    <p>Ce qui est <b>inutile</b> au démarrage : un appareil photo professionnel, un stabilisateur motorisé, un studio. Vous les ajouterez plus tard si le besoin s'en fait sentir. Commencer simple, c'est surtout commencer tout court.</p>
+
+    <h2 id="a1-plan">Préparer son plan avant de filmer</h2>
+    <p>Une vidéo réussie se décide <b>avant</b> d'appuyer sur « enregistrer ». Posez-vous trois questions : qu'est-ce que je montre, à qui, et quelle action je veux déclencher (venir, réserver, appeler) ?</p>
+    <p>Ensuite, écrivez votre <b>accroche</b> : les 3 premières secondes décident si la personne continue à regarder ou passe à la vidéo suivante. Une accroche efficace annonce un bénéfice ou pique la curiosité : « Voici comment on prépare notre plat signature », « Le détail qui change tout sur un chantier de rénovation ». Évitez les introductions molles du type « Bonjour, aujourd'hui je vais vous parler de… ».</p>
+    <p>Prévoyez enfin un <b>plan simple</b> : 3 à 5 séquences courtes valent mieux qu'un long plan continu. Pour un restaurant, par exemple : le produit frais → la préparation → le dressage → l'assiette servie en salle.</p>
+
+    <h2 id="a1-regles">Lumière, cadrage, stabilité : les 3 réflexes</h2>
+    <h3>La lumière</h3>
+    <p>Filmez toujours <b>face à la lumière</b>, jamais à contre-jour. Placez votre sujet près d'une fenêtre ou dehors à l'ombre (la lumière directe du midi crée des ombres dures). Si vous filmez un intérieur sombre, rapprochez-vous d'une source lumineuse plutôt que de pousser la luminosité du téléphone, qui crée du « grain ».</p>
+    <h3>Le cadrage</h3>
+    <p>Pour les réseaux (Reels, TikTok, Shorts), filmez en <b>vertical</b>. Placez la caméra à hauteur du sujet, laissez un peu d'espace autour, et nettoyez le décor : un plan de travail rangé ou un fond neutre valorise beaucoup mieux votre sujet.</p>
+    <h3>La stabilité</h3>
+    <p>Posez le téléphone sur un support, ou calez vos coudes contre votre corps. Un plan stable paraît immédiatement plus professionnel. Si vous devez vous déplacer, marchez lentement, genoux souples.</p>
+
+    <h2 id="a1-son">Le son et les sous-titres : le détail qui fait la différence</h2>
+    <p>Une règle contre-intuitive : <b>le son compte plus que l'image</b>. Une image moyenne avec un son clair reste regardable ; l'inverse, non. Filmez dans un endroit calme, coupez les bruits de fond (hotte, musique forte), et rapprochez le micro de la source.</p>
+    <p>Surtout, ajoutez des <b>sous-titres</b> : la majorité des vidéos sur les réseaux sont regardées <b>sans le son</b>, dans les transports ou en salle d'attente. Sans sous-titres, votre message passe à la trappe. La plupart des applications de montage les génèrent automatiquement en quelques secondes.</p>
+
+    <h2 id="a1-montage">Monter simplement sur son téléphone</h2>
+    <p>Pas besoin de logiciel compliqué. Une application de montage mobile suffit pour : couper les temps morts, enchaîner vos séquences, ajouter une musique discrète, incruster les sous-titres et un petit texte d'accroche. Gardez vos vidéos <b>courtes</b> (15 à 45 secondes au début) et rythmées : une coupe toutes les 2 à 4 secondes maintient l'attention.</p>
+    <div class="callout blue"><b>Envie de maîtriser tout ça sur votre vrai commerce ?</b> Notre <a class="inl" href="#formation-video">formation « Visibilité locale par la vidéo »</a> se déroule directement chez vous, dans l'Hérault : on filme ensemble vos premières vidéos et vous repartez autonome. <a class="inl" href="#diagnostic">Réservez un diagnostic gratuit</a> pour en parler.</div>
+
+    <h2 id="a1-erreurs">Les 5 erreurs qui plombent une vidéo de commerce</h2>
+    <ol>
+      <li><b>Pas d'accroche</b> : les 3 premières secondes sont molles, on scrolle.</li>
+      <li><b>Le contre-jour</b> : le sujet est une silhouette sombre.</li>
+      <li><b>Pas de sous-titres</b> : regardée sans son, la vidéo ne dit rien.</li>
+      <li><b>Trop long</b> : au-delà d'une minute au début, l'attention chute.</li>
+      <li><b>L'irrégularité</b> : une vidéo tous les trois mois ne construit rien. Mieux vaut une vidéo correcte par semaine.</li>
+    </ol>
+    <p>Une fois vos vidéos prêtes, encore faut-il choisir le bon réseau et le bon format : on détaille ça dans <a class="inl" href="#art-reels">Reels, TikTok, Shorts : quelle vidéo pour attirer des clients</a>. Et pour être trouvé sur Google Maps en plus des réseaux, lisez <a class="inl" href="#art-google-business">Créer sa fiche Google Business</a>.</p>
+
+    <h2 id="a1-faq">Questions fréquentes</h2>
+    <div class="acc faq">
+      <details><summary><span class="ix">?</span> Quel smartphone pour filmer son commerce ? <svg class="chev" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 16 16"><path d="M3 6l5 5 5-5"/></svg></summary><div class="acc-body">N'importe quel modèle des 4-5 dernières années convient. La qualité de la caméra n'est presque jamais le facteur limitant : la lumière, le son et le cadrage comptent bien davantage.</div></details>
+      <details><summary><span class="ix">?</span> Faut-il parler face caméra ? <svg class="chev" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 16 16"><path d="M3 6l5 5 5-5"/></svg></summary><div class="acc-body">Non, ce n'est pas obligatoire. Beaucoup de vidéos efficaces montrent seulement le produit, le geste ou le lieu, avec une voix off ou du texte. Si vous n'êtes pas à l'aise à l'oral, commencez sans parler.</div></details>
+      <details><summary><span class="ix">?</span> Combien de temps pour apprendre ? <svg class="chev" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 16 16"><path d="M3 6l5 5 5-5"/></svg></summary><div class="acc-body">Les bases (filmer, monter, publier) s'acquièrent en une à deux journées de formation-action sur votre propre activité. La maîtrise vient ensuite avec la pratique régulière.</div></details>
+      <details><summary><span class="ix">?</span> Est-ce qu'une formation vidéo est finançable ? <svg class="chev" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 16 16"><path d="M3 6l5 5 5-5"/></svg></summary><div class="acc-body">Oui, pour un professionnel, selon votre statut (AGEFICE, FAFCEA, OPCO), dès lors que l'organisme est certifié Qualiopi. Le reste à charge dépend des plafonds et vous est annoncé avant inscription. Voir notre page <a class="inl" href="#financements">Financements</a>.</div></details>
+    </div>
+
     <div class="maillage"><div class="k">Pour aller plus loin</div>
       <div class="grid3">
         <a class="card-blank" href="#formation-video"><span class="k">Formation</span><h4>Visibilité locale par la vidéo</h4><span class="m">On filme chez vous · finançable</span></a>
@@ -1191,31 +1259,85 @@ body{padding-bottom:3rem;}
 <section class="page" data-page="art-google-business" hidden>
   <section class="phero"><div class="wrap">
     <div class="breadcrumb"><a href="#accueil">Accueil</a><span class="sep">›</span><a href="#lemag">Le Mag</a><span class="sep">›</span><span>Fiche Google Business</span></div>
-    <h1>Créer sa fiche Google Business : le guide pas à pas</h1>
+    <h1>Créer sa fiche Google Business : le guide pas à pas pour être visible localement</h1>
   </div></section>
   <section class="sec"><div class="wrap"><article class="article">
-    <img class="article-cover" src="img/mag-google-business.jpg" alt="Fiche Google Business sur un smartphone">
-    <div class="ameta"><span class="cat">Visibilité locale</span><span>· 7 min de lecture</span><span>· Voxy Formations</span></div>
-    <p class="lead">Quand un client cherche « restaurant » ou « plombier » près de chez lui, c'est votre fiche Google qui apparaît en premier — avant même votre site. La créer et la soigner est le levier de visibilité locale le plus rentable. Voici les étapes.</p>
-    <h2>Qu'est-ce qu'une fiche Google Business ?</h2>
-    <p>C'est la fiche gratuite qui affiche votre établissement sur Google et Google Maps : nom, adresse, horaires, téléphone, photos et avis. Elle vous rend visible sur les recherches locales, même sans site internet.</p>
-    <h2>Comment créer sa fiche, étape par étape</h2>
+    <img class="article-cover" src="img/mag-google-business.jpg" alt="Fiche Google Business affichée sur un smartphone">
+    <div class="ameta"><span class="cat">Visibilité locale</span><span>· 11 min de lecture</span><span>· Voxy Formations</span><span>· Hérault</span></div>
+    <p class="lead">Quand un habitant de Montpellier, Béziers ou Sète cherche « restaurant », « coiffeur » ou « plombier » près de chez lui, c'est votre fiche Google Business qui apparaît en premier — souvent avant votre site, parfois à sa place. La créer et la soigner est, de loin, le levier de visibilité locale le plus rentable. Voici comment la mettre en place et la faire remonter dans les résultats.</p>
+
+    <div class="tldr"><b>En résumé :</b> une fiche Google Business bien remplie, avec la bonne catégorie, des photos récentes, des horaires à jour et des avis auxquels vous répondez, peut vous rendre visible localement même sans site internet. C'est gratuit, et c'est le premier réflexe à avoir pour un commerce de proximité.</div>
+
+    <nav class="toc"><b>Au programme</b><ol>
+      <li><button data-target="a2-quoi">Qu'est-ce qu'une fiche Google Business ?</button></li>
+      <li><button data-target="a2-pourquoi">Pourquoi c'est décisif pour un commerce local</button></li>
+      <li><button data-target="a2-creer">Créer sa fiche, étape par étape</button></li>
+      <li><button data-target="a2-optimiser">Optimiser sa fiche pour être trouvé</button></li>
+      <li><button data-target="a2-sanssite">Être visible sans site internet</button></li>
+      <li><button data-target="a2-avis">Les avis : comment en obtenir et y répondre</button></li>
+      <li><button data-target="a2-erreurs">Les erreurs à éviter</button></li>
+      <li><button data-target="a2-faq">Questions fréquentes</button></li>
+    </ol></nav>
+
+    <h2 id="a2-quoi">Qu'est-ce qu'une fiche Google Business ?</h2>
+    <p>La fiche Google Business (anciennement « Google My Business ») est la fiche <b>gratuite</b> qui présente votre établissement sur Google et sur Google Maps. Elle affiche votre nom, votre adresse, vos horaires, votre téléphone, votre site, vos photos, vos avis et des boutons d'action (itinéraire, appel). C'est, concrètement, votre vitrine sur le moteur de recherche.</p>
+
+    <h2 id="a2-pourquoi">Pourquoi c'est décisif pour un commerce local</h2>
+    <p>La majorité des recherches locales (« près de moi », « à Montpellier »…) débouchent sur le fameux « pack local » : la carte avec trois établissements mis en avant. Y figurer, c'est capter les clients <b>au moment exact où ils cherchent</b>. Et contrairement à la publicité, cette visibilité est gratuite et durable.</p>
+    <div class="stat-row">
+      <div class="stat"><b>N°1</b><span>levier de visibilité locale gratuit</span></div>
+      <div class="stat"><b>Maps</b><span>visible même sans site</span></div>
+      <div class="stat"><b>Avis</b><span>facteur de confiance décisif</span></div>
+    </div>
+
+    <h2 id="a2-creer">Créer sa fiche Google Business, étape par étape</h2>
     <ol>
-      <li>Rendez-vous sur Google Business Profile et connectez-vous avec un compte Google.</li>
-      <li>Saisissez le nom exact de votre établissement et choisissez la <b>bonne catégorie</b> (déterminante pour être trouvé).</li>
-      <li>Renseignez adresse, zone desservie, horaires et téléphone — les mêmes partout (cohérence « NAP »).</li>
-      <li>Validez la fiche (par courrier, téléphone ou vidéo selon les cas).</li>
-      <li>Ajoutez des <b>photos</b> et une description claire avec vos services.</li>
+      <li>Rendez-vous sur <b>Google Business Profile</b> et connectez-vous avec un compte Google (créez-en un dédié à votre entreprise si besoin).</li>
+      <li>Saisissez le <b>nom exact</b> de votre établissement, tel qu'il apparaît sur votre devanture.</li>
+      <li>Choisissez la <b>catégorie principale</b> la plus précise possible (« restaurant de poisson » plutôt que « restaurant »). C'est l'un des critères les plus importants pour être trouvé.</li>
+      <li>Indiquez votre <b>adresse</b> (ou votre zone desservie si vous intervenez chez le client, comme un artisan).</li>
+      <li>Renseignez <b>horaires et téléphone</b>, identiques à ceux de votre site et de vos réseaux.</li>
+      <li><b>Validez la fiche</b> : Google vérifie que vous êtes bien le propriétaire (par courrier postal, téléphone, e-mail ou vidéo selon les cas).</li>
     </ol>
-    <h2>Être visible sur Google Maps sans site internet, c'est possible</h2>
-    <p>Une fiche bien remplie suffit pour apparaître sur Maps. Mais pour convertir ceux qui veulent en savoir plus, un site reste un vrai plus : voyez notre <a class="inl" href="#formation-site">formation création de site internet</a>.</p>
-    <h2>Les 3 leviers pour remonter dans les résultats locaux</h2>
+
+    <h2 id="a2-optimiser">Optimiser sa fiche pour remonter dans les résultats</h2>
+    <p>Créer la fiche ne suffit pas : Google favorise les fiches <b>actives et complètes</b>. Pour remonter :</p>
     <ul>
-      <li><b>La régularité</b> : publiez des actus et de nouvelles photos (vos vidéos font parfaitement l'affaire).</li>
-      <li><b>Les avis</b> : demandez-en à vos clients satisfaits et répondez-y.</li>
-      <li><b>La cohérence</b> : mêmes coordonnées sur la fiche, le site et les réseaux.</li>
+      <li><b>Ajoutez des photos régulièrement</b> — vos vidéos et photos récentes sont un signal fort. L'intérieur, les produits, l'équipe.</li>
+      <li><b>Remplissez tous les champs</b> : description, services, zone, attributs (terrasse, accès PMR, paiement…).</li>
+      <li><b>Publiez des « posts »</b> (actus, offres, nouveautés) : ils montrent que la fiche est vivante.</li>
+      <li><b>Soignez la cohérence « NAP »</b> (Name, Address, Phone) : exactement les mêmes informations partout sur le web.</li>
     </ul>
-    <div class="callout blue" style="margin:1.5rem 0;"><b>On met tout ça en place avec vous.</b> Notre <a class="inl" href="#formation-video">formation visibilité locale</a> inclut l'optimisation de votre fiche Google — <a class="inl" href="#diagnostic">réservez un diagnostic</a> pour en parler.</div>
+
+    <h2 id="a2-sanssite">Être visible sur Google Maps sans site internet</h2>
+    <p>Bonne nouvelle : une fiche bien remplie suffit pour apparaître sur Maps, <b>même sans site</b>. C'est un excellent point de départ. Mais pour convertir ceux qui veulent en savoir plus (menu, tarifs, prise de rendez-vous), un site reste un atout décisif. Si vous souhaitez franchir ce cap, notre <a class="inl" href="#formation-site">formation création de site internet</a> vous apprend à le construire et à le mettre en ligne vous-même.</p>
+
+    <h2 id="a2-avis">Les avis : comment en obtenir et y répondre</h2>
+    <p>Les avis sont un facteur de confiance majeur — pour vos clients comme pour l'algorithme. Quelques principes sains :</p>
+    <ul>
+      <li>Demandez un avis à vos clients satisfaits, simplement, au bon moment (après une prestation réussie).</li>
+      <li>Facilitez-leur la tâche avec un lien direct ou un QR code.</li>
+      <li><b>Répondez à tous les avis</b>, positifs comme négatifs, avec courtoisie. Une réponse posée à un avis négatif rassure souvent plus qu'un 5 étoiles.</li>
+      <li>Ne fabriquez jamais de faux avis : c'est interdit, risqué et contre-productif.</li>
+    </ul>
+
+    <h2 id="a2-erreurs">Les erreurs à éviter</h2>
+    <ul>
+      <li>Une catégorie trop vague ou mal choisie.</li>
+      <li>Des horaires non mis à jour (jours fériés, congés).</li>
+      <li>Des coordonnées différentes entre la fiche, le site et les réseaux.</li>
+      <li>Une fiche créée puis jamais alimentée.</li>
+    </ul>
+    <div class="callout blue"><b>On met tout ça en place avec vous.</b> Notre <a class="inl" href="#formation-video">formation visibilité locale</a> inclut l'optimisation de votre fiche Google et vos premières vidéos. <a class="inl" href="#diagnostic">Réservez un diagnostic</a> pour votre commerce dans l'Hérault.</div>
+
+    <h2 id="a2-faq">Questions fréquentes</h2>
+    <div class="acc faq">
+      <details><summary><span class="ix">?</span> La fiche Google Business est-elle gratuite ? <svg class="chev" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 16 16"><path d="M3 6l5 5 5-5"/></svg></summary><div class="acc-body">Oui, totalement gratuite. Vous n'avez rien à payer pour créer et gérer votre fiche. Google propose par ailleurs de la publicité payante, mais elle est optionnelle.</div></details>
+      <details><summary><span class="ix">?</span> Combien de temps pour apparaître sur Google Maps ? <svg class="chev" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 16 16"><path d="M3 6l5 5 5-5"/></svg></summary><div class="acc-body">Dès que la fiche est validée (quelques jours à deux semaines selon le mode de vérification). Remonter dans le pack local prend ensuite un peu plus de temps, selon votre activité et votre concurrence.</div></details>
+      <details><summary><span class="ix">?</span> Comment modifier sa fiche Google Business ? <svg class="chev" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 16 16"><path d="M3 6l5 5 5-5"/></svg></summary><div class="acc-body">Depuis Google Business Profile, ou directement dans les résultats Google quand vous êtes connecté en tant que propriétaire. Vous pouvez tout changer : horaires, photos, description, services.</div></details>
+      <details><summary><span class="ix">?</span> Faut-il un site en plus de la fiche ? <svg class="chev" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 16 16"><path d="M3 6l5 5 5-5"/></svg></summary><div class="acc-body">La fiche suffit pour être visible. Un site devient utile pour présenter en détail votre offre, prendre des réservations ou vendre en ligne. Les deux se renforcent.</div></details>
+    </div>
+
     <div class="maillage"><div class="k">Pour aller plus loin</div>
       <div class="grid3">
         <a class="card-blank" href="#formation-video"><span class="k">Formation</span><h4>Visibilité locale par la vidéo</h4><span class="m">Fiche Google incluse</span></a>
@@ -1230,31 +1352,68 @@ body{padding-bottom:3rem;}
 <section class="page" data-page="art-financement" hidden>
   <section class="phero"><div class="wrap">
     <div class="breadcrumb"><a href="#accueil">Accueil</a><span class="sep">›</span><a href="#lemag">Le Mag</a><span class="sep">›</span><span>Financer sa formation</span></div>
-    <h1>AGEFICE, FAFCEA, OPCO : financer sa formation en 2026</h1>
+    <h1>AGEFICE, FAFCEA, OPCO : comment financer sa formation en 2026 (et comprendre son reste à charge)</h1>
   </div></section>
   <section class="sec"><div class="wrap"><article class="article">
-    <img class="article-cover" src="img/mag-financement.jpg" alt="Calculer le financement d'une formation">
-    <div class="ameta"><span class="cat">Financement</span><span>· 8 min de lecture</span><span>· Voxy Formations</span></div>
-    <p class="lead">En tant que dirigeant, vous cotisez déjà à un fonds de formation — et la plupart ne l'utilisent jamais. Voici qui finance quoi en 2026, et comment comprendre votre reste à charge, sans promesse trompeuse.</p>
-    <h2>Qui finance quoi ?</h2>
-    <ul>
-      <li><b>AGEFICE</b> — dirigeants du commerce, des services et de la restauration.</li>
-      <li><b>FAFCEA</b> — artisans (immatriculés au répertoire des métiers).</li>
-      <li><b>OPCO</b> — salariés, via le plan de développement des compétences.</li>
-      <li><b>Constructys</b> — entreprises du BTP.</li>
-    </ul>
-    <p>Chaque fonds a ses <b>plafonds annuels</b> et ses taux de prise en charge, qui évoluent chaque année. Les montants exacts sont à vérifier sur les sites officiels au moment de votre demande.</p>
-    <h2>Comprendre le « reste à charge »</h2>
-    <p>Le reste à charge, c'est la part qui n'est pas couverte par votre fonds et que vous payez. <b>Il est presque toujours réel.</b> Méfiez-vous des « 100 % financé, 0 € » : c'est rarement vrai, et c'est encadré par la loi. Chez nous, le reste à charge est <b>écrit sur le devis avant toute inscription</b>.</p>
-    <h2>Les étapes pour faire financer sa formation</h2>
+    <img class="article-cover" src="img/mag-financement.jpg" alt="Calculer le financement et le reste à charge d'une formation">
+    <div class="ameta"><span class="cat">Financement</span><span>· 12 min de lecture</span><span>· Voxy Formations</span></div>
+    <p class="lead">En tant que dirigeant ou indépendant, vous cotisez déjà, chaque année, à un fonds de formation — et la plupart des professionnels ne l'utilisent jamais. Cet argent peut financer une partie de votre montée en compétences. Ce guide explique qui finance quoi en 2026, comment constituer son dossier, et surtout comment comprendre son reste à charge sans tomber dans les pièges marketing.</p>
+
+    <div class="tldr"><b>En résumé :</b> selon votre statut, vous relevez de l'AGEFICE (commerce, services), du FAFCEA (artisans), d'un OPCO (salariés) ou de Constructys (BTP). Chaque fonds a des plafonds annuels. La prise en charge est <b>partielle</b> : un reste à charge existe presque toujours, et un bon organisme vous l'annonce <b>avant</b> l'inscription. Méfiez-vous du « 100 % financé, 0 € ».</div>
+
+    <nav class="toc"><b>Au programme</b><ol>
+      <li><button data-target="a3-principe">Le principe : vous cotisez déjà</button></li>
+      <li><button data-target="a3-qui">Qui finance quoi en 2026</button></li>
+      <li><button data-target="a3-rac">Comprendre le reste à charge</button></li>
+      <li><button data-target="a3-piege">Le piège du « 100 % financé »</button></li>
+      <li><button data-target="a3-etapes">Les étapes pour faire financer sa formation</button></li>
+      <li><button data-target="a3-qualiopi">Pourquoi Qualiopi est indispensable</button></li>
+      <li><button data-target="a3-faq">Questions fréquentes</button></li>
+    </ol></nav>
+
+    <h2 id="a3-principe">Le principe : vous cotisez déjà à la formation</h2>
+    <p>Chaque professionnel verse, avec ses cotisations, une <b>contribution à la formation professionnelle</b> (la CFP pour les indépendants). Cet argent est mutualisé et géré par des fonds (AGEFICE, FAFCEA…) ou des opérateurs de compétences (OPCO). Il est <b>destiné à financer vos formations</b> — mais il faut en faire la demande. Beaucoup de dirigeants laissent ces droits inutilisés année après année.</p>
+
+    <h2 id="a3-qui">Qui finance quoi en 2026</h2>
+    <p>Votre financeur dépend de votre statut et de votre secteur. Voici les principaux, avec des repères à vérifier sur les sites officiels au moment de votre demande (les montants évoluent chaque année) :</p>
+    <div class="tbl-wrap"><table class="tbl">
+      <tr><th>Fonds</th><th>Pour qui</th><th>Repère 2026 <span style="font-weight:400;color:var(--muted)">[à vérifier]</span></th></tr>
+      <tr><td><b>AGEFICE</b></td><td>Dirigeants non salariés du commerce, des services, de la restauration</td><td>≈ 42 €/h · plafond annuel de l'ordre de 3 000 € (davantage pour certains parcours certifiants)</td></tr>
+      <tr><td><b>FAFCEA</b></td><td>Artisans immatriculés au répertoire des métiers</td><td>≈ 35 €/h · plafonds spécifiques, susceptibles d'évoluer</td></tr>
+      <tr><td><b>OPCO</b></td><td>Salariés (via le plan de développement des compétences de l'entreprise)</td><td>Selon la branche et l'effectif</td></tr>
+      <tr><td><b>Constructys</b></td><td>Entreprises du BTP</td><td>Selon taille et branche</td></tr>
+    </table></div>
+    <p>À noter : ces dispositifs s'adressent aux <b>professionnels</b>. Ils sont distincts du CPF (compte personnel de formation), qui concerne les particuliers et obéit à d'autres règles.</p>
+
+    <h2 id="a3-rac">Comprendre le reste à charge</h2>
+    <p>Le <b>reste à charge</b>, c'est la part du coût de la formation qui n'est pas couverte par votre fonds et que vous réglez vous-même. Il dépend de trois choses : le coût total de la formation, le taux de prise en charge de votre fonds, et votre <b>plafond annuel disponible</b> (si vous avez déjà consommé une partie de vos droits dans l'année, il reste moins).</p>
+    <p>Prenons un exemple simple et transparent : une formation de 35 heures facturée 42 €/h coûte <b>1 470 €</b>. Si votre fonds prend en charge une partie dans la limite de votre plafond, votre reste à charge est la différence. Il peut être faible, parfois nul dans certains cas, mais il est <b>rarement garanti à zéro</b> — et personne ne devrait vous le promettre à l'aveugle.</p>
+
+    <h2 id="a3-piege">Le piège du « 100 % financé, 0 € »</h2>
+    <p>Vous avez sûrement vu des publicités promettant une formation « <b>100 % financée, 0 € de reste à charge</b> ». Soyez prudent : dans la grande majorité des cas, c'est faux, et ce type de promesse est <b>encadré par la loi</b>. Les fonds de formation ne financent que de la <b>formation réelle</b>, et un reste à charge existe presque toujours.</p>
+    <p>Chez Voxy, nous faisons l'inverse de ces promesses : le reste à charge est <b>écrit noir sur blanc sur le devis, avant toute inscription</b>. C'est la condition d'une relation de confiance — et d'un dossier conforme.</p>
+
+    <h2 id="a3-etapes">Les étapes pour faire financer sa formation</h2>
     <ol>
-      <li>On vérifie votre éligibilité et votre fonds lors d'un <a class="inl" href="#diagnostic">diagnostic</a>.</li>
-      <li>On monte ensemble le dossier (devis, programme, convention).</li>
-      <li>Vous recevez l'accord de prise en charge et connaissez votre reste à charge.</li>
-      <li>La formation démarre, dans les délais d'accès annoncés.</li>
+      <li><b>Le diagnostic</b> : on identifie votre fonds, votre plafond disponible et le montant mobilisable (<a class="inl" href="#diagnostic">réservez-en un</a>).</li>
+      <li><b>Le dossier</b> : on prépare ensemble devis, programme et convention.</li>
+      <li><b>La demande de prise en charge</b> : déposée auprès de votre fonds, dans les délais requis.</li>
+      <li><b>L'accord</b> : vous connaissez précisément votre reste à charge.</li>
+      <li><b>La formation</b> : elle démarre dans les délais d'accès annoncés, puis le fonds règle sa part.</li>
     </ol>
-    <div class="callout blue" style="margin:1.5rem 0;">Détail des financeurs et exemple chiffré sur notre page <a class="inl" href="#financements">Financements</a>. Pour estimer votre cas précis, <a class="inl" href="#diagnostic">réservez un diagnostic</a>.</div>
-    <p>Bon à savoir : seule une formation dispensée par un organisme certifié peut être financée. On explique pourquoi dans <a class="inl" href="#art-qualiopi">Qualiopi, c'est quoi ?</a></p>
+
+    <h2 id="a3-qualiopi">Pourquoi Qualiopi est indispensable</h2>
+    <p>Un point essentiel : <b>seules les formations dispensées par un organisme certifié Qualiopi peuvent être financées</b> par ces fonds. Sans Qualiopi, pas de prise en charge. C'est pour cela que la certification est devenue incontournable — on l'explique en détail dans <a class="inl" href="#art-qualiopi">Qualiopi, c'est quoi ?</a> Voxy Formations est certifié : vos formations sont donc éligibles.</p>
+    <div class="callout blue"><b>Estimez votre financement.</b> Le détail des financeurs et un exemple chiffré sont sur notre page <a class="inl" href="#financements">Financements</a>. Pour votre cas précis, <a class="inl" href="#diagnostic">réservez un diagnostic gratuit</a> : on vérifie votre éligibilité et votre reste à charge en 30 minutes.</div>
+
+    <h2 id="a3-faq">Questions fréquentes</h2>
+    <div class="acc faq">
+      <details><summary><span class="ix">?</span> Une formation peut-elle vraiment être gratuite ? <svg class="chev" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 16 16"><path d="M3 6l5 5 5-5"/></svg></summary><div class="acc-body">« Gratuite » est trompeur : la formation est financée par vos cotisations, et un reste à charge subsiste le plus souvent. Un organisme sérieux parle de prise en charge partielle et annonce le reste à charge avant l'inscription.</div></details>
+      <details><summary><span class="ix">?</span> De quel fonds je dépends ? <svg class="chev" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 16 16"><path d="M3 6l5 5 5-5"/></svg></summary><div class="acc-body">Cela dépend de votre statut : AGEFICE pour les dirigeants du commerce et des services, FAFCEA pour les artisans, un OPCO pour les salariés. En cas de doute, le diagnostic permet de le déterminer rapidement.</div></details>
+      <details><summary><span class="ix">?</span> Combien de temps avant de pouvoir commencer ? <svg class="chev" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 16 16"><path d="M3 6l5 5 5-5"/></svg></summary><div class="acc-body">Il faut compter le temps d'instruction du dossier par votre fonds. Le délai d'accès est indiqué sur chaque fiche formation et dans la convention.</div></details>
+      <details><summary><span class="ix">?</span> Qui monte le dossier de financement ? <svg class="chev" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 16 16"><path d="M3 6l5 5 5-5"/></svg></summary><div class="acc-body">Nous vous accompagnons de bout en bout : devis, programme, convention et pièces à fournir. Vous déposez la demande auprès de votre fonds, avec notre appui.</div></details>
+    </div>
+
     <div class="maillage"><div class="k">Pour aller plus loin</div>
       <div class="grid3">
         <a class="card-blank" href="#financements"><span class="k">Page</span><h4>Financements & reste à charge</h4><span class="m">AGEFICE · FAFCEA · OPCO</span></a>
@@ -1269,23 +1428,57 @@ body{padding-bottom:3rem;}
 <section class="page" data-page="art-reels" hidden>
   <section class="phero"><div class="wrap">
     <div class="breadcrumb"><a href="#accueil">Accueil</a><span class="sep">›</span><a href="#lemag">Le Mag</a><span class="sep">›</span><span>Reels, TikTok, Shorts</span></div>
-    <h1>Reels, TikTok, Shorts : quelle vidéo pour attirer des clients</h1>
+    <h1>Reels, TikTok, Shorts : quelle vidéo pour attirer des clients dans votre commerce</h1>
   </div></section>
   <section class="sec"><div class="wrap"><article class="article">
-    <img class="article-cover" src="img/mag-reels-social.jpg" alt="Créer des vidéos courtes pour les réseaux sociaux">
-    <div class="ameta"><span class="cat">Vidéo</span><span>· 5 min de lecture</span><span>· Voxy Formations</span></div>
-    <p class="lead">Reels Instagram, TikTok, Shorts YouTube : ce sont les mêmes vidéos verticales courtes, mais chaque réseau a ses codes et son public. Lequel choisir pour votre commerce ? Voici comment décider.</p>
-    <h2>La même vidéo, trois réseaux</h2>
-    <p>Une vidéo verticale de 15 à 45 secondes peut être publiée sur les trois. L'erreur est de croire qu'il faut tout refaire à chaque fois : filmez une fois, adaptez le format et la légende.</p>
-    <h2>Quel réseau pour quel commerce ?</h2>
+    <img class="article-cover" src="img/mag-reels-social.jpg" alt="Créer des vidéos courtes pour Reels, TikTok et Shorts">
+    <div class="ameta"><span class="cat">Vidéo</span><span>· 9 min de lecture</span><span>· Voxy Formations</span></div>
+    <p class="lead">Reels Instagram, TikTok, Shorts YouTube : ce sont les mêmes vidéos verticales courtes, mais chaque plateforme a ses codes, son public et ses atouts. Pour un commerce local, inutile d'être partout : mieux vaut bien choisir. Ce guide vous aide à décider où publier, quoi filmer, et à quelle fréquence.</p>
+
+    <div class="tldr"><b>En résumé :</b> filmez une fois, adaptez le format à chaque réseau. Instagram (Reels) est le plus efficace pour un commerce local visuel ; TikTok vise la découverte large et un public plus jeune ; YouTube Shorts dure dans le temps et se retrouve via la recherche. La régularité prime sur la plateforme.</div>
+
+    <nav class="toc"><b>Au programme</b><ol>
+      <li><button data-target="a4-meme">Une même vidéo, trois plateformes</button></li>
+      <li><button data-target="a4-insta">Instagram Reels : le réflexe local</button></li>
+      <li><button data-target="a4-tiktok">TikTok : la découverte large</button></li>
+      <li><button data-target="a4-shorts">YouTube Shorts : durer dans le temps</button></li>
+      <li><button data-target="a4-quoi">Quoi filmer selon votre métier</button></li>
+      <li><button data-target="a4-freq">À quelle fréquence publier</button></li>
+      <li><button data-target="a4-faq">Questions fréquentes</button></li>
+    </ol></nav>
+
+    <h2 id="a4-meme">Une même vidéo, trois plateformes</h2>
+    <p>Reels, TikTok et Shorts partagent le même format : une vidéo <b>verticale</b> de 15 à 60 secondes. L'erreur fréquente est de croire qu'il faut tout refaire pour chaque réseau. En réalité, vous filmez une fois, puis vous adaptez : la légende, les mots-clés et, idéalement, l'accroche, pour coller aux codes de chaque plateforme.</p>
+
+    <h2 id="a4-insta">Instagram Reels : le réflexe pour un commerce local</h2>
+    <p>Pour un restaurant, un salon, une boutique ou un artisan de l'Hérault, <b>Instagram est souvent la priorité</b> : son public local est large (25-45 ans), très visuel, et la fonction « lieux » et les hashtags géolocalisés aident à toucher les habitants de votre ville. C'est aussi là que se concentrent les comptes de commerces de proximité.</p>
+
+    <h2 id="a4-tiktok">TikTok : pour la découverte et un public jeune</h2>
+    <p>TikTok excelle pour l'effet « découverte » : son algorithme peut faire décoller une vidéo auprès d'un très large public, même avec peu d'abonnés. Intéressant si vous visez une clientèle jeune ou si vous voulez tester des formats créatifs. En contrepartie, l'audience y est moins forcément locale.</p>
+
+    <h2 id="a4-shorts">YouTube Shorts : pour durer dans le temps</h2>
+    <p>Les Shorts ont un atout particulier : ils restent <b>trouvables via la recherche</b> YouTube et Google sur la durée, là où un Reel « vit » surtout quelques jours. Utile pour des contenus « evergreen » (conseils, démonstrations) que vos clients chercheront encore dans six mois.</p>
+
+    <h2 id="a4-quoi">Quoi filmer selon votre métier</h2>
     <ul>
-      <li><b>Instagram (Reels)</b> : restaurants, salons, boutiques — public local, visuel, 25-45 ans.</li>
-      <li><b>TikTok</b> : si vous visez un public jeune ou un effet « découverte » large.</li>
-      <li><b>YouTube Shorts</b> : utile pour durer dans le temps et être trouvé via la recherche.</li>
+      <li><b>Restaurant</b> : préparation d'un plat, dressage, ambiance d'un service, nouveauté de la carte.</li>
+      <li><b>Artisan</b> : avant/après de chantier, geste technique, coulisses d'une réalisation.</li>
+      <li><b>Salon</b> : transformation client, nouveau soin, conseils d'entretien.</li>
+      <li><b>Boutique</b> : arrivage, coup de cœur, démonstration d'un produit.</li>
     </ul>
-    <h2>Pourquoi faire des Reels quand on a un commerce local ?</h2>
-    <p>Parce que l'algorithme montre vos vidéos à des gens <b>près de chez vous</b> qui ne vous connaissent pas encore. C'est de la publicité gratuite et ciblée — à condition de publier régulièrement.</p>
-    <div class="callout blue" style="margin:1.5rem 0;">Avant de choisir le réseau, il faut savoir filmer : lisez <a class="inl" href="#art-smartphone">Comment filmer son commerce au smartphone</a>, ou formez-vous avec notre <a class="inl" href="#formation-video">formation visibilité par la vidéo</a>.</div>
+    <p>Dans tous les cas, le principe est le même : montrer concrètement votre savoir-faire et donner une raison de venir. Pour la technique de tournage, voyez notre guide <a class="inl" href="#art-smartphone">Comment filmer son commerce au smartphone</a>.</p>
+
+    <h2 id="a4-freq">À quelle fréquence publier ?</h2>
+    <p>Mieux vaut une <b>cadence régulière et tenable</b> qu'un pic suivi d'un silence. Une à deux vidéos par semaine constituent un bon rythme de départ pour un commerce. L'important est la constance : l'algorithme et votre audience récompensent la régularité. Pour comprendre pourquoi publier des Reels est si efficace en local, la réponse tient en un mot : <b>la portée</b> — vos vidéos sont montrées à des gens proches de vous qui ne vous connaissent pas encore.</p>
+    <div class="callout blue"><b>Vous voulez un plan de contenu clair et savoir tout faire vous-même ?</b> Notre <a class="inl" href="#formation-video">formation visibilité par la vidéo</a> vous donne la méthode et un plan sur 90 jours, filmé sur votre propre activité. <a class="inl" href="#diagnostic">Réservez un diagnostic</a>.</div>
+
+    <h2 id="a4-faq">Questions fréquentes</h2>
+    <div class="acc faq">
+      <details><summary><span class="ix">?</span> Faut-il être présent sur les trois réseaux ? <svg class="chev" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 16 16"><path d="M3 6l5 5 5-5"/></svg></summary><div class="acc-body">Non. Mieux vaut être régulier sur un réseau bien choisi que dispersé partout. Pour un commerce local, commencez par Instagram, puis élargissez si vous avez le temps.</div></details>
+      <details><summary><span class="ix">?</span> Quelle durée idéale pour une vidéo ? <svg class="chev" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 16 16"><path d="M3 6l5 5 5-5"/></svg></summary><div class="acc-body">Entre 15 et 45 secondes au début. L'essentiel se joue dans les 3 premières secondes : l'accroche décide si l'on continue à regarder.</div></details>
+      <details><summary><span class="ix">?</span> Pourquoi faire des Reels quand on a un commerce local ? <svg class="chev" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 16 16"><path d="M3 6l5 5 5-5"/></svg></summary><div class="acc-body">Parce que l'algorithme montre vos vidéos à des personnes géographiquement proches qui ne vous connaissent pas : c'est de la publicité gratuite et ciblée, à condition de publier régulièrement.</div></details>
+    </div>
+
     <div class="maillage"><div class="k">Pour aller plus loin</div>
       <div class="grid3">
         <a class="card-blank" href="#formation-video"><span class="k">Formation</span><h4>Visibilité locale par la vidéo</h4><span class="m">Filmer, monter, diffuser</span></a>
@@ -1300,25 +1493,69 @@ body{padding-bottom:3rem;}
 <section class="page" data-page="art-clients-locaux" hidden>
   <section class="phero"><div class="wrap">
     <div class="breadcrumb"><a href="#accueil">Accueil</a><span class="sep">›</span><a href="#lemag">Le Mag</a><span class="sep">›</span><span>Attirer des clients locaux</span></div>
-    <h1>Restaurant, artisan, salon : attirer plus de clients locaux</h1>
+    <h1>Restaurant, artisan, salon : comment attirer plus de clients locaux dans l'Hérault</h1>
   </div></section>
   <section class="sec"><div class="wrap"><article class="article">
-    <img class="article-cover" src="img/mag-clients-locaux.jpg" alt="Commerce local qui attire des clients">
-    <div class="ameta"><span class="cat">Local</span><span>· 7 min de lecture</span><span>· Voxy Formations · Hérault</span></div>
-    <p class="lead">Terrasse vide le mardi, fauteuils libres en semaine, carnet de commandes creux l'hiver ? La visibilité locale se travaille. Voici des leviers concrets, par métier, pour les pros de l'Hérault.</p>
-    <h2>Pour un restaurant : montrer, donner faim, donner envie</h2>
-    <p>Filmez vos plats, l'ambiance, l'équipe. Publiez aux bons moments (avant les services). Soignez votre <a class="inl" href="#art-google-business">fiche Google Business</a> avec de belles photos et répondez aux avis.</p>
-    <h2>Pour un artisan : la preuve par le chantier</h2>
-    <p>Les avant/après de chantier rassurent et donnent envie d'appeler. Une courte vidéo d'un travail bien fait vaut mieux qu'un long discours. Beaucoup de vos futurs clients regardent des vidéos avant de demander un devis.</p>
-    <h2>Pour un salon (coiffure, esthétique) : la transformation</h2>
-    <p>Les transformations client sont votre meilleure publicité. Filmées simplement, publiées en Reels, elles font venir une clientèle de proximité.</p>
-    <h2>Le point commun : régularité + local</h2>
-    <p>Dans tous les cas, c'est la <b>régularité</b> et l'<b>ancrage local</b> qui paient. Et la bonne nouvelle : vous pouvez apprendre à tout faire vous-même.</p>
-    <div class="callout blue" style="margin:1.5rem 0;"><b>On vient filmer chez vous, dans l'Hérault.</b> Découvrez la <a class="inl" href="#formation-video">formation visibilité par la vidéo</a> ou <a class="inl" href="#diagnostic">réservez un diagnostic</a> adapté à votre métier.</div>
+    <img class="article-cover" src="img/mag-clients-locaux.jpg" alt="Commerce local de l'Hérault qui attire des clients">
+    <div class="ameta"><span class="cat">Local</span><span>· 11 min de lecture</span><span>· Voxy Formations · Hérault</span></div>
+    <p class="lead">Terrasse vide le mardi, fauteuils libres en semaine, carnet de commandes creux l'hiver ? La visibilité locale n'est pas une question de chance : elle se construit, méthodiquement. Voici une feuille de route concrète, déclinée par métier, pour attirer davantage de clients près de chez vous — à Montpellier, Béziers, Sète et partout dans le 34.</p>
+
+    <div class="tldr"><b>En résumé :</b> trois leviers se combinent — une fiche Google soignée, des vidéos courtes régulières, et des avis clients. Le point commun : montrer concrètement votre savoir-faire, de façon locale et régulière. Et tout cela, vous pouvez apprendre à le faire vous-même.</div>
+
+    <nav class="toc"><b>Au programme</b><ol>
+      <li><button data-target="a5-constat">Le constat : vos clients vous cherchent en ligne</button></li>
+      <li><button data-target="a5-socle">Le socle commun à tous les métiers</button></li>
+      <li><button data-target="a5-resto">Pour un restaurant</button></li>
+      <li><button data-target="a5-artisan">Pour un artisan</button></li>
+      <li><button data-target="a5-salon">Pour un salon (coiffure, esthétique)</button></li>
+      <li><button data-target="a5-erreurs">Les erreurs qui coûtent des clients</button></li>
+      <li><button data-target="a5-faq">Questions fréquentes</button></li>
+    </ol></nav>
+
+    <h2 id="a5-constat">Le constat : vos clients vous cherchent d'abord en ligne</h2>
+    <p>Avant de pousser la porte d'un commerce, la plupart des gens vérifient : la fiche Google, les avis, les photos, parfois une vidéo. Si vous êtes invisible ou si votre présence en ligne est vieillissante, vous perdez des clients <b>sans même le savoir</b>, au profit de concurrents parfois moins bons mais plus visibles. La visibilité locale est devenue un prérequis, pas un bonus.</p>
+
+    <h2 id="a5-socle">Le socle commun à tous les métiers</h2>
+    <p>Quel que soit votre secteur, trois leviers se renforcent mutuellement :</p>
+    <ul>
+      <li><b>La fiche Google Business</b> : votre vitrine sur Maps, à soigner en priorité (voir <a class="inl" href="#art-google-business">notre guide</a>).</li>
+      <li><b>La vidéo courte</b> : le format qui montre le mieux votre savoir-faire et que l'algorithme diffuse localement.</li>
+      <li><b>Les avis</b> : la preuve sociale qui rassure et fait venir.</li>
+    </ul>
+    <p>Et un dénominateur commun : la <b>régularité</b>. Mieux vaut un petit geste chaque semaine qu'une grande campagne une fois par an.</p>
+
+    <h2 id="a5-resto">Pour un restaurant : donner faim, donner envie</h2>
+    <p>Vos clients choisissent souvent où manger en regardant des images. Filmez vos plats, la préparation, l'ambiance d'un service, votre équipe. Publiez aux bons moments (en fin de matinée et en fin d'après-midi, avant les décisions de repas). Mettez en avant vos spécialités et vos nouveautés, et répondez aux avis — surtout les moins bons, avec courtoisie.</p>
+    <p>Objectif concret : remplir les creux de la semaine. Une série de vidéos « le plat du mardi » peut transformer le jour le plus calme en rendez-vous attendu.</p>
+
+    <h2 id="a5-artisan">Pour un artisan : la preuve par le chantier</h2>
+    <p>Pour un plombier, un électricien, un maçon ou un paysagiste, la confiance est tout. Les <b>avant/après de chantier</b> sont imbattables : ils montrent le résultat, rassurent et donnent envie d'appeler. Une courte vidéo d'un travail bien fait vaut mieux qu'un long discours. Beaucoup de vos futurs clients regardent des vidéos et des avis avant de demander un devis — autant que ce soit les vôtres qu'ils trouvent.</p>
+    <p>Pensez aussi à la zone d'intervention sur votre fiche Google : un artisan n'a pas de vitrine, mais il a une <b>zone desservie</b> à renseigner précisément.</p>
+
+    <h2 id="a5-salon">Pour un salon (coiffure, esthétique) : la transformation</h2>
+    <p>Dans la beauté, l'<b>avant/après</b> fait vendre. Une transformation filmée simplement, publiée en Reels, attire une clientèle de proximité et remplit les créneaux creux de semaine. Pas besoin d'être mannequin ni experte en vidéo : le naturel fonctionne, surtout avec des sous-titres et une accroche claire (« Voici comment on a redonné de la lumière à ces cheveux »).</p>
+
+    <h2 id="a5-erreurs">Les erreurs qui coûtent des clients</h2>
+    <ul>
+      <li>Une fiche Google incomplète ou aux horaires faux.</li>
+      <li>Aucune photo ou vidéo récente : on croit le commerce « endormi ».</li>
+      <li>Des avis sans réponse, surtout les négatifs.</li>
+      <li>Une présence en dents de scie : trois vidéos puis plus rien pendant des mois.</li>
+      <li>Déléguer sans comprendre : si vous dépendez entièrement d'une agence, vous ne maîtrisez plus votre image ni votre budget.</li>
+    </ul>
+    <div class="callout blue"><b>On vient vous former, chez vous, dans l'Hérault.</b> La <a class="inl" href="#formation-video">formation visibilité par la vidéo</a> vous rend autonome sur ces leviers, sur votre vrai commerce. Vous préférez par métier ? Voyez nos pages <a class="inl" href="#metier-restaurateur">restaurateurs</a>, <a class="inl" href="#metier-artisan">artisans</a> et <a class="inl" href="#metier-salon">salons</a>, ou <a class="inl" href="#diagnostic">réservez un diagnostic</a>.</div>
+
+    <h2 id="a5-faq">Questions fréquentes</h2>
+    <div class="acc faq">
+      <details><summary><span class="ix">?</span> Combien de temps avant de voir des résultats ? <svg class="chev" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 16 16"><path d="M3 6l5 5 5-5"/></svg></summary><div class="acc-body">La fiche Google peut avoir un effet rapide. Les réseaux demandent de la régularité : comptez quelques semaines de publications constantes avant de voir la dynamique s'installer. La constance est la clé.</div></details>
+      <details><summary><span class="ix">?</span> Faut-il un budget publicitaire ? <svg class="chev" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 16 16"><path d="M3 6l5 5 5-5"/></svg></summary><div class="acc-body">Pas au départ. La fiche Google et les vidéos organiques sont gratuites. La publicité peut venir plus tard, en complément, une fois les bases en place — avec votre propre budget, maîtrisé.</div></details>
+      <details><summary><span class="ix">?</span> Je n'ai pas le temps, est-ce réaliste ? <svg class="chev" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 16 16"><path d="M3 6l5 5 5-5"/></svg></summary><div class="acc-body">Oui, à condition d'avoir une méthode et un rythme tenable. L'objectif de la formation est justement de vous rendre efficace : quelques minutes bien employées par semaine suffisent une fois la mécanique acquise.</div></details>
+    </div>
+
     <div class="maillage"><div class="k">Pour aller plus loin</div>
       <div class="grid3">
         <a class="card-blank" href="#formation-video"><span class="k">Formation</span><h4>Visibilité locale par la vidéo</h4><span class="m">Offre pilote · Hérault</span></a>
-        <a class="card-blank" href="#formation-site"><span class="k">Formation</span><h4>Créer un site internet</h4><span class="m">Pour aller plus loin</span></a>
+        <a class="card-blank" href="#pres-de-chez-vous"><span class="k">Local</span><h4>Près de chez vous</h4><span class="m">Par ville et par métier</span></a>
         <a class="card-blank" href="#art-smartphone"><span class="k">Article</span><h4>Filmer au smartphone</h4><span class="m">Le guide pratique</span></a>
       </div>
     </div>
@@ -1329,25 +1566,60 @@ body{padding-bottom:3rem;}
 <section class="page" data-page="art-qualiopi" hidden>
   <section class="phero"><div class="wrap">
     <div class="breadcrumb"><a href="#accueil">Accueil</a><span class="sep">›</span><a href="#lemag">Le Mag</a><span class="sep">›</span><span>Qualiopi</span></div>
-    <h1>Qualiopi, c'est quoi ? Ce que ça change pour votre formation</h1>
+    <h1>Qualiopi, c'est quoi ? Ce que la certification change pour votre formation financée</h1>
   </div></section>
   <section class="sec"><div class="wrap"><article class="article">
     <img class="article-cover" src="img/mag-qualiopi.jpg" alt="Certification Qualiopi et documents de formation">
-    <div class="ameta"><span class="cat">Financement</span><span>· 5 min de lecture</span><span>· Voxy Formations</span></div>
-    <p class="lead">Vous avez vu le logo « Qualiopi » sur des pages de formation sans savoir ce que ça veut dire ? C'est pourtant la clé qui conditionne le financement de votre formation. Explications simples.</p>
-    <h2>Qualiopi, une certification qualité</h2>
-    <p>Qualiopi est la certification nationale qui atteste de la <b>qualité du processus</b> d'un organisme de formation. Elle est délivrée après un audit, au titre d'une ou plusieurs catégories d'actions (pour nous : les actions de formation).</p>
-    <h2>Pourquoi c'est important pour vous</h2>
-    <p>Depuis 2022, <b>seules les formations dispensées par un organisme certifié Qualiopi peuvent être financées</b> par les fonds publics et mutualisés (AGEFICE, FAFCEA, OPCO…). Sans Qualiopi, pas de prise en charge.</p>
-    <h2>Ce que ça garantit concrètement</h2>
+    <div class="ameta"><span class="cat">Financement</span><span>· 8 min de lecture</span><span>· Voxy Formations</span></div>
+    <p class="lead">Vous avez vu le logo « Qualiopi » sur des pages de formation sans savoir ce qu'il signifie ? C'est pourtant la clé qui conditionne le financement de votre formation. Voici une explication simple : ce qu'est Qualiopi, pourquoi c'est important pour vous, et ce que la certification garantit concrètement.</p>
+
+    <div class="tldr"><b>En résumé :</b> Qualiopi est la certification qualité nationale des organismes de formation. Depuis 2022, seules les formations dispensées par un organisme certifié peuvent être financées par les fonds publics et mutualisés (AGEFICE, FAFCEA, OPCO…). Sans Qualiopi, pas de prise en charge.</div>
+
+    <nav class="toc"><b>Au programme</b><ol>
+      <li><button data-target="a6-quoi">Qualiopi, une certification qualité</button></li>
+      <li><button data-target="a6-important">Pourquoi c'est important pour vous</button></li>
+      <li><button data-target="a6-garantit">Ce que ça garantit concrètement</button></li>
+      <li><button data-target="a6-verifier">Comment vérifier qu'un organisme est certifié</button></li>
+      <li><button data-target="a6-idees">Idées reçues</button></li>
+      <li><button data-target="a6-faq">Questions fréquentes</button></li>
+    </ol></nav>
+
+    <h2 id="a6-quoi">Qualiopi, une certification qualité</h2>
+    <p>Qualiopi est la <b>marque de certification nationale</b> qui atteste de la qualité du <b>processus</b> mis en œuvre par un prestataire d'actions de formation. Elle est délivrée après un <b>audit indépendant</b>, au titre d'une ou plusieurs catégories d'actions (pour un organisme de formation comme Voxy : les actions de formation). La certification repose sur un référentiel national organisé en critères et indicateurs.</p>
+    <p>Point important : Qualiopi certifie le <b>processus</b> de l'organisme (comment il conçoit, mène et évalue ses formations), pas le contenu de chaque formation en lui-même.</p>
+
+    <h2 id="a6-important">Pourquoi c'est important pour vous</h2>
+    <p>La raison est très concrète : depuis le 1er janvier 2022, <b>seules les formations dispensées par un organisme certifié Qualiopi peuvent bénéficier de fonds publics ou mutualisés</b> — c'est-à-dire des financements AGEFICE, FAFCEA, OPCO, etc. En clair : sans Qualiopi, votre formation <b>ne peut pas être prise en charge</b>. C'est pourquoi la certification est devenue incontournable pour tout professionnel qui veut faire financer sa montée en compétences.</p>
+
+    <h2 id="a6-garantit">Ce que ça garantit concrètement</h2>
+    <p>Pour vous, apprenant, Qualiopi est un gage de sérieux. L'organisme doit notamment démontrer :</p>
     <ul>
-      <li>Des objectifs et un programme clairs et adaptés.</li>
-      <li>Des moyens pédagogiques et un encadrement qualifiés.</li>
-      <li>Des évaluations des acquis et un suivi.</li>
-      <li>Une prise en compte du handicap (accessibilité).</li>
+      <li>Des <b>objectifs et un programme</b> clairs, adaptés au public.</li>
+      <li>Des <b>moyens pédagogiques et un encadrement</b> qualifiés.</li>
+      <li>Des <b>évaluations des acquis</b> et un suivi (positionnement, jalons, à chaud, à froid).</li>
+      <li>Une <b>information transparente</b> (tarifs, prérequis, délais d'accès, résultats).</li>
+      <li>La prise en compte du <b>handicap</b> (accessibilité, référent dédié).</li>
+      <li>Une démarche d'<b>amélioration continue</b> (traitement des réclamations, retours).</li>
     </ul>
-    <p>Voxy Formations est un organisme <b>certifié Qualiopi</b> : vos formations sont donc éligibles au financement. On vous accompagne pour le dossier — voir la page <a class="inl" href="#financements">Financements</a>.</p>
-    <div class="callout blue" style="margin:1.5rem 0;">Une question sur votre éligibilité ? <a class="inl" href="#diagnostic">Réservez un diagnostic</a> : on vérifie votre financeur et votre reste à charge.</div>
+
+    <h2 id="a6-verifier">Comment vérifier qu'un organisme est bien certifié</h2>
+    <p>Un organisme certifié peut vous communiquer son <b>certificat Qualiopi</b> (avec son numéro et la catégorie d'actions concernée). Vous pouvez aussi demander son numéro de déclaration d'activité (NDA). Méfiez-vous des organismes qui affichent le logo sans pouvoir fournir ces éléments. Voxy Formations est un organisme certifié Qualiopi : vos formations sont donc <b>éligibles au financement</b>, et nous vous accompagnons pour le dossier (voir la page <a class="inl" href="#financements">Financements</a>).</p>
+
+    <h2 id="a6-idees">Idées reçues sur Qualiopi</h2>
+    <ul>
+      <li><b>« Qualiopi = formation gratuite »</b> : faux. Qualiopi rend la formation <b>éligible</b> à un financement, mais un reste à charge existe presque toujours. Voir <a class="inl" href="#art-financement">notre guide du financement</a>.</li>
+      <li><b>« Qualiopi garantit la qualité du contenu »</b> : la certification porte sur le processus, pas sur chaque contenu. Un bon organisme va au-delà du minimum.</li>
+      <li><b>« C'est réservé aux grands organismes »</b> : non, un organisme local et à taille humaine peut être pleinement certifié.</li>
+    </ul>
+    <div class="callout blue"><b>Une question sur votre éligibilité ?</b> <a class="inl" href="#diagnostic">Réservez un diagnostic gratuit</a> : on vérifie votre financeur et votre reste à charge, et on vous explique chaque étape.</div>
+
+    <h2 id="a6-faq">Questions fréquentes</h2>
+    <div class="acc faq">
+      <details><summary><span class="ix">?</span> Qualiopi est-elle obligatoire ? <svg class="chev" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 16 16"><path d="M3 6l5 5 5-5"/></svg></summary><div class="acc-body">Elle n'est pas obligatoire pour exister comme organisme de formation, mais elle l'est de fait pour accéder aux financements publics et mutualisés. Sans elle, vos formations ne sont pas finançables.</div></details>
+      <details><summary><span class="ix">?</span> Qualiopi finance-t-elle ma formation ? <svg class="chev" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 16 16"><path d="M3 6l5 5 5-5"/></svg></summary><div class="acc-body">Non, Qualiopi ne finance rien directement : elle rend la formation éligible aux fonds (AGEFICE, FAFCEA, OPCO), qui, eux, prennent en charge une partie du coût.</div></details>
+      <details><summary><span class="ix">?</span> Comment savoir de quel fonds je dépends ? <svg class="chev" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 16 16"><path d="M3 6l5 5 5-5"/></svg></summary><div class="acc-body">Selon votre statut : AGEFICE (commerce/services), FAFCEA (artisans), OPCO (salariés). Le diagnostic permet de le déterminer et d'estimer votre reste à charge.</div></details>
+    </div>
+
     <div class="maillage"><div class="k">Pour aller plus loin</div>
       <div class="grid3">
         <a class="card-blank" href="#financements"><span class="k">Page</span><h4>Financements</h4><span class="m">AGEFICE · FAFCEA · OPCO</span></a>
@@ -1370,13 +1642,19 @@ body{padding-bottom:3rem;}
     <div class="grid3">
       <a class="card-blank" href="#local-montpellier"><span class="k">Hérault</span><h4>Montpellier</h4><span class="m">Formation digitale, vidéo & réseaux sociaux</span></a>
       <a class="card-blank" href="#local-beziers"><span class="k">Hérault</span><h4>Béziers</h4><span class="m">Formation digitale & visibilité locale</span></a>
-      <a class="card-blank" href="#diagnostic"><span class="k">Hérault</span><h4>Sète & tout le 34</h4><span class="m">On se déplace — réservez un diagnostic</span></a>
+      <a class="card-blank" href="#local-sete"><span class="k">Hérault</span><h4>Sète</h4><span class="m">Port, tourisme & commerces de bouche</span></a>
     </div>
     <h2 class="sec-title" style="margin-top:2.5rem;">Par métier</h2>
     <div class="grid3">
       <a class="card-blank" href="#metier-restaurateur"><span class="k">AGEFICE</span><h4>Restaurateurs & commerces</h4><span class="m">Remplir sa salle avec la vidéo locale</span></a>
       <a class="card-blank" href="#metier-artisan"><span class="k">FAFCEA</span><h4>Artisans du bâtiment</h4><span class="m">Plus de devis grâce au digital</span></a>
       <a class="card-blank" href="#metier-salon"><span class="k">AGEFICE</span><h4>Salons coiffure & esthétique</h4><span class="m">Remplir ses créneaux en semaine</span></a>
+    </div>
+    <h2 class="sec-title" style="margin-top:2.5rem;">Combinaisons populaires</h2>
+    <div class="grid3">
+      <a class="card-blank" href="#combo-resto-montpellier"><span class="k">Montpellier · AGEFICE</span><h4>Formation vidéo pour restaurateurs à Montpellier</h4><span class="m">Remplir sa terrasse en semaine</span></a>
+      <a class="card-blank" href="#combo-artisan-beziers"><span class="k">Béziers · FAFCEA</span><h4>Formation digitale pour artisans à Béziers</h4><span class="m">Générer des demandes de devis</span></a>
+      <a class="card-blank" href="#combo-reseaux-montpellier"><span class="k">Montpellier</span><h4>Réseaux sociaux pour commerçants à Montpellier</h4><span class="m">Être vu dans l'Écusson et au-delà</span></a>
     </div>
   </div></section>
 </section>
@@ -1514,6 +1792,118 @@ body{padding-bottom:3rem;}
   </div></section>
 </section>
 
+<!-- ═══════════ LOCAL : SÈTE ═══════════ -->
+<section class="page" data-page="local-sete" hidden>
+  <section class="phero"><div class="wrap">
+    <div class="breadcrumb"><a href="#accueil">Accueil</a><span class="sep">›</span><a href="#pres-de-chez-vous">Près de chez vous</a><span class="sep">›</span><span>Sète</span></div>
+    <div class="badges"><span class="badge">Sète (34)</span><span class="badge">Présentiel</span><span class="badge">Finançable</span></div>
+    <h1>Formation digitale, vidéo & visibilité locale à Sète</h1>
+    <p class="lead">Commerce de bouche, restaurant de bord de mer, artisan ou boutique à Sète ? Entre saison touristique et clientèle locale à l'année, votre visibilité en ligne fait la différence. Formez-vous à la vidéo et au web sur votre activité réelle, avec une formation prise en charge.</p>
+  </div></section>
+  <section class="sec"><div class="wrap narrow">
+    <p class="prose">Sète a une identité forte : le port, les canaux, la gastronomie (tielle, produits de la mer), un tourisme marqué l'été et une vie locale le reste de l'année. Cette saisonnalité est un enjeu : il faut remplir en haute saison <b>et</b> fidéliser la clientèle locale hors saison. La vidéo et une présence Google soignée sont des leviers idéaux pour capter les deux publics.</p>
+    <h2 class="sec-title" style="margin-top:1.5rem;">Les formations disponibles à Sète</h2>
+    <div class="grid3">
+      <a class="card-blank" href="#formation-video"><span class="k">Vidéo</span><h4>Visibilité locale par la vidéo</h4><span class="m">On se déplace à Sète</span></a>
+      <a class="card-blank" href="#formation-site"><span class="k">Web</span><h4>Créer un site internet</h4><span class="m">Réservations & menu en ligne</span></a>
+      <a class="card-blank" href="#formation-boutique"><span class="k">E-commerce</span><h4>Boutique en ligne</h4><span class="m">Vendre vos produits au-delà de la saison</span></a>
+    </div>
+    <h2 class="sec-title" style="margin-top:2rem;">Un enjeu particulier à Sète : la saisonnalité</h2>
+    <ul class="ul-check">
+      <li>Capter les touristes en haute saison (vidéos, fiche Google, photos récentes)</li>
+      <li>Fidéliser la clientèle locale toute l'année (contenu régulier, offres hors saison)</li>
+      <li>Valoriser votre savoir-faire et vos produits de la mer en vidéo</li>
+      <li>Vendre en ligne pour lisser votre activité</li>
+    </ul>
+    <div class="callout blue" style="margin-top:1.5rem;">Certifié Qualiopi, finançable AGEFICE / FAFCEA / OPCO — reste à charge annoncé avant inscription. <a class="inl" href="#diagnostic">Réserver un diagnostic à Sète</a>.</div>
+    <div class="ctaband" style="margin-top:2rem;"><h2>On vient à Sète</h2><p>Diagnostic gratuit de 30 min, sur place ou à distance.</p><a class="btn btn-white" href="#diagnostic">Réserver mon diagnostic</a></div>
+  </div></section>
+</section>
+
+<!-- ═══════════ COMBO : RESTAURATEUR MONTPELLIER ═══════════ -->
+<section class="page" data-page="combo-resto-montpellier" hidden>
+  <section class="phero"><div class="wrap">
+    <div class="breadcrumb"><a href="#accueil">Accueil</a><span class="sep">›</span><a href="#pres-de-chez-vous">Près de chez vous</a><span class="sep">›</span><span>Restaurateurs à Montpellier</span></div>
+    <div class="badges"><span class="badge hl">Montpellier · AGEFICE</span><span class="badge">Présentiel</span><span class="badge">Formation-action</span></div>
+    <h1>Formation vidéo pour restaurateurs à Montpellier</h1>
+    <p class="lead">La restauration à Montpellier est l'une des plus concurrentielles de la région : Comédie, Écusson, Antigone, Port Marianne… Pour sortir du lot et remplir votre salle en semaine, apprenez à filmer votre établissement et à être visible localement. Formation finançable AGEFICE.</p>
+  </div></section>
+  <section class="sec"><div class="wrap narrow">
+    <p class="prose">À Montpellier, un client a l'embarras du choix. Ce qui déclenche sa décision ? Des images qui donnent faim, des avis rassurants, une fiche Google impeccable. En apprenant à produire vos propres vidéos — vos plats, votre ambiance, votre équipe — vous captez une clientèle de proximité et vous réduisez votre dépendance aux plateformes de livraison et à leurs commissions.</p>
+    <h2 class="sec-title" style="margin-top:1.5rem;">Ce que vous apprenez, appliqué à votre restaurant</h2>
+    <ul class="ul-check">
+      <li>Filmer et monter des vidéos courtes qui donnent envie (plats, service, coulisses)</li>
+      <li>Publier au bon moment sur Instagram et TikTok, avec les bons hashtags locaux</li>
+      <li>Optimiser votre fiche Google Business pour ressortir sur « restaurant Montpellier »</li>
+      <li>Gérer vos avis et lire vos résultats pour ajuster</li>
+    </ul>
+    <div class="callout" style="margin-top:1.2rem;"><b>Financement :</b> dirigeant de la restauration → <b>AGEFICE</b>. Le reste à charge vous est annoncé avant inscription.</div>
+    <h2 class="sec-title" style="margin-top:1.5rem;">La formation adaptée</h2>
+    <div class="grid3">
+      <a class="card-blank" href="#formation-video"><span class="k">Offre pilote</span><h4>Visibilité locale par la vidéo</h4><span class="m">On filme dans votre restaurant à Montpellier</span></a>
+      <a class="card-blank" href="#art-clients-locaux"><span class="k">Article</span><h4>Attirer plus de clients locaux</h4><span class="m">Section restaurant</span></a>
+      <a class="card-blank" href="#art-reels"><span class="k">Article</span><h4>Reels, TikTok, Shorts</h4><span class="m">Quelle vidéo choisir</span></a>
+    </div>
+    <div class="ctaband" style="margin-top:2rem;"><h2>Remplissez votre salle à Montpellier</h2><p>Diagnostic gratuit de 30 min, spécial restauration.</p><a class="btn btn-white" href="#diagnostic">Réserver mon diagnostic</a></div>
+  </div></section>
+</section>
+
+<!-- ═══════════ COMBO : ARTISAN BÉZIERS ═══════════ -->
+<section class="page" data-page="combo-artisan-beziers" hidden>
+  <section class="phero"><div class="wrap">
+    <div class="breadcrumb"><a href="#accueil">Accueil</a><span class="sep">›</span><a href="#pres-de-chez-vous">Près de chez vous</a><span class="sep">›</span><span>Artisans à Béziers</span></div>
+    <div class="badges"><span class="badge hl">Béziers · FAFCEA</span><span class="badge">Présentiel</span><span class="badge">Formation-action</span></div>
+    <h1>Formation digitale pour artisans à Béziers</h1>
+    <p class="lead">Plombier, électricien, maçon, menuisier à Béziers et dans le biterrois ? Vos futurs clients cherchent un artisan de confiance en ligne, avis et photos à l'appui. Apprenez à montrer votre savoir-faire et à générer des demandes de devis. Formation finançable FAFCEA.</p>
+  </div></section>
+  <section class="sec"><div class="wrap narrow">
+    <p class="prose">Dans le bâtiment, la confiance se gagne par la preuve. À Béziers, où le bouche-à-oreille reste important, une présence en ligne solide le prolonge et le démultiplie : un avant/après de chantier bien filmé, une fiche Google avec vos réalisations et vos avis, et vous devenez l'artisan qu'on rappelle. Pas besoin d'être expert : on vous forme sur vos propres chantiers.</p>
+    <h2 class="sec-title" style="margin-top:1.5rem;">Ce que vous apprenez, sur vos chantiers</h2>
+    <ul class="ul-check">
+      <li>Filmer un chantier en quelques minutes, même sans expérience</li>
+      <li>Mettre en valeur vos avant/après et votre savoir-faire</li>
+      <li>Renseigner votre zone d'intervention et ressortir sur Google Maps à Béziers</li>
+      <li>Transformer les vues en demandes de devis concrètes</li>
+    </ul>
+    <div class="callout" style="margin-top:1.2rem;"><b>Financement :</b> artisan immatriculé → <b>FAFCEA</b>. Reste à charge annoncé avant inscription. <a class="inl" href="#financements">Voir les financements</a>.</div>
+    <h2 class="sec-title" style="margin-top:1.5rem;">La formation adaptée</h2>
+    <div class="grid3">
+      <a class="card-blank" href="#formation-video"><span class="k">Offre pilote</span><h4>Visibilité locale par la vidéo</h4><span class="m">On filme sur votre chantier à Béziers</span></a>
+      <a class="card-blank" href="#formation-site"><span class="k">Web</span><h4>Créer un site internet</h4><span class="m">Vitrine + demande de devis</span></a>
+      <a class="card-blank" href="#art-google-business"><span class="k">Article</span><h4>Fiche Google Business</h4><span class="m">Être trouvé localement</span></a>
+    </div>
+    <div class="ctaband" style="margin-top:2rem;"><h2>Plus de devis à Béziers</h2><p>Diagnostic gratuit de 30 min, spécial artisans.</p><a class="btn btn-white" href="#diagnostic">Réserver mon diagnostic</a></div>
+  </div></section>
+</section>
+
+<!-- ═══════════ COMBO : RÉSEAUX COMMERÇANTS MONTPELLIER ═══════════ -->
+<section class="page" data-page="combo-reseaux-montpellier" hidden>
+  <section class="phero"><div class="wrap">
+    <div class="breadcrumb"><a href="#accueil">Accueil</a><span class="sep">›</span><a href="#pres-de-chez-vous">Près de chez vous</a><span class="sep">›</span><span>Commerçants à Montpellier</span></div>
+    <div class="badges"><span class="badge">Montpellier</span><span class="badge">Présentiel</span><span class="badge">Finançable</span></div>
+    <h1>Formation réseaux sociaux pour commerçants à Montpellier</h1>
+    <p class="lead">Boutique dans l'Écusson, concept-store à Antigone, commerce de quartier ? À Montpellier, les réseaux sociaux sont devenus la vitrine qui amène les clients en magasin. Apprenez à les animer vous-même, efficacement, sans y passer vos soirées. Formation finançable.</p>
+  </div></section>
+  <section class="sec"><div class="wrap narrow">
+    <p class="prose">Le centre de Montpellier est piéton, dense, très fréquenté : la différence se fait souvent en ligne, avant la visite. Une présence régulière sur Instagram, des stories qui montrent vos nouveautés, une fiche Google à jour : voilà ce qui transforme un passant connecté en client. L'objectif de la formation est de vous rendre <b>autonome et efficace</b>, avec un rythme tenable.</p>
+    <h2 class="sec-title" style="margin-top:1.5rem;">Ce que vous apprenez, pour votre boutique</h2>
+    <ul class="ul-check">
+      <li>Créer des contenus simples et réguliers (photos, vidéos, stories)</li>
+      <li>Mettre en avant vos arrivages et vos coups de cœur</li>
+      <li>Utiliser les fonctions locales (lieux, hashtags Montpellier) pour toucher le quartier</li>
+      <li>Transformer vos abonnés en visiteurs en magasin</li>
+    </ul>
+    <div class="callout" style="margin-top:1.2rem;"><b>Financement :</b> selon votre statut (AGEFICE pour les dirigeants, OPCO pour les salariés). Reste à charge annoncé avant inscription.</div>
+    <h2 class="sec-title" style="margin-top:1.5rem;">La formation adaptée</h2>
+    <div class="grid3">
+      <a class="card-blank" href="#formation-video"><span class="k">Vidéo</span><h4>Visibilité locale par la vidéo</h4><span class="m">Reels & stories pour votre boutique</span></a>
+      <a class="card-blank" href="#art-reels"><span class="k">Article</span><h4>Reels, TikTok, Shorts</h4><span class="m">Quelle vidéo choisir</span></a>
+      <a class="card-blank" href="#art-smartphone"><span class="k">Article</span><h4>Filmer au smartphone</h4><span class="m">Le guide pratique</span></a>
+    </div>
+    <div class="ctaband" style="margin-top:2rem;"><h2>Faites venir le quartier en boutique</h2><p>Diagnostic gratuit de 30 min, spécial commerçants.</p><a class="btn btn-white" href="#diagnostic">Réserver mon diagnostic</a></div>
+  </div></section>
+</section>
+
 <!-- ═══════════ PAGES LÉGALES ═══════════ -->
 <section class="page" data-page="mentions" hidden>
   <section class="phero"><div class="wrap"><div class="breadcrumb"><a href="#accueil">Accueil</a><span class="sep">›</span><span>Mentions légales</span></div><h1>Mentions légales</h1></div></section>
@@ -1585,7 +1975,7 @@ body{padding-bottom:3rem;}
 
 <script>
 (function(){
-  var PAGES = ['accueil','formations','formation-site','formation-boutique','formation-prospection','formation-video','methode','financements','diagnostic','apropos','contact','lemag','art-smartphone','art-google-business','art-financement','art-reels','art-clients-locaux','art-qualiopi','pres-de-chez-vous','local-montpellier','local-beziers','metier-restaurateur','metier-artisan','metier-salon','mentions','cgv','confidentialite'];
+  var PAGES = ['accueil','formations','formation-site','formation-boutique','formation-prospection','formation-video','methode','financements','diagnostic','apropos','contact','lemag','art-smartphone','art-google-business','art-financement','art-reels','art-clients-locaux','art-qualiopi','pres-de-chez-vous','local-montpellier','local-beziers','local-sete','metier-restaurateur','metier-artisan','metier-salon','combo-resto-montpellier','combo-artisan-beziers','combo-reseaux-montpellier','mentions','cgv','confidentialite'];
   function route(){
     var h = (location.hash || '#accueil').replace('#','');
     if (PAGES.indexOf(h) === -1) h = 'accueil';
@@ -1599,12 +1989,12 @@ body{padding-bottom:3rem;}
   window.addEventListener('hashchange', route);
   // sub-nav smooth scroll (sans toucher au hash)
   document.addEventListener('click', function(e){
-    var btn = e.target.closest('.subnav button');
+    var btn = e.target.closest('button[data-target]');
     if (!btn) return;
     var t = document.getElementById(btn.getAttribute('data-target'));
     if (t){ t.scrollIntoView({behavior:'smooth', block:'start'});
-      var nav = btn.closest('.subnav'); nav.querySelectorAll('button').forEach(function(b){ b.classList.remove('active'); });
-      btn.classList.add('active');
+      var nav = btn.closest('.subnav');
+      if (nav){ nav.querySelectorAll('button').forEach(function(b){ b.classList.remove('active'); }); btn.classList.add('active'); }
     }
   });
   // diagnostic form
