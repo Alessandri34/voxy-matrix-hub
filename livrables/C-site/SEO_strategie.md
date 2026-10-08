@@ -146,7 +146,25 @@ Idées de longue traîne pour la suite : « comment modifier sa fiche google bus
 - **Google Business Profile** optimisé (catégorie, zone, photos, avis) — levier local n°1.
 - **Avis clients** après les 1res sessions (jamais inventés).
 
-## 8. KPIs
+## 8bis. Pages locales (2ᵉ vague — ville × métier) — FAIT
+
+> Levier n°1 en local : une page dédiée par **intention géo** et par **métier/persona**, avec son mot-clé, son financeur et ses liens. Construites dans `site.html` (hub `#pres-de-chez-vous`).
+
+| Page | Mot-clé cible | Financeur | Persona |
+|---|---|---|---|
+| Montpellier | formation communication digitale / réseaux sociaux Montpellier | AGEFICE/FAFCEA/OPCO | tous |
+| Béziers | formation digitale Béziers | id. | tous |
+| Restaurateurs | formation vidéo pour restaurateur / attirer clients restaurant | **AGEFICE** | Sophie |
+| Artisans du bâtiment | formation digitale artisan / visibilité artisan | **FAFCEA** | Karim |
+| Coiffure & esthétique | visibilité salon coiffure / attirer clients salon | **AGEFICE** / OPCO | Léa |
+
+**Enseignement du relevé Suggest :** « formation restaurateur / coiffeur » dérive vers les **métiers** (CAP coiffure, restauration d'art) → on cible donc explicitement **« formation vidéo / digitale / visibilité POUR [métier] »** (notre angle, faible concurrence), jamais « formation [métier] ».
+
+**À répliquer (même gabarit) :** Sète, Lunel, Agde (villes) · taxi/VTC, bien-être, commerce de bouche, auto-entrepreneurs (métiers). 1 page = 1 combinaison ville×métier à fort potentiel (ex. « formation vidéo restaurateur Montpellier »).
+
+**Maillage des pages locales :** hub `Près de chez vous` (footer + section accueil) → pages ville/métier → fiches formation + articles MAG + diagnostic. Chaque page locale pointe vers la fiche pertinente et 1-2 articles de soutien.
+
+## 9. KPIs
 Positions sur les requêtes longue traîne cibles · trafic organique local · clics « itinéraire/appel » GBP · demandes de diagnostic depuis l'organique · pages indexées.
 
 > Rien n'est poussé sans ton accord explicite (`CLAUDE.md §8`).
