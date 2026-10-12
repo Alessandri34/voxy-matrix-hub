@@ -27,10 +27,14 @@ Les **fonds de formation ne financent que de la formation réelle**. Ce que nous
 
 Formulations **bannies** : « gratuit », « 100 % financé », « sans reste à charge », « machine à cash », « paravent ».
 
-## 5. Paramètres financement 2026 [À vérifier sur sites officiels]
-- FAFCEA : 35 €/h technique, 100 h/an ; **600 €/an si CFP ≤ 85 € (dès 1/9/2026)**.
-- AGEFICE : 42 €/h, 3 000 €/an (5 000 € si RNCP).
-- Constructys : 19 €/h (11-49 sal., dès 1/6/2026).
+## 5. Paramètres financement 2026 [Vérifié — PDF officiels, 12/10/2026]
+- **AGEFICE** : **42 €/h présentiel · 35 €/h distanciel synchrone · 20 €/h asynchrone** ; plafond **3 000 €/an** (si CFP ≥ 7 €) ; **600 €/an si CFP < 7 €**. ⚠️ **Le plafond 5 000 € est réservé aux diplômes nationaux et titres RNCP — PAS aux certifications RS.** Max 25 participants.
+  **Dépôt : de 4 mois à 15 jours calendaires avant le démarrage, OBLIGATOIREMENT via un Point d'Accueil** (un dossier envoyé au siège n'est pas instruit).
+- **FAFCEA** : ⚠️ **le numérique / web / vidéo est TRANSVERSE = 25 €/h** (les 35 €/h sont le taux technique métier) ; 100 h/an ; **600 €/an si CFP ≤ 85 € (dès 1/9/2026)**. Qualiopi obligatoire depuis le 1/7/2026.
+  **Dépôt : 3 mois avant → jusqu'au jour du début.**
+- 🔥 **FAFCEA « parcours individualisé »** (sur mesure, gestion d'entreprise) : **80 €/h, 40 h/an** = 3 200 € ; 1 parcours/entreprise/5 ans ; min. 14 h, ≥ 2 intitulés de ≥ 4 h ; **100 % distanciel et e-learning interdits** ; autodiagnostic préalable ; **OF obligatoirement référencé FAFCEA**. → voir `livrables/D-strategie/D1` §2bis.
+- **FIF PL** (professions libérales, courtiers) : ordre de grandeur 900 €/an [À vérifier]. **Dépôt jusqu'à 10 jours APRÈS le début** — le plus souple.
+- **Constructys** : 19 €/h (demandes reçues dès le 1/6/2026) ; les < 11 salariés conserveraient 24 €/h [À vérifier].
 → **Ne jamais vendre « financé à 100 % »** : le reste à charge est réel.
 
 ## 6. Livrables (branche `claude/new-session-nefcch`)
@@ -38,7 +42,9 @@ Formulations **bannies** : « gratuit », « 100 % financé », « sans reste à
 - `livrables/00-cadrage/` : `00_cadrage.md`
 - `livrables/A-marketing/` : `A0_Marche_et_Personas.md` · `A_scripts_ugc.md` · `A_scripts_ugc_v2.md`
 - `livrables/B-socle/` : `B_pilotage.md` · `B1_Programme_AFEST_Visibilite_Locale.md` · `B2_Modele_Contrat_Sous_Traitance.md` · `B3_Grilles_Pedagogiques.md` · `B4_Programmes_Commercialisables_Qualiopi.md` · `Referentiel_Competences_Qualiopi.md`
-- `livrables/C-site/` : `C_architecture_site.md` · `maquette.html` · `apercus/`
+- `livrables/C-site/` : `C_architecture_site.md` · `site.html` · `SEO_strategie.md` · `INFOS_A_FOURNIR.md` · `formulaire/` · `img/` · `apercus/`
+- `livrables/D-strategie/` : `D0_Analyse_Strategique.md` · `D1_Business_Model_Unit_Economics.md` · `D2_Plan_Commercialisation.md` · `D3_Operationnel_ADS_Meta.md`
+- `livrables/E-produit/` : `E0_Architecture_Produit.md` · `E1_Module_Generateur_Scripts.md` · `E2_Module_Generateur_Prompts.md` · `E2b_Modeles_Prompts_Prets.md` · `E3_Stack_Technique.md` · `E4_Idees_Strategiques.md`
 
 ## 7. Chantiers (master prompt)
 A = 10 scripts UGC (**fait** : fiche signal + 10 angles + 10 scripts + plan de test) · B = pilotage (**socle fait**) · C = site vitrine · D = plateforme de gestion.

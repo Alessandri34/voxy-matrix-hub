@@ -49,6 +49,21 @@ Les **fonds de formation ne financent que de la formation réelle**. Toute prest
 - **[site.html](C-site/site.html)** — **Site multi-pages complet** : accueil + catalogue + 4 fiches formation (structure Qualiopi) + méthode, financements, diagnostic, à-propos, contact, Le Mag, légales. Navigation par ancres, tous boutons cliquables.
 - **[maquette.html](C-site/maquette.html)** — Première maquette (accueil seul), conservée pour historique.
 - **`apercus/`** — Rendus vérifiés (desktop 1280, tablette 768, mobile 360, pleine page).
+
+### `D-strategie/` — 🆕 Stratégie, économie & commercialisation
+- **[D_SYNTHESE_PDG.md](D-strategie/D_SYNTHESE_PDG.md)** — ⭐ **À LIRE EN PREMIER.** Thèse, 5 découvertes, grille tarifaire, ordre d'exécution, 12 décisions, 5 actions de la semaine.
+- **[D0_Analyse_Strategique.md](D-strategie/D0_Analyse_Strategique.md)** — Diagnostic sans complaisance, thèse centrale (OF + logiciel), conformité des 3 périmètres, goulots réels, positionnement, moat, pré-mortem.
+- **[D1_Business_Model_Unit_Economics.md](D-strategie/D1_Business_Model_Unit_Economics.md)** — Ingénierie de durée, grille tarifaire, coûts collectif vs individuel, parcours individualisé FAFCEA à 80 €/h, LTV/CAC, trésorerie, plafond du marché local.
+- **[D2_Plan_Commercialisation.md](D-strategie/D2_Plan_Commercialisation.md)** — Client idéal, assistant dossier de financement, canaux par rendement, tunnel, script de découverte, 8 objections, **roadmap 90 jours**.
+- **[D3_Operationnel_ADS_Meta.md](D-strategie/D3_Operationnel_ADS_Meta.md)** — Plan publicitaire 2 000 € / 12 créas : conformité, 3 phases (test / apprentissage / scale), seuils de décision, 5 erreurs à éviter. **Planifié, non lancé.**
+
+### `E-produit/` — 🆕 Architecture produit & modules IA
+- **[E0_Architecture_Produit.md](E-produit/E0_Architecture_Produit.md)** — Vision, 3 utilisateurs du produit, modules, différenciation, conformité par construction, stack, séquencement, modèle de données.
+- **[E1_Module_Generateur_Scripts.md](E-produit/E1_Module_Generateur_Scripts.md)** — Questionnaire, enrichissement automatique, moteur de raisonnement à 3 passes, contrôle de conformité, boucle de mesure, squelette de prompt.
+- **[E2_Module_Generateur_Prompts.md](E-produit/E2_Module_Generateur_Prompts.md)** — Noyau 5 champs, questions adaptatives, gates, journal de session, bibliothèque de méthodes, entrée vocale.
+- **[E2b_Modeles_Prompts_Prets.md](E-produit/E2b_Modeles_Prompts_Prets.md)** — ✅ **3 modèles .MD utilisables dès maintenant** (créer un outil · monter une offre · plan de contenu).
+- **[E3_Stack_Technique.md](E-produit/E3_Stack_Technique.md)** — Démonstration « jamais de GPU », architecture LLM en 3 phases, souveraineté UE, BYOK, sources de données et verdicts juridiques, budget.
+- **[E4_Idees_Strategiques.md](E-produit/E4_Idees_Strategiques.md)** — 10 opportunités non sollicitées, matrice de priorisation, les 3 à faire en premier.
 - Version interactive en ligne : maquette publiée en artefact Claude (lien partagé séparément).
 
 ---
