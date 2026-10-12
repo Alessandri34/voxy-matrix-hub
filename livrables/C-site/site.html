@@ -1,8 +1,8 @@
-<title>Voxy Formations</title>
+<title>VFormations</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Raleway:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-/* Voxy Formations — site multi-pages (routeur par ancres). Gabarit Cegos, palette bleu,
+/* VFormations — site multi-pages (routeur par ancres). Gabarit Cegos, palette bleu,
    typo Poppins (titres) / Raleway (corps). Auto-layout fluide clamp(). Mono-thème clair. */
 
 :root {
@@ -79,8 +79,8 @@ a{color:inherit;}
 .header-top .wrap{display:flex;align-items:center;gap:var(--gap-sm);padding-block:clamp(.6rem,.4rem + .6vw,.9rem);flex-wrap:nowrap;}
 .burger{display:none;width:42px;height:42px;border:1px solid var(--line);border-radius:12px;background:#fff;cursor:pointer;align-items:center;justify-content:center;flex-shrink:0;color:var(--head);}
 .brand{display:flex;align-items:center;gap:clamp(.6rem,.4rem + .6vw,.9rem);text-decoration:none;flex-shrink:0;margin-right:auto;}
-.brand-logo{font-family:'Poppins',sans-serif;font-weight:600;font-size:clamp(1.5rem,1.2rem + 1vw,1.85rem);color:var(--head);line-height:1;position:relative;}
-.brand-logo::before{content:'';position:absolute;top:1px;left:4px;width:6px;height:6px;border-radius:50%;background:var(--red);}
+.brand-mark{height:clamp(30px,1.6rem + 1vw,38px);width:auto;flex-shrink:0;}
+.brand-name{font-family:'Poppins',sans-serif;font-weight:700;font-size:clamp(1.2rem,1rem + 1vw,1.5rem);color:var(--head);line-height:1;letter-spacing:-.01em;}
 .brand-tag{border-left:2px solid var(--line);padding-left:clamp(.6rem,.4rem + .5vw,.9rem);font-family:'Poppins',sans-serif;font-weight:500;font-size:var(--fs-xs);line-height:1.25;color:var(--head);max-width:200px;}
 .brand-tag span{color:var(--muted);font-weight:400;}
 .hsearch{flex:1 1 180px;max-width:360px;display:flex;align-items:center;gap:.5rem;background:var(--cream);border-radius:var(--r-pill);padding:.3rem .3rem .3rem 1.1rem;}
@@ -273,7 +273,7 @@ section.sec{padding-block:var(--section-y);}
 .callout.red{border-color:var(--red);background:#FDEEF0;color:#8a1020;}
 .callout b{font-family:'Poppins',sans-serif;}
 
-/* Deliverables (différenciateur Voxy) */
+/* Deliverables (différenciateur VFormations) */
 .deliver{background:linear-gradient(135deg,var(--plum),var(--blue-brand));color:#fff;border-radius:var(--r);padding:clamp(1.3rem,1rem + 1.5vw,2rem);}
 .deliver h3{color:#fff;font-size:var(--fs-h3);margin-bottom:1rem;display:flex;align-items:center;gap:.6rem;}
 .deliver-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:1rem;}
@@ -393,16 +393,17 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
       <button class="burger" aria-label="Menu" onclick="var m=document.getElementById('mnav');m.dataset.open=m.dataset.open==='1'?'0':'1';">
         <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 6h16M3 11h16M3 16h16"/></svg>
       </button>
-      <a class="brand" href="#accueil">
-        <span class="brand-logo">voxy</span>
-        <span class="brand-tag">Formation professionnelle<br><span>Digital · Vente · Vidéo — Hérault</span></span>
+      <a class="brand" href="#accueil" aria-label="VFormations — accueil">
+        <img class="brand-mark" src="img/logo-mark-blue.png" alt="VFormations">
+        <span class="brand-name">VFormations</span>
+        <span class="brand-tag">Organisme certifié Qualiopi<br><span>Digital · Web · IA — Hérault</span></span>
       </a>
       <form class="hsearch" onsubmit="location.hash='#formations';return false;">
         <input type="text" placeholder="Rechercher une formation…" aria-label="Rechercher">
         <button type="submit" aria-label="Rechercher"><svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.3"><circle cx="7" cy="7" r="5"/><path d="M11 11l4 4"/></svg></button>
       </form>
       <div class="hutil">
-        <a href="#contact"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4c0 7 6 11 11 11l1-3-3-1-1 1c-2-1-4-3-5-5l1-1-1-3z"/></svg> <span class="lbl">04 00 00 00 00</span></a>
+        <a href="#contact"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4c0 7 6 11 11 11l1-3-3-1-1 1c-2-1-4-3-5-5l1-1-1-3z"/></svg> <span class="lbl">07 63 67 82 92</span></a>
         <a href="#contact"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="14" height="10" rx="1.5"/><path d="M2 5l7 5 7-5"/></svg> <span class="lbl">Nous contacter</span></a>
         <a href="#diagnostic"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="5.5" r="3"/><path d="M2.5 15c0-3 2.8-4.5 5.5-4.5S13.5 12 13.5 15"/></svg> <span class="lbl">Espace client</span></a>
         <a class="cart" href="#diagnostic"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 2h2l1.5 9h8L16 5H5"/><circle cx="7" cy="15" r="1.2"/><circle cx="13" cy="15" r="1.2"/></svg><span class="badge">0</span></a>
@@ -485,7 +486,7 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
           <p>On se déplace dans votre commerce pour vous former sur votre vrai cas. Vous repartez autonome, avec vos propres outils — pas dépendant d'une agence.</p>
           <a class="btn btn-outline-w" href="#methode">Découvrir notre méthode</a>
         </div>
-        <div class="feature-logo"><div class="big">voxy</div><div class="sub">Beyond the agency</div></div>
+        <div class="feature-logo"><div class="big">VFormations</div><div class="sub">Beyond the agency</div></div>
       </div>
     </div>
   </section>
@@ -497,17 +498,17 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
         <article class="fcard">
           <div class="media m1"><svg fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><rect x="2" y="5" width="15" height="14" rx="2"/><path d="M17 9l5-3v12l-5-3z"/></svg></div>
           <div class="fb"><h3>Visibilité locale par la vidéo</h3><div class="subt">Filmer, monter et diffuser pour attirer des clients locaux</div><div class="rate"><span class="st">★★★★★</span> Nouvelle formation</div><div class="dur"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg> 14 h à 60 h · présentiel</div></div>
-          <div class="ff"><a class="btn btn-wine" href="#formation-video">Voir la formation</a><div class="price">dès 35 €/h<small>finançable</small></div></div>
+          <div class="ff"><a class="btn btn-wine" href="#formation-video">Voir la formation</a><div class="price">dès 1 190 €<small>finançable</small></div></div>
         </article>
         <article class="fcard">
           <div class="media m2"><svg fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path d="M3 7h18l-1.5 11H4.5z"/><path d="M8 7V5a4 4 0 018 0v2"/></svg></div>
           <div class="fb"><h3>Créer et piloter sa boutique en ligne</h3><div class="subt">De la création du site à la première vente</div><div class="rate"><span class="st">★★★★★</span> Nouvelle formation</div><div class="dur"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg> 14 h à 35 h · présentiel</div></div>
-          <div class="ff"><a class="btn btn-wine" href="#formation-boutique">Voir la formation</a><div class="price">dès 35 €/h<small>finançable</small></div></div>
+          <div class="ff"><a class="btn btn-wine" href="#formation-boutique">Voir la formation</a><div class="price">dès 1 190 €<small>finançable</small></div></div>
         </article>
         <article class="fcard">
           <div class="media m3"><svg fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path d="M3 11l5-6 4 4 5-6"/><path d="M15 3h4v4"/></svg></div>
           <div class="fb"><h3>Structurer sa prospection B2B</h3><div class="subt">Ciblage, prise de contact, relance, outils</div><div class="rate"><span class="st">★★★★★</span> Nouvelle formation</div><div class="dur"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg> 14 h à 35 h · présentiel</div></div>
-          <div class="ff"><a class="btn btn-wine" href="#formation-prospection">Voir la formation</a><div class="price">dès 35 €/h<small>finançable</small></div></div>
+          <div class="ff"><a class="btn btn-wine" href="#formation-prospection">Voir la formation</a><div class="price">dès 1 190 €<small>finançable</small></div></div>
         </article>
       </div>
       <div class="cbtn" style="margin-top:2rem;"><a class="btn btn-white" href="#formations">Voir tout le catalogue</a></div>
@@ -579,22 +580,22 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
         <article class="fcard lite" data-cat="video">
           <div class="media m1"><svg fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><rect x="2" y="5" width="15" height="14" rx="2"/><path d="M17 9l5-3v12l-5-3z"/></svg></div>
           <div class="fb"><h3>Développer sa visibilité locale par la vidéo</h3><div class="subt">Filmer, monter et diffuser soi-même des vidéos courtes — offre pilote.</div><div class="rate"><span class="st">★★★★★</span> Nouvelle formation</div><div class="dur"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg> 14 h à 60 h · présentiel · AFEST</div></div>
-          <div class="ff"><a class="btn btn-wine" href="#formation-video">Voir la formation</a><div class="price">dès 35 €/h<small>finançable</small></div></div>
+          <div class="ff"><a class="btn btn-wine" href="#formation-video">Voir la formation</a><div class="price">dès 1 190 €<small>finançable</small></div></div>
         </article>
         <article class="fcard lite" data-cat="web">
           <div class="media m2"><svg fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 8h20"/></svg></div>
           <div class="fb"><h3>Créer un site internet professionnel</h3><div class="subt">Concevoir, mettre en ligne et piloter un site qui amène des clients.</div><div class="rate"><span class="st">★★★★★</span> Formation phare</div><div class="dur"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg> 14 h à 35 h · présentiel</div></div>
-          <div class="ff"><a class="btn btn-wine" href="#formation-site">Voir la formation</a><div class="price">dès 35 €/h<small>finançable</small></div></div>
+          <div class="ff"><a class="btn btn-wine" href="#formation-site">Voir la formation</a><div class="price">dès 1 190 €<small>finançable</small></div></div>
         </article>
         <article class="fcard lite" data-cat="web">
           <div class="media m2"><svg fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path d="M3 7h18l-1.5 11H4.5z"/><path d="M8 7V5a4 4 0 018 0v2"/></svg></div>
           <div class="fb"><h3>Créer et piloter sa boutique en ligne</h3><div class="subt">De la création du site à la première vente, sur votre catalogue.</div><div class="rate"><span class="st">★★★★★</span> Nouvelle formation</div><div class="dur"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg> 14 h à 35 h · présentiel</div></div>
-          <div class="ff"><a class="btn btn-wine" href="#formation-boutique">Voir la formation</a><div class="price">dès 35 €/h<small>finançable</small></div></div>
+          <div class="ff"><a class="btn btn-wine" href="#formation-boutique">Voir la formation</a><div class="price">dès 1 190 €<small>finançable</small></div></div>
         </article>
         <article class="fcard lite" data-cat="vente">
           <div class="media m3"><svg fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path d="M3 11l5-6 4 4 5-6"/><path d="M15 3h4v4"/></svg></div>
           <div class="fb"><h3>Structurer sa prospection commerciale B2B</h3><div class="subt">Ciblage, message, prise de rendez-vous et suivi — sur vos vrais prospects.</div><div class="rate"><span class="st">★★★★★</span> Nouvelle formation</div><div class="dur"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg> 14 h à 60 h · présentiel</div></div>
-          <div class="ff"><a class="btn btn-wine" href="#formation-prospection">Voir la formation</a><div class="price">dès 35 €/h<small>finançable</small></div></div>
+          <div class="ff"><a class="btn btn-wine" href="#formation-prospection">Voir la formation</a><div class="price">dès 1 190 €<small>finançable</small></div></div>
         </article>
       </div>
       <div class="callout blue" style="margin-top:2rem;"><b>Besoin d'un parcours sur-mesure ?</b> On construit un programme intra sur votre cas précis. <a href="#diagnostic" style="color:inherit;text-decoration:underline;">Réservez un diagnostic</a> pour en parler.</div>
@@ -663,7 +664,7 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
             <div class="row"><dt>Méthodes</dt><dd>Mises en situation + phases réflexives. 70 % de pratique.</dd></div>
             <div class="row"><dt>Évaluation</dt><dd>Positionnement, évaluations jalonnées, à chaud et à froid à 90 jours.</dd></div>
             <div class="row"><dt>Accessibilité</dt><dd>Référent handicap désigné, adaptations possibles (PSH).</dd></div>
-            <div class="row"><dt>Délai d'accès</dt><dd>[X] jours après accord de financement.</dd></div>
+            <div class="row"><dt>Délai d'accès</dt><dd>11 jours ouvrés après accord de financement.</dd></div>
           </div>
           <div class="callout" style="margin-top:1rem;">Indicateurs de résultats (satisfaction, réussite) : <b>à publier après les premières sessions</b>, avec la méthode de calcul.</div>
         </div>
@@ -678,7 +679,7 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
         </div>
       </div>
       <aside class="rail">
-        <div class="price"><b>dès 35 €/h</b><small>Tarif indicatif · finançable</small></div>
+        <div class="price"><b>dès 1 190 €</b><small>Tarif indicatif · finançable</small></div>
         <ul class="rail-facts">
           <li><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 20 20"><circle cx="10" cy="10" r="8"/><path d="M10 6v4l3 2"/></svg> 14 h à 35 h</li>
           <li><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 20 20"><path d="M10 2c3.3 0 6 2.5 6 6 0 4-6 10-6 10S4 12 4 8c0-3.5 2.7-6 6-6z"/><circle cx="10" cy="8" r="2"/></svg> Présentiel · Hérault (34)</li>
@@ -762,7 +763,7 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
             <div class="row"><dt>Méthodes</dt><dd>Mises en situation + phases réflexives jalonnées.</dd></div>
             <div class="row"><dt>Évaluation</dt><dd>Positionnement, jalons, à chaud, à froid 90 j.</dd></div>
             <div class="row"><dt>Accessibilité</dt><dd>Référent handicap, adaptations possibles (PSH).</dd></div>
-            <div class="row"><dt>Délai d'accès</dt><dd>[X] jours après accord de financement.</dd></div>
+            <div class="row"><dt>Délai d'accès</dt><dd>11 jours ouvrés après accord de financement.</dd></div>
           </div>
           <div class="callout" style="margin-top:1rem;">Indicateurs de résultats : <b>à publier après les premières sessions</b>.</div>
         </div>
@@ -777,7 +778,7 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
         </div>
       </div>
       <aside class="rail">
-        <div class="price"><b>dès 35 €/h</b><small>Tarif indicatif · finançable</small></div>
+        <div class="price"><b>dès 1 190 €</b><small>Tarif indicatif · finançable</small></div>
         <ul class="rail-facts">
           <li><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 20 20"><circle cx="10" cy="10" r="8"/><path d="M10 6v4l3 2"/></svg> 14 h à 60 h</li>
           <li><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 20 20"><path d="M10 2c3.3 0 6 2.5 6 6 0 4-6 10-6 10S4 12 4 8c0-3.5 2.7-6 6-6z"/><circle cx="10" cy="8" r="2"/></svg> Présentiel · Hérault (34)</li>
@@ -853,7 +854,7 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
             <div class="row"><dt>Conformité</dt><dd>Prospection B2B sur intérêt légitime, information + droit d'opposition. Aucun ciblage de particuliers ni de CPF.</dd></div>
             <div class="row"><dt>Évaluation</dt><dd>Positionnement, jalons, à chaud, à froid 90 j.</dd></div>
             <div class="row"><dt>Accessibilité</dt><dd>Référent handicap, adaptations (PSH).</dd></div>
-            <div class="row"><dt>Délai d'accès</dt><dd>[X] jours après accord de financement.</dd></div>
+            <div class="row"><dt>Délai d'accès</dt><dd>11 jours ouvrés après accord de financement.</dd></div>
           </div>
           <div class="callout" style="margin-top:1rem;">Indicateurs de résultats : <b>à publier après les premières sessions</b>.</div>
         </div>
@@ -868,7 +869,7 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
         </div>
       </div>
       <aside class="rail">
-        <div class="price"><b>dès 35 €/h</b><small>Tarif indicatif · finançable</small></div>
+        <div class="price"><b>dès 1 190 €</b><small>Tarif indicatif · finançable</small></div>
         <ul class="rail-facts">
           <li><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 20 20"><circle cx="10" cy="10" r="8"/><path d="M10 6v4l3 2"/></svg> 14 h à 60 h</li>
           <li><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 20 20"><path d="M10 2c3.3 0 6 2.5 6 6 0 4-6 10-6 10S4 12 4 8c0-3.5 2.7-6 6-6z"/><circle cx="10" cy="8" r="2"/></svg> Présentiel · Hérault (34)</li>
@@ -951,7 +952,7 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
             <div class="row"><dt>Format</dt><dd>Présentiel, dans votre commerce (AFEST).</dd></div>
             <div class="row"><dt>Évaluation</dt><dd>Positionnement, jalons, à chaud, à froid à 90 j.</dd></div>
             <div class="row"><dt>Accessibilité</dt><dd>Référent handicap, adaptations (PSH) — ind. 26.</dd></div>
-            <div class="row"><dt>Délai d'accès</dt><dd>[X] jours après accord de financement.</dd></div>
+            <div class="row"><dt>Délai d'accès</dt><dd>11 jours ouvrés après accord de financement.</dd></div>
           </div>
           <div class="callout" style="margin-top:1rem;">Indicateurs de résultats : <b>à publier après les premières sessions</b>.</div>
         </div>
@@ -966,7 +967,7 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
         </div>
       </div>
       <aside class="rail">
-        <div class="price"><b>dès 35 €/h</b><small>Tarif indicatif · finançable</small></div>
+        <div class="price"><b>dès 1 190 €</b><small>Tarif indicatif · finançable</small></div>
         <ul class="rail-facts">
           <li><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 20 20"><circle cx="10" cy="10" r="8"/><path d="M10 6v4l3 2"/></svg> 14 h à 60 h</li>
           <li><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 20 20"><path d="M10 2c3.3 0 6 2.5 6 6 0 4-6 10-6 10S4 12 4 8c0-3.5 2.7-6 6-6z"/><circle cx="10" cy="8" r="2"/></svg> Chez vous · Hérault (34)</li>
@@ -999,7 +1000,7 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
     </div>
     <div style="margin-top:2.5rem;">
       <h2 class="sec-title">Pourquoi « formation-action » ?</h2>
-      <p class="prose" style="max-width:720px;">Les fonds de formation ne financent que de la formation réelle. Chez Voxy, vous n'achetez pas une prestation « clé en main » : vous <b>apprenez à faire</b>, sur votre propre cas, et vous repartez capable de continuer seul. C'est plus exigeant — et c'est ce qui rend la formation finançable et utile dans la durée.</p>
+      <p class="prose" style="max-width:720px;">Les fonds de formation ne financent que de la formation réelle. Chez VFormations, vous n'achetez pas une prestation « clé en main » : vous <b>apprenez à faire</b>, sur votre propre cas, et vous repartez capable de continuer seul. C'est plus exigeant — et c'est ce qui rend la formation finançable et utile dans la durée.</p>
     </div>
     <div class="ctaband" style="margin-top:2.5rem;">
       <h2>Envie de voir ce que ça donne sur votre cas ?</h2>
@@ -1089,7 +1090,7 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
     <div class="wrap">
       <div class="breadcrumb"><a href="#accueil">Accueil</a><span class="sep">›</span><span>À propos</span></div>
       <h1>Un organisme de formation local et certifié</h1>
-      <p class="lead">Voxy Formations accompagne les professionnels de l'Hérault à devenir autonomes sur leur communication et leur acquisition de clients — par la pratique, sur leur vrai cas.</p>
+      <p class="lead">VFormations accompagne les professionnels de l'Hérault à devenir autonomes sur leur communication et leur acquisition de clients — par la pratique, sur leur vrai cas.</p>
     </div>
   </section>
   <section class="sec"><div class="wrap narrow">
@@ -1097,11 +1098,11 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
     <p class="prose">Rendre les dirigeants de TPE autonomes sur leur visibilité et leur développement commercial, plutôt que dépendants d'une agence. Nous formons, nous ne faisons pas « à la place ».</p>
 
     <h2 class="sec-title" style="margin-top:2rem;">Qualité & certification</h2>
-    <div class="callout blue"><b>Certifié Qualiopi</b> au titre des actions de formation. La certification atteste de la qualité du processus mis en œuvre.</div>
+    <div class="callout blue"><b>Certifié Qualiopi</b> — certificat n° <b>VFO12912026001</b>, catégorie « actions de formation » (L.6313-1 1°), délivré par evolve, valable jusqu'au 30/07/2029. NDA 11757618175.</div>
     <div class="dl" style="margin-top:1rem;">
-      <div class="row"><dt>Taux de satisfaction</dt><dd>[à publier après les premières sessions]</dd></div>
-      <div class="row"><dt>Taux de réussite / d'atteinte des objectifs</dt><dd>[à publier]</dd></div>
-      <div class="row"><dt>Nombre de stagiaires formés</dt><dd>[à publier]</dd></div>
+      <div class="row"><dt>Taux de satisfaction</dt><dd><b>100 %</b> <span class="form-note">*sur les premières sessions — base (nombre de stagiaires) et méthode de calcul en cours de formalisation</span></dd></div>
+      <div class="row"><dt>Taux de réussite / d'atteinte des objectifs</dt><dd>Publié après un volume de sessions suffisant</dd></div>
+      <div class="row"><dt>Nombre de stagiaires formés</dt><dd>Mis à jour régulièrement</dd></div>
       <div class="row"><dt>Modalités d'évaluation</dt><dd>Positionnement, jalons, à chaud et à froid à 90 jours.</dd></div>
     </div>
 
@@ -1123,23 +1124,37 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
     </div>
   </section>
   <section class="sec"><div class="wrap">
-    <div class="presence">
-      <div class="presence-txt">
-        <h3>Voxy Formations — Hérault (34)</h3>
+    <div class="fiche">
+      <div class="fiche-main">
+        <h2 class="sec-title" style="margin-top:0;">Écrivez-nous</h2>
+        <form id="contactForm" novalidate>
+          <div class="form">
+            <div class="field"><label for="c-nom">Nom &amp; prénom *</label><input id="c-nom" name="nom" required></div>
+            <div class="field"><label for="c-email">E-mail *</label><input id="c-email" name="email" type="email" required></div>
+            <div class="field"><label for="c-tel">Téléphone</label><input id="c-tel" name="tel" type="tel"></div>
+            <div class="field"><label for="c-activite">Votre activité</label><input id="c-activite" name="activite" placeholder="Ex. restaurant, artisan, courtier…"></div>
+            <div class="field full"><label for="c-sujet">Sujet *</label>
+              <select id="c-sujet" name="sujet" required><option value="">Choisir…</option><option>Renseignement sur une formation</option><option>Financement / éligibilité</option><option>Demande de devis</option><option>Accessibilité (PSH)</option><option>Autre</option></select></div>
+            <div class="field full"><label for="c-msg">Votre message *</label><textarea id="c-msg" name="message" required></textarea></div>
+            <div class="field full"><label style="display:flex;gap:.6rem;align-items:flex-start;font-weight:400;"><input type="checkbox" id="c-rgpd" style="width:auto;margin-top:.2rem;" required> <span class="form-note">J'accepte que mes informations soient utilisées pour répondre à ma demande (voir la <a class="inl" href="#confidentialite">politique de confidentialité</a>). *</span></label></div>
+            <div class="field full"><button type="submit" class="btn btn-wine">Envoyer mon message</button></div>
+          </div>
+        </form>
+        <div id="contactOk" class="form-ok" hidden>✓ Merci, votre message est bien pris en compte (démonstration). Vous seriez recontacté sous 48 h ouvrées une fois le site en ligne.</div>
+        <p class="form-note" style="margin-top:1rem;">* Champs obligatoires · Maquette — formulaire à brancher à un service d'envoi avant mise en ligne.</p>
+      </div>
+      <aside class="rail">
+        <h3 style="margin:0;font-size:var(--fs-h3);">VFormations</h3>
         <ul class="rail-facts">
-          <li><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 20 20"><path d="M3 4c0 8 6 12 12 12l1-3-3-1-1 1c-2-1-4-3-5-5l1-1-1-3z"/></svg> <span>04 00 00 00 00 <span class="form-note">[à compléter]</span></span></li>
-          <li><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 20 20"><rect x="2" y="4" width="16" height="12" rx="1.5"/><path d="M2 5l8 6 8-6"/></svg> <span>contact@voxy-formations.fr <span class="form-note">[à compléter]</span></span></li>
-          <li><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 20 20"><path d="M10 2c3.3 0 6 2.5 6 6 0 4-6 10-6 10S4 12 4 8c0-3.5 2.7-6 6-6z"/><circle cx="10" cy="8" r="2"/></svg> <span>Montpellier · Béziers · Sète et environs</span></li>
+          <li><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 20 20"><path d="M3 4c0 8 6 12 12 12l1-3-3-1-1 1c-2-1-4-3-5-5l1-1-1-3z"/></svg> <span>07 63 67 82 92</span></li>
+          <li><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 20 20"><rect x="2" y="4" width="16" height="12" rx="1.5"/><path d="M2 5l8 6 8-6"/></svg> <span>contact@vformations.fr</span></li>
+          <li><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 20 20"><path d="M10 2c3.3 0 6 2.5 6 6 0 4-6 10-6 10S4 12 4 8c0-3.5 2.7-6 6-6z"/><circle cx="10" cy="8" r="2"/></svg> <span>Zone : Hérault (34) — Montpellier · Béziers · Sète</span></li>
+          <li><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 20 20"><path d="M4 7h12v9H4z"/><path d="M8 7V4h4v3"/></svg> <span>Siège : 47 rue Vivienne, 75002 Paris</span></li>
+          <li><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 20 20"><path d="M4 10l4 4 8-8"/></svg> <span>Certifié Qualiopi · n° VFO12912026001</span></li>
         </ul>
-        <a class="btn btn-wine" href="#diagnostic">Réserver un diagnostic</a>
-      </div>
-      <div class="mapbox">
-        <svg viewBox="0 0 300 280" fill="none" role="img" aria-label="Carte Occitanie">
-          <path d="M70 40 L120 30 L150 45 L190 38 L220 60 L245 55 L255 90 L235 120 L250 150 L225 180 L235 215 L195 230 L180 255 L150 240 L120 250 L90 230 L60 235 L45 200 L60 165 L40 135 L55 100 L50 70 Z" fill="#21457F" stroke="rgba(255,255,255,.15)" stroke-width="1.5"/>
-          <circle cx="165" cy="205" r="9" fill="#E4002B"/><circle cx="165" cy="205" r="16" fill="#E4002B" opacity=".25"/>
-          <circle cx="140" cy="215" r="6" fill="#ff5c7a"/><circle cx="188" cy="195" r="6" fill="#ff5c7a"/>
-        </svg>
-      </div>
+        <a class="btn btn-wine block" href="#diagnostic">Réserver un diagnostic</a>
+        <p class="note">On répond sous 48 h ouvrées.</p>
+      </aside>
     </div>
   </div></section>
 </section>
@@ -1173,7 +1188,7 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
   </div></section>
   <section class="sec"><div class="wrap"><article class="article">
     <img class="article-cover" src="img/mag-filmer-smartphone.jpg" alt="Commerçant de l'Hérault qui filme son activité avec un smartphone">
-    <div class="ameta"><span class="cat">Vidéo</span><span>· 10 min de lecture</span><span>· Voxy Formations</span><span>· Hérault</span></div>
+    <div class="ameta"><span class="cat">Vidéo</span><span>· 10 min de lecture</span><span>· VFormations</span><span>· Hérault</span></div>
     <p class="lead">Vous n'avez pas besoin d'un matériel de cinéma ni d'un budget d'agence pour attirer des clients près de chez vous. Avec le smartphone que vous avez déjà dans la poche et une poignée de règles simples, vous pouvez filmer votre commerce, montrer votre savoir-faire et donner envie qu'on pousse votre porte. Ce guide détaille tout, étape par étape, de la préparation à la publication.</p>
 
     <div class="tldr"><b>En résumé :</b> une bonne vidéo de commerce tient en 4 piliers — une idée claire, une lumière correcte, un son propre, des sous-titres — puis de la régularité. Le matériel compte beaucoup moins que la méthode. Et tout cela s'apprend en une à deux journées sur votre propre activité.</div>
@@ -1260,7 +1275,7 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
   </div></section>
   <section class="sec"><div class="wrap"><article class="article">
     <img class="article-cover" src="img/mag-google-business.jpg" alt="Fiche Google Business affichée sur un smartphone">
-    <div class="ameta"><span class="cat">Visibilité locale</span><span>· 11 min de lecture</span><span>· Voxy Formations</span><span>· Hérault</span></div>
+    <div class="ameta"><span class="cat">Visibilité locale</span><span>· 11 min de lecture</span><span>· VFormations</span><span>· Hérault</span></div>
     <p class="lead">Quand un habitant de Montpellier, Béziers ou Sète cherche « restaurant », « coiffeur » ou « plombier » près de chez lui, c'est votre fiche Google Business qui apparaît en premier — souvent avant votre site, parfois à sa place. La créer et la soigner est, de loin, le levier de visibilité locale le plus rentable. Voici comment la mettre en place et la faire remonter dans les résultats.</p>
 
     <div class="tldr"><b>En résumé :</b> une fiche Google Business bien remplie, avec la bonne catégorie, des photos récentes, des horaires à jour et des avis auxquels vous répondez, peut vous rendre visible localement même sans site internet. C'est gratuit, et c'est le premier réflexe à avoir pour un commerce de proximité.</div>
@@ -1353,7 +1368,7 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
   </div></section>
   <section class="sec"><div class="wrap"><article class="article">
     <img class="article-cover" src="img/mag-financement.jpg" alt="Calculer le financement et le reste à charge d'une formation">
-    <div class="ameta"><span class="cat">Financement</span><span>· 12 min de lecture</span><span>· Voxy Formations</span></div>
+    <div class="ameta"><span class="cat">Financement</span><span>· 12 min de lecture</span><span>· VFormations</span></div>
     <p class="lead">En tant que dirigeant ou indépendant, vous cotisez déjà, chaque année, à un fonds de formation — et la plupart des professionnels ne l'utilisent jamais. Cet argent peut financer une partie de votre montée en compétences. Ce guide explique qui finance quoi en 2026, comment constituer son dossier, et surtout comment comprendre son reste à charge sans tomber dans les pièges marketing.</p>
 
     <div class="tldr"><b>En résumé :</b> selon votre statut, vous relevez de l'AGEFICE (commerce, services), du FAFCEA (artisans), d'un OPCO (salariés) ou de Constructys (BTP). Chaque fonds a des plafonds annuels. La prise en charge est <b>partielle</b> : un reste à charge existe presque toujours, et un bon organisme vous l'annonce <b>avant</b> l'inscription. Méfiez-vous du « 100 % financé, 0 € ».</div>
@@ -1388,7 +1403,7 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
 
     <h2 id="a3-piege">Le piège du « 100 % financé, 0 € »</h2>
     <p>Vous avez sûrement vu des publicités promettant une formation « <b>100 % financée, 0 € de reste à charge</b> ». Soyez prudent : dans la grande majorité des cas, c'est faux, et ce type de promesse est <b>encadré par la loi</b>. Les fonds de formation ne financent que de la <b>formation réelle</b>, et un reste à charge existe presque toujours.</p>
-    <p>Chez Voxy, nous faisons l'inverse de ces promesses : le reste à charge est <b>écrit noir sur blanc sur le devis, avant toute inscription</b>. C'est la condition d'une relation de confiance — et d'un dossier conforme.</p>
+    <p>Chez VFormations, nous faisons l'inverse de ces promesses : le reste à charge est <b>écrit noir sur blanc sur le devis, avant toute inscription</b>. C'est la condition d'une relation de confiance — et d'un dossier conforme.</p>
 
     <h2 id="a3-etapes">Les étapes pour faire financer sa formation</h2>
     <ol>
@@ -1400,7 +1415,7 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
     </ol>
 
     <h2 id="a3-qualiopi">Pourquoi Qualiopi est indispensable</h2>
-    <p>Un point essentiel : <b>seules les formations dispensées par un organisme certifié Qualiopi peuvent être financées</b> par ces fonds. Sans Qualiopi, pas de prise en charge. C'est pour cela que la certification est devenue incontournable — on l'explique en détail dans <a class="inl" href="#art-qualiopi">Qualiopi, c'est quoi ?</a> Voxy Formations est certifié : vos formations sont donc éligibles.</p>
+    <p>Un point essentiel : <b>seules les formations dispensées par un organisme certifié Qualiopi peuvent être financées</b> par ces fonds. Sans Qualiopi, pas de prise en charge. C'est pour cela que la certification est devenue incontournable — on l'explique en détail dans <a class="inl" href="#art-qualiopi">Qualiopi, c'est quoi ?</a> VFormations est certifié : vos formations sont donc éligibles.</p>
     <div class="callout blue"><b>Estimez votre financement.</b> Le détail des financeurs et un exemple chiffré sont sur notre page <a class="inl" href="#financements">Financements</a>. Pour votre cas précis, <a class="inl" href="#diagnostic">réservez un diagnostic gratuit</a> : on vérifie votre éligibilité et votre reste à charge en 30 minutes.</div>
 
     <h2 id="a3-faq">Questions fréquentes</h2>
@@ -1429,7 +1444,7 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
   </div></section>
   <section class="sec"><div class="wrap"><article class="article">
     <img class="article-cover" src="img/mag-reels-social.jpg" alt="Créer des vidéos courtes pour Reels, TikTok et Shorts">
-    <div class="ameta"><span class="cat">Vidéo</span><span>· 9 min de lecture</span><span>· Voxy Formations</span></div>
+    <div class="ameta"><span class="cat">Vidéo</span><span>· 9 min de lecture</span><span>· VFormations</span></div>
     <p class="lead">Reels Instagram, TikTok, Shorts YouTube : ce sont les mêmes vidéos verticales courtes, mais chaque plateforme a ses codes, son public et ses atouts. Pour un commerce local, inutile d'être partout : mieux vaut bien choisir. Ce guide vous aide à décider où publier, quoi filmer, et à quelle fréquence.</p>
 
     <div class="tldr"><b>En résumé :</b> filmez une fois, adaptez le format à chaque réseau. Instagram (Reels) est le plus efficace pour un commerce local visuel ; TikTok vise la découverte large et un public plus jeune ; YouTube Shorts dure dans le temps et se retrouve via la recherche. La régularité prime sur la plateforme.</div>
@@ -1494,7 +1509,7 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
   </div></section>
   <section class="sec"><div class="wrap"><article class="article">
     <img class="article-cover" src="img/mag-clients-locaux.jpg" alt="Commerce local de l'Hérault qui attire des clients">
-    <div class="ameta"><span class="cat">Local</span><span>· 11 min de lecture</span><span>· Voxy Formations · Hérault</span></div>
+    <div class="ameta"><span class="cat">Local</span><span>· 11 min de lecture</span><span>· VFormations · Hérault</span></div>
     <p class="lead">Terrasse vide le mardi, fauteuils libres en semaine, carnet de commandes creux l'hiver ? La visibilité locale n'est pas une question de chance : elle se construit, méthodiquement. Voici une feuille de route concrète, déclinée par métier, pour attirer davantage de clients près de chez vous — à Montpellier, Béziers, Sète et partout dans le 34.</p>
 
     <div class="tldr"><b>En résumé :</b> trois leviers se combinent — une fiche Google soignée, des vidéos courtes régulières, et des avis clients. Le point commun : montrer concrètement votre savoir-faire, de façon locale et régulière. Et tout cela, vous pouvez apprendre à le faire vous-même.</div>
@@ -1567,7 +1582,7 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
   </div></section>
   <section class="sec"><div class="wrap"><article class="article">
     <img class="article-cover" src="img/mag-qualiopi.jpg" alt="Certification Qualiopi et documents de formation">
-    <div class="ameta"><span class="cat">Financement</span><span>· 8 min de lecture</span><span>· Voxy Formations</span></div>
+    <div class="ameta"><span class="cat">Financement</span><span>· 8 min de lecture</span><span>· VFormations</span></div>
     <p class="lead">Vous avez vu le logo « Qualiopi » sur des pages de formation sans savoir ce qu'il signifie ? C'est pourtant la clé qui conditionne le financement de votre formation. Voici une explication simple : ce qu'est Qualiopi, pourquoi c'est important pour vous, et ce que la certification garantit concrètement.</p>
 
     <div class="tldr"><b>En résumé :</b> Qualiopi est la certification qualité nationale des organismes de formation. Depuis 2022, seules les formations dispensées par un organisme certifié peuvent être financées par les fonds publics et mutualisés (AGEFICE, FAFCEA, OPCO…). Sans Qualiopi, pas de prise en charge.</div>
@@ -1582,7 +1597,7 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
     </ol></nav>
 
     <h2 id="a6-quoi">Qualiopi, une certification qualité</h2>
-    <p>Qualiopi est la <b>marque de certification nationale</b> qui atteste de la qualité du <b>processus</b> mis en œuvre par un prestataire d'actions de formation. Elle est délivrée après un <b>audit indépendant</b>, au titre d'une ou plusieurs catégories d'actions (pour un organisme de formation comme Voxy : les actions de formation). La certification repose sur un référentiel national organisé en critères et indicateurs.</p>
+    <p>Qualiopi est la <b>marque de certification nationale</b> qui atteste de la qualité du <b>processus</b> mis en œuvre par un prestataire d'actions de formation. Elle est délivrée après un <b>audit indépendant</b>, au titre d'une ou plusieurs catégories d'actions (pour un organisme de formation comme VFormations : les actions de formation). La certification repose sur un référentiel national organisé en critères et indicateurs.</p>
     <p>Point important : Qualiopi certifie le <b>processus</b> de l'organisme (comment il conçoit, mène et évalue ses formations), pas le contenu de chaque formation en lui-même.</p>
 
     <h2 id="a6-important">Pourquoi c'est important pour vous</h2>
@@ -1600,7 +1615,7 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
     </ul>
 
     <h2 id="a6-verifier">Comment vérifier qu'un organisme est bien certifié</h2>
-    <p>Un organisme certifié peut vous communiquer son <b>certificat Qualiopi</b> (avec son numéro et la catégorie d'actions concernée). Vous pouvez aussi demander son numéro de déclaration d'activité (NDA). Méfiez-vous des organismes qui affichent le logo sans pouvoir fournir ces éléments. Voxy Formations est un organisme certifié Qualiopi : vos formations sont donc <b>éligibles au financement</b>, et nous vous accompagnons pour le dossier (voir la page <a class="inl" href="#financements">Financements</a>).</p>
+    <p>Un organisme certifié peut vous communiquer son <b>certificat Qualiopi</b> (avec son numéro et la catégorie d'actions concernée). Vous pouvez aussi demander son numéro de déclaration d'activité (NDA). Méfiez-vous des organismes qui affichent le logo sans pouvoir fournir ces éléments. VFormations est un organisme certifié Qualiopi : vos formations sont donc <b>éligibles au financement</b>, et nous vous accompagnons pour le dossier (voir la page <a class="inl" href="#financements">Financements</a>).</p>
 
     <h2 id="a6-idees">Idées reçues sur Qualiopi</h2>
     <ul>
@@ -1632,7 +1647,7 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
   <section class="phero"><div class="wrap">
     <div class="breadcrumb"><a href="#accueil">Accueil</a><span class="sep">›</span><span>Près de chez vous</span></div>
     <h1>Nos formations près de chez vous, dans l'Hérault</h1>
-    <p class="lead">Voxy se déplace dans tout le département (34). Choisissez votre ville ou votre métier : on adapte la formation à votre réalité locale et à votre financeur.</p>
+    <p class="lead">VFormations se déplace dans tout le département (34). Choisissez votre ville ou votre métier : on adapte la formation à votre réalité locale et à votre financeur.</p>
   </div></section>
   <section class="sec"><div class="wrap">
     <h2 class="sec-title">Par ville</h2>
@@ -1672,7 +1687,7 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
       <a class="card-blank" href="#formation-site"><span class="k">Web</span><h4>Créer un site internet</h4><span class="m">En ligne pendant la formation</span></a>
       <a class="card-blank" href="#formation-boutique"><span class="k">E-commerce</span><h4>Boutique en ligne</h4><span class="m">Vendre sur votre catalogue</span></a>
     </div>
-    <h2 class="sec-title" style="margin-top:2rem;">Pourquoi se former avec Voxy à Montpellier</h2>
+    <h2 class="sec-title" style="margin-top:2rem;">Pourquoi se former avec VFormations à Montpellier</h2>
     <ul class="ul-check">
       <li>Le formateur se déplace dans Montpellier et sa métropole</li>
       <li>Formation sur votre vrai cas (votre commerce, vos produits, votre quartier)</li>
@@ -1905,20 +1920,32 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
 <section class="page" data-page="mentions" hidden>
   <section class="phero"><div class="wrap"><div class="breadcrumb"><a href="#accueil">Accueil</a><span class="sep">›</span><span>Mentions légales</span></div><h1>Mentions légales</h1></div></section>
   <section class="sec"><div class="wrap narrow legal">
-    <h2>Éditeur</h2><p>Voxy Formations — [raison sociale, statut juridique à compléter]. SIRET : [à compléter]. Siège : [adresse], Hérault (34).</p>
-    <h2>Déclaration d'activité</h2><p>Numéro de déclaration d'activité (NDA) : [à compléter] — enregistré auprès de la Préfecture de région. Cet enregistrement ne vaut pas agrément de l'État.</p>
-    <h2>Certification</h2><p>Organisme certifié Qualiopi au titre des actions de formation — certificat n° [à compléter].</p>
-    <h2>Hébergement</h2><p>[Hébergeur à compléter].</p>
-    <h2>Contact</h2><p>contact@voxy-formations.fr — 04 00 00 00 00 [à compléter].</p>
+    <h2>Éditeur du site</h2>
+    <p><b>VFormations</b> — Société par actions simplifiée (SAS), au capital social de [montant à compléter] €.<br>
+    SIREN 103&nbsp;940&nbsp;227 · SIRET (siège) 103&nbsp;940&nbsp;227&nbsp;00012 · Code APE 85.59A (formation continue d'adultes) · RCS Paris.<br>
+    TVA intracommunautaire : FR31&nbsp;103&nbsp;940&nbsp;227 [à confirmer] — ou exonération de TVA sur les actions de formation (art. 261-4-4°a du CGI) le cas échéant.<br>
+    Siège social : 47 rue Vivienne, 75002 Paris.<br>
+    Nom commercial / sigle : VFormations (VOXY FORMATIONS).</p>
+    <h2>Direction</h2>
+    <p>Président : Pierre&nbsp;Nicolas Alessandri · Directeur général : Jonathan Bischoff · Directeur de la publication : Pierre&nbsp;Nicolas Alessandri.</p>
+    <h2>Déclaration d'activité &amp; certification</h2>
+    <p>Organisme de formation enregistré sous le <b>numéro de déclaration d'activité (NDA) 11757618175</b> auprès du préfet de région. Cet enregistrement ne vaut pas agrément de l'État.<br>
+    <b>Certifié Qualiopi</b> au titre de la catégorie « actions de formation » (L.6313-1 1°), certificat n° <b>VFO12912026001</b>, délivré par evolve (1 rue Marc Seguin, 26300 Alixan — accréditation Cofrac n° 5-0670), valable du 31/07/2026 au 30/07/2029.</p>
+    <h2>Contact</h2>
+    <p>E-mail : contact@vformations.fr · Téléphone : 07&nbsp;63&nbsp;67&nbsp;82&nbsp;92.<br>Zone d'intervention : Hérault (34) et Occitanie.</p>
+    <h2>Hébergement</h2>
+    <p>[Hébergeur à compléter — nom et adresse, une fois le site mis en ligne.]</p>
+    <h2>Propriété intellectuelle</h2>
+    <p>L'ensemble des contenus de ce site (textes, visuels, logo VFormations) est protégé. Toute reproduction sans autorisation écrite est interdite.</p>
   </div></section>
 </section>
 <section class="page" data-page="cgv" hidden>
   <section class="phero"><div class="wrap"><div class="breadcrumb"><a href="#accueil">Accueil</a><span class="sep">›</span><span>CGV</span></div><h1>Conditions générales de vente</h1></div></section>
   <section class="sec"><div class="wrap narrow legal">
     <p class="form-note">Document à finaliser avec relecture juridique.</p>
-    <h2>Objet</h2><p>Les présentes conditions régissent les prestations de formation professionnelle fournies par Voxy Formations.</p>
+    <h2>Objet</h2><p>Les présentes conditions régissent les prestations de formation professionnelle fournies par <b>VFormations</b> (SAS, SIRET 103&nbsp;940&nbsp;227&nbsp;00012 — 47 rue Vivienne, 75002 Paris), organisme certifié Qualiopi (n° VFO12912026001, NDA 11757618175).</p>
     <h2>Inscription & financement</h2><p>L'inscription est confirmée après signature du devis et de la convention. Le reste à charge est indiqué avant signature. La prise en charge par un financeur (AGEFICE, FAFCEA, OPCO) est soumise à son accord.</p>
-    <h2>Délais d'accès</h2><p>[X] jours après accord de financement.</p>
+    <h2>Délais d'accès</h2><p>11 jours ouvrés après accord de financement.</p>
     <h2>Annulation</h2><p>[Conditions d'annulation et de report à compléter].</p>
     <h2>Accessibilité</h2><p>Référent handicap désigné ; adaptations possibles (PSH).</p>
   </div></section>
@@ -1926,9 +1953,10 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
 <section class="page" data-page="confidentialite" hidden>
   <section class="phero"><div class="wrap"><div class="breadcrumb"><a href="#accueil">Accueil</a><span class="sep">›</span><span>Confidentialité</span></div><h1>Politique de confidentialité</h1></div></section>
   <section class="sec"><div class="wrap narrow legal">
-    <h2>Données collectées</h2><p>Les informations transmises via le formulaire de diagnostic (nom, activité, e-mail, téléphone, message) sont utilisées uniquement pour traiter votre demande.</p>
+    <h2>Responsable de traitement</h2><p>VFormations (SAS), 47 rue Vivienne, 75002 Paris — contact@vformations.fr.</p>
+    <h2>Données collectées</h2><p>Les informations transmises via nos formulaires (nom, activité, e-mail, téléphone, message) sont utilisées uniquement pour traiter votre demande.</p>
     <h2>Finalité & conservation</h2><p>Recontact commercial et montage du dossier de formation. Conservation limitée à la durée nécessaire. Aucune revente à des tiers.</p>
-    <h2>Vos droits</h2><p>Accès, rectification, suppression et opposition : écrivez à contact@voxy-formations.fr [à compléter].</p>
+    <h2>Vos droits</h2><p>Accès, rectification, suppression et opposition : écrivez à contact@vformations.fr. Vous pouvez aussi saisir la CNIL.</p>
   </div></section>
 </section>
 </main>
@@ -1938,11 +1966,11 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
   <div class="wrap">
     <div class="footer-cert">
       <div>
+        <img src="img/logo-vformations-white.png" alt="VFormations" style="height:54px;width:auto;margin-bottom:1rem;">
         <h4>Qualité et certification</h4>
         <div class="certbox">
-          <div class="afaq">AFAQ<br><span style="font-size:10px;font-weight:500;">ISO 9001</span></div>
-          <svg width="34" height="34" viewBox="0 0 24 24" fill="none"><path d="M3 10l5-2 5 3 3-5" stroke="#1E54D6" stroke-width="2.5" stroke-linecap="round"/><path d="M14 6h4v4" stroke="#E4002B" stroke-width="2.5" stroke-linecap="round"/></svg>
-          <div class="q"><b>Qualiopi</b><small>Délivrée au titre de la catégorie : actions de formation.</small></div>
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" style="flex-shrink:0"><path d="M3 10l5-2 5 3 3-5" stroke="#1E54D6" stroke-width="2.5" stroke-linecap="round"/><path d="M14 6h4v4" stroke="#E4002B" stroke-width="2.5" stroke-linecap="round"/></svg>
+          <div class="q"><b>Qualiopi · n° VFO12912026001</b><small>Catégorie : actions de formation (L.6313-1 1°) · certifié par evolve · valable jusqu'au 30/07/2029.</small></div>
         </div>
       </div>
       <div>
@@ -1962,7 +1990,7 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
       <div><h4>Ressources</h4><a href="#lemag">Le Mag</a><a href="#mentions">Mentions légales</a><a href="#cgv">CGV</a><a href="#confidentialite">Confidentialité</a></div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 Voxy Formations — NDA [à compléter] · Qualiopi n° [à compléter]</span>
+      <span>© 2026 VFormations (SAS) — SIRET 103 940 227 00012 · NDA 11757618175 · Qualiopi n° VFO12912026001</span>
       <div style="display:flex;gap:1rem;flex-wrap:wrap;"><a href="#mentions">Mentions légales</a><a href="#confidentialite">Confidentialité</a><a href="#cgv">CGV</a></div>
     </div>
   </div>
@@ -1999,6 +2027,13 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
     if (!f.checkValidity()){ f.reportValidity(); return; }
     f.hidden = true;
     var ok = document.getElementById('diagOk'); if (ok){ ok.hidden = false; ok.scrollIntoView({behavior:'smooth',block:'center'}); }
+  }); }
+  var cf = document.getElementById('contactForm');
+  if (cf){ cf.addEventListener('submit', function(e){
+    e.preventDefault();
+    if (!cf.checkValidity()){ cf.reportValidity(); return; }
+    cf.hidden = true;
+    var ok = document.getElementById('contactOk'); if (ok){ ok.hidden = false; ok.scrollIntoView({behavior:'smooth',block:'center'}); }
   }); }
   route();
 })();
