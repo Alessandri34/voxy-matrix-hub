@@ -1074,13 +1074,15 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
         <div class="field full">
           <label style="display:flex;gap:.6rem;align-items:flex-start;font-weight:400;"><input type="checkbox" id="d-rgpd" style="width:auto;margin-top:.2rem;" required> <span class="form-note">J'accepte que mes informations soient utilisées pour être recontacté au sujet de ma demande. Elles ne sont ni revendues ni transmises à des tiers. *</span></label>
         </div>
+        <div class="field full" style="position:absolute;left:-9999px;" aria-hidden="true"><label>Ne pas remplir<input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label></div>
         <div class="field full">
           <button type="submit" class="btn btn-wine">Envoyer ma demande</button>
         </div>
       </div>
     </form>
-    <div id="diagOk" class="form-ok" hidden>✓ Merci, votre demande est bien prise en compte (démonstration). Dans la version en ligne, vous seriez recontacté sous 48 h ouvrées.</div>
-    <p class="form-note" style="margin-top:1rem;">* Champs obligatoires. Maquette de démonstration — aucun formulaire n'est réellement envoyé.</p>
+    <div id="diagOk" class="form-ok" hidden>✓ Merci, votre demande a bien été envoyée. Nous vous recontactons sous 48 h ouvrées.</div>
+    <div id="diagOkErr" class="form-ok" style="background:#fdecef;border-color:#f5c2cd;" hidden>L'envoi n'a pas abouti. Écrivez-nous à <a class="inl" href="mailto:contact@vformations.fr">contact@vformations.fr</a> ou appelez le 07 63 67 82 92.</div>
+    <p class="form-note" style="margin-top:1rem;">* Champs obligatoires · Vos données servent uniquement à traiter votre demande et ne sont ni revendues ni transmises à des tiers.</p>
   </div></section>
 </section>
 
@@ -1137,11 +1139,13 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
               <select id="c-sujet" name="sujet" required><option value="">Choisir…</option><option>Renseignement sur une formation</option><option>Financement / éligibilité</option><option>Demande de devis</option><option>Accessibilité (PSH)</option><option>Autre</option></select></div>
             <div class="field full"><label for="c-msg">Votre message *</label><textarea id="c-msg" name="message" required></textarea></div>
             <div class="field full"><label style="display:flex;gap:.6rem;align-items:flex-start;font-weight:400;"><input type="checkbox" id="c-rgpd" style="width:auto;margin-top:.2rem;" required> <span class="form-note">J'accepte que mes informations soient utilisées pour répondre à ma demande (voir la <a class="inl" href="#confidentialite">politique de confidentialité</a>). *</span></label></div>
+            <div class="field full" style="position:absolute;left:-9999px;" aria-hidden="true"><label>Ne pas remplir<input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label></div>
             <div class="field full"><button type="submit" class="btn btn-wine">Envoyer mon message</button></div>
           </div>
         </form>
-        <div id="contactOk" class="form-ok" hidden>✓ Merci, votre message est bien pris en compte (démonstration). Vous seriez recontacté sous 48 h ouvrées une fois le site en ligne.</div>
-        <p class="form-note" style="margin-top:1rem;">* Champs obligatoires · Maquette — formulaire à brancher à un service d'envoi avant mise en ligne.</p>
+        <div id="contactOk" class="form-ok" hidden>✓ Merci, votre message a bien été envoyé. Nous vous recontactons sous 48 h ouvrées.</div>
+        <div id="contactOkErr" class="form-ok" style="background:#fdecef;border-color:#f5c2cd;" hidden>L'envoi n'a pas abouti. Écrivez-nous directement à <a class="inl" href="mailto:contact@vformations.fr">contact@vformations.fr</a> ou appelez le 07 63 67 82 92.</div>
+        <p class="form-note" style="margin-top:1rem;">* Champs obligatoires · Vos données servent uniquement à traiter votre demande (voir la <a class="inl" href="#confidentialite">politique de confidentialité</a>).</p>
       </div>
       <aside class="rail">
         <h3 style="margin:0;font-size:var(--fs-h3);">VFormations</h3>
@@ -1998,6 +2002,62 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
 
 <script>
 (function(){
+  // ─────────────────────────────────────────────────────────────
+  // Branchement des formulaires (Google Sheet + e-mail)
+  // Colle ici l'URL de ton application Google Apps Script déployée
+  // (voir livrables/C-site/formulaire/GUIDE_BRANCHEMENT.md).
+  // Tant que la valeur est vide, les formulaires restent en mode démo.
+  var FORM_ENDPOINT = '';
+  // ─────────────────────────────────────────────────────────────
+
+  // Envoi d'une demande vers Google Apps Script (écrit dans le Sheet + e-mail).
+  // Requête "simple" (URLSearchParams) → pas de pré-vol CORS. On est optimiste :
+  // la ligne est écrite côté serveur ; on confirme à l'envoi, on bascule sur un
+  // lien e-mail de secours en cas d'échec réseau.
+  function sendLead(form, meta){
+    var data = new URLSearchParams();
+    var fd = new FormData(form);
+    fd.forEach(function(v, k){ if (k !== '_gotcha') data.append(k, v); });
+    data.append('_form', (meta && meta.form) || form.id || 'contact');
+    data.append('_page', location.hash || '#');
+    data.append('_date', new Date().toISOString());
+    return fetch(FORM_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+      body: data.toString()
+    });
+  }
+
+  // Gère la soumission d'un formulaire de contact/diagnostic.
+  function wireLeadForm(form, okId, opts){
+    if (!form) return;
+    opts = opts || {};
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      if (!form.checkValidity()){ form.reportValidity(); return; }
+      // Pot de miel anti-spam : rempli = robot, on ignore silencieusement.
+      var hp = form.querySelector('input[name="_gotcha"]');
+      if (hp && hp.value){ form.hidden = true; return; }
+      var showOk = function(){
+        form.hidden = true;
+        var ok = document.getElementById(okId);
+        if (ok){ ok.hidden = false; ok.scrollIntoView({behavior:'smooth', block:'center'}); }
+      };
+      if (!FORM_ENDPOINT){ showOk(); return; } // mode démo : pas d'endpoint configuré
+      var btn = form.querySelector('button[type="submit"]');
+      var label = btn ? btn.textContent : '';
+      if (btn){ btn.disabled = true; btn.textContent = 'Envoi en cours…'; }
+      sendLead(form, { form: opts.form })
+        .then(function(){ showOk(); })
+        .catch(function(){
+          if (btn){ btn.disabled = false; btn.textContent = label; }
+          var err = document.getElementById(okId + 'Err');
+          if (err){ err.hidden = false; err.scrollIntoView({behavior:'smooth', block:'center'}); }
+          else { alert('Envoi impossible pour le moment. Écrivez-nous à contact@vformations.fr'); }
+        });
+    });
+  }
+
   var PAGES = ['accueil','formations','formation-site','formation-boutique','formation-prospection','formation-video','methode','financements','diagnostic','apropos','contact','lemag','art-smartphone','art-google-business','art-financement','art-reels','art-clients-locaux','art-qualiopi','pres-de-chez-vous','local-montpellier','local-beziers','local-sete','metier-restaurateur','metier-artisan','metier-salon','combo-resto-montpellier','combo-artisan-beziers','combo-reseaux-montpellier','mentions','cgv','confidentialite'];
   function route(){
     var h = (location.hash || '#accueil').replace('#','');
@@ -2020,21 +2080,9 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
       if (nav){ nav.querySelectorAll('button').forEach(function(b){ b.classList.remove('active'); }); btn.classList.add('active'); }
     }
   });
-  // diagnostic form
-  var f = document.getElementById('diagForm');
-  if (f){ f.addEventListener('submit', function(e){
-    e.preventDefault();
-    if (!f.checkValidity()){ f.reportValidity(); return; }
-    f.hidden = true;
-    var ok = document.getElementById('diagOk'); if (ok){ ok.hidden = false; ok.scrollIntoView({behavior:'smooth',block:'center'}); }
-  }); }
-  var cf = document.getElementById('contactForm');
-  if (cf){ cf.addEventListener('submit', function(e){
-    e.preventDefault();
-    if (!cf.checkValidity()){ cf.reportValidity(); return; }
-    cf.hidden = true;
-    var ok = document.getElementById('contactOk'); if (ok){ ok.hidden = false; ok.scrollIntoView({behavior:'smooth',block:'center'}); }
-  }); }
+  // Formulaires (diagnostic + contact) branchés sur Google Sheet + e-mail
+  wireLeadForm(document.getElementById('diagForm'), 'diagOk', { form: 'diagnostic' });
+  wireLeadForm(document.getElementById('contactForm'), 'contactOk', { form: 'contact' });
   route();
 })();
 </script>

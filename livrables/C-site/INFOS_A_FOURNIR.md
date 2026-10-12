@@ -61,7 +61,7 @@ Pour **chacune** des 4 formations (Site internet, Boutique en ligne, Prospection
 ## 8. 🔴 Technique — pour « rendre le site accessible » (mise en ligne)
 - [ ] **Nom de domaine** réservé + **hébergement** (ou plateforme : Netlify / Vercel / OVH / o2switch…).
 - [ ] **E-mail professionnel** sur le domaine.
-- [ ] **Branchement du formulaire de diagnostic** à un vrai service (Formspree, Web3Forms, ou fonction serverless) — aujourd'hui c'est une démo. ⚠ secrets hors code.
+- [x] **Branchement des formulaires (contact + diagnostic)** : fait via Google Apps Script → Google Sheet + e-mail sur contact@vformations.fr. Il reste à **déployer le script côté Google et coller l'URL** dans `site.html` (`FORM_ENDPOINT`) — voir `formulaire/GUIDE_BRANCHEMENT.md`. ⚠ aucun secret dans le code (l'URL /exec est publique par nature).
 - [ ] **Analytics respectueux RGPD** (Plausible / Matomo) + **bannière de consentement cookies**.
 - [ ] **Google Business Profile** créé/optimisé (levier local n°1 — voir `SEO_strategie.md`).
 - [ ] **Accessibilité web (a11y / RGAA)** : contrastes, navigation clavier, alternatives textes (déjà en partie en place ; audit avant mise en ligne).
