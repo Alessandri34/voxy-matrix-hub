@@ -1,0 +1,67 @@
+name: Déployer le site VFormations
+
+# Déclenchement manuel uniquement (bouton "Run workflow" dans l'onglet Actions).
+# On passera en automatique sur push quand le site sera prêt à être publié.
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Construire et déployer sur le VPS
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Récupérer le dépôt
+        uses: actions/checkout@v4
+
+      - name: Construire le paquet
+        run: |
+          mkdir -p dist/img
+          cp livrables/C-site/site.html dist/index.html
+          cp livrables/C-site/img/*.png dist/img/
+          cp livrables/C-site/img/*.jpg dist/img/
+          echo "Paquet construit :"
+          find dist -type f | sort
+
+      - name: Contrôle légal avant publication
+        run: |
+          if grep -qE "à compléter|\[à confirmer\]" dist/index.html; then
+            echo "::error::Des champs légaux obligatoires sont encore à compléter — déploiement interrompu."
+            grep -nE "à compléter|\[à confirmer\]" dist/index.html
+            exit 1
+          fi
+          echo "Aucun champ légal manquant."
+
+      - name: Avertissement formulaire de contact
+        run: |
+          if grep -q "var FORM_ENDPOINT = '';" dist/index.html; then
+            echo "::warning::Le formulaire de contact n'est pas branché : les demandes ne seront pas envoyées."
+          fi
+
+      - name: Installer la clé de déploiement
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H "${{ secrets.VPS_HOST }}" >> ~/.ssh/known_hosts 2>/dev/null
+
+      - name: Envoyer les fichiers sur le VPS
+        run: |
+          rsync -avz --delete \
+            -e "ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=accept-new" \
+            dist/ "${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/var/www/vformations.fr/"
+
+      - name: Corriger les droits et recharger nginx
+        run: |
+          ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=accept-new \
+            "${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}" \
+            "chown -R www-data:www-data /var/www/vformations.fr && chmod -R 755 /var/www/vformations.fr && nginx -t && systemctl reload nginx"
+
+      - name: Vérifier que le site répond
+        run: |
+          sleep 3
+          code=$(curl -s -o /dev/null -w "%{http_code}" --max-time 20 "https://vformations.fr" || echo "000")
+          echo "Réponse de https://vformations.fr : HTTP $code"
+          if [ "$code" != "200" ]; then
+            echo "::warning::Le site ne répond pas encore en 200 (DNS ou certificat peut-être pas prêt)."
+          fi
