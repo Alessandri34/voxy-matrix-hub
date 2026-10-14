@@ -36,6 +36,11 @@ const header  = prendre(/(<header class="header">[\s\S]*?<\/header>)/, 'header')
 const footer  = prendre(/(<footer class="footer">[\s\S]*?<\/footer>)/, 'footer');
 const cmp     = prendre(/(<div class="cmp" id="cmp"[\s\S]*?\n<\/div>)/, 'bandeau cookies');
 let js        = [...src.matchAll(/<script>([\s\S]*?)<\/script>/g)].pop()[1];
+// Identifiant du pixel Meta. Il n'est pas secret — il figure dans le code de
+// n'importe quel site qui en porte un — mais il vaut mieux le tenir avec les
+// autres reglages que perdu dans site.html. Le pixel ne se charge de toute
+// facon qu'apres consentement publicitaire.
+js = js.replace('__META_PIXEL_ID__', (seo.metaPixelId || '').replace(/[^0-9]/g, ''));
 
 // Le routeur doit partir de la page declaree par le serveur, pas du fragment.
 const routeurAvant = `    var h = (location.hash || '#accueil').replace('#','');

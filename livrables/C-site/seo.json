@@ -6,5 +6,7 @@
   "_bing": "Bing Webmaster Tools > Ajouter un site > Balise meta. Facultatif : IndexNow fonctionne sans compte Bing.",
   "bingSiteVerification": "",
   "_ficheGoogle": "Fiche d'etablissement Google, URL canonique par CID (stable, sans parametres de suivi). Verifiee : la page affiche bien VFormations.",
-  "ficheGoogle": "https://maps.google.com/?cid=12887937362581179627"
+  "ficheGoogle": "https://maps.google.com/?cid=12887937362581179627",
+  "_meta": "Identifiant du pixel Meta (Gestionnaire d'evenements > Sources de donnees). Chiffres uniquement. Vide = aucun pixel charge.",
+  "metaPixelId": "1079331051538456"
 }

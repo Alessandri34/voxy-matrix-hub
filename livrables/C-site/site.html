@@ -2354,6 +2354,14 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
       var hp = form.querySelector('input[name="_gotcha"]');
       if (hp && hp.value){ form.hidden = true; return; }
       var showOk = function(){
+        // Signale la conversion a Meta — uniquement si la publicite a ete
+        // acceptee. Sans cet evenement, une campagne ne peut pas s'optimiser
+        // sur les demandes de contact : Meta ne verrait que des visites.
+        try {
+          if (window.fbq && window.vfConsent && window.vfConsent.pub) {
+            window.fbq('track', 'Lead', { content_name: opts.form || 'contact' });
+          }
+        } catch (e) {}
         form.hidden = true;
         var ok = document.getElementById(okId);
         if (ok){ ok.hidden = false; ok.scrollIntoView({behavior:'smooth', block:'center'}); }
@@ -2403,7 +2411,7 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
   // Aucun traceur non essentiel n'est déposé avant un choix explicite.
   // Refuser est au même niveau qu'accepter. Choix conservé 6 mois.
   // ─────────────────────────────────────────────────────────────
-  var META_PIXEL_ID = '';            // à renseigner avant la campagne
+  var META_PIXEL_ID = '__META_PIXEL_ID__';   // pose par build.mjs depuis seo.json
   var CMP_CLE = 'vf_consent_v1';
   var CMP_DUREE = 182 * 24 * 3600 * 1000;   // 6 mois
 
