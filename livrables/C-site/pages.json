@@ -1,33 +1,233 @@
 [
-["accueil","","Formation digitale finançable en Hérault","Organisme certifié Qualiopi dans l'Hérault. Formations-action en vidéo, site internet, e-commerce et prospection, finançables AGEFICE, FAFCEA et OPCO.","accueil"],
-["formations","formations/","Nos formations digitales finançables","Quatre parcours courts et concrets construits sur votre activité réelle : vidéo, site internet, boutique en ligne, prospection B2B. Finançables selon votre statut.","liste"],
-["formation-site","formations/creer-site-internet/","Formation créer un site internet pro","Concevez, mettez en ligne et pilotez votre site pendant la formation, sur votre vraie activité. Certifié Qualiopi, finançable AGEFICE, FAFCEA ou OPCO. Hérault.","formation"],
-["formation-boutique","formations/boutique-en-ligne/","Formation boutique en ligne et e-commerce","De la création de votre boutique à la première vente, sur votre propre catalogue. Formation-action certifiée Qualiopi, finançable. Présentiel dans l'Hérault.","formation"],
-["formation-prospection","formations/prospection-b2b/","Formation prospection commerciale B2B","Construisez votre système de prospection sur vos vrais prospects : ciblage, message, prise de rendez-vous, relance. Certifié Qualiopi, finançable. Hérault.","formation"],
-["formation-video","formations/visibilite-locale-video/","Formation vidéo et visibilité locale","Tournez, montez et diffusez vos propres vidéos pour attirer des clients près de chez vous. Formation-action certifiée Qualiopi, finançable. Hérault (34).","formation"],
-["methode","methode/","La formation-action en quatre temps","Pas de diapositives : vous apprenez sur votre activité réelle, avec un formateur, des phases réflexives et des évaluations tracées. Notre méthode AFEST.","page"],
-["financements","financements/","Financer sa formation : AGEFICE, FAFCEA, OPCO","Dirigeant, vous cotisez déjà à un fonds de formation. Qui finance quoi, quels plafonds, quels délais de dépôt, et votre reste à charge annoncé au devis.","page"],
-["diagnostic","diagnostic/","Réserver un diagnostic de visibilité gratuit","Trente minutes sans engagement : on analyse votre visibilité, vos concurrents locaux et votre éligibilité au financement. Dirigeants de TPE dans l'Hérault.","page"],
-["apropos","a-propos/","Organisme de formation certifié Qualiopi","VFormations accompagne les professionnels de l'Hérault vers l'autonomie numérique. Certifié Qualiopi n° VFO12912026001, déclaration d'activité 11757618175.","page"],
-["contact","contact/","Nous contacter — VFormations, Hérault","Une question sur une formation, un financement ou un devis ? Écrivez-nous ou appelez le 07 63 67 82 92. Réponse sous 48 heures ouvrées.","contact"],
-["lemag","mag/","Le Mag : visibilité, vidéo et financement","Conseils concrets pour les pros de l'Hérault : attirer des clients locaux, filmer soi-même, créer sa présence en ligne et financer sa formation.","liste"],
-["art-smartphone","mag/filmer-son-commerce-au-smartphone/","Filmer son commerce au smartphone : guide 2026","Pas besoin de matériel de cinéma. Cadrage, lumière, son et montage : la méthode complète pour filmer votre commerce avec le téléphone que vous avez déjà.","article"],
-["art-google-business","mag/creer-sa-fiche-google-business/","Créer sa fiche Google Business : guide pas à pas","Le levier de visibilité locale le plus rentable, et il est gratuit. Création, optimisation, photos et avis : la marche à suivre pour être trouvé près de chez vous.","article"],
-["art-financement","mag/financer-sa-formation-agefice-fafcea/","AGEFICE, FAFCEA, OPCO : financer sa formation","Qui finance quoi selon votre statut, quels plafonds horaires et annuels, quels délais de dépôt, et comment monter votre dossier sans vous tromper.","article"],
-["art-reels","mag/reels-tiktok-shorts-clients-locaux/","Reels, TikTok, Shorts : quelle vidéo choisir","Mêmes vidéos verticales, trois plateformes, trois logiques. Laquelle privilégier quand on est commerçant, artisan ou restaurateur dans l'Hérault.","article"],
-["art-clients-locaux","mag/attirer-plus-de-clients-locaux/","Restaurant, artisan, salon : attirer en local","Terrasse vide le mardi, fauteuils libres en semaine : les leviers concrets pour faire venir les clients qui habitent à moins de dix minutes de chez vous.","article"],
-["art-qualiopi","mag/qualiopi-ce-que-ca-change/","Qualiopi : ce que la certification change","Ce que le label garantit vraiment, ce qu'il ne garantit pas, et pourquoi il conditionne le financement de votre formation par votre OPCO ou votre fonds.","article"],
-["pres-de-chez-vous","formations-herault/","Nos formations près de chez vous dans l'Hérault","VFormations se déplace dans tout le département : Montpellier, Béziers, Sète. Choisissez votre ville ou votre métier pour voir les parcours adaptés.","liste"],
-["local-montpellier","formations-herault/montpellier/","Formation digitale et vidéo à Montpellier","Dirigeant ou indépendant à Montpellier ? Formez-vous à la vidéo, aux réseaux sociaux et à la visibilité locale, sur votre activité. Finançable, certifié Qualiopi.","local"],
-["local-beziers","formations-herault/beziers/","Formation digitale et visibilité à Béziers","Commerçant, artisan ou indépendant à Béziers ? Apprenez à attirer des clients près de chez vous. Formation-action finançable et certifiée Qualiopi.","local"],
-["local-sete","formations-herault/sete/","Formation digitale et vidéo à Sète","Commerce de bouche, restaurant de bord de mer, artisan ou boutique à Sète : rendez votre activité visible en ligne. Formation finançable, certifiée Qualiopi.","local"],
-["metier-restaurateur","formations-herault/restaurateur/","Formation vidéo et visibilité restaurateurs","Terrasse vide en semaine, dépendance aux plateformes et à leurs commissions : reprenez la main sur votre clientèle. Formation finançable via l'AGEFICE.","local"],
-["metier-artisan","formations-herault/artisan-batiment/","Formation digitale pour artisans du bâtiment","Invisible en ligne pendant que vos concurrents captent les devis ? Montrez vos chantiers et faites venir les demandes. Formation finançable via le FAFCEA.","local"],
-["metier-salon","formations-herault/salon-coiffure-esthetique/","Visibilité en ligne pour salons de coiffure","Créneaux vides en semaine et concurrence très visible : vos transformations clients sont votre meilleure publicité. Apprenez à les filmer et à les diffuser.","local"],
-["combo-resto-montpellier","formations-herault/restaurateur-montpellier/","Formation vidéo restaurateurs à Montpellier","La restauration montpelliéraine est l'une des plus concurrentielles de la région. Démarquez-vous en vidéo, sur votre établissement. Finançable via l'AGEFICE.","local"],
-["combo-artisan-beziers","formations-herault/artisan-beziers/","Formation digitale pour artisans à Béziers","Plombier, électricien, maçon ou menuisier dans le biterrois : rendez votre savoir-faire visible et captez les demandes de devis. Finançable via le FAFCEA.","local"],
-["combo-reseaux-montpellier","formations-herault/reseaux-sociaux-montpellier/","Réseaux sociaux pour commerçants à Montpellier","Boutique dans l'Écusson, concept-store à Antigone ou commerce de quartier : attirez les Montpelliérains qui passent devant sans entrer. Formation finançable.","local"],
-["mentions","mentions-legales/","Mentions légales","Éditeur, direction de la publication, déclaration d'activité, certification Qualiopi et hébergement du site vformations.fr.","legal"],
-["cgv","cgv/","Conditions générales de vente","Inscription, financement, délais d'accès, prix et TVA, conditions d'annulation et de report, accessibilité : les conditions applicables à nos formations.","legal"],
-["confidentialite","politique-confidentialite/","Politique de confidentialité","Données collectées, finalités et bases légales, durées de conservation, sous-traitants, transferts hors UE, cookies et vos droits. Conforme au RGPD.","legal"]
+[
+"accueil",
+"",
+"Formation digitale finançable en Hérault",
+"Organisme certifié Qualiopi dans l'Hérault. Formations-action en vidéo, site internet, e-commerce et prospection, finançables AGEFICE, FAFCEA et OPCO.",
+"accueil"
+],
+[
+"formations",
+"formations/",
+"Nos formations digitales finançables",
+"Quatre parcours courts et concrets construits sur votre activité réelle : vidéo, site internet, boutique en ligne, prospection B2B. Finançables selon votre statut.",
+"liste"
+],
+[
+"formation-site",
+"formations/creer-site-internet/",
+"Formation créer un site internet pro",
+"Concevez, mettez en ligne et pilotez votre site pendant la formation, sur votre vraie activité. Certifié Qualiopi, finançable AGEFICE, FAFCEA ou OPCO. Hérault.",
+"formation"
+],
+[
+"formation-boutique",
+"formations/boutique-en-ligne/",
+"Formation boutique en ligne et e-commerce",
+"De la création de votre boutique à la première vente, sur votre propre catalogue. Formation-action certifiée Qualiopi, finançable. Présentiel dans l'Hérault.",
+"formation"
+],
+[
+"formation-prospection",
+"formations/prospection-b2b/",
+"Formation prospection commerciale B2B",
+"Construisez votre système de prospection sur vos vrais prospects : ciblage, message, prise de rendez-vous, relance. Certifié Qualiopi, finançable. Hérault.",
+"formation"
+],
+[
+"formation-video",
+"formations/visibilite-locale-video/",
+"Formation vidéo et visibilité locale",
+"Tournez, montez et diffusez vos propres vidéos pour attirer des clients près de chez vous. Formation-action certifiée Qualiopi, finançable. Hérault (34).",
+"formation"
+],
+[
+"methode",
+"methode/",
+"La formation-action en quatre temps",
+"Pas de diapositives : vous apprenez sur votre activité réelle, avec un formateur, des phases réflexives et des évaluations tracées. Notre méthode AFEST.",
+"page"
+],
+[
+"financements",
+"financements/",
+"Financer sa formation : AGEFICE, FAFCEA, OPCO",
+"Dirigeant, vous cotisez déjà à un fonds de formation. Qui finance quoi, quels plafonds, quels délais de dépôt, et votre reste à charge annoncé au devis.",
+"page"
+],
+[
+"diagnostic",
+"diagnostic/",
+"Réserver un diagnostic de visibilité gratuit",
+"Trente minutes sans engagement : on analyse votre visibilité, vos concurrents locaux et votre éligibilité au financement. Dirigeants de TPE dans l'Hérault.",
+"page"
+],
+[
+"apropos",
+"a-propos/",
+"Organisme de formation certifié Qualiopi",
+"VFormations accompagne les professionnels de l'Hérault vers l'autonomie numérique. Certifié Qualiopi n° VFO12912026001, déclaration d'activité 11757618175.",
+"page"
+],
+[
+"contact",
+"contact/",
+"Nous contacter — VFormations, Hérault",
+"Une question sur une formation, un financement ou un devis ? Écrivez-nous ou appelez le 07 63 67 82 92. Réponse sous 48 heures ouvrées.",
+"contact"
+],
+[
+"lemag",
+"mag/",
+"Le Mag : visibilité, vidéo et financement",
+"Conseils concrets pour les pros de l'Hérault : attirer des clients locaux, filmer soi-même, créer sa présence en ligne et financer sa formation.",
+"liste"
+],
+[
+"art-smartphone",
+"mag/filmer-son-commerce-au-smartphone/",
+"Filmer son commerce au smartphone : guide 2026",
+"Pas besoin de matériel de cinéma. Cadrage, lumière, son et montage : la méthode complète pour filmer votre commerce avec le téléphone que vous avez déjà.",
+"article"
+],
+[
+"art-google-business",
+"mag/creer-sa-fiche-google-business/",
+"Créer sa fiche Google Business : guide pas à pas",
+"Le levier de visibilité locale le plus rentable, et il est gratuit. Création, optimisation, photos et avis : la marche à suivre pour être trouvé près de chez vous.",
+"article"
+],
+[
+"art-financement",
+"mag/financer-sa-formation-agefice-fafcea/",
+"AGEFICE, FAFCEA, OPCO : financer sa formation",
+"Qui finance quoi selon votre statut, quels plafonds horaires et annuels, quels délais de dépôt, et comment monter votre dossier sans vous tromper.",
+"article"
+],
+[
+"art-reels",
+"mag/reels-tiktok-shorts-clients-locaux/",
+"Reels, TikTok, Shorts : quelle vidéo choisir",
+"Mêmes vidéos verticales, trois plateformes, trois logiques. Laquelle privilégier quand on est commerçant, artisan ou restaurateur dans l'Hérault.",
+"article"
+],
+[
+"art-clients-locaux",
+"mag/attirer-plus-de-clients-locaux/",
+"Restaurant, artisan, salon : attirer en local",
+"Terrasse vide le mardi, fauteuils libres en semaine : les leviers concrets pour faire venir les clients qui habitent à moins de dix minutes de chez vous.",
+"article"
+],
+[
+"art-qualiopi",
+"mag/qualiopi-ce-que-ca-change/",
+"Qualiopi : ce que la certification change",
+"Ce que le label garantit vraiment, ce qu'il ne garantit pas, et pourquoi il conditionne le financement de votre formation par votre OPCO ou votre fonds.",
+"article"
+],
+[
+"art-reste-a-charge",
+"mag/reste-a-charge-formation/",
+"Reste à charge formation : le calcul exact",
+"Votre reste à charge n'est pas le prix moins le taux de votre fonds. La formule exacte, les taux officiels 2026 et les trois variables qui le déterminent.",
+"article"
+],
+[
+"art-fafcea-transverse",
+"mag/fafcea-taux-transverse-numerique/",
+"FAFCEA : 25 €/h pour le numérique, pas 35",
+"La FAFCEA classe le web, la vidéo et les réseaux sociaux en transverse : 25 €/h, et non les 35 €/h des formations techniques. Ce que l'écart change.",
+"article"
+],
+[
+"pres-de-chez-vous",
+"formations-herault/",
+"Nos formations près de chez vous dans l'Hérault",
+"VFormations se déplace dans tout le département : Montpellier, Béziers, Sète. Choisissez votre ville ou votre métier pour voir les parcours adaptés.",
+"liste"
+],
+[
+"local-montpellier",
+"formations-herault/montpellier/",
+"Formation digitale et vidéo à Montpellier",
+"Dirigeant ou indépendant à Montpellier ? Formez-vous à la vidéo, aux réseaux sociaux et à la visibilité locale, sur votre activité. Finançable, certifié Qualiopi.",
+"local"
+],
+[
+"local-beziers",
+"formations-herault/beziers/",
+"Formation digitale et visibilité à Béziers",
+"Commerçant, artisan ou indépendant à Béziers ? Apprenez à attirer des clients près de chez vous. Formation-action finançable et certifiée Qualiopi.",
+"local"
+],
+[
+"local-sete",
+"formations-herault/sete/",
+"Formation digitale et vidéo à Sète",
+"Commerce de bouche, restaurant de bord de mer, artisan ou boutique à Sète : rendez votre activité visible en ligne. Formation finançable, certifiée Qualiopi.",
+"local"
+],
+[
+"metier-restaurateur",
+"formations-herault/restaurateur/",
+"Formation vidéo et visibilité restaurateurs",
+"Terrasse vide en semaine, dépendance aux plateformes et à leurs commissions : reprenez la main sur votre clientèle. Formation finançable via l'AGEFICE.",
+"local"
+],
+[
+"metier-artisan",
+"formations-herault/artisan-batiment/",
+"Formation digitale pour artisans du bâtiment",
+"Invisible en ligne pendant que vos concurrents captent les devis ? Montrez vos chantiers et faites venir les demandes. Formation finançable via le FAFCEA.",
+"local"
+],
+[
+"metier-salon",
+"formations-herault/salon-coiffure-esthetique/",
+"Visibilité en ligne pour salons de coiffure",
+"Créneaux vides en semaine et concurrence très visible : vos transformations clients sont votre meilleure publicité. Apprenez à les filmer et à les diffuser.",
+"local"
+],
+[
+"combo-resto-montpellier",
+"formations-herault/restaurateur-montpellier/",
+"Formation vidéo restaurateurs à Montpellier",
+"La restauration montpelliéraine est l'une des plus concurrentielles de la région. Démarquez-vous en vidéo, sur votre établissement. Finançable via l'AGEFICE.",
+"local"
+],
+[
+"combo-artisan-beziers",
+"formations-herault/artisan-beziers/",
+"Formation digitale pour artisans à Béziers",
+"Plombier, électricien, maçon ou menuisier dans le biterrois : rendez votre savoir-faire visible et captez les demandes de devis. Finançable via le FAFCEA.",
+"local"
+],
+[
+"combo-reseaux-montpellier",
+"formations-herault/reseaux-sociaux-montpellier/",
+"Réseaux sociaux pour commerçants à Montpellier",
+"Boutique dans l'Écusson, concept-store à Antigone ou commerce de quartier : attirez les Montpelliérains qui passent devant sans entrer. Formation finançable.",
+"local"
+],
+[
+"mentions",
+"mentions-legales/",
+"Mentions légales",
+"Éditeur, direction de la publication, déclaration d'activité, certification Qualiopi et hébergement du site vformations.fr.",
+"legal"
+],
+[
+"cgv",
+"cgv/",
+"Conditions générales de vente",
+"Inscription, financement, délais d'accès, prix et TVA, conditions d'annulation et de report, accessibilité : les conditions applicables à nos formations.",
+"legal"
+],
+[
+"confidentialite",
+"politique-confidentialite/",
+"Politique de confidentialité",
+"Données collectées, finalités et bases légales, durées de conservation, sous-traitants, transferts hors UE, cookies et vos droits. Conforme au RGPD.",
+"legal"
+]
 ]

@@ -72,6 +72,19 @@ A = 10 scripts UGC (**fait** : fiche signal + 10 angles + 10 scripts + plan de t
 - Pas d'identifiant de modèle dans les fichiers du dépôt.
 
 ## 9. En attente
+- 🔴 **Grille tarifaire non arrêtée [Décision du 14/10/2026].** Trois sources divergent :
+  le site affiche **« dès 1 190 € HT »** (11 endroits) avec une gamme *ESSENTIEL = 14 h* ;
+  `D1` §2 retient **Atelier 7 h à 490 € · Essentiel 35 h à 1 950 € · Intégral 60 h à 2 900 € · Intra 3 200 €**,
+  où *Essentiel* désigne 35 h. Aucun palier de D1 ne vaut 1 190 €, le site n'a pas de 7 h, D1 n'a pas de 14 h,
+  et « ESSENTIEL » nomme deux produits différents.
+  → **Conséquence tenue :** aucun montant de prix ni de reste à charge chiffré dans les contenus publiés.
+  On s'en tient aux **taux officiels des financeurs** (42/35/20 €/h AGEFICE, 25 €/h FAFCEA transverse,
+  80 €/h parcours individualisé) et on renvoie au devis pour le montant réel.
+  → **À trancher aussi :** le « dès 1 190 € HT » affiché en production, qui n'est validé par aucune source.
+  → **Et la TVA :** les restes à charge de D1 (480 €, 380 €) sont calculés **HT**. Pour un client qui
+  ne récupère pas la TVA (micro non assujettie), le reste à charge réel est bien supérieur
+  (Intégral : 2 900 € HT → 3 480 € TTC, moins 2 520 € AGEFICE = **960 €**, et non 380 €).
+  L'exonération DREETS en cours ramènerait ce cas à 380 €.
 - Étude de marché PDF (à fournir).
 - Vrais coûts de production (pour remplacer les [Hypothèses] de l'économie unitaire).
 - Relecture juridique du montage et des contrats.
