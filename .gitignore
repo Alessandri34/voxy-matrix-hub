@@ -21,3 +21,6 @@ build/
 .vscode/
 .idea/
 *.swp
+
+# Produit du build du site (regenere par build.mjs)
+livrables/C-site/dist/
