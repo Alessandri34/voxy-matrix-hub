@@ -55,17 +55,39 @@ jobs:
           chmod 600 ~/.ssh/deploy_key
           ssh-keyscan -H "${{ secrets.VPS_HOST }}" >> ~/.ssh/known_hosts 2>/dev/null
 
+      - name: Déterminer la racine web gérée par Hestia
+        id: cible
+        run: |
+          SSH="ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=accept-new"
+          HU=$($SSH "${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}" \
+            'for d in /home/*/; do [ -d "${d}web" ] && basename "$d" && break; done')
+          if [ -z "$HU" ]; then
+            echo "::error::Utilisateur Hestia introuvable sur le serveur."
+            exit 1
+          fi
+          RACINE="/home/$HU/web/vformations.fr/public_html"
+          if ! $SSH "${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}" "[ -d '$RACINE' ]"; then
+            echo "::error::$RACINE n'existe pas — le domaine n'est pas déclaré dans Hestia."
+            exit 1
+          fi
+          echo "utilisateur=$HU" >> "$GITHUB_OUTPUT"
+          echo "racine=$RACINE" >> "$GITHUB_OUTPUT"
+          echo "Cible : $RACINE (utilisateur $HU)"
+
       - name: Envoyer les fichiers sur le VPS
         run: |
           rsync -avz --delete \
+            --exclude '.well-known' \
             -e "ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=accept-new" \
-            dist/ "${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/var/www/vformations.fr/"
+            dist/ "${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:${{ steps.cible.outputs.racine }}/"
 
       - name: Corriger les droits et recharger nginx
         run: |
+          HU="${{ steps.cible.outputs.utilisateur }}"
+          RACINE="${{ steps.cible.outputs.racine }}"
           ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=accept-new \
             "${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}" \
-            "chown -R www-data:www-data /var/www/vformations.fr && chmod -R 755 /var/www/vformations.fr && nginx -t && systemctl reload nginx"
+            "chown -R $HU:$HU '$RACINE' && find '$RACINE' -type d -exec chmod 755 {} + && find '$RACINE' -type f -exec chmod 644 {} + && nginx -t && systemctl reload nginx"
 
       - name: Vérifier que le site répond
         run: |
