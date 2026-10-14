@@ -112,7 +112,11 @@ jobs:
           mkdir -p ~/.ssh
           printf '%s\n' "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
-          ssh-keyscan -H "${{ secrets.VPS_HOST }}" >> ~/.ssh/known_hosts 2>/dev/null
+          # known_hosts n'est qu'un confort : les connexions suivantes utilisent
+          # StrictHostKeyChecking=accept-new. Un ssh-keyscan qui echoue (hote
+          # momentanement injoignable, limitation de debit) ne doit donc pas
+          # faire echouer la publication — le shell tourne en -e.
+          ssh-keyscan -H "${{ secrets.VPS_HOST }}" >> ~/.ssh/known_hosts 2>/dev/null || true
 
       - name: Déterminer la racine web gérée par Hestia
         id: cible

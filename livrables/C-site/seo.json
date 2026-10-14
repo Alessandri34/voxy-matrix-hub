@@ -1,11 +1,10 @@
 {
   "_lisezmoi": "Reglages d'indexation. La cle IndexNow est publique par nature : elle est servie a la racine du site, ce n'est pas un secret. Les jetons de verification sont des meta-balises publiques elles aussi.",
-
   "indexnowKey": "fad51efc6161a57358bd86f578809254",
-
-  "_google": "Search Console > Ajouter une propriete > prefixe d'URL > Balise HTML. Coller ici le contenu de l'attribut content, sans les guillemets.",
-  "googleSiteVerification": "",
-
+  "_google": "Jeton de verification Search Console (balise HTML). Pose sur toutes les pages par build.mjs.",
+  "googleSiteVerification": "F9ih85lbwGcjUsTPJJJz8JTjiLzRolEg9ZBS3w8FmUE",
   "_bing": "Bing Webmaster Tools > Ajouter un site > Balise meta. Facultatif : IndexNow fonctionne sans compte Bing.",
-  "bingSiteVerification": ""
+  "bingSiteVerification": "",
+  "_ficheGoogle": "Fiche d'etablissement Google, URL canonique par CID (stable, sans parametres de suivi). Verifiee : la page affiche bien VFormations.",
+  "ficheGoogle": "https://maps.google.com/?cid=12887937362581179627"
 }

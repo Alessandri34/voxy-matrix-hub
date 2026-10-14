@@ -105,6 +105,10 @@ const ORGANISME = {
   address: { '@type': 'PostalAddress', streetAddress: '47 rue Vivienne',
              postalCode: '75002', addressLocality: 'Paris', addressCountry: 'FR' },
   areaServed: { '@type': 'AdministrativeArea', name: 'Hérault' },
+  // Relie le site a la fiche d'etablissement Google : c'est ce qui permet
+  // a Google de rattacher les deux entites l'une a l'autre. URL par CID,
+  // stable et sans parametres de suivi.
+  ...(seo.ficheGoogle ? { sameAs: [seo.ficheGoogle], hasMap: seo.ficheGoogle } : {}),
   identifier: [
     { '@type': 'PropertyValue', name: 'SIRET', value: '10394022700012' },
     { '@type': 'PropertyValue', name: 'Déclaration d’activité', value: '11757618175' },
