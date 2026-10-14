@@ -14,6 +14,7 @@ on:
       - 'livrables/C-site/site.html'
       - 'livrables/C-site/pages.json'
       - 'livrables/C-site/seo.json'
+      - 'livrables/C-site/contenu/**'
       - 'livrables/C-site/build.mjs'
       - 'livrables/C-site/api/contact.php'
       - 'livrables/C-site/img/**'

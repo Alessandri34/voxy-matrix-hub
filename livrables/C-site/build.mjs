@@ -145,11 +145,22 @@ writeFileSync(join(SORTIE, 'assets/app.js'), js);
 const headerR = reecrire(header), footerR = reecrire(footer), cmpR = reecrire(cmp);
 let total = 0;
 
+// Le corps d'une page vient de site.html, ou bien de son propre fichier
+// dans contenu/. A pres de 9 Ko par article, tout entasser dans la source
+// unique la rendrait impossible a relire et chaque retouche ferait courir
+// un risque au site entier. Un fichier de contenu ne porte que l'interieur
+// de la section : le slug reste declare une seule fois, dans pages.json.
+function corpsDe(slug) {
+  const m = src.match(new RegExp(
+    `<section class="page" data-page="${slug}"[^>]*>([\\s\\S]*?)\\n</section>\\n`, 'm'));
+  if (m) { return m[1]; }
+  const f = join('contenu', slug + '.html');
+  if (existsSync(f)) { return '\n' + readFileSync(f, 'utf8').trim(); }
+  throw new Error(`Corps introuvable pour « ${slug} » : absent de site.html et de ${f}`);
+}
+
 for (const [slug, chemin, titre, desc, type] of pages) {
-  const re = new RegExp(`<section class="page" data-page="${slug}"[^>]*>([\\s\\S]*?)\\n</section>\\n`, 'm');
-  const m = src.match(re);
-  if (!m) { throw new Error('Section introuvable : ' + slug); }
-  const corps = reecrire(`<section class="page" data-page="${slug}">${m[1]}\n</section>`);
+  const corps = reecrire(`<section class="page" data-page="${slug}">${corpsDe(slug)}\n</section>`);
   const url = '/' + chemin;
   const titreComplet = titre + ' | VFormations';
 
