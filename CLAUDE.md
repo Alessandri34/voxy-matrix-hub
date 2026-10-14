@@ -56,6 +56,14 @@ Formulations **bannies** : « gratuit », « 100 % financé », « sans reste à
 - ❌ **Backlinks automatiques à grande échelle : refusés.** C'est un *link scheme* au sens des règles anti-spam de Google ; une pénalité manuelle sur un domaine neuf coûterait plus que les liens ne rapportent, et cela consiste à déposer du contenu non sollicité chez des tiers. Remplacé par les citations légitimes listées dans `INDEXATION.md` (GBP, carif-oref, CCI/CMA, pages financeurs, fédérations métier, prescripteurs).
 - Le déploiement **refuse de publier** si un titre ou un canonical est dupliqué, si une meta description manque, si un Schema.org est invalide, ou si le sitemap ne couvre pas les 31 pages.
 
+## 6ter. Pixel Meta & consentement [Vérifié en production — 14/10/2026]
+- **Pixel `1079331051538456`** posé via `seo.json` (`metaPixelId`), injecté au build.
+- ⚠️ **L'extrait fourni par Meta n'est PAS utilisé tel quel** : il charge le pixel dès l'ouverture de la page, ce qui contredirait la politique de confidentialité et la recommandation CNIL. Le `<noscript>` est volontairement écarté — il se déclenche sans aucun choix de l'utilisateur.
+- Le pixel ne se charge **que** si la catégorie « Publicité » du bandeau est acceptée. Vérifié sur 4 scénarios : aucun choix / refus / audience seule → **0 requête Facebook** ; acceptation → PageView.
+- **Événement `Lead`** à l'envoi réussi d'un formulaire, sous le même garde-fou. Sans lui, une campagne ne s'optimise pas sur les demandes de contact.
+- 🔬 **Piège de test** : `fbevents.js` filtre les navigateurs automatisés — en Playwright headless standard, **aucun événement ne part, quel que soit le consentement**. Un test de conformité fait ainsi donne un faux « tout va bien ». Il faut une empreinte réaliste (user-agent, `navigator.webdriver` masqué, `--disable-blink-features=AutomationControlled`).
+- ⏳ **API de Conversions non implémentée.** La politique de confidentialité la mentionne au conditionnel (« peuvent être transmises »), ce qui reste exact, mais le canal serveur n'existe pas encore.
+
 ## 7. Chantiers (master prompt)
 A = 10 scripts UGC (**fait** : fiche signal + 10 angles + 10 scripts + plan de test) · B = pilotage (**socle fait**) · C = site vitrine · D = plateforme de gestion.
 
