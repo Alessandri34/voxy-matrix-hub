@@ -14,6 +14,9 @@ dist/
 build/
 .next/
 
+# Archives de déploiement (régénérables : voir livrables/C-site/DEPLOIEMENT_VPS.md)
+*.zip
+
 # Éditeurs
 .vscode/
 .idea/
