@@ -1102,7 +1102,7 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
         </div>
         <div class="field full"><label for="d-msg">Votre message</label><textarea id="d-msg" name="message" placeholder="Décrivez votre situation en quelques mots…"></textarea></div>
         <div class="field full">
-          <label style="display:flex;gap:.6rem;align-items:flex-start;font-weight:400;"><input type="checkbox" id="d-rgpd" style="width:auto;margin-top:.2rem;" required> <span class="form-note">J'accepte que mes informations soient utilisées pour être recontacté au sujet de ma demande. Elles ne sont ni revendues ni transmises à des tiers. *</span></label>
+          <label style="display:flex;gap:.6rem;align-items:flex-start;font-weight:400;"><input type="checkbox" id="d-rgpd" name="consentement" value="oui" style="width:auto;margin-top:.2rem;" required> <span class="form-note">J'accepte que mes informations soient utilisées pour être recontacté au sujet de ma demande. Elles ne sont ni revendues ni transmises à des tiers. *</span></label>
         </div>
         <div class="field full" style="position:absolute;left:-9999px;" aria-hidden="true"><label>Ne pas remplir<input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label></div>
         <div class="field full">
@@ -1168,7 +1168,7 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
             <div class="field full"><label for="c-sujet">Sujet *</label>
               <select id="c-sujet" name="sujet" required><option value="">Choisir…</option><option>Renseignement sur une formation</option><option>Financement / éligibilité</option><option>Demande de devis</option><option>Accessibilité (PSH)</option><option>Autre</option></select></div>
             <div class="field full"><label for="c-msg">Votre message *</label><textarea id="c-msg" name="message" required></textarea></div>
-            <div class="field full"><label style="display:flex;gap:.6rem;align-items:flex-start;font-weight:400;"><input type="checkbox" id="c-rgpd" style="width:auto;margin-top:.2rem;" required> <span class="form-note">J'accepte que mes informations soient utilisées pour répondre à ma demande (voir la <a class="inl" href="#confidentialite">politique de confidentialité</a>). *</span></label></div>
+            <div class="field full"><label style="display:flex;gap:.6rem;align-items:flex-start;font-weight:400;"><input type="checkbox" id="c-rgpd" name="consentement" value="oui" style="width:auto;margin-top:.2rem;" required> <span class="form-note">J'accepte que mes informations soient utilisées pour répondre à ma demande (voir la <a class="inl" href="#confidentialite">politique de confidentialité</a>). *</span></label></div>
             <div class="field full" style="position:absolute;left:-9999px;" aria-hidden="true"><label>Ne pas remplir<input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label></div>
             <div class="field full"><button type="submit" class="btn btn-wine">Envoyer mon message</button></div>
           </div>
@@ -2208,8 +2208,14 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
     data.append('_form', (meta && meta.form) || form.id || 'contact');
     data.append('_page', location.hash || '#');
     data.append('_date', new Date().toISOString());
+    // mode no-cors : Google Apps Script répond par une redirection vers un
+    // domaine sans en-têtes CORS. En mode normal, fetch rejetterait alors que
+    // la demande a bien été enregistrée — et le visiteur verrait une erreur à
+    // tort. En no-cors la réponse est opaque : seule une vraie panne réseau
+    // rejette, ce qui est exactement le cas que l'on veut signaler.
     return fetch(FORM_ENDPOINT, {
       method: 'POST',
+      mode: 'no-cors',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
       body: data.toString()
     });

@@ -10,7 +10,7 @@
 // ───────────────────────── Paramètres ─────────────────────────
 var NOTIFY_EMAIL = 'contact@vformations.fr'; // destinataire des notifications
 var SHEET_NAME   = 'Demandes';               // onglet où écrire les lignes
-var SHEET_ID     = '';                        // laisser vide si le script est lié au Sheet
+var SHEET_ID     = '1Iij8fCiqW4Wv2R_Vn_jlHJd8jm_UEIof3pOGg8c7QSQ'; // feuille VFormations
 // ───────────────────────────────────────────────────────────────
 
 // Ordre et libellés des colonnes du Sheet.
@@ -25,6 +25,7 @@ var COLUMNS = [
   ['besoin',   'Besoin'],
   ['financeur','Financeur'],
   ['message',  'Message'],
+  ['consentement','Consentement RGPD'],
   ['_page',    'Page']
 ];
 

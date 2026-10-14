@@ -1,77 +1,98 @@
-# Brancher les formulaires du site sur Google Sheet + e-mail
+# Brancher les formulaires sur ta feuille Google
 
-> Les deux formulaires du site (**Contact** et **Diagnostic**) envoient chaque demande dans un **Google Sheet** et déclenchent un **e-mail de notification** vers `contact@vformations.fr`.
-> Solution **gratuite, sans serveur** : Google Apps Script. Tout s'exécute dans **ton** compte Google — aucune clé secrète dans le code du site.
-
-**Important :** connecte-toi avec le compte Google qui peut relever `contact@vformations.fr` (ou qui a cette adresse en alias), pour recevoir les notifications là où tu les attends.
-
----
-
-## Étape 1 — Créer le Google Sheet
-1. Va sur [sheets.google.com](https://sheets.google.com) → **Créer un classeur vide**.
-2. Nomme-le par ex. **« VFormations — Demandes site »**.
-3. Laisse-le vide : l'onglet `Demandes` et la ligne d'en-têtes seront créés automatiquement au 1er envoi.
-
-## Étape 2 — Ouvrir l'éditeur de script
-1. Dans ce Sheet : menu **Extensions → Apps Script**.
-   *(Créer le script ainsi le « lie » au Sheet : pas besoin de renseigner `SHEET_ID`.)*
-2. Supprime le contenu de `Code.gs` et **colle tout le contenu du fichier `Code.gs`** (même dossier que ce guide).
-3. (Optionnel) Vérifie en haut du fichier :
-   - `NOTIFY_EMAIL` = `contact@vformations.fr` ✅ (déjà réglé)
-   - `SHEET_NAME`   = `Demandes`
-4. **Enregistrer** (icône disquette).
-
-## Étape 3 — Déployer en application web
-1. En haut à droite : **Déployer → Nouveau déploiement**.
-2. Roue crantée **⚙ → Application Web**.
-3. Réglages :
-   - **Description** : `VFormations form`
-   - **Exécuter en tant que** : **Moi** (ton compte)
-   - **Qui a accès** : **Tout le monde** *(obligatoire pour que le site public puisse envoyer ; ne publie aucune donnée, le script ne fait qu'écrire)*.
-4. **Déployer** → Google demande une **autorisation** :
-   - « Autoriser » → choisis ton compte → *« Google n'a pas validé cette application »* → **Paramètres avancés → Accéder à … (non sécurisé)** → **Autoriser**.
-   - *(Normal : c'est TON propre script. Il demande l'accès au Sheet et à l'envoi d'e-mail.)*
-5. Copie l'**URL de l'application Web** affichée. Elle ressemble à :
-   `https://script.google.com/macros/s/AKfyc.........../exec`
-
-## Étape 4 — Brancher le site
-1. Ouvre `livrables/C-site/site.html`.
-2. Cherche la ligne (tout en haut du `<script>` principal) :
-   ```js
-   var FORM_ENDPOINT = '';
-   ```
-3. Colle ton URL entre les guillemets :
-   ```js
-   var FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfyc.........../exec';
-   ```
-4. Enregistre. **C'est tout** — les deux formulaires envoient désormais réellement.
-   *(Tant que `FORM_ENDPOINT` est vide, les formulaires restent en mode démo et n'envoient rien.)*
-
-## Étape 5 — Tester
-1. Ouvre le site, va sur **Contact**, remplis et envoie.
-2. Vérifie :
-   - une **nouvelle ligne** dans l'onglet `Demandes` du Sheet ;
-   - un **e-mail** sur `contact@vformations.fr` (objet `[VFormations] Message de contact — …`).
-3. Teste aussi la page **Diagnostic** (colonne « Formulaire » = `diagnostic`).
-
-> Astuce : pour vérifier que le déploiement répond, ouvre l'URL `.../exec` dans le navigateur → tu dois voir `{"ok":true,"service":"VFormations form endpoint"}`.
+> **Feuille cible :** [VFormations — Demandes](https://docs.google.com/spreadsheets/d/1Iij8fCiqW4Wv2R_Vn_jlHJd8jm_UEIof3pOGg8c7QSQ/edit) — déjà renseignée dans le script.
+> **Durée : 5 minutes.** Trois étapes, puis tu m'envoies une URL.
+> **Date : 14 octobre 2026.**
 
 ---
 
-## Comment ça marche (résumé technique)
-- Le site envoie les champs en **POST `application/x-www-form-urlencoded`** (requête « simple » → pas de blocage CORS).
-- `doPost()` écrit une ligne (`Date, Formulaire, Nom, E-mail, Téléphone, Activité, Sujet, Besoin, Financeur, Message, Page`) puis envoie l'e-mail avec **`replyTo` = e-mail du visiteur** → tu réponds en un clic.
-- Un champ **pot de miel** (`_gotcha`, invisible) filtre les robots : s'il est rempli, la demande est ignorée.
-- `replyTo` facilite la réponse ; l'expéditeur de la notification reste ton compte Google.
+## Pourquoi c'est toi qui dois le faire
+Le script s'exécute **dans ton compte Google** : c'est lui qui écrit dans ta feuille et envoie les e-mails. Je n'ai aucun accès Google dans cette session, et c'est d'ailleurs préférable — aucun identifiant ne transite par la conversation.
 
-## Limites & bon à savoir
-- **Quota e-mail** Apps Script : ~100 destinataires/jour (compte gratuit) / ~1 500 (Workspace) — largement suffisant pour des demandes de contact.
-- Si tu modifies `Code.gs` plus tard : **Déployer → Gérer les déploiements → ✏️ → Nouvelle version**, l'URL `/exec` **reste la même** (rien à changer sur le site).
-- L'URL `/exec` est **publique par nature** (elle est dans le HTML, c'est normal) : elle ne donne accès à rien, elle ne fait qu'ajouter une ligne + notifier. Ce **n'est pas** un secret à mettre dans `.env`.
-- Pour une protection anti-spam renforcée plus tard : ajout d'un reCAPTCHA v3 ou passage à un service dédié (Formspree / Web3Forms).
+> ⚠️ Connecte-toi avec le compte qui relève **contact@vformations.fr** (ou qui a cette adresse en alias), sinon les notifications partiront ailleurs.
 
-## Alternatives (si tu préfères)
-- **Formspree / Web3Forms** : branchement encore plus simple (1 attribut `action`), gratuit jusqu'à un quota, e-mail inclus — mais les données vont chez un tiers (pas dans ton Sheet).
-- **Google Forms** : zéro code, mais le formulaire n'a pas le design du site (iframe).
+---
 
-> Dis-moi quand ton URL est prête : je peux la coller dans `site.html` et republier pour toi.
+## Étape 1 — Créer le script
+
+1. Ouvre [ta feuille](https://docs.google.com/spreadsheets/d/1Iij8fCiqW4Wv2R_Vn_jlHJd8jm_UEIof3pOGg8c7QSQ/edit)
+2. Menu **Extensions → Apps Script**
+3. **Ctrl+A** dans l'éditeur pour tout sélectionner, **Suppr**
+4. Colle **l'intégralité** du fichier `Code.gs` (il commence par `/**` et finit par `}`)
+5. 💾 **Enregistrer**
+
+> L'identifiant de ta feuille est déjà dans le script : rien à modifier.
+
+---
+
+## Étape 2 — Déployer
+
+1. **Déployer → Nouveau déploiement**
+2. Roue crantée ⚙ → **Application Web**
+3. Réglages — les deux comptent :
+   - **Exécuter en tant que : Moi**
+   - **Qui a accès : Tout le monde** *(indispensable pour qu'un visiteur du site puisse écrire ; le script n'expose aucune donnée, il ne fait qu'ajouter une ligne)*
+4. **Déployer** → Google demande une autorisation :
+   - « Autoriser » → ton compte → *« Google n'a pas validé cette application »* → **Paramètres avancés** → **Accéder à … (non sécurisé)** → **Autoriser**
+   - *C'est normal : c'est **ton** script. Il demande l'accès à ta feuille et le droit d'envoyer des e-mails.*
+5. **Copie l'URL** affichée. Elle ressemble à :
+   `https://script.google.com/macros/s/AKfyc.............../exec`
+
+---
+
+## Étape 3 — Me l'envoyer
+
+Colle-moi simplement cette URL dans la conversation. Je la pose dans le site, je redéploie, et je teste un envoi réel de bout en bout.
+
+> Tu peux aussi la poser toi-même : dans `livrables/C-site/site.html`, cherche `var FORM_ENDPOINT = '';` et mets l'URL entre les guillemets. Mais laisse-moi vérifier derrière.
+
+---
+
+## Ce qui sera enregistré
+
+Une ligne par demande, dans l'onglet **`Demandes`** (créé automatiquement au premier envoi) :
+
+| Colonne | Contenu |
+|---|---|
+| Date | Horodatage de la demande |
+| Formulaire | `contact` ou `diagnostic` |
+| Nom & prénom · E-mail · Téléphone · Activité | Champs saisis |
+| Sujet · Besoin · Financeur · Message | Selon le formulaire |
+| **Consentement RGPD** | `oui` — preuve que la case a été cochée |
+| Page | D'où venait le visiteur |
+
+Et un e-mail sur **contact@vformations.fr**, avec **réponse directe au visiteur** : tu cliques « Répondre », ça part chez lui.
+
+> 🔒 **La colonne Consentement n'est pas cosmétique.** Elle prouve que le visiteur a accepté d'être recontacté. C'est ce qui rend ta relance téléphonique défendable, et c'est exigé par ta politique de confidentialité.
+
+---
+
+## Vérification (je la ferai avec toi)
+
+1. Formulaire de contact du site → envoyer
+2. Une ligne apparaît dans la feuille
+3. Un e-mail arrive sur contact@vformations.fr
+4. Même test depuis la page **Diagnostic** (colonne Formulaire = `diagnostic`)
+
+> Test rapide du déploiement : ouvre l'URL `/exec` dans ton navigateur. Tu dois voir
+> `{"ok":true,"service":"VFormations form endpoint"}`.
+
+---
+
+## Bon à savoir
+
+- **Quota d'e-mails** : ~100/jour en compte gratuit, ~1 500 en Workspace. Large pour des demandes de contact.
+- **Modifier le script plus tard** : *Déployer → Gérer les déploiements → ✏️ → Nouvelle version*. **L'URL `/exec` ne change pas**, rien à refaire côté site.
+- **L'URL `/exec` est publique par nature** (elle figure dans le code du site, c'est inévitable). Elle ne donne accès à rien : elle ajoute une ligne et notifie. Ce **n'est pas** un secret.
+- **Anti-spam** : un champ invisible piège les robots ; leurs envois sont ignorés sans écrire dans la feuille.
+
+---
+
+## Si ça coince
+
+| Symptôme | Cause |
+|---|---|
+| `SyntaxError: Illegal return statement` | Copier-coller incomplet. Ctrl+A, Suppr, recolle **tout** le fichier. |
+| Erreur en cliquant ▶ Exécuter | Normal : `doPost` attend une vraie soumission. Pour un test manuel, choisis `doGet`. |
+| Rien n'arrive dans la feuille | Vérifie « Qui a accès : **Tout le monde** » dans le déploiement. |
+| Pas d'e-mail | Regarde les indésirables, et confirme que le compte Google relève bien contact@vformations.fr. |
