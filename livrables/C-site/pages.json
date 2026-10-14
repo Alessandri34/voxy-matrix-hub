@@ -84,6 +84,54 @@
 "liste"
 ],
 [
+"art-google-maps",
+"mag/referencement-google-maps/",
+"Google Maps : comment le classement marche",
+"Pertinence, distance, notoriété : les trois critères du pack local, ce que vous pouvez changer et ce que vous ne pouvez pas. Catégories, avis, cohérence.",
+"article",
+{
+"img": "mag-google-business.jpg",
+"tag": "Visibilité locale",
+"carte": "Google Maps : comment le classement fonctionne"
+}
+],
+[
+"art-modifier-fiche-google",
+"mag/modifier-sa-fiche-google-business/",
+"Modifier sa fiche Google : les cas qui coincent",
+"Ce qui se change sans risque, ce qui déclenche une vérification, et quoi faire quand une modification est refusée ou qu'un tiers modifie votre fiche.",
+"article",
+{
+"img": "mag-google-business.jpg",
+"tag": "Visibilité locale",
+"carte": "Modifier sa fiche Google : les cas qui coincent"
+}
+],
+[
+"art-visible-sans-site",
+"mag/visible-sur-google-sans-site/",
+"Être visible sur Google sans site internet",
+"La fiche d'établissement suffit-elle ? Ce qui marche sans site, les trois limites réelles, la fragilité qu'on oublie et le moment où un site devient nécessaire.",
+"article",
+{
+"img": "formation-prospection.jpg",
+"tag": "Visibilité locale",
+"carte": "Être visible sur Google sans site internet"
+}
+],
+[
+"art-visible-sans-budget",
+"mag/visible-sur-google-sans-publicite/",
+"Être visible sur Google sans payer de pub",
+"Les quatre leviers qui ne coûtent rien, dans quel ordre les activer, ce que la gratuité coûte en temps, et les raccourcis qui finissent par se retourner.",
+"article",
+{
+"img": "formation-boutique.jpg",
+"tag": "Visibilité locale",
+"carte": "Être visible sur Google sans payer de publicité"
+}
+],
+[
 "art-delais-financement",
 "mag/delais-demande-prise-en-charge/",
 "Délais de prise en charge : le calendrier",
