@@ -13,6 +13,7 @@ jobs:
   diagnostic:
     name: Inspecter l'état du serveur
     runs-on: ubuntu-latest
+    timeout-minutes: 4
     steps:
       - name: Installer la clé
         run: |
@@ -22,8 +23,8 @@ jobs:
 
       - name: Inspecter
         run: |
-          ssh -i ~/.ssh/k -o StrictHostKeyChecking=accept-new \
-            "${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}" 'bash -s' <<'REMOTE'
+          timeout 180 ssh -i ~/.ssh/k -o StrictHostKeyChecking=accept-new -o ConnectTimeout=15 \
+            "${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}" 'timeout 150 bash -s' <<'REMOTE'
           echo "######## 1. QUI ECOUTE SUR 80 ET 443 ########"
           ss -tlnp 2>/dev/null | grep -E ':80 |:443 ' || echo "(ss indisponible)"
           echo
@@ -48,9 +49,9 @@ jobs:
           echo
           echo
           echo "######## 7. REPONSE LOCALE AVEC LE BON HOST ########"
-          curl -s -H 'Host: vformations.fr' http://127.0.0.1/ 2>/dev/null | grep -oE '<title>[^<]*' | head -1 || echo "  (pas de titre / pas de reponse)"
+          curl -s --max-time 8 -H 'Host: vformations.fr' http://127.0.0.1/ 2>/dev/null | grep -oE '<title>[^<]*' | head -1 || echo "  (pas de titre / pas de reponse)"
           echo "  --- sans Host particulier (page par defaut) ---"
-          curl -s http://127.0.0.1/ 2>/dev/null | grep -oE '<title>[^<]*|Success!' | head -2 || echo "  (rien)"
+          curl -s --max-time 8 http://127.0.0.1/ 2>/dev/null | grep -oE '<title>[^<]*|Success!' | head -2 || echo "  (rien)"
           echo
           echo "######## 8. AUTRES CONFIGS WEB PRESENTES ########"
           ls /etc/apache2/sites-enabled/ 2>/dev/null | sed 's/^/  apache: /' || true
