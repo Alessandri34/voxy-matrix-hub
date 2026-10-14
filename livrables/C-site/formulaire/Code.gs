@@ -1,115 +1,52 @@
-/**
- * VFormations — réception des formulaires du site (contact + diagnostic).
- * Chaque envoi : 1) ajoute une ligne dans le Google Sheet, 2) envoie un
- * e-mail de notification à contact@vformations.fr.
- *
- * Déploiement : voir GUIDE_BRANCHEMENT.md (même dossier).
- * Aucune clé secrète ici — ce code s'exécute dans TON compte Google.
- */
+var NOTIFY_EMAIL = 'contact@vformations.fr';
+var SHEET_ID = '1Iij8fCiqW4Wv2R_Vn_jlHJd8jm_UEIof3pOGg8c7QSQ';
+var SHEET_NAME = 'Demandes';
+var COLS = [['_date','Date'],['_form','Formulaire'],['nom','Nom et prenom'],
+  ['email','E-mail'],['tel','Telephone'],['activite','Activite'],['sujet','Sujet'],
+  ['besoin','Besoin'],['financeur','Financeur'],['message','Message'],
+  ['consentement','Consentement RGPD'],['_page','Page']];
 
-// ───────────────────────── Paramètres ─────────────────────────
-var NOTIFY_EMAIL = 'contact@vformations.fr'; // destinataire des notifications
-var SHEET_NAME   = 'Demandes';               // onglet où écrire les lignes
-var SHEET_ID     = '1Iij8fCiqW4Wv2R_Vn_jlHJd8jm_UEIof3pOGg8c7QSQ'; // feuille VFormations
-// ───────────────────────────────────────────────────────────────
-
-// Ordre et libellés des colonnes du Sheet.
-var COLUMNS = [
-  ['_date',    'Date'],
-  ['_form',    'Formulaire'],
-  ['nom',      'Nom & prénom'],
-  ['email',    'E-mail'],
-  ['tel',      'Téléphone'],
-  ['activite', 'Activité'],
-  ['sujet',    'Sujet'],
-  ['besoin',   'Besoin'],
-  ['financeur','Financeur'],
-  ['message',  'Message'],
-  ['consentement','Consentement RGPD'],
-  ['_page',    'Page']
-];
+function doGet() {
+  return json_({ ok: true, service: 'VFormations form endpoint' });
+}
 
 function doPost(e) {
   try {
     var p = (e && e.parameter) ? e.parameter : {};
-
-    // Pot de miel anti-spam : si rempli, on ignore sans rien écrire.
     if (p._gotcha) { return json_({ ok: true, skipped: 'spam' }); }
 
-    var sheet = getSheet_();
-    ensureHeaders_(sheet);
+    var ss = SpreadsheetApp.openById(SHEET_ID);
+    var sh = ss.getSheetByName(SHEET_NAME) || ss.insertSheet(SHEET_NAME);
+    if (sh.getLastRow() === 0) {
+      sh.appendRow(COLS.map(function (c) { return c[1]; }));
+      sh.getRange(1, 1, 1, COLS.length).setFontWeight('bold');
+      sh.setFrozenRows(1);
+    }
 
     var now = p._date ? new Date(p._date) : new Date();
-    var row = COLUMNS.map(function (c) {
-      var key = c[0];
-      if (key === '_date') { return formatDate_(now); }
-      return p[key] || '';
-    });
-    sheet.appendRow(row);
+    var d = Utilities.formatDate(now, Session.getScriptTimeZone(), 'dd/MM/yyyy HH:mm');
+    sh.appendRow(COLS.map(function (c) {
+      return c[0] === '_date' ? d : (p[c[0]] || '');
+    }));
 
-    sendNotification_(p, now);
+    var lignes = [];
+    COLS.forEach(function (c) {
+      if (c[0] !== '_date' && p[c[0]]) { lignes.push(c[1] + ' : ' + p[c[0]]); }
+    });
+    var opt = { name: 'Site VFormations' };
+    if (p.email && /\S+@\S+\.\S+/.test(p.email)) { opt.replyTo = p.email; }
+    MailApp.sendEmail(NOTIFY_EMAIL,
+      '[VFormations] ' + (p._form === 'diagnostic' ? 'Diagnostic' : 'Contact') +
+        (p.nom ? ' - ' + p.nom : ''),
+      'Recu le ' + d + '\n\n' + lignes.join('\n'), opt);
+
     return json_({ ok: true });
   } catch (err) {
     return json_({ ok: false, error: String(err) });
   }
 }
 
-// Permet de tester que le déploiement répond (ouvrir l'URL dans le navigateur).
-function doGet() {
-  return json_({ ok: true, service: 'VFormations form endpoint' });
-}
-
-function getSheet_() {
-  var ss = SHEET_ID ? SpreadsheetApp.openById(SHEET_ID) : SpreadsheetApp.getActiveSpreadsheet();
-  if (!ss) {
-    throw new Error('Aucun Google Sheet lié. Renseigne SHEET_ID ou crée le script depuis Extensions > Apps Script du Sheet.');
-  }
-  var sheet = ss.getSheetByName(SHEET_NAME);
-  if (!sheet) { sheet = ss.insertSheet(SHEET_NAME); }
-  return sheet;
-}
-
-function ensureHeaders_(sheet) {
-  if (sheet.getLastRow() > 0) { return; }
-  var headers = COLUMNS.map(function (c) { return c[1]; });
-  sheet.appendRow(headers);
-  sheet.getRange(1, 1, 1, headers.length).setFontWeight('bold');
-  sheet.setFrozenRows(1);
-}
-
-function sendNotification_(p, now) {
-  var formLabel = (p._form === 'diagnostic') ? 'Demande de diagnostic' : 'Message de contact';
-  var subject = '[VFormations] ' + formLabel + (p.nom ? ' — ' + p.nom : '');
-
-  var lines = [];
-  lines.push(formLabel + ' reçu le ' + formatDate_(now));
-  lines.push('');
-  COLUMNS.forEach(function (c) {
-    var key = c[0];
-    if (key === '_date' || key === '_form') { return; }
-    if (p[key]) { lines.push(c[1] + ' : ' + p[key]); }
-  });
-  lines.push('');
-  lines.push('— Notification automatique du site vformations.fr');
-
-  var options = {
-    name: 'Site VFormations',
-    noReply: true
-  };
-  // Répondre directement au visiteur depuis l'e-mail de notification.
-  if (p.email && /\S+@\S+\.\S+/.test(p.email)) {
-    options.replyTo = p.email;
-    delete options.noReply;
-  }
-  MailApp.sendEmail(NOTIFY_EMAIL, subject, lines.join('\n'), options);
-}
-
-function formatDate_(d) {
-  return Utilities.formatDate(d, Session.getScriptTimeZone(), 'dd/MM/yyyy HH:mm');
-}
-
-function json_(obj) {
-  return ContentService
-    .createTextOutput(JSON.stringify(obj))
+function json_(o) {
+  return ContentService.createTextOutput(JSON.stringify(o))
     .setMimeType(ContentService.MimeType.JSON);
 }
