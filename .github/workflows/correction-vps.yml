@@ -1,0 +1,140 @@
+name: Correction VPS - declarer vformations.fr dans Hestia
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - claude/new-session-nefcch
+    paths:
+      - '.github/workflows/correction-vps.yml'
+
+jobs:
+  corriger:
+    name: Corriger la configuration nginx
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Installer la cle
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/k
+          chmod 600 ~/.ssh/k
+
+      - name: Corriger
+        run: |
+          timeout 420 ssh -i ~/.ssh/k -o StrictHostKeyChecking=accept-new -o ConnectTimeout=15 \
+            "${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}" 'timeout 400 bash -s' <<'REMOTE'
+          set -uo pipefail
+
+          IP=$(hostname -I | awk '{print $1}')
+          CONF="/etc/nginx/conf.d/${IP}.conf"
+          TS=$(date +%Y%m%d-%H%M%S)
+          DOMAINES="antiplanity.fr ai.antiplanity.fr auto.antiplanity.fr furnished.antiplanity.fr timeclean.antiplanity.fr voxy.antiplanity.fr sabriperformance.com srv1332415.hstgr.cloud"
+
+          verifier() {
+            local echecs=0
+            for d in $DOMAINES; do
+              local c=$(curl -s -o /dev/null -w '%{http_code}' --max-time 8 -H "Host: $d" "http://${IP}/" 2>/dev/null || echo 000)
+              printf "    %-28s HTTP %s\n" "$d" "$c"
+              case "$c" in 2*|3*) ;; *) echecs=$((echecs+1)) ;; esac
+            done
+            return $echecs
+          }
+
+          restaurer() {
+            echo "!!! RESTAURATION !!!"
+            cp -a "${CONF}.avant-${TS}" "$CONF"
+            nginx -t && systemctl reload nginx && echo "  config restauree, nginx recharge"
+          }
+
+          echo "######## 0. ETAT DE REFERENCE (via IP publique) ########"
+          verifier; REF_ECHECS=$?
+          echo "  domaines en echec avant intervention : $REF_ECHECS"
+          echo
+
+          echo "######## 1. SAUVEGARDE CIBLEE ########"
+          cp -a "$CONF" "${CONF}.avant-${TS}"
+          echo "  $CONF -> ${CONF}.avant-${TS}"
+          echo
+
+          echo "######## 2. RETRAIT DU BLOC CERTBOT ########"
+          cat > /tmp/nettoyer.py <<'PYEOF2'
+          import sys, re
+          chemin = sys.argv[1]
+          src = open(chemin, encoding='utf-8').read()
+          sortie, i, retires = [], 0, 0
+          while i < len(src):
+              m = re.compile(r'\bserver\s*\{').search(src, i)
+              if not m:
+                  sortie.append(src[i:]); break
+              sortie.append(src[i:m.start()])
+              prof, j = 0, m.start()
+              while j < len(src):
+                  if src[j] == '{': prof += 1
+                  elif src[j] == '}':
+                      prof -= 1
+                      if prof == 0: j += 1; break
+                  j += 1
+              bloc = src[m.start():j]
+              if re.search(r'server_name\s+[^;]*\bvformations\.fr\b', bloc):
+                  retires += 1
+                  print(f"  bloc retire : {len(bloc)} octets, lignes server_name = "
+                        f"{re.findall(r'server_name[^;]*;', bloc)}")
+              else:
+                  sortie.append(bloc)
+              i = j
+          if retires == 0:
+              print("  AUCUN bloc vformations trouve - fichier inchange"); sys.exit(2)
+          open(chemin, 'w', encoding='utf-8').write(''.join(sortie))
+          print(f"  {retires} bloc(s) retire(s)")
+          PYEOF2
+          python3 /tmp/nettoyer.py "$CONF"
+          RC=$?
+          if [ $RC -eq 2 ]; then echo "  rien a faire"; elif [ $RC -ne 0 ]; then restaurer; exit 1; fi
+          echo
+
+          echo "######## 3. VALIDATION NGINX ########"
+          if ! nginx -t 2>&1 | sed 's/^/  /'; then restaurer; exit 1; fi
+          systemctl reload nginx && echo "  nginx recharge"
+          echo
+
+          echo "######## 4. VERIFICATION DES 8 DOMAINES ########"
+          verifier; APRES=$?
+          if [ $APRES -gt $REF_ECHECS ]; then
+            echo "  REGRESSION DETECTEE ($APRES vs $REF_ECHECS)"; restaurer; exit 1
+          fi
+          echo "  aucune regression"
+          echo
+
+          echo "######## 5. AJOUT DU DOMAINE DANS HESTIA ########"
+          HU=""; for d in /home/*/; do [ -d "${d}web" ] && HU=$(basename "$d") && break; done
+          if [ -z "$HU" ]; then echo "  utilisateur Hestia introuvable"; restaurer; exit 1; fi
+          echo "  utilisateur Hestia : $HU"
+          if /usr/local/hestia/bin/v-list-web-domain "$HU" vformations.fr >/dev/null 2>&1; then
+            echo "  deja declare"
+          else
+            /usr/local/hestia/bin/v-add-web-domain "$HU" vformations.fr "$IP" yes www.vformations.fr 2>&1 | sed 's/^/    /'
+            echo "  domaine ajoute"
+          fi
+          echo
+
+          echo "######## 6. CERTIFICAT LET SENCRYPT VIA HESTIA ########"
+          /usr/local/hestia/bin/v-add-letsencrypt-domain "$HU" vformations.fr www.vformations.fr 2>&1 | sed 's/^/    /' || echo "    (echec - on reessaiera, le site reste joignable en HTTP)"
+          echo
+
+          echo "######## 7. VALIDATION FINALE ########"
+          if ! nginx -t 2>&1 | sed 's/^/  /'; then restaurer; exit 1; fi
+          systemctl reload nginx
+          echo "  --- les 8 domaines ---"
+          verifier; FINAL=$?
+          if [ $FINAL -gt $REF_ECHECS ]; then echo "  REGRESSION"; restaurer; exit 1; fi
+          echo "  --- vformations.fr ---"
+          for proto in http https; do
+            c=$(curl -sk -o /dev/null -w '%{http_code}' --max-time 10 --resolve "vformations.fr:443:${IP}" --resolve "vformations.fr:80:${IP}" "${proto}://vformations.fr/" 2>/dev/null || echo 000)
+            echo "    $proto -> HTTP $c"
+          done
+          echo
+          echo "######## 8. RACINE WEB CIBLE ########"
+          ls -ld /home/$HU/web/vformations.fr/public_html 2>/dev/null | sed 's/^/  /' || echo "  dossier absent"
+          echo "######## FIN ########"
+          REMOTE
