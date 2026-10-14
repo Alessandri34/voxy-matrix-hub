@@ -84,6 +84,78 @@
 "liste"
 ],
 [
+"art-prix-site-internet",
+"mag/prix-site-internet/",
+"Prix d'un site internet : ce qui fait varier",
+"Pourquoi trois devis donnent trois chiffres sans rapport. Les coûts incompressibles, ce qui fait varier le reste, et le poste que les devis oublient.",
+"article",
+{
+"img": "formation-prospection.jpg",
+"tag": "Site internet",
+"carte": "Prix d'un site internet : ce qui fait varier"
+}
+],
+[
+"art-site-artisan",
+"mag/site-internet-artisan/",
+"Site d'artisan : les 5 pages qui servent",
+"Un artisan n'a pas besoin d'un beau site mais d'un site qui répond à trois questions. Les cinq pages utiles, et pourquoi les réalisations font tout.",
+"article",
+{
+"img": "formation-video.jpg",
+"tag": "Site internet",
+"carte": "Site d'artisan : les 5 pages vraiment utiles"
+}
+],
+[
+"art-premiere-vente-en-ligne",
+"mag/premiere-vente-en-ligne/",
+"Première vente en ligne : ce qui bloque",
+"Trafic, confiance, parcours : les trois conditions d'une vente. La plupart des boutiques qui ne vendent pas n'ont personne qui arrive sur la page produit.",
+"article",
+{
+"img": "mag-clients-locaux.jpg",
+"tag": "E-commerce",
+"carte": "Première vente en ligne : ce qui bloque vraiment"
+}
+],
+[
+"art-quoi-filmer",
+"mag/que-filmer-commerce-idees/",
+"Que filmer : 10 sujets pour un commerce",
+"Le blocage n'est pas technique, il est dans le choix du sujet. Dix sujets qui existent déjà dans votre quotidien, et la méthode pour ne jamais être à court.",
+"article",
+{
+"img": "mag-filmer-smartphone.jpg",
+"tag": "Vidéo",
+"carte": "Que filmer quand on n'a pas d'idées : 10 sujets"
+}
+],
+[
+"art-montage-smartphone",
+"mag/monter-ses-videos-au-smartphone/",
+"Monter ses vidéos au smartphone en 20 min",
+"Couper, ordonner, sous-titrer, sonoriser, exporter : les cinq seules opérations qui comptent. Pourquoi les sous-titres ne sont pas optionnels.",
+"article",
+{
+"img": "mag-reels-social.jpg",
+"tag": "Vidéo",
+"carte": "Monter ses vidéos au smartphone en 20 minutes"
+}
+],
+[
+"art-video-ia",
+"mag/intelligence-artificielle-video/",
+"L'IA pour ses vidéos : ce qui aide vraiment",
+"L'IA fait gagner du temps sur le sous-titrage et le montage. Elle dessert dès qu'elle remplace votre voix ou votre atelier. Et les règles à connaître.",
+"article",
+{
+"img": "formation-boutique.jpg",
+"tag": "Vidéo",
+"carte": "L'IA pour ses vidéos : ce qui aide, ce qui dessert"
+}
+],
+[
 "art-google-maps",
 "mag/referencement-google-maps/",
 "Google Maps : comment le classement marche",
