@@ -25,29 +25,38 @@ jobs:
         run: |
           timeout 180 ssh -i ~/.ssh/k -o StrictHostKeyChecking=accept-new -o ConnectTimeout=15 \
             "${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}" 'timeout 150 bash -s' <<'REMOTE'
-          echo "######## A. PANNEAU DE CONTROLE ########"
-          for b in /usr/local/hestia/bin/v-list-web-domains /usr/local/vesta/bin/v-list-web-domains; do
-            [ -x "$b" ] && echo "  trouve : $b"
+          set -u
+          echo "######## 1. SAUVEGARDE DE /etc/nginx ########"
+          BK=/var/backups/nginx-avant-vformations-$(date +%Y%m%d-%H%M%S).tar.gz
+          mkdir -p /var/backups
+          tar czf "$BK" /etc/nginx 2>/dev/null && echo "  sauvegarde : $BK ($(du -h "$BK" | cut -f1))"
+          ls -1t /var/backups/nginx-avant-vformations-*.tar.gz 2>/dev/null | head -3 | sed 's/^/    /'
+          echo
+          echo "######## 2. ETAT DE REFERENCE DES 8 DOMAINES ########"
+          for d in antiplanity.fr ai.antiplanity.fr auto.antiplanity.fr furnished.antiplanity.fr timeclean.antiplanity.fr voxy.antiplanity.fr sabriperformance.com srv1332415.hstgr.cloud; do
+            c=$(curl -s -o /dev/null -w '%{http_code}' --max-time 6 -H "Host: $d" http://127.0.0.1/ 2>/dev/null || echo ERR)
+            printf "  %-28s HTTP %s\n" "$d" "$c"
           done
-          [ -d /usr/local/hestia ] && echo "  HestiaCP present" || echo "  pas de HestiaCP"
           echo
-          echo "######## B. DOMAINES WEB DU PANNEAU ########"
-          ls -1 /home/*/web/ 2>/dev/null | sed 's/^/  /' || echo "  (aucun)"
+          echo "######## 3. OU EST LE BLOC CERTBOT ? ########"
+          grep -rln 'vformations' /etc/nginx/ 2>/dev/null | sed 's/^/  fichier: /' || echo "  aucun fichier"
           echo
-          echo "######## C. UTILISATEUR PROPRIETAIRE ########"
-          ls -ld /home/*/web 2>/dev/null | sed 's/^/  /'
+          echo "######## 4. CONTEXTE EXACT (20 lignes autour) ########"
+          for f in $(grep -rln 'vformations' /etc/nginx/ 2>/dev/null); do
+            echo "  ===== $f ====="
+            grep -n 'vformations' "$f" | sed 's/^/    ligne /'
+            echo "    --- extrait ---"
+            n=$(grep -n 'vformations' "$f" | head -1 | cut -d: -f1)
+            sed -n "$((n>12?n-12:1)),$((n+8))p" "$f" | cat -A | sed 's/\$$//' | sed 's/^/    /' | head -24
+          done
           echo
-          echo "######## D. OU NGINX INCLUT SES CONFIGS ########"
-          grep -hE '^\s*include' /etc/nginx/nginx.conf 2>/dev/null | sed 's/^/  /'
+          echo "######## 5. CERTIFICATS LET SENCRYPT ########"
+          ls -1 /etc/letsencrypt/live/ 2>/dev/null | sed 's/^/  /' || echo "  aucun"
           echo
-          echo "######## E. CONF DU DOMAINE vformations ########"
-          find /etc/nginx /home/*/conf 2>/dev/null -name '*vformations*' | sed 's/^/  /' || echo "  aucune"
+          echo "######## 6. FICHIERS HESTIA DU DOSSIER domains ########"
+          ls -1 /etc/nginx/conf.d/domains/ 2>/dev/null | sed 's/^/  /' | head -20
           echo
-          echo "######## F. LE DOSSIER PANNEAU EXISTE-T-IL DEJA ? ########"
-          ls -la /home/*/web/vformations.fr/ 2>/dev/null | head -5 || echo "  non, domaine pas encore ajoute au panneau"
-          echo
-          echo "######## G. CONTENU SERVI AUJOURD HUI ########"
-          echo "  taille document_errors :"
-          ls -la /var/www/document_errors/ 2>/dev/null | head -6 | sed 's/^/    /'
+          echo "######## 7. CONFIG INUTILE CREEE A L ETAPE 2 ########"
+          ls -la /etc/nginx/sites-available/ 2>/dev/null | sed 's/^/  /' || echo "  (absent)"
           echo "######## FIN ########"
           REMOTE
