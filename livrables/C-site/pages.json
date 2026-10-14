@@ -84,60 +84,100 @@
 "liste"
 ],
 [
-"art-smartphone",
-"mag/filmer-son-commerce-au-smartphone/",
-"Filmer son commerce au smartphone : guide 2026",
-"Pas besoin de matériel de cinéma. Cadrage, lumière, son et montage : la méthode complète pour filmer votre commerce avec le téléphone que vous avez déjà.",
-"article"
-],
-[
-"art-google-business",
-"mag/creer-sa-fiche-google-business/",
-"Créer sa fiche Google Business : guide pas à pas",
-"Le levier de visibilité locale le plus rentable, et il est gratuit. Création, optimisation, photos et avis : la marche à suivre pour être trouvé près de chez vous.",
-"article"
-],
-[
-"art-financement",
-"mag/financer-sa-formation-agefice-fafcea/",
-"AGEFICE, FAFCEA, OPCO : financer sa formation",
-"Qui finance quoi selon votre statut, quels plafonds horaires et annuels, quels délais de dépôt, et comment monter votre dossier sans vous tromper.",
-"article"
-],
-[
-"art-reels",
-"mag/reels-tiktok-shorts-clients-locaux/",
-"Reels, TikTok, Shorts : quelle vidéo choisir",
-"Mêmes vidéos verticales, trois plateformes, trois logiques. Laquelle privilégier quand on est commerçant, artisan ou restaurateur dans l'Hérault.",
-"article"
-],
-[
-"art-clients-locaux",
-"mag/attirer-plus-de-clients-locaux/",
-"Restaurant, artisan, salon : attirer en local",
-"Terrasse vide le mardi, fauteuils libres en semaine : les leviers concrets pour faire venir les clients qui habitent à moins de dix minutes de chez vous.",
-"article"
-],
-[
-"art-qualiopi",
-"mag/qualiopi-ce-que-ca-change/",
-"Qualiopi : ce que la certification change",
-"Ce que le label garantit vraiment, ce qu'il ne garantit pas, et pourquoi il conditionne le financement de votre formation par votre OPCO ou votre fonds.",
-"article"
-],
-[
 "art-reste-a-charge",
 "mag/reste-a-charge-formation/",
 "Reste à charge formation : le calcul exact",
 "Votre reste à charge n'est pas le prix moins le taux de votre fonds. La formule exacte, les taux officiels 2026 et les trois variables qui le déterminent.",
-"article"
+"article",
+{
+"img": "mag-financement.jpg",
+"tag": "Financement",
+"carte": "Reste à charge : comment le calculer vraiment"
+}
 ],
 [
 "art-fafcea-transverse",
 "mag/fafcea-taux-transverse-numerique/",
 "FAFCEA : 25 €/h pour le numérique, pas 35",
 "La FAFCEA classe le web, la vidéo et les réseaux sociaux en transverse : 25 €/h, et non les 35 €/h des formations techniques. Ce que l'écart change.",
-"article"
+"article",
+{
+"img": "mag-qualiopi.jpg",
+"tag": "Financement",
+"carte": "FAFCEA : 25 €/h pour le numérique, pas 35"
+}
+],
+[
+"art-smartphone",
+"mag/filmer-son-commerce-au-smartphone/",
+"Filmer son commerce au smartphone : guide 2026",
+"Pas besoin de matériel de cinéma. Cadrage, lumière, son et montage : la méthode complète pour filmer votre commerce avec le téléphone que vous avez déjà.",
+"article",
+{
+"img": "mag-filmer-smartphone.jpg",
+"tag": "Vidéo",
+"carte": "Filmer son commerce au smartphone : le guide 2026"
+}
+],
+[
+"art-google-business",
+"mag/creer-sa-fiche-google-business/",
+"Créer sa fiche Google Business : guide pas à pas",
+"Le levier de visibilité locale le plus rentable, et il est gratuit. Création, optimisation, photos et avis : la marche à suivre pour être trouvé près de chez vous.",
+"article",
+{
+"img": "mag-google-business.jpg",
+"tag": "Visibilité locale",
+"carte": "Créer sa fiche Google Business : le guide pas à pas"
+}
+],
+[
+"art-financement",
+"mag/financer-sa-formation-agefice-fafcea/",
+"AGEFICE, FAFCEA, OPCO : financer sa formation",
+"Qui finance quoi selon votre statut, quels plafonds horaires et annuels, quels délais de dépôt, et comment monter votre dossier sans vous tromper.",
+"article",
+{
+"img": "mag-financement.jpg",
+"tag": "Financement",
+"carte": "AGEFICE, FAFCEA, OPCO : financer sa formation en 2026"
+}
+],
+[
+"art-clients-locaux",
+"mag/attirer-plus-de-clients-locaux/",
+"Restaurant, artisan, salon : attirer en local",
+"Terrasse vide le mardi, fauteuils libres en semaine : les leviers concrets pour faire venir les clients qui habitent à moins de dix minutes de chez vous.",
+"article",
+{
+"img": "mag-clients-locaux.jpg",
+"tag": "Visibilité locale",
+"carte": "Restaurant, artisan, salon : attirer plus de clients"
+}
+],
+[
+"art-reels",
+"mag/reels-tiktok-shorts-clients-locaux/",
+"Reels, TikTok, Shorts : quelle vidéo choisir",
+"Mêmes vidéos verticales, trois plateformes, trois logiques. Laquelle privilégier quand on est commerçant, artisan ou restaurateur dans l'Hérault.",
+"article",
+{
+"img": "mag-reels-social.jpg",
+"tag": "Vidéo",
+"carte": "Reels, TikTok, Shorts : quelle vidéo choisir"
+}
+],
+[
+"art-qualiopi",
+"mag/qualiopi-ce-que-ca-change/",
+"Qualiopi : ce que la certification change",
+"Ce que le label garantit vraiment, ce qu'il ne garantit pas, et pourquoi il conditionne le financement de votre formation par votre OPCO ou votre fonds.",
+"article",
+{
+"img": "mag-qualiopi.jpg",
+"tag": "Financement",
+"carte": "Qualiopi : ce que la certification change"
+}
 ],
 [
 "pres-de-chez-vous",

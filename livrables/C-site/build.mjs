@@ -59,6 +59,30 @@ js = js.replace("window.addEventListener('hashchange', route);",
 // Table des URL reelles, lue par le routeur pour rediriger les anciens liens.
 js = 'var URLS = ' + JSON.stringify(Object.fromEntries(pages.map(p => [p[0], '/' + p[1]]))) + ';\n' + js;
 
+// Grilles d'articles. Elles etaient codees en dur dans site.html : chaque
+// nouvel article obligeait a les modifier, et la grille de l'accueil avait
+// fini par ne plus montrer que d'anciens articles. Elles sont desormais
+// derivees de pages.json, ou l'ordre des articles fait foi.
+const articles = pages.filter(p => p[4] === 'article');
+function grilleArticles(combien) {
+  const liste = combien ? articles.slice(0, combien) : articles;
+  return liste.map(([slug, chemin, titre, desc, type, c]) => {
+    const m = c || {};
+    return `      <a class="ncard" href="#${slug}">` +
+      `<img class="cover" src="img/${m.img || 'logo-vformations-blue.png'}" alt="${(m.carte || titre).replace(/"/g, '&quot;')}" loading="lazy">` +
+      `<div class="nbody"><span class="ntag">${m.tag || 'Article'}</span>` +
+      `<h3>${m.carte || titre}</h3></div></a>`;
+  }).join('\n');
+}
+// Dans site.html, une grille s'ecrit <div class="news" data-auto="3"></div>
+// (les 3 plus recents) ou data-auto="tous". Le contenu est pose ici.
+function poserGrilles(html) {
+  return html.replace(/<div class="news" data-auto="([^"]+)"><\/div>/g, (_, combien) => {
+    const n = combien === 'tous' ? 0 : parseInt(combien, 10);
+    return `<div class="news">\n${grilleArticles(n)}\n      </div>`;
+  });
+}
+
 // ── Reecriture des liens et des chemins ──────────────────────────────────
 function reecrire(html) {
   return html
@@ -88,7 +112,7 @@ const ORGANISME = {
   ]
 };
 
-function schema(slug, url, titre, desc, type) {
+function schema(slug, url, titre, desc, type, carte) {
   const absolu = RACINE + url;
   const fil = [{ '@type': 'ListItem', position: 1, name: 'Accueil', item: RACINE + '/' }];
   const seg = url.replace(/^\/|\/$/g, '').split('/').filter(Boolean);
@@ -123,7 +147,9 @@ function schema(slug, url, titre, desc, type) {
   if (type === 'article') {
     blocs.push({ '@type': 'BlogPosting', headline: titre, description: desc,
       url: absolu, inLanguage: 'fr-FR',
-      image: RACINE + '/img/logo-vformations-blue.png',
+      // Google se sert de cette image pour les resultats enrichis : il lui
+      // faut la photo de l'article, pas le logo de l'organisme.
+      image: RACINE + '/img/' + ((carte && carte.img) || 'logo-vformations-blue.png'),
       author: { '@id': RACINE + '/#organisme' },
       publisher: { '@id': RACINE + '/#organisme' },
       mainEntityOfPage: { '@type': 'WebPage', '@id': absolu } });
@@ -159,8 +185,8 @@ function corpsDe(slug) {
   throw new Error(`Corps introuvable pour « ${slug} » : absent de site.html et de ${f}`);
 }
 
-for (const [slug, chemin, titre, desc, type] of pages) {
-  const corps = reecrire(`<section class="page" data-page="${slug}">${corpsDe(slug)}\n</section>`);
+for (const [slug, chemin, titre, desc, type, carte] of pages) {
+  const corps = reecrire(poserGrilles(`<section class="page" data-page="${slug}">${corpsDe(slug)}\n</section>`));
   const url = '/' + chemin;
   const titreComplet = titre + ' | VFormations';
 
@@ -187,7 +213,7 @@ ${verif}
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Raleway:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/style.css">
-<script type="application/ld+json">${schema(slug, url, titre, desc, type)}</script>
+<script type="application/ld+json">${schema(slug, url, titre, desc, type, carte)}</script>
 </head>
 <body>
 ${headerR}

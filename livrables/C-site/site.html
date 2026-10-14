@@ -406,6 +406,97 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
 .article .stat b{font-family:'Poppins',sans-serif;font-weight:600;font-size:1.3rem;color:var(--plum);display:block;}
 .article .stat span{font-size:var(--fs-xs);color:var(--muted);}
 
+
+/* ── Affinage mobile ───────────────────────────────────────────────────────
+   Le reste de la feuille est deja fluide (clamp() sur les tailles, les
+   gouttieres et les espacements) : ce bloc ne refait pas la mise en page,
+   il corrige ce que le fluide ne sait pas resoudre seul sur un petit ecran.
+   Mesures prises a 390 x 844 (iPhone 14/15) avant intervention.          */
+@media (max-width: 560px) {
+
+  /* Bandeau cookies : il occupait 320px, soit 38 % de l'ecran, sur chaque
+     page et pour chaque nouveau visiteur — donc pour tout le trafic qui
+     viendra des publicites. Les trois boutons empiles sur toute la largeur
+     en etaient la cause principale.
+     « Tout refuser » garde exactement le meme poids visuel que
+     « Tout accepter » : c'est une exigence CNIL, pas une preference. */
+  .cmp { padding: .9rem 1rem calc(.9rem + env(safe-area-inset-bottom, 0px)); }
+  .cmp h2 { font-size: .95rem; margin-bottom: .3rem; }
+  .cmp p  { font-size: .8rem; line-height: 1.45; margin-bottom: .7rem; }
+  .cmp-acts { gap: .5rem; }
+  .cmp-acts .btn { flex: 1 1 calc(50% - .25rem); min-height: 44px;
+                   padding: .55em 1em; font-size: .85rem; justify-content: center; }
+  /* L'ordre du HTML place « Personnaliser » entre refus et acceptation :
+     en pleine largeur il s'intercalait et imposait trois rangees. On le
+     renvoie visuellement en dessous, sans toucher a l'ordre du document
+     (donc sans changer l'ordre de tabulation au clavier). */
+  #cmpRefuser { order: 1; }
+  #cmpAccepter { order: 2; }
+  #cmpPerso, #cmpValider { order: 3; flex: 1 1 100%; }
+  /* le panneau de reglages reste lisible sans pousser le bandeau hors ecran */
+  .cmp-prefs { max-height: 42vh; overflow-y: auto; }
+  /* Phrase de reassurance masquee sur petit ecran : les deux boutons de
+     poids egal la demontrent deja. L'information obligatoire (nature des
+     traceurs, consentement requis, lien vers la politique) reste entiere. */
+  .cmp-plus { display: none; }
+
+  /* En-tete : le panier (badge « 0 ») et « Espace client » pointent tous
+     deux vers le diagnostic. Il n'y a ni boutique en ligne ni espace
+     client : sur mobile ils ne font qu'occuper deux cibles tactiles et
+     suggerer un achat impossible. Le telephone, lui, convertit. */
+  /* Attention : le build reecrit href="#slug" en URL reelle (/diagnostic/).
+     Un selecteur base sur l'ancre ne correspondrait donc plus a la page
+     publiee — on cible par position, qui elle ne change pas.
+     [0] telephone · [1] e-mail · [2] Espace client · [3] panier */
+  .hutil > a:nth-child(3), .hutil .cart { display: none; }
+  .hutil { gap: .85rem; }
+  /* Cible tactile confortable en hauteur, sans largeur imposee : la rangee
+     de l'en-tete (bouton menu + logo + icones) n'a pas 36px de marge a
+     390px, et un min-width la faisait deborder — ce qui elargissait tout
+     le document et rognait le texte du bandeau cookies. */
+  .hutil a { min-height: 44px; padding-inline: .3rem; display: inline-flex;
+             align-items: center; justify-content: center; }
+
+  /* Champ de recherche du hero : l'intitule du bouton lui laissait 156px,
+     d'ou le texte tronque. On rend la place au champ. */
+  .hero-search { padding: .4rem .4rem .4rem 1rem; gap: .4rem; }
+  .hero-search input { min-width: 0; font-size: .95rem; }
+  .hero-search .btn { padding: .7em 1.05em; font-size: .85rem; white-space: nowrap; }
+
+  /* Cibles tactiles : la recommandation est 44px de cote. Les liens de
+     pied de page et de menu tombaient a 16px. */
+  .footer a, .mnav a, .toc button, .acc summary {
+    min-height: 44px; display: flex; align-items: center; }
+  .footer a { padding-block: .15rem; }
+
+  /* Lisibilite : --fs-xs descendait a 10.9px, sous le seuil confortable. */
+  :root { --fs-xs: .78rem; --fs-sm: .84rem; }
+
+  /* Respiration : des sections un peu plus courtes, pour reduire le
+     defilement sans tasser le contenu. */
+  :root { --section-y: 2.4rem; }
+
+  /* Les cartes passent en pleine largeur plutot qu'en colonnes etroites. */
+  .news, .grid3 { grid-template-columns: 1fr; }
+}
+
+/* Tres petits ecrans (iPhone SE, 320-375px) */
+@media (max-width: 380px) {
+  .hero-search { flex-wrap: wrap; border-radius: 18px; padding: .6rem; }
+  .hero-search input { flex: 1 1 100%; padding-inline: .4rem; }
+  .hero-search .btn { flex: 1 1 100%; justify-content: center; }
+  .brand-name { font-size: 1.05rem; }
+  /* Sous 380px la rangee de l'en-tete ne tient plus : on garde le telephone,
+     qui est l'action qui convertit, et on retire l'icone e-mail — le contact
+     reste accessible par le menu et par la page Contact. */
+  .hutil > a:nth-child(2) { display: none; }
+  /* Sur un ecran de 320x568 le texte du bandeau se replie davantage et lui
+     faisait reprendre la moitie de la hauteur utile. */
+  .cmp { padding: .75rem .85rem calc(.75rem + env(safe-area-inset-bottom, 0px)); }
+  .cmp h2 { font-size: .9rem; }
+  .cmp p { font-size: .76rem; line-height: 1.4; margin-bottom: .6rem; }
+  .cmp-acts .btn { font-size: .8rem; padding: .5em .7em; }
+}
 </style>
 
 <div class="redline"></div>
@@ -477,11 +568,7 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
   <section class="sec">
     <div class="wrap">
       <h2 class="sec-title">Nos dernières actualités</h2>
-      <div class="news">
-        <a class="ncard" href="#art-smartphone"><img class="cover" src="img/mag-filmer-smartphone.jpg" alt="Filmer son commerce avec un smartphone" loading="lazy"><div class="nbody"><span class="ntag">Vidéo</span><h3>Filmer son commerce au smartphone : le guide 2026</h3></div></a>
-        <a class="ncard" href="#art-financement"><img class="cover" src="img/mag-financement.jpg" alt="Financer sa formation AGEFICE FAFCEA" loading="lazy"><div class="nbody"><span class="ntag">Financement</span><h3>AGEFICE, FAFCEA, OPCO : financer sa formation en 2026</h3></div></a>
-        <a class="ncard" href="#art-google-business"><img class="cover" src="img/mag-google-business.jpg" alt="Créer sa fiche Google Business" loading="lazy"><div class="nbody"><span class="ntag">Visibilité locale</span><h3>Créer sa fiche Google Business : le guide pas à pas</h3></div></a>
-      </div>
+      <div class="news" data-auto="3"></div>
     </div>
   </section>
 
@@ -1203,16 +1290,7 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
     </div>
   </section>
   <section class="sec"><div class="wrap">
-    <div class="news">
-      <a class="ncard" href="#art-reste-a-charge"><img class="cover" src="img/mag-financement.jpg" alt="Calculer le reste a charge d'une formation" loading="lazy"><div class="nbody"><span class="ntag">Financement</span><h3>Reste à charge : comment le calculer vraiment</h3></div></a>
-      <a class="ncard" href="#art-fafcea-transverse"><img class="cover" src="img/mag-qualiopi.jpg" alt="Taux de prise en charge FAFCEA pour le numerique" loading="lazy"><div class="nbody"><span class="ntag">Financement</span><h3>FAFCEA : 25 €/h pour le numérique, pas 35</h3></div></a>
-      <a class="ncard" href="#art-smartphone"><img class="cover" src="img/mag-filmer-smartphone.jpg" alt="Filmer son commerce avec un smartphone" loading="lazy"><div class="nbody"><span class="ntag">Vidéo</span><h3>Comment filmer son commerce au smartphone (guide 2026)</h3></div></a>
-      <a class="ncard" href="#art-google-business"><img class="cover" src="img/mag-google-business.jpg" alt="Créer sa fiche Google Business" loading="lazy"><div class="nbody"><span class="ntag">Visibilité locale</span><h3>Créer sa fiche Google Business : le guide pas à pas</h3></div></a>
-      <a class="ncard" href="#art-financement"><img class="cover" src="img/mag-financement.jpg" alt="Financer sa formation" loading="lazy"><div class="nbody"><span class="ntag">Financement</span><h3>AGEFICE, FAFCEA, OPCO : financer sa formation en 2026</h3></div></a>
-      <a class="ncard" href="#art-reels"><img class="cover" src="img/mag-reels-social.jpg" alt="Reels TikTok Shorts pour commerce" loading="lazy"><div class="nbody"><span class="ntag">Vidéo</span><h3>Reels, TikTok, Shorts : quelle vidéo pour attirer des clients</h3></div></a>
-      <a class="ncard" href="#art-clients-locaux"><img class="cover" src="img/mag-clients-locaux.jpg" alt="Attirer des clients locaux" loading="lazy"><div class="nbody"><span class="ntag">Local</span><h3>Restaurant, artisan, salon : attirer plus de clients locaux</h3></div></a>
-      <a class="ncard" href="#art-qualiopi"><img class="cover" src="img/mag-qualiopi.jpg" alt="Qualiopi expliqué" loading="lazy"><div class="nbody"><span class="ntag">Financement</span><h3>Qualiopi, c'est quoi ? Ce que ça change pour votre formation</h3></div></a>
-    </div>
+    <div class="news" data-auto="tous"></div>
   </div></section>
 </section>
 
@@ -2166,7 +2244,7 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
 <div class="cmp" id="cmp" hidden role="dialog" aria-modal="false" aria-labelledby="cmpTitre">
   <div class="cmp-in">
     <h2 id="cmpTitre">Nous respectons votre choix</h2>
-    <p>Ce site dépose des traceurs de mesure d'audience et de publicité <b>uniquement si vous l'acceptez</b>. Refuser est aussi simple qu'accepter et n'empêche rien. Détails dans notre <a class="inl" href="#confidentialite">politique de confidentialité</a>.</p>
+    <p>Ce site dépose des traceurs de mesure d'audience et de publicité <b>uniquement si vous l'acceptez</b>. <span class="cmp-plus">Refuser est aussi simple qu'accepter et n'empêche rien.</span> Détails dans notre <a class="inl" href="#confidentialite">politique de confidentialité</a>.</p>
     <div class="cmp-prefs" id="cmpPrefs" hidden>
       <div class="cmp-row lock">
         <div><label><input type="checkbox" checked disabled> Strictement nécessaires</label>
