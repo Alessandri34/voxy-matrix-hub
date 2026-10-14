@@ -32,7 +32,7 @@ jobs:
       - name: Installer Node
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
 
       # Le site source est un fichier unique à routage par ancres (#slug) :
       # une seule URL pour 31 pages, donc une seule page indexable.

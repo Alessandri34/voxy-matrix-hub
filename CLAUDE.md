@@ -42,9 +42,19 @@ Formulations **bannies** : « gratuit », « 100 % financé », « sans reste à
 - `livrables/00-cadrage/` : `00_cadrage.md`
 - `livrables/A-marketing/` : `A0_Marche_et_Personas.md` · `A_scripts_ugc.md` · `A_scripts_ugc_v2.md`
 - `livrables/B-socle/` : `B_pilotage.md` · `B1_Programme_AFEST_Visibilite_Locale.md` · `B2_Modele_Contrat_Sous_Traitance.md` · `B3_Grilles_Pedagogiques.md` · `B4_Programmes_Commercialisables_Qualiopi.md` · `Referentiel_Competences_Qualiopi.md`
-- `livrables/C-site/` : `C_architecture_site.md` · `site.html` · `SEO_strategie.md` · `INFOS_A_FOURNIR.md` · `formulaire/` · `img/` · `apercus/`
+- `livrables/C-site/` : `C_architecture_site.md` · `site.html` (source) · `pages.json` + `build.mjs` (génération des 31 vraies URL) · `seo.json` (clé IndexNow, jetons de vérification) · `INDEXATION.md` · `SEO_strategie.md` · `INFOS_A_FOURNIR.md` · `api/contact.php` · `formulaire/` · `img/` · `apercus/`
+  > **Le site en production est généré, pas copié.** `site.html` reste la source unique ; `node build.mjs` en produit `dist/` (31 pages autonomes + `sitemap.xml` + `robots.txt`). Ne jamais déployer `site.html` tel quel : il n'expose qu'une URL pour 31 pages. `dist/` est hors Git.
 - `livrables/D-strategie/` : `D0_Analyse_Strategique.md` · `D1_Business_Model_Unit_Economics.md` · `D2_Plan_Commercialisation.md` · `D3_Operationnel_ADS_Meta.md`
 - `livrables/E-produit/` : `E0_Architecture_Produit.md` · `E1_Module_Generateur_Scripts.md` · `E2_Module_Generateur_Prompts.md` · `E2b_Modeles_Prompts_Prets.md` · `E3_Stack_Technique.md` · `E4_Idees_Strategiques.md`
+
+## 6bis. Indexation [Vérifié — 14/10/2026]
+- **31 vraies URL** en production, titres/descriptions/canonicals uniques, Schema.org, sitemap, robots.txt. Contenu lisible **sans JavaScript**.
+- Anciens liens `/#slug` **redirigés** vers leur URL réelle (`location.replace`).
+- **IndexNow branché** (clé vérifiée, HTTP 200) : Bing, Yandex, Seznam, Naver notifiés à chaque déploiement. **Google n'y participe pas.**
+- ⏳ **Reste à faire par Pierre** : jeton Google Search Console (2 min, voir `livrables/C-site/INDEXATION.md`) → à coller dans `seo.json`, le build pose la balise sur les 31 pages.
+- ⏳ **Fiche Google Business Profile** : pèse plus lourd que le site sur les requêtes locales. Délai de validation long → à lancer tôt.
+- ❌ **Backlinks automatiques à grande échelle : refusés.** C'est un *link scheme* au sens des règles anti-spam de Google ; une pénalité manuelle sur un domaine neuf coûterait plus que les liens ne rapportent, et cela consiste à déposer du contenu non sollicité chez des tiers. Remplacé par les citations légitimes listées dans `INDEXATION.md` (GBP, carif-oref, CCI/CMA, pages financeurs, fédérations métier, prescripteurs).
+- Le déploiement **refuse de publier** si un titre ou un canonical est dupliqué, si une meta description manque, si un Schema.org est invalide, ou si le sitemap ne couvre pas les 31 pages.
 
 ## 7. Chantiers (master prompt)
 A = 10 scripts UGC (**fait** : fiche signal + 10 angles + 10 scripts + plan de test) · B = pilotage (**socle fait**) · C = site vitrine · D = plateforme de gestion.
