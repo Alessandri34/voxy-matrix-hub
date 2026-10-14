@@ -179,6 +179,28 @@ section.sec{padding-block:var(--section-y);}
 .fcard .subt{color:var(--muted);font-size:var(--fs-sm);}
 .fcard .rate{display:flex;align-items:center;gap:.5rem;font-size:var(--fs-sm);color:var(--muted);}
 .fcard .rate .st{color:var(--stars);letter-spacing:1px;}
+.fcard .tagline{font-size:.82rem;font-weight:600;color:var(--plum);letter-spacing:.02em;}
+.legal .tablewrap{overflow-x:auto;margin:1rem 0 1.4rem;border:1px solid var(--line);border-radius:10px;}
+.legal table.ltab{border-collapse:collapse;width:100%;font-size:.92rem;min-width:520px;}
+.legal table.ltab th,.legal table.ltab td{text-align:left;padding:.7rem .9rem;border-bottom:1px solid var(--line);vertical-align:top;}
+.legal table.ltab th{font-weight:600;font-size:.82rem;letter-spacing:.03em;text-transform:uppercase;background:var(--sand);}
+.legal table.ltab tr:last-child td{border-bottom:0;}
+.legal h3{font-size:1rem;margin-top:1.2rem;}
+/* Bandeau de consentement */
+.cmp{position:fixed;left:0;right:0;bottom:0;z-index:9000;background:#fff;border-top:3px solid var(--plum);box-shadow:0 -10px 40px rgba(0,0,0,.18);padding:1.1rem var(--gutter) calc(1.1rem + env(safe-area-inset-bottom,0px));}
+.cmp[hidden]{display:none!important;}
+.cmp-in{max-width:1200px;margin-inline:auto;}
+.cmp h2{font-size:1.02rem;margin:0 0 .4rem;}
+.cmp p{font-size:.88rem;color:var(--muted);margin:0 0 .9rem;max-width:68ch;}
+.cmp-acts{display:flex;flex-wrap:wrap;gap:.6rem;}
+.cmp-acts .btn{flex:1 1 auto;min-width:150px;justify-content:center;}
+.cmp-prefs{margin:.2rem 0 1rem;display:flex;flex-direction:column;gap:.7rem;}
+.cmp-row{display:flex;gap:.8rem;align-items:flex-start;padding:.7rem .9rem;background:var(--sand);border-radius:8px;}
+.cmp-row label{font-weight:600;font-size:.9rem;display:flex;gap:.6rem;align-items:center;cursor:pointer;}
+.cmp-row input{width:auto;margin:0;}
+.cmp-row .d{font-size:.82rem;color:var(--muted);margin-top:.2rem;}
+.cmp-row.lock label{cursor:default;opacity:.75;}
+@media (max-width:560px){.cmp-acts .btn{flex:1 1 100%;}}
 .fcard .dur{display:flex;align-items:center;gap:.5rem;font-size:var(--fs-sm);color:var(--ink);font-weight:500;margin-top:auto;padding-top:.9rem;border-top:1px solid var(--line);}
 .fcard .ff{padding:var(--card-pad);padding-top:.9rem;display:flex;align-items:center;justify-content:space-between;gap:.75rem;flex-wrap:wrap;}
 .fcard .ff .btn{padding:.65em 1.2em;font-size:var(--fs-sm);}
@@ -499,17 +521,17 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
       <div class="fcards">
         <article class="fcard">
           <img class="media" src="img/formation-video.jpg" alt="Commerçant filmant sa boulangerie au smartphone sur stabilisateur" width="1600" height="893" loading="lazy" decoding="async">
-          <div class="fb"><h3>Visibilité locale par la vidéo</h3><div class="subt">Filmer, monter et diffuser pour attirer des clients locaux</div><div class="rate"><span class="st">★★★★★</span> Nouvelle formation</div><div class="dur"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg> 14 h à 60 h · présentiel</div></div>
+          <div class="fb"><h3>Visibilité locale par la vidéo</h3><div class="subt">Filmer, monter et diffuser pour attirer des clients locaux</div><div class="dur"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg> 14 h à 60 h · présentiel</div></div>
           <div class="ff"><a class="btn btn-wine" href="#formation-video">Voir la formation</a><div class="price">dès 1 190 € HT<small>finançable</small></div></div>
         </article>
         <article class="fcard">
           <img class="media" src="img/formation-boutique.jpg" alt="Dirigeante pilotant sa boutique en ligne depuis son tableau de bord" width="1600" height="893" loading="lazy" decoding="async">
-          <div class="fb"><h3>Créer et piloter sa boutique en ligne</h3><div class="subt">De la création du site à la première vente</div><div class="rate"><span class="st">★★★★★</span> Nouvelle formation</div><div class="dur"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg> 14 h à 35 h · présentiel</div></div>
+          <div class="fb"><h3>Créer et piloter sa boutique en ligne</h3><div class="subt">De la création du site à la première vente</div><div class="dur"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg> 14 h à 35 h · présentiel</div></div>
           <div class="ff"><a class="btn btn-wine" href="#formation-boutique">Voir la formation</a><div class="price">dès 1 190 € HT<small>finançable</small></div></div>
         </article>
         <article class="fcard">
           <img class="media" src="img/formation-prospection.jpg" alt="Dirigeant de PME menant un entretien de prospection commerciale B2B" width="1600" height="893" loading="lazy" decoding="async">
-          <div class="fb"><h3>Structurer sa prospection B2B</h3><div class="subt">Ciblage, prise de contact, relance, outils</div><div class="rate"><span class="st">★★★★★</span> Nouvelle formation</div><div class="dur"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg> 14 h à 35 h · présentiel</div></div>
+          <div class="fb"><h3>Structurer sa prospection B2B</h3><div class="subt">Ciblage, prise de contact, relance, outils</div><div class="dur"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg> 14 h à 35 h · présentiel</div></div>
           <div class="ff"><a class="btn btn-wine" href="#formation-prospection">Voir la formation</a><div class="price">dès 1 190 € HT<small>finançable</small></div></div>
         </article>
       </div>
@@ -532,7 +554,7 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
       <div class="tiles">
         <div class="tile t1"><div class="num">100 %</div><div class="lbl">des parcours sur votre cas réel</div></div>
         <div class="tile t2"><div class="num">90 j</div><div class="lbl">suivi & évaluation à froid</div></div>
-        <div class="tile t3"><div class="st">★★★★★</div><div class="num">Qualiopi</div><div class="lbl">processus certifié</div></div>
+        <div class="tile t3"><div class="num">Qualiopi</div><div class="lbl">certifié — n° VFO12912026001</div></div>
         <div class="tile t4"><div class="num">34</div><div class="lbl">Hérault — déplacement inclus</div></div>
         <div class="tile t5"><div class="num">4</div><div class="lbl">parcours finançables (AGEFICE · FAFCEA · OPCO)</div></div>
       </div>
@@ -581,22 +603,22 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
       <div class="fcards" id="catalogue">
         <article class="fcard lite" data-cat="video">
           <img class="media" src="img/formation-video.jpg" alt="Commerçant filmant sa boulangerie au smartphone sur stabilisateur" width="1600" height="893" loading="lazy" decoding="async">
-          <div class="fb"><h3>Développer sa visibilité locale par la vidéo</h3><div class="subt">Filmer, monter et diffuser soi-même des vidéos courtes — offre pilote.</div><div class="rate"><span class="st">★★★★★</span> Nouvelle formation</div><div class="dur"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg> 14 h à 60 h · présentiel · AFEST</div></div>
+          <div class="fb"><h3>Développer sa visibilité locale par la vidéo</h3><div class="subt">Filmer, monter et diffuser soi-même des vidéos courtes — offre pilote.</div><div class="dur"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg> 14 h à 60 h · présentiel · AFEST</div></div>
           <div class="ff"><a class="btn btn-wine" href="#formation-video">Voir la formation</a><div class="price">dès 1 190 € HT<small>finançable</small></div></div>
         </article>
         <article class="fcard lite" data-cat="web">
           <div class="media m2"><svg fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 8h20"/></svg></div>
-          <div class="fb"><h3>Créer un site internet professionnel</h3><div class="subt">Concevoir, mettre en ligne et piloter un site qui amène des clients.</div><div class="rate"><span class="st">★★★★★</span> Formation phare</div><div class="dur"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg> 14 h à 35 h · présentiel</div></div>
+          <div class="fb"><h3>Créer un site internet professionnel</h3><div class="subt">Concevoir, mettre en ligne et piloter un site qui amène des clients.</div><div class="tagline">Offre pilote</div><div class="dur"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg> 14 h à 35 h · présentiel</div></div>
           <div class="ff"><a class="btn btn-wine" href="#formation-site">Voir la formation</a><div class="price">dès 1 190 € HT<small>finançable</small></div></div>
         </article>
         <article class="fcard lite" data-cat="web">
           <img class="media" src="img/formation-boutique.jpg" alt="Dirigeante pilotant sa boutique en ligne depuis son tableau de bord" width="1600" height="893" loading="lazy" decoding="async">
-          <div class="fb"><h3>Créer et piloter sa boutique en ligne</h3><div class="subt">De la création du site à la première vente, sur votre catalogue.</div><div class="rate"><span class="st">★★★★★</span> Nouvelle formation</div><div class="dur"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg> 14 h à 35 h · présentiel</div></div>
+          <div class="fb"><h3>Créer et piloter sa boutique en ligne</h3><div class="subt">De la création du site à la première vente, sur votre catalogue.</div><div class="dur"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg> 14 h à 35 h · présentiel</div></div>
           <div class="ff"><a class="btn btn-wine" href="#formation-boutique">Voir la formation</a><div class="price">dès 1 190 € HT<small>finançable</small></div></div>
         </article>
         <article class="fcard lite" data-cat="vente">
           <img class="media" src="img/formation-prospection.jpg" alt="Dirigeant de PME menant un entretien de prospection commerciale B2B" width="1600" height="893" loading="lazy" decoding="async">
-          <div class="fb"><h3>Structurer sa prospection commerciale B2B</h3><div class="subt">Ciblage, message, prise de rendez-vous et suivi — sur vos vrais prospects.</div><div class="rate"><span class="st">★★★★★</span> Nouvelle formation</div><div class="dur"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg> 14 h à 60 h · présentiel</div></div>
+          <div class="fb"><h3>Structurer sa prospection commerciale B2B</h3><div class="subt">Ciblage, message, prise de rendez-vous et suivi — sur vos vrais prospects.</div><div class="dur"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg> 14 h à 60 h · présentiel</div></div>
           <div class="ff"><a class="btn btn-wine" href="#formation-prospection">Voir la formation</a><div class="price">dès 1 190 € HT<small>finançable</small></div></div>
         </article>
       </div>
@@ -1974,12 +1996,130 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
   </div></section>
 </section>
 <section class="page" data-page="confidentialite" hidden>
-  <section class="phero"><div class="wrap"><div class="breadcrumb"><a href="#accueil">Accueil</a><span class="sep">›</span><span>Confidentialité</span></div><h1>Politique de confidentialité</h1></div></section>
+  <section class="phero"><div class="wrap"><div class="breadcrumb"><a href="#accueil">Accueil</a><span class="sep">›</span><span>Confidentialité</span></div><h1>Politique de confidentialité et de protection des données</h1><p class="lead">Comment VFormations collecte, utilise et protège vos données personnelles.</p></div></section>
   <section class="sec"><div class="wrap narrow legal">
-    <h2>Responsable de traitement</h2><p>VFormations (SAS), 47 rue Vivienne, 75002 Paris — contact@vformations.fr.</p>
-    <h2>Données collectées</h2><p>Les informations transmises via nos formulaires (nom, activité, e-mail, téléphone, message) sont utilisées uniquement pour traiter votre demande.</p>
-    <h2>Finalité & conservation</h2><p>Recontact commercial et montage du dossier de formation. Conservation limitée à la durée nécessaire. Aucune revente à des tiers.</p>
-    <h2>Vos droits</h2><p>Accès, rectification, suppression et opposition : écrivez à contact@vformations.fr. Vous pouvez aussi saisir la CNIL.</p>
+    <p class="form-note">Dernière mise à jour : 14 octobre 2026. Version 2.0.</p>
+
+    <h2>1. Qui est responsable de vos données</h2>
+    <p><b>VFORMATIONS</b>, société par actions simplifiée à associé unique au capital de 1&nbsp;000&nbsp;€, immatriculée au RCS de Paris sous le numéro 103&nbsp;940&nbsp;227, dont le siège est situé 47 rue Vivienne, 75002 Paris, agissant en qualité de <b>responsable de traitement</b>.</p>
+    <p>Organisme de formation enregistré sous le NDA 11757618175, certifié Qualiopi (certificat n° VFO12912026001).<br>
+    Directeur de la publication : Pierre&nbsp;Nicolas Alessandri.<br>
+    <b>Contact pour toute question relative à vos données :</b> <a class="inl" href="mailto:contact@vformations.fr">contact@vformations.fr</a> · 07&nbsp;63&nbsp;67&nbsp;82&nbsp;92.</p>
+    <p class="form-note">Nous n’avons pas désigné de délégué à la protection des données : notre activité ne relève d’aucun des cas rendant cette désignation obligatoire (article 37 du RGPD). Vos demandes sont traitées directement à l’adresse ci-dessus.</p>
+
+    <h2>2. Les données que nous collectons</h2>
+    <p>Nous ne collectons que les données nécessaires, et nous vous indiquons toujours lesquelles sont obligatoires.</p>
+    <div class="tablewrap"><table class="ltab">
+      <thead><tr><th>Origine</th><th>Données concernées</th></tr></thead>
+      <tbody>
+        <tr><td><b>Formulaire de contact</b></td><td>Nom et prénom, e-mail, téléphone, activité, sujet, contenu du message</td></tr>
+        <tr><td><b>Demande de diagnostic</b></td><td>Nom et prénom, e-mail, téléphone, activité, besoin exprimé, financeur envisagé</td></tr>
+        <tr><td><b>Formulaires publicitaires</b> (Facebook, Instagram)</td><td>Nom, e-mail, téléphone, nom de l’entreprise, secteur, effectif, échéance de projet — renseignés par vous sur la plateforme</td></tr>
+        <tr><td><b>Dossier de formation</b></td><td>Identité, coordonnées professionnelles, SIRET, statut, financeur, émargements, travaux réalisés, évaluations, attestation</td></tr>
+        <tr><td><b>Navigation sur le site</b></td><td>Adresse IP, type de navigateur, pages consultées, date et heure, source d’arrivée</td></tr>
+      </tbody>
+    </table></div>
+    <p class="form-note"><b>À noter :</b> si vous exercez en entreprise individuelle, vos coordonnées professionnelles sont des données personnelles au sens du RGPD. Elles bénéficient donc de la même protection que celles d’un particulier.</p>
+    <p>Nous ne collectons <b>aucune donnée sensible</b> (santé, opinions, orientation, origine). Si vous nous signalez un besoin d’adaptation lié à une situation de handicap, cette information n’est utilisée que pour organiser votre accueil, avec votre accord, et n’est jamais conservée au-delà de la formation.</p>
+
+    <h2>3. Pourquoi nous les utilisons, et sur quel fondement</h2>
+    <div class="tablewrap"><table class="ltab">
+      <thead><tr><th>Finalité</th><th>Base légale</th><th>Durée de conservation</th></tr></thead>
+      <tbody>
+        <tr><td>Répondre à votre demande, vous rappeler, établir un devis</td><td>Mesures précontractuelles à votre demande (art.&nbsp;6.1.b)</td><td><b>3 ans</b> à compter de notre dernier échange</td></tr>
+        <tr><td>Monter et suivre votre dossier de financement</td><td>Exécution du contrat (art.&nbsp;6.1.b)</td><td>Durée du dossier, puis archivage ci-dessous</td></tr>
+        <tr><td>Organiser et dispenser la formation</td><td>Exécution du contrat (art.&nbsp;6.1.b)</td><td>Durée de la relation</td></tr>
+        <tr><td>Conserver les preuves pédagogiques (émargements, évaluations, attestations)</td><td>Obligation légale (art.&nbsp;6.1.c) — contrôle de la formation professionnelle</td><td><b>Au moins 3 ans</b> après la fin de l’action ; davantage si le financeur l’exige</td></tr>
+        <tr><td>Tenir notre comptabilité et nos factures</td><td>Obligation légale (art.&nbsp;6.1.c)</td><td><b>10 ans</b> (art.&nbsp;L.123-22 du code de commerce)</td></tr>
+        <tr><td>Mesurer l’audience du site et l’efficacité de nos publicités</td><td><b>Votre consentement</b> (art.&nbsp;6.1.a)</td><td>Traceurs : <b>13 mois</b> · données issues des traceurs : <b>25 mois</b></td></tr>
+        <tr><td>Sécurité du site et journaux de connexion</td><td>Intérêt légitime à protéger notre service (art.&nbsp;6.1.f)</td><td><b>12 mois</b></td></tr>
+      </tbody>
+    </table></div>
+    <p class="form-note">Au terme de ces durées, les données sont supprimées ou anonymisées de façon irréversible.</p>
+
+    <h2>4. Qui a accès à vos données</h2>
+    <p><b>Nous ne vendons, ne louons et n’échangeons aucune donnée personnelle.</b> Y accèdent uniquement :</p>
+    <ul class="ul-check">
+      <li>les dirigeants et les formateurs de VFormations, pour ce qui relève de leur mission ;</li>
+      <li>nos <b>sous-traitants techniques</b>, listés ci-dessous, liés par contrat et ne pouvant agir que sur nos instructions ;</li>
+      <li>votre <b>financeur</b> (AGEFICE, FAFCEA, OPCO, FIF&nbsp;PL) et son Point d’Accueil, pour les seules pièces nécessaires à votre prise en charge ;</li>
+      <li>nos <b>intervenants sous-traitants</b> (formateurs indépendants, cadreur), soumis à une obligation contractuelle de confidentialité ;</li>
+      <li>l’<b>organisme certificateur</b> et les agents de contrôle de l’administration, dans le cadre de leurs prérogatives légales.</li>
+    </ul>
+    <div class="tablewrap"><table class="ltab">
+      <thead><tr><th>Sous-traitant</th><th>Rôle</th><th>Localisation</th></tr></thead>
+      <tbody>
+        <tr><td><b>Hostinger International Ltd</b></td><td>Hébergement du site</td><td>Union européenne</td></tr>
+        <tr><td><b>Meta Platforms Ireland Limited</b></td><td>Diffusion publicitaire et mesure (voir § 6)</td><td>Irlande, avec transferts possibles hors UE</td></tr>
+        <tr><td><b>Google Ireland Limited</b></td><td>Réception et stockage des demandes envoyées par nos formulaires</td><td>Irlande, avec transferts possibles hors UE</td></tr>
+      </tbody>
+    </table></div>
+
+    <h2>5. Transferts hors de l’Union européenne</h2>
+    <p>Nos hébergeurs sont situés dans l’Union européenne. En revanche, <b>Meta et Google peuvent transférer certaines données vers les États-Unis</b>.</p>
+    <p>Ces transferts reposent sur les garanties prévues au chapitre&nbsp;V du RGPD : <b>décision d’adéquation</b> lorsque le destinataire est certifié au titre du cadre de protection des données UE–États-Unis, ou à défaut <b>clauses contractuelles types</b> de la Commission européenne assorties de mesures complémentaires.</p>
+    <p class="form-note">Vous pouvez obtenir une copie de ces garanties en écrivant à contact@vformations.fr.</p>
+
+    <h2>6. Publicité sur Facebook et Instagram</h2>
+    <p>Nous diffusons des campagnes publicitaires sur les plateformes de Meta. Voici exactement ce que cela implique.</p>
+
+    <h3>Le pixel Meta et l’API de Conversions</h3>
+    <p>Lorsque vous y consentez, un traceur du pixel Meta est déposé sur votre navigateur. Il nous permet de savoir si une publicité a conduit à une visite ou à une demande de contact, et d’améliorer nos campagnes. Les mêmes informations peuvent être transmises depuis notre serveur via l’API de Conversions — <b>uniquement si vous avez donné votre consentement</b> : nous n’utilisons pas ce canal pour contourner votre refus.</p>
+    <p><b>Si vous refusez, aucun traceur publicitaire n’est déposé et aucune donnée n’est transmise à Meta depuis ce site.</b></p>
+
+    <h3>Audiences personnalisées</h3>
+    <p>Avec votre consentement, nous pouvons constituer des audiences afin de montrer nos publicités aux personnes ayant déjà consulté notre site ou vu nos vidéos, et exclure nos clients actuels. Aucune liste de contacts n’est téléversée vers Meta sans base légale appropriée.</p>
+
+    <h3>Formulaires publicitaires</h3>
+    <p>Si vous remplissez un formulaire directement dans Facebook ou Instagram, les données sont d’abord collectées par Meta, puis nous sont transmises pour vous recontacter. Votre consentement y est recueilli explicitement et horodaté.</p>
+
+    <h3>Responsabilité conjointe</h3>
+    <p class="form-note">Pour le pixel et les audiences personnalisées, Meta et VFormations agissent en <b>responsables conjoints</b> au sens de l’article&nbsp;26 du RGPD. Nous répondons de l’information préalable et du recueil de votre consentement ; Meta répond du traitement opéré sur son infrastructure. Vous pouvez exercer vos droits auprès de l’une ou l’autre des parties.</p>
+    <p>Pour maîtriser la publicité que vous voyez, consultez les paramètres publicitaires de votre compte Meta et la <a class="inl" href="https://www.facebook.com/privacy/policy" target="_blank" rel="noopener">politique de confidentialité de Meta</a>.</p>
+
+    <h2>7. Cookies et traceurs</h2>
+    <p>Un bandeau vous est présenté dès votre première visite. <b>Aucun traceur non essentiel n’est déposé avant votre choix</b>, et refuser est aussi simple qu’accepter.</p>
+    <div class="tablewrap"><table class="ltab">
+      <thead><tr><th>Catégorie</th><th>À quoi ça sert</th><th>Consentement</th><th>Durée</th></tr></thead>
+      <tbody>
+        <tr><td><b>Essentiels</b></td><td>Mémoriser votre choix sur les cookies, sécurité du site</td><td>Non requis</td><td>6 mois</td></tr>
+        <tr><td><b>Mesure d’audience</b></td><td>Comprendre quelles pages sont consultées</td><td><b>Requis</b></td><td>13 mois</td></tr>
+        <tr><td><b>Publicité</b> (pixel Meta)</td><td>Mesurer l’efficacité de nos campagnes</td><td><b>Requis</b></td><td>13 mois</td></tr>
+      </tbody>
+    </table></div>
+    <p>Vous pouvez modifier votre choix à tout moment : <button type="button" class="btn btn-wine" data-cookie-open>Gérer mes préférences de cookies</button></p>
+    <p class="form-note">Votre choix est conservé 6 mois, puis nous vous le redemandons. Vous pouvez aussi paramétrer votre navigateur pour bloquer les cookies, au risque de dégrader le fonctionnement de certains sites.</p>
+
+    <h2>8. Vos droits</h2>
+    <p>Vous disposez des droits suivants sur vos données :</p>
+    <ul class="ul-check">
+      <li><b>Accès</b> — obtenir une copie des données que nous détenons sur vous ;</li>
+      <li><b>Rectification</b> — corriger une information inexacte ou incomplète ;</li>
+      <li><b>Effacement</b> — demander la suppression, sauf lorsque la loi nous impose de conserver (comptabilité, preuves de formation) ;</li>
+      <li><b>Limitation</b> — demander le gel d’un traitement le temps d’une vérification ;</li>
+      <li><b>Opposition</b> — vous opposer à un traitement fondé sur notre intérêt légitime, et à tout moment à la prospection ;</li>
+      <li><b>Portabilité</b> — recevoir vos données dans un format lisible par machine ;</li>
+      <li><b>Retrait du consentement</b> — à tout moment, sans remettre en cause ce qui a été fait avant ;</li>
+      <li><b>Directives post-mortem</b> — définir le sort de vos données après votre décès.</li>
+    </ul>
+    <p><b>Comment faire :</b> écrivez à <a class="inl" href="mailto:contact@vformations.fr">contact@vformations.fr</a>. Nous répondons sous <b>un mois</b>, délai prolongeable de deux mois pour les demandes complexes, auquel cas nous vous en informons. Une pièce d’identité peut vous être demandée en cas de doute sérieux sur votre identité.</p>
+    <p>Si notre réponse ne vous satisfait pas, vous pouvez saisir la <b>CNIL</b> : 3 place de Fontenoy, TSA 80715, 75334 Paris Cedex 07 — <a class="inl" href="https://www.cnil.fr/fr/plaintes" target="_blank" rel="noopener">cnil.fr/fr/plaintes</a>.</p>
+
+    <h2>9. Sécurité</h2>
+    <p>Le site est servi exclusivement en <b>HTTPS</b> (connexion chiffrée). L’accès aux dossiers est limité aux personnes qui en ont besoin et protégé par authentification. Nos sous-traitants sont sélectionnés pour leurs garanties de sécurité et liés par contrat.</p>
+    <p>En cas de violation de données susceptible d’engendrer un risque pour vos droits, nous notifions la CNIL sous <b>72 heures</b> et vous informons directement lorsque le risque est élevé.</p>
+
+    <h2>10. Données des stagiaires</h2>
+    <p>Si vous suivez une de nos formations, nous traitons en plus les éléments requis par la réglementation de la formation professionnelle : feuilles d’émargement, travaux produits, évaluations et attestation de fin de formation. Ces éléments constituent des <b>preuves d’exécution</b> opposables en cas de contrôle : nous ne pouvons pas les effacer à la demande pendant leur durée légale de conservation.</p>
+    <p>Lorsque votre formation est financée, les pièces strictement nécessaires sont transmises à votre financeur, qui en devient responsable pour ce qui le concerne.</p>
+
+    <h2>11. Mineurs</h2>
+    <p>Nos formations et ce site s’adressent exclusivement à des <b>professionnels majeurs</b>. Nous ne collectons pas sciemment de données relatives à des mineurs. Si cela se produisait, signalez-le-nous : nous les supprimerions sans délai.</p>
+
+    <h2>12. Évolution de cette politique</h2>
+    <p>Nous pouvons faire évoluer cette politique, notamment en cas de nouvel outil ou de changement réglementaire. La date de mise à jour figure en haut de page. En cas de modification substantielle, nous vous en informons et recueillons à nouveau votre consentement lorsque la loi l’exige.</p>
+
+    <p class="form-note" style="margin-top:2rem;">Ce document décrit nos pratiques réelles au 14 octobre 2026. Une relecture par un conseil juridique est prévue ; si vous constatez un écart entre ce texte et ce que vous observez, signalez-le-nous à contact@vformations.fr.</p>
   </div></section>
 </section>
 </main>
@@ -2010,7 +2150,7 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
       <div><h4>Nos formations</h4><a href="#formation-video">Visibilité par la vidéo</a><a href="#formation-site">Site internet</a><a href="#formation-boutique">Boutique en ligne</a><a href="#formation-prospection">Prospection B2B</a><a href="#formations">Tout le catalogue</a><a href="#pres-de-chez-vous">Près de chez vous</a></div>
       <div><h4>À propos</h4><a href="#methode">Notre méthode AFEST</a><a href="#apropos">Qualité & indicateurs</a><a href="#apropos">Accessibilité (PSH)</a></div>
       <div><h4>Aides</h4><a href="#financements">Comment financer</a><a href="#diagnostic">Réserver un diagnostic</a><a href="#contact">Nous contacter</a></div>
-      <div><h4>Ressources</h4><a href="#lemag">Le Mag</a><a href="#mentions">Mentions légales</a><a href="#cgv">CGV</a><a href="#confidentialite">Confidentialité</a></div>
+      <div><h4>Ressources</h4><a href="#lemag">Le Mag</a><a href="#mentions">Mentions légales</a><a href="#cgv">CGV</a><a href="#confidentialite">Confidentialité</a> · <a href="#" data-cookie-open>Gérer mes cookies</a></div>
     </div>
     <div class="footer-bottom">
       <span>© 2026 VFormations (SAS) — SIRET 103 940 227 00012 · NDA 11757618175 · Qualiopi n° VFO12912026001</span>
@@ -2018,6 +2158,34 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
     </div>
   </div>
 </footer>
+
+<!-- ═══════════ BANDEAU DE CONSENTEMENT (CNIL) ═══════════ -->
+<div class="cmp" id="cmp" hidden role="dialog" aria-modal="false" aria-labelledby="cmpTitre">
+  <div class="cmp-in">
+    <h2 id="cmpTitre">Nous respectons votre choix</h2>
+    <p>Ce site dépose des traceurs de mesure d'audience et de publicité <b>uniquement si vous l'acceptez</b>. Refuser est aussi simple qu'accepter et n'empêche rien. Détails dans notre <a class="inl" href="#confidentialite">politique de confidentialité</a>.</p>
+    <div class="cmp-prefs" id="cmpPrefs" hidden>
+      <div class="cmp-row lock">
+        <div><label><input type="checkbox" checked disabled> Strictement nécessaires</label>
+        <div class="d">Mémorisent votre choix sur les cookies et assurent la sécurité du site. Toujours actifs.</div></div>
+      </div>
+      <div class="cmp-row">
+        <div><label><input type="checkbox" id="cmpAudience"> Mesure d'audience</label>
+        <div class="d">Nous indiquent quelles pages sont consultées, pour les améliorer. Conservation 13 mois.</div></div>
+      </div>
+      <div class="cmp-row">
+        <div><label><input type="checkbox" id="cmpPub"> Publicité</label>
+        <div class="d">Pixel Meta : mesure l'efficacité de nos campagnes sur Facebook et Instagram. Conservation 13 mois.</div></div>
+      </div>
+    </div>
+    <div class="cmp-acts">
+      <button type="button" class="btn btn-wine" id="cmpRefuser">Tout refuser</button>
+      <button type="button" class="btn btn-ghost" id="cmpPerso">Personnaliser</button>
+      <button type="button" class="btn btn-ghost" id="cmpValider" hidden>Enregistrer mes choix</button>
+      <button type="button" class="btn btn-wine" id="cmpAccepter">Tout accepter</button>
+    </div>
+  </div>
+</div>
 
 <script>
 (function(){
@@ -2102,6 +2270,71 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
   // Formulaires (diagnostic + contact) branchés sur Google Sheet + e-mail
   wireLeadForm(document.getElementById('diagForm'), 'diagOk', { form: 'diagnostic' });
   wireLeadForm(document.getElementById('contactForm'), 'contactOk', { form: 'contact' });
+  // ─────────────────────────────────────────────────────────────
+  // Consentement aux traceurs (recommandation CNIL)
+  // Aucun traceur non essentiel n'est déposé avant un choix explicite.
+  // Refuser est au même niveau qu'accepter. Choix conservé 6 mois.
+  // ─────────────────────────────────────────────────────────────
+  var META_PIXEL_ID = '';            // à renseigner avant la campagne
+  var CMP_CLE = 'vf_consent_v1';
+  var CMP_DUREE = 182 * 24 * 3600 * 1000;   // 6 mois
+
+  function consentLire(){
+    try {
+      var b = JSON.parse(localStorage.getItem(CMP_CLE) || 'null');
+      if (!b || !b.date || (Date.now() - b.date) > CMP_DUREE) return null;
+      return b;
+    } catch (e) { return null; }      // navigation privée, stockage bloqué
+  }
+  function consentEcrire(audience, pub){
+    var b = { v:1, date:Date.now(), audience:!!audience, pub:!!pub };
+    try { localStorage.setItem(CMP_CLE, JSON.stringify(b)); } catch (e) {}
+    window.vfConsent = b;
+    appliquerConsent(b);
+    var el = document.getElementById('cmp'); if (el) el.hidden = true;
+  }
+  function appliquerConsent(b){
+    if (b && b.pub && META_PIXEL_ID && !window.__vfPixel) {
+      window.__vfPixel = true;
+      !function(f,c,v,t,n,s,u){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+      n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];s=c.createElement(v);s.async=!0;
+      s.src=t;u=c.getElementsByTagName(v)[0];u.parentNode.insertBefore(s,u)}
+      (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+      window.fbq('init', META_PIXEL_ID); window.fbq('track', 'PageView');
+    }
+  }
+  function cmpInit(){
+    var el = document.getElementById('cmp'); if (!el) return;
+    var prefs = document.getElementById('cmpPrefs'),
+        bPerso = document.getElementById('cmpPerso'),
+        bValider = document.getElementById('cmpValider'),
+        cAud = document.getElementById('cmpAudience'),
+        cPub = document.getElementById('cmpPub');
+
+    document.getElementById('cmpAccepter').addEventListener('click', function(){ consentEcrire(true, true); });
+    document.getElementById('cmpRefuser').addEventListener('click', function(){ consentEcrire(false, false); });
+    bPerso.addEventListener('click', function(){
+      prefs.hidden = false; bPerso.hidden = true; bValider.hidden = false;
+    });
+    bValider.addEventListener('click', function(){ consentEcrire(cAud.checked, cPub.checked); });
+
+    // Rouvrir depuis la politique de confidentialité ou le pied de page
+    document.addEventListener('click', function(e){
+      var t = e.target.closest('[data-cookie-open]'); if (!t) return;
+      e.preventDefault();
+      var b = consentLire();
+      cAud.checked = !!(b && b.audience); cPub.checked = !!(b && b.pub);
+      prefs.hidden = false; bPerso.hidden = true; bValider.hidden = false;
+      el.hidden = false; el.scrollIntoView({ behavior:'smooth', block:'end' });
+    });
+
+    var dejaChoisi = consentLire();
+    if (dejaChoisi) { window.vfConsent = dejaChoisi; appliquerConsent(dejaChoisi); }
+    else { el.hidden = false; }
+  }
+  cmpInit();
+
   route();
 })();
 </script>
