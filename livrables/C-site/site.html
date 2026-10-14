@@ -108,8 +108,8 @@ a{color:inherit;}
 @media(max-width:860px){ .burger{display:flex;} .header-nav{display:none;} .brand-tag{display:none;} .hutil{gap:1rem;} .mnav[data-open="1"]{display:block;} }
 
 /* HERO (home) */
-.hero{background:var(--charcoal);position:relative;overflow:hidden;isolation:isolate;}
-.hero-photo{position:absolute;inset:0 0 0 auto;width:min(52%,680px);z-index:-1;background:radial-gradient(120% 120% at 80% 20%, rgba(243,166,61,.28), transparent 55%),radial-gradient(100% 100% at 70% 90%, rgba(26,60,134,.5), transparent 60%),linear-gradient(120deg,#2d3a40 0%, #324056 45%, #3a4a6a 100%);}
+.hero{background:var(--charcoal);position:relative;isolation:isolate;}
+.hero-photo{overflow:hidden;position:absolute;inset:0 0 0 auto;width:min(52%,680px);z-index:-1;background:radial-gradient(120% 120% at 80% 20%, rgba(243,166,61,.28), transparent 55%),radial-gradient(100% 100% at 70% 90%, rgba(26,60,134,.5), transparent 60%),linear-gradient(120deg,#2d3a40 0%, #324056 45%, #3a4a6a 100%);}
 .hero-photo::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,var(--charcoal) 0%, rgba(38,50,56,.75) 24%, transparent 55%);}
 .hero-photo .dots{position:absolute;top:clamp(16px,3vw,30px);right:clamp(16px,4vw,40px);width:clamp(70px,12vw,120px);height:clamp(70px,12vw,120px);opacity:.25;background-image:radial-gradient(#fff 1.4px, transparent 1.4px);background-size:14px 14px;}
 .hero .wrap{position:relative;z-index:1;padding-block:clamp(3rem,2rem + 5vw,5.4rem) clamp(4.5rem,3rem + 6vw,7.5rem);}
@@ -497,6 +497,42 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
   .cmp p { font-size: .76rem; line-height: 1.4; margin-bottom: .6rem; }
   .cmp-acts .btn { font-size: .8rem; padding: .5em .7em; }
 }
+
+/* ── Suggestions de recherche ─────────────────────────────────────────────
+   Panneau affiche sous le champ des que deux caracteres sont saisis. Les
+   deux formulaires (en-tete et hero) le partagent. Pense pour le pouce :
+   lignes de 44px, pleine largeur sur mobile.                            */
+.hsearch, .hero-search { position: relative; }
+.rsug {
+  position: absolute; top: calc(100% + .5rem); left: 0; right: 0;
+  z-index: 8000; background: #fff; border-radius: 14px;
+  box-shadow: 0 18px 50px rgba(0,0,0,.18); border: 1px solid rgba(0,0,0,.07);
+  overflow: hidden auto; max-height: min(60vh, 420px);
+}
+.rsug-item {
+  display: flex; flex-direction: column; gap: .15rem;
+  padding: .6rem .9rem; min-height: 44px; justify-content: center;
+  text-decoration: none; color: var(--ink);
+  border-bottom: 1px solid rgba(0,0,0,.05);
+}
+.rsug-item:last-child { border-bottom: 0; }
+.rsug-item.on, .rsug-item:hover, .rsug-item:focus-visible { background: var(--cream); outline: none; }
+.rsug-tag {
+  font-size: .68rem; text-transform: uppercase; letter-spacing: .06em;
+  color: var(--wine); font-weight: 600;
+}
+.rsug-titre { font-size: .9rem; line-height: 1.3; }
+.rsug-titre b { color: var(--wine); font-weight: 700; }
+.rsug-vide { padding: .9rem; font-size: .85rem; color: var(--muted); line-height: 1.6; }
+.rsug-vide a { color: var(--wine); }
+
+@media (max-width: 560px) {
+  /* Sur mobile le panneau deborde volontairement la gouttiere du champ
+     pour gagner en largeur de lecture, sans sortir de l'ecran. */
+  .rsug { left: -.25rem; right: -.25rem; max-height: 52vh; }
+  .rsug-item { padding: .65rem .8rem; }
+  .rsug-titre { font-size: .88rem; }
+}
 </style>
 
 <div class="redline"></div>
@@ -513,8 +549,8 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
         <span class="brand-name">VFormations</span>
         <span class="brand-tag">Organisme certifié Qualiopi<br><span>Digital · Web · IA — Hérault</span></span>
       </a>
-      <form class="hsearch" onsubmit="location.hash='#formations';return false;">
-        <input type="text" placeholder="Rechercher une formation…" aria-label="Rechercher">
+      <form class="hsearch" action="/formations/" role="search" data-recherche>
+        <input type="text" name="q" placeholder="Rechercher une formation…" aria-label="Rechercher" autocomplete="off">
         <button type="submit" aria-label="Rechercher"><svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.3"><circle cx="7" cy="7" r="5"/><path d="M11 11l4 4"/></svg></button>
       </form>
       <div class="hutil">
@@ -556,9 +592,9 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
     <div class="wrap">
       <div class="hero-inner">
         <h1>Trouvez la formation qui fait décoller votre activité</h1>
-        <form class="hero-search" onsubmit="location.hash='#formations';return false;">
+        <form class="hero-search" action="/formations/" role="search" data-recherche>
           <svg class="mg" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="9" cy="9" r="6"/><path d="M14 14l5 5"/></svg>
-          <input type="text" placeholder="Je souhaite me former à la vidéo…" aria-label="Rechercher">
+          <input type="text" name="q" placeholder="Je souhaite me former à la vidéo…" aria-label="Rechercher" autocomplete="off">
           <button type="submit" class="btn btn-wine">Rechercher</button>
         </form>
       </div>
