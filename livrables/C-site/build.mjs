@@ -11,6 +11,14 @@ const RACINE = 'https://vformations.fr';
 const SORTIE = 'dist';
 const src = readFileSync('site.html', 'utf8');
 const pages = JSON.parse(readFileSync('pages.json', 'utf8'));
+const seo = JSON.parse(readFileSync('seo.json', 'utf8'));
+// Jetons de verification de propriete : des meta-balises publiques, posees
+// sur toutes les pages pour que la verification tienne quelle que soit
+// l'URL que le moteur choisit de controler.
+const verif = [
+  seo.googleSiteVerification && `<meta name="google-site-verification" content="${seo.googleSiteVerification}">`,
+  seo.bingSiteVerification && `<meta name="msvalidate.01" content="${seo.bingSiteVerification}">`,
+].filter(Boolean).join('\n');
 const parSlug = new Map(pages.map(p => [p[0], p]));
 const urlDe = slug => {
   const p = parSlug.get(slug);
@@ -163,6 +171,7 @@ for (const [slug, chemin, titre, desc, type] of pages) {
 <meta property="og:image" content="${RACINE}/img/logo-vformations-blue.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#1A3C86">
+${verif}
 <link rel="icon" href="/img/logo-mark-blue.png">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Raleway:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -189,6 +198,11 @@ ${cmpR}
 // ── Ressources ───────────────────────────────────────────────────────────
 cpSync('img', join(SORTIE, 'img'), { recursive: true });
 if (existsSync('api/contact.php')) { cpSync('api/contact.php', join(SORTIE, 'contact.php')); }
+
+// Cle IndexNow : servie a la racine en text/plain, corps egal a la cle.
+// C'est ce fichier qui prouve aux moteurs que les URL soumises sont bien
+// les notres. Il est public par construction.
+writeFileSync(join(SORTIE, seo.indexnowKey + '.txt'), seo.indexnowKey);
 
 // ── sitemap.xml ──────────────────────────────────────────────────────────
 const aujourdhui = new Date().toISOString().slice(0, 10);

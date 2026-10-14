@@ -13,6 +13,7 @@ on:
     paths:
       - 'livrables/C-site/site.html'
       - 'livrables/C-site/pages.json'
+      - 'livrables/C-site/seo.json'
       - 'livrables/C-site/build.mjs'
       - 'livrables/C-site/api/contact.php'
       - 'livrables/C-site/img/**'
@@ -159,6 +160,53 @@ jobs:
 
       # On ne vérifie pas que "le site répond" : on vérifie que chaque URL
       # du sitemap répond 200 et que les titres sont bien différents en ligne.
+      # IndexNow notifie Bing, Yandex, Seznam et Naver sans aucun compte :
+      # c'est le fichier de cle servi a la racine qui authentifie le domaine.
+      # Google n'y participe pas — lui passe par la Search Console.
+      # Cette etape vient APRES le deploiement : la cle doit etre en ligne
+      # pour que les moteurs puissent la verifier.
+      - name: Notifier les moteurs (IndexNow)
+        working-directory: livrables/C-site
+        continue-on-error: true
+        run: |
+          CLE=$(node -e "process.stdout.write(require('./seo.json').indexnowKey)")
+          EMPLACEMENT="https://vformations.fr/${CLE}.txt"
+
+          # Sans fichier de cle joignable, la soumission serait refusee en 403.
+          CODE=$(curl -s -o /tmp/cle.txt -w '%{http_code}' --max-time 15 "$EMPLACEMENT")
+          if [ "$CODE" != "200" ] || [ "$(cat /tmp/cle.txt)" != "$CLE" ]; then
+            echo "::warning::Fichier de cle IndexNow injoignable ($CODE) — soumission ignoree."
+            exit 0
+          fi
+          echo "Cle verifiee : $EMPLACEMENT"
+
+          node -e "
+            const { readFileSync } = require('fs');
+            const sm = readFileSync('dist/sitemap.xml', 'utf8');
+            const urls = [...sm.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1]);
+            process.stdout.write(JSON.stringify({
+              host: 'vformations.fr',
+              key: process.argv[1],
+              keyLocation: process.argv[2],
+              urlList: urls,
+            }));
+          " "$CLE" "$EMPLACEMENT" > /tmp/indexnow.json
+          echo "URLs soumises : $(node -e "console.log(require('/tmp/indexnow.json').urlList.length)")"
+
+          CODE=$(curl -s -X POST 'https://api.indexnow.org/indexnow' \
+            -H 'Content-Type: application/json; charset=utf-8' \
+            --data-binary @/tmp/indexnow.json \
+            -o /tmp/reponse.txt -w '%{http_code}' --max-time 30 || echo 000)
+          echo "Reponse IndexNow : HTTP $CODE"
+          case "$CODE" in
+            200) echo "URLs acceptees." ;;
+            202) echo "Cle en cours de verification : les URLs seront prises en compte ensuite." ;;
+            403) echo "::warning::Cle refusee (403) — verifier que ${EMPLACEMENT} renvoie bien la cle." ;;
+            422) echo "::warning::Requete invalide (422) — URL ou cle hors specification." ;;
+            429) echo "::warning::Trop de soumissions (429) — reessayer plus tard." ;;
+            *)   echo "::warning::Reponse inattendue ($CODE)." ; head -c 400 /tmp/reponse.txt ;;
+          esac
+
       - name: Vérifier les URLs en production
         working-directory: livrables/C-site
         run: |
@@ -170,7 +218,8 @@ jobs:
             printf "  %-58s %s  %s\n" "${u#https://vformations.fr}" "$code" "${titre:0:40}"
             [ "$code" = "200" ] || ECHECS=$((ECHECS+1))
           done < <(grep -o '<loc>[^<]*</loc>' dist/sitemap.xml | sed 's/<[^>]*>//g')
-          for f in /sitemap.xml /robots.txt; do
+          CLE=$(node -e "process.stdout.write(require('./seo.json').indexnowKey)")
+          for f in /sitemap.xml /robots.txt "/${CLE}.txt"; do
             code=$(curl -s -o /dev/null -w "%{http_code}" --max-time 15 "https://vformations.fr$f" || echo 000)
             echo "  $f → HTTP $code"
             [ "$code" = "200" ] || ECHECS=$((ECHECS+1))

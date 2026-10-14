@@ -1,0 +1,11 @@
+{
+  "_lisezmoi": "Reglages d'indexation. La cle IndexNow est publique par nature : elle est servie a la racine du site, ce n'est pas un secret. Les jetons de verification sont des meta-balises publiques elles aussi.",
+
+  "indexnowKey": "fad51efc6161a57358bd86f578809254",
+
+  "_google": "Search Console > Ajouter une propriete > prefixe d'URL > Balise HTML. Coller ici le contenu de l'attribut content, sans les guillemets.",
+  "googleSiteVerification": "",
+
+  "_bing": "Bing Webmaster Tools > Ajouter un site > Balise meta. Facultatif : IndexNow fonctionne sans compte Bing.",
+  "bingSiteVerification": ""
+}
