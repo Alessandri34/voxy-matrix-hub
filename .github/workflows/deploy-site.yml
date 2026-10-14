@@ -1,9 +1,19 @@
 name: Déployer le site VFormations
 
-# Déclenchement manuel uniquement (bouton "Run workflow" dans l'onglet Actions).
-# On passera en automatique sur push quand le site sera prêt à être publié.
+# Deux déclencheurs :
+#  - push sur la branche de travail, quand un fichier du site change.
+#    (Le bouton "Run workflow" n'apparaît dans l'onglet Actions que si le
+#     fichier existe sur la branche par défaut — ce n'est pas notre cas.)
+#  - déclenchement manuel, utilisable une fois le workflow sur main.
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - claude/new-session-nefcch
+    paths:
+      - 'livrables/C-site/site.html'
+      - 'livrables/C-site/img/**'
+      - '.github/workflows/deploy-site.yml'
 
 jobs:
   deploy:
