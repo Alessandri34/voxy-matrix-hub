@@ -84,6 +84,42 @@
 "liste"
 ],
 [
+"art-delais-financement",
+"mag/delais-demande-prise-en-charge/",
+"Délais de prise en charge : le calendrier",
+"AGEFICE 15 jours avant et via un Point d'Accueil, FAFCEA jusqu'au jour J, FIF PL 10 jours après : les fenêtres de dépôt et le calendrier à rebours.",
+"article",
+{
+"img": "mag-financement.jpg",
+"tag": "Financement",
+"carte": "Délais de prise en charge : s'y prendre à temps"
+}
+],
+[
+"art-financement-restaurateur",
+"mag/financement-formation-restaurateur/",
+"Restaurateur : financer sa formation",
+"Quel fonds, quels taux et quel calendrier pour un restaurateur qui veut se former au numérique. AGEFICE, plafonds réels et délais à anticiper.",
+"article",
+{
+"img": "mag-clients-locaux.jpg",
+"tag": "Financement",
+"carte": "Restaurateur : quel financement pour se former"
+}
+],
+[
+"art-financement-artisan",
+"mag/financement-formation-artisan/",
+"Artisan : financer sa formation au web",
+"La FAFCEA classe le numérique en transverse à 25 €/h. Plafonds, Qualiopi obligatoire depuis juillet 2026 et délais de dépôt : ce qui s'applique aux artisans.",
+"article",
+{
+"img": "formation-video.jpg",
+"tag": "Financement",
+"carte": "Artisan : financer sa formation au web et à la vidéo"
+}
+],
+[
 "art-reste-a-charge",
 "mag/reste-a-charge-formation/",
 "Reste à charge formation : le calcul exact",
