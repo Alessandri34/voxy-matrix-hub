@@ -1163,7 +1163,7 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
           <div class="form">
             <div class="field"><label for="c-nom">Nom &amp; prénom *</label><input id="c-nom" name="nom" required></div>
             <div class="field"><label for="c-email">E-mail *</label><input id="c-email" name="email" type="email" required></div>
-            <div class="field"><label for="c-tel">Téléphone</label><input id="c-tel" name="tel" type="tel"></div>
+            <div class="field"><label for="c-tel">Téléphone *</label><input id="c-tel" name="tel" type="tel" required autocomplete="tel" inputmode="tel"></div>
             <div class="field"><label for="c-activite">Votre activité</label><input id="c-activite" name="activite" placeholder="Ex. restaurant, artisan, courtier…"></div>
             <div class="field full"><label for="c-sujet">Sujet *</label>
               <select id="c-sujet" name="sujet" required><option value="">Choisir…</option><option>Renseignement sur une formation</option><option>Financement / éligibilité</option><option>Demande de devis</option><option>Accessibilité (PSH)</option><option>Autre</option></select></div>
@@ -2194,7 +2194,7 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
   // Colle ici l'URL de ton application Google Apps Script déployée
   // (voir livrables/C-site/formulaire/GUIDE_BRANCHEMENT.md).
   // Tant que la valeur est vide, les formulaires restent en mode démo.
-  var FORM_ENDPOINT = '';
+  var FORM_ENDPOINT = '/contact.php';
   // ─────────────────────────────────────────────────────────────
 
   // Envoi d'une demande vers Google Apps Script (écrit dans le Sheet + e-mail).
@@ -2215,9 +2215,14 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
     // rejette, ce qui est exactement le cas que l'on veut signaler.
     return fetch(FORM_ENDPOINT, {
       method: 'POST',
-      mode: 'no-cors',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
       body: data.toString()
+    }).then(function (r) {
+      if (!r.ok) { throw new Error('HTTP ' + r.status); }
+      return r.json().then(function (j) {
+        if (!j || j.ok !== true) { throw new Error(j && j.error ? j.error : 'refus'); }
+        return j;
+      });
     });
   }
 

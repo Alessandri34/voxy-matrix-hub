@@ -30,6 +30,7 @@ jobs:
           cp livrables/C-site/site.html dist/index.html
           cp livrables/C-site/img/*.png dist/img/
           cp livrables/C-site/img/*.jpg dist/img/
+          cp livrables/C-site/api/contact.php dist/
           echo "Paquet construit :"
           find dist -type f | sort
 
@@ -87,7 +88,14 @@ jobs:
           RACINE="${{ steps.cible.outputs.racine }}"
           ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=accept-new \
             "${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}" \
-            "chown -R $HU:$HU '$RACINE' && find '$RACINE' -type d -exec chmod 755 {} + && find '$RACINE' -type f -exec chmod 644 {} + && nginx -t && systemctl reload nginx"
+            "set -e
+             PRIVE=\"\$(dirname '$RACINE')/private\"
+             mkdir -p \"\$PRIVE\"
+             chown -R $HU:$HU '$RACINE' \"\$PRIVE\"
+             chmod 750 \"\$PRIVE\"
+             find '$RACINE' -type d -exec chmod 755 {} +
+             find '$RACINE' -type f -exec chmod 644 {} +
+             nginx -t && systemctl reload nginx"
 
       - name: Vérifier que le site répond
         run: |
