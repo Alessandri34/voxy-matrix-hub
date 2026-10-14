@@ -173,6 +173,7 @@ section.sec{padding-block:var(--section-y);}
 .fcard .media.m3{background:linear-gradient(135deg,#0E4A3B,#1a6a54);}
 .fcard .media.m4{background:linear-gradient(135deg,#4C122A,#7a2a48);}
 .fcard .media svg{width:clamp(42px,7vw,52px);height:clamp(42px,7vw,52px);color:rgba(255,255,255,.9);}
+.fcard img.media{display:block;width:100%;height:auto;object-fit:cover;}
 .fcard .fb{padding:var(--card-pad);padding-bottom:0;flex:1;display:flex;flex-direction:column;gap:.5rem;}
 .fcard h3{font-size:var(--fs-h3);font-weight:500;}
 .fcard .subt{color:var(--muted);font-size:var(--fs-sm);}
@@ -497,17 +498,17 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
       <h2 class="sec-title">Nos formations du moment</h2>
       <div class="fcards">
         <article class="fcard">
-          <div class="media m1"><svg fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><rect x="2" y="5" width="15" height="14" rx="2"/><path d="M17 9l5-3v12l-5-3z"/></svg></div>
+          <img class="media" src="img/formation-video.jpg" alt="Commerçant filmant sa boulangerie au smartphone sur stabilisateur" width="1600" height="893" loading="lazy" decoding="async">
           <div class="fb"><h3>Visibilité locale par la vidéo</h3><div class="subt">Filmer, monter et diffuser pour attirer des clients locaux</div><div class="rate"><span class="st">★★★★★</span> Nouvelle formation</div><div class="dur"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg> 14 h à 60 h · présentiel</div></div>
           <div class="ff"><a class="btn btn-wine" href="#formation-video">Voir la formation</a><div class="price">dès 1 190 € HT<small>finançable</small></div></div>
         </article>
         <article class="fcard">
-          <div class="media m2"><svg fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path d="M3 7h18l-1.5 11H4.5z"/><path d="M8 7V5a4 4 0 018 0v2"/></svg></div>
+          <img class="media" src="img/formation-boutique.jpg" alt="Dirigeante pilotant sa boutique en ligne depuis son tableau de bord" width="1600" height="893" loading="lazy" decoding="async">
           <div class="fb"><h3>Créer et piloter sa boutique en ligne</h3><div class="subt">De la création du site à la première vente</div><div class="rate"><span class="st">★★★★★</span> Nouvelle formation</div><div class="dur"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg> 14 h à 35 h · présentiel</div></div>
           <div class="ff"><a class="btn btn-wine" href="#formation-boutique">Voir la formation</a><div class="price">dès 1 190 € HT<small>finançable</small></div></div>
         </article>
         <article class="fcard">
-          <div class="media m3"><svg fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path d="M3 11l5-6 4 4 5-6"/><path d="M15 3h4v4"/></svg></div>
+          <img class="media" src="img/formation-prospection.jpg" alt="Dirigeant de PME menant un entretien de prospection commerciale B2B" width="1600" height="893" loading="lazy" decoding="async">
           <div class="fb"><h3>Structurer sa prospection B2B</h3><div class="subt">Ciblage, prise de contact, relance, outils</div><div class="rate"><span class="st">★★★★★</span> Nouvelle formation</div><div class="dur"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg> 14 h à 35 h · présentiel</div></div>
           <div class="ff"><a class="btn btn-wine" href="#formation-prospection">Voir la formation</a><div class="price">dès 1 190 € HT<small>finançable</small></div></div>
         </article>
@@ -579,7 +580,7 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
       </div>
       <div class="fcards" id="catalogue">
         <article class="fcard lite" data-cat="video">
-          <div class="media m1"><svg fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><rect x="2" y="5" width="15" height="14" rx="2"/><path d="M17 9l5-3v12l-5-3z"/></svg></div>
+          <img class="media" src="img/formation-video.jpg" alt="Commerçant filmant sa boulangerie au smartphone sur stabilisateur" width="1600" height="893" loading="lazy" decoding="async">
           <div class="fb"><h3>Développer sa visibilité locale par la vidéo</h3><div class="subt">Filmer, monter et diffuser soi-même des vidéos courtes — offre pilote.</div><div class="rate"><span class="st">★★★★★</span> Nouvelle formation</div><div class="dur"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg> 14 h à 60 h · présentiel · AFEST</div></div>
           <div class="ff"><a class="btn btn-wine" href="#formation-video">Voir la formation</a><div class="price">dès 1 190 € HT<small>finançable</small></div></div>
         </article>
@@ -589,12 +590,12 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
           <div class="ff"><a class="btn btn-wine" href="#formation-site">Voir la formation</a><div class="price">dès 1 190 € HT<small>finançable</small></div></div>
         </article>
         <article class="fcard lite" data-cat="web">
-          <div class="media m2"><svg fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path d="M3 7h18l-1.5 11H4.5z"/><path d="M8 7V5a4 4 0 018 0v2"/></svg></div>
+          <img class="media" src="img/formation-boutique.jpg" alt="Dirigeante pilotant sa boutique en ligne depuis son tableau de bord" width="1600" height="893" loading="lazy" decoding="async">
           <div class="fb"><h3>Créer et piloter sa boutique en ligne</h3><div class="subt">De la création du site à la première vente, sur votre catalogue.</div><div class="rate"><span class="st">★★★★★</span> Nouvelle formation</div><div class="dur"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg> 14 h à 35 h · présentiel</div></div>
           <div class="ff"><a class="btn btn-wine" href="#formation-boutique">Voir la formation</a><div class="price">dès 1 190 € HT<small>finançable</small></div></div>
         </article>
         <article class="fcard lite" data-cat="vente">
-          <div class="media m3"><svg fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path d="M3 11l5-6 4 4 5-6"/><path d="M15 3h4v4"/></svg></div>
+          <img class="media" src="img/formation-prospection.jpg" alt="Dirigeant de PME menant un entretien de prospection commerciale B2B" width="1600" height="893" loading="lazy" decoding="async">
           <div class="fb"><h3>Structurer sa prospection commerciale B2B</h3><div class="subt">Ciblage, message, prise de rendez-vous et suivi — sur vos vrais prospects.</div><div class="rate"><span class="st">★★★★★</span> Nouvelle formation</div><div class="dur"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg> 14 h à 60 h · présentiel</div></div>
           <div class="ff"><a class="btn btn-wine" href="#formation-prospection">Voir la formation</a><div class="price">dès 1 190 € HT<small>finançable</small></div></div>
         </article>
