@@ -1,0 +1,60 @@
+name: Diagnostic du VPS
+
+# Se déclenche à la poussée de ce fichier. Commandes en lecture seule.
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - claude/new-session-nefcch
+    paths:
+      - '.github/workflows/diagnostic-vps.yml'
+
+jobs:
+  diagnostic:
+    name: Inspecter l'état du serveur
+    runs-on: ubuntu-latest
+    steps:
+      - name: Installer la clé
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/k
+          chmod 600 ~/.ssh/k
+
+      - name: Inspecter
+        run: |
+          ssh -i ~/.ssh/k -o StrictHostKeyChecking=accept-new \
+            "${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}" 'bash -s' <<'REMOTE'
+          echo "######## 1. QUI ECOUTE SUR 80 ET 443 ########"
+          ss -tlnp 2>/dev/null | grep -E ':80 |:443 ' || echo "(ss indisponible)"
+          echo
+          echo "######## 2. SERVICES WEB ########"
+          for s in nginx apache2 httpd caddy lshttpd openlitespeed; do
+            printf "%-14s : %s\n" "$s" "$(systemctl is-active $s 2>/dev/null || echo absent)"
+          done
+          echo
+          echo "######## 3. CONTENEURS DOCKER ########"
+          docker ps --format '  {{.Names}} | {{.Image}} | {{.Ports}}' 2>/dev/null || echo "  (docker absent ou inaccessible)"
+          echo
+          echo "######## 4. SITES NGINX ACTIVES ########"
+          ls -la /etc/nginx/sites-enabled/ 2>/dev/null || echo "  (pas de sites-enabled)"
+          echo
+          echo "######## 5. VHOSTS NGINX (server_name + root) ########"
+          nginx -T 2>/dev/null | grep -E 'server_name|root |listen ' | sed 's/^/  /' | head -40 || echo "  (nginx -T indisponible)"
+          echo
+          echo "######## 6. NOS FICHIERS ########"
+          ls -la /var/www/vformations.fr/ 2>/dev/null | head -15 || echo "  DOSSIER ABSENT"
+          echo "  --- premiere ligne de index.html ---"
+          head -c 200 /var/www/vformations.fr/index.html 2>/dev/null || echo "  index.html absent"
+          echo
+          echo
+          echo "######## 7. REPONSE LOCALE AVEC LE BON HOST ########"
+          curl -s -H 'Host: vformations.fr' http://127.0.0.1/ 2>/dev/null | grep -oE '<title>[^<]*' | head -1 || echo "  (pas de titre / pas de reponse)"
+          echo "  --- sans Host particulier (page par defaut) ---"
+          curl -s http://127.0.0.1/ 2>/dev/null | grep -oE '<title>[^<]*|Success!' | head -2 || echo "  (rien)"
+          echo
+          echo "######## 8. AUTRES CONFIGS WEB PRESENTES ########"
+          ls /etc/apache2/sites-enabled/ 2>/dev/null | sed 's/^/  apache: /' || true
+          ls /usr/local/lsws/conf/ 2>/dev/null | sed 's/^/  litespeed: /' | head -5 || true
+          ls /etc/caddy/ 2>/dev/null | sed 's/^/  caddy: /' || true
+          echo "######## FIN ########"
+          REMOTE
