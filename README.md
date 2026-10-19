@@ -17,7 +17,7 @@ leurs plans, et vérifie qu'aucun ne vous expose juridiquement.
 ### 1. Récupérer le dépôt
 
 ```bash
-git clone -b generateur-scripts <URL-DU-DEPOT> generateur-scripts
+git clone -b generateur-scripts https://github.com/Alessandri34/voxy-matrix-hub.git generateur-scripts
 cd generateur-scripts
 ```
 
