@@ -113,22 +113,62 @@ function reecrire(html) {
 }
 
 // ── Schema.org ───────────────────────────────────────────────────────────
+// Le siege social est a Paris : c'est une domiciliation, personne n'y est
+// jamais forme. Le declarer comme adresse de l'organisme disait a Google
+// « entreprise parisienne » alors que toute l'activite est heraultaise, et
+// contredisait la fiche d'etablissement, qui est l'autre moitie du signal.
+// On ne declare donc que ce qui est vrai du lieu d'exercice : la region,
+// et la commune si elle est renseignee dans seo.json. Le siege reste
+// integralement publie aux mentions legales, la ou la loi l'exige.
+const ADRESSE = { '@type': 'PostalAddress',
+  ...(seo.villeBase ? { addressLocality: seo.villeBase } : {}),
+  ...(seo.codePostalBase ? { postalCode: seo.codePostalBase } : {}),
+  addressRegion: 'Hérault', addressCountry: 'FR' };
+
+// Le second type ouvre les traitements locaux de Google. Il n'est pose que
+// si une commune est connue : annoncer un etablissement local sans savoir
+// ou il se trouve serait une declaration a moitie vraie.
+const TYPES = seo.villeBase
+  ? ['EducationalOrganization', 'LocalBusiness']
+  : ['EducationalOrganization'];
+
+const HORAIRES = (seo.horairesJours || []).length && seo.horairesDebut && seo.horairesFin
+  ? [{ '@type': 'OpeningHoursSpecification', dayOfWeek: seo.horairesJours,
+       opens: seo.horairesDebut, closes: seo.horairesFin }]
+  : null;
+
+// Toutes les fiches ou l'organisme est reellement inscrit. C'est ce
+// recoupement qui permet a Google de tenir les differentes mentions du
+// site pour une seule et meme entite.
+const MEMES = [seo.ficheGoogle, ...(seo.profilsExternes || [])].filter(Boolean);
+
 const ORGANISME = {
-  '@type': 'EducationalOrganization',
+  '@type': TYPES,
   '@id': RACINE + '/#organisme',
   name: 'VFormations',
   legalName: 'VFORMATIONS',
   url: RACINE,
   logo: RACINE + '/img/logo-vformations-blue.png',
+  image: RACINE + '/img/logo-vformations-blue.png',
   email: 'contact@vformations.fr',
   telephone: '+33763678292',
-  address: { '@type': 'PostalAddress', streetAddress: '47 rue Vivienne',
-             postalCode: '75002', addressLocality: 'Paris', addressCountry: 'FR' },
-  areaServed: { '@type': 'AdministrativeArea', name: 'Hérault' },
+  address: ADRESSE,
+  ...(HORAIRES ? { openingHoursSpecification: HORAIRES } : {}),
+  areaServed: [{ '@type': 'AdministrativeArea', name: 'Hérault' },
+               { '@type': 'AdministrativeArea', name: 'Occitanie' }],
+  // Rayon d'intervention reel, centre sur Montpellier : il couvre Beziers,
+  // Sete, Lunel et Lodeve, soit la zone annoncee aux mentions legales.
+  serviceArea: { '@type': 'GeoCircle',
+    geoMidpoint: { '@type': 'GeoCoordinates', latitude: 43.6109, longitude: 3.8772 },
+    geoRadius: '80000' },
+  contactPoint: { '@type': 'ContactPoint', contactType: 'sales',
+    telephone: '+33763678292', email: 'contact@vformations.fr',
+    areaServed: 'FR-34', availableLanguage: ['fr'] },
   // Relie le site a la fiche d'etablissement Google : c'est ce qui permet
   // a Google de rattacher les deux entites l'une a l'autre. URL par CID,
   // stable et sans parametres de suivi.
-  ...(seo.ficheGoogle ? { sameAs: [seo.ficheGoogle], hasMap: seo.ficheGoogle } : {}),
+  ...(MEMES.length ? { sameAs: MEMES } : {}),
+  ...(seo.ficheGoogle ? { hasMap: seo.ficheGoogle } : {}),
   identifier: [
     { '@type': 'PropertyValue', name: 'SIRET', value: '10394022700012' },
     { '@type': 'PropertyValue', name: 'Déclaration d’activité', value: '11757618175' },
@@ -147,13 +187,16 @@ function schema(slug, url, titre, desc, type, carte) {
                name: p ? p[2] : seg[i], item: RACINE + bout });
   });
 
-  const blocs = [];
-  if (slug === 'accueil') {
-    blocs.push(ORGANISME,
-      { '@type': 'WebSite', '@id': RACINE + '/#site', url: RACINE,
-        name: 'VFormations', inLanguage: 'fr-FR',
-        publisher: { '@id': RACINE + '/#organisme' } });
-  } else {
+  // L'organisme et le site sont declares sur CHAQUE page. Google traite
+  // chaque URL separement : un renvoi @id vers un noeud defini sur une
+  // autre page ne se resout pas. « publisher » et « author » pointaient
+  // donc dans le vide sur 45 des 46 pages, et l'entite n'etait rattachee
+  // a la fiche d'etablissement que depuis l'accueil.
+  const blocs = [ORGANISME,
+    { '@type': 'WebSite', '@id': RACINE + '/#site', url: RACINE,
+      name: 'VFormations', inLanguage: 'fr-FR',
+      publisher: { '@id': RACINE + '/#organisme' } }];
+  if (slug !== 'accueil') {
     blocs.push({ '@type': 'WebPage', '@id': absolu + '#page', url: absolu,
                  name: titre, description: desc, inLanguage: 'fr-FR',
                  isPartOf: { '@id': RACINE + '/#site' },
@@ -209,8 +252,108 @@ function corpsDe(slug) {
   throw new Error(`Corps introuvable pour « ${slug} » : absent de site.html et de ${f}`);
 }
 
+// ── « Dans la meme rubrique » ────────────────────────────────────────────
+// Le maillage ecrit a la main en fin d'article cree des liens choisis, mais
+// il laisse fatalement des trous : un article ajoute apres les autres ne
+// recoit aucun lien entrant, et reste donc difficile a decouvrir — pour un
+// lecteur comme pour un moteur. Ce bloc comble le manque mecaniquement.
+// Chaque article pointe vers les trois suivants de sa rubrique, en boucle :
+// chacun recoit ainsi exactement trois liens entrants, et aucun n'est
+// oublie le jour ou l'on en ajoute quinze d'un coup.
+function rubriqueDe(slug) {
+  const a = articles.find(x => x[0] === slug);
+  return ((a && a[5]) || {}).tag || '';
+}
+
+// La description sert de sous-titre de carte : on garde la premiere
+// proposition, qui porte l'essentiel, plutot que de couper au caractere.
+function sousTitre(desc) {
+  const t = (desc || '').split(/[.,:]/)[0].trim();
+  return t.length > 54 ? t.slice(0, 51).trimEnd() + '…' : t;
+}
+
+function memeRubrique(slug) {
+  const tag = rubriqueDe(slug);
+  let famille = articles.filter(a => rubriqueDe(a[0]) === tag);
+  // Une rubrique de deux ou trois articles ne peut pas remplir trois
+  // cartes : on complete avec le reste du Mag plutot que d'afficher un
+  // bloc incomplet ou de se repeter.
+  if (famille.length < 4) {
+    famille = famille.concat(articles.filter(a => rubriqueDe(a[0]) !== tag));
+  }
+  const i = famille.findIndex(a => a[0] === slug);
+  const choix = [];
+  for (let n = 1; choix.length < 3 && n < famille.length; n++) {
+    choix.push(famille[(i + n) % famille.length]);
+  }
+  if (!choix.length) { return ''; }
+  const cartes = choix.map(([s, c, t, d, ty, m]) => {
+    const meta = m || {};
+    return `        <a class="card-blank" href="#${s}">` +
+      `<span class="k">${meta.tag || 'Article'}</span>` +
+      `<h4>${meta.carte || t}</h4>` +
+      `<span class="m">${sousTitre(d)}</span></a>`;
+  }).join('\n');
+  return `
+    <div class="maillage"><div class="k">Dans la même rubrique</div>
+      <div class="grid3">
+${cartes}
+      </div>
+    </div>`;
+}
+
+// ── Conversion en fin d'article ──────────────────────────────────────────
+// Les articles sont la porte d'entree depuis Google : ce sont eux qui
+// repondent aux requetes precises. Jusqu'ici ils se terminaient sur un lien
+// vers le diagnostic, ce qui impose une page de plus avant le premier champ
+// a remplir. Le formulaire est donc pose directement en fin d'article.
+// Le slug voyage avec la demande (data-lead) : sans lui, on saurait qu'une
+// demande est arrivee sans savoir quel article l'a produite.
+function blocConversion(slug) {
+  const id = 'lead-' + slug;
+  const champ = (suffixe, nom, libelle, attrs) =>
+    `<div class="field"><label for="${id}-${suffixe}">${libelle}</label>` +
+    `<input id="${id}-${suffixe}" name="${nom}" ${attrs}></div>`;
+  return `
+    <div class="artcta">
+      <div class="k">Votre situation en particulier</div>
+      <h2>Savoir ce qui est mobilisable dans votre cas</h2>
+      <p>Un échange court, sans engagement : on identifie votre fonds, le volume d'heures mobilisable cette année et ce qui reste à votre charge. Vous repartez avec un chiffre écrit.</p>
+      <form data-lead="${slug}" data-ok="${id}-ok" novalidate>
+        <div class="form">
+          ${champ('nom', 'nom', 'Nom &amp; prénom *', 'autocomplete="name" required')}
+          ${champ('act', 'activite', 'Votre activité *', 'placeholder="Ex. restaurant, plombier, salon…" required')}
+          ${champ('mail', 'email', 'E-mail *', 'type="email" autocomplete="email" required')}
+          ${champ('tel', 'tel', 'Téléphone', 'type="tel" autocomplete="tel"')}
+          <div class="field full"><label for="${id}-msg">Votre question</label><textarea id="${id}-msg" name="message" placeholder="Ce que vous cherchez à savoir, en quelques mots…"></textarea></div>
+          <div class="field full">
+            <label style="display:flex;gap:.6rem;align-items:flex-start;font-weight:400;"><input type="checkbox" id="${id}-rgpd" name="consentement" value="oui" style="width:auto;margin-top:.2rem;" required> <span class="form-note">J'accepte que mes informations soient utilisées pour être recontacté au sujet de ma demande. Elles ne sont ni revendues ni transmises à des tiers. *</span></label>
+          </div>
+          <div class="field full" style="position:absolute;left:-9999px;" aria-hidden="true"><label>Ne pas remplir<input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label></div>
+          <div class="field full"><button type="submit" class="btn btn-wine">Envoyer ma demande</button></div>
+        </div>
+      </form>
+      <div id="${id}-ok" class="form-ok" hidden>✓ Merci, votre demande a bien été envoyée. Nous vous recontactons sous 48 h ouvrées.</div>
+      <div id="${id}-okErr" class="form-err" hidden>L'envoi n'a pas abouti. Écrivez-nous à <a href="mailto:contact@vformations.fr">contact@vformations.fr</a> ou appelez le 07 63 67 82 92.</div>
+      <p class="artcta-aide">Vous préférez lire d'abord ? La page <a href="#financements">Financements</a> détaille les dispositifs, et <a href="#methode">la méthode</a> explique comment se déroule un parcours.</p>
+    </div>`;
+}
+
 for (const [slug, chemin, titre, desc, type, carte] of pages) {
-  const corps = reecrire(poserGrilles(`<section class="page" data-page="${slug}">${corpsDe(slug)}\n</section>`));
+  let interieur = corpsDe(slug);
+  if (type === 'article') {
+    // Le formulaire se glisse juste apres le corps redactionnel, donc avant
+    // le bloc « Pour aller plus loin » : on demande au moment ou l'interet
+    // est le plus haut, pas apres trois listes de liens.
+    let i = interieur.indexOf('<div class="maillage">');
+    if (i === -1) { i = interieur.lastIndexOf('</article>'); }
+    if (i === -1) { throw new Error(`fin d'article introuvable dans « ${slug} »`); }
+    interieur = interieur.slice(0, i) + blocConversion(slug).trim() + '\n\n    ' + interieur.slice(i);
+    // Le bloc de rubrique ferme la page, pour qui ne remplit pas le formulaire.
+    const j = interieur.lastIndexOf('</article>');
+    interieur = interieur.slice(0, j) + memeRubrique(slug) + '\n  ' + interieur.slice(j);
+  }
+  const corps = reecrire(poserGrilles(`<section class="page" data-page="${slug}">${interieur}\n</section>`));
   const url = '/' + chemin;
   const titreComplet = titre + ' | VFormations';
 

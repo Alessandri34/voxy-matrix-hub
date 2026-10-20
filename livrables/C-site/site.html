@@ -533,6 +533,28 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
   .rsug-item { padding: .65rem .8rem; }
   .rsug-titre { font-size: .88rem; }
 }
+
+/* ── Conversion en fin d'article ─────────────────────────────────────────
+   L'objectif du site est de recevoir des demandes depuis les recherches
+   Google. Un lien vers une autre page perd une large part des gens en
+   route : le formulaire est donc pose la ou la lecture s'acheve, dans
+   l'article lui-meme.                                                    */
+.artcta{margin:2.6rem 0 0;padding:1.6rem;border:1px solid var(--line);
+  border-radius:var(--r);background:var(--surf-2)}
+.artcta>.k{font-size:var(--fs-xs);letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);font-weight:700}
+.artcta h2{margin:.35rem 0 .5rem;font-size:1.22rem;line-height:1.25;border:0;padding:0}
+.artcta p{margin:0 0 1.1rem;color:var(--ink-2)}
+.artcta .form{margin:0}
+.artcta .form-note{font-size:var(--fs-xs)}
+.artcta .form-ok,.artcta .form-err{margin-top:.9rem}
+.artcta-aide{margin:.9rem 0 0;font-size:var(--fs-xs);color:var(--muted)}
+.artcta-aide a{color:inherit;text-decoration:underline}
+@media (max-width:560px){
+  .artcta{padding:1.1rem;margin-top:2rem}
+  .artcta h2{font-size:1.1rem}
+  .artcta button[type=submit]{width:100%;min-height:48px}
+}
 </style>
 
 <div class="redline"></div>
@@ -2406,6 +2428,13 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
   // Formulaires (diagnostic + contact) branchés sur Google Sheet + e-mail
   wireLeadForm(document.getElementById('diagForm'), 'diagOk', { form: 'diagnostic' });
   wireLeadForm(document.getElementById('contactForm'), 'contactOk', { form: 'contact' });
+  // Formulaires de fin d'article. Il y en a un par article, pose par
+  // build.mjs. On les cable tous d'un coup, et l'identifiant de l'article
+  // part avec la demande : c'est ce qui dira plus tard quel article amene
+  // reellement des clients, et lesquels ne font que du trafic.
+  document.querySelectorAll('form[data-lead]').forEach(function (f) {
+    wireLeadForm(f, f.getAttribute('data-ok'), { form: f.getAttribute('data-lead') });
+  });
   // ─────────────────────────────────────────────────────────────
   // Consentement aux traceurs (recommandation CNIL)
   // Aucun traceur non essentiel n'est déposé avant un choix explicite.

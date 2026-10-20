@@ -174,3 +174,88 @@ Idées de longue traîne pour la suite : « comment modifier sa fiche google bus
 Positions sur les requêtes longue traîne cibles · trafic organique local · clics « itinéraire/appel » GBP · demandes de diagnostic depuis l'organique · pages indexées.
 
 > Rien n'est poussé sans ton accord explicite (`CLAUDE.md §8`).
+
+---
+
+# Vague 3 — 15 articles supplémentaires + signaux locaux [20/10/2026]
+
+## Pourquoi cette vague
+
+Les 21 premiers articles couvraient la vidéo, la fiche Google et les bases du
+financement. Trois trous restaient, tous sur des requêtes à **forte intention
+commerciale** :
+
+1. **Le financement hors AGEFICE/FAFCEA** — CPF du dirigeant, OPCO, FIF PL,
+   micro-entreprise. Ce sont les questions que se pose quelqu'un qui cherche
+   réellement à se former, pas quelqu'un qui s'informe.
+2. **Le référencement local lui-même** — pack local, avis, cohérence des
+   coordonnées. Cible directe pour un organisme qui vend de la visibilité.
+3. **Les blocages concrets** — refus de dossier, Point d'Accueil, concurrent
+   mieux classé. Requêtes de frustration, donc de passage à l'acte.
+
+## Les 15 articles et leur requête cible
+
+| Article | URL | Requête cible | Rubrique |
+|---|---|---|---|
+| Apparaître dans les trois résultats de la carte | `/mag/apparaitre-dans-le-pack-local/` | apparaître pack local google | Visibilité locale |
+| Quel est mon OPCO ? | `/mag/trouver-son-opco/` | quel est mon opco | Financement |
+| Avis Google : en obtenir sans en acheter | `/mag/obtenir-des-avis-google/` | comment obtenir des avis google | Visibilité locale |
+| Refus de prise en charge | `/mag/refus-prise-en-charge-formation/` | refus prise en charge formation | Financement |
+| L'erreur d'adresse qui plafonne votre fiche | `/mag/coherence-nom-adresse-telephone/` | cohérence nom adresse téléphone | Visibilité locale |
+| CPF et dirigeant | `/mag/cpf-dirigeant-entreprise/` | cpf dirigeant entreprise | Financement |
+| Pourquoi un concurrent moins bon passe devant | `/mag/concurrent-moins-bon-mieux-classe/` | concurrent mieux référencé que moi | Visibilité locale |
+| AGEFICE : le Point d'Accueil | `/mag/agefice-point-accueil/` | agefice point d'accueil | Financement |
+| Annuaires locaux : lesquels servent | `/mag/annuaires-locaux-qui-servent/` | annuaires locaux référencement | Visibilité locale |
+| FIF PL : lire sa fiche de critères | `/mag/fif-pl-profession-liberale/` | fif pl plafond prise en charge | Financement |
+| Combien de vidéos par semaine | `/mag/combien-de-videos-par-semaine/` | combien de vidéos par semaine | Vidéo |
+| Micro-entrepreneur : la CFP | `/mag/formation-micro-entrepreneur-cfp/` | formation micro entrepreneur financement | Financement |
+| Écrire un script de vidéo courte | `/mag/ecrire-un-script-de-video-courte/` | comment écrire un script vidéo courte | Vidéo |
+| Salon de coiffure : créneaux creux | `/mag/salon-coiffure-creneaux-creux/` | remplir créneaux creux salon | Visibilité locale |
+| Littoral de l'Hérault : préparer la saison | `/mag/preparer-la-saison-littoral-herault/` | saison touristique commerce hérault | Visibilité locale |
+
+**Total : 36 articles**, ~19 600 mots ajoutés. Aucune cannibalisation : chaque
+article a une requête cible distincte, vérifiée contre les 21 existants.
+
+## Maillage — passage d'un maillage écrit à un maillage garanti
+
+Le maillage était écrit à la main dans chaque article. Problème structurel :
+**un article ajouté après les autres ne reçoit aucun lien entrant**, et reste
+donc difficile à découvrir — pour un lecteur comme pour un moteur.
+
+`build.mjs` pose maintenant un bloc **« Dans la même rubrique »** généré :
+chaque article pointe vers les trois suivants de sa rubrique, en boucle.
+Chacun reçoit donc exactement trois liens entrants, quelle que soit la date
+d'ajout. Le maillage écrit à la main est conservé par-dessus : il porte les
+liens choisis, l'automatique porte le filet.
+
+**Résultat mesuré** : 0 article orphelin, 10,6 liens sortants par article en
+moyenne, 4 à 13 liens entrants pour chacun des 15 nouveaux.
+
+## Conversion — le formulaire descend dans l'article
+
+L'objectif est de recevoir des demandes **depuis les recherches Google**. Or
+les articles sont la porte d'entrée depuis Google, et ils se terminaient sur un
+lien vers `/diagnostic/` : une page de plus avant le premier champ à remplir.
+
+Un formulaire court (nom, activité, e-mail, téléphone, question) est maintenant
+posé **juste après le corps rédactionnel**, avant les blocs de liens — donc au
+moment où l'intérêt est le plus haut. Il est présent sur les 36 articles, et
+sur eux seulement.
+
+**Le slug de l'article part avec la demande** (`data-lead`). Sans lui, on
+saurait qu'une demande est arrivée sans savoir quel article l'a produite — et
+donc sans savoir lequel renforcer. C'est la donnée qui pilotera la vague 4.
+
+## Signaux locaux
+
+Voir `CLAUDE.md` §8quater. En résumé : l'adresse déclarée au schéma passe de
+Paris (siège social, domiciliation) à l'Hérault (lieu d'exercice), l'entité
+est désormais émise sur les 61 pages et non sur la seule page d'accueil, et le
+type `LocalBusiness` s'active dès que la commune est renseignée.
+
+## Liens entrants
+
+Voir `BACKLINKS.md` : opportunités vérifiées, par ordre de rentabilité, avec
+les textes prêts à soumettre. Priorité absolue au **Carif-Oref Occitanie**, qui
+est à la fois une mention sur un domaine régional de référence et une entrée
+dans les outils de prescription de France Travail.

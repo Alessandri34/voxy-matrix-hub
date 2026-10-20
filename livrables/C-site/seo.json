@@ -8,5 +8,18 @@
   "_ficheGoogle": "Fiche d'etablissement Google, URL canonique par CID (stable, sans parametres de suivi). Verifiee : la page affiche bien VFormations.",
   "ficheGoogle": "https://maps.google.com/?cid=12887937362581179627",
   "_meta": "Identifiant du pixel Meta (Gestionnaire d'evenements > Sources de donnees). Chiffres uniquement. Vide = aucun pixel charge.",
-  "metaPixelId": "1079331051538456"
+  "metaPixelId": "1079331051538456",
+
+  "_villeBase": "Commune de l'Herault d'ou l'activite est exercee. Doit etre ECRITE EXACTEMENT comme sur la fiche Google : c'est la coherence des deux qui compte, pas l'orthographe ideale. Vide = le schema ne declare que la region, ce qui est vrai et sans risque. Ne jamais mettre Paris ici : le siege social est une mention legale, pas le lieu d'activite.",
+  "villeBase": "",
+  "_codePostalBase": "Code postal de cette commune. Vide si villeBase est vide.",
+  "codePostalBase": "",
+
+  "_horaires": "Plage d'ouverture, au format HH:MM-HH:MM, et jours concernes. Etre ouvert au moment ou quelqu'un cherche est devenu un facteur de classement local de premier plan : renseigner ces champs vaut mieux que de les laisser vides. Vide = aucun horaire declare (plutot que des horaires inventes).",
+  "horairesJours": [],
+  "horairesDebut": "",
+  "horairesFin": "",
+
+  "_profilsExternes": "URL des fiches et annuaires ou l'organisme est reellement inscrit (Carif-Oref Occitanie, liste publique des OF, pages d'annuaires professionnels, reseaux sociaux). Elles alimentent sameAs : c'est ce qui permet a Google de recouper l'identite de l'entite. N'y mettre qu'une URL verifiee, qui affiche bien VFormations.",
+  "profilsExternes": []
 }
