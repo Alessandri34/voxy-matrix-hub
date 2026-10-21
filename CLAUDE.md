@@ -24,6 +24,13 @@ Les **fonds de formation ne financent que de la formation réelle**. Ce que nous
 1. Créer et piloter sa boutique en ligne (ex-E-Com Commando)
 2. Structurer sa prospection commerciale B2B (ex-Outbound)
 3. **Développer sa visibilité locale par la vidéo** (ex-Drive-to-Store) — **offre pilote**
+4. **Utiliser l'IA générative dans son entreprise** (débutant/intermédiaire) — *ajoutée le 21/10/2026*
+5. **Héberger et exploiter son IA en interne** (avancé, offre 4 en prérequis) — *ajoutée le 21/10/2026*
+6. Créer son site internet — **⚠️ en ligne sur le site, sans programme dans `B4` ni compétences au référentiel** (trou antérieur, voir §9)
+
+**Les 3 paliers IA sont calés sur les seuils de financement, pas sur un découpage pédagogique** : Sprint **14 h** = plancher du parcours individualisé FAFCEA · Médian **28 h** = sous le plafond annuel · Max **40 h** = plafond annuel exact. Les deux offres prises ensemble fournissent les « ≥ 2 intitulés de ≥ 4 h » exigés par ce dispositif.
+**Base réglementaire** : règlement (UE) 2024/1689, **article 4** (maîtrise de l'IA pour les *déployeurs*), dispositions générales applicables depuis le **2/02/2025** [Vérifié — EUR-Lex, 21/10/2026]. ⚠️ C'est une **obligation de moyens** : ni durée, ni certificat, ni format imposés. **Ne jamais vendre une « formation obligatoire »** — la fiche le dit explicitement.
+**Garde-fou offre 5 (règle d'or §2 + D4)** : *« Vous installez, nous guidons. »* L'installation faite **à la place** de l'apprenant est une prestation, pas une formation : non finançable, facturée à part, jamais conditionnée à l'inscription. Prérequis matériel annoncé (16 Go RAM ou 8 Go VRAM) et coût d'un serveur loué **hors financement**.
 
 Formulations **bannies** : « gratuit », « 100 % financé », « sans reste à charge », « machine à cash », « paravent ».
 
@@ -113,6 +120,10 @@ A = 10 scripts UGC (**fait** : fiche signal + 10 angles + 10 scripts + plan de t
   ne récupère pas la TVA (micro non assujettie), le reste à charge réel est bien supérieur
   (Intégral : 2 900 € HT → 3 480 € TTC, moins 2 520 € AGEFICE = **960 €**, et non 380 €).
   L'exonération DREETS en cours ramènerait ce cas à 380 €.
+- 🟠 **`formation-site` est vendue sans socle.** Le site présente 6 fiches formation ; `B4` en décrit 5 et le référentiel 5. « Créer son site internet » n'a **ni programme (ind. 1), ni compétences, ni grille d'évaluation**. Trou antérieur aux offres IA, non comblé : écrire un programme pour une formation non conçue serait pire que de le signaler.
+- 🟠 **Les offres 4 et 5 sont [À faire valider]** par un référent Qualiopi, comme `B1` et `B3`. Aucune grille d'évaluation type `B3` G3 n'existe pour IA-1→5 ni IAL-1→5.
+- 🟠 **Les 2 fiches IA sont sans image de couverture** (même état que `formation-site`) et portent **« Tarif sur devis »**, quand les 4 autres affichent « dès 1 190 € HT » validé par aucune source — l'incohérence d'affichage est désormais visible en production.
+- 🟠 **Référencement FAFCEA « parcours individualisé » : engagé, pas acquis.** Les paliers 14/28/40 h sont calés sur ce dispositif ; sans référencement, le taux applicable retombe à 25 €/h transverse. À confirmer auprès du fonds. Son périmètre est la **gestion d'entreprise** : son application à l'offre 5 (technique) est à valider au cas par cas.
 - Étude de marché PDF (à fournir).
 - Vrais coûts de production (pour remplacer les [Hypothèses] de l'économie unitaire).
 - Relecture juridique du montage et des contrats.
