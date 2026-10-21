@@ -1,5 +1,5 @@
 # Référentiel des Compétences (Skills) - Catalogue Voxy Formation
-Ce document détaille les compétences visées (volet "Learning") pour chacune des 3 offres du catalogue. Ces compétences justifient l'action de formation dans le cadre du financement OPCO/Qualiopi.
+Ce document détaille les compétences visées (volet "Learning") pour chacune des 5 offres du catalogue. Ces compétences justifient l'action de formation dans le cadre du financement OPCO/Qualiopi.
 
 ## Offre 1 : Le Système "E-Com Commando"
 **Objectif Global :** Rendre l'apprenant autonome dans la gestion technique, commerciale et marketing d'une boutique en ligne optimisée pour la conversion.
@@ -35,3 +35,26 @@ Ce document détaille les compétences visées (volet "Learning") pour chacune d
 *   **SKILL VISU-3 (Référencement Local) :** Optimiser sa fiche d'établissement "Google Business Profile" pour performer sur le SEO local.
 *   **SKILL VISU-4 (E-Réputation) :** Mettre en place un processus de collecte et de gestion automatisée des avis clients.
 *   **SKILL VISU-5 (Social Ads Local) :** Comprendre les bases du ciblage publicitaire (Ads) géolocalisé pour générer du trafic en point de vente (Drive-to-store).
+
+
+## Offre 4 : Utiliser l'IA générative dans son entreprise *(ajouté le 21/10/2026)*
+
+| Code | Compétence | Critère observable | Preuve |
+|---|---|---|---|
+| IA-1 | Situer l'IA générative et ses limites | Décrit ce qu'un modèle produit ; repère sur son métier une réponse fausse mais plausible | Fiche d'analyse d'une réponse erronée |
+| IA-2 | Formuler une demande exploitable | Obtient un livrable utilisable en 3 échanges au plus, sur une tâche réelle | Le livrable et l'historique des échanges |
+| IA-3 | Construire ses modèles réutilisables | Produit 3 modèles documentés, applicables à des tâches récurrentes | Les 3 modèles |
+| IA-4 | Encadrer l'usage : données et obligations | Établit par écrit ce qui ne doit pas être saisi, et les mentions à porter | La règle d'usage signée |
+| IA-5 | Mesurer le temps réellement gagné | Tient un relevé sur 3 tâches et décide de la suite | Le relevé daté |
+
+## Offre 5 : Héberger et exploiter son IA en interne *(ajouté le 21/10/2026)*
+
+| Code | Compétence | Critère observable | Preuve |
+|---|---|---|---|
+| IAL-1 | Arbitrer entre service en ligne et hébergement interne | Produit un arbitrage écrit : besoin, coût total, confidentialité, charge d'administration | L'arbitrage chiffré |
+| IAL-2 | Installer et faire tourner un modèle ouvert | Obtient un modèle qui répond, sur son propre matériel | Capture du modèle en fonctionnement |
+| IAL-3 | Connecter l'IA à ses propres documents | Interroge sa documentation et vérifie la justesse des réponses | Les requêtes et leur vérification |
+| IAL-4 | Administrer et sécuriser | Gère accès, sauvegardes et mises à jour | La procédure écrite |
+| IAL-5 | Mettre un cas d'usage en service | Un cas réel en fonctionnement, avec son relevé à 90 j | Le cas en service et son relevé |
+
+> ⚠️ **Ces deux blocs sont [À faire valider]** par le référent Qualiopi, au même titre que `B1` et `B3`. Aucune grille d'évaluation (type `B3` G3) n'existe encore pour IA-1→5 ni IAL-1→5.

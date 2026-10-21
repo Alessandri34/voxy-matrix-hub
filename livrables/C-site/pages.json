@@ -42,6 +42,20 @@
   "formation"
  ],
  [
+  "formation-ia-usage",
+  "formations/ia-generative-dirigeant/",
+  "Formation IA générative pour dirigeants",
+  "Formuler des demandes utilisables, construire vos modèles réutilisables, encadrer l'usage de vos données. Trois paliers : 14 h, 28 h, 40 h. Finançable, Hérault.",
+  "formation"
+ ],
+ [
+  "formation-ia-locale",
+  "formations/heberger-son-ia/",
+  "Formation héberger son IA en interne",
+  "Installer un modèle ouvert sur votre matériel, le connecter à vos documents, l'administrer. Vous installez, nous guidons. Trois paliers de 14 à 40 h. Hérault.",
+  "formation"
+ ],
+ [
   "methode",
   "methode/",
   "La formation-action en quatre temps",
