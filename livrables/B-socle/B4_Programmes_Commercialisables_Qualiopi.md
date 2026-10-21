@@ -60,6 +60,11 @@ Formulations **bannies** sur tous les supports : « gratuit », « 0 € », « 
 - 28 h = permet d'intercaler du travail entre les séances. À 42 €/h, la prise en charge AGEFICE reste sous le plafond de 3 000 €/an ;
 - 40 h = déploiement en équipe et cas mené jusqu'à la mise en service. 1 680 € au taux AGEFICE, sous le plafond de 3 000 €/an et sous les 100 h/an FAFCEA.
 **Modalités** — Présentiel, formation-action sur les tâches réelles de l'apprenant. Phases réflexives et évaluations jalonnées.
+**Programme — par palier** (repris de la fiche publiée) :
+- **Sprint 14 h** : situer l'IA et ses limites (IA-1) → formuler une demande exploitable sur ses propres tâches (IA-2) → construire trois modèles réutilisables (IA-3) → poser sa règle d'usage et de confidentialité (IA-4) → évaluation finale. *Deux jours, en intra.*
+- **Médian 28 h** : le Sprint, puis bibliothèque de modèles couvrant les tâches récurrentes, travail accompagné entre les séances sur cas réels, mise en place du relevé de temps (IA-5), phases réflexives après chaque lot. *Quatre jours sur trois semaines.*
+- **Max 40 h** : le Médian, puis déploiement auprès de l'équipe, rédaction de la règle d'usage interne et des mentions à porter, un cas d'usage mené de bout en bout avec sa mesure, évaluation à froid à 90 j. *Six jours sur six semaines.*
+**Accessibilité** — référent handicap désigné, adaptations possibles (locaux, rythme, supports) — étudiées au diagnostic.
 **Évaluation** — Positionnement, jalons par palier, finale, à froid à 90 j.
 **Argument de cadre** — Règlement (UE) 2024/1689, art. 4 : les **déployeurs** prennent des mesures pour garantir un niveau suffisant de maîtrise de l'IA. Applicable depuis le **2/02/2025**. ⚠️ **Obligation de moyens**, sans durée ni certificat imposés : ne jamais vendre une « formation obligatoire ».
 **Tarif** — établi au devis après diagnostic ; coût total, part financée et reste à charge y figurent avant inscription. · **Délai d'accès** — 11 jours ouvrés après accord de financement.
@@ -75,6 +80,11 @@ Formulations **bannies** sur tous les supports : « gratuit », « 0 € », « 
 **Compétences** — IAL-1 arbitrer interne / en ligne · IAL-2 installer un modèle ouvert · IAL-3 connecter ses documents · IAL-4 administrer et sécuriser · IAL-5 mettre un cas d'usage en service.
 **Durées — trois paliers** — **Sprint 14 h** · **Médian 28 h** · **Max 40 h** (même logique de plafonds que l'offre 4).
 **Modalités** — Présentiel, sur le matériel de l'apprenant. **C'est l'apprenant qui installe.**
+**Programme — par palier** (repris de la fiche publiée) :
+- **Sprint 14 h** : arbitrer interne ou service en ligne sur son cas chiffré (IAL-1) → installer un modèle ouvert sur son matériel (IAL-2) → premiers usages vérifiés → évaluation finale. *Deux jours, sur sa propre machine.*
+- **Médian 28 h** : le Sprint, puis connexion de ses propres documents au modèle (IAL-3), vérification de la justesse des réponses sur sa documentation, administration courante — accès, sauvegardes, mises à jour (IAL-4), travail accompagné entre les séances. *Quatre jours sur trois semaines.*
+- **Max 40 h** : le Médian, puis un cas d'usage mené jusqu'à la mise en service (IAL-5), procédure d'administration écrite et transmissible, plan de reprise si le service tombe, évaluation à froid à 90 j. *Six jours sur six semaines.*
+**Accessibilité** — référent handicap désigné, adaptations possibles — étudiées au diagnostic. ⚠️ Le prérequis matériel (16 Go de RAM, ou 8 Go de VRAM) est vérifié avant l'inscription : sans lui, le palier visé n'est pas atteignable.
 **Évaluation** — Positionnement, jalons par palier, finale, à froid à 90 j.
 **🔴 Garde-fou, décision D4 et règle d'or §2** — L'installation réalisée **à la place** de l'apprenant est une **prestation**, pas une formation : non finançable, facturée séparément, **jamais conditionnée à une inscription**. Le coût d'un serveur loué reste à la charge du client et **n'entre pas dans le financement**.
 **Tarif** — établi au devis après diagnostic ; coût total, part financée et reste à charge y figurent avant inscription. · **Délai d'accès** — 11 jours ouvrés.

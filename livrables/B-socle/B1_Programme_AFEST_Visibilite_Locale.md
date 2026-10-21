@@ -66,8 +66,9 @@ Alternance site + tutorat à distance + **travail accompagné sur le cas réel**
 ## 5. Modalités, évaluation, accessibilité (exigences Qualiopi)
 - **Positionnement** en amont (pré-requis, objectifs individualisés) — ind. 4, 8.
 - **Évaluation des acquis** à chaud (fin de parcours) + **à froid à 90 j** (réutilisé comme outil de suivi et d'amélioration — idée #5) — ind. 2, 11, 30.
-- **Indicateurs de résultats publiés** avec **méthode de calcul** (taux de satisfaction, d'achevement, nb de vidéos publiées à 3 mois) — ind. 2 (calculés par la future plateforme, chantier D).
-- **Accessibilité handicap** : référent désigné, adaptation possible — ind. 26.
+- **Indicateurs de résultats** : quatre taux — satisfaction, atteinte des objectifs, abandon, mise en œuvre à 90 j — dont la **méthode de calcul** est écrite dans `B3` grille 7, avec les règles tenues à la publication (effectif affiché, taux de réponse publié) — ind. 2. **Organisme ouvert en 2026 : aucune session achevée, donc aucun taux publié à ce jour.** Chiffrés dès la clôture de la première promotion, automatisés ensuite par la plateforme (chantier D).
+- **Accessibilité handicap** : référent désigné, adaptation possible (locaux, rythme, supports), étudiée au diagnostic — ind. 26.
+- **Délai d'accès** : **11 jours ouvrés** après accord de financement. Le délai de dépôt propre à chaque financeur s'y ajoute en amont (AGEFICE : 15 jours calendaires minimum avant le démarrage, via un Point d'Accueil ; FAFCEA : jusqu'au jour du début ; FIF PL : jusqu'à 10 jours après) — ind. 1.
 - **Modules à distance** (tutorat) : traçabilité du suivi réel (connexions, rendus) — ind. 19.
 
 ---
