@@ -14,7 +14,13 @@ BANNIES = ['100 % finance','100% finance','sans reste a charge','machine a cash'
 # Promesses de resultat, meme implicites
 PROMESSES = [r'\bgaranti', r'vous (?:gagnerez|aurez|obtiendrez|doublerez)',
              r'\+\s*\d+\s*%', r'x\s*\d+\s+(?:vos|votre|plus)',
-             r'(?:premiere|1re) place', r'assure(?:z|r)-vous d\'etre']
+             r'(?:premiere|1re) place', r'assure(?:z|r)-vous d\'etre',
+             # G1 : on enseigne a mesurer, jamais a obtenir
+             r'(?:plus|davantage) de (?:clients|chiffre|revenus?|ventes)\b(?! ne)',
+             r'(?:augmente|fera augmenter|fait augmenter) (?:votre|ton) (?:ca|chiffre)',
+             r'(?:usine|machine) a ',
+             # G2 : vocabulaire de domination
+             r'\bdomination\b', r'\btop 1 ?%', r'\bhack\b']
 # Taux officiels admis (CLAUDE.md §5) — tout autre montant en € est suspect
 TAUX_OK = {'42','35','25','20','80','19','24','3 000','5 000','600','900','2 500'}
 

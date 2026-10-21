@@ -1,0 +1,562 @@
+[
+ {
+  "id": "T01",
+  "titre": "Savoir d'où viennent vos clients, sans aucun outil",
+  "cat": "D'où viennent vos clients",
+  "persona": "Tous",
+  "angle": "La compétence C6 manquante",
+  "format": "Face caméra + carnet",
+  "duree": "60 s",
+  "conscience": "2 → 3",
+  "note": 95,
+  "temps": [
+   [
+    "Accroche",
+    "Vous pouvez savoir d'où viennent vos clients cette semaine. Sans logiciel, sans tableau de bord, sans rien installer.",
+    "Un carnet posé sur un comptoir, un stylo"
+   ],
+   [
+    "Ancrage",
+    "C'est la question à laquelle presque aucun dirigeant de TPE ne sait répondre. Et c'est celle qui décide où vous mettez votre temps.",
+    "Face caméra, posé"
+   ],
+   [
+    "Transmission",
+    "La méthode tient en trois gestes. Un : à chaque nouveau client, vous posez une question, toujours la même — « comment est-ce que vous nous avez connus ? ». À l'encaissement, au téléphone, sur le devis. Deux : vous notez la réponse. Un carnet suffit, une colonne dans votre logiciel de caisse aussi. Trois : au bout de trente jours, vous comptez. Pas de moyenne, pas de pourcentage : vous comptez combien de fois chaque réponse revient. Ce classement, c'est votre carte. Il vous dit où va votre temps le mois suivant.",
+    "Trois lignes qui s'écrivent dans le carnet, puis des bâtons qui s'additionnent"
+   ],
+   [
+    "Nuance",
+    "Et voilà ce qui va vous arriver : les gens répondent mal. « Par internet », ça ne veut rien dire — Google, Instagram, le site d'un confrère, c'est trois choses. Il faut une deuxième question : « sur internet, vous vous souvenez où ? ». L'autre limite est plus sérieuse : vous n'interrogez que ceux qui sont venus. Ceux qui ne sont pas venus ne vous diront jamais pourquoi, et ce sont eux qui vous manquent.",
+    "Un point d'interrogation, puis un second plus petit"
+   ],
+   [
+    "Sortie",
+    "Posez la question au prochain client qui entre. Vous verrez en trente jours ce que vous supposiez depuis trois ans.",
+    "Bandeau : VFormations — organisme certifié Qualiopi"
+   ]
+  ],
+  "conformite": "Enseigne à MESURER, pas à obtenir. Aucun chiffre de résultat. Deux limites de la méthode dites explicitement.",
+  "source": "Compétence C6 proposée · B3 grille G5 (question posée à 90 j sans avoir été enseignée)"
+ },
+ {
+  "id": "T02",
+  "titre": "Une boutique qui ne vend pas, dans quel ordre regarder",
+  "cat": "L'ordre des opérations",
+  "persona": "Thomas",
+  "angle": "L'erreur d'ordre",
+  "format": "Voix-off + écran",
+  "duree": "55 s",
+  "conscience": "2 → 3",
+  "note": 92,
+  "temps": [
+   [
+    "Accroche",
+    "Avant de changer la couleur d'un bouton, il y a trois choses à vérifier, et elles sont dans cet ordre.",
+    "Un écran de boutique en ligne, curseur immobile"
+   ],
+   [
+    "Ancrage",
+    "Parce qu'une boutique qui ne vend pas, neuf fois sur dix, n'a tout simplement personne qui arrive. Et on passe des semaines à déplacer des boutons devant une salle vide.",
+    "Un compteur de visiteurs à un chiffre"
+   ],
+   [
+    "Transmission",
+    "Un : le trafic. Combien de personnes sont arrivées sur la page cette semaine ? Si c'est moins de cent, arrêtez tout : votre problème n'est pas la page, c'est que personne ne la voit. Deux : la confiance. Si des gens arrivent et repartent sans rien regarder, ce qui manque est en haut de page — qui vous êtes, où vous êtes, ce que vous vendez exactement, et pourquoi on vous croirait. Trois, et seulement trois : la friction. Le nombre d'étapes, les frais qui apparaissent à la fin, le formulaire qui redemande ce qu'on a déjà saisi. C'est le dernier endroit à regarder, pas le premier.",
+    "Trois paliers qui s'allument un par un, le troisième en dernier"
+   ],
+   [
+    "Nuance",
+    "L'ordre compte plus que le contenu de chaque étape. Travailler la friction quand on n'a pas de trafic, c'est repeindre une devanture dans une rue sans passage. Et l'inverse existe aussi : amener du monde sur une page qui n'inspire pas confiance, c'est payer pour faire fuir des gens.",
+    "Une rue vide, une devanture repeinte"
+   ],
+   [
+    "Sortie",
+    "Ouvrez vos statistiques et regardez d'abord le nombre de visiteurs. Le reste attend.",
+    "Bandeau : VFormations — organisme certifié Qualiopi"
+   ]
+  ],
+  "conformite": "Aucune promesse de vente. Le seuil de 100 est un repère de méthode, pas un résultat annoncé.",
+  "source": "art-premiere-vente-en-ligne.html · B4 offre 1"
+ },
+ {
+  "id": "T03",
+  "titre": "La page qui convertit n'est pas celle que vous croyez",
+  "cat": "Être vu ≠ être choisi",
+  "persona": "Karim",
+  "angle": "Écart audience / décision",
+  "format": "Démonstration écran",
+  "duree": "50 s",
+  "conscience": "2 → 3",
+  "note": 90,
+  "temps": [
+   [
+    "Accroche",
+    "Sur le site d'un artisan, la page qui décide n'est pas l'accueil. C'est la page réalisations.",
+    "Deux onglets, le second se surligne"
+   ],
+   [
+    "Ancrage",
+    "Et pourtant c'est l'accueil qu'on refait, qu'on soigne, sur lequel on passe trois semaines.",
+    "Une page d'accueil très travaillée, puis une page vide intitulée Réalisations"
+   ],
+   [
+    "Transmission",
+    "La raison est simple : quelqu'un qui cherche un artisan ne veut pas savoir qui vous êtes, il veut voir ce que vous faites. Une page réalisations qui travaille, c'est cinq à dix chantiers, et pour chacun trois choses : une photo avant, une photo après, et deux lignes qui disent le problème et ce que vous avez fait. Pas de texte de présentation, pas de vocabulaire de métier. Le problème dans les mots du client, la solution en une phrase.",
+    "Une fiche chantier se compose : avant, après, deux lignes"
+   ],
+   [
+    "Nuance",
+    "Et il y a un cas où ça ne marche pas : les métiers dont le travail ne se voit pas. Un électricien qui refait un tableau, un plombier qui change une évacuation — le résultat est derrière un mur. Là, ce qui convertit n'est pas l'avant-après, c'est le détail du travail pendant : les gestes propres, le chantier rangé, la finition. Ce sont des photos différentes, prises à un autre moment.",
+    "Un tableau électrique propre, un chantier rangé"
+   ],
+   [
+    "Sortie",
+    "Comptez combien de chantiers sont montrés sur votre site aujourd'hui. Si la réponse est zéro, vous savez par quoi commencer.",
+    "Bandeau : VFormations — organisme certifié Qualiopi"
+   ]
+  ],
+  "conformite": "Aucune promesse de conversion chiffrée. L'exception (métiers invisibles) rend le conseil utilisable.",
+  "source": "art-site-artisan.html · B4 offre site internet"
+ },
+ {
+  "id": "T04",
+  "titre": "Cinq opérations suffisent à monter une vidéo",
+  "cat": "Le geste technique",
+  "persona": "Léa",
+  "angle": "Geste enseigné en session",
+  "format": "Démonstration téléphone",
+  "duree": "50 s",
+  "conscience": "2 → 3",
+  "note": 88,
+  "temps": [
+   [
+    "Accroche",
+    "Monter une vidéo, c'est cinq opérations. Tout le reste de l'application, vous pouvez l'ignorer.",
+    "Un téléphone, une application de montage ouverte"
+   ],
+   [
+    "Ancrage",
+    "Et c'est le reste qui fait abandonner : on ouvre l'outil, on voit quarante boutons, on referme.",
+    "Une interface chargée, un doigt qui hésite"
+   ],
+   [
+    "Transmission",
+    "Les cinq, dans l'ordre. Couper : on retire les silences du début et de la fin, c'est ce qui change le plus pour le moins d'effort. Ordonner : on met les plans dans le bon sens. Sous-titrer : l'application le fait automatiquement, vous corrigez les fautes. Sonoriser : une musique discrète, au volume le plus bas qui s'entende. Exporter. C'est tout. Les transitions, les filtres, les effets, les polices animées : vous pouvez les ignorer entièrement, et personne ne le remarquera.",
+    "Cinq étapes qui se cochent, puis l'interface se vide des boutons inutiles"
+   ],
+   [
+    "Nuance",
+    "Un point à ne pas ignorer, en revanche : le sous-titrage n'est pas une option. L'essentiel des vidéos se regarde sans le son, et une vidéo sans sous-titres est une vidéo qu'on fait défiler. C'est d'ailleurs la seule des cinq opérations où l'automatique ne suffit pas : l'application se trompe sur les noms propres et sur le vocabulaire de métier, et c'est exactement là que ça compte.",
+    "Un sous-titre généré, puis corrigé à la main"
+   ],
+   [
+    "Sortie",
+    "Prenez une vidéo que vous avez déjà, et faites seulement les trois premières opérations. Vingt minutes.",
+    "Bandeau : VFormations — organisme certifié Qualiopi"
+   ]
+  ],
+  "conformite": "Geste technique pur. Aucune promesse. Le don est complet : faisable ce soir.",
+  "source": "art-montage-smartphone.html · B1 séquence 4 (C3)"
+ },
+ {
+  "id": "T05",
+  "titre": "Pourquoi filmer en 4K vous dessert",
+  "cat": "Le geste technique",
+  "persona": "Karim",
+  "angle": "Précision technique contre-intuitive",
+  "format": "Démonstration téléphone",
+  "duree": "45 s",
+  "conscience": "3 → 4",
+  "note": 89,
+  "temps": [
+   [
+    "Accroche",
+    "Dans les réglages de votre téléphone, passez de 4K à 1080p. Vos vidéos ne seront pas moins belles, et tout le reste sera plus simple.",
+    "Un menu de réglages, le curseur qui descend d'un cran"
+   ],
+   [
+    "Ancrage",
+    "C'est contre-intuitif, parce qu'on a appris que plus c'est élevé, mieux c'est. Pour une vidéo destinée aux réseaux, c'est faux.",
+    "Deux images identiques côte à côte"
+   ],
+   [
+    "Transmission",
+    "Trois raisons concrètes. D'abord, les plateformes recompressent tout ce que vous envoyez : la qualité supplémentaire est détruite à la publication, personne ne la verra jamais. Ensuite, un fichier 4K pèse plusieurs fois plus lourd : il remplit votre téléphone, il met plus longtemps à se téléverser, et il fait ramer le montage. Enfin — et c'est le point que les gens ratent — si votre téléphone chauffe ou saccade pendant le montage, ce n'est pas sa puissance qui est en cause, c'est la résolution de ce que vous lui donnez à traiter.",
+    "Un fichier lourd, une barre de téléversement qui traîne"
+   ],
+   [
+    "Nuance",
+    "Il y a un cas où la 4K sert : si vous comptez recadrer fortement après coup, par exemple filmer large puis zoomer au montage. Vous puisez alors dans la matière supplémentaire. Si vous cadrez juste au tournage — ce qui est l'objectif — vous n'en avez pas besoin.",
+    "Un cadre qui se resserre dans une image large"
+   ],
+   [
+    "Sortie",
+    "Ouvrez vos réglages caméra maintenant. Le changement prend dix secondes.",
+    "Bandeau : VFormations — organisme certifié Qualiopi"
+   ]
+  ],
+  "conformite": "Pur technique. Un seul terme (résolution), expliqué par ses effets. L'exception nommée.",
+  "source": "art-montage-smartphone.html · B1 séquence 2 (C2)"
+ },
+ {
+  "id": "T06",
+  "titre": "Le chiffre que vous regardez ne veut rien dire",
+  "cat": "L'indicateur qui veut dire quelque chose",
+  "persona": "Sophie",
+  "angle": "C5 corrigée par C6",
+  "format": "Face caméra + écran",
+  "duree": "55 s",
+  "conscience": "2 → 3",
+  "note": 93,
+  "temps": [
+   [
+    "Accroche",
+    "Il y a quatre chiffres à regarder pour un commerce local. Le nombre de vues n'en fait pas partie.",
+    "Un tableau de bord, le compteur de vues barré"
+   ],
+   [
+    "Ancrage",
+    "C'est le chiffre le plus visible et le moins utile. Il est affiché en gros parce qu'il flatte, pas parce qu'il informe.",
+    "Un grand nombre à l'écran, puis il pâlit"
+   ],
+   [
+    "Transmission",
+    "Les quatre qui comptent. Un : les appels passés depuis votre fiche d'établissement. Deux : les demandes d'itinéraire — quelqu'un qui demande son chemin a décidé de venir. Trois : les messages reçus. Quatre, et c'est le plus important même s'il ne se compte pas : le nombre de clients qui vous disent vous avoir vu quelque part. Ces quatre-là décrivent des gens qui bougent. Les vues décrivent des gens qui ont regardé.",
+    "Quatre indicateurs qui s'allument, les vues restent grises"
+   ],
+   [
+    "Nuance",
+    "Et voilà pourquoi ça se joue si souvent à l'envers. Une vidéo à trois cents vues dont quatre personnes du quartier poussent votre porte vaut mieux qu'une vidéo à cinquante mille vues regardée par des gens à six cents kilomètres. La deuxième vous fera plus plaisir. La première vous fait vivre.",
+    "Deux compteurs, le petit encadré"
+   ],
+   [
+    "Sortie",
+    "Regardez dans votre fiche d'établissement combien d'appels sont partis de là ce mois-ci. C'est votre vrai chiffre.",
+    "Bandeau : VFormations — organisme certifié Qualiopi"
+   ]
+  ],
+  "conformite": "Enseigne à mesurer. Le quatrième indicateur est explicitement dit non quantifiable — aveu de limite.",
+  "source": "art-rythme-publication.html · B1 séquence 6 (C5)"
+ },
+ {
+  "id": "T07",
+  "titre": "Les chiffres qu'on vous cite n'existent pas",
+  "cat": "L'indicateur qui veut dire quelque chose",
+  "persona": "Tous",
+  "angle": "Démontage sourcé",
+  "format": "Face caméra + écran",
+  "duree": "60 s",
+  "conscience": "3 → 4",
+  "note": 95,
+  "temps": [
+   [
+    "Accroche",
+    "« 46 % des recherches Google ont une intention locale. » Ce chiffre vient d'un tweet de 2018. C'est tout.",
+    "Une capture de tweet, datée"
+   ],
+   [
+    "Ancrage",
+    "Vous allez l'entendre cette semaine, par quelqu'un qui veut vous vendre quelque chose. Voici comment vérifier n'importe quel chiffre qu'on vous présente.",
+    "Face caméra, calme"
+   ],
+   [
+    "Transmission",
+    "Trois questions, dans cet ordre. Un : qui l'a publié, et où peut-on lire le document ? Si la réponse est « une étude », sans nom ni lien, ce n'est pas une étude. Deux : sur combien de personnes, et lesquelles ? Un chiffre sur trois cent cinquante commerces ne dit pas la même chose qu'un chiffre sur neuf mille entreprises. Trois : de quand date-t-il, et sur quel pays ? Beaucoup de chiffres cités en France sont américains et ont plus de dix ans.",
+    "Les trois questions s'affichent, un chiffre s'efface à chaque fois"
+   ],
+   [
+    "Nuance",
+    "Faites le test sur une affirmation précise : la part de particuliers qui cherchent un artisan sur Google. J'ai trouvé six chiffres différents chez six prestataires — quatre-vingt-trois, quatre-vingt-sept, quatre-vingt-huit, quatre-vingt-treize, quatre-vingt-dix-sept pour cent. Aucun ne cite d'enquête. Six chiffres pour un seul comportement, c'est qu'aucun n'est mesuré.",
+    "Six pourcentages qui s'empilent, tous différents"
+   ],
+   [
+    "Sortie",
+    "La prochaine fois qu'on vous cite un pourcentage, demandez le lien vers le document. La réponse vous dira tout.",
+    "Bandeau : VFormations — organisme certifié Qualiopi"
+   ]
+  ],
+  "conformite": "Aucune promesse. Le script enseigne une méthode de vérification, et l'applique à lui-même en donnant ses sources.",
+  "source": "Search Engine Roundtable (2018) · relevé de 6 prestataires · corpus A3"
+ },
+ {
+  "id": "T08",
+  "titre": "Utile ne veut pas dire rentable",
+  "cat": "Être vu ≠ être choisi",
+  "persona": "Karim",
+  "angle": "Reconnaître le doute documenté",
+  "format": "Face caméra",
+  "duree": "55 s",
+  "conscience": "2 → 3",
+  "note": 94,
+  "temps": [
+   [
+    "Accroche",
+    "Si vous doutez que le numérique vous rapporte quelque chose, les chiffres vous donnent raison. Et ce n'est pas ce que vous croyez.",
+    "Face caméra, direct, sans musique"
+   ],
+   [
+    "Ancrage",
+    "Je parle d'une enquête publique du ministère, menée auprès de neuf mille six cent cinquante entreprises au printemps 2026.",
+    "Un rapport à l'écran, page de méthode visible"
+   ],
+   [
+    "Transmission",
+    "Deux chiffres, et l'écart entre les deux est tout le sujet. Soixante et onze pour cent des dirigeants disent que le numérique leur apporte un bénéfice réel. Mais seulement trente-six pour cent disent qu'il augmente leur chiffre d'affaires. Autrement dit : sept sur dix le trouvent utile, un peu plus d'un sur trois pense qu'il rapporte. Et les deux chiffres baissent — sept points et quatre points en un an.",
+    "Deux barres côte à côte, l'écart entre elles se surligne"
+   ],
+   [
+    "Nuance",
+    "Et voilà ce que ça dit, précisément. Ça ne dit pas que le numérique ne rapporte rien : ce sont des perceptions déclarées, pas une mesure de chiffre d'affaires. Ça dit que la plupart des dirigeants **ne savent pas** s'il rapporte. Ce n'est pas la même chose, et ça n'appelle pas la même réponse : on n'a pas besoin de faire plus, on a besoin de savoir quoi compter.",
+    "Un point d'interrogation à la place d'un graphique"
+   ],
+   [
+    "Sortie",
+    "Si vous ne savez pas répondre, commencez par compter : notez pendant trente jours comment chaque nouveau client vous a connu. C'est la mesure qui manque.",
+    "Bandeau : VFormations — organisme certifié Qualiopi"
+   ]
+  ],
+  "conformite": "Chiffre cité avec sa base, sa date et sa nature (déclaratif). Ne promet pas l'inverse de ce qu'il constate.",
+  "source": "Baromètre France Num 2026, DGE/Crédoc, 9 655 entreprises"
+ },
+ {
+  "id": "T09",
+  "titre": "Votre levier n'est pas celui de votre voisin",
+  "cat": "Le levier qui rapporte chez vous",
+  "persona": "Karim",
+  "angle": "Écart sectoriel mesuré",
+  "format": "Voix-off + écran",
+  "duree": "55 s",
+  "conscience": "2 → 3",
+  "note": 93,
+  "temps": [
+   [
+    "Accroche",
+    "Un restaurateur et un plombier n'ont pas le même rapport à internet. Et l'écart entre les deux est énorme.",
+    "Deux pictogrammes, une assiette et une clé à molette"
+   ],
+   [
+    "Ancrage",
+    "Même enquête, neuf mille six cent cinquante entreprises, même question posée à tout le monde.",
+    "Un tableau qui se remplit"
+   ],
+   [
+    "Transmission",
+    "Part d'entreprises qui reçoivent au moins cinq pour cent de leurs clients par internet : hébergement et restauration, soixante-quatorze pour cent. Services à la personne, cinquante-quatre. Transport et logistique, vingt-neuf. Et sur la question « le numérique augmente mon chiffre d'affaires », tout à fait d'accord : restauration vingt pour cent, bâtiment sept pour cent, agriculture quatre. Vente en ligne : restauration trente-cinq pour cent, bâtiment trois pour cent.",
+    "Les barres se dessinent, l'écart restauration / bâtiment se surligne"
+   ],
+   [
+    "Nuance",
+    "Ce que ça ne veut pas dire : que le bâtiment n'a rien à faire en ligne. Ce que ça veut dire : le levier n'est pas le même. Pour un restaurant, internet amène des clients directement. Pour un artisan, il confirme une recommandation — quelqu'un entend votre nom, puis vérifie. Dans le premier cas on cherche du flux. Dans le second on cherche à ne pas décevoir la vérification. Ce sont deux travaux différents, et les conseils génériques mélangent les deux.",
+    "Deux parcours différents se dessinent : l'un direct, l'autre en deux temps"
+   ],
+   [
+    "Sortie",
+    "Demandez-vous laquelle des deux situations est la vôtre. La réponse change ce sur quoi vous devez passer du temps.",
+    "Bandeau : VFormations — organisme certifié Qualiopi"
+   ]
+  ],
+  "conformite": "Chiffres d'adoption et de perception, jamais de résultat. Dit explicitement ce que la donnée ne veut pas dire.",
+  "source": "Baromètre France Num 2026, DGE/Crédoc"
+ },
+ {
+  "id": "T10",
+  "titre": "L'autodiagnostic qui surprend un artisan sur deux",
+  "cat": "D'où viennent vos clients",
+  "persona": "Karim",
+  "angle": "Parcours individualisé FAFCEA, données réelles",
+  "format": "Voix-off + écran",
+  "duree": "50 s",
+  "conscience": "2 → 3",
+  "note": 92,
+  "temps": [
+   [
+    "Accroche",
+    "Huit mille artisans ont fait un autodiagnostic de gestion l'an dernier. Plus de la moitié ont été surpris par leur résultat.",
+    "Un questionnaire à l'écran, une barre de progression"
+   ],
+   [
+    "Ancrage",
+    "C'est une étape obligatoire pour accéder à un dispositif de financement de la FAFCEA. Et c'est devenu, par accident, la meilleure donnée qu'on ait sur ce que les artisans maîtrisent vraiment.",
+    "Logo FAFCEA, chiffre 8 000"
+   ],
+   [
+    "Transmission",
+    "Le résultat publié est net : aucun des quatre domaines de gestion n'est maîtrisé à plus de cinquante pour cent. Pas un seul. Et plus d'un répondant sur deux se dit surpris de son propre score — ce qui veut dire qu'on se croyait meilleur qu'on ne l'est, sur des sujets qu'on pratique tous les jours. Le dispositif lui-même : cinq mille sept cents dossiers et neuf virgule six millions d'euros depuis septembre 2024, et les trois quarts des bénéficiaires n'ont aucun salarié.",
+    "Quatre jauges qui restent toutes sous la moitié"
+   ],
+   [
+    "Nuance",
+    "Une précaution sur ces chiffres : l'enquête de satisfaction du dispositif a un taux de réponse de cinq et demi pour cent, sans groupe de comparaison. Les volumes de dossiers sont solides, ce sont des données administratives. Les effets déclarés, beaucoup moins — et je ne les citerai pas.",
+    "Un petit échantillon, visiblement petit"
+   ],
+   [
+    "Sortie",
+    "Si vous êtes artisan, faites l'autodiagnostic. Il est accessible sans engagement, et le résultat seul vaut le détour.",
+    "Bandeau : VFormations — organisme certifié Qualiopi"
+   ]
+  ],
+  "conformite": "Refuse explicitement de citer les 80 % d'augmentation de CA auto-déclarés. Distingue données administratives et déclaratives.",
+  "source": "FAFCEA, rapport d'activité 2025"
+ },
+ {
+  "id": "T11",
+  "titre": "La plaque sans fil qui simplifie les avis",
+  "cat": "Le geste technique",
+  "persona": "Sophie",
+  "angle": "Support NFC, sans le conditionnement",
+  "format": "Démonstration comptoir",
+  "duree": "50 s",
+  "conscience": "2 → 3",
+  "note": 90,
+  "temps": [
+   [
+    "Accroche",
+    "Une plaque posée sur le comptoir. Le client approche son téléphone, le formulaire d'avis s'ouvre. Pas de recherche, pas d'application.",
+    "Une main qui approche un téléphone d'une petite plaque"
+   ],
+   [
+    "Ancrage",
+    "Parce que le vrai obstacle n'est pas la bonne volonté du client, c'est le nombre d'étapes entre son envie et le formulaire.",
+    "Un téléphone, quelqu'un qui cherche, abandonne"
+   ],
+   [
+    "Transmission",
+    "Concrètement : vous achetez des plaques sans fil, vous les encodez avec le lien direct de votre formulaire d'avis, et vous les posez là où le client s'arrête — comptoir, addition, bureau. Ça coûte quelques euros, ça s'encode depuis un téléphone, et ça se refait en cinq minutes si vous changez de fiche.",
+    "Le lien se copie, la plaque s'encode, elle se pose"
+   ],
+   [
+    "Nuance",
+    "Et maintenant la partie qui compte, parce que c'est là que beaucoup se font sanctionner. Vous tendez la plaque à **tout le monde**, pas seulement aux clients contents. Pas de « si vous avez passé un bon moment ». Pas de « mettez-nous cinq étoiles ». Demander un avis est autorisé ; ne le demander qu'aux satisfaits est du filtrage, et c'est ce qui fait suspendre une fiche. L'outil est bon, c'est la phrase qui va avec qui vous expose.",
+    "Une plaque tendue à plusieurs personnes différentes, sans tri"
+   ],
+   [
+    "Sortie",
+    "Si vous avez déjà ce dispositif, vérifiez la phrase que dit votre équipe. C'est elle le point de risque, pas la plaque.",
+    "Bandeau : VFormations — organisme certifié Qualiopi"
+   ]
+  ],
+  "conformite": "⚠️ Corrige explicitement la mécanique du manuel élève (module 2), non conforme. Aucune promesse de note.",
+  "source": "Manuel élève module 2 (à corriger) · art-avis-google.html"
+ },
+ {
+  "id": "T12",
+  "titre": "Votre bio tient en trois lignes",
+  "cat": "Le geste technique",
+  "persona": "Léa",
+  "angle": "Geste enseigné, immédiat",
+  "format": "Démonstration téléphone",
+  "duree": "45 s",
+  "conscience": "2 → 3",
+  "note": 87,
+  "temps": [
+   [
+    "Accroche",
+    "Votre bio Instagram a trois lignes à écrire, et elles sont toujours les mêmes, dans cet ordre.",
+    "Un profil à l'écran, bio vide"
+   ],
+   [
+    "Ancrage",
+    "C'est le seul endroit où quelqu'un qui vous découvre décide s'il reste. Et c'est souvent le dernier champ qu'on remplit.",
+    "Un pouce qui remonte vers la bio, puis quitte"
+   ],
+   [
+    "Transmission",
+    "Ligne un : ce que vous faites, en langage de client, pas en nom de métier. Pas « artisan coiffeur », mais « coupe et couleur, cheveux bouclés ». Ligne deux : où vous êtes. La commune, pas le département — quelqu'un qui cherche ne pense pas en départements. Ligne trois : comment réserver, avec le lien. Une seule action, pas trois liens dans un menu.",
+    "Les trois lignes s'écrivent une par une"
+   ],
+   [
+    "Nuance",
+    "Et l'erreur que je vois le plus : mettre un slogan en ligne un. « La beauté autrement », « L'excellence au service de votre sourire ». Ça ne dit ni ce que vous faites, ni où. Quelqu'un qui arrive sur votre profil a trois secondes et une question : est-ce que c'est pour moi, et est-ce que c'est près de chez moi ? Un slogan ne répond ni à l'une ni à l'autre.",
+    "Un slogan s'efface, remplacé par une phrase concrète"
+   ],
+   [
+    "Sortie",
+    "Ouvrez votre profil et lisez votre ligne un. Est-ce qu'elle dit ce que vous faites ?",
+    "Bandeau : VFormations — organisme certifié Qualiopi"
+   ]
+  ],
+  "conformite": "Geste pur. Aucune promesse. Le don est complet.",
+  "source": "Manuel élève module 3 · B1 séquence 5 (C4)"
+ },
+ {
+  "id": "T13",
+  "titre": "Le son décide avant l'image",
+  "cat": "Le geste technique",
+  "persona": "Sophie",
+  "angle": "Priorité technique contre-intuitive",
+  "format": "Démonstration audio",
+  "duree": "45 s",
+  "conscience": "2 → 3",
+  "note": 89,
+  "temps": [
+   [
+    "Accroche",
+    "On accepte une image moyenne. On n'accepte pas un son moyen. Et c'est le réglage qu'on ne fait jamais.",
+    "Une forme d'onde audio à l'écran"
+   ],
+   [
+    "Ancrage",
+    "Une vidéo mal cadrée se regarde jusqu'au bout. Une vidéo où l'on entend la hotte, la rue ou l'écho de la pièce se ferme en deux secondes.",
+    "Deux lecteurs, l'un continue, l'autre s'arrête"
+   ],
+   [
+    "Transmission",
+    "Trois gestes, du plus efficace au moins. Un : rapprochez-vous. Un téléphone à cinquante centimètres capte une voix nette ; à deux mètres il capte la pièce. C'est gratuit et ça règle la moitié du problème. Deux : coupez la source de bruit — la hotte, la musique d'ambiance, la radio. Trente secondes de silence valent mieux qu'un micro à cent euros. Trois : passez votre fichier dans un outil de nettoyage audio avant le montage. Ça supprime le fond et ça égalise la voix.",
+    "Le micro se rapproche, la forme d'onde se nettoie"
+   ],
+   [
+    "Nuance",
+    "Et le cas où rien de tout ça ne suffit : les lieux qui résonnent. Un salon carrelé, une boutique vitrée, un atelier vide. Là, aucun réglage ne rattrape — il faut filmer ailleurs, ou mettre du tissu dans la pièce, ou accepter de faire une vidéo sans voix, avec du texte. Ce n'est pas un échec, c'est un choix de format.",
+    "Un carrelage nu, puis un plan sans voix avec du texte"
+   ],
+   [
+    "Sortie",
+    "Enregistrez dix secondes dans votre local, écoutez au casque. Vous saurez en dix secondes lequel des trois gestes vous concerne.",
+    "Bandeau : VFormations — organisme certifié Qualiopi"
+   ]
+  ],
+  "conformite": "Technique pure. Le gratuit cité porte sur un geste, pas sur la formation.",
+  "source": "Manuel élève module 5 · B1 séquence 2 (C2)"
+ },
+ {
+  "id": "T14",
+  "titre": "Garder son niveau est un objectif légitime",
+  "cat": "Être vu ≠ être choisi",
+  "persona": "Tous",
+  "angle": "Contre la pression à la croissance",
+  "format": "Face caméra",
+  "duree": "50 s",
+  "conscience": "1 → 2",
+  "note": 91,
+  "temps": [
+   [
+    "Accroche",
+    "Vingt-huit pour cent des dirigeants disent vouloir garder leur niveau d'activité actuel. Et cette part augmente.",
+    "Face caméra, posé"
+   ],
+   [
+    "Ancrage",
+    "Je le dis parce que tout le discours sur le numérique suppose que vous voulez grandir. Pour une entreprise sur quatre, c'est faux — et assumé.",
+    "Un graphique qui monte, puis une ligne plate à côté"
+   ],
+   [
+    "Transmission",
+    "Le détail de l'enquête : quarante-quatre pour cent veulent poursuivre leur activité actuelle, vingt-huit veulent garder leur niveau « qui leur convient », dix visent un développement avec des changements majeurs, dix veulent céder. Donc une entreprise sur dix cherche la croissance au sens où on vous la vend. Et si c'est votre cas, le numérique ne sert pas à faire plus : il sert à **remplacer** — remplacer les clients qui partent, remplir les creux, être trouvé quand le bouche-à-oreille ne suffit plus.",
+    "Les quatre parts se dessinent, la plus petite se surligne"
+   ],
+   [
+    "Nuance",
+    "Et il y a une raison de fond qu'on oublie : votre capacité est bornée. Si vous êtes seul, ou à trois, générer plus de demande que vous ne pouvez en servir ne vous enrichit pas — ça vous fait refuser des clients, et refuser un client coûte plus qu'il ne rapporte. Le bon objectif n'est pas toujours plus de demande. Souvent, c'est une demande plus régulière.",
+    "Un agenda plein par à-coups, puis le même lissé"
+   ],
+   [
+    "Sortie",
+    "Avant de chercher du volume, regardez si votre problème est le nombre ou la régularité. Ce n'est pas le même travail.",
+    "Bandeau : VFormations — organisme certifié Qualiopi"
+   ]
+  ],
+  "conformite": "Contredit frontalement la promesse de croissance. Aucun résultat promis. Chiffres d'ambition déclarée, avec leur nature.",
+  "source": "Baromètre France Num 2026, DGE/Crédoc · OPCO EP 2025"
+ }
+]
