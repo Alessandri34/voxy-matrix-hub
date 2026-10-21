@@ -82,22 +82,73 @@ js = 'var URLS = ' + JSON.stringify(Object.fromEntries(pages.map(p => [p[0], '/'
 // fini par ne plus montrer que d'anciens articles. Elles sont desormais
 // derivees de pages.json, ou l'ordre des articles fait foi.
 const articles = pages.filter(p => p[4] === 'article');
-function grilleArticles(combien) {
-  const liste = combien ? articles.slice(0, combien) : articles;
-  return liste.map(([slug, chemin, titre, desc, type, c]) => {
-    const m = c || {};
-    return `      <a class="ncard" href="#${slug}">` +
-      `<img class="cover" src="img/${m.img || 'logo-vformations-blue.png'}" alt="${(m.carte || titre).replace(/"/g, '&quot;')}" loading="lazy">` +
-      `<div class="nbody"><span class="ntag">${m.tag || 'Article'}</span>` +
-      `<h3>${m.carte || titre}</h3></div></a>`;
-  }).join('\n');
+function carteArticle([slug, chemin, titre, desc, type, c]) {
+  const m = c || {};
+  return `      <a class="ncard" href="#${slug}">` +
+    `<img class="cover" src="img/${m.img || 'logo-vformations-blue.png'}" alt="${(m.carte || titre).replace(/"/g, '&quot;')}" loading="lazy">` +
+    `<div class="nbody"><span class="ntag">${m.tag || 'Article'}</span>` +
+    `<h3>${m.carte || titre}</h3></div></a>`;
 }
+const grilleCartes = liste => liste.map(carteArticle).join('\n');
+function grilleArticles(combien) {
+  return grilleCartes(combien ? articles.slice(0, combien) : articles);
+}
+// Rangees par rubrique, pour la page Le Mag. Trente-six articles dans une
+// seule grille font une page qu'on parcourt au pouce sans jamais trouver :
+// on les groupe par rubrique, chaque rubrique defilant horizontalement, et
+// les puces du haut masquent les rubriques non retenues. Sans JavaScript,
+// toutes les rubriques restent visibles : aucun article n'est perdu.
+const CHEV_G = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M10 3L5 8l5 5"/></svg>';
+const CHEV_D = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg>';
+const cleRubrique = t => t.toLowerCase().normalize('NFD')
+  .replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+
+function railsParRubrique() {
+  const groupes = new Map();
+  for (const a of articles) {
+    const tag = (a[5] && a[5].tag) || 'Article';
+    if (!groupes.has(tag)) { groupes.set(tag, []); }
+    groupes.get(tag).push(a);
+  }
+  // Les rubriques les mieux fournies en premier : ce qu'on publie le plus
+  // est ce qu'on sait le mieux faire, autant le montrer en haut.
+  const ordre = [...groupes.entries()].sort((a, b) => b[1].length - a[1].length);
+
+  const puces = '<div class="filters" id="magfilters">\n'
+    + '        <button class="chip active" type="button" data-f="all">Tout voir</button>\n'
+    + ordre.map(([t, l]) => `        <button class="chip" type="button" data-f="${cleRubrique(t)}">`
+        + `${t}<span class="chip-n">${l.length}</span></button>`).join('\n')
+    + '\n      </div>';
+
+  const sections = ordre.map(([t, l]) => {
+    const n = l.length;
+    return `      <section class="magrub" data-rub="${cleRubrique(t)}">
+        <div class="rub-head"><h2>${t}</h2><span class="rub-n">${n} article${n > 1 ? 's' : ''}</span></div>
+        <div class="railwrap">
+          <button class="railnav prev" type="button" aria-label="Articles précédents">${CHEV_G}</button>
+          <div class="rail-h">
+${grilleCartes(l)}
+          </div>
+          <button class="railnav next" type="button" aria-label="Articles suivants">${CHEV_D}</button>
+        </div>
+      </section>`;
+  }).join('\n');
+
+  return puces + '\n' + sections + '\n      <p class="magvide" hidden>Aucun article dans cette rubrique.</p>';
+}
+
 // Dans site.html, une grille s'ecrit <div class="news" data-auto="3"></div>
-// (les 3 plus recents) ou data-auto="tous". Le contenu est pose ici.
+// (les 3 plus recents) ou data-auto="tous" ; data-rail="m" la fait defiler
+// horizontalement sur mobile. <div data-auto="mag"></div> pose les rangees
+// par rubrique de la page Le Mag.
 function poserGrilles(html) {
-  return html.replace(/<div class="news" data-auto="([^"]+)"><\/div>/g, (_, combien) => {
-    const n = combien === 'tous' ? 0 : parseInt(combien, 10);
-    return `<div class="news">\n${grilleArticles(n)}\n      </div>`;
+  html = html.replace(/<div data-auto="mag"><\/div>/g, () => railsParRubrique());
+  return html.replace(/<div class="news"([^>]*)><\/div>/g, (bloc, attrs) => {
+    const auto = /data-auto="([^"]+)"/.exec(attrs);
+    if (!auto) { return bloc; }
+    const n = auto[1] === 'tous' ? 0 : parseInt(auto[1], 10);
+    const rail = /data-rail="m"/.test(attrs) ? ' rail-h rail-m' : '';
+    return `<div class="news${rail}">\n${grilleArticles(n)}\n      </div>`;
   });
 }
 

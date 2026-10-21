@@ -407,6 +407,59 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
 .article .stat span{font-size:var(--fs-xs);color:var(--muted);}
 
 
+/* ── Rails horizontaux ─────────────────────────────────────────────────────
+   Une rangee qui defile lateralement plutot que de s'empiler. Les cartes
+   debordent jusqu'au bord de l'ecran : un bord net laisserait croire que la
+   rangee s'arrete la, alors qu'une carte coupee dit qu'on peut continuer.
+   overscroll-behavior evite que le pouce reste prisonnier du rail au lieu
+   de faire defiler la page. Sans JavaScript, un rail defile quand meme.   */
+.railwrap{position:relative;}
+.rail-h{
+  display:flex;flex-wrap:nowrap;gap:var(--gap-sm);
+  overflow-x:auto;overflow-y:hidden;
+  overscroll-behavior-x:contain;
+  scroll-snap-type:x proximity;scroll-behavior:smooth;
+  scroll-padding-inline:var(--gutter);
+  padding:6px var(--gutter) .9rem;
+  margin-inline:calc(var(--gutter) * -1);
+  scrollbar-width:thin;scrollbar-color:var(--line) transparent;
+}
+.rail-h::-webkit-scrollbar{height:6px;}
+.rail-h::-webkit-scrollbar-thumb{background:var(--line);border-radius:100px;}
+.rail-h::-webkit-scrollbar-track{background:transparent;}
+.rail-h > *{flex:0 0 var(--rail-w,min(78%,300px));scroll-snap-align:start;}
+.rail-h.pills > *{flex:0 0 auto;}
+@media(min-width:700px){ .rail-h > *{flex-basis:var(--rail-w-d,310px);} }
+
+/* Fleches de rail : le pouce sait glisser, la souris non. Elles ne
+   s'affichent donc que sur pointeur fin, et seulement si le rail deborde
+   vraiment — la classe « on » est posee par le script.                    */
+.railnav{position:absolute;top:calc(50% - 2.2rem);z-index:3;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:#fff;box-shadow:var(--sh-sm);
+  display:none;place-items:center;cursor:pointer;color:var(--head);transition:opacity .15s;}
+.railnav svg{width:18px;height:18px;}
+.railnav.prev{left:-8px;}
+.railnav.next{right:-8px;}
+.railnav[disabled]{opacity:.28;cursor:default;}
+@media(min-width:861px) and (hover:hover){ .railwrap.on .railnav{display:grid;} }
+
+/* « rail-m » : rail sur mobile, grille habituelle au-dela. */
+@media(min-width:561px){
+  .rail-h.rail-m{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));
+    overflow:visible;margin-inline:0;padding:0;}
+  .rail-h.rail-m > *{flex:initial;}
+  .rail-h.pills.rail-m{display:flex;flex-wrap:wrap;justify-content:center;}
+}
+
+/* Le Mag : une rangee par rubrique, filtrable par les puces. */
+.magrub{margin-bottom:clamp(1.4rem,.9rem + 2vw,2.2rem);}
+.rub-head{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;margin-bottom:.8rem;}
+.rub-head h2{font-size:var(--fs-h3);font-weight:600;}
+.rub-n{font-family:'Poppins',sans-serif;font-size:var(--fs-xs);color:var(--muted);white-space:nowrap;}
+.chip-n{display:inline-block;margin-left:.4em;opacity:.6;font-size:.9em;}
+.magvide{text-align:center;color:var(--muted);padding:2rem 0;}
+
+
 /* ── Affinage mobile ───────────────────────────────────────────────────────
    Le reste de la feuille est deja fluide (clamp() sur les tailles, les
    gouttieres et les espacements) : ce bloc ne refait pas la mise en page,
@@ -476,8 +529,9 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
      defilement sans tasser le contenu. */
   :root { --section-y: 2.4rem; }
 
-  /* Les cartes passent en pleine largeur plutot qu'en colonnes etroites. */
-  .news, .grid3 { grid-template-columns: 1fr; }
+  /* Les cartes passent en pleine largeur plutot qu'en colonnes etroites.
+     Les grilles passees en rail (.rail-m) sont exclues : elles defilent.  */
+  .news:not(.rail-m), .grid3 { grid-template-columns: 1fr; }
 }
 
 /* Tres petits ecrans (iPhone SE, 320-375px) */
@@ -626,7 +680,7 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
   <section class="sec">
     <div class="wrap">
       <h2 class="sec-title">Nos dernières actualités</h2>
-      <div class="news" data-auto="3"></div>
+      <div class="news" data-auto="3" data-rail="m"></div>
     </div>
   </section>
 
@@ -634,13 +688,13 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
     <div class="wrap">
       <h2 class="sec-title">Retrouvez tous nos domaines de formation</h2>
       <div class="domaines">
-        <div class="dpills">
-          <a class="dpill" href="#formation-video"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 20 20"><rect x="2" y="4" width="12" height="11" rx="1.5"/><path d="M14 8l4-2v8l-4-2z"/></svg>Visibilité & vidéo</a>
-          <a class="dpill" href="#formation-site"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 20 20"><path d="M2 5h16v10H2z"/><path d="M2 8h16"/></svg>Site internet</a>
+        <div class="dpills rail-h rail-m pills">
+          <a class="dpill" href="#formation-video"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 20 20"><path d="M2 5h11v10H2z"/><path d="M13 8.5l5-2.5v8l-5-2.5z"/></svg>Visibilité & vidéo</a>
+          <a class="dpill" href="#formation-ia-usage"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 20 20"><rect x="5" y="5" width="10" height="10" rx="2"/><path d="M10 2v3M10 15v3M2 10h3M15 10h3"/><circle cx="10" cy="10" r="1.6"/></svg>Intelligence artificielle</a>
+          <a class="dpill" href="#formation-ia-locale"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 20 20"><rect x="3" y="3" width="14" height="5" rx="1"/><rect x="3" y="12" width="14" height="5" rx="1"/><path d="M6 5.5h.01M6 14.5h.01"/></svg>Héberger son IA</a>
+          <a class="dpill" href="#formation-site"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 20 20"><path d="M2 5h16v10H2z"/><path d="M2 8h16"/><circle cx="4.5" cy="6.5" r=".6" fill="currentColor"/></svg>Site internet</a>
           <a class="dpill" href="#formation-boutique"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 20 20"><path d="M3 6h14M6 6l1 9h6l1-9"/><path d="M8 6V4a2 2 0 014 0v2"/></svg>Boutique en ligne</a>
           <a class="dpill" href="#formation-prospection"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 20 20"><path d="M3 11l5-6 4 4 5-6"/><path d="M14 3h3v3"/></svg>Prospection B2B</a>
-          <a class="dpill" href="#formations"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 20 20"><path d="M10 3l2 4 4 .5-3 3 .8 4L10 12.7 6.2 14.5 7 10.5 4 7.5 8 7z"/></svg>Publicité locale</a>
-          <a class="dpill" href="#formations"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 2"/></svg>Acquisition client</a>
         </div>
         <a class="all" href="#formations">Tous les domaines</a>
       </div>
@@ -663,7 +717,7 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
   <section class="sec formasec">
     <div class="wrap">
       <h2 class="sec-title">Nos formations du moment</h2>
-      <div class="fcards">
+      <div class="fcards rail-h rail-m">
         <article class="fcard">
           <img class="media" src="img/formation-video.jpg" alt="Commerçant filmant sa boulangerie au smartphone sur stabilisateur" width="1600" height="893" loading="lazy" decoding="async">
           <div class="fb"><h3>Visibilité locale par la vidéo</h3><div class="subt">Filmer, monter et diffuser pour attirer des clients locaux</div><div class="dur"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg> 14 h à 60 h · présentiel</div></div>
@@ -678,6 +732,21 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
           <img class="media" src="img/formation-prospection.jpg" alt="Dirigeant de PME menant un entretien de prospection commerciale B2B" width="1600" height="893" loading="lazy" decoding="async">
           <div class="fb"><h3>Structurer sa prospection B2B</h3><div class="subt">Ciblage, prise de contact, relance, outils</div><div class="dur"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg> 14 h à 35 h · présentiel</div></div>
           <div class="ff"><a class="btn btn-wine" href="#formation-prospection">Voir la formation</a><div class="price">Sur devis<small>finançable</small></div></div>
+        </article>
+        <article class="fcard">
+          <img class="media" src="img/formation-ia-usage.jpg" alt="Trois personnes travaillant autour d'un ordinateur portable pendant une séance de formation en petit groupe" loading="lazy" decoding="async">
+          <div class="fb"><h3>Utiliser l'IA générative dans son entreprise</h3><div class="subt">Formuler, construire ses modèles, encadrer ses données</div><div class="dur"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg> 14 h à 40 h · présentiel</div></div>
+          <div class="ff"><a class="btn btn-wine" href="#formation-ia-usage">Voir la formation</a><div class="price">Sur devis<small>finançable</small></div></div>
+        </article>
+        <article class="fcard">
+          <img class="media" src="img/formation-ia-locale.jpg" alt="Gros plan sur des barrettes de mémoire vive installées sur une carte mère" loading="lazy" decoding="async">
+          <div class="fb"><h3>Héberger et exploiter son IA en interne</h3><div class="subt">Installer un modèle ouvert sur votre propre matériel</div><div class="dur"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg> 14 h à 40 h · présentiel</div></div>
+          <div class="ff"><a class="btn btn-wine" href="#formation-ia-locale">Voir la formation</a><div class="price">Sur devis<small>finançable</small></div></div>
+        </article>
+        <article class="fcard">
+          <img class="media" src="img/formation-site.jpg" alt="Vue de dessus d'un poste de travail : un ordinateur portable affichant la mise en page d'un site, un carnet et un stylo" loading="lazy" decoding="async">
+          <div class="fb"><h3>Créer un site internet professionnel</h3><div class="subt">Concevoir, mettre en ligne et piloter son site</div><div class="dur"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg> 14 h à 35 h · présentiel</div></div>
+          <div class="ff"><a class="btn btn-wine" href="#formation-site">Voir la formation</a><div class="price">Sur devis<small>finançable</small></div></div>
         </article>
       </div>
       <div class="cbtn" style="margin-top:2rem;"><a class="btn btn-white" href="#formations">Voir tout le catalogue</a></div>
@@ -1528,7 +1597,7 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
     </div>
   </section>
   <section class="sec"><div class="wrap">
-    <div class="news" data-auto="tous"></div>
+    <div data-auto="mag"></div>
   </div></section>
 </section>
 
@@ -2624,6 +2693,67 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
       });
     });
   })();
+
+  // Puces du Mag. Meme mecanique que le catalogue, mais elles masquent des
+  // rubriques entieres plutot que des cartes. Le message « aucun article »
+  // n'apparait que si une puce ne correspond a rien, ce qui ne devrait pas
+  // arriver puisque les puces sont generees depuis les rubriques existantes.
+  (function () {
+    var puces = document.querySelectorAll('#magfilters .chip');
+    var rubs = document.querySelectorAll('.magrub');
+    var vide = document.querySelector('.magvide');
+    if (!puces.length || !rubs.length) { return; }
+    puces.forEach(function (p) {
+      p.addEventListener('click', function () {
+        var f = p.dataset.f, visibles = 0;
+        puces.forEach(function (q) { q.classList.toggle('active', q === p); });
+        rubs.forEach(function (r) {
+          var on = (f === 'all' || r.dataset.rub === f);
+          r.hidden = !on;
+          if (on) { visibles++; }
+        });
+        if (vide) { vide.hidden = visibles > 0; }
+        // Une rubrique qu'on vient d'afficher peut avoir ete defilee :
+        // on la remet a son debut, sinon elle s'ouvre au milieu.
+        rubs.forEach(function (r) {
+          if (!r.hidden) { var x = r.querySelector('.rail-h'); if (x) { x.scrollLeft = 0; } }
+        });
+        majRails();
+      });
+    });
+  })();
+
+  // Fleches des rails. Le pouce sait glisser, la souris non : sans eux, un
+  // visiteur au clavier ou a la souris ne voit que les trois premieres
+  // cartes. Elles ne s'affichent que si le rail deborde reellement — d'ou
+  // la classe « on », posee ici et pas dans le HTML.
+  function majRails() {
+    document.querySelectorAll('.railwrap').forEach(function (w) {
+      var r = w.querySelector('.rail-h');
+      if (!r) { return; }
+      var deborde = r.scrollWidth - r.clientWidth > 4;
+      w.classList.toggle('on', deborde);
+      var prev = w.querySelector('.railnav.prev'), next = w.querySelector('.railnav.next');
+      if (prev) { prev.disabled = r.scrollLeft <= 2; }
+      if (next) { next.disabled = r.scrollLeft >= r.scrollWidth - r.clientWidth - 2; }
+    });
+  }
+  document.querySelectorAll('.railwrap').forEach(function (w) {
+    var r = w.querySelector('.rail-h');
+    if (!r) { return; }
+    w.querySelectorAll('.railnav').forEach(function (b) {
+      b.addEventListener('click', function () {
+        // On avance d'une « page » moins une carte, pour garder un repere
+        // visuel entre deux clics plutot que de tout remplacer d'un coup.
+        var pas = Math.max(r.clientWidth * 0.8, 240);
+        r.scrollBy({ left: b.classList.contains('next') ? pas : -pas, behavior: 'smooth' });
+      });
+    });
+    r.addEventListener('scroll', majRails, { passive: true });
+  });
+  window.addEventListener('resize', majRails, { passive: true });
+  majRails();
+
   wireLeadForm(document.getElementById('diagForm'), 'diagOk', { form: 'diagnostic' });
   wireLeadForm(document.getElementById('contactForm'), 'contactOk', { form: 'contact' });
   // Formulaires de fin d'article. Il y en a un par article, pose par
