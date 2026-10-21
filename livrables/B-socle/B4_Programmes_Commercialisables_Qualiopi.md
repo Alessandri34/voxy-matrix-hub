@@ -54,7 +54,7 @@ Formulations **bannies** sur tous les supports : « gratuit », « 0 € », « 
 
 **Public / prérequis** — Dirigeants et salariés de TPE-PME. Une activité déclarée, un ordinateur, une connexion. Aucune compétence technique.
 **Objectif** — À l'issue, l'apprenant sait formuler une demande qui produit un résultat utilisable, construire ses propres modèles réutilisables, encadrer l'usage de ses données, et mesurer le temps réellement gagné.
-**Compétences** — IA1 situer l'IA et ses limites · IA2 formuler une demande exploitable · IA3 construire ses modèles réutilisables · IA4 encadrer données et obligations · IA5 mesurer le temps gagné.
+**Compétences** — IA-1 situer l'IA et ses limites · IA-2 formuler une demande exploitable · IA-3 construire ses modèles réutilisables · IA-4 encadrer données et obligations · IA-5 mesurer le temps gagné.
 **Durées — trois paliers** — **Sprint 14 h** · **Médian 28 h** · **Max 40 h**, tous trois sous les plafonds annuels des financeurs visés :
 - 14 h = deux jours. Le plus court format qui laisse produire un livrable utilisable, et pas seulement assister à une démonstration ;
 - 28 h = permet d'intercaler du travail entre les séances. À 42 €/h, la prise en charge AGEFICE reste sous le plafond de 3 000 €/an ;
@@ -72,7 +72,7 @@ Formulations **bannies** sur tous les supports : « gratuit », « 0 € », « 
 
 **Public / prérequis** — TPE-PME ayant un besoin de confidentialité ou un volume d'usage le justifiant. **Avoir suivi l'offre 4 ou équivalent.** Machine d'au moins 16 Go de RAM, ou serveur loué. **Prérequis matériel vérifié au diagnostic.**
 **Objectif** — À l'issue, l'apprenant sait arbitrer entre service en ligne et hébergement interne, installer un modèle ouvert sur son matériel, le connecter à ses documents, l'administrer et mettre un cas d'usage en service.
-**Compétences** — IAL1 arbitrer interne / en ligne · IAL2 installer un modèle ouvert · IAL3 connecter ses documents · IAL4 administrer et sécuriser · IAL5 mettre un cas d'usage en service.
+**Compétences** — IAL-1 arbitrer interne / en ligne · IAL-2 installer un modèle ouvert · IAL-3 connecter ses documents · IAL-4 administrer et sécuriser · IAL-5 mettre un cas d'usage en service.
 **Durées — trois paliers** — **Sprint 14 h** · **Médian 28 h** · **Max 40 h** (même logique de plafonds que l'offre 4).
 **Modalités** — Présentiel, sur le matériel de l'apprenant. **C'est l'apprenant qui installe.**
 **Évaluation** — Positionnement, jalons par palier, finale, à froid à 90 j.
