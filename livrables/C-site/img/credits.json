@@ -34,5 +34,13 @@
     "url": "https://www.rawpixel.com/image/5909353/image-public-domain-mockup-free",
     "kb": 25,
     "note": "seule image de banque encore en place"
+  },
+
+  "qualiopi": {
+    "src": "ministere du Travail (DGEFP)",
+    "lic": "marque de certification - propriete de l'Etat francais",
+    "titre": "Marque Qualiopi - variante Republique francaise (avec Marianne)",
+    "url": "https://pays-de-la-loire.dreets.gouv.fr/sites/pays-de-la-loire.dreets.gouv.fr/IMG/pdf/qualiopi.pdf",
+    "note": "ATTENTION : ce n'est PAS une image libre. Marque de certification propriete de l'Etat. Son usage est reserve aux prestataires certifies et encadre par le reglement d'usage + la charte graphique. Fichier extrait SANS RETOUCHE de la plaquette officielle DGEFP (janvier 2021, page 2), hebergee sur un domaine .gouv.fr : 317x163 px, couleurs d'origine (#1C2977 / #DF011A), fond blanc, zone de protection incluse dans le fichier. Variante AVEC bandeau Republique francaise et Marianne : c'est la seule autorisee pour un organisme certifie, seul l'Etat pouvant utiliser la version sans Marianne. A remplacer par le fichier du kit officiel remis par l'organisme certificateur avec le certificat (source de reference). Ne jamais modifier : couleurs, proportions, ajout d'elements interdits."
   }
 }

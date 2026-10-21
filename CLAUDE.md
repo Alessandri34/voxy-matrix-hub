@@ -150,6 +150,22 @@ Si le brief ne s'écrit pas clairement, la tâche n'est pas assez comprise pour 
 **Le rapport d'un agent est une affirmation, pas un fait.** Ce circuit a déjà produit ici deux comptages faux dans `A3` et une note moyenne surévaluée dans `A4` (91,3 annoncé, 86,7 après contrôle).
 Tout chiffre, toute citation et tout « c'est fait » venant d'un agent se **recontrôle à la source** avant d'entrer dans un livrable. Un agent à qui on donne une hypothèse a tendance à la confirmer : lui donner la matière, pas la conclusion attendue.
 
+## 8sexies. Marque Qualiopi — règles d'usage [21/10/2026]
+
+**Le vrai logo est posé dans le footer**, sur les 63 pages (`img/qualiopi.png`, extrait sans retouche de la plaquette officielle DGEFP hébergée sur un domaine `.gouv.fr`). Il remplace un **pictogramme SVG maison** aux couleurs de Qualiopi qui occupait sa place dans un encart « Qualité et certification » : ce n'était pas la marque, mais le visiteur le lisait comme telle.
+
+**Ce qui accompagne obligatoirement le logo, partout où il apparaît :**
+> La certification qualité a été délivrée au titre de la catégorie d'action suivante : **ACTIONS DE FORMATION**.
+Plus le n° de certificat **VFO12912026001** et le certificateur **evolve** (1 rue Marc Seguin, 26300 Alixan — accréditation Cofrac n° 5-0670), valable jusqu'au 30/07/2029.
+
+**Variante obligatoire** : celle **avec la Marianne et le bandeau « RÉPUBLIQUE FRANÇAISE »**. La version sans Marianne est réservée à l'État. Ne jamais recolorer, déformer, recadrer, ni rogner la marge blanche du fichier — c'est la zone de protection. Ne pas descendre sous ~120 px de large.
+
+🔴 **Usages interdits — à retenir avant le premier euro d'ADS.** La marque ne peut pas être utilisée **« dans une publicité pour une action de formation en particulier »**, ni **« sur l'attestation de formation ou sur tout support dédié uniquement à une action de formation »**. Le footer partagé est conforme : il identifie l'organisme. **Mais : pas de logo Qualiopi dans une créa Meta Ads qui pousse une formation précise, ni dans le corps d'une fiche formation, ni sur les attestations de fin de formation.** C'est le piège le plus facile à déclencher vu le chantier D3.
+
+⏳ **À recouper par Pierre** : la **forme exacte** de la mention (ponctuation, casse, placement) est fixée par la **charte graphique**, qui n'est pas publique — elle est remise avec le certificat par *evolve*. Le kit contient aussi le logo en meilleure définition que le fichier extrait du PDF : à substituer.
+
+❌ **« AFAQ ISO » retiré du bandeau « Financements & certifications » de l'accueil.** AFAQ ISO est une marque d'**AFNOR Certification** et désigne une certification ISO ; VFormations est certifié par *evolve*, et rien dans le dossier n'atteste d'une certification ISO. C'était une **allégation de certification non étayée, en production**. À ne remettre que si la certification existe réellement. ⚠️ Le titre de la section mélange toujours une certification (Qualiopi) et quatre **financeurs** (AGEFICE, FAFCEA, OPCO EP, Constructys) — à clarifier.
+
 ## 9. En attente
 - 🔴 **Grille tarifaire toujours non arrêtée** — mais elle n'est plus publiée nulle part *(décision D9, 21/10/2026)*.
   Le site n'affiche plus aucun prix : les 11 « dès 1 190 € HT » sont retirés, les 6 fiches portent « Tarif sur devis ».
@@ -164,7 +180,8 @@ Tout chiffre, toute citation et tout « c'est fait » venant d'un agent se **rec
   L'exonération DREETS en cours ramènerait ce cas à 380 €.
 - 🟠 **Les indicateurs de résultats ne sont pas chiffrés, et c'est volontaire.** L'organisme n'a achevé aucune session : publier un taux serait faux, et c'est précisément ce qu'un auditeur recalcule. `B3` grille 7 fixe la **méthode de calcul** des quatre taux (satisfaction, atteinte des objectifs, abandon, mise en œuvre à 90 j) et les règles tenues (effectif affiché, taux de réponse publié). **À chiffrer dès la clôture de la première promotion.**
 - 🟠 **Les 3 photos de couverture ajoutées le 21/10 sont des placeholders CC0** (StockSnap, créditées dans `img/credits.json`, 960×540 — seule taille servie par le CDN, contre 1600×893 pour les photos du client). À remplacer par de vraies photos dès que possible : les 3 autres fiches portent des photos du client.
-- 🟠 **Logo Qualiopi du footer : non posé.** L'agent lancé dessus est tombé sur une limite de session avant d'avoir trouvé un fichier officiel — il avait écarté les images de chlorofil.fr, qui sont celles de *QualiFormAgri* et non de Qualiopi. Son travail est conservé et reprenable. ⚠️ **Ne jamais redessiner un logo de certification** : approximatif, il vaut moins que pas de logo. Le pack officiel est diffusé par le ministère du Travail (travail-emploi.gouv.fr). La charte impose la mention qui l'accompagne, le **numéro de certificat** (`VFO12912026001`, déjà affiché ailleurs sur le site) et l'**organisme certificateur** — ce dernier reste à fournir par Pierre.
+- 🟠 **Remplacer `img/qualiopi.png` par le fichier du kit remis par *evolve*** (meilleure définition) et **recouper la forme exacte de la mention** avec la charte graphique du kit. Voir §8sexies.
+- 🔴 **Trancher « AFAQ ISO »** : retiré du site le 21/10 faute de preuve. Si la certification existe, dire laquelle et par qui ; sinon, ne pas la remettre.
 - 🟠 **Demander le référencement FAFCEA « parcours individualisé »** si le dispositif est jugé intéressant : 80 €/h contre 25 €/h transverse. C'est une démarche distincte de Qualiopi.
 - Étude de marché PDF (à fournir).
 - Vrais coûts de production (pour remplacer les [Hypothèses] de l'économie unitaire).
