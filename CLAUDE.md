@@ -21,6 +21,7 @@ Les **fonds de formation ne financent que de la formation réelle**. Ce que nous
 - **D8** Financeurs prioritaires : **AGEFICE** (commerce/resto) + **FAFCEA** (artisans).
 - **D9** [21/10/2026] **Aucun prix affiché sur le site.** Les 11 « dès 1 190 € HT » sont retirés : aucune source ne les validait et ils contredisaient `D1`. Les 6 fiches portent « Tarif sur devis ». Le devis reste le seul endroit où un montant est annoncé, avec le reste à charge.
 - **D10** [21/10/2026] **Les annotations « [À faire valider] » sont retirées des livrables**, à la demande de Pierre, qui prend la validation Qualiopi à sa charge. Les livrables sont donc complets en l'état ; cela ne vaut pas validation par un référent.
+- **D11** [21/10/2026] **La méthode d'exécution est écrite et s'applique par défaut** : sous-agents, parallélisme et choix du palier de modèle selon le coût d'une erreur → §8quinquies.
 
 ## 4. Offres (intitulés lisses)
 1. Créer et piloter sa boutique en ligne (ex-E-Com Commando)
@@ -89,7 +90,8 @@ A = 10 scripts UGC (**fait** : fiche signal + 10 angles + 10 scripts + plan de t
 - Langue : français. Sources datées, classées [Vérifié] / [À vérifier] / [Hypothèse].
 - Rien d'irréversible sans accord explicite (pas de `git push`, suppression, déploiement, envoi).
 - Secrets hors Git (`.env` + `.gitignore`).
-- Pas d'identifiant de modèle dans les fichiers du dépôt.
+- Pas d'identifiant de modèle **en tant qu'auteur** dans les fichiers du dépôt (commits, livrables, commentaires de code).
+  Nommer un palier de modèle pour décrire la **méthode de travail** est autorisé — voir §8quinquies.
 
 ## 8quater. Signaux locaux — adresse et schéma [20/10/2026]
 
@@ -109,6 +111,45 @@ A = 10 scripts UGC (**fait** : fiche signal + 10 angles + 10 scripts + plan de t
 
 **Horaires** : être ouvert au moment de la recherche est devenu l'un des premiers facteurs de classement local (rapport Whitespark 2026 — estimations de praticiens, Google ne publie aucune pondération). Les champs `horairesJours` / `horairesDebut` / `horairesFin` de `seo.json` sont vides : les remplir vaut mieux que de les laisser vides, mais **ne jamais inventer d'horaires**.
 
+## 8quinquies. Exécution : sous-agents, parallélisme et coût [21/10/2026]
+
+> Méthode à appliquer à toute tâche du projet. Elle est tirée de ce qui a marché et de ce qui a raté ici, pas de principes généraux.
+
+### Déléguer ou faire soi-même
+Un sous-agent n'est pas gratuit : il ne sait que ce qu'on met dans son brief, on ne voit que son résumé, et les deux passages perdent de l'information.
+- **Déléguer** : une recherche large (plusieurs sources, plusieurs fichiers) dont on ne veut que la conclusion · un travail réellement parallélisable · une tâche annexe qui ne doit pas bloquer la principale.
+- **Faire soi-même** : quelques appels d'outils · un fichier qu'on sait déjà localiser · toute tâche dont la **vérification coûterait plus cher que l'exécution**.
+- **Jamais les deux** : une fois délégué, on attend le résultat, on ne refait pas le travail en parallèle.
+
+### Choix du modèle — c'est là qu'est le coût
+Trois paliers. **Le coût d'une erreur décide du palier, pas la longueur de la tâche.**
+
+| Palier | Pour quoi | Exemples vécus ici |
+|---|---|---|
+| **Rapide** (Haiku) | Extraction, comptage, reformatage, récupération de fichiers, application mécanique d'une règle — tout ce qui se vérifie d'un coup d'œil | Lister les occurrences d'un motif · télécharger et recadrer des images · normaliser une notation |
+| **Intermédiaire** (Sonnet) | Rédaction cadrée par un gabarit existant, recherche documentaire avec synthèse, veille | Les 15 articles du Mag · le dépouillement des annonces publicitaires |
+| **Raisonnement** (Opus) | Arbitrage, conception, relecture critique, et **tout ce qui touche à la conformité** | Les paliers de financement · l'article 4 de l'AI Act · décider si une fiche promet trop |
+
+⚠️ **Tout ce qui touche Qualiopi, le financement ou la règle d'or §2 monte au palier raisonnement, sans discussion.** Un taux faux ou une promesse mal cadrée coûte infiniment plus que l'écart de prix entre deux modèles — le site a déjà annoncé la FAFCEA à 35 €/h et un parcours individualisé non mobilisable.
+
+### Parallélisme : un seul rédacteur par fichier
+**Deux agents — ou un agent et moi — ne doivent jamais écrire dans le même fichier.** C'est la seule règle qui fasse vraiment échouer le parallélisme.
+Un agent lancé en parallèle produit des **artefacts séparés** : un fichier image, un extrait à insérer, un rapport. L'intégration dans la source commune se fait ensuite, par une seule main. Le brief doit porter l'interdiction en toutes lettres (« tu ne modifies pas `site.html` »), et interdire aussi le commit, le push et le build, qui touchent à l'état partagé.
+
+### Les limites de session sont le vrai plafond
+Trois agents sont morts sur une limite de session dans ce projet (contrôle des scripts A2, registre sans jargon, logo Qualiopi).
+- Un agent tombé sur une limite **garde son travail** : le **reprendre par message**, ne pas en relancer un neuf qui repartira de zéro.
+- Chaque agent consomme le même quota que la session principale : une flotte de six agents épuise six fois plus vite.
+- **Deux ou trois agents bien briefés valent mieux qu'une flotte.**
+
+### Le brief
+Ce que l'agent ne voit pas, il ne l'a pas. Un brief utile tient en cinq points : l'objectif · ce qui est **déjà écarté** (pour ne pas refaire) · les chemins de fichiers exacts à lire · la contrainte de non-écriture · **ce qu'on attend en retour** (un fichier à tel endroit, pas un résumé).
+Si le brief ne s'écrit pas clairement, la tâche n'est pas assez comprise pour être déléguée.
+
+### Vérifier ce que l'agent rapporte
+**Le rapport d'un agent est une affirmation, pas un fait.** Ce circuit a déjà produit ici deux comptages faux dans `A3` et une note moyenne surévaluée dans `A4` (91,3 annoncé, 86,7 après contrôle).
+Tout chiffre, toute citation et tout « c'est fait » venant d'un agent se **recontrôle à la source** avant d'entrer dans un livrable. Un agent à qui on donne une hypothèse a tendance à la confirmer : lui donner la matière, pas la conclusion attendue.
+
 ## 9. En attente
 - 🔴 **Grille tarifaire toujours non arrêtée** — mais elle n'est plus publiée nulle part *(décision D9, 21/10/2026)*.
   Le site n'affiche plus aucun prix : les 11 « dès 1 190 € HT » sont retirés, les 6 fiches portent « Tarif sur devis ».
@@ -123,6 +164,7 @@ A = 10 scripts UGC (**fait** : fiche signal + 10 angles + 10 scripts + plan de t
   L'exonération DREETS en cours ramènerait ce cas à 380 €.
 - 🟠 **Les indicateurs de résultats ne sont pas chiffrés, et c'est volontaire.** L'organisme n'a achevé aucune session : publier un taux serait faux, et c'est précisément ce qu'un auditeur recalcule. `B3` grille 7 fixe la **méthode de calcul** des quatre taux (satisfaction, atteinte des objectifs, abandon, mise en œuvre à 90 j) et les règles tenues (effectif affiché, taux de réponse publié). **À chiffrer dès la clôture de la première promotion.**
 - 🟠 **Les 3 photos de couverture ajoutées le 21/10 sont des placeholders CC0** (StockSnap, créditées dans `img/credits.json`, 960×540 — seule taille servie par le CDN, contre 1600×893 pour les photos du client). À remplacer par de vraies photos dès que possible : les 3 autres fiches portent des photos du client.
+- 🟠 **Logo Qualiopi du footer : non posé.** L'agent lancé dessus est tombé sur une limite de session avant d'avoir trouvé un fichier officiel — il avait écarté les images de chlorofil.fr, qui sont celles de *QualiFormAgri* et non de Qualiopi. Son travail est conservé et reprenable. ⚠️ **Ne jamais redessiner un logo de certification** : approximatif, il vaut moins que pas de logo. Le pack officiel est diffusé par le ministère du Travail (travail-emploi.gouv.fr). La charte impose la mention qui l'accompagne, le **numéro de certificat** (`VFO12912026001`, déjà affiché ailleurs sur le site) et l'**organisme certificateur** — ce dernier reste à fournir par Pierre.
 - 🟠 **Demander le référencement FAFCEA « parcours individualisé »** si le dispositif est jugé intéressant : 80 €/h contre 25 €/h transverse. C'est une démarche distincte de Qualiopi.
 - Étude de marché PDF (à fournir).
 - Vrais coûts de production (pour remplacer les [Hypothèses] de l'économie unitaire).
