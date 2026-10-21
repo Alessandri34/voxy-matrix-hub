@@ -1,7 +1,7 @@
 # Référentiel des Compétences (Skills) - Catalogue Voxy Formation
-Ce document détaille les compétences visées (volet "Learning") pour chacune des 5 offres du catalogue. Ces compétences justifient l'action de formation dans le cadre du financement OPCO/Qualiopi.
+Ce document détaille les compétences visées (volet "Learning") pour chacune des 6 offres du catalogue. Ces compétences justifient l'action de formation dans le cadre du financement OPCO/Qualiopi.
 
-## Offre 1 : Le Système "E-Com Commando"
+## Offre 1 : Créer et piloter sa boutique en ligne
 **Objectif Global :** Rendre l'apprenant autonome dans la gestion technique, commerciale et marketing d'une boutique en ligne optimisée pour la conversion.
 
 ### Compétences visées (Skills) :
@@ -14,7 +14,7 @@ Ce document détaille les compétences visées (volet "Learning") pour chacune d
 
 ---
 
-## Offre 2 : Le "Département Commercial Externalisé"
+## Offre 2 : Structurer sa prospection commerciale B2B
 **Objectif Global :** Rendre l'apprenant capable de piloter un système de prospection digital et de maîtriser le closing commercial.
 
 ### Compétences visées (Skills) :
@@ -26,7 +26,7 @@ Ce document détaille les compétences visées (volet "Learning") pour chacune d
 
 ---
 
-## Offre 3 : Le "Magnet Local & Viral"
+## Offre 3 : Développer sa visibilité locale par la vidéo
 **Objectif Global :** Rendre l'apprenant autonome dans la création de contenus engageants (format vidéo court) et la gestion de son rayonnement local en ligne.
 
 ### Compétences visées (Skills) :
@@ -37,7 +37,7 @@ Ce document détaille les compétences visées (volet "Learning") pour chacune d
 *   **SKILL VISU-5 (Social Ads Local) :** Comprendre les bases du ciblage publicitaire (Ads) géolocalisé pour générer du trafic en point de vente (Drive-to-store).
 
 
-## Offre 4 : Utiliser l'IA générative dans son entreprise *(ajouté le 21/10/2026)*
+## Offre 4 : Utiliser l'IA générative dans son entreprise
 
 | Code | Compétence | Critère observable | Preuve |
 |---|---|---|---|
@@ -47,7 +47,7 @@ Ce document détaille les compétences visées (volet "Learning") pour chacune d
 | IA-4 | Encadrer l'usage : données et obligations | Établit par écrit ce qui ne doit pas être saisi, et les mentions à porter | La règle d'usage signée |
 | IA-5 | Mesurer le temps réellement gagné | Tient un relevé sur 3 tâches et décide de la suite | Le relevé daté |
 
-## Offre 5 : Héberger et exploiter son IA en interne *(ajouté le 21/10/2026)*
+## Offre 5 : Héberger et exploiter son IA en interne
 
 | Code | Compétence | Critère observable | Preuve |
 |---|---|---|---|
@@ -57,4 +57,14 @@ Ce document détaille les compétences visées (volet "Learning") pour chacune d
 | IAL-4 | Administrer et sécuriser | Gère accès, sauvegardes et mises à jour | La procédure écrite |
 | IAL-5 | Mettre un cas d'usage en service | Un cas réel en fonctionnement, avec son relevé à 90 j | Le cas en service et son relevé |
 
-> ⚠️ **Ces deux blocs sont [À faire valider]** par le référent Qualiopi, au même titre que `B1` et `B3`. Aucune grille d'évaluation (type `B3` G3) n'existe encore pour IA-1→5 ni IAL-1→5.
+## Offre 6 : Créer un site internet professionnel
+
+| Code | Compétence | Critère observable | Preuve |
+|---|---|---|---|
+| SITE-1 | Structurer l'arborescence et les pages clés | Produit l'arborescence de son propre site : pages, hiérarchie, chemin vers la prise de contact | L'arborescence datée |
+| SITE-2 | Rédiger des contenus qui incitent à agir | Rédige accueil, services et contact ; chaque page porte une action explicite pour le visiteur | Les pages rédigées |
+| SITE-3 | Mettre son site en ligne | Site accessible sur son nom de domaine, mentions légales et information RGPD en place | L'URL en ligne et la capture des pages légales |
+| SITE-4 | Poser les bases du référencement local | Titres et descriptions renseignés sur les pages clés ; fiche Google créée et complétée | Captures de la fiche et des balises |
+| SITE-5 | Lire la fréquentation et décider | Lit ses statistiques, nomme deux améliorations et les ordonne par effort/effet | Le plan d'amélioration 90 j |
+
+> Chaque compétence est évaluée avec la grille correspondante de `B3` (grilles 3 à 3d), sur les preuves listées ci-dessus.

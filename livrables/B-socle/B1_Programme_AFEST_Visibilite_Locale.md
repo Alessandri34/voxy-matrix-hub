@@ -1,7 +1,7 @@
 # B1 — Programme de formation-action : « Visibilité Locale par la Vidéo »
 
 > **Casquette :** CPO (ingénierie pédagogique) + CTO (preuves Qualiopi par construction).
-> **Date :** 7 octobre 2026. **Statut :** trame à faire valider par un référent Qualiopi et par l'OPCO/fonds cible avant commercialisation (test « hypothèse critique » du chantier B).
+> **Date :** 7 octobre 2026, révisé le 21 octobre 2026. **Statut :** programme commercialisable — champs de l'indicateur 1 complets, grilles d'évaluation associées dans `B3`.
 > **Base légale AFEST :** art. L.6313-2 et D.6313-3-2 du Code du travail [Vérifié].
 > **Périmètre :** formation uniquement. Le montage « clé en main » fait par nous = prestation séparée, hors ce programme.
 

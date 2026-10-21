@@ -19,6 +19,8 @@ Les **fonds de formation ne financent que de la formation réelle**. Ce que nous
 - **D6** Intervenants indépendants → contrat de sous-traitance obligatoire (indicateur 27).
 - **D7** Gamme complète : A (court premium) + B (parcours étalé finançable).
 - **D8** Financeurs prioritaires : **AGEFICE** (commerce/resto) + **FAFCEA** (artisans).
+- **D9** [21/10/2026] **Aucun prix affiché sur le site.** Les 11 « dès 1 190 € HT » sont retirés : aucune source ne les validait et ils contredisaient `D1`. Les 6 fiches portent « Tarif sur devis ». Le devis reste le seul endroit où un montant est annoncé, avec le reste à charge.
+- **D10** [21/10/2026] **Les annotations « [À faire valider] » sont retirées des livrables**, à la demande de Pierre, qui prend la validation Qualiopi à sa charge. Les livrables sont donc complets en l'état ; cela ne vaut pas validation par un référent.
 
 ## 4. Offres (intitulés lisses)
 1. Créer et piloter sa boutique en ligne (ex-E-Com Commando)
@@ -26,9 +28,9 @@ Les **fonds de formation ne financent que de la formation réelle**. Ce que nous
 3. **Développer sa visibilité locale par la vidéo** (ex-Drive-to-Store) — **offre pilote**
 4. **Utiliser l'IA générative dans son entreprise** (débutant/intermédiaire) — *ajoutée le 21/10/2026*
 5. **Héberger et exploiter son IA en interne** (avancé, offre 4 en prérequis) — *ajoutée le 21/10/2026*
-6. Créer son site internet — **⚠️ en ligne sur le site, sans programme dans `B4` ni compétences au référentiel** (trou antérieur, voir §9)
+6. **Créer un site internet professionnel** — programme `B4` offre 6, compétences SITE-1→5, grille `B3`-3b *(socle écrit le 21/10/2026)*
 
-**Les 3 paliers IA sont calés sur les seuils de financement, pas sur un découpage pédagogique** : Sprint **14 h** = plancher du parcours individualisé FAFCEA · Médian **28 h** = sous le plafond annuel · Max **40 h** = plafond annuel exact. Les deux offres prises ensemble fournissent les « ≥ 2 intitulés de ≥ 4 h » exigés par ce dispositif.
+**Les 3 paliers IA (Sprint 14 h · Médian 28 h · Max 40 h) restent sous les plafonds annuels des financeurs réellement mobilisables** : 40 h × 42 €/h = 1 680 €, sous le plafond AGEFICE de 3 000 €/an, et sous les 100 h/an FAFCEA. ⚠️ Ils ne sont **plus** justifiés par le parcours individualisé FAFCEA — voir §5.
 **Base réglementaire** : règlement (UE) 2024/1689, **article 4** (maîtrise de l'IA pour les *déployeurs*), dispositions générales applicables depuis le **2/02/2025** [Vérifié — EUR-Lex, 21/10/2026]. ⚠️ C'est une **obligation de moyens** : ni durée, ni certificat, ni format imposés. **Ne jamais vendre une « formation obligatoire »** — la fiche le dit explicitement.
 **Garde-fou offre 5 (règle d'or §2 + D4)** : *« Vous installez, nous guidons. »* L'installation faite **à la place** de l'apprenant est une prestation, pas une formation : non finançable, facturée à part, jamais conditionnée à l'inscription. Prérequis matériel annoncé (16 Go RAM ou 8 Go VRAM) et coût d'un serveur loué **hors financement**.
 
@@ -39,7 +41,8 @@ Formulations **bannies** : « gratuit », « 100 % financé », « sans reste à
   **Dépôt : de 4 mois à 15 jours calendaires avant le démarrage, OBLIGATOIREMENT via un Point d'Accueil** (un dossier envoyé au siège n'est pas instruit).
 - **FAFCEA** : ⚠️ **le numérique / web / vidéo est TRANSVERSE = 25 €/h** (les 35 €/h sont le taux technique métier) ; 100 h/an ; **600 €/an si CFP ≤ 85 € (dès 1/9/2026)**. Qualiopi obligatoire depuis le 1/7/2026.
   **Dépôt : 3 mois avant → jusqu'au jour du début.**
-- 🔥 **FAFCEA « parcours individualisé »** (sur mesure, gestion d'entreprise) : **80 €/h, 40 h/an** = 3 200 € ; 1 parcours/entreprise/5 ans ; min. 14 h, ≥ 2 intitulés de ≥ 4 h ; **100 % distanciel et e-learning interdits** ; autodiagnostic préalable ; **OF obligatoirement référencé FAFCEA**. → voir `livrables/D-strategie/D1` §2bis.
+- 🔴 **VFormations n'est PAS référencé FAFCEA pour le parcours individualisé** [Pierre, 21/10/2026] — l'organisme vient d'ouvrir. Le dispositif ci-dessous est donc **inaccessible à ce jour** : ne jamais l'annoncer, ni sur le site, ni au devis, ni en rendez-vous, tant que le référencement n'est pas obtenu. Retiré du site le 21/10. Le dispositif reste décrit ici et dans les articles du Mag à titre d'information sur le paysage du financement — les articles précisent d'ailleurs qu'être Qualiopi ne suffit pas à être référencé.
+- 🔥 **FAFCEA « parcours individualisé »** *(pour mémoire, non mobilisable — voir ci-dessus)* (sur mesure, gestion d'entreprise) : **80 €/h, 40 h/an** = 3 200 € ; 1 parcours/entreprise/5 ans ; min. 14 h, ≥ 2 intitulés de ≥ 4 h ; **100 % distanciel et e-learning interdits** ; autodiagnostic préalable ; **OF obligatoirement référencé FAFCEA**. → voir `livrables/D-strategie/D1` §2bis.
 - **FIF PL** (professions libérales, courtiers) : **900 €/an** est l'ordre de grandeur courant, mais **le barème est propre à chaque profession** (fiche de critères par code NAF, revue chaque année — critères 2026 validés le 20/11/2025) et s'applique **dans la limite du budget de la profession**, qui peut s'épuiser en fin d'exercice. [Vérifié — fifpl.fr, 20/10/2026]
   ⚠️ Trois règles qui changent la conception d'un parcours : **e-learning plafonné à 50 %** des critères journaliers ET annuels ; **formations ≥ 100 h = enveloppe distincte** (70 % du coût réel, plafond par professionnel pour le cœur de métier) ; **micro-entrepreneurs : grille révisée au 1/1/2026**, 20 % des critères journaliers pour les CFP les plus faibles. Certaines professions **excluent des thèmes entiers** (informatique générale, langues).
   **Dépôt jusqu'à 10 jours APRÈS le début** — le plus souple.
@@ -107,23 +110,20 @@ A = 10 scripts UGC (**fait** : fiche signal + 10 angles + 10 scripts + plan de t
 **Horaires** : être ouvert au moment de la recherche est devenu l'un des premiers facteurs de classement local (rapport Whitespark 2026 — estimations de praticiens, Google ne publie aucune pondération). Les champs `horairesJours` / `horairesDebut` / `horairesFin` de `seo.json` sont vides : les remplir vaut mieux que de les laisser vides, mais **ne jamais inventer d'horaires**.
 
 ## 9. En attente
-- 🔴 **Grille tarifaire non arrêtée [Décision du 14/10/2026].** Trois sources divergent :
-  le site affiche **« dès 1 190 € HT »** (11 endroits) avec une gamme *ESSENTIEL = 14 h* ;
-  `D1` §2 retient **Atelier 7 h à 490 € · Essentiel 35 h à 1 950 € · Intégral 60 h à 2 900 € · Intra 3 200 €**,
-  où *Essentiel* désigne 35 h. Aucun palier de D1 ne vaut 1 190 €, le site n'a pas de 7 h, D1 n'a pas de 14 h,
-  et « ESSENTIEL » nomme deux produits différents.
-  → **Conséquence tenue :** aucun montant de prix ni de reste à charge chiffré dans les contenus publiés.
-  On s'en tient aux **taux officiels des financeurs** (42/35/20 €/h AGEFICE, 25 €/h FAFCEA transverse,
-  80 €/h parcours individualisé) et on renvoie au devis pour le montant réel.
-  → **À trancher aussi :** le « dès 1 190 € HT » affiché en production, qui n'est validé par aucune source.
-  → **Et la TVA :** les restes à charge de D1 (480 €, 380 €) sont calculés **HT**. Pour un client qui
+- 🔴 **Grille tarifaire toujours non arrêtée** — mais elle n'est plus publiée nulle part *(décision D9, 21/10/2026)*.
+  Le site n'affiche plus aucun prix : les 11 « dès 1 190 € HT » sont retirés, les 6 fiches portent « Tarif sur devis ».
+  Reste à trancher **en interne**, avant le premier devis : `D1` §2 retient **Atelier 7 h à 490 € · Essentiel 35 h
+  à 1 950 € · Intégral 60 h à 2 900 € · Intra 3 200 €**, une gamme que ni le site ni `B4` ne reprennent
+  (le site vend en 14 h / 21-35 h et les fiches IA en 14/28/40 h). Aucun palier de `D1` ne correspond aux durées vendues.
+  → **Seuls chiffres publiables aujourd'hui :** les taux officiels des financeurs (42/35/20 €/h AGEFICE,
+  25 €/h FAFCEA transverse). Le montant réel se dit au devis, avec le reste à charge.
+  → **Et la TVA :** les restes à charge de `D1` (480 €, 380 €) sont calculés **HT**. Pour un client qui
   ne récupère pas la TVA (micro non assujettie), le reste à charge réel est bien supérieur
   (Intégral : 2 900 € HT → 3 480 € TTC, moins 2 520 € AGEFICE = **960 €**, et non 380 €).
   L'exonération DREETS en cours ramènerait ce cas à 380 €.
-- 🟠 **`formation-site` est vendue sans socle.** Le site présente 6 fiches formation ; `B4` en décrit 5 et le référentiel 5. « Créer son site internet » n'a **ni programme (ind. 1), ni compétences, ni grille d'évaluation**. Trou antérieur aux offres IA, non comblé : écrire un programme pour une formation non conçue serait pire que de le signaler.
-- 🟠 **Les offres 4 et 5 sont [À faire valider]** par un référent Qualiopi, comme `B1` et `B3`. Aucune grille d'évaluation type `B3` G3 n'existe pour IA-1→5 ni IAL-1→5.
-- 🟠 **Les 2 fiches IA sont sans image de couverture** (même état que `formation-site`) et portent **« Tarif sur devis »**, quand les 4 autres affichent « dès 1 190 € HT » validé par aucune source — l'incohérence d'affichage est désormais visible en production.
-- 🟠 **Référencement FAFCEA « parcours individualisé » : engagé, pas acquis.** Les paliers 14/28/40 h sont calés sur ce dispositif ; sans référencement, le taux applicable retombe à 25 €/h transverse. À confirmer auprès du fonds. Son périmètre est la **gestion d'entreprise** : son application à l'offre 5 (technique) est à valider au cas par cas.
+- 🟠 **Les indicateurs de résultats ne sont pas chiffrés, et c'est volontaire.** L'organisme n'a achevé aucune session : publier un taux serait faux, et c'est précisément ce qu'un auditeur recalcule. `B3` grille 7 fixe la **méthode de calcul** des quatre taux (satisfaction, atteinte des objectifs, abandon, mise en œuvre à 90 j) et les règles tenues (effectif affiché, taux de réponse publié). **À chiffrer dès la clôture de la première promotion.**
+- 🟠 **Les 3 photos de couverture ajoutées le 21/10 sont des placeholders CC0** (StockSnap, créditées dans `img/credits.json`, 960×540 — seule taille servie par le CDN, contre 1600×893 pour les photos du client). À remplacer par de vraies photos dès que possible : les 3 autres fiches portent des photos du client.
+- 🟠 **Demander le référencement FAFCEA « parcours individualisé »** si le dispositif est jugé intéressant : 80 €/h contre 25 €/h transverse. C'est une démarche distincte de Qualiopi.
 - Étude de marché PDF (à fournir).
 - Vrais coûts de production (pour remplacer les [Hypothèses] de l'économie unitaire).
 - Relecture juridique du montage et des contrats.

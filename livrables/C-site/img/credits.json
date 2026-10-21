@@ -5,6 +5,22 @@
   "formation-prospection":  { "src": "client", "lic": "propriete VFORMATIONS", "note": "photo fournie par le client" },
   "formation-video":        { "src": "client", "lic": "propriete VFORMATIONS", "note": "photo fournie par le client" },
 
+  "formation-site": {
+    "src": "stocksnap", "lic": "cc0-1.0", "titre": "Man Work", "auteur": "Burst",
+    "url": "https://stocksnap.io/photo/man-work-DZ7DC58DSV",
+    "note": "placeholder CC0, 960x540 (seule taille servie par le CDN) — a remplacer par une photo du client"
+  },
+  "formation-ia-usage": {
+    "src": "stocksnap", "lic": "cc0-1.0", "titre": "Diverse Workplace", "auteur": "Direct Media",
+    "url": "https://stocksnap.io/photo/diverse-workplace-UJ1P4WLT4N",
+    "note": "placeholder CC0, 960x540 — a remplacer par une photo du client"
+  },
+  "formation-ia-locale": {
+    "src": "stocksnap", "lic": "cc0-1.0", "titre": "Computer Ram", "auteur": "Charlie Belvin Designs",
+    "url": "https://stocksnap.io/photo/computer-ram-52KJ8KZGWY",
+    "note": "placeholder CC0, 960x540 — a remplacer par une photo du client"
+  },
+
   "mag-clients-locaux":     { "src": "client", "lic": "propriete VFORMATIONS", "note": "photo fournie par le client" },
   "mag-filmer-smartphone":  { "src": "client", "lic": "propriete VFORMATIONS", "note": "photo fournie par le client" },
   "mag-financement":        { "src": "client", "lic": "propriete VFORMATIONS", "note": "photo fournie par le client" },
