@@ -8,7 +8,7 @@
   "format": "Face caméra + carnet",
   "duree": "60 s",
   "conscience": "2 → 3",
-  "note": 95,
+  "note": 90,
   "temps": [
    [
     "Accroche",
@@ -37,7 +37,8 @@
    ]
   ],
   "conformite": "Enseigne à MESURER, pas à obtenir. Aucun chiffre de résultat. Deux limites de la méthode dites explicitement.",
-  "source": "Compétence C6 proposée · B3 grille G5 (question posée à 90 j sans avoir été enseignée)"
+  "source": "Compétence C6 proposée · B3 grille G5 (question posée à 90 j sans avoir été enseignée)",
+  "specificite": "La question « comment nous avez-vous connus ? » est un conseil classique qu'un concurrent pourrait publier. Reste propre : les deux limites dites explicitement, et le rattachement à la compétence C6."
  },
  {
   "id": "T02",
@@ -48,7 +49,7 @@
   "format": "Voix-off + écran",
   "duree": "55 s",
   "conscience": "2 → 3",
-  "note": 92,
+  "note": 83,
   "temps": [
    [
     "Accroche",
@@ -77,7 +78,8 @@
    ]
   ],
   "conformite": "Aucune promesse de vente. Le seuil de 100 est un repère de méthode, pas un résultat annoncé.",
-  "source": "art-premiere-vente-en-ligne.html · B4 offre 1"
+  "source": "art-premiere-vente-en-ligne.html · B4 offre 1",
+  "specificite": "L'ordre trafic, confiance, friction est un conseil e-commerce public. Seuls le seuil et l'image de la devanture le distinguent."
  },
  {
   "id": "T03",
@@ -88,7 +90,7 @@
   "format": "Démonstration écran",
   "duree": "50 s",
   "conscience": "2 → 3",
-  "note": 90,
+  "note": 82,
   "temps": [
    [
     "Accroche",
@@ -117,7 +119,8 @@
    ]
   ],
   "conformite": "Aucune promesse de conversion chiffrée. L'exception (métiers invisibles) rend le conseil utilisable.",
-  "source": "art-site-artisan.html · B4 offre site internet"
+  "source": "art-site-artisan.html · B4 offre site internet",
+  "specificite": "Conseil de conception de site d'artisan répandu. L'exception des métiers dont le travail ne se voit pas est la partie propre."
  },
  {
   "id": "T04",
@@ -128,7 +131,7 @@
   "format": "Démonstration téléphone",
   "duree": "50 s",
   "conscience": "2 → 3",
-  "note": 88,
+  "note": 80,
   "temps": [
    [
     "Accroche",
@@ -157,7 +160,8 @@
    ]
   ],
   "conformite": "Geste technique pur. Aucune promesse. Le don est complet : faisable ce soir.",
-  "source": "art-montage-smartphone.html · B1 séquence 4 (C3)"
+  "source": "art-montage-smartphone.html · B1 séquence 4 (C3)",
+  "specificite": "Cinq opérations de montage : n'importe quel formateur vidéo pourrait le publier. Le sous-titrage corrigé à la main est la seule nuance propre."
  },
  {
   "id": "T05",
@@ -168,7 +172,7 @@
   "format": "Démonstration téléphone",
   "duree": "45 s",
   "conscience": "3 → 4",
-  "note": 89,
+  "note": 81,
   "temps": [
    [
     "Accroche",
@@ -197,7 +201,8 @@
    ]
   ],
   "conformite": "Pur technique. Un seul terme (résolution), expliqué par ses effets. L'exception nommée.",
-  "source": "art-montage-smartphone.html · B1 séquence 2 (C2)"
+  "source": "art-montage-smartphone.html · B1 séquence 2 (C2)",
+  "specificite": "Conseil technique public. L'exception du recadrage en post-production le sauve en partie."
  },
  {
   "id": "T06",
@@ -208,7 +213,7 @@
   "format": "Face caméra + écran",
   "duree": "55 s",
   "conscience": "2 → 3",
-  "note": 93,
+  "note": 87,
   "temps": [
    [
     "Accroche",
@@ -237,7 +242,8 @@
    ]
   ],
   "conformite": "Enseigne à mesurer. Le quatrième indicateur est explicitement dit non quantifiable — aveu de limite.",
-  "source": "art-rythme-publication.html · B1 séquence 6 (C5)"
+  "source": "art-rythme-publication.html · B1 séquence 6 (C5)",
+  "specificite": "Les quatre indicateurs sont un conseil local courant. Reste propre : l'aveu que le quatrième ne se compte pas, et le renvoi aux données réelles."
  },
  {
   "id": "T07",
@@ -408,7 +414,7 @@
   "format": "Démonstration comptoir",
   "duree": "50 s",
   "conscience": "2 → 3",
-  "note": 90,
+  "note": 86,
   "temps": [
    [
     "Accroche",
@@ -437,7 +443,8 @@
    ]
   ],
   "conformite": "⚠️ Corrige explicitement la mécanique du manuel élève (module 2), non conforme. Aucune promesse de note.",
-  "source": "Manuel élève module 2 (à corriger) · art-avis-google.html"
+  "source": "Manuel élève module 2 (à corriger) · art-avis-google.html",
+  "specificite": "Le support NFC est public. La correction de la phrase conditionnelle est la partie propre : elle suppose de savoir ce que certains organismes enseignent."
  },
  {
   "id": "T12",
@@ -448,7 +455,7 @@
   "format": "Démonstration téléphone",
   "duree": "45 s",
   "conscience": "2 → 3",
-  "note": 87,
+  "note": 79,
   "temps": [
    [
     "Accroche",
@@ -477,7 +484,8 @@
    ]
   ],
   "conformite": "Geste pur. Aucune promesse. Le don est complet.",
-  "source": "Manuel élève module 3 · B1 séquence 5 (C4)"
+  "source": "Manuel élève module 3 · B1 séquence 5 (C4)",
+  "specificite": "Structure de bio en trois lignes : conseil réseaux sociaux courant, tout concurrent pourrait le publier."
  },
  {
   "id": "T13",
@@ -488,7 +496,7 @@
   "format": "Démonstration audio",
   "duree": "45 s",
   "conscience": "2 → 3",
-  "note": 89,
+  "note": 81,
   "temps": [
    [
     "Accroche",
@@ -517,7 +525,8 @@
    ]
   ],
   "conformite": "Technique pure. Le gratuit cité porte sur un geste, pas sur la formation.",
-  "source": "Manuel élève module 5 · B1 séquence 2 (C2)"
+  "source": "Manuel élève module 5 · B1 séquence 2 (C2)",
+  "specificite": "Conseil audio répandu. L'exception des lieux qui résonnent est la partie propre."
  },
  {
   "id": "T14",

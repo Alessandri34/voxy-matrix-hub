@@ -24,8 +24,9 @@
 | Arc complet en 5 temps | ✅ 14 / 14 |
 | Action exécutable nommée (R1) | ✅ 14 / 14 — **1 corrigée** (T08 concluait sans rien donner à faire) |
 | Durée dans le créneau 45-60 s | ✅ 14 / 14 |
+| Test de spécificité (remplacer VFormations par un concurrent) | ⚠️ **6 scripts le passent mal** (T02, T03, T04, T05, T12, T13), 3 le passent en partie (T01, T06, T11). Notes abaissées. **Ce test n'avait pas été passé à la première livraison.** |
 
-**Note moyenne : 91,3 / 100.** Contrôle par `controle-scripts.py`, étendu de
+**Note moyenne : 86,7 / 100** (91,3 avant le test de spécificité). Contrôle par `controle-scripts.py`, étendu de
 deux règles propres à ce lot.
 
 ⚠️ **L'exactitude factuelle n'a pas eu de relecture indépendante.** Les
@@ -505,7 +506,7 @@ maison — elle est juste noyée sous le vocabulaire de la domination.
 
 ## 📝 T01 — Savoir d'où viennent vos clients, sans aucun outil
 
-**Axe :** D'où viennent vos clients · **Persona :** Tous · **Format :** Face caméra + carnet · **Durée :** 60 s · **Niveau de conscience :** 2 → 3 · **Note :** 95/100
+**Axe :** D'où viennent vos clients · **Persona :** Tous · **Format :** Face caméra + carnet · **Durée :** 60 s · **Niveau de conscience :** 2 → 3 · **Note :** 90/100
 **Angle :** La compétence C6 manquante
 
 | Temps | Ce qui est dit | Ce qui est vu |
@@ -518,12 +519,14 @@ maison — elle est juste noyée sous le vocabulaire de la domination.
 
 **Conformité :** Enseigne à MESURER, pas à obtenir. Aucun chiffre de résultat. Deux limites de la méthode dites explicitement.
 
+**⚠️ Spécificité :** La question « comment nous avez-vous connus ? » est un conseil classique qu'un concurrent pourrait publier. Reste propre : les deux limites dites explicitement, et le rattachement à la compétence C6.
+
 **Source :** Compétence C6 proposée · B3 grille G5 (question posée à 90 j sans avoir été enseignée)
 
 
 ## 📝 T02 — Une boutique qui ne vend pas, dans quel ordre regarder
 
-**Axe :** L'ordre des opérations · **Persona :** Thomas · **Format :** Voix-off + écran · **Durée :** 55 s · **Niveau de conscience :** 2 → 3 · **Note :** 92/100
+**Axe :** L'ordre des opérations · **Persona :** Thomas · **Format :** Voix-off + écran · **Durée :** 55 s · **Niveau de conscience :** 2 → 3 · **Note :** 83/100
 **Angle :** L'erreur d'ordre
 
 | Temps | Ce qui est dit | Ce qui est vu |
@@ -536,12 +539,14 @@ maison — elle est juste noyée sous le vocabulaire de la domination.
 
 **Conformité :** Aucune promesse de vente. Le seuil de 100 est un repère de méthode, pas un résultat annoncé.
 
+**⚠️ Spécificité :** L'ordre trafic, confiance, friction est un conseil e-commerce public. Seuls le seuil et l'image de la devanture le distinguent.
+
 **Source :** art-premiere-vente-en-ligne.html · B4 offre 1
 
 
 ## 📝 T03 — La page qui convertit n'est pas celle que vous croyez
 
-**Axe :** Être vu ≠ être choisi · **Persona :** Karim · **Format :** Démonstration écran · **Durée :** 50 s · **Niveau de conscience :** 2 → 3 · **Note :** 90/100
+**Axe :** Être vu ≠ être choisi · **Persona :** Karim · **Format :** Démonstration écran · **Durée :** 50 s · **Niveau de conscience :** 2 → 3 · **Note :** 82/100
 **Angle :** Écart audience / décision
 
 | Temps | Ce qui est dit | Ce qui est vu |
@@ -554,12 +559,14 @@ maison — elle est juste noyée sous le vocabulaire de la domination.
 
 **Conformité :** Aucune promesse de conversion chiffrée. L'exception (métiers invisibles) rend le conseil utilisable.
 
+**⚠️ Spécificité :** Conseil de conception de site d'artisan répandu. L'exception des métiers dont le travail ne se voit pas est la partie propre.
+
 **Source :** art-site-artisan.html · B4 offre site internet
 
 
 ## 📝 T04 — Cinq opérations suffisent à monter une vidéo
 
-**Axe :** Le geste technique · **Persona :** Léa · **Format :** Démonstration téléphone · **Durée :** 50 s · **Niveau de conscience :** 2 → 3 · **Note :** 88/100
+**Axe :** Le geste technique · **Persona :** Léa · **Format :** Démonstration téléphone · **Durée :** 50 s · **Niveau de conscience :** 2 → 3 · **Note :** 80/100
 **Angle :** Geste enseigné en session
 
 | Temps | Ce qui est dit | Ce qui est vu |
@@ -572,12 +579,14 @@ maison — elle est juste noyée sous le vocabulaire de la domination.
 
 **Conformité :** Geste technique pur. Aucune promesse. Le don est complet : faisable ce soir.
 
+**⚠️ Spécificité :** Cinq opérations de montage : n'importe quel formateur vidéo pourrait le publier. Le sous-titrage corrigé à la main est la seule nuance propre.
+
 **Source :** art-montage-smartphone.html · B1 séquence 4 (C3)
 
 
 ## 📝 T05 — Pourquoi filmer en 4K vous dessert
 
-**Axe :** Le geste technique · **Persona :** Karim · **Format :** Démonstration téléphone · **Durée :** 45 s · **Niveau de conscience :** 3 → 4 · **Note :** 89/100
+**Axe :** Le geste technique · **Persona :** Karim · **Format :** Démonstration téléphone · **Durée :** 45 s · **Niveau de conscience :** 3 → 4 · **Note :** 81/100
 **Angle :** Précision technique contre-intuitive
 
 | Temps | Ce qui est dit | Ce qui est vu |
@@ -590,12 +599,14 @@ maison — elle est juste noyée sous le vocabulaire de la domination.
 
 **Conformité :** Pur technique. Un seul terme (résolution), expliqué par ses effets. L'exception nommée.
 
+**⚠️ Spécificité :** Conseil technique public. L'exception du recadrage en post-production le sauve en partie.
+
 **Source :** art-montage-smartphone.html · B1 séquence 2 (C2)
 
 
 ## 📝 T06 — Le chiffre que vous regardez ne veut rien dire
 
-**Axe :** L'indicateur qui veut dire quelque chose · **Persona :** Sophie · **Format :** Face caméra + écran · **Durée :** 55 s · **Niveau de conscience :** 2 → 3 · **Note :** 93/100
+**Axe :** L'indicateur qui veut dire quelque chose · **Persona :** Sophie · **Format :** Face caméra + écran · **Durée :** 55 s · **Niveau de conscience :** 2 → 3 · **Note :** 87/100
 **Angle :** C5 corrigée par C6
 
 | Temps | Ce qui est dit | Ce qui est vu |
@@ -607,6 +618,8 @@ maison — elle est juste noyée sous le vocabulaire de la domination.
 | **Sortie** | Regardez dans votre fiche d'établissement combien d'appels sont partis de là ce mois-ci. C'est votre vrai chiffre. | *Bandeau : VFormations — organisme certifié Qualiopi* |
 
 **Conformité :** Enseigne à mesurer. Le quatrième indicateur est explicitement dit non quantifiable — aveu de limite.
+
+**⚠️ Spécificité :** Les quatre indicateurs sont un conseil local courant. Reste propre : l'aveu que le quatrième ne se compte pas, et le renvoi aux données réelles.
 
 **Source :** art-rythme-publication.html · B1 séquence 6 (C5)
 
@@ -685,7 +698,7 @@ maison — elle est juste noyée sous le vocabulaire de la domination.
 
 ## 📝 T11 — La plaque sans fil qui simplifie les avis
 
-**Axe :** Le geste technique · **Persona :** Sophie · **Format :** Démonstration comptoir · **Durée :** 50 s · **Niveau de conscience :** 2 → 3 · **Note :** 90/100
+**Axe :** Le geste technique · **Persona :** Sophie · **Format :** Démonstration comptoir · **Durée :** 50 s · **Niveau de conscience :** 2 → 3 · **Note :** 86/100
 **Angle :** Support NFC, sans le conditionnement
 
 | Temps | Ce qui est dit | Ce qui est vu |
@@ -698,12 +711,14 @@ maison — elle est juste noyée sous le vocabulaire de la domination.
 
 **Conformité :** ⚠️ Corrige explicitement la mécanique du manuel élève (module 2), non conforme. Aucune promesse de note.
 
+**⚠️ Spécificité :** Le support NFC est public. La correction de la phrase conditionnelle est la partie propre : elle suppose de savoir ce que certains organismes enseignent.
+
 **Source :** Manuel élève module 2 (à corriger) · art-avis-google.html
 
 
 ## 📝 T12 — Votre bio tient en trois lignes
 
-**Axe :** Le geste technique · **Persona :** Léa · **Format :** Démonstration téléphone · **Durée :** 45 s · **Niveau de conscience :** 2 → 3 · **Note :** 87/100
+**Axe :** Le geste technique · **Persona :** Léa · **Format :** Démonstration téléphone · **Durée :** 45 s · **Niveau de conscience :** 2 → 3 · **Note :** 79/100
 **Angle :** Geste enseigné, immédiat
 
 | Temps | Ce qui est dit | Ce qui est vu |
@@ -716,12 +731,14 @@ maison — elle est juste noyée sous le vocabulaire de la domination.
 
 **Conformité :** Geste pur. Aucune promesse. Le don est complet.
 
+**⚠️ Spécificité :** Structure de bio en trois lignes : conseil réseaux sociaux courant, tout concurrent pourrait le publier.
+
 **Source :** Manuel élève module 3 · B1 séquence 5 (C4)
 
 
 ## 📝 T13 — Le son décide avant l'image
 
-**Axe :** Le geste technique · **Persona :** Sophie · **Format :** Démonstration audio · **Durée :** 45 s · **Niveau de conscience :** 2 → 3 · **Note :** 89/100
+**Axe :** Le geste technique · **Persona :** Sophie · **Format :** Démonstration audio · **Durée :** 45 s · **Niveau de conscience :** 2 → 3 · **Note :** 81/100
 **Angle :** Priorité technique contre-intuitive
 
 | Temps | Ce qui est dit | Ce qui est vu |
@@ -733,6 +750,8 @@ maison — elle est juste noyée sous le vocabulaire de la domination.
 | **Sortie** | Enregistrez dix secondes dans votre local, écoutez au casque. Vous saurez en dix secondes lequel des trois gestes vous concerne. | *Bandeau : VFormations — organisme certifié Qualiopi* |
 
 **Conformité :** Technique pure. Le gratuit cité porte sur un geste, pas sur la formation.
+
+**⚠️ Spécificité :** Conseil audio répandu. L'exception des lieux qui résonnent est la partie propre.
 
 **Source :** Manuel élève module 5 · B1 séquence 2 (C2)
 
