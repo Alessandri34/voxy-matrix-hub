@@ -133,14 +133,9 @@ section.sec{padding-block:var(--section-y);}
 .ncard .media{aspect-ratio:16/9;width:100%;}
 .ncard .media.a{background:linear-gradient(135deg,#3a4a52,#5a6a5a);}
 .ncard .media.b{background:linear-gradient(135deg,#324056,#4a5a7a);}
-.ncard.dark{background:var(--charcoal);color:#fff;}
-.ncard.dark .media{background:linear-gradient(135deg,#1f2a30,#2e3b42);display:grid;place-items:center;}
-.ncard.dark .media svg{width:clamp(44px,8vw,64px);height:clamp(44px,8vw,64px);color:rgba(255,255,255,.5);}
 .ncard .nbody{padding:var(--card-pad);display:flex;flex-direction:column;gap:.5rem;}
 .ncard .ntag{font-family:'Poppins',sans-serif;font-weight:500;font-size:var(--fs-xs);letter-spacing:.06em;text-transform:uppercase;color:var(--wine);}
-.ncard.dark .ntag{color:var(--orange);}
 .ncard h3{font-size:var(--fs-h3);font-weight:500;}
-.ncard.dark h3{color:#fff;}
 
 /* Domaines */
 .domaines{background:var(--green);border-radius:var(--r-lg);padding:var(--box-pad);position:relative;overflow:hidden;}
@@ -168,18 +163,12 @@ section.sec{padding-block:var(--section-y);}
 .fcard{background:#fff;border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;box-shadow:0 14px 40px rgba(0,0,0,.25);}
 .fcard.lite{box-shadow:var(--sh-sm);border:1px solid var(--line);}
 .fcard .media{aspect-ratio:16/8;display:grid;place-items:center;}
-.fcard .media.m1{background:linear-gradient(135deg,#263238,#3a4a52);}
-.fcard .media.m2{background:linear-gradient(135deg,#1A3C86,#3a63c4);}
-.fcard .media.m3{background:linear-gradient(135deg,#0E4A3B,#1a6a54);}
-.fcard .media.m4{background:linear-gradient(135deg,#4C122A,#7a2a48);}
-.fcard .media svg{width:clamp(42px,7vw,52px);height:clamp(42px,7vw,52px);color:rgba(255,255,255,.9);}
 .fcard img.media{display:block;width:100%;height:auto;object-fit:cover;}
 .fcard .fb{padding:var(--card-pad);padding-bottom:0;flex:1;display:flex;flex-direction:column;gap:.5rem;}
 .fcard h3{font-size:var(--fs-h3);font-weight:500;}
 .fcard .subt{color:var(--muted);font-size:var(--fs-sm);}
 .fcard .rate{display:flex;align-items:center;gap:.5rem;font-size:var(--fs-sm);color:var(--muted);}
 .fcard .rate .st{color:var(--stars);letter-spacing:1px;}
-.fcard .tagline{font-size:.82rem;font-weight:600;color:var(--plum);letter-spacing:.02em;}
 .legal .tablewrap{overflow-x:auto;margin:1rem 0 1.4rem;border:1px solid var(--line);border-radius:10px;}
 .legal table.ltab{border-collapse:collapse;width:100%;font-size:.92rem;min-width:520px;}
 .legal table.ltab th,.legal table.ltab td{text-align:left;padding:.7rem .9rem;border-bottom:1px solid var(--line);vertical-align:top;}
@@ -820,8 +809,8 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
           <div class="ff"><a class="btn btn-wine" href="#formation-video">Voir la formation</a><div class="price">Sur devis<small>finançable</small></div></div>
         </article>
         <article class="fcard lite" data-cat="web">
-          <div class="media m2"><svg fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 8h20"/></svg></div>
-          <div class="fb"><h3>Créer un site internet professionnel</h3><div class="subt">Concevoir, mettre en ligne et piloter un site qui amène des clients.</div><div class="tagline">Offre pilote</div><div class="dur"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg> 14 h à 35 h · présentiel</div></div>
+          <img class="media" src="img/formation-site.jpg" alt="Vue de dessus d'un poste de travail : un ordinateur portable affichant la mise en page d'un site, un carnet et un stylo" width="960" height="540" loading="lazy" decoding="async">
+          <div class="fb"><h3>Créer un site internet professionnel</h3><div class="subt">Concevoir, mettre en ligne et piloter un site qui amène des clients.</div><div class="dur"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg> 14 h à 35 h · présentiel</div></div>
           <div class="ff"><a class="btn btn-wine" href="#formation-site">Voir la formation</a><div class="price">Sur devis<small>finançable</small></div></div>
         </article>
         <article class="fcard lite" data-cat="web">
@@ -835,10 +824,12 @@ table.tbl th{font-family:'Poppins',sans-serif;font-weight:500;color:var(--plum);
           <div class="ff"><a class="btn btn-wine" href="#formation-prospection">Voir la formation</a><div class="price">Sur devis<small>finançable</small></div></div>
         </article>
         <article class="fcard lite" data-cat="ia">
+          <img class="media" src="img/formation-ia-usage.jpg" alt="Trois personnes travaillant autour d'un ordinateur portable pendant une séance de formation en petit groupe" width="960" height="540" loading="lazy" decoding="async">
           <div class="fb"><h3>Utiliser l'IA générative dans son entreprise</h3><div class="subt">Formuler, construire ses modèles, encadrer l'usage — sur vos tâches réelles.</div><div class="dur"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg> 14 h · 28 h · 40 h · présentiel</div></div>
           <div class="ff"><a class="btn btn-wine" href="#formation-ia-usage">Voir la formation</a><div class="price">Sur devis<small>finançable</small></div></div>
         </article>
         <article class="fcard lite" data-cat="ia">
+          <img class="media" src="img/formation-ia-locale.jpg" alt="Gros plan sur des barrettes de mémoire vive installées sur une carte mère" width="960" height="540" loading="lazy" decoding="async">
           <div class="fb"><h3>Héberger et exploiter son IA en interne</h3><div class="subt">Installer un modèle ouvert sur votre matériel et le connecter à vos documents.</div><div class="dur"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg> 14 h · 28 h · 40 h · avancé</div></div>
           <div class="ff"><a class="btn btn-wine" href="#formation-ia-locale">Voir la formation</a><div class="price">Sur devis<small>finançable</small></div></div>
         </article>
