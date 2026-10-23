@@ -53,7 +53,7 @@ Formulations **bannies** : « gratuit », « 100 % financé », « sans reste à
 ## 6. Livrables (branche `claude/new-session-nefcch`)
 > **Tout est consolidé dans `livrables/`** (dossier indépendant, voir `livrables/README.md`).
 - `livrables/00-cadrage/` : `00_cadrage.md`
-- `livrables/A-marketing/` : `A0_Marche_et_Personas.md` · `A_scripts_ugc.md` · `A_scripts_ugc_v2.md`
+- `livrables/A-marketing/` : `A0_Marche_et_Personas.md` · `A2_Contenu_Valeur_MOFU.md` · `A3_Veille_Publicitaire.md` · `A4_Leviers_Revenus.md` · **`A5_Structure_Retention.md`** · `A_scripts_ugc.md` · `A_scripts_ugc_v2.md` · `controle-scripts.py`
 - `livrables/B-socle/` : `B_pilotage.md` · `B1_Programme_AFEST_Visibilite_Locale.md` · `B2_Modele_Contrat_Sous_Traitance.md` · `B3_Grilles_Pedagogiques.md` · `B4_Programmes_Commercialisables_Qualiopi.md` · `Referentiel_Competences_Qualiopi.md`
 - `livrables/C-site/` : `C_architecture_site.md` · `site.html` (source) · `pages.json` + `build.mjs` (génération des 31 vraies URL) · `seo.json` (clé IndexNow, jetons de vérification) · `INDEXATION.md` · `SEO_strategie.md` · `INFOS_A_FOURNIR.md` · `api/contact.php` · `formulaire/` · `img/` · `apercus/`
   > **Le site en production est généré, pas copié.** `site.html` reste la source unique ; `node build.mjs` en produit `dist/` (31 pages autonomes + `sitemap.xml` + `robots.txt`). Ne jamais déployer `site.html` tel quel : il n'expose qu'une URL pour 31 pages. `dist/` est hors Git.
@@ -85,6 +85,8 @@ A = 10 scripts UGC (**fait** : fiche signal + 10 angles + 10 scripts + plan de t
 - Méthode créa intégrée (guide Agence Short) : *signal → 10 angles (5 persona / 5 douleur) → scripts voix-off+b-roll*, hook TAV, awareness TOFU/MOFU/BOFU, 1 vidéo = 1 format × 1 angle × 1 persona.
 - 5 personas localisés : Karim (artisan BTP/FAFCEA), Sophie (resto/AGEFICE), Léa (salon/AGEFICE), Véronique (PME/OPCO), Thomas (créateur).
 - Garde-fous pub = contraintes légales formation (pas de « gratuit/100 % financé », pas de résultat garanti, cible 100 % pro, mention Publicité si créateur rémunéré).
+- **Structure de rétention [23/10/2026 — `A5`]** : l'arc en 5 temps dit *ce qui est transmis*, il ne disait pas *pourquoi le spectateur reste*. Tout script porte désormais **deux boucles décalées** : B s'ouvre avant que A se referme, et **A se referme au temps 4 (la nuance), jamais au temps 3**. Les 30 scripts de `A2` et `A4` sont repris ; `controle-scripts.py` le vérifie (règles L1-L3) et refuse « restez jusqu'à la fin ».
+- ❌ **Appât à commentaire automatisé (ManyChat & co) : refusé.** Recommandé par le guide Orcalynx au motif qu'il *« trompe l'algorithme »*. Même catégorie que les backlinks automatiques (§6bis) : Meta démote l'appât à engagement, le risque porte sur le compte qui finance les ADS, et collecter des contacts par message privé automatisé pose un problème de base légale RGPD pour un organisme de formation.
 
 ## 8. Conventions
 - Langue : français. Sources datées, classées [Vérifié] / [À vérifier] / [Hypothèse].
@@ -183,6 +185,7 @@ Plus le n° de certificat **VFO12912026001** et le certificateur **evolve** (1 r
 - 🟠 **Remplacer `img/qualiopi.png` par le fichier du kit remis par *evolve*** (meilleure définition) et **recouper la forme exacte de la mention** avec la charte graphique du kit. Voir §8sexies.
 - 🔴 **Trancher « AFAQ ISO »** : retiré du site le 21/10 faute de preuve. Si la certification existe, dire laquelle et par qui ; sinon, ne pas la remettre.
 - 🟠 **Demander le référencement FAFCEA « parcours individualisé »** si le dispositif est jugé intéressant : 80 €/h contre 25 €/h transverse. C'est une démarche distincte de Qualiopi.
+- 🟠 **Tester la structure de rétention** : 6 Reels, 3 en boucle unique / 3 en boucles décalées, même sujet et même format. Relever la rétention **à 15 s et à 40 s**, pas les vues. Protocole dans `A5` §6. ⚠️ Six vidéos ne font pas un test statistique — faisceau d'indices, jamais un résultat à publier.
 - Étude de marché PDF (à fournir).
 - Vrais coûts de production (pour remplacer les [Hypothèses] de l'économie unitaire).
 - Relecture juridique du montage et des contrats.

@@ -3,7 +3,10 @@
 import json, re, sys, unicodedata
 from collections import Counter
 
-S = json.load(open('scripts.json', encoding='utf8'))
+# Le chemin etait code en dur sur un fichier qui n'existe pas sous ce nom :
+# le controleur ne tournait que si on renommait le lot a la main.
+FICHIER = sys.argv[1] if len(sys.argv) > 1 else 'A2_scripts.json'
+S = json.load(open(FICHIER, encoding='utf8'))
 
 def plat(t):
     return unicodedata.normalize('NFD', t.lower()).encode('ascii','ignore').decode()
@@ -42,7 +45,7 @@ for s in S:
             err.append(f'{ref} promesse de resultat : /{p}/')
 
     # 3. Montants en euros hors taux de financeur
-    for m in re.finditer(r'([\d\s ]{1,7})\s*euros?\b', tout):
+    for m in re.finditer(r'(\d[\d\s ]{0,6})\s*euros?\b', tout):
         v = m.group(1).strip()
         if v not in TAUX_OK:
             warn.append(f'{ref} montant a verifier : « {v} euros »')
@@ -66,12 +69,46 @@ for s in S:
     if not any(a in plat(tout) for a in actions):
         warn.append(f'{ref} aucune action executable nommee — verifier R1')
 
-    # 7. Duree dans le creneau etabli
+    # 7. Boucles de retention (A5). L'arc en 5 temps dit ce qui est transmis,
+    #    il ne disait pas pourquoi le spectateur reste. Une boucle A refermee
+    #    en transmission laisse ~30 s sans question en cours : c'est la zone
+    #    ou un Reel se perd.
+    b = s.get('boucles')
+    if not b:
+        err.append(f'{ref} aucune boucle declaree — voir A5')
+    else:
+        cles = {x.get('id') for x in b}
+        if cles != {'A', 'B'}:
+            err.append(f'{ref} il faut exactement deux boucles A et B, trouve : {sorted(cles)}')
+        for x in b:
+            ouv, fer = x.get('ouvre'), x.get('ferme')
+            # L3 : toute boucle ouverte se referme dans la video
+            if not fer:
+                err.append(f'{ref} boucle {x.get("id")} ouverte et jamais refermee')
+                continue
+            if ouv not in attendu or fer not in attendu:
+                err.append(f'{ref} boucle {x.get("id")} : temps inconnu ({ouv} -> {fer})')
+                continue
+            if attendu.index(fer) < attendu.index(ouv):
+                err.append(f'{ref} boucle {x.get("id")} se referme avant de s\'ouvrir')
+            # L2 : A tient jusqu'a la nuance, sinon le trou revient
+            if x.get('id') == 'A' and fer not in ('Nuance', 'Sortie'):
+                err.append(f'{ref} boucle A refermee en « {fer} » — doit tenir jusqu\'a Nuance (A5 L2)')
+            if x.get('id') == 'B' and ouv != 'Transmission':
+                warn.append(f'{ref} boucle B ouverte en « {ouv} » — attendue en Transmission')
+
+    # 8. L'annonce de la manoeuvre remplace la boucle au lieu de la porter
+    for m in ['restez jusqu', 'reste jusqu', 'regardez jusqu', 'jusqu\'a la fin',
+              'attendez la fin', 'la suite a la fin']:
+        if m in bas:
+            err.append(f'{ref} annonce de manoeuvre : « {m} » (A5 §3)')
+
+    # 9. Duree dans le creneau etabli
     d = int(re.sub(r'\D','',s['duree']))
     if d < 40 or d > 95:
         warn.append(f'{ref} duree hors creneau : {s["duree"]}')
 
-print(f'{len(S)} scripts contrôlés\n')
+print(f'{len(S)} scripts contrôlés — {FICHIER}\n')
 print('— ERREURS BLOQUANTES —')
 print('\n'.join('  ✗ '+e for e in err) if err else '  aucune ✓')
 print('\n— POINTS À VÉRIFIER —')

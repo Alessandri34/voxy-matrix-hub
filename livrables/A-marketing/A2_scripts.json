@@ -1,645 +1,869 @@
 [
- {
-  "id": "V01",
-  "titre": "Le taux que votre organisme ne vérifie pas",
-  "cat": "Le chiffre qu'on vous cache",
-  "persona": "Karim",
-  "angle": "Taux transverse 25 vs 35 €/h",
-  "format": "Voix-off + écran partagé",
-  "duree": "50 s",
-  "conscience": "2 → 3",
-  "note": 92,
-  "temps": [
-   [
-    "Accroche",
-    "Il y a une question à poser à votre organisme de formation, et presque personne ne la pose.",
-    "Plan serré sur un devis de formation, le doigt qui s'arrête sur une ligne"
-   ],
-   [
-    "Ancrage",
-    "Si vous êtes artisan et que vous préparez une formation au web ou à la vidéo, votre dossier part à la FAFCEA. Et la FAFCEA n'a pas un taux, elle en a deux.",
-    "Logo FAFCEA à l'écran, deux colonnes qui apparaissent"
-   ],
-   [
-    "Transmission",
-    "Le taux technique métier, c'est celui du geste professionnel : les matériaux, les normes, votre cœur d'activité. Le taux transverse, c'est la gestion, la bureautique, le numérique, la communication. Une formation vidéo, même si vous filmez votre propre chantier, relève du transverse. Vingt-cinq euros de l'heure, pas trente-cinq. Donc la question à poser, mot pour mot : « sous quel taux déposez-vous cette formation, technique ou transverse ? »",
-    "Les deux colonnes se remplissent : 35 €/h technique · 25 €/h transverse. Le curseur glisse vers transverse"
-   ],
-   [
-    "Nuance",
-    "Et voilà ce qui rend l'erreur si facile à faire : elle est de bonne foi. Un maçon qui apprend à filmer ses chantiers associe naturellement le contenu de ses vidéos à son métier. C'est logique, et c'est faux. Sur trente-cinq heures, l'écart fait trois cent cinquante euros — et il sort de votre poche, pas de celle de l'organisme.",
-    "Un maçon lisse un joint, puis le même plan filmé au téléphone"
-   ],
-   [
-    "Sortie",
-    "Posez la question. Un organisme qui ne sait pas répondre vous apprend quelque chose.",
-    "Bandeau : VFormations — organisme certifié Qualiopi"
-   ]
-  ],
-  "conformite": "Aucun prix de formation. Taux de financeur uniquement, issus des PDF officiels. Aucun résultat promis.",
-  "source": "CLAUDE.md §5 · art-fafcea-transverse.html"
- },
- {
-  "id": "V02",
-  "titre": "Votre reste à charge est-il HT ou TTC ?",
-  "cat": "Le chiffre qu'on vous cache",
-  "persona": "Thomas",
-  "angle": "Reste à charge TVA comprise",
-  "format": "Face caméra + incrustation",
-  "duree": "55 s",
-  "conscience": "2 → 3",
-  "note": 90,
-  "temps": [
-   [
-    "Accroche",
-    "Il y a une question de trois mots qui peut faire doubler votre reste à charge, et on ne vous la posera pas.",
-    "Face caméra, posé, pas de musique"
-   ],
-   [
-    "Ancrage",
-    "Si vous êtes en micro-entreprise et que vous ne récupérez pas la TVA, ce paragraphe vous concerne directement.",
-    "Incrustation : « franchise en base de TVA »"
-   ],
-   [
-    "Transmission",
-    "Les organismes annoncent leurs prix hors taxes. Les fonds de formation remboursent sur une base hors taxes. Mais vous, si vous ne récupérez pas la TVA, vous payez le toutes taxes comprises. Le fonds rembourse sur le petit montant, vous réglez le grand. L'écart reste à votre charge, et il ne figure sur aucun devis. La question à poser, mot pour mot : « le reste à charge que vous m'annoncez, est-il hors taxes ou toutes taxes comprises ? »",
-    "Deux montants côte à côte à l'écran : HT et TTC, l'écart surligné"
-   ],
-   [
-    "Nuance",
-    "Et il y a un cas où la question ne se pose plus : certaines actions de formation sont exonérées de TVA quand l'organisme détient l'attestation correspondante. Demandez où il en est. S'il est en cours d'obtention, il doit vous le dire comme ça — en cours, pas obtenue.",
-    "Un document administratif, cadrage neutre"
-   ],
-   [
-    "Sortie",
-    "Posez ces deux questions avant de signer quoi que ce soit. Elles ne coûtent rien à poser.",
-    "Bandeau : VFormations — organisme certifié Qualiopi"
-   ]
-  ],
-  "conformite": "Aucun prix. Mécanisme expliqué sans chiffrer l'offre. Formulation « en cours, pas obtenue » reprise telle quelle du dépôt.",
-  "source": "CLAUDE.md §9 · D1 §10 · art-reste-a-charge.html"
- },
- {
-  "id": "V03",
-  "titre": "Le dispositif à 80 €/h dont personne ne parle",
-  "cat": "Le chiffre qu'on vous cache",
-  "persona": "Karim",
-  "angle": "Parcours individualisé FAFCEA — zéro résultat en ligne",
-  "format": "Voix-off + écran",
-  "duree": "60 s",
-  "conscience": "2 → 3",
-  "note": 94,
-  "temps": [
-   [
-    "Accroche",
-    "Il existe un dispositif de financement pour les artisans à quatre-vingts euros de l'heure. Cherchez-le sur internet : vous ne trouverez presque rien.",
-    "Barre de recherche vide, curseur qui clignote"
-   ],
-   [
-    "Ancrage",
-    "C'est le parcours individualisé de la FAFCEA. Il est réservé aux chefs d'entreprise artisanale, et c'est le dispositif le plus généreux auquel vous ayez accès.",
-    "Logo FAFCEA, chiffre 80 €/h qui apparaît"
-   ],
-   [
-    "Transmission",
-    "Quarante heures par an, à quatre-vingts euros de l'heure. Un parcours par entreprise tous les cinq ans. Et des conditions strictes : quatorze heures minimum, au moins deux intitulés d'au moins quatre heures chacun, un autodiagnostic préalable, et surtout le cent pour cent distanciel est interdit. L'organisme doit aussi être référencé auprès de la FAFCEA — ce n'est pas la même chose qu'être certifié Qualiopi.",
-    "Les conditions s'empilent à l'écran, une par une"
-   ],
-   [
-    "Nuance",
-    "Et c'est précisément pour ça qu'il est invisible. Ces contraintes le rendent inexploitable par un vendeur de formation en ligne : pas de distanciel, pas de e-learning, un parcours tous les cinq ans. Donc personne n'a intérêt à en parler. Nous-mêmes, notre référencement FAFCEA sur ce dispositif est engagé, pas acquis — et tant qu'il ne l'est pas, nous ne pouvons pas le mobiliser.",
-    "Plan sur un atelier d'artisan, lumière naturelle"
-   ],
-   [
-    "Sortie",
-    "Si vous êtes artisan, demandez-le à votre Point d'Accueil. Le pire qu'il puisse arriver, c'est qu'on vous dise non.",
-    "Bandeau : VFormations — organisme certifié Qualiopi"
-   ]
-  ],
-  "conformite": "Aveu de limite explicite sur notre propre référencement — formulation reprise du dépôt. Aucun prix, aucune promesse.",
-  "source": "CLAUDE.md §5 · art-fafcea-transverse.html · D1 §2bis"
- },
- {
-  "id": "V04",
-  "titre": "Les prestations que votre fiche ne déclare pas",
-  "cat": "Le geste",
-  "persona": "Léa",
-  "angle": "Services prédéfinis — poids en forte hausse",
-  "format": "Démonstration écran",
-  "duree": "45 s",
-  "conscience": "2 → 3",
-  "note": 82,
-  "temps": [
-   [
-    "Accroche",
-    "Quelqu'un cherche un balayage à cinquante mètres de votre salon. Et il ne vous trouve pas.",
-    "Téléphone qui tape « balayage » + nom de ville"
-   ],
-   [
-    "Ancrage",
-    "Pas parce que votre fiche est mauvaise. Parce qu'il y a une liste que presque personne ne remplit.",
-    "Fiche Google à l'écran, section Services vide"
-   ],
-   [
-    "Transmission",
-    "Dans votre fiche d'établissement, Google propose une liste de services à cocher, selon votre catégorie. Leur poids a nettement augmenté en 2026. Et la plupart des fiches les laissent vides. Or quelqu'un qui cherche un balayage, un lissage, une coupe enfant ou une coloration végétale ne tape pas « coiffeur » : il tape sa prestation. Si elle n'est pas déclarée, vous n'existez pas pour cette recherche. Listez vos dix prestations les plus demandées, et cochez-les une par une. Vingt minutes, une fois.",
-    "Les cases se cochent à l'écran, une par une"
-   ],
-   [
-    "Nuance",
-    "Et faites l'inverse aussi : décochez ce que vous ne faites pas. Une prestation annoncée puis refusée au téléphone coûte un client et un avis. Le second fait plus de dégâts que le premier.",
-    "Un téléphone qui sonne dans un salon, quelqu'un décroche"
-   ],
-   [
-    "Sortie",
-    "Ouvrez votre fiche et regardez la section Services. Elle est vide, non ?",
-    "Bandeau : VFormations — organisme certifié Qualiopi"
-   ]
-  ],
-  "conformite": "Aucune promesse de position. « Nettement augmenté » sans pourcentage — l'instrument ne publie que des scores bruts.",
-  "source": "art-local-pack.html · art-salon-coiffure.html · CLAUDE.md §8quater",
-  "specificite": "Une agence de référencement local pourrait publier ce script. La liste de prestations propre au salon et la nuance sur le décochage le sauvent partiellement."
- },
- {
-  "id": "V05",
-  "titre": "Vingt minutes pour savoir pourquoi il passe devant",
-  "cat": "Le geste",
-  "persona": "Tous",
-  "angle": "Rétro-ingénierie sans outil (compatible AFEST)",
-  "format": "Écran partagé, deux fiches",
-  "duree": "55 s",
-  "conscience": "2 → 3",
-  "note": 84,
-  "temps": [
-   [
-    "Accroche",
-    "Votre concurrent fait un travail moins bon que le vôtre, et c'est lui qui sort en premier. Voici comment savoir pourquoi, sans acheter aucun outil.",
-    "Deux fiches Google côte à côte à l'écran"
-   ],
-   [
-    "Ancrage",
-    "Tout ce dont vous avez besoin est public. Ouvrez sa fiche et la vôtre, côte à côte.",
-    "Deux onglets qui s'ouvrent"
-   ],
-   [
-    "Transmission",
-    "Huit points à relever, dans cet ordre. Sa catégorie principale, mot pour mot — elle est visible sous son nom. Ses catégories secondaires. Les services qu'il a cochés. Son nombre d'avis, sa note, et la date du plus récent. Le nombre d'avis auxquels il a répondu. La date de ses dernières photos. Ses horaires, et s'il a renseigné les jours exceptionnels. Et s'il a des pages qui parlent de votre zone. Notez les huit pour lui, les huit pour vous.",
-    "Un tableau à deux colonnes se remplit, ligne par ligne"
-   ],
-   [
-    "Nuance",
-    "Dans neuf cas sur dix, l'écart saute aux yeux dès la première ou la deuxième ligne. Et parfois il n'y a aucun écart : c'est simplement qu'il est plus près du point de recherche que vous. Ça, vous n'y pouvez rien — et savoir que vous n'y pouvez rien vous évite de dépenser de l'argent sur le mauvais problème.",
-    "Une carte, deux épingles à distance différente"
-   ],
-   [
-    "Sortie",
-    "Faites le relevé avant de payer qui que ce soit pour vous l'expliquer.",
-    "Bandeau : VFormations — organisme certifié Qualiopi"
-   ]
-  ],
-  "conformite": "Aveu de limite sur la distance, facteur non actionnable. Exercice réalisable seul — le don est complet.",
-  "source": "art-concurrent-mieux-classe.html · rapport Whitespark 2026 (scores bruts)",
-  "specificite": "Le relevé en 8 points est transposable par n'importe quel concurrent. Ce qui reste nôtre : l'aveu que la distance n'est pas actionnable."
- },
- {
-  "id": "V06",
-  "titre": "Combien de vidéos par semaine, le vrai chiffre",
-  "cat": "Le mythe démonté",
-  "persona": "Sophie",
-  "angle": "Coût réel en temps, mesuré",
-  "format": "Face caméra",
-  "duree": "55 s",
-  "conscience": "2 → 3",
-  "note": 89,
-  "temps": [
-   [
-    "Accroche",
-    "Voilà le rythme qui tient pour un patron de TPE : une vidéo par semaine. Et je vais vous dire pourquoi, avant de vous dire pourquoi ce n'est pas ce qu'on vous conseille.",
-    "Face caméra, calme, pas de musique"
-   ],
-   [
-    "Ancrage",
-    "Une vidéo par semaine, ça fait cinquante dans l'année. Et surtout, ça se tient en période chargée — ce qui est le seul critère qui compte.",
-    "Un calendrier, les semaines qui se cochent"
-   ],
-   [
-    "Transmission",
-    "Chiffrez d'abord le coût réel. Pas le tournage : le total. Trouver le sujet, c'est souvent l'étape la plus longue et celle qu'on oublie de compter. Tourner. Monter. Publier et répondre. Pour quelqu'un qui débute, comptez trente à soixante minutes par vidéo, tout compris. Multipliez par le rythme envisagé, regardez le total hebdomadaire, et posez-vous une question : ce créneau existe-t-il dans ma semaine, ou est-ce que je viens de l'inventer ? S'il faut le prendre sur le service du midi, il n'existe pas.",
-    "Un chronomètre qui tourne, quatre étapes qui s'additionnent"
-   ],
-   [
-    "Nuance",
-    "Et l'erreur que je vois toutes les semaines, c'est de viser sept par semaine. Pas parce que c'est faux dans l'absolu — parce que ça décrit le métier de quelqu'un dont la journée entière y est consacrée. La courbe est toujours la même : enthousiasme deux semaines, tension la troisième, abandon la cinquième. Et un compte abandonné raconte qu'une activité s'est arrêtée.",
-    "Un compte figé, « dernière publication il y a cinq mois »"
-   ],
-   [
-    "Sortie",
-    "Deux par semaine tenues six mois battent sept par semaine abandonnées au bout de trois. Choisissez le rythme que vous tiendrez en novembre.",
-    "Bandeau : VFormations — organisme certifié Qualiopi"
-   ]
-  ],
-  "conformite": "Geste correct annoncé AVANT l'erreur (littérature sur la charge mentale). Chiffre de temps, pas de résultat.",
-  "source": "art-rythme-publication.html"
- },
- {
-  "id": "V07",
-  "titre": "Filmer son chantier, ce n'est pas faire l'influenceur",
-  "cat": "Le mythe démonté",
-  "persona": "Karim",
-  "angle": "Mythe d'identité (M12)",
-  "format": "Voix-off + B-roll chantier",
-  "duree": "50 s",
-  "conscience": "1 → 2",
-  "note": 93,
-  "temps": [
-   [
-    "Accroche",
-    "« Les réseaux, c'est pas pour moi. » Je l'entends chaque semaine, et le problème n'est jamais technique.",
-    "Un artisan range ses outils, regarde son téléphone, le repose"
-   ],
-   [
-    "Ancrage",
-    "Derrière cette phrase il y a une image : celle du type qui se filme en voiture pour raconter sa vie. Si c'est ça que vous imaginez, évidemment que ce n'est pas pour vous.",
-    "Plan d'un chantier propre, lumière du matin"
-   ],
-   [
-    "Transmission",
-    "Mais filmer son travail n'a rien à voir. Vous ne racontez pas votre vie, vous montrez un geste. Un raccord propre. Une soudure. Une pièce avant, une pièce après. Vous n'avez pas besoin d'apparaître à l'écran : les mains et le travail suffisent, et c'est même souvent mieux. Pas de musique, pas de danse, pas de blague. Trente secondes sur un geste que vous faites tous les jours et que personne n'a jamais vu de près.",
-    "Mains qui travaillent, plan serré, aucun visage"
-   ],
-   [
-    "Nuance",
-    "Et voilà le piège de l'expertise : ce que vous trouvez banal est exactement ce qui retient l'attention. Vous l'avez vu dix mille fois. Lui, jamais. Ce qui vous paraît trop évident pour être filmé est précisément ce qu'il faut filmer.",
-    "Un détail technique en gros plan, main qui désigne"
-   ],
-   [
-    "Sortie",
-    "La prochaine fois que vous faites un geste propre, posez le téléphone contre quelque chose et filmez-le. Vous jugerez après.",
-    "Bandeau : VFormations — organisme certifié Qualiopi"
-   ]
-  ],
-  "conformite": "Aucune promesse. Traite l'objection identitaire, pas technique — c'est le vrai blocage de ce persona.",
-  "source": "A0 §3 (Karim) · art-quoi-filmer.html · mécanique M12"
- },
- {
-  "id": "V08",
-  "titre": "Faut-il mettre son adresse sur sa fiche ?",
-  "cat": "La question qu'on me pose tout le temps",
-  "persona": "Tous",
-  "angle": "Arbre de décision par type d'activité (M3)",
-  "format": "Démonstration écran",
-  "duree": "50 s",
-  "conscience": "2 → 3",
-  "note": 83,
-  "temps": [
-   [
-    "Accroche",
-    "« Je travaille de chez moi. Est-ce que je dois mettre mon adresse personnelle sur Google ? » Non. Et il y a un réglage fait pour ça.",
-    "Une fiche Google à l'écran, champ adresse surligné"
-   ],
-   [
-    "Ancrage",
-    "La réponse dépend d'une seule chose : est-ce que des clients viennent chez vous, ou est-ce vous qui allez chez eux ?",
-    "Deux pictogrammes : une porte, une camionnette"
-   ],
-   [
-    "Transmission",
-    "Trois cas, et un seul vous concerne. Un : vous recevez du public — commerce, restaurant, salon, cabinet. Vous affichez l'adresse. Deux : vous vous déplacez — artisan, dépanneur, prestataire mobile. Vous déclarez des zones desservies, communes ou rayon, et vous masquez l'adresse. Trois : vous faites les deux — boutique et livraison. Vous affichez l'adresse et vous ajoutez une zone desservie.",
-    "Trois branches qui se déploient à l'écran, une se surligne"
-   ],
-   [
-    "Nuance",
-    "Et il faut dire ce que ça coûte : déclarer une zone plutôt qu'une adresse est moins efficace pour le classement. C'est un vrai arbitrage, pas un truc gratuit. Mais une adresse affichée à tort génère des visites perdues, des demandes de correction, et peut faire suspendre la fiche. Entre un léger désavantage et une fiche qui saute, le choix est vite fait.",
-    "Une carte avec un rayon qui se dessine autour d'une zone"
-   ],
-   [
-    "Sortie",
-    "Ouvrez votre fiche, regardez dans quel cas vous êtes, et corrigez si besoin.",
-    "Bandeau : VFormations — organisme certifié Qualiopi"
-   ]
-  ],
-  "conformite": "Aveu de limite explicite (« moins efficace »). Arbitrage honnête, pas de solution magique.",
-  "source": "art-nap.html · BACKLINKS.md §0 · mécanique M3",
-  "specificite": "L'arbre de décision est public et déjà publié ailleurs. Notre apport est l'arbitrage chiffré du coût de la zone desservie."
- },
- {
-  "id": "V09",
-  "titre": "Pourquoi vos vues ne veulent plus rien dire",
-  "cat": "Le comparatif qui tranche",
-  "persona": "Sophie",
-  "angle": "Démontage sourcé des chiffres qui circulent",
-  "format": "Voix-off + écran",
-  "duree": "60 s",
-  "conscience": "3 → 3",
-  "note": 91,
-  "temps": [
-   [
-    "Accroche",
-    "Vos vues ont peut-être explosé cette année sans que personne ne regarde davantage vos vidéos. Voici pourquoi.",
-    "Un compteur de vues qui défile vite"
-   ],
-   [
-    "Ancrage",
-    "Les plateformes ont changé la définition du mot « vue ». Pas la façon de compter : la définition.",
-    "Un dictionnaire, le mot « vue » surligné"
-   ],
-   [
-    "Transmission",
-    "Depuis le 31 mars 2025, YouTube compte une vue dès que la vidéo démarre, sans durée minimale. L'ancienne mesure existe toujours, elle s'appelle maintenant les vues engagées. Instagram, de son côté, a remplacé les impressions par les vues en 2026. Résultat : les trois plateformes appellent « vue » trois choses différentes. Tout tableau qui compare les vues moyennes entre Reels, TikTok et Shorts compare des unités qui n'ont rien à voir.",
-    "Trois colonnes avec trois définitions différentes"
-   ],
-   [
-    "Nuance",
-    "Et c'est là que ça devient intéressant. Vous allez lire partout que la durée d'attention s'est effondrée de soixante-sept pour cent sur les Shorts. C'est un chiffre mesuré — mais la comparaison traverse le changement de définition, et le dénominateur s'est rempli de vues d'une seconde qui n'étaient pas comptées avant. L'éditeur de l'étude le dit lui-même. Ce n'est pas forcément une dégradation de l'attention.",
-    "Un graphique qui chute, puis une ligne pointillée qui marque la date du changement"
-   ],
-   [
-    "Sortie",
-    "La prochaine fois qu'on vous cite un chiffre de vues, demandez de quelle année il date et comment la vue était comptée.",
-    "Bandeau : VFormations — organisme certifié Qualiopi"
-   ]
-  ],
-  "conformite": "Chiffres sourcés et datés, avec leur limite d'interprétation. Aucune promesse. Angle libre I.",
-  "source": "Page d'aide YouTube · Metricool 2026 · Socialinsider (méthodologie)"
- },
- {
-  "id": "V10",
-  "titre": "Trois financeurs, trois calendriers, un seul piège",
-  "cat": "La fenêtre qui se ferme",
-  "persona": "Sophie",
-  "angle": "Délais de dépôt comme outil de décision",
-  "format": "Voix-off + écran",
-  "duree": "55 s",
-  "conscience": "2 → 3",
-  "note": 90,
-  "temps": [
-   [
-    "Accroche",
-    "Si vous changez de statut, vous changez de financeur — et son calendrier n'a rien à voir avec celui que vous connaissiez.",
-    "Trois calendriers côte à côte, trois fenêtres de couleurs différentes"
-   ],
-   [
-    "Ancrage",
-    "Avant de poser une date de formation, regardez la fenêtre de dépôt du fonds dont vous relevez. Elles vont du simple au triple.",
-    "Un doigt qui glisse le long d'une frise"
-   ],
-   [
-    "Transmission",
-    "Trois repères. L'AGEFICE : de quatre mois à quinze jours calendaires avant le démarrage, et obligatoirement via un Point d'Accueil — un dossier envoyé au siège n'est pas instruit. La FAFCEA : de trois mois avant jusqu'au jour du début. Le FIF PL : jusqu'à dix jours après le début, le plus souple des trois. Calendaires veut dire week-ends et jours fériés compris : quinze jours calendaires en période de fêtes, c'est très peu de jours utiles.",
-    "Les trois fenêtres se dessinent sur une frise, largeurs très différentes"
-   ],
-   [
-    "Nuance",
-    "Et la différence entre les deux types de refus est juridique. Un plafond déjà consommé, c'est un décalage de calendrier : vos droits se rechargent l'année suivante, et répartir un parcours sur deux exercices est tout à fait régulier. Un délai dépassé, lui, ne se conteste pas — ce n'est pas un refus motivé, la demande est simplement hors de la période d'examen. Il n'y a rien à contester.",
-    "Deux chemins qui divergent, l'un continue, l'autre s'arrête net"
-   ],
-   [
-    "Sortie",
-    "Appelez votre Point d'Accueil avant de caler une date, pas après.",
-    "Bandeau : VFormations — organisme certifié Qualiopi"
-   ]
-  ],
-  "conformite": "Règles officielles uniquement, aucun montant d'offre. Distinction juridique issue du dépôt.",
-  "source": "CLAUDE.md §5 · art-delais-financement.html · art-refus-prise-en-charge.html"
- },
- {
-  "id": "V11",
-  "titre": "Deux rappels dans votre téléphone, deux fois par an",
-  "cat": "L'erreur que je vois toutes les semaines",
-  "persona": "Sophie",
-  "angle": "Horaires saisonniers · littoral héraultais",
-  "format": "Voix-off + B-roll littoral",
-  "duree": "50 s",
-  "conscience": "2 → 3",
-  "note": 88,
-  "temps": [
-   [
-    "Accroche",
-    "Posez deux rappels dans votre téléphone maintenant : un en mai, un en septembre. « Mettre à jour les horaires de la fiche. » C'est cinq minutes, deux fois par an.",
-    "Un téléphone, deux rappels qui se créent"
-   ],
-   [
-    "Ancrage",
-    "Sur le littoral, de Palavas à Valras, votre amplitude change deux fois dans l'année. Votre fiche, elle, ne change pas toute seule.",
-    "Une terrasse pleine en été, la même vide en novembre"
-   ],
-   [
-    "Transmission",
-    "Renseignez les horaires exacts, pas approximatifs. Ajoutez les horaires exceptionnels : 14 juillet, 15 août, fermeture annuelle, fête locale. Pourquoi c'est devenu important : être ouvert au moment où quelqu'un cherche figure désormais parmi les cinq premiers facteurs de classement local, d'après le rapport Whitespark 2026. Google privilégie l'établissement où la personne peut aller maintenant.",
-    "Un champ horaires qui se remplit, jour par jour"
-   ],
-   [
-    "Nuance",
-    "Deux précautions. D'abord, ce sont des estimations de praticiens : Google n'a jamais publié de pondération, et les pourcentages qui circulent sont des traductions divergentes d'un même classement. Ensuite, ne touchez pas au nom, à l'adresse ou à la catégorie principale en pleine saison : ces trois-là déclenchent une revérification qui peut faire disparaître votre fiche le temps du contrôle, jusqu'à trois semaines.",
-    "Un sablier, une fiche qui disparaît puis revient"
-   ],
-   [
-    "Sortie",
-    "Les horaires, eux, passent librement. Commencez par là.",
-    "Bandeau : VFormations — organisme certifié Qualiopi"
-   ]
-  ],
-  "conformite": "Source nommée ET qualifiée (estimations de praticiens). Refus explicite de citer un pourcentage.",
-  "source": "art-saison-littoral.html · art-modifier-fiche-google.html · Whitespark 2026"
- },
- {
-  "id": "V12",
-  "titre": "Le nom qui fait sauter votre fiche",
-  "cat": "L'erreur que je vois toutes les semaines",
-  "persona": "Karim",
-  "angle": "Sanction nommée (M7)",
-  "format": "Démonstration écran",
-  "duree": "45 s",
-  "conscience": "3 → 4",
-  "note": 87,
-  "temps": [
-   [
-    "Accroche",
-    "Votre nom d'établissement sur Google, c'est le nom de votre entreprise. Rien d'autre.",
-    "Un champ « Nom » à l'écran, curseur qui clignote"
-   ],
-   [
-    "Ancrage",
-    "Je dis ça parce que la tentation est forte, et parce qu'elle marche — c'est bien ça le problème.",
-    "Une fiche concurrente avec un nom à rallonge"
-   ],
-   [
-    "Transmission",
-    "« Dupont Plomberie Montpellier Dépannage Urgent » : ça améliore réellement le classement. Les mots-clés dans le nom restent un avantage mesuré. La plupart des contenus vous diront que non, c'est faux. Mais c'est aussi la première cause de suspension de fiche, et Google serre la vis dessus d'année en année. Une fiche suspendue, c'est l'actif que vous aviez mis des mois à construire qui disparaît du jour au lendemain.",
-    "Le nom à rallonge, puis la fiche qui disparaît"
-   ],
-   [
-    "Nuance",
-    "L'arbitrage honnête, c'est celui-là : le gain est réel, le risque aussi, et le gain ne vaut pas la fiche. Pour le dire autrement — vous jouez quelques places contre la totalité de votre visibilité locale. Et si vous avez déjà un nom bourré de mots-clés, ne le corrigez pas en pleine saison : le changement de nom déclenche une revérification qui peut durer jusqu'à trois semaines.",
-    "Une balance, deux plateaux très inégaux"
-   ],
-   [
-    "Sortie",
-    "Regardez le nom de votre fiche. S'il contient votre ville ou votre métier en plus de votre raison sociale, vous savez quoi faire.",
-    "Bandeau : VFormations — organisme certifié Qualiopi"
-   ]
-  ],
-  "conformite": "Admet l'avantage au lieu de le nier — c'est ce qui rend l'arbitrage crédible. Aucune promesse.",
-  "source": "art-nap.html · art-modifier-fiche-google.html · BACKLINKS.md §5"
- },
- {
-  "id": "V13",
-  "titre": "Le fil local de TikTok est arrivé en France",
-  "cat": "Le décryptage de règle",
-  "persona": "Sophie",
-  "angle": "Nearby Feed — seule découverte géographique documentée",
-  "format": "Voix-off + captures",
-  "duree": "50 s",
-  "conscience": "3 → 4",
-  "note": 89,
-  "temps": [
-   [
-    "Accroche",
-    "Depuis le 4 décembre 2025, TikTok a un fil qui classe les vidéos selon l'endroit où vous êtes. En France.",
-    "Un onglet qui apparaît dans l'interface, portant un nom de ville"
-   ],
-   [
-    "Ancrage",
-    "C'est nouveau, et c'est le seul mécanisme de découverte géographique documenté officiellement sur les trois grandes plateformes de vidéo courte.",
-    "Une carte de l'Hérault, des épingles qui s'allument"
-   ],
-   [
-    "Transmission",
-    "TikTok l'annonce lui-même : les publications du fil local sont montrées en fonction de la localisation, du sujet du contenu, et du moment où il a été publié. Trois conséquences concrètes. Un : votre compte doit être public — un compte privé n'y entre pas. Deux : taguez un lieu ou un service, c'est ce qui conditionne l'entrée dans le fil. Trois : la fraîcheur est un critère déclaré, donc publier régulièrement compte réellement ici, ce qui n'est pas vrai partout.",
-    "Les trois conditions s'affichent, puis se cochent"
-   ],
-   [
-    "Nuance",
-    "Et voilà ce que ça ne fera pas pour vous. En dessous de cinq mille abonnés, TikTok plafonne autour de trois cent cinquante vues en moyenne — en dessous d'Instagram. TikTok annonce par ailleurs que quarante-six pour cent de ses utilisateurs britanniques ont visité un commerce local vu sur la plateforme : c'est un chiffre de la plateforme sur son propre produit, non audité, et au Royaume-Uni, pas en France. À traiter comme un test, pas comme un canal principal.",
-    "Un graphique modeste, honnête"
-   ],
-   [
-    "Sortie",
-    "Si vous êtes sur TikTok, passez votre compte en public et taguez votre commune sur la prochaine vidéo.",
-    "Bandeau : VFormations — organisme certifié Qualiopi"
-   ]
-  ],
-  "conformite": "Chiffre de plateforme cité AVEC sa limite (non audité, UK). Aveu de limite sur la portée réelle.",
-  "source": "Billet officiel TikTok 04/12/2025 · Socialinsider (vues par tranche)"
- },
- {
-  "id": "V14",
-  "titre": "J'ouvre une vraie fiche et je dis ce qui ne va pas",
-  "cat": "L'audit à voix haute",
-  "persona": "Tous",
-  "angle": "Format vacant en francophone",
-  "format": "Partage d'écran commenté",
-  "duree": "90 s",
-  "conscience": "2 → 3",
-  "note": 92,
-  "temps": [
-   [
-    "Accroche",
-    "Voici la fiche d'un commerce de Montpellier, avec son accord. En trois minutes, je vous montre ce que je regarde en premier.",
-    "Une fiche à l'écran, nom et photos floutés"
-   ],
-   [
-    "Ancrage",
-    "Ce n'est pas une fiche ratée. C'est une fiche normale — et c'est exactement pour ça qu'elle est intéressante.",
-    "Vue d'ensemble de la fiche, rien d'alarmant"
-   ],
-   [
-    "Transmission",
-    "Un : la catégorie principale. Elle est là, sous le nom. Je la compare à celle des trois concurrents mieux classés — même activité, catégorie différente. Premier écart. Deux : les services. Section vide. Zéro prestation déclarée, alors que le commerce en propose une dizaine. Deuxième écart, et c'est le plus rentable à corriger. Trois : les horaires. Pas d'horaires exceptionnels, et on est à trois semaines d'un jour férié. Quatre : les avis. Vingt-huit avis, mais le dernier date de onze mois, et aucun n'a de réponse.",
-    "Le curseur se déplace, chaque point se surligne au fur et à mesure"
-   ],
-   [
-    "Nuance",
-    "Et maintenant ce que je ne peux pas dire. Je ne sais pas si corriger ces quatre points le fera monter, et personne ne le sait — la distance au point de recherche pèse lourd et ne se corrige pas. Ce que je peux dire, c'est que ces quatre champs sont les siens, qu'ils sont vides, et qu'ils ne coûtent que du temps. C'est tout, et c'est déjà beaucoup.",
-    "Plan fixe sur la fiche, pas d'effet"
-   ],
-   [
-    "Sortie",
-    "Faites le même parcours sur la vôtre. Quatre champs, dans cet ordre.",
-    "Bandeau : VFormations — organisme certifié Qualiopi"
-   ]
-  ],
-  "conformite": "⚠️ ACCORD ÉCRIT du commerce obligatoire avant tournage. Aucune promesse de résultat, limite explicitement dite.",
-  "source": "Format identifié comme vacant par deux agents · art-concurrent-mieux-classe.html"
- },
- {
-  "id": "V15",
-  "titre": "La question qu'on pose en fin de séance",
-  "cat": "Les coulisses",
-  "persona": "Véronique",
-  "angle": "AFEST appliquée au dirigeant — rien de comparable en ligne",
-  "format": "Captation en session",
-  "duree": "45 s",
-  "conscience": "3 → 4",
-  "note": 86,
-  "temps": [
-   [
-    "Accroche",
-    "À la fin de chaque séquence, on pose cinq questions écrites. La troisième est celle qui surprend tout le monde.",
-    "Une grille papier sur une table, un stylo"
-   ],
-   [
-    "Ancrage",
-    "Ce n'est pas un questionnaire de satisfaction. C'est une obligation pédagogique, et c'est aussi le moment le plus utile de la journée.",
-    "Une main qui écrit, plan serré"
-   ],
-   [
-    "Transmission",
-    "Les cinq : qu'as-tu réalisé concrètement dans cette séquence ? Qu'est-ce qui a bien fonctionné, qu'est-ce qui a moins bien marché ? Qu'as-tu compris que tu ne savais pas avant ? Que feras-tu différemment la prochaine fois ? Et quel point reste à retravailler avec le formateur ? Daté, signé. La troisième est celle qui surprend, parce qu'on vous demande rarement de nommer ce que vous ignoriez une heure plus tôt.",
-    "Les cinq questions apparaissent, la troisième se surligne"
-   ],
-   [
-    "Nuance",
-    "Et c'est là que la formation-action se distingue d'une prestation. Si quelqu'un filme et monte à votre place, vous repartez avec une vidéo. Si vous le faites vous-même avec un formateur à côté, vous repartez avec une vidéo et avec la réponse à la question trois. La première se périme. La deuxième, non. C'est aussi pour ça que le travail fait à votre place ne peut pas être financé par un fonds de formation.",
-    "Deux objets côte à côte : une clé USB, un carnet"
-   ],
-   [
-    "Sortie",
-    "Posez-vous la question trois ce soir, sur n'importe quoi que vous avez fait aujourd'hui.",
-    "Bandeau : VFormations — organisme certifié Qualiopi"
-   ]
-  ],
-  "conformite": "La formation apparaît comme DÉCOR, jamais comme proposition. Rappelle la règle d'or sans vendre.",
-  "source": "B3 grille G2 · B1 §2 · CLAUDE.md §2"
- },
- {
-  "id": "V16",
-  "titre": "Ce qu'un fonds de formation ne financera jamais",
-  "cat": "Le décryptage de règle",
-  "persona": "Thomas",
-  "angle": "Frontière formation / prestation — personne ne la trace",
-  "format": "Face caméra",
-  "duree": "55 s",
-  "conscience": "2 → 3",
-  "note": 94,
-  "temps": [
-   [
-    "Accroche",
-    "Si on vous propose de faire vos vidéos à votre place et de le faire financer par un fonds de formation, c'est non. Et c'est non pour vous, pas seulement pour eux.",
-    "Face caméra, direct, pas de musique"
-   ],
-   [
-    "Ancrage",
-    "La distinction est simple et elle est dans la loi : les fonds de formation ne financent que de la formation réelle.",
-    "Un texte de loi à l'écran, référence visible"
-   ],
-   [
-    "Transmission",
-    "Former, c'est vous apprendre à faire. Prester, c'est faire à votre place. Les deux sont parfaitement légitimes, et beaucoup d'acteurs font les deux — nous aussi. Ce qui ne l'est pas, c'est de présenter la seconde comme la première pour la faire financer. Concrètement : une prestation clé en main se facture séparément, hors financement, et elle n'est jamais conditionnée à une inscription en formation. Trois périmètres, trois contrats, trois factures.",
-    "Deux colonnes : « apprendre à faire » / « faire à votre place », une ligne nette entre les deux"
-   ],
-   [
-    "Nuance",
-    "Et le risque n'est pas que du côté de l'organisme. En cas de contrôle, c'est l'entreprise bénéficiaire qui doit rembourser. Un arrangement qui vous arrange aujourd'hui vous expose dans deux ans. La loi anti-fraude de juin 2026 a d'ailleurs renforcé les contrôles — je ne vous donnerai pas les montants d'amende qui circulent, je n'ai pas pu les vérifier à la source.",
-    "Un dossier de contrôle, cadrage neutre"
-   ],
-   [
-    "Sortie",
-    "Demandez toujours : qu'est-ce que je saurai faire seul à la fin ? Si la réponse est floue, ce n'est pas de la formation.",
-    "Bandeau : VFormations — organisme certifié Qualiopi"
-   ]
-  ],
-  "conformite": "Admet que VFormations fait les deux — l'aveu rend la frontière crédible. Refus explicite de citer un chiffre non vérifié.",
-  "source": "CLAUDE.md §2 · D0 §3 · loi n° 2026-534"
- }
+  {
+    "id": "V01",
+    "titre": "Le taux que votre organisme ne vérifie pas",
+    "cat": "Le chiffre qu'on vous cache",
+    "persona": "Karim",
+    "angle": "Taux transverse 25 vs 35 €/h",
+    "format": "Voix-off + écran partagé",
+    "duree": "50 s",
+    "conscience": "2 → 3",
+    "note": 92,
+    "temps": [
+      [
+        "Accroche",
+        "Il y a une question à poser à votre organisme de formation, et presque personne ne la pose. Elle tient en une phrase, et sur trente-cinq heures elle vaut trois cent cinquante euros.",
+        "Plan serré sur un devis de formation, le doigt qui s'arrête sur une ligne"
+      ],
+      [
+        "Ancrage",
+        "Si vous êtes artisan et que vous préparez une formation au web ou à la vidéo, votre dossier part à la FAFCEA. Et la FAFCEA n'a pas un taux, elle en a deux.",
+        "Logo FAFCEA à l'écran, deux colonnes qui apparaissent"
+      ],
+      [
+        "Transmission",
+        "Avant de vous la donner, il faut comprendre pourquoi elle existe. La FAFCEA n'a pas un taux de remboursement, elle en a deux — et ce qui fait basculer de l'un à l'autre n'est pas ce que vous croyez. Le taux technique métier, c'est celui du geste professionnel : les matériaux, les normes, votre cœur d'activité. Le taux transverse, c'est la gestion, la bureautique, le numérique, la communication. Une formation vidéo, même si vous filmez votre propre chantier, relève du transverse. Vingt-cinq euros de l'heure, pas trente-cinq.",
+        "Les deux colonnes se remplissent : 35 €/h technique · 25 €/h transverse. Le curseur glisse vers transverse"
+      ],
+      [
+        "Nuance",
+        "Donc la question, la voici, mot pour mot : « sous quel taux déposez-vous cette formation, technique ou transverse ? » Et voilà ce qui rend l'erreur si facile à faire : elle est de bonne foi. Un maçon qui apprend à filmer ses chantiers associe naturellement le contenu de ses vidéos à son métier. C'est logique, et c'est faux. L'écart sort de votre poche, pas de celle de l'organisme.",
+        "Un maçon lisse un joint, puis le même plan filmé au téléphone"
+      ],
+      [
+        "Sortie",
+        "Posez la question. Un organisme qui ne sait pas répondre vous apprend quelque chose.",
+        "Bandeau : VFormations — organisme certifié Qualiopi"
+      ]
+    ],
+    "conformite": "Aucun prix de formation. Taux de financeur uniquement, issus des PDF officiels. Aucun résultat promis.",
+    "source": "CLAUDE.md §5 · art-fafcea-transverse.html",
+    "boucles": [
+      {
+        "id": "A",
+        "ouvre": "Accroche",
+        "ferme": "Nuance",
+        "quoi": "la question exacte à poser, et ce qu'elle vaut"
+      },
+      {
+        "id": "B",
+        "ouvre": "Transmission",
+        "ferme": "Transmission",
+        "quoi": "pourquoi la FAFCEA a deux taux et lequel s'applique"
+      }
+    ]
+  },
+  {
+    "id": "V02",
+    "titre": "Votre reste à charge est-il HT ou TTC ?",
+    "cat": "Le chiffre qu'on vous cache",
+    "persona": "Thomas",
+    "angle": "Reste à charge TVA comprise",
+    "format": "Face caméra + incrustation",
+    "duree": "55 s",
+    "conscience": "2 → 3",
+    "note": 90,
+    "temps": [
+      [
+        "Accroche",
+        "Il y a une question de trois mots qui peut faire doubler votre reste à charge, et on ne vous la posera pas.",
+        "Face caméra, posé, pas de musique"
+      ],
+      [
+        "Ancrage",
+        "Si vous êtes en micro-entreprise et que vous ne récupérez pas la TVA, ce paragraphe vous concerne directement.",
+        "Incrustation : « franchise en base de TVA »"
+      ],
+      [
+        "Transmission",
+        "Pour comprendre pourquoi elle change tout, regardez sur quelle base chacun calcule — parce que ce n'est pas la même des deux côtés. Les organismes annoncent leurs prix hors taxes. Les fonds de formation remboursent sur une base hors taxes. Mais vous, si vous ne récupérez pas la TVA, vous payez le toutes taxes comprises. Le fonds rembourse sur le petit montant, vous réglez le grand. L'écart reste à votre charge, et il ne figure sur aucun devis.",
+        "Deux montants côte à côte à l'écran : HT et TTC, l'écart surligné"
+      ],
+      [
+        "Nuance",
+        "La question, la voici : « hors taxes ou toutes taxes comprises ? » Trois mots, à poser sur le reste à charge qu'on vous annonce. Et il y a un cas où elle ne se pose plus : certaines actions de formation sont exonérées de TVA quand l'organisme détient l'attestation correspondante. Demandez où il en est. S'il est en cours d'obtention, il doit vous le dire comme ça — en cours, pas obtenue.",
+        "Un document administratif, cadrage neutre"
+      ],
+      [
+        "Sortie",
+        "Posez ces deux questions avant de signer quoi que ce soit. Elles ne coûtent rien à poser.",
+        "Bandeau : VFormations — organisme certifié Qualiopi"
+      ]
+    ],
+    "conformite": "Aucun prix. Mécanisme expliqué sans chiffrer l'offre. Formulation « en cours, pas obtenue » reprise telle quelle du dépôt.",
+    "source": "CLAUDE.md §9 · D1 §10 · art-reste-a-charge.html",
+    "boucles": [
+      {
+        "id": "A",
+        "ouvre": "Accroche",
+        "ferme": "Nuance",
+        "quoi": "la question de trois mots"
+      },
+      {
+        "id": "B",
+        "ouvre": "Transmission",
+        "ferme": "Transmission",
+        "quoi": "pourquoi le fonds et vous ne payez pas sur la même base"
+      }
+    ]
+  },
+  {
+    "id": "V03",
+    "titre": "Le dispositif à 80 €/h dont personne ne parle",
+    "cat": "Le chiffre qu'on vous cache",
+    "persona": "Karim",
+    "angle": "Parcours individualisé FAFCEA — zéro résultat en ligne",
+    "format": "Voix-off + écran",
+    "duree": "60 s",
+    "conscience": "2 → 3",
+    "note": 94,
+    "temps": [
+      [
+        "Accroche",
+        "Il existe un dispositif de financement pour les artisans à quatre-vingts euros de l'heure. Cherchez-le sur internet : vous ne trouverez presque rien. Ce n'est pas un hasard, et la raison est instructive.",
+        "Barre de recherche vide, curseur qui clignote"
+      ],
+      [
+        "Ancrage",
+        "C'est le parcours individualisé de la FAFCEA. Il est réservé aux chefs d'entreprise artisanale, et c'est le dispositif le plus généreux auquel vous ayez accès.",
+        "Logo FAFCEA, chiffre 80 €/h qui apparaît"
+      ],
+      [
+        "Transmission",
+        "Commençons par ce qu'il exige, parce que c'est là que tout se joue. Quarante heures par an, à quatre-vingts euros de l'heure. Un parcours par entreprise tous les cinq ans. Quatorze heures minimum, au moins deux intitulés d'au moins quatre heures chacun, un autodiagnostic préalable, et surtout le cent pour cent distanciel est interdit. L'organisme doit en plus être référencé auprès de la FAFCEA — ce n'est pas la même chose qu'être certifié Qualiopi.",
+        "Les conditions s'empilent à l'écran, une par une"
+      ],
+      [
+        "Nuance",
+        "Et c'est précisément pour ça qu'il est invisible : ces contraintes le rendent inexploitable par un vendeur de formation en ligne. Pas de distanciel, pas de e-learning, un parcours tous les cinq ans. Personne n'a intérêt à en parler. Nous non plus, d'ailleurs : notre organisme vient d'ouvrir et n'est pas référencé sur ce dispositif. Nous ne pouvons donc pas le mobiliser, et je vous le dis plutôt que de vous laisser le découvrir au devis.",
+        "Plan sur un atelier d'artisan, lumière naturelle"
+      ],
+      [
+        "Sortie",
+        "Si vous êtes artisan, demandez-le à votre Point d'Accueil. Le pire qu'il puisse arriver, c'est qu'on vous dise non.",
+        "Bandeau : VFormations — organisme certifié Qualiopi"
+      ]
+    ],
+    "conformite": "Aveu de limite explicite sur notre propre référencement — formulation reprise du dépôt. Aucun prix, aucune promesse.",
+    "source": "CLAUDE.md §5 · art-fafcea-transverse.html · D1 §2bis",
+    "boucles": [
+      {
+        "id": "A",
+        "ouvre": "Accroche",
+        "ferme": "Nuance",
+        "quoi": "pourquoi ce dispositif est introuvable"
+      },
+      {
+        "id": "B",
+        "ouvre": "Transmission",
+        "ferme": "Transmission",
+        "quoi": "ses conditions réelles"
+      }
+    ]
+  },
+  {
+    "id": "V04",
+    "titre": "Les prestations que votre fiche ne déclare pas",
+    "cat": "Le geste",
+    "persona": "Léa",
+    "angle": "Services prédéfinis — poids en forte hausse",
+    "format": "Démonstration écran",
+    "duree": "45 s",
+    "conscience": "2 → 3",
+    "note": 82,
+    "temps": [
+      [
+        "Accroche",
+        "Quelqu'un cherche un balayage à cinquante mètres de votre salon. Et il ne vous trouve pas.",
+        "Téléphone qui tape « balayage » + nom de ville"
+      ],
+      [
+        "Ancrage",
+        "Pas parce que votre fiche est mauvaise. Parce qu'il y a une liste que presque personne ne remplit.",
+        "Fiche Google à l'écran, section Services vide"
+      ],
+      [
+        "Transmission",
+        "Cette liste existe dans votre fiche, elle a pris du poids en 2026, et la plupart des salons la laissent vide. Ce sont les services à cocher, proposés selon votre catégorie. Or quelqu'un qui cherche un balayage, un lissage, une coupe enfant ou une coloration végétale ne tape pas « coiffeur » : il tape sa prestation. Listez vos dix prestations les plus demandées, et cochez-les une par une. Vingt minutes, une fois.",
+        "Les cases se cochent à l'écran, une par une"
+      ],
+      [
+        "Nuance",
+        "Voilà pourquoi il ne vous trouve pas : si la prestation n'est pas déclarée, vous n'existez pas pour cette recherche-là, même à cinquante mètres. Et faites l'inverse aussi : décochez ce que vous ne faites pas. Une prestation annoncée puis refusée au téléphone coûte un client et un avis. Le second fait plus de dégâts que le premier.",
+        "Un téléphone qui sonne dans un salon, quelqu'un décroche"
+      ],
+      [
+        "Sortie",
+        "Ouvrez votre fiche et regardez la section Services. Elle est vide, non ?",
+        "Bandeau : VFormations — organisme certifié Qualiopi"
+      ]
+    ],
+    "conformite": "Aucune promesse de position. « Nettement augmenté » sans pourcentage — l'instrument ne publie que des scores bruts.",
+    "source": "art-local-pack.html · art-salon-coiffure.html · CLAUDE.md §8quater",
+    "specificite": "Une agence de référencement local pourrait publier ce script. La liste de prestations propre au salon et la nuance sur le décochage le sauvent partiellement.",
+    "boucles": [
+      {
+        "id": "A",
+        "ouvre": "Accroche",
+        "ferme": "Nuance",
+        "quoi": "pourquoi il ne vous trouve pas à cinquante mètres"
+      },
+      {
+        "id": "B",
+        "ouvre": "Transmission",
+        "ferme": "Transmission",
+        "quoi": "la liste que presque personne ne remplit"
+      }
+    ]
+  },
+  {
+    "id": "V05",
+    "titre": "Vingt minutes pour savoir pourquoi il passe devant",
+    "cat": "Le geste",
+    "persona": "Tous",
+    "angle": "Rétro-ingénierie sans outil (compatible AFEST)",
+    "format": "Écran partagé, deux fiches",
+    "duree": "55 s",
+    "conscience": "2 → 3",
+    "note": 84,
+    "temps": [
+      [
+        "Accroche",
+        "Votre concurrent fait un travail moins bon que le vôtre, et c'est lui qui sort en premier. Voici comment savoir pourquoi, sans acheter aucun outil.",
+        "Deux fiches Google côte à côte à l'écran"
+      ],
+      [
+        "Ancrage",
+        "Tout ce dont vous avez besoin est public. Ouvrez sa fiche et la vôtre, côte à côte.",
+        "Deux onglets qui s'ouvrent"
+      ],
+      [
+        "Transmission",
+        "Il y a huit points à relever, et l'ordre compte : les deux premiers suffisent le plus souvent. Sa catégorie principale, mot pour mot — elle est visible sous son nom. Ses catégories secondaires. Les services qu'il a cochés. Son nombre d'avis, sa note, et la date du plus récent. Le nombre d'avis auxquels il a répondu. La date de ses dernières photos. Ses horaires, et s'il a renseigné les jours exceptionnels. Et s'il a des pages qui parlent de votre zone. Notez les huit pour lui, les huit pour vous.",
+        "Un tableau à deux colonnes se remplit, ligne par ligne"
+      ],
+      [
+        "Nuance",
+        "Dans neuf cas sur dix, l'écart saute aux yeux dès la première ou la deuxième ligne — et vous tenez votre réponse. Mais parfois il n'y a aucun écart : c'est simplement qu'il est plus près du point de recherche que vous. Ça, vous n'y pouvez rien — et savoir que vous n'y pouvez rien vous évite de dépenser de l'argent sur le mauvais problème.",
+        "Une carte, deux épingles à distance différente"
+      ],
+      [
+        "Sortie",
+        "Faites le relevé avant de payer qui que ce soit pour vous l'expliquer.",
+        "Bandeau : VFormations — organisme certifié Qualiopi"
+      ]
+    ],
+    "conformite": "Aveu de limite sur la distance, facteur non actionnable. Exercice réalisable seul — le don est complet.",
+    "source": "art-concurrent-mieux-classe.html · rapport Whitespark 2026 (scores bruts)",
+    "specificite": "Le relevé en 8 points est transposable par n'importe quel concurrent. Ce qui reste nôtre : l'aveu que la distance n'est pas actionnable.",
+    "boucles": [
+      {
+        "id": "A",
+        "ouvre": "Accroche",
+        "ferme": "Nuance",
+        "quoi": "pourquoi le concurrent sort devant"
+      },
+      {
+        "id": "B",
+        "ouvre": "Transmission",
+        "ferme": "Transmission",
+        "quoi": "les huit points à relever"
+      }
+    ]
+  },
+  {
+    "id": "V06",
+    "titre": "Combien de vidéos par semaine, le vrai chiffre",
+    "cat": "Le mythe démonté",
+    "persona": "Sophie",
+    "angle": "Coût réel en temps, mesuré",
+    "format": "Face caméra",
+    "duree": "55 s",
+    "conscience": "2 → 3",
+    "note": 89,
+    "temps": [
+      [
+        "Accroche",
+        "Voilà le rythme qui tient pour un patron de TPE : une vidéo par semaine. Et je vais vous dire pourquoi, avant de vous dire pourquoi ce n'est pas ce qu'on vous conseille.",
+        "Face caméra, calme, pas de musique"
+      ],
+      [
+        "Ancrage",
+        "Une vidéo par semaine, ça fait cinquante dans l'année. Et surtout, ça se tient en période chargée — ce qui est le seul critère qui compte.",
+        "Un calendrier, les semaines qui se cochent"
+      ],
+      [
+        "Transmission",
+        "Pour trancher, il faut un chiffre que presque personne ne calcule : le coût réel d'une vidéo. Pas le tournage, le total. Trouver le sujet, c'est souvent l'étape la plus longue et celle qu'on oublie de compter. Tourner. Monter. Publier et répondre. Pour quelqu'un qui débute, comptez trente à soixante minutes par vidéo, tout compris. Multipliez par le rythme envisagé, regardez le total hebdomadaire, et posez-vous une question : ce créneau existe-t-il dans ma semaine, ou est-ce que je viens de l'inventer ? S'il faut le prendre sur le service du midi, il n'existe pas.",
+        "Un chronomètre qui tourne, quatre étapes qui s'additionnent"
+      ],
+      [
+        "Nuance",
+        "Et l'erreur que je vois toutes les semaines, c'est de viser sept par semaine. Pas parce que c'est faux dans l'absolu — parce que ça décrit le métier de quelqu'un dont la journée entière y est consacrée. La courbe est toujours la même : enthousiasme deux semaines, tension la troisième, abandon la cinquième. Et un compte abandonné raconte qu'une activité s'est arrêtée.",
+        "Un compte figé, « dernière publication il y a cinq mois »"
+      ],
+      [
+        "Sortie",
+        "Deux par semaine tenues six mois battent sept par semaine abandonnées au bout de trois. Choisissez le rythme que vous tiendrez en novembre.",
+        "Bandeau : VFormations — organisme certifié Qualiopi"
+      ]
+    ],
+    "conformite": "Geste correct annoncé AVANT l'erreur (littérature sur la charge mentale). Chiffre de temps, pas de résultat.",
+    "source": "art-rythme-publication.html",
+    "boucles": [
+      {
+        "id": "A",
+        "ouvre": "Accroche",
+        "ferme": "Nuance",
+        "quoi": "pourquoi on vous conseille autre chose"
+      },
+      {
+        "id": "B",
+        "ouvre": "Transmission",
+        "ferme": "Transmission",
+        "quoi": "le coût réel d'une vidéo, étape par étape"
+      }
+    ]
+  },
+  {
+    "id": "V07",
+    "titre": "Filmer son chantier, ce n'est pas faire l'influenceur",
+    "cat": "Le mythe démonté",
+    "persona": "Karim",
+    "angle": "Mythe d'identité (M12)",
+    "format": "Voix-off + B-roll chantier",
+    "duree": "50 s",
+    "conscience": "1 → 2",
+    "note": 93,
+    "temps": [
+      [
+        "Accroche",
+        "« Les réseaux, c'est pas pour moi. » Je l'entends chaque semaine, et le problème n'est jamais technique.",
+        "Un artisan range ses outils, regarde son téléphone, le repose"
+      ],
+      [
+        "Ancrage",
+        "Derrière cette phrase il y a une image : celle du type qui se filme en voiture pour raconter sa vie. Si c'est ça que vous imaginez, évidemment que ce n'est pas pour vous.",
+        "Plan d'un chantier propre, lumière du matin"
+      ],
+      [
+        "Transmission",
+        "Ce qu'on imagine derrière « les réseaux », c'est se mettre en scène. Filmer son travail n'a rien à voir, et il suffit de le décrire pour s'en rendre compte. Vous ne racontez pas votre vie, vous montrez un geste. Un raccord propre. Une soudure. Une pièce avant, une pièce après. Vous n'avez pas besoin d'apparaître à l'écran : les mains et le travail suffisent, et c'est même souvent mieux. Pas de musique, pas de danse, pas de blague. Trente secondes sur un geste que vous faites tous les jours.",
+        "Mains qui travaillent, plan serré, aucun visage"
+      ],
+      [
+        "Nuance",
+        "Le vrai blocage, le voici, et il n'a rien de technique : c'est le piège de l'expertise. Ce que vous trouvez banal est exactement ce qui retient l'attention. Vous l'avez vu dix mille fois. Lui, jamais. Ce qui vous paraît trop évident pour être filmé est précisément ce qu'il faut filmer.",
+        "Un détail technique en gros plan, main qui désigne"
+      ],
+      [
+        "Sortie",
+        "La prochaine fois que vous faites un geste propre, posez le téléphone contre quelque chose et filmez-le. Vous jugerez après.",
+        "Bandeau : VFormations — organisme certifié Qualiopi"
+      ]
+    ],
+    "conformite": "Aucune promesse. Traite l'objection identitaire, pas technique — c'est le vrai blocage de ce persona.",
+    "source": "A0 §3 (Karim) · art-quoi-filmer.html · mécanique M12",
+    "boucles": [
+      {
+        "id": "A",
+        "ouvre": "Accroche",
+        "ferme": "Nuance",
+        "quoi": "quel est le vrai blocage, s'il n'est pas technique"
+      },
+      {
+        "id": "B",
+        "ouvre": "Transmission",
+        "ferme": "Transmission",
+        "quoi": "à quoi ressemble vraiment une vidéo de chantier"
+      }
+    ]
+  },
+  {
+    "id": "V08",
+    "titre": "Faut-il mettre son adresse sur sa fiche ?",
+    "cat": "La question qu'on me pose tout le temps",
+    "persona": "Tous",
+    "angle": "Arbre de décision par type d'activité (M3)",
+    "format": "Démonstration écran",
+    "duree": "50 s",
+    "conscience": "2 → 3",
+    "note": 83,
+    "temps": [
+      [
+        "Accroche",
+        "« Je travaille de chez moi. Est-ce que je dois mettre mon adresse personnelle sur Google ? » Non. Et il y a un réglage fait pour ça.",
+        "Une fiche Google à l'écran, champ adresse surligné"
+      ],
+      [
+        "Ancrage",
+        "La réponse dépend d'une seule chose : est-ce que des clients viennent chez vous, ou est-ce vous qui allez chez eux ?",
+        "Deux pictogrammes : une porte, une camionnette"
+      ],
+      [
+        "Transmission",
+        "Trois cas existent, et un seul vous concerne — repérez le vôtre. Un : vous recevez du public — commerce, restaurant, salon, cabinet. Vous affichez l'adresse. Deux : vous vous déplacez — artisan, dépanneur, prestataire mobile. Vous déclarez des zones desservies, communes ou rayon, et vous masquez l'adresse. Trois : vous faites les deux — boutique et livraison. Vous affichez l'adresse et vous ajoutez une zone desservie.",
+        "Trois branches qui se déploient à l'écran, une se surligne"
+      ],
+      [
+        "Nuance",
+        "Et il faut dire ce que ce réglage coûte, parce qu'il n'est pas gratuit : déclarer une zone plutôt qu'une adresse est moins efficace pour le classement. C'est un vrai arbitrage. Mais une adresse affichée à tort génère des visites perdues, des demandes de correction, et peut faire suspendre la fiche. Entre un léger désavantage et une fiche qui saute, le choix est vite fait.",
+        "Une carte avec un rayon qui se dessine autour d'une zone"
+      ],
+      [
+        "Sortie",
+        "Ouvrez votre fiche, regardez dans quel cas vous êtes, et corrigez si besoin.",
+        "Bandeau : VFormations — organisme certifié Qualiopi"
+      ]
+    ],
+    "conformite": "Aveu de limite explicite (« moins efficace »). Arbitrage honnête, pas de solution magique.",
+    "source": "art-nap.html · BACKLINKS.md §0 · mécanique M3",
+    "specificite": "L'arbre de décision est public et déjà publié ailleurs. Notre apport est l'arbitrage chiffré du coût de la zone desservie.",
+    "boucles": [
+      {
+        "id": "A",
+        "ouvre": "Accroche",
+        "ferme": "Nuance",
+        "quoi": "ce que coûte le réglage annoncé"
+      },
+      {
+        "id": "B",
+        "ouvre": "Transmission",
+        "ferme": "Transmission",
+        "quoi": "lequel des trois cas vous concerne"
+      }
+    ]
+  },
+  {
+    "id": "V09",
+    "titre": "Pourquoi vos vues ne veulent plus rien dire",
+    "cat": "Le comparatif qui tranche",
+    "persona": "Sophie",
+    "angle": "Démontage sourcé des chiffres qui circulent",
+    "format": "Voix-off + écran",
+    "duree": "60 s",
+    "conscience": "3 → 3",
+    "note": 91,
+    "temps": [
+      [
+        "Accroche",
+        "Vos vues ont peut-être explosé cette année sans que personne ne regarde davantage vos vidéos. Voici pourquoi.",
+        "Un compteur de vues qui défile vite"
+      ],
+      [
+        "Ancrage",
+        "Les plateformes ont changé la définition du mot « vue ». Pas la façon de compter : la définition.",
+        "Un dictionnaire, le mot « vue » surligné"
+      ],
+      [
+        "Transmission",
+        "Trois plateformes, trois définitions du mot « vue » — et elles ont changé récemment. Depuis le 31 mars 2025, YouTube compte une vue dès que la vidéo démarre, sans durée minimale. L'ancienne mesure existe toujours, elle s'appelle maintenant les vues engagées. Instagram, de son côté, a remplacé les impressions par les vues en 2026. Tout tableau qui compare les vues moyennes entre Reels, TikTok et Shorts compare donc des unités qui n'ont rien à voir.",
+        "Trois colonnes avec trois définitions différentes"
+      ],
+      [
+        "Nuance",
+        "Et voilà ce que ça change pour ce qu'on vous raconte. Vous allez lire partout que la durée d'attention s'est effondrée de soixante-sept pour cent sur les Shorts. C'est un chiffre mesuré — mais la comparaison traverse le changement de définition, et le dénominateur s'est rempli de vues d'une seconde qui n'étaient pas comptées avant. L'éditeur de l'étude le dit lui-même. Ce n'est pas forcément une dégradation de l'attention.",
+        "Un graphique qui chute, puis une ligne pointillée qui marque la date du changement"
+      ],
+      [
+        "Sortie",
+        "La prochaine fois qu'on vous cite un chiffre de vues, demandez de quelle année il date et comment la vue était comptée.",
+        "Bandeau : VFormations — organisme certifié Qualiopi"
+      ]
+    ],
+    "conformite": "Chiffres sourcés et datés, avec leur limite d'interprétation. Aucune promesse. Angle libre I.",
+    "source": "Page d'aide YouTube · Metricool 2026 · Socialinsider (méthodologie)",
+    "boucles": [
+      {
+        "id": "A",
+        "ouvre": "Accroche",
+        "ferme": "Nuance",
+        "quoi": "ce que ça change pour ce qu'on vous raconte"
+      },
+      {
+        "id": "B",
+        "ouvre": "Transmission",
+        "ferme": "Transmission",
+        "quoi": "ce que chaque plateforme appelle « vue »"
+      }
+    ]
+  },
+  {
+    "id": "V10",
+    "titre": "Trois financeurs, trois calendriers, un seul piège",
+    "cat": "La fenêtre qui se ferme",
+    "persona": "Sophie",
+    "angle": "Délais de dépôt comme outil de décision",
+    "format": "Voix-off + écran",
+    "duree": "55 s",
+    "conscience": "2 → 3",
+    "note": 90,
+    "temps": [
+      [
+        "Accroche",
+        "Si vous changez de statut, vous changez de financeur — et son calendrier n'a rien à voir avec celui que vous connaissiez. Il y a un piège là-dedans, et il ne se rattrape pas.",
+        "Trois calendriers côte à côte, trois fenêtres de couleurs différentes"
+      ],
+      [
+        "Ancrage",
+        "Avant de poser une date de formation, regardez la fenêtre de dépôt du fonds dont vous relevez. Elles vont du simple au triple.",
+        "Un doigt qui glisse le long d'une frise"
+      ],
+      [
+        "Transmission",
+        "Trois repères, et vous verrez que l'écart entre eux est énorme. L'AGEFICE : de quatre mois à quinze jours calendaires avant le démarrage, et obligatoirement via un Point d'Accueil — un dossier envoyé au siège n'est pas instruit. La FAFCEA : de trois mois avant jusqu'au jour du début. Le FIF PL : jusqu'à dix jours après le début, le plus souple des trois. Calendaires veut dire week-ends et jours fériés compris : quinze jours calendaires en période de fêtes, c'est très peu de jours utiles.",
+        "Les trois fenêtres se dessinent sur une frise, largeurs très différentes"
+      ],
+      [
+        "Nuance",
+        "Et le piège, c'est de croire que tous les refus se valent. La différence est juridique. Un plafond déjà consommé, c'est un décalage de calendrier : vos droits se rechargent l'année suivante, et répartir un parcours sur deux exercices est tout à fait régulier. Un délai dépassé, lui, ne se conteste pas — ce n'est pas un refus motivé, la demande est simplement hors de la période d'examen. Il n'y a rien à contester.",
+        "Deux chemins qui divergent, l'un continue, l'autre s'arrête net"
+      ],
+      [
+        "Sortie",
+        "Appelez votre Point d'Accueil avant de caler une date, pas après.",
+        "Bandeau : VFormations — organisme certifié Qualiopi"
+      ]
+    ],
+    "conformite": "Règles officielles uniquement, aucun montant d'offre. Distinction juridique issue du dépôt.",
+    "source": "CLAUDE.md §5 · art-delais-financement.html · art-refus-prise-en-charge.html",
+    "boucles": [
+      {
+        "id": "A",
+        "ouvre": "Accroche",
+        "ferme": "Nuance",
+        "quoi": "le piège, et pourquoi un refus n'est pas l'autre"
+      },
+      {
+        "id": "B",
+        "ouvre": "Transmission",
+        "ferme": "Transmission",
+        "quoi": "les trois calendriers"
+      }
+    ]
+  },
+  {
+    "id": "V11",
+    "titre": "Deux rappels dans votre téléphone, deux fois par an",
+    "cat": "L'erreur que je vois toutes les semaines",
+    "persona": "Sophie",
+    "angle": "Horaires saisonniers · littoral héraultais",
+    "format": "Voix-off + B-roll littoral",
+    "duree": "50 s",
+    "conscience": "2 → 3",
+    "note": 88,
+    "temps": [
+      [
+        "Accroche",
+        "Posez deux rappels dans votre téléphone maintenant : un en mai, un en septembre. « Mettre à jour les horaires de la fiche. » Cinq minutes, deux fois par an — et ces deux mois-là ne sont pas choisis au hasard.",
+        "Un téléphone, deux rappels qui se créent"
+      ],
+      [
+        "Ancrage",
+        "Sur le littoral, de Palavas à Valras, votre amplitude change deux fois dans l'année. Votre fiche, elle, ne change pas toute seule.",
+        "Une terrasse pleine en été, la même vide en novembre"
+      ],
+      [
+        "Transmission",
+        "D'abord, pourquoi les horaires pèsent autant, parce que ça a changé. Être ouvert au moment où quelqu'un cherche figure désormais parmi les cinq premiers facteurs de classement local, d'après le rapport Whitespark 2026 : Google privilégie l'établissement où la personne peut aller maintenant. Donc renseignez les horaires exacts, pas approximatifs, et ajoutez les horaires exceptionnels : 14 juillet, 15 août, fermeture annuelle, fête locale.",
+        "Un champ horaires qui se remplit, jour par jour"
+      ],
+      [
+        "Nuance",
+        "Mai et septembre, parce qu'ils arrivent juste avant les deux périodes où vos horaires bougent — et juste avant les saisons où une fiche absente coûte le plus cher. D'où la précaution qui va avec : ne touchez pas au nom, à l'adresse ou à la catégorie principale en pleine saison. Ces trois-là déclenchent une revérification qui peut faire disparaître votre fiche le temps du contrôle, jusqu'à trois semaines. Et sur le chiffre : ce sont des estimations de praticiens, Google n'a jamais publié de pondération.",
+        "Un sablier, une fiche qui disparaît puis revient"
+      ],
+      [
+        "Sortie",
+        "Les horaires, eux, passent librement. Commencez par là.",
+        "Bandeau : VFormations — organisme certifié Qualiopi"
+      ]
+    ],
+    "conformite": "Source nommée ET qualifiée (estimations de praticiens). Refus explicite de citer un pourcentage.",
+    "source": "art-saison-littoral.html · art-modifier-fiche-google.html · Whitespark 2026",
+    "boucles": [
+      {
+        "id": "A",
+        "ouvre": "Accroche",
+        "ferme": "Nuance",
+        "quoi": "pourquoi ces deux mois-là, et ce qu'il ne faut surtout pas toucher"
+      },
+      {
+        "id": "B",
+        "ouvre": "Transmission",
+        "ferme": "Transmission",
+        "quoi": "pourquoi les horaires pèsent autant"
+      }
+    ]
+  },
+  {
+    "id": "V12",
+    "titre": "Le nom qui fait sauter votre fiche",
+    "cat": "L'erreur que je vois toutes les semaines",
+    "persona": "Karim",
+    "angle": "Sanction nommée (M7)",
+    "format": "Démonstration écran",
+    "duree": "45 s",
+    "conscience": "3 → 4",
+    "note": 87,
+    "temps": [
+      [
+        "Accroche",
+        "Votre nom d'établissement sur Google, c'est le nom de votre entreprise. Rien d'autre. Et ce n'est pas pour la raison qu'on vous donne d'habitude.",
+        "Un champ « Nom » à l'écran, curseur qui clignote"
+      ],
+      [
+        "Ancrage",
+        "Je dis ça parce que la tentation est forte, et parce qu'elle marche — c'est bien ça le problème.",
+        "Une fiche concurrente avec un nom à rallonge"
+      ],
+      [
+        "Transmission",
+        "Parce que la raison qu'on vous donne, c'est que ça ne marche pas. C'est faux. « Dupont Plomberie Montpellier Dépannage Urgent » : ça améliore réellement le classement, les mots-clés dans le nom restent un avantage mesuré. La plupart des contenus vous diront le contraire. Mais c'est aussi la première cause de suspension de fiche, et Google serre la vis dessus d'année en année. Une fiche suspendue, c'est l'actif que vous aviez mis des mois à construire qui disparaît du jour au lendemain.",
+        "Le nom à rallonge, puis la fiche qui disparaît"
+      ],
+      [
+        "Nuance",
+        "Donc la vraie raison, la voici : le gain est réel, le risque aussi, et le gain ne vaut pas la fiche. Vous jouez quelques places contre la totalité de votre visibilité locale. Et si vous avez déjà un nom bourré de mots-clés, ne le corrigez pas en pleine saison : le changement de nom déclenche une revérification qui peut durer jusqu'à trois semaines.",
+        "Une balance, deux plateaux très inégaux"
+      ],
+      [
+        "Sortie",
+        "Regardez le nom de votre fiche. S'il contient votre ville ou votre métier en plus de votre raison sociale, vous savez quoi faire.",
+        "Bandeau : VFormations — organisme certifié Qualiopi"
+      ]
+    ],
+    "conformite": "Admet l'avantage au lieu de le nier — c'est ce qui rend l'arbitrage crédible. Aucune promesse.",
+    "source": "art-nap.html · art-modifier-fiche-google.html · BACKLINKS.md §5",
+    "boucles": [
+      {
+        "id": "A",
+        "ouvre": "Accroche",
+        "ferme": "Nuance",
+        "quoi": "pourquoi s'en tenir au nom, alors que la triche fonctionne"
+      },
+      {
+        "id": "B",
+        "ouvre": "Transmission",
+        "ferme": "Transmission",
+        "quoi": "est-ce que bourrer le nom de mots-clés marche vraiment"
+      }
+    ]
+  },
+  {
+    "id": "V13",
+    "titre": "Le fil local de TikTok est arrivé en France",
+    "cat": "Le décryptage de règle",
+    "persona": "Sophie",
+    "angle": "Nearby Feed — seule découverte géographique documentée",
+    "format": "Voix-off + captures",
+    "duree": "50 s",
+    "conscience": "3 → 4",
+    "note": 89,
+    "temps": [
+      [
+        "Accroche",
+        "Depuis le 4 décembre 2025, TikTok a un fil qui classe les vidéos selon l'endroit où vous êtes. En France. Avant de vous y précipiter, il y a un chiffre à connaître.",
+        "Un onglet qui apparaît dans l'interface, portant un nom de ville"
+      ],
+      [
+        "Ancrage",
+        "C'est nouveau, et c'est le seul mécanisme de découverte géographique documenté officiellement sur les trois grandes plateformes de vidéo courte.",
+        "Une carte de l'Hérault, des épingles qui s'allument"
+      ],
+      [
+        "Transmission",
+        "Trois conditions pour y entrer, et elles sont simples. TikTok l'annonce lui-même : les publications du fil local sont montrées en fonction de la localisation, du sujet du contenu, et du moment de publication. Un : votre compte doit être public — un compte privé n'y entre pas. Deux : taguez un lieu ou un service, c'est ce qui conditionne l'entrée dans le fil. Trois : la fraîcheur est un critère déclaré, donc publier régulièrement compte réellement ici, ce qui n'est pas vrai partout.",
+        "Les trois conditions s'affichent, puis se cochent"
+      ],
+      [
+        "Nuance",
+        "Et le chiffre, le voici : en dessous de cinq mille abonnés, TikTok plafonne autour de trois cent cinquante vues en moyenne — en dessous d'Instagram. TikTok annonce par ailleurs que quarante-six pour cent de ses utilisateurs britanniques ont visité un commerce local vu sur la plateforme : c'est un chiffre de la plateforme sur son propre produit, non audité, et au Royaume-Uni, pas en France. À traiter comme un test, pas comme un canal principal.",
+        "Un graphique modeste, honnête"
+      ],
+      [
+        "Sortie",
+        "Si vous êtes sur TikTok, passez votre compte en public et taguez votre commune sur la prochaine vidéo.",
+        "Bandeau : VFormations — organisme certifié Qualiopi"
+      ]
+    ],
+    "conformite": "Chiffre de plateforme cité AVEC sa limite (non audité, UK). Aveu de limite sur la portée réelle.",
+    "source": "Billet officiel TikTok 04/12/2025 · Socialinsider (vues par tranche)",
+    "boucles": [
+      {
+        "id": "A",
+        "ouvre": "Accroche",
+        "ferme": "Nuance",
+        "quoi": "ce que ce fil peut réellement vous apporter"
+      },
+      {
+        "id": "B",
+        "ouvre": "Transmission",
+        "ferme": "Transmission",
+        "quoi": "les trois conditions pour y entrer"
+      }
+    ]
+  },
+  {
+    "id": "V14",
+    "titre": "J'ouvre une vraie fiche et je dis ce qui ne va pas",
+    "cat": "L'audit à voix haute",
+    "persona": "Tous",
+    "angle": "Format vacant en francophone",
+    "format": "Partage d'écran commenté",
+    "duree": "90 s",
+    "conscience": "2 → 3",
+    "note": 92,
+    "temps": [
+      [
+        "Accroche",
+        "Voici la fiche d'un commerce de Montpellier, avec son accord. En trois minutes, je vous montre ce que je regarde en premier — et ce que je ne pourrai pas lui promettre à la fin.",
+        "Une fiche à l'écran, nom et photos floutés"
+      ],
+      [
+        "Ancrage",
+        "Ce n'est pas une fiche ratée. C'est une fiche normale — et c'est exactement pour ça qu'elle est intéressante.",
+        "Vue d'ensemble de la fiche, rien d'alarmant"
+      ],
+      [
+        "Transmission",
+        "Un : la catégorie principale. Elle est là, sous le nom. Je la compare à celle des trois concurrents mieux classés — même activité, catégorie différente. Premier écart. Deux : les services. Section vide. Zéro prestation déclarée, alors que le commerce en propose une dizaine. Deuxième écart, et c'est le plus rentable à corriger. Trois : les horaires. Pas d'horaires exceptionnels, et on est à trois semaines d'un jour férié. Quatre : les avis. Vingt-huit avis, mais le dernier date de onze mois, et aucun n'a de réponse.",
+        "Le curseur se déplace, chaque point se surligne au fur et à mesure"
+      ],
+      [
+        "Nuance",
+        "Et voilà ce que je ne peux pas lui promettre : je ne sais pas si corriger ces quatre points le fera monter, et personne ne le sait — la distance au point de recherche pèse lourd et ne se corrige pas. Ce que je peux dire, c'est que ces quatre champs sont les siens, qu'ils sont vides, et qu'ils ne coûtent que du temps. C'est tout, et c'est déjà beaucoup.",
+        "Plan fixe sur la fiche, pas d'effet"
+      ],
+      [
+        "Sortie",
+        "Faites le même parcours sur la vôtre. Quatre champs, dans cet ordre.",
+        "Bandeau : VFormations — organisme certifié Qualiopi"
+      ]
+    ],
+    "conformite": "⚠️ ACCORD ÉCRIT du commerce obligatoire avant tournage. Aucune promesse de résultat, limite explicitement dite.",
+    "source": "Format identifié comme vacant par deux agents · art-concurrent-mieux-classe.html",
+    "boucles": [
+      {
+        "id": "A",
+        "ouvre": "Accroche",
+        "ferme": "Nuance",
+        "quoi": "si corriger ces points la fera monter"
+      },
+      {
+        "id": "B",
+        "ouvre": "Transmission",
+        "ferme": "Transmission",
+        "quoi": "les quatre écarts relevés"
+      }
+    ]
+  },
+  {
+    "id": "V15",
+    "titre": "La question qu'on pose en fin de séance",
+    "cat": "Les coulisses",
+    "persona": "Véronique",
+    "angle": "AFEST appliquée au dirigeant — rien de comparable en ligne",
+    "format": "Captation en session",
+    "duree": "45 s",
+    "conscience": "3 → 4",
+    "note": 86,
+    "temps": [
+      [
+        "Accroche",
+        "À la fin de chaque séquence, on pose cinq questions écrites. La troisième est celle qui surprend tout le monde.",
+        "Une grille papier sur une table, un stylo"
+      ],
+      [
+        "Ancrage",
+        "Ce n'est pas un questionnaire de satisfaction. C'est une obligation pédagogique, et c'est aussi le moment le plus utile de la journée.",
+        "Une main qui écrit, plan serré"
+      ],
+      [
+        "Transmission",
+        "Les cinq, dans l'ordre, et vous repérerez la troisième au passage : qu'as-tu réalisé concrètement dans cette séquence ? Qu'est-ce qui a bien fonctionné, qu'est-ce qui a moins bien marché ? Qu'as-tu compris que tu ne savais pas avant ? Que feras-tu différemment la prochaine fois ? Et quel point reste à retravailler avec le formateur ? Daté, signé.",
+        "Les cinq questions apparaissent, la troisième se surligne"
+      ],
+      [
+        "Nuance",
+        "La troisième surprend parce qu'on vous demande rarement de nommer ce que vous ignoriez une heure plus tôt — et c'est exactement là que la formation-action se distingue d'une prestation. Si quelqu'un filme et monte à votre place, vous repartez avec une vidéo. Si vous le faites vous-même avec un formateur à côté, vous repartez avec une vidéo et avec la réponse à la question trois. La première se périme. La deuxième, non. C'est aussi pour ça que le travail fait à votre place ne peut pas être financé par un fonds de formation.",
+        "Deux objets côte à côte : une clé USB, un carnet"
+      ],
+      [
+        "Sortie",
+        "Posez-vous la question trois ce soir, sur n'importe quoi que vous avez fait aujourd'hui.",
+        "Bandeau : VFormations — organisme certifié Qualiopi"
+      ]
+    ],
+    "conformite": "La formation apparaît comme DÉCOR, jamais comme proposition. Rappelle la règle d'or sans vendre.",
+    "source": "B3 grille G2 · B1 §2 · CLAUDE.md §2",
+    "boucles": [
+      {
+        "id": "A",
+        "ouvre": "Accroche",
+        "ferme": "Nuance",
+        "quoi": "pourquoi la troisième question surprend"
+      },
+      {
+        "id": "B",
+        "ouvre": "Transmission",
+        "ferme": "Transmission",
+        "quoi": "les cinq questions"
+      }
+    ]
+  },
+  {
+    "id": "V16",
+    "titre": "Ce qu'un fonds de formation ne financera jamais",
+    "cat": "Le décryptage de règle",
+    "persona": "Thomas",
+    "angle": "Frontière formation / prestation — personne ne la trace",
+    "format": "Face caméra",
+    "duree": "55 s",
+    "conscience": "2 → 3",
+    "note": 94,
+    "temps": [
+      [
+        "Accroche",
+        "Si on vous propose de faire vos vidéos à votre place et de le faire financer par un fonds de formation, c'est non. Et c'est non pour vous, pas seulement pour eux.",
+        "Face caméra, direct, pas de musique"
+      ],
+      [
+        "Ancrage",
+        "La distinction est simple et elle est dans la loi : les fonds de formation ne financent que de la formation réelle.",
+        "Un texte de loi à l'écran, référence visible"
+      ],
+      [
+        "Transmission",
+        "La frontière est nette, et il faut la voir avant de comprendre qui paie. Former, c'est vous apprendre à faire. Prester, c'est faire à votre place. Les deux sont parfaitement légitimes, et beaucoup d'acteurs font les deux — nous aussi. Ce qui ne l'est pas, c'est de présenter la seconde comme la première pour la faire financer. Concrètement : une prestation clé en main se facture séparément, hors financement, et elle n'est jamais conditionnée à une inscription en formation. Trois périmètres, trois contrats, trois factures.",
+        "Deux colonnes : « apprendre à faire » / « faire à votre place », une ligne nette entre les deux"
+      ],
+      [
+        "Nuance",
+        "Et voilà pourquoi c'est non pour vous : en cas de contrôle, c'est l'entreprise bénéficiaire qui doit rembourser, pas l'organisme. Un arrangement qui vous arrange aujourd'hui vous expose dans deux ans. La loi anti-fraude de juin 2026 a d'ailleurs renforcé les contrôles — je ne vous donnerai pas les montants d'amende qui circulent, je n'ai pas pu les vérifier à la source.",
+        "Un dossier de contrôle, cadrage neutre"
+      ],
+      [
+        "Sortie",
+        "Demandez toujours : qu'est-ce que je saurai faire seul à la fin ? Si la réponse est floue, ce n'est pas de la formation.",
+        "Bandeau : VFormations — organisme certifié Qualiopi"
+      ]
+    ],
+    "conformite": "Admet que VFormations fait les deux — l'aveu rend la frontière crédible. Refus explicite de citer un chiffre non vérifié.",
+    "source": "CLAUDE.md §2 · D0 §3 · loi n° 2026-534",
+    "boucles": [
+      {
+        "id": "A",
+        "ouvre": "Accroche",
+        "ferme": "Nuance",
+        "quoi": "pourquoi le risque est pour vous, pas pour eux"
+      },
+      {
+        "id": "B",
+        "ouvre": "Transmission",
+        "ferme": "Transmission",
+        "quoi": "où passe exactement la frontière"
+      }
+    ]
+  }
 ]
