@@ -65,7 +65,9 @@ for s in S:
 
     # 6. Le don est-il complet ? heuristique : une action faisable est nommee
     actions = ['ouvrez','regardez','posez','listez','cochez','notez','demandez',
-               'faites','appelez','verifiez','taguez','passez','multipliez','chiffrez']
+               'faites','appelez','verifiez','taguez','passez','multipliez','chiffrez',
+               'tracez','comptez','divisez','relisez','ecrivez','remplissez','additionnez',
+               'relancez','archivez','supprimez','testez','mesurez','rangez','soustrayez']
     if not any(a in plat(tout) for a in actions):
         warn.append(f'{ref} aucune action executable nommee — verifier R1')
 

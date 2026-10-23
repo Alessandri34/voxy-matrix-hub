@@ -865,5 +865,545 @@
         "quoi": "où passe exactement la frontière"
       }
     ]
+  },
+  {
+    "id": "V17",
+    "titre": "Le délai qui décide avant le prix",
+    "cat": "Le chiffre qu'on vous cache",
+    "persona": "Tous",
+    "angle": "Délai de réponse mesuré sur soi, pas sur une statistique empruntée",
+    "format": "Voix-off + écran",
+    "duree": "55 s",
+    "conscience": "2 → 3",
+    "note": 91,
+    "temps": [
+      [
+        "Accroche",
+        "Quand deux artisans proposent la même chose au même prix, ce n'est presque jamais le prix qui tranche. Et je ne vais pas vous donner le chiffre qu'on cite partout là-dessus — je vais vous dire pourquoi.",
+        "Plan serré sur deux téléphones posés côte à côte, un seul s'allume."
+      ],
+      [
+        "Ancrage",
+        "Si vous recevez des demandes par formulaire, par message ou par téléphone, ce qui suit se mesure chez vous en vingt minutes.",
+        "Boîte de réception sur ordinateur, défilement lent."
+      ],
+      [
+        "Transmission",
+        "Prenez vos dix dernières demandes entrantes. Pour chacune, notez deux heures : celle où elle est arrivée, celle où vous avez répondu. Faites la soustraction, et rangez les dix écarts du plus court au plus long. Vous obtenez votre délai réel, celui que vivent vos clients — pas celui que vous croyez tenir. Regardez surtout les trois plus longs : ce sont eux qui font votre réputation, pas la moyenne.",
+        "Feuille quadrillée, deux colonnes d'heures écrites à la main, soustractions dans la marge."
+      ],
+      [
+        "Nuance",
+        "Et voilà pourquoi je ne cite pas le fameux pourcentage de clients qui choisissent celui qui répond en premier : je l'ai cherché, il circule sous cinq valeurs différentes et aucune ne renvoie à une enquête. Votre relevé à vous, lui, est vrai. Il porte sur vos clients, dans votre métier, sur votre zone. Un chiffre emprunté ne vaut jamais un chiffre mesuré.",
+        "Capture d'écran de trois pages affichant trois pourcentages différents, surlignés."
+      ],
+      [
+        "Sortie",
+        "Faites le relevé sur dix demandes. Si les trois plus longs vous surprennent, vous saurez quoi corriger.",
+        "La feuille repliée, posée près du téléphone."
+      ]
+    ],
+    "conformite": "Aucune statistique empruntée. Aucun résultat promis. La méthode est mesurable par l'apprenant lui-même.",
+    "source": "A4 T07 (démontage des chiffres non sourcés) · A2 R3",
+    "boucles": [
+      {
+        "id": "A",
+        "ouvre": "Accroche",
+        "ferme": "Nuance",
+        "quoi": "pourquoi je refuse de vous donner le chiffre qui circule"
+      },
+      {
+        "id": "B",
+        "ouvre": "Transmission",
+        "ferme": "Transmission",
+        "quoi": "comment mesurer votre propre délai"
+      }
+    ]
+  },
+  {
+    "id": "V18",
+    "titre": "Les photos qui font venir, et celles qui décorent",
+    "cat": "Le geste",
+    "persona": "Léa",
+    "angle": "Photos de fiche d'établissement : fonction plutôt qu'esthétique",
+    "format": "Démonstration écran",
+    "duree": "50 s",
+    "conscience": "2 → 3",
+    "note": 89,
+    "temps": [
+      [
+        "Accroche",
+        "Vous avez des photos sur votre fiche Google. Il y en a une qui travaille beaucoup plus que les autres, et ce n'est pas celle que vous avez choisie en couverture.",
+        "Fiche d'établissement à l'écran, galerie de photos qui défile."
+      ],
+      [
+        "Ancrage",
+        "Ça vaut pour un salon, un restaurant, un atelier, un cabinet : tout lieu où quelqu'un doit décider de pousser la porte.",
+        "Devanture filmée depuis le trottoir d'en face."
+      ],
+      [
+        "Transmission",
+        "Il y a quatre types de photo, et ils ne servent pas à la même chose. La devanture, prise depuis le trottoir, dans le sens où l'on arrive : elle sert à reconnaître l'endroit. L'intérieur, pris depuis l'entrée : il sert à savoir où l'on met les pieds. Le travail lui-même, en gros plan : il sert à juger. Et l'équipe, visage visible : elle sert à décider qu'on ne tombera pas sur n'importe qui. Quatre photos, quatre questions auxquelles on répond avant de venir.",
+        "Les quatre types montrés l'un après l'autre, plein cadre."
+      ],
+      [
+        "Nuance",
+        "Celle qui compte le plus, c'est la devanture prise depuis le trottoir — et c'est presque toujours celle qui manque. On met en couverture une belle image d'intérieur, ou un logo. Mais quelqu'un qui arrive à pied cherche à reconnaître une façade, pas à admirer une déco. S'il ne reconnaît pas, il passe devant. Et une photo de logo en couverture ne répond à aucune des quatre questions.",
+        "Deux captures côte à côte : un logo en couverture, puis la façade réelle."
+      ],
+      [
+        "Sortie",
+        "Ouvrez votre fiche et regardez votre photo de couverture. Est-ce qu'on reconnaît votre porte ?",
+        "Main qui range le téléphone, façade en arrière-plan."
+      ]
+    ],
+    "conformite": "Aucun résultat promis. Aucune donnée de classement avancée. Geste exécutable le soir même.",
+    "source": "A0 persona Léa · CLAUDE.md §8quater (signaux locaux)",
+    "boucles": [
+      {
+        "id": "A",
+        "ouvre": "Accroche",
+        "ferme": "Nuance",
+        "quoi": "la photo qui compte plus que toutes les autres"
+      },
+      {
+        "id": "B",
+        "ouvre": "Transmission",
+        "ferme": "Transmission",
+        "quoi": "les quatre types de photo"
+      }
+    ]
+  },
+  {
+    "id": "V19",
+    "titre": "Le formulaire que personne ne finit",
+    "cat": "L'erreur que je vois toutes les semaines",
+    "persona": "Thomas",
+    "angle": "Friction de formulaire, testée sur son propre téléphone",
+    "format": "Partage d'écran commenté",
+    "duree": "50 s",
+    "conscience": "2 → 3",
+    "note": 88,
+    "temps": [
+      [
+        "Accroche",
+        "Votre formulaire de contact a probablement un champ de trop. Pas un champ inutile : un champ qui fait fermer la page.",
+        "Formulaire affiché sur téléphone, le pouce hésite puis quitte."
+      ],
+      [
+        "Ancrage",
+        "Si vous recevez moins de demandes que de visites, c'est le premier endroit à regarder — avant le texte, avant les couleurs.",
+        "Page de contact sur mobile, défilement."
+      ],
+      [
+        "Transmission",
+        "La règle tient en trois champs : de quoi avez-vous besoin pour rappeler quelqu'un ? Un nom, un moyen de le joindre, et une ligne pour dire ce qu'il veut. C'est tout. Tout le reste — la raison sociale, le code postal, le budget envisagé, le menu déroulant à sept entrées — peut se demander au téléphone, quand la conversation est engagée. Un formulaire n'est pas un dossier d'inscription : c'est une poignée de main.",
+        "Suppression des champs un par un à l'écran, le formulaire se réduit."
+      ],
+      [
+        "Nuance",
+        "Et le champ qui fait le plus de dégâts, c'est celui du budget. Il arrive trop tôt. Quelqu'un qui ne connaît pas encore vos prix ne peut pas y répondre sans se sentir jugé, alors il ferme. Testez-le vous-même : remplissez votre propre formulaire depuis votre téléphone, au doigt, debout, sans tricher. Vous saurez en trente secondes ce qui agace.",
+        "Le champ « budget » encadré en rouge, puis supprimé."
+      ],
+      [
+        "Sortie",
+        "Comptez vos champs maintenant. Au-delà de trois, demandez-vous ce que chacun vous apporte vraiment.",
+        "Formulaire final, trois champs, envoyé."
+      ]
+    ],
+    "conformite": "Aucun taux de conversion avancé. Aucun résultat promis. Test réalisable immédiatement.",
+    "source": "A0 persona Thomas · livrables/C-site (formulaire de fin d'article)",
+    "boucles": [
+      {
+        "id": "A",
+        "ouvre": "Accroche",
+        "ferme": "Nuance",
+        "quoi": "le champ qui fait abandonner"
+      },
+      {
+        "id": "B",
+        "ouvre": "Transmission",
+        "ferme": "Transmission",
+        "quoi": "la règle des trois champs"
+      }
+    ]
+  },
+  {
+    "id": "V20",
+    "titre": "Répondre à un avis négatif sans se justifier",
+    "cat": "Le décryptage de règle",
+    "persona": "Sophie",
+    "angle": "Réponse publique : structure en quatre phrases",
+    "format": "Face caméra",
+    "duree": "55 s",
+    "conscience": "2 → 3",
+    "note": 90,
+    "temps": [
+      [
+        "Accroche",
+        "Un avis à deux étoiles vient de tomber. Ce que vous allez écrire dans l'heure sera lu par beaucoup plus de monde que l'avis lui-même. Et il y a une phrase à ne jamais y mettre.",
+        "Notification d'avis sur téléphone, posé sur un comptoir."
+      ],
+      [
+        "Ancrage",
+        "La réponse ne s'adresse pas à la personne qui a écrit l'avis. Elle s'adresse à celle qui lira les deux, dans trois mois, avant de choisir.",
+        "Quelqu'un qui fait défiler des avis dans la rue."
+      ],
+      [
+        "Transmission",
+        "Quatre phrases, dans cet ordre. Un : vous remerciez d'avoir pris le temps d'écrire — sans ironie, c'est une information gratuite. Deux : vous reformulez le reproche en vos mots, pour montrer que vous l'avez lu. Trois : vous dites ce que vous faites à partir de maintenant, au présent et au concret. Quatre : vous proposez de poursuivre en privé. Pas d'explication longue, pas d'historique, pas de contexte. Quatre phrases, et on s'arrête.",
+        "Les quatre phrases qui s'écrivent à l'écran, l'une après l'autre."
+      ],
+      [
+        "Nuance",
+        "La phrase à ne jamais écrire, c'est celle qui commence par « Nous sommes surpris, car… ». Tout ce qui suit est une plaidoirie, et une plaidoirie publique donne raison à l'autre aux yeux du lecteur. Même quand vous avez raison. Surtout quand vous avez raison : le lecteur ne vérifiera pas, il verra deux personnes qui se disputent et il ira ailleurs.",
+        "La phrase tapée puis effacée caractère par caractère."
+      ],
+      [
+        "Sortie",
+        "Écrivez votre modèle de quatre phrases aujourd'hui, pendant que vous êtes calme. Le jour où l'avis tombe, vous ne le serez pas.",
+        "Carnet refermé sur le comptoir."
+      ]
+    ],
+    "conformite": "Aucun résultat promis. Aucune incitation à filtrer ou solliciter sélectivement des avis.",
+    "source": "A0 persona Sophie · A4 T11 (sollicitation d'avis non filtrée)",
+    "boucles": [
+      {
+        "id": "A",
+        "ouvre": "Accroche",
+        "ferme": "Nuance",
+        "quoi": "la phrase qu'il ne faut jamais écrire"
+      },
+      {
+        "id": "B",
+        "ouvre": "Transmission",
+        "ferme": "Transmission",
+        "quoi": "les quatre phrases de la réponse"
+      }
+    ]
+  },
+  {
+    "id": "V21",
+    "titre": "Le dossier parti sans réponse",
+    "cat": "La question qu'on me pose tout le temps",
+    "persona": "Karim",
+    "angle": "Relance écrite : rythme et contenu",
+    "format": "Voix-off + B-roll chantier",
+    "duree": "55 s",
+    "conscience": "2 → 3",
+    "note": 89,
+    "temps": [
+      [
+        "Accroche",
+        "Vous avez chiffré, vous avez envoyé, et depuis, rien. La question n'est pas s'il faut relancer : c'est combien de fois, et à quel moment on arrête.",
+        "Chantier calme, téléphone posé sur un établi."
+      ],
+      [
+        "Ancrage",
+        "Ça vaut pour tout métier qui chiffre avant de travailler : bâtiment, aménagement, prestation sur mesure.",
+        "Mains qui rangent un mètre et un carnet."
+      ],
+      [
+        "Transmission",
+        "Une relance utile tient en trois lignes et ne redemande rien. Première ligne : vous rappelez l'objet et la date, pour que la personne retrouve le fil sans chercher. Deuxième ligne : vous apportez un élément nouveau — une précision, une disponibilité qui se libère, une question que d'autres vous ont posée sur le même sujet. Troisième ligne : vous proposez une réponse simple, oui, non, ou plus tard. C'est le « plus tard » qui fait le travail : il rend la non-réponse inutile.",
+        "Un message court tapé sur téléphone, trois lignes visibles."
+      ],
+      [
+        "Nuance",
+        "Deux relances, et on arrête. La troisième ne convainc personne et elle vous coûte quelque chose de réel : la prochaine fois que cette personne aura un besoin, elle se souviendra d'avoir été harcelée plutôt que d'avoir été chiffrée. Le silence après deux relances est une réponse. Notez la date, passez à autre chose, et relancez dans six mois sur un autre motif.",
+        "Agenda papier, une date entourée six mois plus loin."
+      ],
+      [
+        "Sortie",
+        "Listez ce qui est parti sans réponse depuis trois mois. Relancez ceux qui n'ont eu qu'une relance, archivez les autres.",
+        "Pile de documents séparée en deux tas."
+      ]
+    ],
+    "conformite": "Aucun taux de transformation avancé. Aucune promesse de signature. Le mot « devis » n'apparaît pas en sortie.",
+    "source": "A0 persona Karim · A2 R3",
+    "boucles": [
+      {
+        "id": "A",
+        "ouvre": "Accroche",
+        "ferme": "Nuance",
+        "quoi": "combien de relances, et quand s'arrêter"
+      },
+      {
+        "id": "B",
+        "ouvre": "Transmission",
+        "ferme": "Transmission",
+        "quoi": "ce que contient une relance utile"
+      }
+    ]
+  },
+  {
+    "id": "V22",
+    "titre": "Le tableau d'acquisition tient sur une feuille",
+    "cat": "Le geste",
+    "persona": "Véronique",
+    "angle": "Suivi contacts → clients, cinq colonnes, sans outil",
+    "format": "Voix-off + écran",
+    "duree": "60 s",
+    "conscience": "3 → 3",
+    "note": 92,
+    "temps": [
+      [
+        "Accroche",
+        "Pour savoir ce qui vous amène des clients, vous n'avez besoin ni de logiciel ni d'abonnement. Cinq colonnes sur une feuille suffisent — et il y en a une que tout le monde oublie.",
+        "Feuille A4 vierge, règle, stylo."
+      ],
+      [
+        "Ancrage",
+        "Ça vaut dès que plusieurs canaux coexistent : recommandation, fiche Google, réseaux, site, salon professionnel.",
+        "Bureau de PME, écran éteint, papier au premier plan."
+      ],
+      [
+        "Transmission",
+        "Les cinq colonnes. Date du premier contact. Canal — et un seul, celui que la personne cite en premier. Objet de la demande, en cinq mots. Suite donnée : échange, chiffrage, rien. Et issue, renseignée plus tard : client, pas client, en attente. Une ligne par demande, remplie au moment où elle arrive, pas le dimanche soir de mémoire. Trente jours de ce relevé valent mieux qu'un an d'impressions.",
+        "Les cinq en-têtes tracés à la règle, puis trois lignes remplies."
+      ],
+      [
+        "Nuance",
+        "La colonne qu'on oublie, c'est la quatrième — la suite donnée. Sans elle, vous saurez d'où viennent les demandes, mais pas où elles s'arrêtent. Et c'est souvent là qu'est le problème : un canal qui amène beaucoup de demandes dont aucune n'arrive au chiffrage ne vous apporte rien, et il ressortira pourtant en tête de votre comptage. Le volume d'entrée ment ; le passage d'une étape à l'autre, non.",
+        "La quatrième colonne surlignée, les autres estompées."
+      ],
+      [
+        "Sortie",
+        "Tracez les cinq colonnes avant ce soir. La première ligne, c'est la prochaine demande qui arrive.",
+        "Feuille punaisée au mur, près du téléphone."
+      ]
+    ],
+    "conformite": "Aucun résultat promis. On enseigne à mesurer, jamais à obtenir. Aucun outil payant recommandé.",
+    "source": "A0 persona Véronique · A4 T01 · A2 R1",
+    "boucles": [
+      {
+        "id": "A",
+        "ouvre": "Accroche",
+        "ferme": "Nuance",
+        "quoi": "la colonne qu'on oublie systématiquement"
+      },
+      {
+        "id": "B",
+        "ouvre": "Transmission",
+        "ferme": "Transmission",
+        "quoi": "les cinq colonnes"
+      }
+    ]
+  },
+  {
+    "id": "V23",
+    "titre": "La prise de rendez-vous en ligne, et pour qui elle ne marche pas",
+    "cat": "Le comparatif qui tranche",
+    "persona": "Léa",
+    "angle": "Réservation en ligne : arbitrage par type d'activité",
+    "format": "Démonstration écran",
+    "duree": "50 s",
+    "conscience": "2 → 3",
+    "note": 87,
+    "temps": [
+      [
+        "Accroche",
+        "La réservation en ligne fait gagner du temps à presque tout le monde. Presque : il y a deux cas où elle vous en fait perdre, et il vaut mieux le savoir avant.",
+        "Écran de réservation, créneaux qui se remplissent."
+      ],
+      [
+        "Ancrage",
+        "Salon, cabinet, restaurant, atelier sur rendez-vous : partout où un créneau se réserve à l'avance.",
+        "Agenda papier et agenda écran côte à côte."
+      ],
+      [
+        "Transmission",
+        "Trois règles pour la poser. Un : le lien doit être visible sans chercher — sur la fiche d'établissement, dans la bio, en haut du site. S'il faut deux clics pour le trouver, il ne sert à rien. Deux : n'ouvrez que les créneaux que vous tiendrez vraiment, y compris en période chargée ; un créneau annulé coûte plus qu'un créneau jamais proposé. Trois : demandez un numéro de téléphone à la réservation, pas seulement un courriel — c'est ce qui vous permet de prévenir en cas d'imprévu.",
+        "Les trois réglages effectués à l'écran, l'un après l'autre."
+      ],
+      [
+        "Nuance",
+        "Les deux cas où c'est une mauvaise idée : quand la durée de la prestation dépend de ce qu'on trouve sur place, et quand le prix se discute avant. Un dépannage, un chantier à diagnostiquer, une prestation sur mesure : si vous laissez quelqu'un réserver un créneau d'une heure pour un travail qui en demande trois, vous décalez toute votre journée et vous commencez la relation par une mauvaise nouvelle. Là, un formulaire de demande de rappel vaut mieux qu'un agenda ouvert.",
+        "Un créneau d'une heure qui déborde sur les suivants dans l'agenda."
+      ],
+      [
+        "Sortie",
+        "Regardez votre activité : votre durée est-elle connue d'avance ? La réponse décide à votre place.",
+        "Agenda refermé."
+      ]
+    ],
+    "conformite": "Aucun outil nommé commercialement. Aucun résultat promis. Arbitrage présenté avec son coût.",
+    "source": "A0 persona Léa · A2 §Les 4 règles (R3 preuve plutôt que promesse)",
+    "boucles": [
+      {
+        "id": "A",
+        "ouvre": "Accroche",
+        "ferme": "Nuance",
+        "quoi": "les activités pour lesquelles c'est une mauvaise idée"
+      },
+      {
+        "id": "B",
+        "ouvre": "Transmission",
+        "ferme": "Transmission",
+        "quoi": "comment la poser correctement"
+      }
+    ]
+  },
+  {
+    "id": "V24",
+    "titre": "Les annuaires qui comptent, et ceux qui vous prennent une heure",
+    "cat": "Le mythe démonté",
+    "persona": "Karim",
+    "angle": "Citations locales : hiérarchie réelle et pièges",
+    "format": "Voix-off + captures",
+    "duree": "60 s",
+    "conscience": "2 → 3",
+    "note": 90,
+    "temps": [
+      [
+        "Accroche",
+        "On vous dira de vous inscrire partout. C'est une heure perdue par inscription, et il y en a une qui pèse plus que toutes les autres réunies.",
+        "Liste d'annuaires qui défile sans fin à l'écran."
+      ],
+      [
+        "Ancrage",
+        "Pour un artisan ou un commerce qui travaille dans un rayon de trente kilomètres, l'inscription en masse ne sert à rien. L'ordre, si.",
+        "Carte de l'Hérault, rayon tracé autour d'une commune."
+      ],
+      [
+        "Transmission",
+        "Par ordre d'utilité réelle. D'abord votre fiche d'établissement, complète : c'est elle qui apparaît quand on cherche votre métier près de chez soi. Ensuite les annuaires de votre chambre consulaire — chambre de métiers, chambre de commerce : ils sont légitimes et gratuits. Puis le portail régional de la formation et de l'orientation si votre activité y entre. Puis vos fédérations de métier. Et enfin, seulement, les plateformes de mise en relation — celles qui prennent une commission ou vendent vos coordonnées.",
+        "Les cinq niveaux empilés à l'écran, du plus large au plus étroit."
+      ],
+      [
+        "Nuance",
+        "La fiche d'établissement pèse plus que tout le reste réuni, et l'erreur courante est de la remplir en dix minutes avant de passer trois heures sur des annuaires obscurs. Quant aux annuaires qui vous demandent de l'argent pour « améliorer votre visibilité » : votre présence sur un site que personne ne consulte ne vous apporte rien, quel que soit le rang qu'on vous y vend. Vérifiez avant de payer — tapez le nom de l'annuaire suivi de votre métier et de votre ville, et regardez s'il sort.",
+        "Recherche tapée en direct, l'annuaire n'apparaît pas dans les résultats."
+      ],
+      [
+        "Sortie",
+        "Faites le test sur le prochain annuaire qui vous démarche. S'il ne sort pas lui-même, il ne vous fera pas sortir.",
+        "Téléphone reposé, appel non décroché."
+      ]
+    ],
+    "conformite": "Aucun annuaire payant recommandé. Aucune promesse de classement. Méthode de vérification fournie.",
+    "source": "A0 persona Karim · livrables/C-site/BACKLINKS.md · CLAUDE.md §6bis",
+    "boucles": [
+      {
+        "id": "A",
+        "ouvre": "Accroche",
+        "ferme": "Nuance",
+        "quoi": "celui qui pèse plus que tous les autres réunis"
+      },
+      {
+        "id": "B",
+        "ouvre": "Transmission",
+        "ferme": "Transmission",
+        "quoi": "la liste par ordre d'utilité"
+      }
+    ]
+  },
+  {
+    "id": "V25",
+    "titre": "Les quatre éléments du premier message",
+    "cat": "Le geste",
+    "persona": "Tous",
+    "angle": "Message de réponse : structure minimale",
+    "format": "Face caméra + incrustation",
+    "duree": "45 s",
+    "conscience": "2 → 3",
+    "note": 88,
+    "temps": [
+      [
+        "Accroche",
+        "Quelqu'un vous écrit. Votre réponse décide de la suite, et elle se joue sur quatre éléments — dont un que presque personne ne met.",
+        "Écran de messagerie, curseur qui clignote dans une réponse vide."
+      ],
+      [
+        "Ancrage",
+        "Message sur la fiche, formulaire du site, message privé : la structure est la même partout.",
+        "Trois écrans différents montrant la même conversation."
+      ],
+      [
+        "Transmission",
+        "Les quatre. Un : vous reprenez sa demande en une phrase, dans ses mots à lui, pour qu'il sache que vous avez lu. Deux : vous répondez à la question posée, même partiellement, même par « cela dépend de deux choses ». Trois : vous dites ce qui se passe ensuite et quand — pas « je reviens vers vous », mais « je vous rappelle demain avant midi ». Quatre : vous posez une seule question, celle dont vous avez besoin pour avancer.",
+        "Les quatre blocs du message qui s'écrivent à l'écran."
+      ],
+      [
+        "Nuance",
+        "Celui qu'on oublie, c'est le troisième : la date. « Je reviens vers vous » ne donne aucune prise, donc la personne continue de chercher ailleurs pendant qu'elle attend. Une heure annoncée, même lointaine, arrête la recherche — et si vous tenez l'heure annoncée, vous avez déjà prouvé quelque chose que vos concurrents n'ont pas prouvé.",
+        "La phrase « je reviens vers vous » remplacée par « demain avant midi »."
+      ],
+      [
+        "Sortie",
+        "Relisez le dernier message que vous avez envoyé. Est-ce qu'il contient une date ?",
+        "Téléphone posé, écran qui s'éteint."
+      ]
+    ],
+    "conformite": "Aucun résultat promis. Aucun taux de réponse avancé. Action vérifiable immédiatement.",
+    "source": "A0 personas · A2 R1",
+    "boucles": [
+      {
+        "id": "A",
+        "ouvre": "Accroche",
+        "ferme": "Nuance",
+        "quoi": "ce qui fait qu'on vous répond, ou pas"
+      },
+      {
+        "id": "B",
+        "ouvre": "Transmission",
+        "ferme": "Transmission",
+        "quoi": "les quatre éléments"
+      }
+    ]
+  },
+  {
+    "id": "V26",
+    "titre": "Ce que vous coûte une demande entrante",
+    "cat": "Le chiffre qu'on vous cache",
+    "persona": "Véronique",
+    "angle": "Coût par demande : calcul sans outil, limites incluses",
+    "format": "Voix-off + écran",
+    "duree": "60 s",
+    "conscience": "3 → 3",
+    "note": 91,
+    "temps": [
+      [
+        "Accroche",
+        "Vous savez ce que vous dépensez pour vous faire connaître. Vous savez rarement ce que vous coûte une demande entrante. Le calcul prend dix minutes, et le résultat surprend presque toujours — dans un sens précis.",
+        "Relevé bancaire et calculatrice posés sur un bureau."
+      ],
+      [
+        "Ancrage",
+        "Ça vaut dès qu'il y a une dépense régulière : publicité, abonnement, prestataire, ou simplement du temps passé.",
+        "Lignes de dépenses surlignées une à une."
+      ],
+      [
+        "Transmission",
+        "Trois temps. Un : additionnez ce que vous avez dépensé sur un canal pendant trois mois — en euros, et en heures converties au taux que vous vous payez. Deux : comptez les demandes arrivées par ce canal sur la même période, en vous servant du relevé à cinq colonnes. Trois : divisez. Vous obtenez le coût d'une demande par ce canal. Refaites-le pour chaque canal, et rangez-les du moins cher au plus cher.",
+        "Division posée à la main, résultat entouré."
+      ],
+      [
+        "Nuance",
+        "Et voilà dans quel sens ça surprend : les canaux gratuits ne le sont pas. Une heure passée à écrire et publier, comptée au taux que vous vous payez, finit souvent plus cher qu'une petite dépense publicitaire — et pourtant elle n'apparaît dans aucun budget. L'inverse existe aussi, et c'est rassurant : une recommandation coûte très peu et arrive très qualifiée. Mais elle ne se commande pas, donc elle ne se pilote pas. Un canal pas cher sur lequel vous n'avez aucune prise n'est pas une stratégie.",
+        "Deux colonnes : « dépensé » et « temps converti », la seconde plus haute."
+      ],
+      [
+        "Sortie",
+        "Chiffrez un seul canal, le plus récent. Le classement se fera tout seul, un canal après l'autre.",
+        "Feuille rangée dans une chemise."
+      ]
+    ],
+    "conformite": "On enseigne à mesurer un coût, jamais à obtenir un résultat. Aucun montant de formation. Limites du calcul énoncées.",
+    "source": "A0 persona Véronique · A2 V22 (relevé cinq colonnes) · A4 T08",
+    "boucles": [
+      {
+        "id": "A",
+        "ouvre": "Accroche",
+        "ferme": "Nuance",
+        "quoi": "pourquoi le chiffre obtenu va vous surprendre"
+      },
+      {
+        "id": "B",
+        "ouvre": "Transmission",
+        "ferme": "Transmission",
+        "quoi": "le calcul en trois temps"
+      }
+    ]
   }
 ]
