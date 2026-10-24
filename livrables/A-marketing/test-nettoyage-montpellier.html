@@ -2,8 +2,8 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
 <style>
-/* Mise en page : une fiche de tournage par annonce — bande d'identité,
-   puis la minute en sept temps, timecode en gouttière mono. */
+/* Mise en page : une fiche par annonce — bande d'identite, puis cinq
+   battements, timecode en gouttiere mono. Format court. */
 :root{
   --ground:#F2F4F3; --panel:#FFFFFF; --ink:#16211F; --ink-2:#4E615D;
   --line:#D6DEDB; --eau:#06706B; --signal:#C9700A; --signal-soft:#FBEEDD;
@@ -40,7 +40,6 @@ h3{font-size:1.05rem;font-weight:700}
 p{margin:0}
 a{color:var(--eau)}
 
-/* ── En-tête ─────────────────────────────────────────────── */
 .top{padding-block:clamp(2.2rem,1.4rem + 3vw,4rem) clamp(1.6rem,1rem + 2vw,2.6rem);
   border-bottom:1px solid var(--line)}
 .kicker{font-family:var(--mono);font-size:.74rem;letter-spacing:.14em;
@@ -51,7 +50,6 @@ a{color:var(--eau)}
   border:1px solid var(--line);border-radius:3px;padding:.32rem .6rem;
   color:var(--ink-2);background:var(--panel)}
 
-/* ── Avertissement ───────────────────────────────────────── */
 .note{background:var(--signal-soft);border-left:3px solid var(--signal);
   padding:1rem 1.1rem;margin-block:2rem;font-size:.93rem}
 .note b{color:var(--ink)}
@@ -59,7 +57,6 @@ a{color:var(--eau)}
   border:1px dashed var(--line);border-radius:3px;padding:.05em .4em;
   color:var(--signal);white-space:nowrap}
 
-/* ── Table des six ───────────────────────────────────────── */
 .somm{margin-block:2.4rem}
 .tbl{width:100%;overflow-x:auto}
 table{border-collapse:collapse;width:100%;font-size:.9rem;min-width:34rem}
@@ -68,14 +65,16 @@ th,td{text-align:left;padding:.62rem .7rem;border-bottom:1px solid var(--line);
 th{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;
   text-transform:uppercase;color:var(--ink-2);font-weight:500}
 td.num{font-family:var(--mono);color:var(--eau);width:2.6rem}
+td.sec{font-family:var(--mono);color:var(--ink-2);white-space:nowrap}
 
-/* ── Fiche ───────────────────────────────────────────────── */
 .fiche{background:var(--panel);border:1px solid var(--line);border-radius:4px;
   margin-block:1.6rem;overflow:hidden}
 .fiche > .band{display:flex;flex-wrap:wrap;gap:.75rem 1.4rem;align-items:baseline;
   padding:1.1rem 1.2rem;border-bottom:1px solid var(--line)}
 .band .no{font-family:var(--mono);font-weight:600;color:var(--eau);font-size:.95rem}
 .band h2{flex:1 1 16rem;min-width:0}
+.band .sec{font-family:var(--mono);font-size:.78rem;color:var(--signal);
+  font-weight:600;white-space:nowrap}
 .meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(11rem,1fr));
   gap:.1rem 1.4rem;padding:.9rem 1.2rem;border-bottom:1px solid var(--line);
   background:var(--ground)}
@@ -84,15 +83,18 @@ td.num{font-family:var(--mono);color:var(--eau);width:2.6rem}
   text-transform:uppercase;color:var(--ink-2);display:block}
 .meta dd{margin:0;font-weight:500}
 
-.temps{display:grid;grid-template-columns:5.2rem 1fr;gap:0}
+.temps{display:grid;grid-template-columns:5.4rem 1fr;gap:0}
 .tc{font-family:var(--mono);font-size:.74rem;color:var(--ink-2);
   padding:.95rem .7rem .95rem 1.2rem;border-bottom:1px solid var(--line);
   border-right:1px solid var(--line);white-space:nowrap}
 .tc b{display:block;color:var(--ink);font-weight:600;font-size:.72rem;
   letter-spacing:.04em;margin-bottom:.2rem}
 .dit{padding:.95rem 1.2rem;border-bottom:1px solid var(--line);min-width:0}
-.dit p{font-size:.97rem}
-.vu{margin-top:.5rem;font-size:.82rem;color:var(--ink-2);font-style:italic}
+.dit p{font-size:1rem}
+.dit .l{display:block}
+.vu{margin-top:.55rem;font-size:.82rem;color:var(--ink-2);font-style:italic}
+.tav{margin-top:.55rem;font-family:var(--mono);font-size:.76rem;
+  color:var(--signal);letter-spacing:.03em}
 .temps > :nth-last-child(-n+2){border-bottom:0}
 
 .boucle{display:inline-block;font-family:var(--mono);font-size:.66rem;
@@ -104,7 +106,6 @@ td.num{font-family:var(--mono);color:var(--eau);width:2.6rem}
   border-top:1px solid var(--line);background:var(--ground)}
 .pied b{color:var(--ink)}
 
-/* ── Banque d'accroches ──────────────────────────────────── */
 .banque{margin-block:3rem}
 .hooks{display:grid;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));
   gap:.9rem;margin-top:1.4rem}
@@ -115,7 +116,6 @@ td.num{font-family:var(--mono);color:var(--eau);width:2.6rem}
 .hook p{font-size:.94rem}
 .hook .pour{margin-top:.55rem;font-size:.79rem;color:var(--ink-2)}
 
-/* ── Plan de test ────────────────────────────────────────── */
 .test{margin-block:3rem;padding-block:1.8rem;border-top:1px solid var(--line);
   border-bottom:1px solid var(--line)}
 .etapes{display:grid;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));
@@ -139,43 +139,60 @@ footer{padding-block:2rem 3rem;color:var(--ink-2);font-size:.85rem}
 <div class="wrap top">
   <div class="kicker">Cas de test · société de nettoyage · Montpellier</div>
   <h1>Six annonces, six leviers</h1>
-  <p class="lede">Six scripts publicitaires pour une entreprise de propreté de l'agglomération.
-  Chacun vise un segment différent, défend un argument différent, et ouvre sur un type
-  d'accroche différent — pour qu'on puisse mesurer lequel travaille, et pas seulement
-  lequel plaît.</p>
+  <p class="lede">Format court. Chaque annonce vise un segment différent, défend un argument
+  différent, et ouvre sur un type d'accroche différent — pour qu'on puisse mesurer lequel
+  travaille, et pas seulement lequel plaît.</p>
   <div class="facts">
+    <span class="fact">26–32 s</span>
+    <span class="fact">5 battements</span>
     <span class="fact">6 segments</span>
     <span class="fact">6 arguments</span>
-    <span class="fact">6 types d'accroche</span>
-    <span class="fact">45–60 s</span>
-    <span class="fact">arc de vente, 7 temps</span>
-    <span class="fact">boucles décalées A5</span>
+    <span class="fact">6 accroches</span>
+    <span class="fact">accroche TAV</span>
   </div>
 </div>
 
 <div class="wrap">
 
 <div class="note">
-  <b>Ce qui reste à remplir.</b> Tout ce qui apparaît comme
-  <span class="jeton">«ENTREPRISE»</span>, <span class="jeton">[ZONE]</span> ou
-  <span class="jeton">[DÉLAI]</span> est un emplacement, pas une donnée. Aucun chiffre
-  de résultat, aucune certification et aucun délai d'intervention n'est inventé ici :
-  il faut les tenir avant de les dire. Un script publicitaire qui promet un délai que
-  l'exploitation ne tient pas produit un client mécontent au premier mois, pas un client.
+  <b>Ce qui a changé par rapport à la première version.</b> Les scripts passaient 45 à 55 s
+  en sept temps, avec des phrases longues et subordonnées. Au téléphone, dans un fil, ça ne
+  tient pas. Ils font maintenant <b>26 à 32 secondes en cinq battements</b>, une idée par
+  ligne, des phrases courtes. Le contenu n'a pas été coupé au hasard : ce sont les
+  <i>transitions</i> et les reformulations qui sautent — à l'oral, elles ne servent qu'à
+  l'écrit.
+</div>
+
+<div class="note">
+  <b>L'accroche est en TAV. Le reste ne l'est pas, et c'est voulu.</b>
+  Texte = audio = visuel sur les trois premières secondes : c'est ce que la méthode demande,
+  et c'est conforme à ce que la recherche valide — un texte court qui signale le point clé.
+  Mais dupliquer toute la voix en gros texte pendant le corps est la condition que
+  <b>16 tests sur 16</b> condamnent (taille d'effet 0,86). Donc : accroche en TAV,
+  puis 1 ou 2 termes clés en incrustation, et des <b>sous-titres</b> complets —
+  qui sont un objet de service, pas une emphase.
+</div>
+
+<div class="note">
+  <b>Ce qui reste à remplir.</b> <span class="jeton">«ENTREPRISE»</span>,
+  <span class="jeton">[ZONE]</span> : des emplacements, pas des données. Aucun délai,
+  aucune certification et aucun chiffre de résultat n'est inventé ici. Une annonce qui
+  promet un délai que l'exploitation ne tient pas fabrique un client mécontent au premier
+  mois, pas un client.
 </div>
 
 <section class="somm">
   <h2>Les six, d'un coup d'œil</h2>
   <div class="tbl">
     <table>
-      <thead><tr><th></th><th>Personnage</th><th>Segment</th><th>Argument défendu</th><th>Type d'accroche</th></tr></thead>
+      <thead><tr><th></th><th>Durée</th><th>Personnage</th><th>Argument défendu</th><th>Type d'accroche</th></tr></thead>
       <tbody>
-        <tr><td class="num">01</td><td>Nadia, office manager</td><td>Bureaux, PME tertiaire</td><td>La continuité : qui vient si l'agent est absent</td><td>L'aveu inversé</td></tr>
-        <tr><td class="num">02</td><td>Patrick, gestionnaire de copropriété</td><td>Syndic, parties communes</td><td>La traçabilité : prouver le passage</td><td>La question rendue</td></tr>
-        <tr><td class="num">03</td><td>Yannis, restaurateur</td><td>Restauration, Écusson</td><td>La conformité : hotte et périodicité</td><td>La conséquence d'abord</td></tr>
-        <tr><td class="num">04</td><td>Camille, conciergerie</td><td>Location saisonnière</td><td>La rotation : tenir le créneau court</td><td>Le compte à rebours</td></tr>
-        <tr><td class="num">05</td><td>Sandrine, coordinatrice de cabinet</td><td>Santé, cabinets</td><td>Le protocole : bionettoyage ≠ nettoyage</td><td>Le contraste de métier</td></tr>
-        <tr><td class="num">06</td><td>Mehdi, conducteur de travaux</td><td>Fin de chantier, livraison</td><td>Le délai : la remise des clés tient ou non</td><td>Le chiffre qui pique</td></tr>
+        <tr><td class="num">01</td><td class="sec">30 s</td><td>Nadia, office manager</td><td>La continuité : qui vient si l'agent est absent</td><td>L'aveu inversé</td></tr>
+        <tr><td class="num">02</td><td class="sec">28 s</td><td>Patrick, gestionnaire de copro</td><td>La traçabilité : prouver le passage</td><td>La question rendue</td></tr>
+        <tr><td class="num">03</td><td class="sec">31 s</td><td>Yannis, restaurateur</td><td>La hotte : jamais dans un contrat courant</td><td>La conséquence d'abord</td></tr>
+        <tr><td class="num">04</td><td class="sec">28 s</td><td>Camille, conciergerie</td><td>La rotation : ce qui casse le créneau</td><td>Le compte à rebours</td></tr>
+        <tr><td class="num">05</td><td class="sec">32 s</td><td>Sandrine, cabinet dentaire</td><td>Le protocole : la différence ne se voit pas</td><td>Le contraste de métier</td></tr>
+        <tr><td class="num">06</td><td class="sec">26 s</td><td>Mehdi, conducteur de travaux</td><td>Deux passages là où on en commande un</td><td>Le chiffre qui pique</td></tr>
       </tbody>
     </table>
   </div>
@@ -183,292 +200,298 @@ footer{padding-block:2rem 3rem;color:var(--ink-2);font-size:.85rem}
 
 <!-- ═══════════ 01 ═══════════ -->
 <article class="fiche">
-  <div class="band"><span class="no">01</span><h2>Le lundi matin qui se voit</h2></div>
+  <div class="band"><span class="no">01</span><h2>Le lundi matin qui se voit</h2><span class="sec">30 s</span></div>
   <div class="meta">
     <div><dt>Personnage</dt><dd>Nadia, office manager</dd></div>
     <div><dt>Argument</dt><dd>Continuité de service</dd></div>
     <div><dt>Accroche</dt><dd>L'aveu inversé</dd></div>
-    <div><dt>Durée</dt><dd>55 s · face caméra + B-roll</dd></div>
+    <div><dt>Format</dt><dd>Voix-off + B-roll</dd></div>
   </div>
   <div class="temps">
-    <div class="tc"><b>00–03</b>Hook TAV</div>
-    <div class="dit"><p>Votre prestataire de nettoyage a un problème que vous ne verrez jamais. Vous en verrez seulement la conséquence, un lundi matin.<span class="boucle ba">🔓 A</span></p>
-      <p class="vu">Texte à l'écran identique, mot pour mot. Plan fixe : un open space propre, une corbeille pleine au premier plan.</p></div>
+    <div class="tc"><b>00–04</b>Accroche</div>
+    <div class="dit"><p><span class="l">Votre prestataire de ménage a un problème.</span>
+      <span class="l">Vous le découvrirez un lundi matin.<span class="boucle ba">🔓 A</span></span></p>
+      <p class="tav">TAV — texte plein cadre : « VOUS LE DÉCOUVRIREZ UN LUNDI MATIN »</p>
+      <p class="vu">Open space impeccable. Une corbeille pleine au premier plan.</p></div>
 
-    <div class="tc"><b>03–12</b>Creuser</div>
-    <div class="dit"><p>Un agent est malade. Personne ne prévient. Vous arrivez à huit heures, le hall n'a pas été fait, les corbeilles sont pleines — et vous avez un client à neuf.</p>
-      <p class="vu">Entrée d'immeuble, lumière du matin, sacs non sortis.</p></div>
+    <div class="tc"><b>04–13</b>Le coût</div>
+    <div class="dit"><p><span class="l">L'agent est malade. Personne ne prévient.</span>
+      <span class="l">Vous arrivez à huit heures. Hall pas fait, corbeilles pleines.</span>
+      <span class="l">Client à neuf. C'est vous qui ramassez.</span>
+      <span class="l">Et ça recommencera.<span class="boucle bb">🔓 B</span></span></p>
+      <p class="vu">Entrée d'immeuble au petit matin. Mains en tailleur qui vident une corbeille.</p></div>
 
-    <div class="tc"><b>12–22</b>Le coût réel</div>
-    <div class="dit"><p>Ce qui coûte, ce n'est pas le ménage. C'est la demi-heure que vous passez à le faire vous-même, l'appel au prestataire qui ne décroche pas avant dix heures, et ce que votre visiteur emporte comme image. Et si c'est arrivé une fois, c'est qu'il y a une raison — elle n'est pas celle que vous croyez.<span class="boucle bb">🔓 B</span></p>
-      <p class="vu">Mains qui vident une corbeille en tailleur. Téléphone, sonnerie sans réponse.</p></div>
+    <div class="tc"><b>13–21</b>Le pivot</div>
+    <div class="dit"><p><span class="l">Changer de prestataire ? Le suivant aura les mêmes arrêts maladie.</span>
+      <span class="l">Le problème, ce n'est pas l'absence.</span>
+      <span class="l">C'est qu'elle n'ait pas de doublure.<span class="boucle bb">🔒 B</span></span></p>
+      <p class="tav">Incrustation : « DOUBLURE »</p>
+      <p class="vu">Planning mural. Deux noms sur la même ligne de site.</p></div>
 
-    <div class="tc"><b>22–31</b>Fausses solutions</div>
-    <div class="dit"><p>Changer de prestataire ne règle rien : le suivant aura les mêmes arrêts maladie. Recruter en interne non plus — vous récupérez le problème, et la paie avec. Le problème n'est pas l'absence, c'est qu'elle n'ait pas de doublure.<span class="boucle bb">🔒 B</span></p>
-      <p class="vu">Deux contrats posés côte à côte, feuilletés.</p></div>
-
-    <div class="tc"><b>31–41</b>La bascule</div>
-    <div class="dit"><p>Ce qui change tout, c'est le planning de remplacement. Un agent référent sur votre site. Un agent doublure, formé sur le même site, qui connaît vos codes et vos étages. Et un responsable de secteur qui déclenche sans que vous ayez à appeler.</p>
-      <p class="vu">Planning mural, deux noms sur la même ligne de site.</p></div>
-
-    <div class="tc"><b>41–50</b>La valeur</div>
-    <div class="dit"><p>Donc la question à poser avant de signer, la voici : « qui vient si mon agent est absent, et sous combien de temps ? » Un prestataire qui n'a pas la réponse toute prête n'a pas de doublure. Vous venez de gagner dix minutes de rendez-vous commercial.<span class="boucle ba">🔒 A</span></p>
+    <div class="tc"><b>21–27</b>La valeur</div>
+    <div class="dit"><p><span class="l">Alors posez une question avant de signer :</span>
+      <span class="l">« qui vient si mon agent est absent ? »</span>
+      <span class="l">Pas de réponse immédiate, pas de doublure.<span class="boucle ba">🔒 A</span></span></p>
       <p class="vu">La question en texte plein cadre.</p></div>
 
-    <div class="tc"><b>50–55</b>Crédibilité + CTA</div>
-    <div class="dit"><p>«ENTREPRISE», nettoyage de bureaux à Montpellier et [ZONE]. Posez-nous la question.</p>
-      <p class="vu">Bandeau : nom, zone, numéro. Pas de musique sur cette fin.</p></div>
+    <div class="tc"><b>27–30</b>Signature</div>
+    <div class="dit"><p>«ENTREPRISE» — bureaux, Montpellier et [ZONE].</p>
+      <p class="vu">Bandeau. Pas de musique sur la fin.</p></div>
   </div>
-  <div class="pied"><b>Pourquoi ça tient :</b> l'annonce ne vend pas la propreté, que tout le monde promet. Elle vend l'absence d'imprévu — et elle donne la question qui permet de tester n'importe quel concurrent, y compris nous. C'est ce qui la rend difficile à copier par quelqu'un qui n'a pas de doublure.</div>
+  <div class="pied"><b>Pourquoi ça tient :</b> l'annonce ne vend pas la propreté, que tout le monde promet. Elle donne une question qui teste n'importe quel concurrent — y compris nous. Difficile à copier quand on n'a pas de doublure.</div>
 </article>
 
 <!-- ═══════════ 02 ═══════════ -->
 <article class="fiche">
-  <div class="band"><span class="no">02</span><h2>« Le hall n'a pas été fait jeudi »</h2></div>
+  <div class="band"><span class="no">02</span><h2>« Le hall n'a pas été fait jeudi »</h2><span class="sec">28 s</span></div>
   <div class="meta">
     <div><dt>Personnage</dt><dd>Patrick, gestionnaire de copropriété</dd></div>
     <div><dt>Argument</dt><dd>Traçabilité du passage</dd></div>
     <div><dt>Accroche</dt><dd>La question rendue</dd></div>
-    <div><dt>Durée</dt><dd>50 s · voix-off + captures</dd></div>
+    <div><dt>Format</dt><dd>Voix-off + captures</dd></div>
   </div>
   <div class="temps">
-    <div class="tc"><b>00–04</b>Hook TAV</div>
-    <div class="dit"><p>Un copropriétaire vous écrit : « le hall n'a pas été fait jeudi ». Vous répondez quoi ?<span class="boucle ba">🔓 A</span></p>
-      <p class="vu">Un courriel à l'écran, la phrase surlignée. Texte identique en incrustation.</p></div>
+    <div class="tc"><b>00–04</b>Accroche</div>
+    <div class="dit"><p><span class="l">« Le hall n'a pas été fait jeudi. »</span>
+      <span class="l">Vous répondez quoi ?<span class="boucle ba">🔓 A</span></span></p>
+      <p class="tav">TAV — la phrase du copropriétaire, plein cadre, puis « VOUS RÉPONDEZ QUOI ? »</p>
+      <p class="vu">Un courriel à l'écran, la phrase surlignée.</p></div>
 
-    <div class="tc"><b>04–13</b>Creuser</div>
-    <div class="dit"><p>Vous ne savez pas. Vous n'étiez pas là. Alors vous appelez le prestataire, qui vous dit que si, l'agent est passé. Deux affirmations, aucune preuve, et c'est vous qui portez la réclamation en assemblée.</p>
-      <p class="vu">Hall d'immeuble vide, caméra à l'épaule.</p></div>
+    <div class="tc"><b>04–12</b>Le coût</div>
+    <div class="dit"><p><span class="l">Vous n'y étiez pas. Le prestataire dit que si.</span>
+      <span class="l">Deux versions, aucune preuve.</span>
+      <span class="l">Et c'est vous qui portez la réclamation en assemblée.<span class="boucle bb">🔓 B</span></span></p>
+      <p class="vu">Hall vide, caméra à l'épaule. Courriels qui défilent.</p></div>
 
-    <div class="tc"><b>13–23</b>Le coût réel</div>
-    <div class="dit"><p>Le coût n'est pas le hall. C'est le temps que vous passez à arbitrer entre deux versions, trois fois par mois, sur quatre immeubles. Et le jour où le conseil syndical décide de changer de prestataire, il vous le reproche à vous. Il existe pourtant un objet qui clôt ce débat en une phrase.<span class="boucle bb">🔓 B</span></p>
-      <p class="vu">Pile de courriels défilant, horodatages visibles.</p></div>
+    <div class="tc"><b>12–19</b>Le pivot</div>
+    <div class="dit"><p><span class="l">La feuille signée au stylo dans le local ?</span>
+      <span class="l">Elle se remplit le vendredi pour toute la semaine.</span>
+      <span class="l">Tout le monde le sait.<span class="boucle bb">🔒 B</span></span></p>
+      <p class="vu">Feuille froissée, cases cochées d'un seul trait.</p></div>
 
-    <div class="tc"><b>23–32</b>Fausses solutions</div>
-    <div class="dit"><p>La feuille de passage punaisée dans le local, celle qu'on signe au stylo : elle se signe le vendredi pour toute la semaine, et tout le monde le sait. Une photo envoyée par message, elle, n'est pas datée du lieu.<span class="boucle bb">🔒 B</span></p>
-      <p class="vu">Feuille de présence froissée, cases remplies d'un seul trait.</p></div>
+    <div class="tc"><b>19–25</b>La valeur</div>
+    <div class="dit"><p><span class="l">Ce qui clôt le débat : une photo horodatée à chaque passage.</span>
+      <span class="l">Votre réponse devient « jeudi, 6 h 12 ».</span>
+      <span class="l">Y compris quand c'est nous qui avons tort.<span class="boucle ba">🔒 A</span></span></p>
+      <p class="tav">Incrustation : « 06:12 »</p>
+      <p class="vu">Photo prise sur téléphone, heure et lieu affichés dessous.</p></div>
 
-    <div class="tc"><b>32–42</b>La bascule</div>
-    <div class="dit"><p>Ce qui clôt le débat, c'est un relevé horodaté avec photo, pris sur place, à l'entrée et à la sortie. Pas un rapport mensuel : une trace par passage, consultable le jour même, que vous pouvez transférer sans rien rédiger.</p>
-      <p class="vu">Téléphone : photo prise, heure et lieu affichés dessous.</p></div>
-
-    <div class="tc"><b>42–47</b>La valeur</div>
-    <div class="dit"><p>Votre réponse au copropriétaire devient donc : « jeudi, 6 h 12, voici la photo ». Et la discussion s'arrête là — y compris quand c'est nous qui avons tort, parce qu'alors on le voit aussi.<span class="boucle ba">🔒 A</span></p>
-      <p class="vu">Réponse tapée en trois secondes, pièce jointe.</p></div>
-
-    <div class="tc"><b>47–50</b>Crédibilité + CTA</div>
-    <div class="dit"><p>«ENTREPRISE», parties communes sur [ZONE]. Demandez à voir un relevé réel.</p>
+    <div class="tc"><b>25–28</b>Signature</div>
+    <div class="dit"><p>«ENTREPRISE» — parties communes sur [ZONE]. Demandez à voir un relevé réel.</p>
       <p class="vu">Bandeau sobre.</p></div>
   </div>
-  <div class="pied"><b>Pourquoi ça tient :</b> l'argument admet qu'il nous accuse aussi — « y compris quand c'est nous qui avons tort ». C'est ce qui le rend crédible pour un gestionnaire qui a déjà entendu toutes les promesses de sérieux.</div>
+  <div class="pied"><b>Pourquoi ça tient :</b> « y compris quand c'est nous qui avons tort » est la ligne qui fait tout. Un gestionnaire a déjà entendu toutes les promesses de sérieux ; il n'a jamais entendu celle-là.</div>
 </article>
 
 <!-- ═══════════ 03 ═══════════ -->
 <article class="fiche">
-  <div class="band"><span class="no">03</span><h2>Onze minutes, en commençant par le plafond</h2></div>
+  <div class="band"><span class="no">03</span><h2>Onze minutes, en commençant par le plafond</h2><span class="sec">31 s</span></div>
   <div class="meta">
     <div><dt>Personnage</dt><dd>Yannis, restaurateur</dd></div>
-    <div><dt>Argument</dt><dd>Conformité : hotte et périodicité</dd></div>
+    <div><dt>Argument</dt><dd>La hotte, hors contrat courant</dd></div>
     <div><dt>Accroche</dt><dd>La conséquence d'abord</dd></div>
-    <div><dt>Durée</dt><dd>55 s · voix-off + B-roll cuisine</dd></div>
+    <div><dt>Format</dt><dd>Voix-off + B-roll cuisine</dd></div>
   </div>
   <div class="temps">
-    <div class="tc"><b>00–04</b>Hook TAV</div>
-    <div class="dit"><p>Le contrôle a duré onze minutes. L'inspecteur a commencé par lever les yeux.<span class="boucle ba">🔓 A</span></p>
-      <p class="vu">Contre-plongée sur une hotte inox. Texte identique à l'écran.</p></div>
+    <div class="tc"><b>00–05</b>Accroche</div>
+    <div class="dit"><p><span class="l">Le contrôle a duré onze minutes.</span>
+      <span class="l">Il a commencé par lever les yeux.<span class="boucle ba">🔓 A</span></span></p>
+      <p class="tav">TAV — « IL A COMMENCÉ PAR LEVER LES YEUX »</p>
+      <p class="vu">Contre-plongée sur une hotte inox.</p></div>
 
-    <div class="tc"><b>04–13</b>Creuser</div>
-    <div class="dit"><p>La salle était impeccable. Les frigos aussi. Le sol, les plans de travail, la plonge : rien à dire. Mais le conduit au-dessus des feux n'avait pas été dégraissé depuis l'ouverture, et ça, ça se voit du sol.</p>
-      <p class="vu">Panoramique salle propre, puis cadrage serré sur un filtre encrassé.</p></div>
+    <div class="tc"><b>05–14</b>Le coût</div>
+    <div class="dit"><p><span class="l">La salle était impeccable. Les frigos aussi.</span>
+      <span class="l">Mais le conduit au-dessus des feux n'avait jamais été dégraissé.</span>
+      <span class="l">Et ça, ça se voit du sol.<span class="boucle bb">🔓 B</span></span></p>
+      <p class="vu">Panoramique salle nickel, puis cadrage serré sur un filtre encrassé.</p></div>
 
-    <div class="tc"><b>13–24</b>Le coût réel</div>
-    <div class="dit"><p>Ce n'est pas seulement une remarque sur un rapport. Un conduit chargé de graisse, c'est le départ de feu le plus courant en cuisine professionnelle — et votre assureur le sait. Il y a d'ailleurs une raison pour laquelle personne ne le nettoie, et elle est très simple.<span class="boucle bb">🔓 B</span></p>
-      <p class="vu">Document d'assurance feuilleté, clause soulignée au doigt.</p></div>
+    <div class="tc"><b>14–24</b>Le pivot</div>
+    <div class="dit"><p><span class="l">Votre équipe nettoie les filtres. Très bien.</span>
+      <span class="l">Le conduit, c'est un démontage, un accès en hauteur, une attestation.</span>
+      <span class="l">Ce n'est pas le même métier — et ce n'est jamais dans un contrat de nettoyage courant.<span class="boucle bb">🔒 B</span></span></p>
+      <p class="vu">Filtre lavé en plonge, puis caméra qui remonte vers le conduit.</p></div>
 
-    <div class="tc"><b>24–34</b>Fausses solutions</div>
-    <div class="dit"><p>La raison, c'est que ce n'est pas le même métier. Votre équipe nettoie les filtres, et elle le fait bien. Mais le conduit, le caisson et l'extraction demandent un démontage, un accès en hauteur et une attestation. Ce n'est pas du nettoyage courant, et ça n'est jamais dans un contrat de nettoyage courant.<span class="boucle bb">🔒 B</span></p>
-      <p class="vu">Filtre lavé en plonge, puis caméra qui remonte vers le conduit inaccessible.</p></div>
+    <div class="tc"><b>24–28</b>La valeur</div>
+    <div class="dit"><p><span class="l">Sa première question, après avoir levé les yeux :</span>
+      <span class="l">« vous avez l'attestation de dégraissage ? »<span class="boucle ba">🔒 A</span></span></p>
+      <p class="tav">Incrustation : « L'ATTESTATION »</p>
+      <p class="vu">Classeur ouvert à la bonne page, document tamponné.</p></div>
 
-    <div class="tc"><b>34–44</b>La bascule</div>
-    <div class="dit"><p>Ce qu'il faut, c'est une intervention distincte, à périodicité fixée, avec un rapport avant-après et une attestation datée. Vous la rangez avec vos documents d'hygiène, et elle répond à l'inspecteur avant qu'il pose la question.</p>
-      <p class="vu">Caisson ouvert, avant / après, puis document tamponné.</p></div>
-
-    <div class="tc"><b>44–51</b>La valeur</div>
-    <div class="dit"><p>Donc ce qu'il a demandé en premier, après avoir levé les yeux : « vous avez l'attestation de dégraissage ? ». Préparez-la, et les onze minutes se passent autrement.<span class="boucle ba">🔒 A</span></p>
-      <p class="vu">La question en plein cadre, puis le classeur ouvert à la bonne page.</p></div>
-
-    <div class="tc"><b>51–55</b>Crédibilité + CTA</div>
-    <div class="dit"><p>«ENTREPRISE», dégraissage de hottes sur [ZONE], attestation remise à chaque passage. Faites contrôler la vôtre.</p>
+    <div class="tc"><b>28–31</b>Signature</div>
+    <div class="dit"><p>«ENTREPRISE» — dégraissage de hottes sur [ZONE]. Attestation à chaque passage.</p>
       <p class="vu">Bandeau. Aucune musique.</p></div>
   </div>
-  <div class="pied"><b>À tenir avant de diffuser :</b> ne pas citer de texte réglementaire ni de périodicité chiffrée tant que la référence exacte n'est pas vérifiée à la source. Le script fonctionne sans, parce qu'il parle du contrôle vécu, pas du code.</div>
+  <div class="pied"><b>À tenir avant de diffuser :</b> aucune norme ni périodicité chiffrée tant que la référence exacte n'est pas vérifiée à la source. Le script tient sans, parce qu'il raconte un contrôle vécu, pas un article de code.</div>
 </article>
 
 <!-- ═══════════ 04 ═══════════ -->
 <article class="fiche">
-  <div class="band"><span class="no">04</span><h2>Quatre heures entre deux séjours</h2></div>
+  <div class="band"><span class="no">04</span><h2>Quatre heures entre deux séjours</h2><span class="sec">28 s</span></div>
   <div class="meta">
     <div><dt>Personnage</dt><dd>Camille, conciergerie</dd></div>
-    <div><dt>Argument</dt><dd>Rotation : tenir le créneau court</dd></div>
+    <div><dt>Argument</dt><dd>Tenir le créneau court</dd></div>
     <div><dt>Accroche</dt><dd>Le compte à rebours</dd></div>
-    <div><dt>Durée</dt><dd>45 s · plans courts, montage cut</dd></div>
+    <div><dt>Format</dt><dd>Plans courts, montage cut</dd></div>
   </div>
   <div class="temps">
-    <div class="tc"><b>00–04</b>Hook TAV</div>
-    <div class="dit"><p>Onze heures : départ. Quinze heures : arrivée. Entre les deux, tout — et ce n'est pas le ménage qui fait rater la rotation.<span class="boucle ba">🔓 A</span></p>
-      <p class="vu">Horloge en incrustation. Porte qui se ferme, puis valise dans le couloir.</p></div>
+    <div class="tc"><b>00–05</b>Accroche</div>
+    <div class="dit"><p><span class="l">Onze heures, départ. Quinze heures, arrivée.</span>
+      <span class="l">Ce n'est pas le ménage qui fait rater la rotation.<span class="boucle ba">🔓 A</span></span></p>
+      <p class="tav">TAV — « 11 H → 15 H » puis « CE N'EST PAS LE MÉNAGE »</p>
+      <p class="vu">Porte qui claque, valise dans le couloir. Horloge en incrustation.</p></div>
 
-    <div class="tc"><b>04–11</b>Creuser</div>
-    <div class="dit"><p>Vous avez quatre heures, et seulement si le départ est à l'heure. Un locataire qui traîne, et vous passez à trois. Un drap taché découvert à midi, et vous passez à deux.</p>
-      <p class="vu">Compte à rebours qui descend en surimpression.</p></div>
+    <div class="tc"><b>05–13</b>Le coût</div>
+    <div class="dit"><p><span class="l">Un locataire qui traîne : vous passez à trois heures.</span>
+      <span class="l">Et « appartement pas prêt à l'arrivée » reste en ligne des années.<span class="boucle bb">🔓 B</span></span></p>
+      <p class="vu">Compte à rebours en surimpression. Un avis à l'écran, phrase surlignée.</p></div>
 
-    <div class="tc"><b>11–20</b>Le coût réel</div>
-    <div class="dit"><p>Ce qui se paie, ce n'est pas l'heure perdue : c'est le commentaire. « Appartement pas prêt à l'arrivée » reste en ligne pendant des années et coûte des réservations longtemps après. Et il y a une étape précise où la rotation casse presque toujours.<span class="boucle bb">🔓 B</span></p>
-      <p class="vu">Un avis à l'écran, la phrase surlignée.</p></div>
+    <div class="tc"><b>13–21</b>Le pivot</div>
+    <div class="dit"><p><span class="l">Ce qui casse, c'est le linge. Pas le sol.</span>
+      <span class="l">Une machine ne sèche pas en quatre heures.</span>
+      <span class="l">Et une seule parure ne couvre pas deux rotations le même jour.<span class="boucle bb">🔒 B</span></span></p>
+      <p class="tav">Incrustation : « LE LINGE »</p>
+      <p class="vu">Tambour qui tourne. Horloge qui avance.</p></div>
 
-    <div class="tc"><b>20–29</b>Fausses solutions</div>
-    <div class="dit"><p>Cette étape, c'est le linge. Pas le sol, pas la salle de bain : le linge. Une machine lancée sur place ne sèche pas en quatre heures, et une seule parure de rechange ne couvre pas deux rotations le même jour. C'est là que tout le reste déraille.<span class="boucle bb">🔒 B</span></p>
-      <p class="vu">Machine en route, tambour qui tourne, horloge qui avance.</p></div>
+    <div class="tc"><b>21–25</b>La valeur</div>
+    <div class="dit"><p><span class="l">Alors on sort le linge du chemin critique.</span>
+      <span class="l">Parures échangées à chaque passage. Le reste tient.<span class="boucle ba">🔒 A</span></span></p>
+      <p class="vu">Pile de linge échangée à la porte. Appartement prêt, lumière de 14 h.</p></div>
 
-    <div class="tc"><b>29–37</b>La bascule</div>
-    <div class="dit"><p>Donc on sort le linge du créneau : parures en rotation, livrées propres et reprises sales à chaque passage. Le reste tient dans un déroulé fixe — même ordre, même durée, à deux quand la surface le demande — et se termine par les photos de l'état remis.</p>
-      <p class="vu">Pile de linge échangée à la porte. Déroulé affiché sur un téléphone.</p></div>
-
-    <div class="tc"><b>37–42</b>La valeur</div>
-    <div class="dit"><p>Ce qui fait rater une rotation, ce n'est donc jamais le temps de nettoyage. C'est ce qu'on n'a pas sorti du chemin critique avant de commencer.<span class="boucle ba">🔒 A</span></p>
-      <p class="vu">Appartement prêt, lumière de 14 h, personne dans le cadre.</p></div>
-
-    <div class="tc"><b>42–45</b>Crédibilité + CTA</div>
-    <div class="dit"><p>«ENTREPRISE», rotations locatives sur [ZONE]. Dites-nous votre créneau, on vous dit si on le tient.</p>
+    <div class="tc"><b>25–28</b>Signature</div>
+    <div class="dit"><p>«ENTREPRISE» — rotations locatives sur [ZONE]. Dites-nous votre créneau, on vous dit si on le tient.</p>
       <p class="vu">Bandeau.</p></div>
   </div>
-  <div class="pied"><b>Pourquoi ça tient :</b> l'annonce renonce à promettre un délai et propose l'inverse — « dites-nous votre créneau, on vous dit si on le tient ». Pour une conciergerie qui s'est déjà fait poser un lapin, c'est plus crédible qu'un engagement en gros caractères.</div>
+  <div class="pied"><b>Pourquoi ça tient :</b> l'annonce refuse de promettre un délai et propose l'inverse — « on vous dit si on le tient ». Pour une conciergerie qui s'est déjà fait poser un lapin, c'est plus crédible qu'un engagement en gros caractères.</div>
 </article>
 
 <!-- ═══════════ 05 ═══════════ -->
 <article class="fiche">
-  <div class="band"><span class="no">05</span><h2>Ce qui ne se voit pas après le passage</h2></div>
+  <div class="band"><span class="no">05</span><h2>Ce qui ne se voit pas après le passage</h2><span class="sec">32 s</span></div>
   <div class="meta">
     <div><dt>Personnage</dt><dd>Sandrine, coordinatrice de cabinet</dd></div>
-    <div><dt>Argument</dt><dd>Protocole : bionettoyage ≠ nettoyage</dd></div>
+    <div><dt>Argument</dt><dd>Le protocole, pas le résultat visible</dd></div>
     <div><dt>Accroche</dt><dd>Le contraste de métier</dd></div>
-    <div><dt>Durée</dt><dd>55 s · face caméra + démonstration</dd></div>
+    <div><dt>Format</dt><dd>Face caméra + démonstration</dd></div>
   </div>
   <div class="temps">
-    <div class="tc"><b>00–04</b>Hook TAV</div>
-    <div class="dit"><p>Nettoyer un cabinet, ce n'est pas nettoyer un bureau. Et la différence, justement, ne se voit pas.<span class="boucle ba">🔓 A</span></p>
+    <div class="tc"><b>00–05</b>Accroche</div>
+    <div class="dit"><p><span class="l">Nettoyer un cabinet, ce n'est pas nettoyer un bureau.</span>
+      <span class="l">Et la différence ne se voit pas.<span class="boucle ba">🔓 A</span></span></p>
+      <p class="tav">TAV — « LA DIFFÉRENCE NE SE VOIT PAS »</p>
       <p class="vu">Deux plans successifs : un open space, une salle de soins. Même propreté apparente.</p></div>
 
-    <div class="tc"><b>04–13</b>Creuser</div>
-    <div class="dit"><p>Dans un bureau, le résultat se juge à l'œil : c'est propre ou ça ne l'est pas. Dans une salle de soins, une surface peut être visuellement impeccable et ne pas être traitée. Vous ne pouvez pas le vérifier en regardant.</p>
-      <p class="vu">Plan de travail brillant, puis gant qui passe dessus.</p></div>
+    <div class="tc"><b>05–14</b>Le coût</div>
+    <div class="dit"><p><span class="l">Dans un bureau, le résultat se juge à l'œil.</span>
+      <span class="l">Ici, une surface peut être impeccable et ne pas être traitée.</span>
+      <span class="l">Et c'est le praticien qui en répond.<span class="boucle bb">🔓 B</span></span></p>
+      <p class="vu">Plan de travail brillant, gant qui passe dessus. Registre d'hygiène, colonnes vides.</p></div>
 
-    <div class="tc"><b>13–24</b>Le coût réel</div>
-    <div class="dit"><p>Et c'est vous qui en répondez. Le praticien engage sa responsabilité, pas le prestataire. Donc vous avez besoin d'une méthode que vous puissiez décrire à quelqu'un qui vous la demande — et il y a trois choses qu'on ne fait jamais dans le bon ordre.<span class="boucle bb">🔓 B</span></p>
-      <p class="vu">Registre d'hygiène ouvert, colonnes vides.</p></div>
+    <div class="tc"><b>14–25</b>Le pivot</div>
+    <div class="dit"><p><span class="l">Trois choses décident, et aucune ne se voit.</span>
+      <span class="l">L'ordre des zones : du plus propre vers le plus sale.</span>
+      <span class="l">Le sens : du haut vers le bas.</span>
+      <span class="l">Le temps de contact : essuyer trop tôt, c'est n'avoir rien fait.<span class="boucle bb">🔒 B</span></span></p>
+      <p class="tav">Trois repères numérotés à l'image : ZONES · HAUTEUR · TEMPS</p>
+      <p class="vu">Chariots distincts, codes couleur. Un minuteur qui tourne.</p></div>
 
-    <div class="tc"><b>24–35</b>Fausses solutions</div>
-    <div class="dit"><p>Les trois : le sens des zones, le sens des surfaces, le sens du temps. On va du plus propre vers le plus sale, jamais l'inverse. On va du haut vers le bas. Et chaque produit a un temps de contact qui doit être respecté — l'essuyer trop tôt revient à ne rien avoir fait. Un agent qui ignore ces trois-là nettoie très bien, et ne désinfecte rien.<span class="boucle bb">🔒 B</span></p>
-      <p class="vu">Trois flèches tracées au sol en surimpression : zones, hauteur, minuteur.</p></div>
+    <div class="tc"><b>25–29</b>La valeur</div>
+    <div class="dit"><p><span class="l">Voilà la différence.</span>
+      <span class="l">Dans un bureau, on vous livre un résultat.</span>
+      <span class="l">Ici, on doit pouvoir vous montrer la méthode.<span class="boucle ba">🔒 A</span></span></p>
+      <p class="vu">Fiche de protocole plastifiée, remise en main propre.</p></div>
 
-    <div class="tc"><b>35–45</b>La bascule</div>
-    <div class="dit"><p>Ce qui change, c'est un protocole écrit par type de pièce, des agents formés spécifiquement sur ce protocole, un matériel qui ne circule pas d'une zone à l'autre, et une traçabilité des produits utilisés — pas une promesse d'hygiène, une procédure qu'on peut vous montrer.</p>
-      <p class="vu">Fiche de protocole plastifiée au mur. Chariots distincts, codes couleur.</p></div>
-
-    <div class="tc"><b>45–51</b>La valeur</div>
-    <div class="dit"><p>La différence entre les deux métiers, c'est donc celle-ci : dans un bureau, on vous livre un résultat. Ici, on doit pouvoir vous livrer la méthode qui l'a produit.<span class="boucle ba">🔒 A</span></p>
-      <p class="vu">Classeur de protocoles remis en main propre.</p></div>
-
-    <div class="tc"><b>51–55</b>Crédibilité + CTA</div>
-    <div class="dit"><p>«ENTREPRISE», cabinets et locaux de santé sur [ZONE]. Demandez le protocole avant le devis.</p>
+    <div class="tc"><b>29–32</b>Signature</div>
+    <div class="dit"><p>«ENTREPRISE» — cabinets et locaux de santé sur [ZONE]. Demandez le protocole avant le devis.</p>
       <p class="vu">Bandeau.</p></div>
   </div>
-  <div class="pied"><b>À tenir avant de diffuser :</b> ne jamais employer les mots « stérile », « aseptisé » ni citer une norme sans référence vérifiée — c'est le script du lot le plus exposé. Le texte ci-dessus décrit une méthode de travail, ce qui est vérifiable, et ne revendique aucun résultat microbiologique, qui ne le serait pas.</div>
+  <div class="pied"><b>À tenir avant de diffuser :</b> jamais « stérile » ni « aseptisé », aucune norme citée sans référence vérifiée. Le script décrit une <i>méthode de travail</i> — vérifiable — et ne revendique aucun résultat microbiologique, qui ne le serait pas. C'est le script le plus exposé des six.</div>
 </article>
 
 <!-- ═══════════ 06 ═══════════ -->
 <article class="fiche">
-  <div class="band"><span class="no">06</span><h2>Six jours avant la remise des clés</h2></div>
+  <div class="band"><span class="no">06</span><h2>Six jours avant la remise des clés</h2><span class="sec">26 s</span></div>
   <div class="meta">
     <div><dt>Personnage</dt><dd>Mehdi, conducteur de travaux</dd></div>
-    <div><dt>Argument</dt><dd>Délai : tenir la livraison</dd></div>
+    <div><dt>Argument</dt><dd>Deux passages, pas un</dd></div>
     <div><dt>Accroche</dt><dd>Le chiffre qui pique</dd></div>
-    <div><dt>Durée</dt><dd>50 s · voix-off + B-roll chantier</dd></div>
+    <div><dt>Format</dt><dd>Voix-off + B-roll chantier</dd></div>
   </div>
   <div class="temps">
-    <div class="tc"><b>00–04</b>Hook TAV</div>
-    <div class="dit"><p>Remise des clés dans six jours. Les peintres partent dans trois. Et le nettoyage n'est toujours pas commandé.<span class="boucle ba">🔓 A</span></p>
-      <p class="vu">Calendrier mural, trois dates entourées. Texte identique en incrustation.</p></div>
+    <div class="tc"><b>00–06</b>Accroche</div>
+    <div class="dit"><p><span class="l">Remise des clés dans six jours.</span>
+      <span class="l">Les peintres partent dans trois.</span>
+      <span class="l">Le nettoyage n'est pas commandé.<span class="boucle ba">🔓 A</span></span></p>
+      <p class="tav">TAV — « J-6 · J-3 · 0 » puis « PAS COMMANDÉ »</p>
+      <p class="vu">Calendrier mural, trois dates entourées.</p></div>
 
-    <div class="tc"><b>04–12</b>Creuser</div>
-    <div class="dit"><p>Ça n'arrive pas par négligence. Le nettoyage de fin de chantier est le dernier poste de la liste, donc le dernier auquel on pense — et le seul qui ne peut pas commencer avant que les autres aient fini.</p>
-      <p class="vu">Planning de chantier, dernière ligne vide.</p></div>
-
-    <div class="tc"><b>12–22</b>Le coût réel</div>
-    <div class="dit"><p>Et il ne se rattrape pas en ajoutant du monde. Un sol protégé qu'on découvre taché, une vitre qu'on raye en voulant aller vite, et vous repassez après la livraison, sous réserves, devant l'acquéreur. Il y a une raison précise pour laquelle un seul passage ne suffit jamais.<span class="boucle bb">🔓 B</span></p>
+    <div class="tc"><b>06–12</b>Le coût</div>
+    <div class="dit"><p><span class="l">Et ça ne se rattrape pas en ajoutant du monde.</span>
+      <span class="l">Vous repasserez sous réserves. Devant l'acquéreur.<span class="boucle bb">🔓 B</span></span></p>
       <p class="vu">Procès-verbal de livraison, colonne « réserves » qui se remplit.</p></div>
 
-    <div class="tc"><b>22–32</b>Fausses solutions</div>
-    <div class="dit"><p>La raison, c'est que la poussière de chantier retombe. Elle est en suspension tant que les corps d'état circulent, et elle se redépose après votre passage. Un nettoyage unique la veille donne un logement propre le soir et gris le matin. Il en faut deux : un gros œuvre, puis une finition après le dernier intervenant.<span class="boucle bb">🔒 B</span></p>
+    <div class="tc"><b>12–19</b>Le pivot</div>
+    <div class="dit"><p><span class="l">Parce que la poussière de chantier retombe.</span>
+      <span class="l">Un nettoyage la veille donne un logement propre le soir.</span>
+      <span class="l">Et gris le matin.<span class="boucle bb">🔒 B</span></span></p>
+      <p class="tav">Incrustation : « ELLE RETOMBE »</p>
       <p class="vu">Lumière rasante sur un sol, voile de poussière visible.</p></div>
 
-    <div class="tc"><b>32–42</b>La bascule</div>
-    <div class="dit"><p>Donc le nettoyage se cale comme un lot, pas comme une tâche : une date de passage gros œuvre, une date de finition fixée après le dernier corps d'état, et une pré-réception faite avec vous, pour que les réserves tombent avant l'acquéreur, pas devant lui.</p>
-      <p class="vu">Deux lignes ajoutées au planning, dates posées.</p></div>
+    <div class="tc"><b>19–23</b>La valeur</div>
+    <div class="dit"><p><span class="l">L'erreur n'est pas d'avoir commandé tard.</span>
+      <span class="l">C'est d'avoir prévu un passage là où il en faut deux.<span class="boucle ba">🔒 A</span></span></p>
+      <p class="vu">Deux lignes ajoutées au planning. Logement livré, aucune trace.</p></div>
 
-    <div class="tc"><b>42–47</b>La valeur</div>
-    <div class="dit"><p>L'erreur de planning n'est donc pas d'avoir commandé tard. C'est d'avoir prévu un passage là où il en faut deux.<span class="boucle ba">🔒 A</span></p>
-      <p class="vu">Logement livré, lumière du matin, aucune trace.</p></div>
-
-    <div class="tc"><b>47–50</b>Crédibilité + CTA</div>
-    <div class="dit"><p>«ENTREPRISE», fin de chantier et livraison sur [ZONE]. Donnez-nous votre date de remise, on remonte le planning avec vous.</p>
+    <div class="tc"><b>23–26</b>Signature</div>
+    <div class="dit"><p>«ENTREPRISE» — fin de chantier sur [ZONE]. Donnez-nous votre date, on remonte le planning.</p>
       <p class="vu">Bandeau.</p></div>
   </div>
-  <div class="pied"><b>Pourquoi ça tient :</b> c'est le seul des six qui s'adresse à quelqu'un qui achète déjà du nettoyage. L'annonce ne lui dit pas qu'il a tort de ne pas en acheter : elle lui dit qu'il en achète la mauvaise quantité. C'est un angle beaucoup moins défendu.</div>
+  <div class="pied"><b>Pourquoi ça tient :</b> le seul des six qui parle à quelqu'un qui achète déjà du nettoyage. Il ne lui dit pas qu'il a tort d'en acheter — il lui dit qu'il en achète la mauvaise quantité. Angle beaucoup moins défendu.</div>
 </article>
 
 <!-- ═══════════ BANQUE ═══════════ -->
 <section class="banque">
   <h2>Accroches de rechange</h2>
-  <p class="lede">Même métier, autres entrées. À tester en remplacement des trois premières
-  secondes d'un script existant : on garde tout le reste, on ne change que l'accroche.
-  C'est le seul moyen de savoir si c'est l'accroche qui travaille.</p>
+  <p class="lede">Même métier, autres entrées. À tester en remplacement des quatre premières
+  secondes d'un script existant : on garde tout le reste, mot pour mot. C'est le seul moyen
+  de savoir si c'est l'accroche qui travaille.</p>
   <div class="hooks">
-    <div class="hook"><div class="type">L'objet accusateur</div><p>« Il y a un endroit que personne ne nettoie jamais, et c'est le premier que regarde un visiteur. »</p><p class="pour">Bureaux · commerces</p></div>
-    <div class="hook"><div class="type">Le aveu du métier</div><p>« Je vais vous dire ce qu'un devis de nettoyage ne contient jamais, et pourquoi. »</p><p class="pour">Tous segments · forte rétention</p></div>
-    <div class="hook"><div class="type">La comparaison muette</div><p>« Ces deux halls ont été nettoyés le même jour. Un seul a été fait correctement. »</p><p class="pour">Copropriétés</p></div>
-    <div class="hook"><div class="type">Le calcul qu'on ne fait pas</div><p>« Combien d'heures par mois votre équipe passe-t-elle à finir le travail du prestataire ? »</p><p class="pour">Bureaux · PME</p></div>
-    <div class="hook"><div class="type">Le temps réel</div><p>« Un passage de bureau de 300 m² dure quarante minutes. Si le vôtre dure vingt, vous savez ce qui est sauté. »</p><p class="pour">Bureaux — à chiffrer avant usage</p></div>
-    <div class="hook"><div class="type">La saison</div><p>« En août, votre immeuble est vide. C'est le seul moment où tout peut être fait. »</p><p class="pour">Copropriétés · Montpellier</p></div>
-    <div class="hook"><div class="type">Le vocabulaire</div><p>« On vous a vendu un “nettoyage complet”. Demandez ce que ça couvre. Personne ne sait. »</p><p class="pour">Tous segments</p></div>
+    <div class="hook"><div class="type">L'objet accusateur</div><p>« Il y a un endroit que personne ne nettoie. C'est le premier que regarde un visiteur. »</p><p class="pour">Bureaux · commerces</p></div>
+    <div class="hook"><div class="type">L'aveu du métier</div><p>« Ce qu'un devis de nettoyage ne contient jamais. »</p><p class="pour">Tous segments</p></div>
+    <div class="hook"><div class="type">La comparaison muette</div><p>« Ces deux halls ont été nettoyés le même jour. »</p><p class="pour">Copropriétés · très visuel</p></div>
+    <div class="hook"><div class="type">Le calcul qu'on ne fait pas</div><p>« Combien d'heures par mois votre équipe finit-elle le travail du prestataire ? »</p><p class="pour">Bureaux · PME</p></div>
+    <div class="hook"><div class="type">La saison</div><p>« En août votre immeuble est vide. C'est le seul moment où tout peut être fait. »</p><p class="pour">Copropriétés · Montpellier</p></div>
+    <div class="hook"><div class="type">Le vocabulaire</div><p>« On vous a vendu un “nettoyage complet”. Demandez ce que ça couvre. »</p><p class="pour">Tous segments</p></div>
     <div class="hook"><div class="type">La contre-intuition</div><p>« Passer plus souvent ne sert à rien si on passe dans le mauvais ordre. »</p><p class="pour">Santé · restauration</p></div>
-    <div class="hook"><div class="type">Le témoin matériel</div><p>« Regardez une plinthe. Elle vous dit en deux secondes qui s'occupe du reste. »</p><p class="pour">Tous segments · très visuel</p></div>
+    <div class="hook"><div class="type">Le témoin matériel</div><p>« Regardez une plinthe. Elle vous dit qui s'occupe du reste. »</p><p class="pour">Tous segments · très visuel</p></div>
+    <div class="hook"><div class="type">Le temps réel</div><p>« Si votre passage dure vingt minutes, vous savez ce qui est sauté. »</p><p class="pour">Bureaux — à chiffrer avant usage</p></div>
   </div>
 </section>
 
 <!-- ═══════════ TEST ═══════════ -->
 <section class="test">
   <h2>Comment savoir lequel marche</h2>
-  <p class="lede">Six annonces qui diffèrent sur trois dimensions à la fois ne se comparent pas :
-  si la 03 l'emporte, on ne saura pas si c'est le segment, l'argument ou l'accroche. Il faut
-  séparer les variables.</p>
+  <p class="lede">Six annonces qui diffèrent sur trois dimensions à la fois ne se comparent
+  pas : si la 03 l'emporte, on ne saura pas si c'est le segment, l'argument ou l'accroche.
+  Il faut séparer les variables.</p>
   <div class="etapes">
     <div class="etape"><div class="n">Étape 1</div><h3>Les six, à budget égal</h3><p>Même montant, même durée, mêmes zones. On ne cherche pas un gagnant : on cherche quels segments réagissent et lesquels restent muets.</p></div>
     <div class="etape"><div class="n">Étape 2</div><h3>Le segment, pas l'annonce</h3><p>On garde les deux segments qui répondent. Les quatre autres sortent — ce n'est pas l'annonce qui a échoué, c'est l'audience qui n'était pas là.</p></div>
-    <div class="etape"><div class="n">Étape 3</div><h3>Trois accroches, un seul corps</h3><p>Sur chaque segment retenu, on tourne trois versions qui ne diffèrent que par les trois premières secondes. Le reste, mot pour mot identique.</p></div>
-    <div class="etape"><div class="n">Étape 4</div><h3>La rétention, pas les vues</h3><p>On relève la rétention à 15 s et à 40 s. Le taux à 3 s mesure l'accroche ; c'est entre les deux autres points que la structure se juge.</p></div>
+    <div class="etape"><div class="n">Étape 3</div><h3>Trois accroches, un seul corps</h3><p>Sur chaque segment retenu, trois versions qui ne diffèrent que par les quatre premières secondes. Le reste identique, mot pour mot.</p></div>
+    <div class="etape"><div class="n">Étape 4</div><h3>La rétention, pas les vues</h3><p>Sur 30 s, relever la rétention à 10 s et en fin de vidéo. Le taux à 3 s mesure l'accroche ; c'est après que la structure se juge.</p></div>
   </div>
   <div class="note" style="margin-top:1.8rem">
-    <b>Ce que ce plan ne donnera pas.</b> Six annonces sur quelques jours produisent un faisceau
-    d'indices, pas une démonstration. Un écart qui ne se répète pas sur une deuxième vague ne
-    vaut rien, et aucun des chiffres obtenus n'a à être publié comme un résultat.
+    <b>Ce que ce plan ne donnera pas.</b> Six annonces sur quelques jours produisent un
+    faisceau d'indices, pas une démonstration. Un écart qui ne se répète pas sur une
+    deuxième vague ne vaut rien, et aucun des chiffres obtenus n'a à être publié comme
+    un résultat.
   </div>
 </section>
 
 <footer>
-  Cas de test. Arc de vente en sept temps et boucles décalées —
+  Cas de test. Cinq battements, accroche en TAV, boucles décalées —
   <span class="jeton">🔓</span> ouverture, <span class="jeton">🔒</span> fermeture :
-  la boucle B s'ouvre avant que A se referme, pour qu'aucune seconde ne reste sans question en cours.
+  la boucle B s'ouvre avant que A se referme, pour qu'aucune seconde ne reste sans
+  question en cours.
 </footer>
 
 </div>
