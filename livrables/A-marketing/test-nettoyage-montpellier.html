@@ -49,7 +49,6 @@ p{margin:0}
   border:1px dashed var(--line);border-radius:3px;padding:.05em .4em;
   color:var(--signal);white-space:nowrap}
 
-/* ── Signal ─────────────────────────────────────────── */
 .sig{margin-block:2.2rem;background:var(--panel);border:1px solid var(--line);
   border-radius:4px;padding:1.3rem 1.3rem 1.4rem}
 .sig .lab{font-family:var(--mono);font-size:.68rem;letter-spacing:.12em;
@@ -64,7 +63,6 @@ p{margin:0}
   text-transform:uppercase;color:var(--eau);display:block;margin-bottom:.1rem}
 .quali dd{margin:0;color:var(--ink-2)}
 
-/* ── Angles ─────────────────────────────────────────── */
 .tbl{width:100%;overflow-x:auto;margin-top:1.1rem}
 table{border-collapse:collapse;width:100%;font-size:.92rem;min-width:32rem}
 th,td{text-align:left;padding:.65rem .7rem;border-bottom:1px solid var(--line);
@@ -74,7 +72,6 @@ th{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;
 td.num{font-family:var(--mono);color:var(--eau);width:2.4rem}
 td.who{font-weight:600;white-space:nowrap}
 
-/* ── Script ─────────────────────────────────────────── */
 .script{background:var(--panel);border:1px solid var(--line);border-radius:4px;
   margin-block:1.5rem;padding:1.3rem}
 .script > h2{margin-bottom:.7rem}
@@ -85,8 +82,10 @@ td.who{font-weight:600;white-space:nowrap}
   border-bottom:1px solid var(--line)}
 .bloc{padding-block:.85rem;border-bottom:1px solid var(--line)}
 .bloc:last-of-type{border-bottom:0}
+.bloc.hook{background:var(--ground);margin-inline:-1.3rem;padding-inline:1.3rem;
+  border-top:1px solid var(--line)}
 .ind{font-size:.83rem;color:var(--ink-2);font-style:italic;margin-bottom:.3rem}
-.dit{font-size:1.06rem;line-height:1.5}
+.dit{font-size:1.06rem;line-height:1.55}
 .cta{margin-top:1rem;padding-top:1rem;border-top:2px solid var(--eau);
   font-size:.97rem}
 .cta b{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;
@@ -94,14 +93,13 @@ td.who{font-weight:600;white-space:nowrap}
 .conf{margin-top:.8rem;font-size:.82rem;color:var(--ink-2)}
 .conf b{color:var(--ink)}
 
-/* ── Banque ─────────────────────────────────────────── */
 .hooks{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));
   gap:.8rem;margin-top:1.2rem}
-.hook{background:var(--panel);border:1px solid var(--line);border-radius:4px;
+.hook-c{background:var(--panel);border:1px solid var(--line);border-radius:4px;
   padding:.9rem 1rem;min-width:0}
-.hook .for{font-family:var(--mono);font-size:.65rem;letter-spacing:.1em;
+.hook-c .for{font-family:var(--mono);font-size:.65rem;letter-spacing:.1em;
   text-transform:uppercase;color:var(--eau);margin-bottom:.4rem}
-.hook p{font-size:.95rem}
+.hook-c p{font-size:.95rem}
 
 .test{margin-block:2.6rem;padding-block:1.6rem;border-top:1px solid var(--line)}
 .etapes{display:grid;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));
@@ -124,6 +122,14 @@ footer{padding-block:1.8rem 3rem;color:var(--ink-2);font-size:.85rem}
 </div>
 
 <div class="wrap">
+
+<div class="note">
+  <b>Ce qui a changé.</b> Le dialogue est repris à l'oral : phrases un peu plus longues,
+  élisions, le genre de tournure qu'on emploie vraiment en parlant. Et surtout,
+  <b>l'accroche plante le décor</b> au lieu d'assener une formule — une heure, un lieu, ce
+  que la personne était en train de faire. C'est ce qui fait qu'on se reconnaît avant de
+  comprendre que c'est une publicité.
+</div>
 
 <section class="sig">
   <div class="lab">🔍 Fiche signal</div>
@@ -158,25 +164,25 @@ footer{padding-block:1.8rem 3rem;color:var(--ink-2);font-size:.85rem}
   <p class="sg"><b>Signal :</b> Tu passes ton samedi à rattraper la semaine.</p>
   <p class="tags">Particulier · TOFU · Voix-off + B-roll</p>
 
-  <div class="bloc">
-    <p class="ind">(plan serré sur un panier de linge qui déborde ; texte à l'écran = voix : « TON SAMEDI »)</p>
-    <p class="dit">Ton samedi, il est déjà pris. Par la maison.</p>
+  <div class="bloc hook">
+    <p class="ind">(samedi matin, lumière douce, quelqu'un en tenue d'intérieur, tasse à la main, qui s'arrête au milieu du salon ; texte à l'écran = voix : « SAMEDI, NEUF HEURES »)</p>
+    <p class="dit">Samedi matin, neuf heures. T'avais prévu de souffler un peu cette semaine — et puis tu regardes autour de toi, et tu sais déjà comment ça va finir.</p>
   </div>
   <div class="bloc">
-    <p class="ind">(aspirateur sorti du placard, soupir, horloge qui marque 10 h)</p>
-    <p class="dit">Tu commences à dix heures. Tu finis à midi passé. Et t'as rien fait d'autre.</p>
+    <p class="ind">(aspirateur sorti du placard, puis la même pièce en plan large, horloge qui a avancé)</p>
+    <p class="dit">Tu sors l'aspirateur en te disant que c'est l'affaire d'une heure. À midi et demi t'y es encore, et t'as rien fait d'autre de ta journée.</p>
   </div>
   <div class="bloc">
-    <p class="ind">(dimanche soir, même pièce, de nouveau en désordre)</p>
-    <p class="dit">Le dimanche soir, c'est déjà reparti. La semaine suivante, pareil.</p>
+    <p class="ind">(dimanche soir, même salon, affaires qui traînent de nouveau)</p>
+    <p class="dit">Le pire, c'est le dimanche soir. Tu repasses dans le salon, et c'est déjà comme avant. La semaine d'après, tu recommences.</p>
   </div>
   <div class="bloc">
-    <p class="ind">(porte qui s'ouvre, personne en tenue, matériel propre, geste calme)</p>
-    <p class="dit">Nous, on passe quand tu veux. Toutes les semaines, tous les quinze jours, ou juste un grand coup de temps en temps.</p>
+    <p class="ind">(porte qui s'ouvre, une personne en tenue, matériel propre, gestes posés)</p>
+    <p class="dit">Nous, on passe quand ça t'arrange. Toutes les semaines, tous les quinze jours, ou juste un grand coup de temps en temps, quand t'en as vraiment marre.</p>
   </div>
   <div class="bloc">
-    <p class="ind">(la même pièce, propre ; la personne referme la porte derrière elle)</p>
-    <p class="dit">Tu rentres, c'est fait. Et ton samedi, tu le gardes.</p>
+    <p class="ind">(retour le soir, sac posé dans l'entrée, le salon est net)</p>
+    <p class="dit">Tu rentres, c'est fait, t'as rien eu à gérer. Et ton samedi, cette fois, il est vraiment à toi.</p>
   </div>
 
   <div class="cta"><b>CTA</b>Dis-nous ta ville et la taille de ton logement. On te rappelle avec un prix.</div>
@@ -189,29 +195,29 @@ footer{padding-block:1.8rem 3rem;color:var(--ink-2);font-size:.85rem}
   <p class="sg"><b>Signal :</b> Déléguer, oui. Donner tes clés, c'est autre chose.</p>
   <p class="tags">Particulier · MOFU · Face caméra + B-roll</p>
 
-  <div class="bloc">
-    <p class="ind">(main qui tient un trousseau de clés, hésite ; texte à l'écran = voix : « DONNER SES CLÉS »)</p>
-    <p class="dit">Ce qui bloque, c'est pas le prix. C'est de donner ses clés.</p>
+  <div class="bloc hook">
+    <p class="ind">(quelqu'un assis à sa table, téléphone à la main, qui fait défiler puis repose l'écran ; texte à l'écran = voix : « T'Y PENSES DEPUIS TROIS MOIS »)</p>
+    <p class="dit">Ça fait trois mois que t'y penses. Tu regardes les prix, tu te dis que ça pourrait le faire — et chaque fois tu t'arrêtes au même endroit : il faudrait laisser quelqu'un entrer chez toi.</p>
   </div>
   <div class="bloc">
-    <p class="ind">(salon vide, vue depuis l'entrée)</p>
-    <p class="dit">Quelqu'un chez toi, quand t'es pas là. C'est normal d'y réfléchir à deux fois.</p>
+    <p class="ind">(couloir vide vu depuis l'entrée, lumière de fin de journée)</p>
+    <p class="dit">C'est pas une question d'argent. C'est que chez toi, c'est chez toi. Que quelqu'un y soit pendant que t'es au travail, c'est normal que ça se réfléchisse.</p>
   </div>
   <div class="bloc">
-    <p class="ind">(une seule personne, visage visible, qui salue)</p>
-    <p class="dit">Alors voilà comment on fait. C'est toujours la même personne qui vient. Tu la rencontres avant la première fois.</p>
+    <p class="ind">(une seule personne, visage visible, qui salue sur le pas de la porte)</p>
+    <p class="dit">Alors je vais te dire comment on fait, et tu décideras après. C'est toujours la même personne qui vient chez toi, et tu la rencontres avant la première fois.</p>
   </div>
   <div class="bloc">
-    <p class="ind">(contrat signé, carte professionnelle posée sur la table)</p>
-    <p class="dit">Elle est salariée, déclarée, assurée. Si elle est absente, on te prévient — on n'envoie pas un inconnu à sa place sans te le dire.</p>
+    <p class="ind">(contrat signé sur la table, carte professionnelle posée à côté)</p>
+    <p class="dit">Elle est salariée, déclarée, assurée. Et si un jour elle est absente, on t'appelle avant — on n'envoie jamais quelqu'un d'autre sans te prévenir.</p>
   </div>
   <div class="bloc">
-    <p class="ind">(porte qui se referme doucement, clé rendue en main propre)</p>
-    <p class="dit">Et si ça ne te va pas, tu reprends tes clés. Sans discussion.</p>
+    <p class="ind">(clé rendue en main propre, porte qui se referme doucement)</p>
+    <p class="dit">Et si au bout de deux fois ça ne te convient pas, tu nous reprends tes clés et on n'en parle plus. Sans avoir à te justifier.</p>
   </div>
 
   <div class="cta"><b>CTA</b>Rencontre la personne avant de décider. Appelle-nous.</div>
-  <p class="conf"><b>Conformité :</b> chaque phrase est un engagement d'exploitation — même intervenant, rencontre préalable, information en cas d'absence. <b>Ne diffuser que si c'est tenu.</b> C'est le script qui se retourne le plus vite contre l'entreprise.</p>
+  <p class="conf"><b>Conformité :</b> chaque phrase est un engagement d'exploitation — même intervenant, rencontre préalable, information en cas d'absence, sortie sans justification. <b>Ne diffuser que si c'est tenu.</b> C'est le script qui se retourne le plus vite contre l'entreprise.</p>
 </article>
 
 <!-- 03 -->
@@ -220,25 +226,25 @@ footer{padding-block:1.8rem 3rem;color:var(--ink-2);font-size:.85rem}
   <p class="sg"><b>Signal :</b> À la fermeture, ton équipe est cuite. Et c'est là que ça commence.</p>
   <p class="tags">Restaurant · TOFU · Voix-off + B-roll cuisine</p>
 
-  <div class="bloc">
-    <p class="ind">(dernière table qui se lève, salle qui se vide ; texte à l'écran = voix : « 23 H »)</p>
-    <p class="dit">Vingt-trois heures. Le dernier client sort.</p>
+  <div class="bloc hook">
+    <p class="ind">(salle qui se vide, dernière table qui se lève, un serveur qui souffle ; texte à l'écran = voix : « 23 H PASSÉES »)</p>
+    <p class="dit">Vingt-trois heures passées. La dernière table vient de partir, ton équipe est debout depuis midi — et c'est maintenant qu'il faut tout remettre en état.</p>
   </div>
   <div class="bloc">
-    <p class="ind">(cuisine, plan de travail chargé, un commis qui s'assoit deux secondes)</p>
-    <p class="dit">Ton équipe est debout depuis midi. Et maintenant il faut tout remettre d'aplomb.</p>
+    <p class="ind">(cuisine, plan de travail encore chargé, un commis assis deux secondes sur un bac)</p>
+    <p class="dit">Tu le sais, et tout le monde le sait : à cette heure-là, plus personne n'a envie. Alors ça va vite. On passe un coup, on ferme, et on verra demain.</p>
   </div>
   <div class="bloc">
-    <p class="ind">(coup de serpillière rapide, un coin oublié sous un meuble)</p>
-    <p class="dit">Alors ça va vite. Trop vite. Et ce qui n'est pas fait ce soir, personne ne le fait demain non plus.</p>
+    <p class="ind">(coup de serpillière rapide, un angle sous un meuble qu'on ne touche pas)</p>
+    <p class="dit">Sauf que demain, c'est le service qui arrive. Ce qui n'a pas été fait ce soir ne se fait pas le lendemain non plus, et ça s'accumule, semaine après semaine.</p>
   </div>
   <div class="bloc">
-    <p class="ind">(porte de service, équipe qui part, deux agents qui arrivent avec le matériel)</p>
-    <p class="dit">Nous, on arrive quand ton équipe s'en va. On fait la salle, la cuisine, les sols. Toutes les nuits, ou les nuits que tu choisis.</p>
+    <p class="ind">(porte de service, l'équipe sort, deux agents entrent avec leur matériel)</p>
+    <p class="dit">Nous, on arrive au moment où ton équipe s'en va. La salle, la cuisine, les sols, la plonge — on fait ce que tu nous dis de faire, les nuits que tu choisis.</p>
   </div>
   <div class="bloc">
-    <p class="ind">(le matin, lumière du jour, salle impeccable, chaises descendues)</p>
-    <p class="dit">Tu ouvres le lendemain sur un restaurant propre. Pas sur ce qui restait d'hier.</p>
+    <p class="ind">(le matin, lumière du jour, chaises descendues, salle prête)</p>
+    <p class="dit">Et le matin tu ouvres sur un restaurant propre. Pas sur ce qu'il restait de la veille.</p>
   </div>
 
   <div class="cta"><b>CTA</b>Donne-nous ton heure de fermeture. On te dit ce qu'on fait et en combien de temps.</div>
@@ -251,25 +257,25 @@ footer{padding-block:1.8rem 3rem;color:var(--ink-2);font-size:.85rem}
   <p class="sg"><b>Signal :</b> Ta salle est nickel. Ce n'est pas ce qu'on vient voir.</p>
   <p class="tags">Restaurant · MOFU · Voix-off + B-roll</p>
 
-  <div class="bloc">
-    <p class="ind">(panoramique d'une salle impeccable ; texte à l'écran = voix : « C'EST PAS ÇA QU'ON REGARDE »)</p>
-    <p class="dit">Ta salle est nickel. C'est pas ça qu'on regarde.</p>
+  <div class="bloc hook">
+    <p class="ind">(panoramique lent : salle impeccable, frigos tenus, plans de travail nets ; texte à l'écran = voix : « C'EST PAS LÀ QU'IL COMMENCE »)</p>
+    <p class="dit">Ta salle est impeccable, tes frigos sont tenus, tes plans de travail aussi. Et pourtant, quand quelqu'un vient contrôler, c'est rarement là qu'il commence.</p>
   </div>
   <div class="bloc">
-    <p class="ind">(caméra qui remonte lentement vers la hotte au-dessus des feux)</p>
-    <p class="dit">On lève les yeux. Le conduit au-dessus des feux.</p>
+    <p class="ind">(la caméra remonte lentement vers la hotte, au-dessus des feux)</p>
+    <p class="dit">Il lève les yeux. Le conduit au-dessus des feux, le caisson, l'extraction. C'est la première chose qu'on regarde, et ça se voit depuis le sol.</p>
   </div>
   <div class="bloc">
     <p class="ind">(filtre encrassé en gros plan, puis un filtre lavé en plonge)</p>
-    <p class="dit">Ton équipe lave les filtres, et elle le fait bien. Mais le conduit, c'est un démontage. C'est pas le même métier.</p>
+    <p class="dit">Ton équipe lave les filtres, et elle le fait très bien. Mais au-dessus, c'est un démontage, un accès en hauteur, du matériel. C'est pas le même métier — et c'est pour ça que ça ne se fait jamais.</p>
   </div>
   <div class="bloc">
-    <p class="ind">(caisson ouvert, avant / après)</p>
-    <p class="dit">Nous on le démonte, on le dégraisse, et on te laisse un document daté avec les photos.</p>
+    <p class="ind">(caisson ouvert, intervention, puis avant / après côte à côte)</p>
+    <p class="dit">Nous on démonte, on dégraisse, on remonte. Et on te laisse un document daté, avec les photos avant et après.</p>
   </div>
   <div class="bloc">
-    <p class="ind">(classeur rangé, document glissé dedans)</p>
-    <p class="dit">Le jour où on te pose la question, tu sors le papier. C'est tout.</p>
+    <p class="ind">(classeur ouvert à la bonne page, document glissé dedans)</p>
+    <p class="dit">Comme ça, le jour où on te pose la question, t'ouvres ton classeur et tu sors le papier. La discussion s'arrête là.</p>
   </div>
 
   <div class="cta"><b>CTA</b>Envoie-nous une photo de ta hotte. On te dit où tu en es.</div>
@@ -282,25 +288,25 @@ footer{padding-block:1.8rem 3rem;color:var(--ink-2);font-size:.85rem}
   <p class="sg"><b>Signal :</b> Le client juge ta boutique depuis le trottoir.</p>
   <p class="tags">Commerce · TOFU · Voix-off + B-roll</p>
 
-  <div class="bloc">
-    <p class="ind">(vue depuis le trottoir, quelqu'un ralentit devant une vitrine ; texte à l'écran = voix : « IL DÉCIDE DEHORS »)</p>
-    <p class="dit">Il décide avant d'entrer. Dehors.</p>
+  <div class="bloc hook">
+    <p class="ind">(vue depuis le trottoir d'en face, un passant ralentit devant la vitrine, hésite ; texte à l'écran = voix : « IL A DÉCIDÉ DEHORS »)</p>
+    <p class="dit">Ton client, il a décidé avant d'entrer. Il est passé devant, il a ralenti deux secondes — et pendant ces deux secondes-là, il a regardé trois choses.</p>
   </div>
   <div class="bloc">
-    <p class="ind">(gros plan : bas de vitrine marqué, seuil gris, traces de pas)</p>
-    <p class="dit">Et il regarde trois choses. La vitrine. Le seuil. Le sol juste après la porte.</p>
+    <p class="ind">(trois gros plans : bas de vitrine marqué, seuil gris, sol d'entrée avec des traces)</p>
+    <p class="dit">La vitrine. Le seuil de ta porte. Et le sol juste derrière, celui qu'on voit depuis dehors.</p>
   </div>
   <div class="bloc">
-    <p class="ind">(l'intérieur, parfaitement rangé, produits bien présentés)</p>
-    <p class="dit">Tu peux avoir le plus beau magasin de la rue. S'il a vu ça en arrivant, il a déjà son idée.</p>
+    <p class="ind">(l'intérieur, parfaitement rangé, produits bien présentés, lumière soignée)</p>
+    <p class="dit">Tu peux avoir le plus beau magasin de la rue : si ces trois-là sont marqués, il a déjà son idée en poussant la porte. Et la plupart du temps, il ne la pousse pas.</p>
   </div>
   <div class="bloc">
-    <p class="ind">(nettoyage de vitre au raclette, le matin, boutique encore fermée)</p>
-    <p class="dit">Nous on passe avant l'ouverture. Vitrine, seuil, sol. Toutes les semaines, au même créneau.</p>
+    <p class="ind">(raclette sur la vitre, tôt le matin, boutique encore fermée)</p>
+    <p class="dit">Nous on passe avant l'ouverture, toujours au même créneau. Vitrine, seuil, sol d'entrée — tout ce qui se voit de dehors.</p>
   </div>
   <div class="bloc">
-    <p class="ind">(même plan qu'au début, vitrine nette, quelqu'un pousse la porte)</p>
-    <p class="dit">Ça se voit du trottoir. C'est exactement là que ça compte.</p>
+    <p class="ind">(même cadrage qu'au début : vitrine nette, quelqu'un pousse la porte sans hésiter)</p>
+    <p class="dit">C'est pas le plus gros du travail. Mais c'est exactement là que ça se joue.</p>
   </div>
 
   <div class="cta"><b>CTA</b>Envoie-nous une photo de ta devanture. On te dit ce qu'on ferait.</div>
@@ -313,25 +319,25 @@ footer{padding-block:1.8rem 3rem;color:var(--ink-2);font-size:.85rem}
   <p class="sg"><b>Signal :</b> Ta vendeuse passe la serpillière.</p>
   <p class="tags">Commerce · BOFU · Face caméra + B-roll</p>
 
-  <div class="bloc">
-    <p class="ind">(une vendeuse en tenue qui passe la serpillière à la fermeture ; texte à l'écran = voix : « TU LA PAIES POUR VENDRE »)</p>
-    <p class="dit">Ta vendeuse passe la serpillière. Tu la paies pour vendre.</p>
+  <div class="bloc hook">
+    <p class="ind">(rideau à moitié baissé, le gérant à la caisse, derrière lui une vendeuse qui passe la serpillière ; texte à l'écran = voix : « 19 H 15 »)</p>
+    <p class="dit">Dix-neuf heures quinze, tu baisses le rideau à moitié. Et pendant que tu fais ta caisse, ta vendeuse passe la serpillière. Celle que tu paies pour vendre.</p>
   </div>
   <div class="bloc">
-    <p class="ind">(horloge : 19 h 15, rideau à moitié baissé)</p>
-    <p class="dit">Trois quarts d'heure par soir. Six soirs. Fais le calcul sur un mois.</p>
+    <p class="ind">(horloge, puis un calendrier de la semaine, six jours entourés)</p>
+    <p class="dit">Trois quarts d'heure par soir, six soirs sur sept. Pose le calcul sur un mois, tu vas voir ce que ça représente.</p>
   </div>
   <div class="bloc">
-    <p class="ind">(elle range le matériel, fatiguée, regarde son téléphone)</p>
-    <p class="dit">Et c'est pas pour ça qu'elle est venue travailler chez toi. Ça aussi, ça finit par compter.</p>
+    <p class="ind">(elle range le matériel, fatiguée, regarde son téléphone avant de partir)</p>
+    <p class="dit">Et puis c'est pas pour ça qu'elle est venue travailler chez toi. Au bout d'un moment ça compte aussi — sur l'envie qu'elle a le matin, et sur le temps qu'elle reste.</p>
   </div>
   <div class="bloc">
-    <p class="ind">(deux agents qui arrivent après la fermeture, matériel professionnel)</p>
-    <p class="dit">Nous on passe après la fermeture. C'est notre métier, on va plus vite, et on a le matériel.</p>
+    <p class="ind">(deux agents qui arrivent après la fermeture, autolaveuse, matériel professionnel)</p>
+    <p class="dit">Nous on passe après la fermeture, avec notre propre matériel. C'est notre métier, donc on va plus vite — et on fait ce qu'elle n'a jamais le temps de faire.</p>
   </div>
   <div class="bloc">
-    <p class="ind">(le lendemain, la vendeuse ouvre, boutique prête, elle accueille un client)</p>
-    <p class="dit">Elle ouvre, c'est propre, et elle fait son travail. Celui pour lequel tu la paies.</p>
+    <p class="ind">(le lendemain matin, elle ouvre, boutique prête, elle accueille un client)</p>
+    <p class="dit">Le lendemain elle ouvre, c'est propre, et elle fait son travail. Celui pour lequel tu la paies.</p>
   </div>
 
   <div class="cta"><b>CTA</b>Dis-nous ta surface et ton horaire de fermeture. On te fait un prix.</div>
@@ -340,17 +346,18 @@ footer{padding-block:1.8rem 3rem;color:var(--ink-2);font-size:.85rem}
 
 <!-- ═══ BANQUE ═══ -->
 <h2 style="margin-top:2.6rem">Accroches de rechange</h2>
-<p class="lede">À tester en remplacement des trois premières secondes. On garde tout le reste,
-mot pour mot : c'est le seul moyen de savoir si c'est l'accroche qui travaille.</p>
+<p class="lede">À tester en remplacement des premières secondes. On garde tout le reste,
+mot pour mot : c'est le seul moyen de savoir si c'est l'accroche qui travaille.
+Chacune plante un décor avant de poser le problème.</p>
 <div class="hooks">
-  <div class="hook"><div class="for">Particulier</div><p>« Combien de dimanches soir tu passes à finir ce que t'as pas eu le temps de faire ? »</p></div>
-  <div class="hook"><div class="for">Particulier</div><p>« T'as pas besoin de quelqu'un tous les jours. T'as besoin que ce soit fait une fois, bien. »</p></div>
-  <div class="hook"><div class="for">Restaurant</div><p>« Le dernier client est parti. Il reste deux heures de boulot. »</p></div>
-  <div class="hook"><div class="for">Restaurant</div><p>« Regarde sous tes plans de travail. Voilà, c'est ça le sujet. »</p></div>
-  <div class="hook"><div class="for">Commerce</div><p>« Regarde ton seuil de porte. Ton client, lui, il l'a déjà regardé. »</p></div>
-  <div class="hook"><div class="for">Commerce</div><p>« Tu ouvres à 10 h. T'es là à 8 h. Pour faire le ménage. »</p></div>
-  <div class="hook"><div class="for">Tous</div><p>« On vous a vendu un “nettoyage complet”. Demandez ce que ça couvre. »</p></div>
-  <div class="hook"><div class="for">Tous</div><p>« Regarde une plinthe. Elle te dit qui s'occupe du reste. »</p></div>
+  <div class="hook-c"><div class="for">Particulier</div><p>« Dimanche, vingt et une heures. T'as passé ton week-end dessus et t'as l'impression de n'avoir rien fait de tes deux jours. »</p></div>
+  <div class="hook-c"><div class="for">Particulier</div><p>« T'as pas besoin de quelqu'un tous les jours. T'as besoin qu'une fois par mois, ce soit fait à fond, et que tu n'aies pas à y penser. »</p></div>
+  <div class="hook-c"><div class="for">Restaurant</div><p>« Le dernier client est sorti il y a cinq minutes. Regarde ta cuisine : il te reste deux heures de boulot, et il est déjà minuit. »</p></div>
+  <div class="hook-c"><div class="for">Restaurant</div><p>« Baisse-toi et regarde sous tes plans de travail. Voilà, c'est exactement de ça qu'on va parler. »</p></div>
+  <div class="hook-c"><div class="for">Commerce</div><p>« Sors de ta boutique, traverse la rue, et regarde ta devanture comme un client la regarde. »</p></div>
+  <div class="hook-c"><div class="for">Commerce</div><p>« T'ouvres à dix heures. T'es là depuis huit. Et pendant ces deux heures-là, tu fais le ménage. »</p></div>
+  <div class="hook-c"><div class="for">Tous</div><p>« On t'a vendu un “nettoyage complet”. Demande ce qu'il y a dedans, tu vas voir la tête qu'ils font. »</p></div>
+  <div class="hook-c"><div class="for">Tous</div><p>« Regarde une plinthe, n'importe laquelle. Elle te dit en deux secondes qui s'occupe du reste. »</p></div>
 </div>
 
 <!-- ═══ TEST ═══ -->
@@ -359,7 +366,7 @@ mot pour mot : c'est le seul moyen de savoir si c'est l'accroche qui travaille.<
   <div class="etapes">
     <div class="etape"><div class="n">1</div><h3>Trois audiences, pas six</h3><p>Particuliers, restaurants, commerces. Chaque audience reçoit ses deux scripts, à budget égal.</p></div>
     <div class="etape"><div class="n">2</div><h3>L'audience d'abord</h3><p>On garde celles qui répondent. Si les particuliers ne bougent pas, ce n'est pas le script : c'est le ciblage.</p></div>
-    <div class="etape"><div class="n">3</div><h3>Puis l'accroche seule</h3><p>Sur l'audience retenue, deux versions qui ne diffèrent que par les trois premières secondes.</p></div>
+    <div class="etape"><div class="n">3</div><h3>Puis l'accroche seule</h3><p>Sur l'audience retenue, deux versions qui ne diffèrent que par les premières secondes.</p></div>
     <div class="etape"><div class="n">4</div><h3>Les demandes, pas les vues</h3><p>Ce qui compte : appels, messages, formulaires. Une vidéo très vue qui ne fait pas sonner le téléphone n'a rien fait.</p></div>
   </div>
   <div class="note" style="margin-top:1.6rem">
@@ -372,13 +379,13 @@ mot pour mot : c'est le seul moyen de savoir si c'est l'accroche qui travaille.<
 <div class="note">
   <b>Ce qui reste à remplir.</b> Aucun prix, aucun délai, aucune certification n'est inventé
   ici. Les engagements du script 02 — même intervenant, rencontre avant la première
-  prestation, information en cas d'absence — doivent être tenus par l'exploitation avant
-  d'être dits à l'image.
+  prestation, information en cas d'absence, sortie sans justification — doivent être tenus
+  par l'exploitation avant d'être dits à l'image.
 </div>
 
 <footer>
   Cas de test. Méthode maison : signal → angles → scripts voix-off + B-roll.
-  Accroche en TAV sur les trois premières secondes, sous-titres complets ensuite.
+  Accroche en TAV sur les premières secondes, sous-titres complets ensuite.
   Une vidéo = un angle × un persona.
 </footer>
 
