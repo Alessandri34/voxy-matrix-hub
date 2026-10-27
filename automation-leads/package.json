@@ -1,0 +1,11 @@
+{
+  "name": "automation-leads",
+  "private": true,
+  "description": "Leads Meta -> WhatsApp personnalise, SMS en secours",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "node --test"
+  },
+  "engines": { "node": ">=20" }
+}
