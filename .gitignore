@@ -1,0 +1,12 @@
+# Secrets : ne jamais les commiter, même dans un dépôt privé
+.env
+.env.*
+*.token
+*.secret
+.mt
+.clasprc.json
+secrets/
+
+# Divers
+node_modules/
+.DS_Store
