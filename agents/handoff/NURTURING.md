@@ -109,5 +109,5 @@ Onglet `Désabonnés` : une adresse par ligne. **Aucun message ne doit partir ve
 ## 9. Mesures de succès
 
 - Part des prospects qui obtiennent un rendez-vous (aujourd'hui environ 2 % attendu pour ce type de formulaire).
-- **Coût par rendez-vous tenu** : dépense publicitaire (jeton `META_ADS_READ_TOKEN`) divisée par les rendez-vous réellement tenus. C'est le seul chiffre qui dit si la campagne est rentable. Repères du plan : 120 à 250 € attendu, **au-delà de 350 €, on coupe**.
+- **Coût par rendez-vous tenu** : dépense publicitaire (lue via l'API Meta, voir `agents/README.md`) divisée par les rendez-vous réellement tenus. C'est le seul chiffre qui dit si la campagne est rentable. Repères du plan : 120 à 250 € attendu, **au-delà de 350 €, on coupe**.
 - Délai moyen entre l'arrivée d'un prospect et son premier appel.
