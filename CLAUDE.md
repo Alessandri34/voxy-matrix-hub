@@ -1,6 +1,7 @@
 # CLAUDE.md — Mémoire de projet
 
 > Fichier de référence du projet. Tenu à jour à chaque décision importante. Toute reprise de travail commence par la lecture de ce fichier.
+> **Puis par `INDEX.md`** — une ligne par fichier, 21 Ko pour 5,3 Mo de projet. Il sert à localiser sans ouvrir : ne jamais parcourir `livrables/` ou les dossiers d'offres à l'aveugle. Régénéré par `python3 outils/index-projet.py` après tout ajout.
 
 ## 1. Le projet
 Organisme de formation professionnelle **certifié Qualiopi** (NDA + Qualiopi **obtenus**), ciblant d'abord les **professionnels**. Promesse : **formation-action** — l'entreprise apprend une méthode de communication (notamment vidéo) **en la pratiquant sur son propre cas**, avec un formateur, des phases réflexives et des évaluations tracées.
