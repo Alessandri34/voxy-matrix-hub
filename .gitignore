@@ -5,6 +5,10 @@
 # Secrets / environnement (règle 9 : jamais dans Git)
 .env
 .env.*
+# ...mais le MODELE de configuration, si : sans lui, personne ne sait quoi
+# remplir. La regle « .env.* » ci-dessus l'avalait, et backoffice/.env.example
+# n'a donc jamais ete versionne jusqu'au 09/11/2026.
+!.env.example
 *.key
 *.pem
 

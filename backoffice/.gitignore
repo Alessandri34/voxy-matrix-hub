@@ -8,3 +8,6 @@ __pycache__/
 /backups/
 *.sqlite3
 .venv/
+*.egg-info/
+build/
+dist/
