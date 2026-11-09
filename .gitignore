@@ -1,4 +1,10 @@
+# Les secrets, jamais au depot.
 .env
+.env.*
+# ...mais le MODELE, si : sans lui, personne ne sait quoi remplir.
+# C'est la regle « .env.* » du depot d'origine qui l'avalait, et le modele
+# n'y a donc jamais ete versionne.
+!.env.example
 *.pyc
 __pycache__/
 .pytest_cache/
