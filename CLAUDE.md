@@ -93,11 +93,17 @@ A = 10 scripts UGC (**fait** : fiche signal + 10 angles + 10 scripts + plan de t
 
 ## 7ter. Chantier D — back-office (branche `claude/new-session-nefcch`, dossier `backoffice/`)
 
-Django 5.2 LTS, PostgreSQL 17, Celery, Caddy. **Phase 0** (socle, 2FA, rôles, sauvegardes chiffrées) et **phase 1** (CRM, pipeline, leads Meta, résolution SIREN, import CSV) sont écrites et testées — 214 tests. **Phase 2 = mise en production sur le VPS**, non commencée. Détail dans `backoffice/docs/{PRD,ROADMAP,DECISIONS,CHANGELOG,RUNBOOK}.md`.
+Django 5.2 LTS, PostgreSQL 17, Redis 8, Celery, nginx. **Phases 0, 1 et 2 écrites et testées — 231 tests.** Détail dans `backoffice/docs/{PRD,ROADMAP,DECISIONS,CHANGELOG,RUNBOOK}.md`.
+
+**Architecture en production** : nginx d'HestiaCP (ports 80/443, déjà occupés par `vformations.fr`) mandate `backoffice.vformations.fr` vers gunicorn sur `127.0.0.1:8000`. 🔴 **Aucun conteneur ne doit réclamer 80 ni 443** — Caddy est sorti de la pile par défaut et vit dans `compose.autonome.yaml`, réservé à un serveur nu. Le workflow de déploiement refuse de partir si la pile les réclame.
+
+**Ce qui reste à faire sur le serveur** (non vérifiable depuis une session cloud, la clé SSH étant dans les secrets GitHub) : DNS du sous-domaine, domaine + certificat dans Hestia, `.env` de production, puis `backoffice/deploiement/premiere-installation.md`. Le déploiement est ensuite **manuel** (Actions → *Déployer le back-office*) : il applique des migrations sur des données de prospects, ce qui ne se repose pas comme une page HTML.
+
+⚠️ **Leçon de la phase 2, à retenir pour tout Celery de ce projet** : `autodiscover_tasks()` cherche un module nommé **`tasks`**. Nos modules s'appellent `taches` — sans `related_name="taches"`, aucune tâche n'est enregistrée, et l'échec est **muet** (la vue répond 200, le worker lève `KeyError` dans son seul journal). Deux tâches sur trois étaient dans ce cas alors que 214 tests étaient verts. Un test les surveille désormais (`tests/test_decouverte_taches.py`), ainsi que la correspondance entre files routées et workers (`tests/test_files_celery.py`).
 
 🔴 **Le routage financeur est gelé dans le code.** Le champ `financeur_probable` existe, **aucune règle ne le remplit**. L'arbitrage CMA contre FAFCEA transverse n'est pas tranché sur sources primaires, et le site a déjà annoncé la FAFCEA à 35 €/h alors que le numérique y est transverse à 25 €/h (§5). À trancher avant la phase 3.
 
-🔴 **Le dépôt est public et la phase 1 introduit des données de prospects.** Il doit passer en privé, ou le back-office partir dans son propre dépôt privé, **avant toute mise en production**. Voir `livrables/INVENTAIRE_EXPOSITION_PUBLIQUE.md`.
+🔴 **Le dépôt est public et porte désormais le code qui traite des données de prospects.** Il doit passer en privé, ou le back-office partir dans son propre dépôt privé, **avant la mise en service**. C'est le seul prérequis non technique qui reste. Voir `livrables/INVENTAIRE_EXPOSITION_PUBLIQUE.md`.
 
 ## 7quater. Deux constats de la phase 1 qui dépassent le chantier D [09/11/2026]
 
