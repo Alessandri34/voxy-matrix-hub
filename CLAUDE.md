@@ -100,13 +100,15 @@ A = 10 scripts UGC (**fait** : fiche signal + 10 angles + 10 scripts + plan de t
 
 ## 7ter. Chantier D — back-office (branche `claude/new-session-nefcch`, dossier `backoffice/`)
 
-Django 5.2 LTS, PostgreSQL 17, Redis 8, Celery, nginx. **Phases 0, 1 et 2 écrites et testées — 231 tests.** Détail dans `backoffice/docs/{PRD,ROADMAP,DECISIONS,CHANGELOG,RUNBOOK}.md`.
+Django 5.2 LTS, PostgreSQL 17, Redis 8, Celery, nginx. **Phases 0 à 3 écrites et testées — 291 tests.** Détail dans `backoffice/docs/{PRD,ROADMAP,DECISIONS,CHANGELOG,RUNBOOK}.md`.
 
 **Architecture en production** : nginx d'HestiaCP (ports 80/443, déjà occupés par `vformations.fr`) mandate `backoffice.vformations.fr` vers gunicorn sur `127.0.0.1:8000`. 🔴 **Aucun conteneur ne doit réclamer 80 ni 443** — Caddy est sorti de la pile par défaut et vit dans `compose.autonome.yaml`, réservé à un serveur nu. Le workflow de déploiement refuse de partir si la pile les réclame.
 
 **Ce qui reste à faire sur le serveur** (non vérifiable depuis une session cloud, la clé SSH étant dans les secrets GitHub) : DNS du sous-domaine, domaine + certificat dans Hestia, `.env` de production, puis `backoffice/deploiement/premiere-installation.md`. Le déploiement est ensuite **manuel** (Actions → *Déployer le back-office*) : il applique des migrations sur des données de prospects, ce qui ne se repose pas comme une page HTML.
 
 ⚠️ **Leçon de la phase 2, à retenir pour tout Celery de ce projet** : `autodiscover_tasks()` cherche un module nommé **`tasks`**. Nos modules s'appellent `taches` — sans `related_name="taches"`, aucune tâche n'est enregistrée, et l'échec est **muet** (la vue répond 200, le worker lève `KeyError` dans son seul journal). Deux tâches sur trois étaient dans ce cas alors que 214 tests étaient verts. Un test les surveille désormais (`tests/test_decouverte_taches.py`), ainsi que la correspondance entre files routées et workers (`tests/test_files_celery.py`).
+
+✅ **Phase 3 faite : le module financement tourne.** Barèmes FAFCEA et AGEFICE **datés, sourcés et versionnés par date d'effet** dans `apps/financement/bareme.py` — seul endroit du projet où un taux est écrit. Simulation du reste à charge **TVA comprise**, règles bloquantes (4 h minimum FAFCEA, 12 stagiaires en distanciel contre 25 chez l'AGEFICE), fenêtres de dépôt et alerte quotidienne.
 
 ✅ **Le routage financeur est dégelé** depuis l'arbitrage du 09/11/2026 (§5 et `livrables/D-strategie/D4_Financement_Arbitrage.md`). Le champ `inscrite_repertoire_metiers` décide : artisan → FAFCEA à 25 €/h transverse, commerçant → AGEFICE. ⚠️ Ce champ est nul quand l'API ne dit rien, et **nul ne vaut pas « non inscrit »** : un prospect dont l'inscription n'est pas établie n'est pas routé automatiquement. Sur l'échantillon héraultais, 32 % seulement portent une activité au Registre des Métiers.
 
