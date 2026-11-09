@@ -33,6 +33,21 @@ INSTALLED_APPS = [
     "django_otp.plugins.otp_totp",
     "django_otp.plugins.otp_static",
     "apps.accounts",
+    "apps.audit",
+    "apps.crm",
+    "apps.pipeline",
+]
+
+# Modeles dont chaque creation, modification et suppression est inscrite au
+# journal d'audit (apps.audit.signaux). La liste est explicite : un modele
+# surveille par defaut ferait du journal une seconde copie de la base.
+AUDIT_MODELES = [
+    "accounts.Utilisateur",
+    "crm.Entreprise",
+    "crm.Contact",
+    "crm.Lead",
+    "crm.Opposition",
+    "pipeline.Opportunite",
 ]
 
 MIDDLEWARE = [
@@ -45,6 +60,8 @@ MIDDLEWARE = [
     # Doit suivre AuthenticationMiddleware : il pose request.user.is_verified().
     "django_otp.middleware.OTPMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
+    # Apres AuthenticationMiddleware : il lui faut request.user.
+    "apps.audit.middleware.middleware_acteur",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
