@@ -16,6 +16,10 @@ dependencies = [
   "qrcode==8.2",             # QR d'enrolement de l'application d'authentification
   "gunicorn==26.2.0",
   "whitenoise==6.12.0",      # fichiers statiques servis par Django, pas de volume partage
+  # Client HTTP pour l'API Recherche d'entreprises. httpx plutot que requests :
+  # ses delais d'attente sont obligatoires par defaut. requests n'en pose aucun,
+  # et un appel suspendu bloquerait un worker Celery indefiniment.
+  "httpx==0.28.1",
 ]
 
 [project.optional-dependencies]

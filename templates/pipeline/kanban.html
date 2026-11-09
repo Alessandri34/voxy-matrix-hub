@@ -1,0 +1,201 @@
+{% extends "pipeline/base.html" %}
+{% block titre %}Pipeline{% endblock %}
+
+{% block style %}
+  .rail{display:flex;gap:.75rem;overflow-x:auto;padding-bottom:1rem;
+    scroll-snap-type:x proximity}
+  .colonne{flex:0 0 250px;scroll-snap-align:start;background:var(--carte);
+    border:1px solid var(--trait);border-radius:10px;display:flex;flex-direction:column;
+    max-height:calc(100vh - 230px)}
+  .colonne.survol{border-color:var(--accent);box-shadow:0 0 0 2px rgba(31,111,235,.18)}
+  .colonne.finale{opacity:.9;background:var(--fond)}
+  .tete{padding:.6rem .7rem;border-bottom:1px solid var(--trait);position:sticky;top:0;
+    background:inherit;border-radius:10px 10px 0 0}
+  .tete b{display:block;font-size:.84rem;font-weight:650}
+  .tete small{color:var(--doux);font-size:.76rem}
+  .pile{padding:.5rem;display:flex;flex-direction:column;gap:.5rem;overflow-y:auto;flex:1}
+  .carte{background:var(--fond);border:1px solid var(--trait);border-radius:8px;
+    padding:.55rem .6rem;cursor:grab;font-size:.86rem}
+  .carte:active{cursor:grabbing}
+  .carte.deplacee{opacity:.4}
+  .carte b{display:block;font-weight:600}
+  .carte small{color:var(--doux);display:block;margin-top:.15rem;font-size:.78rem}
+  .montant{font-variant-numeric:tabular-nums;font-weight:600}
+  .avis{margin:0 0 1rem;padding:.6rem .75rem;border-radius:8px;font-size:.88rem;
+    border:1px solid var(--trait);background:var(--carte)}
+  .avis.alerte{border-color:#fda29b;background:#fef3f2;color:var(--alerte)}
+  /* Le lien heritait de --accent, un bleu illisible sur fond rouge sombre.
+     Il prend la couleur de l'alerte et garde son soulignement pour rester
+     identifiable comme lien sans dependre de la couleur seule. */
+  .avis.alerte a{color:inherit;text-decoration:underline;font-weight:600}
+  @media (prefers-color-scheme:dark){.avis.alerte{background:#2d1a18;border-color:#5c2622}}
+  dialog{border:1px solid var(--trait);border-radius:10px;background:var(--carte);
+    color:var(--texte);padding:1rem;max-width:420px;width:92vw}
+  dialog::backdrop{background:rgba(0,0,0,.45)}
+  dialog h3{margin:0 0 .35rem;font-size:.95rem}
+  dialog p{margin:0 0 .75rem;color:var(--doux);font-size:.85rem}
+  label{display:block;font-size:.82rem;font-weight:600;margin:.6rem 0 .2rem}
+  select,textarea,input{width:100%;padding:.45rem .5rem;border:1px solid var(--trait);
+    border-radius:6px;background:var(--fond);color:var(--texte);font:inherit}
+  .boutons{display:flex;gap:.5rem;justify-content:flex-end;margin-top:.9rem}
+  button{padding:.45rem .8rem;border-radius:6px;border:1px solid var(--trait);
+    background:var(--fond);color:var(--texte);font:inherit;cursor:pointer}
+  button.primaire{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+  .erreur{color:var(--alerte);font-size:.82rem;margin-top:.5rem;min-height:1.2em}
+{% endblock %}
+
+{% block contenu %}
+{% if leads_en_retard %}
+  <p class="avis alerte">
+    <strong>{{ leads_en_retard }}</strong> lead{{ leads_en_retard|pluralize }} sans aucun contact
+    depuis plus de 24 h. <a href="{% url 'pipeline:leads' %}">Voir la file</a>.
+  </p>
+{% endif %}
+
+<div class="rail" id="rail">
+  {% for colonne in colonnes %}
+    <section class="colonne{% if colonne.finale %} finale{% endif %}"
+             data-etape="{{ colonne.code }}">
+      <div class="tete">
+        <b>{{ colonne.libelle }}</b>
+        <small>{{ colonne.nombre }} affaire{{ colonne.nombre|pluralize }}
+          {% if colonne.montant %}
+            · <span class="montant">{{ colonne.montant }} € HT</span>
+          {% endif %}
+        </small>
+      </div>
+      <div class="pile">
+        {% for affaire in colonne.affaires %}
+          <article class="carte" draggable="true" data-id="{{ affaire.pk }}">
+            <b>{{ affaire.intitule }}</b>
+            <small>{{ affaire.entreprise.denomination }}</small>
+            <small>
+              {% if affaire.montant_estime_centimes %}
+                <span class="montant">{{ affaire.montant_estime }} € HT</span> ·
+              {% endif %}
+              {{ affaire.probabilite }} %
+              {% if affaire.motif_de_perte %} · {{ affaire.get_motif_de_perte_display }}{% endif %}
+            </small>
+          </article>
+        {% empty %}
+          <p class="vide">—</p>
+        {% endfor %}
+      </div>
+    </section>
+  {% endfor %}
+</div>
+
+{% comment %}
+  Lire `csrf_token` ici appelle get_token() cote serveur : c'est ce qui pose
+  le cookie et donne la valeur au JavaScript. Sans cette ligne, le `fetch` de
+  deplacement est refuse en 403 — un defaut invisible aux tests Django, dont
+  le client de test desactive la verification CSRF.
+
+  Et `{# … #}` ne vaut que pour UNE ligne : sur plusieurs, Django ne le
+  reconnait pas comme un commentaire et l'affiche tel quel dans la page.
+{% endcomment %}
+<input type="hidden" id="jeton-csrf" value="{{ csrf_token }}">
+
+<dialog id="boite-perte">
+  <form method="dialog" id="formulaire-perte">
+    <h3>Pourquoi cette affaire est-elle perdue ?</h3>
+    <p>Le motif est obligatoire. Sans lui, la question « pourquoi perd-on ? »
+       n'aura pas de reponse dans six mois.</p>
+    <label for="motif">Motif</label>
+    <select id="motif" name="motif_de_perte" required>
+      {% for valeur, libelle in motifs %}<option value="{{ valeur }}">{{ libelle }}</option>{% endfor %}
+    </select>
+    <label for="commentaire">Commentaire <span style="font-weight:400">(obligatoire si « Autre »)</span></label>
+    <textarea id="commentaire" name="commentaire_perte" rows="3"></textarea>
+    <p class="erreur" id="erreur-perte"></p>
+    <div class="boutons">
+      <button value="annuler" type="submit">Annuler</button>
+      <button value="valider" type="submit" class="primaire">Enregistrer la perte</button>
+    </div>
+  </form>
+</dialog>
+{% endblock %}
+
+{% block script %}
+{% comment %}
+  Le code de l'etape « perdu » vient du serveur : l'ecrire en dur dans le
+  JavaScript le ferait divercher le jour ou l'enumeration change.
+{% endcomment %}
+<script id="script-kanban" data-perdu="{{ etape_perdu }}">
+/* Glisser-deposer avec l'API HTML5 natale : aucune bibliotheque.
+   SortableJS ferait 45 Ko et un CDN de plus a joindre, pour un comportement
+   que le navigateur sait deja faire. */
+(function () {
+  const PERDU = document.getElementById('script-kanban').dataset.perdu;
+  const jeton = document.getElementById('jeton-csrf').value;
+  const boite = document.getElementById('boite-perte');
+  const erreur = document.getElementById('erreur-perte');
+  let saisie = null;
+
+  function colonneDe(element) { return element.closest('.colonne'); }
+
+  document.querySelectorAll('.carte').forEach(carte => {
+    carte.addEventListener('dragstart', e => {
+      saisie = carte;
+      carte.classList.add('deplacee');
+      e.dataTransfer.effectAllowed = 'move';
+      e.dataTransfer.setData('text/plain', carte.dataset.id);
+    });
+    carte.addEventListener('dragend', () => {
+      carte.classList.remove('deplacee');
+      document.querySelectorAll('.colonne.survol').forEach(c => c.classList.remove('survol'));
+    });
+  });
+
+  document.querySelectorAll('.colonne').forEach(colonne => {
+    colonne.addEventListener('dragover', e => {
+      e.preventDefault();
+      colonne.classList.add('survol');
+    });
+    colonne.addEventListener('dragleave', () => colonne.classList.remove('survol'));
+    colonne.addEventListener('drop', async e => {
+      e.preventDefault();
+      colonne.classList.remove('survol');
+      if (!saisie) { return; }
+      const carte = saisie, depart = colonneDe(carte), cible = colonne.dataset.etape;
+      if (depart === colonne) { return; }
+
+      if (cible === PERDU) {
+        /* Le motif est demande AVANT l'appel : poster sans motif donnerait
+           une erreur 400 et une carte qui saute en arriere, ce qui se lit
+           comme un bogue plutot que comme une regle. */
+        erreur.textContent = '';
+        boite.returnValue = '';
+        boite.showModal();
+        const choix = await new Promise(r => boite.addEventListener('close', () => r(boite.returnValue), { once: true }));
+        if (choix !== 'valider') { return; }
+      }
+      await deplacer(carte, cible, colonne);
+    });
+  });
+
+  async function deplacer(carte, cible, colonne) {
+    const corps = new FormData();
+    corps.set('etape', cible);
+    if (cible === PERDU) {
+      corps.set('motif_de_perte', document.getElementById('motif').value);
+      corps.set('commentaire_perte', document.getElementById('commentaire').value);
+    }
+    const reponse = await fetch(`/pipeline/deplacer/${carte.dataset.id}/`, {
+      method: 'POST', body: corps,
+      headers: { 'X-CSRFToken': jeton },
+    });
+    const donnees = await reponse.json().catch(() => ({ erreur: 'reponse illisible' }));
+    if (!reponse.ok || !donnees.ok) {
+      alert(donnees.erreur || 'Deplacement refuse.');
+      return;
+    }
+    colonne.querySelector('.pile').prepend(carte);
+    /* Le total des colonnes est recalcule par le serveur : on recharge
+       plutot que de recompter en JavaScript, ou les deux comptes
+       finiraient par differer. */
+    location.reload();
+  }
+})();
+</script>
+{% endblock %}

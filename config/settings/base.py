@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     "apps.audit",
     "apps.crm",
     "apps.pipeline",
+    "apps.integrations",
 ]
 
 # Modeles dont chaque creation, modification et suppression est inscrite au
@@ -89,6 +90,12 @@ DATABASES = {
 
 AUTH_USER_MODEL = "accounts.Utilisateur"
 
+# Departement de la zone commerciale. Sert a filtrer la resolution SIREN :
+# l'API Recherche d'entreprises filtre sur les etablissements, donc une
+# entreprise avec un etablissement ici est un prospect local meme si son
+# siege est ailleurs. L'Herault est la cible annoncee du positionnement.
+DEPARTEMENT_CIBLE = env("DEPARTEMENT_CIBLE", default="34")
+
 AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
     {
@@ -122,6 +129,37 @@ CELERY_RESULT_BACKEND = CELERY_BROKER_URL
 CELERY_TIMEZONE = TIME_ZONE
 CELERY_TASK_ACKS_LATE = True
 CELERY_WORKER_PREFETCH_MULTIPLIER = 1
+
+# La resolution SIREN va sur sa propre file, servie par UN SEUL worker.
+# L'API Recherche d'entreprises plafonne a 7 requetes/seconde par adresse IP
+# et sa specification previent que les cloud publics l'atteignent. Une file a
+# consommateur unique tient la cadence par construction ; un compteur local
+# serait faux des qu'une seconde instance de worker demarre.
+CELERY_TASK_ROUTES = {
+    "apps.crm.taches.resoudre_siren_du_lead": {"queue": "siren"},
+}
+
+CELERY_BEAT_SCHEDULE = {
+    "alerte-leads-sans-contact": {
+        "task": "apps.crm.taches.alerter_leads_sans_contact",
+        # Toutes les heures : un lead entre a 9 h 05 doit declencher l'alerte
+        # a 10 h le lendemain au plus tard, pas 24 h apres un passage unique.
+        "schedule": 3600.0,
+        "kwargs": {"heures": 24},
+    },
+}
+
+# --- Meta Lead Ads ---------------------------------------------------------
+# Trois secrets, tous hors du depot (.env). Vides par defaut : la
+# verification de signature echoue alors par defaut, ce qui est le
+# comportement voulu — un webhook ouvert accepterait de faux leads.
+META_APP_SECRET = env("META_APP_SECRET", default="")
+META_VERIFY_TOKEN = env("META_VERIFY_TOKEN", default="")
+META_PAGE_ACCESS_TOKEN = env("META_PAGE_ACCESS_TOKEN", default="")
+# Version du Graph API. Citee par la documentation « Retrieving Leads »
+# relevee le 09/11/2026. A relever quand Meta deprecie une version : les
+# versions anciennes cessent de repondre sans preavis utile.
+META_API_VERSION = env("META_API_VERSION", default="v27.0")
 
 # --- Courriel -------------------------------------------------------------
 EMAIL_HOST = env("EMAIL_HOST", default="")

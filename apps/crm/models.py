@@ -108,6 +108,22 @@ class Entreprise(models.Model):
         max_length=3, blank=True, db_index=True, help_text="Ex. 34 pour l'Herault."
     )
 
+    etat_administratif = models.CharField(
+        max_length=1,
+        blank=True,
+        choices=[("A", "Active"), ("C", "Cessee")],
+        help_text="Etat de l'unite legale. Une entreprise cessee ne se vend "
+        "pas une formation : le champ est lu avant tout devis.",
+    )
+    opposition_diffusion_commerciale = models.BooleanField(
+        null=True,
+        blank=True,
+        help_text="Releve dans l'API Recherche d'entreprises. Vrai = l'unite "
+        "legale s'est opposee a la reutilisation de ses donnees a des fins de "
+        "prospection (RGPD art. 21 §2, art. R.123-320 du Code de commerce). "
+        "Nul = unite legale absente du RNE, ce qui n'est pas une absence "
+        "d'opposition.",
+    )
     inscrite_repertoire_metiers = models.BooleanField(
         null=True,
         blank=True,
@@ -328,6 +344,29 @@ class Lead(models.Model):
         blank=True,
         help_text="Renseignee pour un lead de sourcing seulement.",
     )
+
+    candidats_siren = models.JSONField(
+        default=list,
+        blank=True,
+        help_text="Candidats trouves par la resolution SIREN, avec leur note "
+        "et les motifs de cette note. Conserves meme en cas de succes : c'est "
+        "ce qui permet de corriger un rattachement faux sans relancer la "
+        "recherche, et de savoir quel critere a mal juge.",
+    )
+    certitude_resolution = models.CharField(
+        max_length=10,
+        blank=True,
+        choices=[
+            ("certain", "Certain"),
+            ("probable", "Probable"),
+            ("ambigu", "Ambigu — plusieurs candidats"),
+            ("aucun", "Aucun candidat"),
+        ],
+        help_text="Un rattachement « ambigu » n'est jamais applique seul : "
+        "choisir au hasard entre deux homonymes mettrait un faux SIREN sur "
+        "un dossier de financement.",
+    )
+    motif_resolution = models.CharField(max_length=300, blank=True)
 
     doublon_de = models.ForeignKey(
         "self",

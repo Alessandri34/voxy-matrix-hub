@@ -1,0 +1,105 @@
+{% extends "pipeline/base.html" %}
+{% block titre %}Leads{% endblock %}
+
+{% block style %}
+  .retard{color:var(--alerte);font-weight:600}
+  .note{color:var(--doux);font-size:.82rem;margin:.1rem 0 .9rem;max-width:60ch}
+  .puce{font-size:.74rem;padding:.05rem .4rem;border-radius:99px;border:1px solid var(--trait);
+    background:var(--fond);color:var(--doux);white-space:nowrap}
+{% endblock %}
+
+{% block contenu %}
+<h2>Sans contact depuis plus de 24 h <span class="badge alerte">{{ en_retard|length }}</span></h2>
+<p class="note">Le compte part de la reception du lead. Un lead marque doublon
+  n'y figure pas : il n'a pas a etre appele.</p>
+{% if en_retard %}
+  <table>
+    <thead><tr><th>Recu le</th><th>Qui</th><th>Entreprise</th><th>Campagne</th><th>Attente</th></tr></thead>
+    <tbody>
+    {% for lead in en_retard %}
+      <tr>
+        <td>{{ lead.date_reception|date:"d/m/Y H:i" }}</td>
+        <td>{{ lead.nom_declare|default:"—" }}<br>
+            <span class="puce">{{ lead.telephone_normalise|default:lead.email_normalise|default:"aucun contact" }}</span></td>
+        <td>{{ lead.entreprise.denomination|default:lead.entreprise_declaree|default:"—" }}</td>
+        <td>{{ lead.meta_campagne_nom|default:lead.get_source_display }}</td>
+        <td class="retard">{{ lead.date_reception|timesince }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+  <p class="vide">Aucun. Tous les leads ont ete contactes dans les 24 h.</p>
+{% endif %}
+
+<h2>Entreprise non identifiee <span class="badge">{{ a_resoudre|length }}</span></h2>
+<p class="note">La resolution SIREN n'a pas abouti seule. « Ambigu » signifie
+  que plusieurs entreprises correspondaient : le choix est laisse a un humain
+  plutot que tire au hasard, parce qu'un faux SIREN sur un dossier de
+  financement se decouvre au depot, apres signature.</p>
+{% if a_resoudre %}
+  <table>
+    <thead><tr><th>Recu le</th><th>Qui</th><th>Declare</th><th>Certitude</th><th>Ce qui a ete tente</th></tr></thead>
+    <tbody>
+    {% for lead in a_resoudre %}
+      <tr>
+        <td>{{ lead.date_reception|date:"d/m/Y H:i" }}</td>
+        <td>{{ lead.nom_declare|default:"—" }}</td>
+        <td>{{ lead.entreprise_declaree|default:"—" }}<br>
+            <span class="puce">{{ lead.email_normalise|default:"—" }}</span></td>
+        <td>{% if lead.certitude_resolution %}<span class="puce">{{ lead.get_certitude_resolution_display }}</span>{% else %}<span class="puce">pas encore tentee</span>{% endif %}</td>
+        <td>{{ lead.motif_resolution|default:"—" }}
+          {% if lead.candidats_siren %}<br>
+            {% for candidat in lead.candidats_siren|slice:":3" %}
+              <span class="puce">{{ candidat.siren }} · {{ candidat.denomination|truncatechars:28 }} · {{ candidat.note }}/100</span>
+            {% endfor %}
+          {% endif %}
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+  <p class="vide">Aucun.</p>
+{% endif %}
+
+<h2>Doublons probables <span class="badge">{{ doublons|length }}</span></h2>
+<p class="note">Ecrits mais hors pipeline. Signal faible seulement : meme nom
+  chez la meme entreprise. Si ce n'est pas un doublon, vider le champ
+  « doublon de » dans l'administration le remet dans le circuit.</p>
+{% if doublons %}
+  <table>
+    <thead><tr><th>Recu le</th><th>Qui</th><th>Doublon de</th><th>Source</th></tr></thead>
+    <tbody>
+    {% for lead in doublons %}
+      <tr>
+        <td>{{ lead.date_reception|date:"d/m/Y H:i" }}</td>
+        <td>{{ lead.nom_declare|default:"—" }}</td>
+        <td>#{{ lead.doublon_de_id }} — {{ lead.doublon_de.nom_declare|default:"—" }}</td>
+        <td>{{ lead.get_source_display }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+  <p class="vide">Aucun.</p>
+{% endif %}
+
+<h2>Les 20 derniers leads</h2>
+<table>
+  <thead><tr><th>Recu le</th><th>Qui</th><th>Entreprise</th><th>Source</th><th>Contacte</th></tr></thead>
+  <tbody>
+  {% for lead in recents %}
+    <tr>
+      <td>{{ lead.date_reception|date:"d/m/Y H:i" }}</td>
+      <td>{{ lead.nom_declare|default:"—" }}</td>
+      <td>{{ lead.entreprise.denomination|default:lead.entreprise_declaree|default:"—" }}</td>
+      <td>{{ lead.get_source_display }}</td>
+      <td>{% if lead.date_premier_contact %}{{ lead.date_premier_contact|date:"d/m H:i" }}{% else %}<span class="retard">non</span>{% endif %}</td>
+    </tr>
+  {% empty %}
+    <tr><td colspan="5" class="vide">Aucun lead pour l'instant.</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
