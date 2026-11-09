@@ -4,6 +4,7 @@ from django.contrib import admin
 from django.utils.html import format_html
 
 from apps.accounts.admin import admin_site
+from apps.documents.admin import PieceEnLigne
 from apps.financement.models import Dossier
 
 
@@ -117,7 +118,8 @@ class AdminDossier(admin.ModelAdmin):
         ),
         ("Tracabilite", {"fields": ("cree_le", "modifie_le")}),
     )
-    actions = ["recalculer"]
+    inlines = [PieceEnLigne]
+    actions = ["recalculer", "preparer_les_pieces"]
 
     @admin.display(description="Fenetre de depot")
     def signal_fenetre(self, obj):
@@ -129,6 +131,13 @@ class AdminDossier(admin.ModelAdmin):
         if restants <= 7 and obj.etat in ("brouillon", "a_deposer"):
             return format_html('<b style="color:#b54708">{} j restants</b>', restants)
         return f"{restants} j"
+
+    @admin.action(description="Preparer la liste des pieces attendues")
+    def preparer_les_pieces(self, request, queryset):
+        from apps.documents.services import preparer_les_pieces
+
+        crees = sum(preparer_les_pieces(dossier) for dossier in queryset)
+        self.message_user(request, f"{crees} piece(s) attendue(s) ajoutee(s).")
 
     @admin.action(description="Recalculer la prise en charge")
     def recalculer(self, request, queryset):

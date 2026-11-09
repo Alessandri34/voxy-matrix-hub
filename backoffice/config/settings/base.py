@@ -38,6 +38,9 @@ INSTALLED_APPS = [
     "apps.pipeline",
     "apps.integrations",
     "apps.financement",
+    "apps.sequences",
+    "apps.sourcing",
+    "apps.documents",
 ]
 
 # Modeles dont chaque creation, modification et suppression est inscrite au
@@ -51,6 +54,9 @@ AUDIT_MODELES = [
     "crm.Opposition",
     "pipeline.Opportunite",
     "financement.Dossier",
+    "sequences.Sequence",
+    "sequences.Inscription",
+    "documents.Piece",
 ]
 
 MIDDLEWARE = [
@@ -142,6 +148,13 @@ CELERY_TASK_ROUTES = {
 }
 
 CELERY_BEAT_SCHEDULE = {
+    "avancer-les-sequences": {
+        "task": "apps.sequences.taches.faire_avancer_sequences",
+        # Toutes les heures : le moteur refuse de toute facon d'envoyer hors
+        # de la fenetre de chaque sequence, mais une etape « J+0 » doit
+        # pouvoir partir dans l'heure qui suit l'inscription.
+        "schedule": 3600.0,
+    },
     "alerte-fenetres-de-depot": {
         "task": "apps.financement.taches.alerter_fenetres_de_depot",
         # Une fois par jour : une fenetre de depot se compte en jours, pas
@@ -169,6 +182,23 @@ META_PAGE_ACCESS_TOKEN = env("META_PAGE_ACCESS_TOKEN", default="")
 # relevee le 09/11/2026. A relever quand Meta deprecie une version : les
 # versions anciennes cessent de repondre sans preavis utile.
 META_API_VERSION = env("META_API_VERSION", default="v27.0")
+
+# --- Sequences de relance --------------------------------------------------
+# 🔴 Faux par defaut, et le garde-fou est dans le CODE autant que dans la
+# configuration : un moteur de relance branche par erreur sur une vraie base
+# envoie des centaines de messages avant que quiconque s'en apercoive, et un
+# envoi ne se reprend pas. Tant que ce reglage est faux, le moteur prepare
+# les messages, les rend consultables, et n'expedie rien.
+SEQUENCES_ENVOI_REEL = env.bool("SEQUENCES_ENVOI_REEL", default=False)
+
+# --- Google Places (facultatif) --------------------------------------------
+# Enrichit un prospect avec sa presence en ligne : note, nombre d'avis, site.
+# ⚠️ Les conditions de Google Maps Platform n'autorisent a conserver
+# durablement que le `place_id`. La note, les avis, le nom et l'adresse
+# n'ont AUCUNE exception de cache : ils se demandent au moment de l'usage et
+# ne doivent pas entrer en base. Le scraping de Maps est interdit.
+# Sans cle, le sourcing fonctionne — avec les seules donnees publiques.
+GOOGLE_PLACES_API_KEY = env("GOOGLE_PLACES_API_KEY", default="")
 
 # --- Courriel -------------------------------------------------------------
 EMAIL_HOST = env("EMAIL_HOST", default="")

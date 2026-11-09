@@ -29,12 +29,27 @@ le dépôt `voxy-matrix-hub`.
    site public a déjà annoncé la FAFCEA à 35 €/h alors que le numérique y
    est transverse à 25 €/h.
 
-## Ce qui est gelé, et pourquoi
+## Ce qui est tranché, et ce qui ne l'est pas
 
-🔴 **Le routage financeur.** `Opportunite.financeur_probable` existe ; aucune
-règle ne le remplit. L'arbitrage CMA contre FAFCEA transverse n'est pas
-tranché sur sources primaires. Écrire une règle avant cet arbitrage figerait
-dans le code un taux déjà annoncé faux une fois. → `docs/DECISIONS.md` D7.
+✅ **Le routage financeur est dégelé** depuis le 09/11/2026. L'arbitrage
+« CMA contre FAFCEA transverse » n'avait plus d'objet : le Conseil de la
+Formation des chambres de métiers **n'existe plus depuis le 1ᵉʳ septembre
+2022**, et le FAFCEA est le guichet unique des artisans. → D19.
+
+🔴 **On ne route jamais sur une inscription non établie.**
+`inscrite_repertoire_metiers` vaut `None` quand l'API ne dit rien, et **nul
+ne vaut pas « non inscrit »**. Sur l'échantillon héraultais, 32 % seulement
+portaient cette information. → D22.
+
+🔴 **Les envois de séquences sont désactivés par défaut.**
+`SEQUENCES_ENVOI_REEL = False`, et le garde-fou est dans le code autant que
+dans la configuration : un `.env` recopié d'une préproduction ne doit pas
+suffire à déclencher une campagne. → D24.
+
+🔴 **Rien de Google Maps n'est stocké** hors du `place_id`. Les conditions de
+Google Maps Platform n'accordent aucune exception de cache à la note, aux
+avis, au nom ni à l'adresse, et interdisent le scraping. Un test de
+non-régression refuse tout champ qui les stockerait. → D26.
 
 ## Ce qui a déjà coûté cher ici
 
@@ -50,6 +65,10 @@ dans le code un taux déjà annoncé faux une fois. → `docs/DECISIONS.md` D7.
   navigateur, invisible aux tests Django dont le client désactive CSRF.
 - **`{# … #}` de Django ne vaut que pour UNE ligne** : sur plusieurs, le
   commentaire s'affiche en clair aux utilisateurs.
+- **Un test qui dépend de l'heure réelle est instable.** Le moteur de
+  séquences refuse d'envoyer hors de la fenêtre ouvrable : un test qui passe
+  par `traiter_echeances` doit forcer les échéances dans le passé, sinon il
+  échoue le soir et passe le matin.
 
 ## La méthode qui marche ici
 

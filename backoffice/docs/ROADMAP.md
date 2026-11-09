@@ -113,10 +113,45 @@ Ce qui reste, et qui ne dépend pas du code :
       25 €/h transverse) — démarche distincte de Qualiopi.
 
 
-## Phase 4 — Formation et Qualiopi
+## Phase 4 — (fusionnée dans la phase 6)
 Catalogue, sessions, inscriptions, émargement, évaluations, documents PDF,
 preuves Qualiopi.
 
-## Phase 5 — Sourcing et séquences
-Import Sirene par DuckDB, enrichissement, scoring, séquences multi-étapes avec
-arrêt à la réponse et liste d'opposition.
+## Phase 5 — Sourcing, séquences et pièces  ◄ code fait
+
+Le « réacteur » : ce qui fait vivre un prospect de sa découverte à son
+dossier déposé.
+
+- [x] **Séquences de relance.** Étapes datées, jours ouvrés et jours fériés
+      calculés (pas une liste qui se périme), fenêtre horaire, plafond
+      quotidien par séquence. Trois arrêts : opposition, réponse, affaire
+      ouverte.
+      🔴 **`SEQUENCES_ENVOI_REEL = False` par défaut** : le moteur prépare
+      les messages et n'expédie rien. Avancement et expédition sont deux
+      tâches séparées.
+- [x] **Sourcing ciblé** sur l'API Recherche d'entreprises : par NAF et
+      département, siège vérifié localement, entreprises opposées écartées,
+      leads dédoublonnés. Aperçu par défaut.
+- [x] **Enrichissement Google Places**, conforme : interrogé au moment de
+      l'usage, seul le `place_id` est conservé. Un test parcourt tous les
+      modèles et refuse un champ qui stockerait une note ou un avis.
+- [x] **Pièces des dossiers** : fichier ou lien externe, liste attendue par
+      financeur, contrôle de complétude.
+- [x] **Volume finançable** : combien d'heures une enveloppe couvre — un
+      plafond, pas une durée de formation.
+
+Ce qui reste :
+
+- [ ] **Recouper la liste des pièces** avec le Point d'Accueil AGEFICE et le
+      FAFCEA. Elle est établie sur les procédures connues, pas extraite d'un
+      document officiel.
+- [ ] **Écrire les séquences réelles** : les gabarits sont à rédiger, avec
+      un moyen de refus dans chaque message (RGPD art. 21).
+- [ ] **Détection des réponses** : le moteur ne lit aucune boîte mail. Une
+      réponse s'inscrit à la main.
+- [ ] Clé `GOOGLE_PLACES_API_KEY` si l'enrichissement est voulu.
+
+## Phase 6 — Formation et Qualiopi
+
+Sessions, émargements, évaluations, indicateurs de résultats. Les grilles
+existent dans `livrables/B-socle/B3` ; rien n'est codé.

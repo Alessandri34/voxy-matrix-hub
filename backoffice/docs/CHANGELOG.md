@@ -103,3 +103,33 @@ tiers des TPE heraultaises refuse formellement la prospection commerciale.
   distanciel.
 - A prix de vente egal, un artisan paie **357 € de plus** qu'un commercant
   sur 21 h (525 € de FAFCEA contre 882 € d'AGEFICE). `D1` ne le dit pas.
+
+## Phase 5 — Sourcing, séquences et pièces (09/11/2026)
+
+### Ajoute
+- **`apps/sequences`** : le moteur de relance. Étapes datées, jours ouvrés
+  et fériés **calculés** (Paques par l'algorithme de Butcher — une liste
+  codée en dur se périme au 31 décembre), fenêtre horaire, plafond
+  quotidien par séquence.
+  🔴 `SEQUENCES_ENVOI_REEL = False` par défaut : le moteur prépare, il
+  n'expédie pas. Avancement et expédition sont deux tâches séparées.
+- **L'opposition est vérifiée avant CHAQUE envoi**, et une dernière fois
+  juste avant l'expédition : une personne peut s'opposer entre deux étapes,
+  et c'est même le cas le plus fréquent.
+- **`apps/sourcing`** : prospection ciblée sur l'API Recherche
+  d'entreprises. Remplace le scraping demandé — Google interdit le scraping
+  de Maps, et seule l'API officielle porte le drapeau d'opposition.
+- **`apps/sourcing/places.py`** : enrichissement Google Places conforme.
+  Interrogé au moment de l'usage, seul le `place_id` conservé. Un test
+  parcourt tous les modèles et refuse un champ qui stockerait une note.
+- **`apps/documents`** : pièces des dossiers, fichier **ou** lien externe,
+  liste attendue par financeur, contrôle de complétude.
+- **`apps/financement/volume.py`** : combien d'heures une enveloppe couvre.
+  Son résumé rappelle à chaque appel que c'est un plafond, pas une durée.
+- 381 tests.
+
+### Vérifié sur la vraie pile
+Migrations, contraintes et index sur PostgreSQL 17 ; les six tâches Celery
+enregistrées ; la chaîne complète d'une séquence par un vrai worker — un
+prospect reçoit son message, un autre est arrêté sur une opposition arrivée
+après son inscription, et zéro message n'est parti.

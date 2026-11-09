@@ -298,3 +298,83 @@ client et accepte par le financeur.
 
 `detail_calcul` conserve les limites, les blocages et les avertissements :
 c'est ce qui permet d'expliquer un montant longtemps apres.
+
+---
+
+## 2026-11-09 — Phase 4 : le réacteur (séquences, sourcing, pièces)
+
+### D24. Les envois de séquences sont désactivés par défaut, dans le code
+
+`SEQUENCES_ENVOI_REEL = False`. Le moteur calcule qui reçoit quoi et quand,
+prépare les messages, les rend consultables — et n'expédie rien.
+
+Le garde-fou est dans le code autant que dans la configuration : un `.env`
+recopié d'une préproduction vers la production ne doit pas suffire à
+déclencher une campagne. Un moteur de relance branché par erreur sur une
+vraie base envoie des centaines de messages avant que quiconque s'en
+aperçoive, et un envoi ne se reprend pas.
+
+L'avancement et l'expédition sont **deux tâches Celery séparées** : on peut
+faire tourner le moteur et relire ce qu'il produit pendant des semaines sans
+qu'un seul message parte.
+
+### D25. L'opposition est vérifiée avant CHAQUE envoi
+
+Pas à l'inscription. Une personne peut s'opposer entre deux étapes — c'est
+même le cas le plus fréquent, puisque c'est le premier message qui déclenche
+l'opposition. Vérifier à l'inscription seulement enverrait la relance.
+
+Une dernière vérification a lieu **juste avant l'expédition**, parce que
+l'opposition a pu être inscrite pendant que le message attendait en file.
+
+Deux autres arrêts : toute relance s'arrête dès que la personne répond, et un
+prospect devenu affaire sort de la prospection. ⚠️ Le moteur **ne lit aucune
+boîte mail** : une réponse par email ne se détecte pas toute seule. Elle est
+inscrite à la main, ou parce qu'un humain a journalisé un échange.
+
+### D26. Le sourcing passe par l'API officielle, pas par un scraper
+
+Demandé : scraper Google Maps et `societe.com`. Vérifié le 09/11/2026 :
+
+- **Google interdit explicitement le scraping de Maps.** Seul le `place_id`
+  est conservable durablement, les coordonnées 30 jours ; le nom, l'adresse,
+  la note et les avis n'ont **aucune exception de cache**.
+- **Pappers et `societe.com` vendent une API** pour les mêmes données que
+  l'API publique Recherche d'entreprises, déjà intégrée, gratuite.
+- **Seule l'API officielle porte `opposition_diffusion_commerciale`.** Sur
+  l'échantillon héraultais, 34 % des TPE des NAF cibles le portent. Une liste
+  constituée autrement démarche ces 34 % sans le savoir.
+
+`apps/sourcing` fait donc ce qu'un scraper ferait, en mieux : il cible par
+NAF et département, écarte les opposées, vérifie que le siège est bien local
+(l'API filtre sur les établissements), et crée des leads dédoublonnés.
+
+L'enrichissement Places existe (`apps/sourcing/places.py`) : il interroge
+l'API **au moment de l'usage**, sert les signaux de qualification à l'écran,
+et n'écrit que le `place_id`. Un test de non-régression parcourt tous les
+modèles et refuse un champ qui stockerait une note ou un nombre d'avis.
+
+### D27. Une pièce peut vivre ailleurs que sur le VPS
+
+`Piece` accepte **un fichier ou un lien externe**, et l'un ou l'autre suffit
+pour qu'elle compte comme fournie. Le fichier est sauvegardé avec la base
+mais occupe le disque ; le lien ne pèse rien ici, mais **la sauvegarde
+chiffrée du back-office ne le couvre pas** et un lien peut casser. Le choix
+est laissé, et les deux conséquences sont écrites dans l'administration.
+
+⚠️ La liste des pièces par financeur est établie sur les procédures connues,
+**pas extraite d'un document officiel** : à recouper avec le Point d'Accueil
+AGEFICE et le FAFCEA avant le premier dépôt réel. `Controle` le signale
+(`liste_non_officielle`).
+
+### D28. Le volume financable est un plafond, pas une durée
+
+`apps/financement/volume.py` dit combien d'heures une enveloppe couvre. Son
+résumé rappelle, à chaque appel, que c'est un **plafond de financement et non
+une durée de formation** : celle-là se justifie par les objectifs
+pédagogiques et le niveau de départ de l'apprenant, ce que vérifie un
+auditeur Qualiopi (indicateurs 4 et 8).
+
+Construire 100 heures parce que l'enveloppe permet 100 heures, et non parce
+que l'apprenant en a besoin, est précisément ce que vise la loi anti-fraude
+n° 2026-534 — et ce que la règle d'or du projet interdit.
