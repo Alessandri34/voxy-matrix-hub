@@ -11,6 +11,13 @@ DEBUG = False
 
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 SECURE_SSL_REDIRECT = True
+# Le point de sante est appele en HTTP sur 127.0.0.1, depuis le conteneur
+# lui-meme (healthcheck Docker) et depuis le mandataire. Sans cette
+# exemption, il recoit un 301 vers une URL HTTPS que rien ne sert sur cette
+# interface : le conteneur serait marque « unhealthy » en permanence et le
+# deploiement bloque. Exempter cette seule route ne reduit rien : elle ne
+# porte ni session, ni cookie, ni donnee.
+SECURE_REDIRECT_EXEMPT = [r"^sante/$"]
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_HTTPONLY = True

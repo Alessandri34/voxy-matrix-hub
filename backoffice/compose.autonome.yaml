@@ -1,0 +1,29 @@
+# Surcouche pour un serveur NU : aucun panneau, aucun nginx, rien sur les
+# ports 80 et 443. Caddy obtient alors le certificat tout seul.
+#
+#     docker compose -f compose.yaml -f compose.autonome.yaml up -d
+#
+# 🔴 **A ne jamais employer sur le VPS actuel.** Il fait tourner HestiaCP
+# avec nginx sur 80 et 443, qui sert vformations.fr. Caddy ne demarrerait
+# pas — ou pire, nginx ne redemarrerait pas apres une mise a jour.
+
+services:
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    ports: ["80:80", "443:443", "443:443/udp"]
+    env_file: .env
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddydata:/data
+      - caddyconfig:/config
+    depends_on: [web]
+
+  # Sans mandataire externe, inutile d'exposer gunicorn sur l'hote :
+  # Caddy le joint par le reseau interne de la pile.
+  web:
+    ports: !reset []
+
+volumes:
+  caddydata:
+  caddyconfig:

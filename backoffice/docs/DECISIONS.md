@@ -140,3 +140,89 @@ durable ne doit en dependre. A reverifier avant cette date.
 L'API Drag and Drop du navigateur suffit. SortableJS pesait 45 Ko et un CDN
 de plus a joindre, pour un comportement que le navigateur sait deja faire —
 et le back-office doit s'ouvrir meme quand le reseau sortant est coupe.
+
+---
+
+## 2026-11-09 — Phase 2 : ce que l'exécution de la vraie pile a revele
+
+### D14. Deux defauts de la phase 1 que seule la pile reelle montrait
+
+Les tests de la phase 1 etaient verts, et deux taches de fond sur trois
+n'auraient jamais tourne en production.
+
+**1. Aucune tache Celery n'etait enregistree.** `autodiscover_tasks()`
+cherche par defaut un module nomme **`tasks`** dans chaque application. Les
+notres s'appellent **`taches`**, selon la convention de langue du projet.
+Corrige par `autodiscover_tasks(related_name="taches")`, plus
+`apps/integrations/taches.py` — la decouverte ne regarde que la racine de
+chaque application, jamais ses sous-paquets.
+
+Le symptome aurait ete muet : la vue repond 200, la tache part dans Redis,
+un worker la recoit, leve `KeyError` dans son propre journal et l'abandonne.
+Cote application, rien — juste des leads dont le SIREN n'est jamais resolu
+et des webhooks Meta jamais traites.
+
+**2. La file `siren` n'avait aucun consommateur.** La pile ne lancait qu'un
+worker, sur la file par defaut. Reproduit : `LLEN siren` restait a 1
+indefiniment. Corrige par un service `worker-siren` dedie — qui est aussi,
+exactement, le mecanisme de D11 : la cadence de l'API est tenue par la
+topologie des files, pas par un compteur dans le code.
+
+Les tests de la phase 1 ne pouvaient voir ni l'un ni l'autre : ils executent
+les taches en direct, sans courtier. D'ou deux tests nouveaux, qui lisent le
+source et la pile Docker plutot que d'executer :
+`tests/test_decouverte_taches.py` et `tests/test_files_celery.py`. Les deux
+ont ete verifies en remettant le defaut : ils echouent bien.
+
+### D15. Caddy sort de la pile par defaut
+
+Le VPS fait tourner **HestiaCP avec nginx sur 80 et 443**, qui sert
+`vformations.fr`. La pile de la phase 0 reclamait ces memes ports pour
+Caddy : deployee telle quelle, elle aurait fait tomber le site.
+
+La pile par defaut est donc desormais **celle du VPS**, sans Caddy, avec
+gunicorn sur `127.0.0.1:8000` et nginx en mandataire. Caddy est passe dans
+`compose.autonome.yaml`, a activer explicitement pour un serveur nu.
+
+Le raisonnement : **la configuration dangereuse ne doit pas etre celle par
+defaut.** Le workflow de deploiement refuse en plus de partir si
+`compose.yaml` reclame 80 ou 443 — garde-fou verifie sur quatre ecritures
+differentes, dont une qui ne devait pas declencher de faux positif.
+
+### D16. Le point de sante est exempte de la redirection HTTPS
+
+Le healthcheck Docker appelle `http://127.0.0.1:8000/sante/` depuis le
+conteneur, sans en-tete de mandataire. Avec `SECURE_SSL_REDIRECT` et sans
+exemption, il recevait un 301 vers une URL HTTPS que rien ne sert sur cette
+interface : le conteneur serait reste « unhealthy » en permanence, et le
+deploiement bloque a chaque fois.
+
+`SECURE_REDIRECT_EXEMPT = [r"^sante/$"]`, cette route seulement. Elle ne
+porte ni session, ni cookie, ni donnee : deux booleens.
+
+### D17. Le deploiement est manuel, et sauvegarde avant de migrer
+
+Le site vitrine se deploie automatiquement : il est statique, une mauvaise
+version se corrige en reposant la precedente. Le back-office applique des
+**migrations de base sur des donnees de prospects**. Une migration ne se
+repose pas.
+
+Le workflow est donc en declenchement manuel, avec confirmation a taper, et
+il prend un `pg_dump` **avant** la migration — pas apres. Le retour arriere
+remet les images precedentes et **le dit explicitement** : le code revient,
+une migration deja appliquee ne revient pas.
+
+### D18. Ce qui n'a pas pu etre verifie depuis la session
+
+Honnetement : la cle SSH du VPS est dans les secrets GitHub, pas ici. Ont
+ete eprouves **reellement** — PostgreSQL 17 et Redis 8 en conteneurs,
+migrations, contraintes `CHECK` et index uniques partiels, resolution SIREN
+de bout en bout par la file Celery (SIREN 776054090 resolu avec certitude),
+syntaxe nginx validee par un vrai nginx, et la chaine nginx → gunicorn →
+Django avec TLS, en-tetes, statiques et refus de signature du webhook.
+
+N'ont **pas** pu l'etre : les commandes `v-*` d'Hestia, ecrites d'apres sa
+documentation ; la construction de l'image Docker, bloquee ici par le
+certificat du mandataire de ce bac a sable — refuser de desactiver la
+verification TLS dans le Dockerfile etait preferable a une regression de
+securite expediee en production.
