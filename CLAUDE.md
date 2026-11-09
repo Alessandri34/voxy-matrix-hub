@@ -48,6 +48,7 @@ Formulations **bannies** : « gratuit », « 100 % financé », « sans reste à
 - **FIF PL** (professions libérales, courtiers) : **900 €/an** est l'ordre de grandeur courant, mais **le barème est propre à chaque profession** (fiche de critères par code NAF, revue chaque année — critères 2026 validés le 20/11/2025) et s'applique **dans la limite du budget de la profession**, qui peut s'épuiser en fin d'exercice. [Vérifié — fifpl.fr, 20/10/2026]
   ⚠️ Trois règles qui changent la conception d'un parcours : **e-learning plafonné à 50 %** des critères journaliers ET annuels ; **formations ≥ 100 h = enveloppe distincte** (70 % du coût réel, plafond par professionnel pour le cœur de métier) ; **micro-entrepreneurs : grille révisée au 1/1/2026**, 20 % des critères journaliers pour les CFP les plus faibles. Certaines professions **excluent des thèmes entiers** (informatique générale, langues).
   **Dépôt jusqu'à 10 jours APRÈS le début** — le plus souple.
+- 🟠 **Prospection sortante : 34 % des TPE héraultaises des NAF cibles s'y sont formellement opposées** (mesure du 09/11/2026, n=106 — voir §7quater). À déduire de toute liste avant d'en calculer le rendement.
 - **Constructys** : 19 €/h (demandes reçues dès le 1/6/2026) ; les < 11 salariés conserveraient 24 €/h [À vérifier].
 → **Ne jamais vendre « financé à 100 % »** : le reste à charge est réel.
 
@@ -89,6 +90,32 @@ A = 10 scripts UGC (**fait** : fiche signal + 10 angles + 10 scripts + plan de t
 - **Scripts de transmission : 26, en deux lots** — V01-V16 (financement, fiche, formats) et **V17-V26 : acquisition client par le numérique** [23/10/2026]. Le second lot entre par ce qui se passe *après* qu'un inconnu a trouvé l'entreprise : délai de réponse, formulaire, avis, relance, suivi des canaux, coût par demande. Chacun transmet **une mesure ou un geste**, jamais un résultat.
 - **Structure de rétention [23/10/2026 — `A5`]** : l'arc en 5 temps dit *ce qui est transmis*, il ne disait pas *pourquoi le spectateur reste*. Tout script porte désormais **deux boucles décalées** : B s'ouvre avant que A se referme, et **A se referme au temps 4 (la nuance), jamais au temps 3**. Les 30 scripts de `A2` et `A4` sont repris ; `controle-scripts.py` le vérifie (règles L1-L3) et refuse « restez jusqu'à la fin ».
 - ❌ **Appât à commentaire automatisé (ManyChat & co) : refusé.** Recommandé par le guide Orcalynx au motif qu'il *« trompe l'algorithme »*. Même catégorie que les backlinks automatiques (§6bis) : Meta démote l'appât à engagement, le risque porte sur le compte qui finance les ADS, et collecter des contacts par message privé automatisé pose un problème de base légale RGPD pour un organisme de formation.
+
+## 7ter. Chantier D — back-office (branche `claude/new-session-nefcch`, dossier `backoffice/`)
+
+Django 5.2 LTS, PostgreSQL 17, Celery, Caddy. **Phase 0** (socle, 2FA, rôles, sauvegardes chiffrées) et **phase 1** (CRM, pipeline, leads Meta, résolution SIREN, import CSV) sont écrites et testées — 214 tests. **Phase 2 = mise en production sur le VPS**, non commencée. Détail dans `backoffice/docs/{PRD,ROADMAP,DECISIONS,CHANGELOG,RUNBOOK}.md`.
+
+🔴 **Le routage financeur est gelé dans le code.** Le champ `financeur_probable` existe, **aucune règle ne le remplit**. L'arbitrage CMA contre FAFCEA transverse n'est pas tranché sur sources primaires, et le site a déjà annoncé la FAFCEA à 35 €/h alors que le numérique y est transverse à 25 €/h (§5). À trancher avant la phase 3.
+
+🔴 **Le dépôt est public et la phase 1 introduit des données de prospects.** Il doit passer en privé, ou le back-office partir dans son propre dépôt privé, **avant toute mise en production**. Voir `livrables/INVENTAIRE_EXPOSITION_PUBLIQUE.md`.
+
+## 7quater. Deux constats de la phase 1 qui dépassent le chantier D [09/11/2026]
+
+### 🔴 Un tiers des TPE héraultaises refuse formellement la prospection
+Mesuré sur **106 entreprises dont le siège est dans l'Hérault**, sur les codes NAF visés par les offres (restauration, coiffure, BTP, commerce, taxi), via l'API Recherche d'entreprises :
+
+- **34 % portent `opposition_diffusion_commerciale: true`** — opposition formelle à la réutilisation de leurs données à des fins de prospection commerciale, au titre du **RGPD art. 21 §2** et de l'**art. R.123-320 du Code de commerce** ;
+- 65 % ne sont pas opposées ; 1 % sont absentes du RNE, ce qui **n'est pas** une absence d'opposition ;
+- 32 % sont inscrites au **Registre des Métiers** — critère d'éligibilité FAFCEA.
+
+⚠️ Échantillon de convenance (première page de résultats par code NAF), pas tirage aléatoire : l'ordre de grandeur vaut, la décimale non.
+
+**Ce que ça change** : toute économie de sourcing bâtie sur 100 % d'une liste héraultaise est fausse d'un tiers. Le chiffre est à reprendre dans `D1` avant de budgéter la prospection sortante. Le back-office relève l'opposition à chaque résolution SIREN et l'inscrit automatiquement au registre des oppositions — mais un fichier acheté ou constitué à la main, lui, ne la connaît pas.
+
+### 🟠 Le formulaire Meta doit porter un champ « nom de l'entreprise »
+La résolution automatique du SIREN a été mesurée sur **30 entreprises réelles au SIREN connu** : **80 à 90 % de rattachements justes, 0 % de rattachement faux** — sauf dans un cas, où elle tombe à **0 %** : quand le formulaire ne transmet **ni nom d'entreprise, ni email professionnel** (un Gmail et un nom de personne ne disent rien de l'entreprise).
+
+C'est un réglage du **formulaire Meta**, pas du code, et il conditionne tout le rattachement financeur en aval. À appliquer avant la première campagne du chantier `D3`.
 
 ## 8. Conventions
 - Langue : français. Sources datées, classées [Vérifié] / [À vérifier] / [Hypothèse].
@@ -188,6 +215,10 @@ Plus le n° de certificat **VFO12912026001** et le certificateur **evolve** (1 r
 - 🔴 **Trancher « AFAQ ISO »** : retiré du site le 21/10 faute de preuve. Si la certification existe, dire laquelle et par qui ; sinon, ne pas la remettre.
 - 🟠 **Demander le référencement FAFCEA « parcours individualisé »** si le dispositif est jugé intéressant : 80 €/h contre 25 €/h transverse. C'est une démarche distincte de Qualiopi.
 - 🟠 **Tester la structure de rétention** : 6 Reels, 3 en boucle unique / 3 en boucles décalées, même sujet et même format. Relever la rétention **à 15 s et à 40 s**, pas les vues. Protocole dans `A5` §6. ⚠️ Six vidéos ne font pas un test statistique — faisceau d'indices, jamais un résultat à publier.
+- 🔴 **Chantier D — le dépôt est public et le back-office porte désormais des données de prospects.** À passer en privé, ou à sortir dans son propre dépôt privé, **avant la mise en production** (phase 2).
+- 🔴 **Chantier D — trancher le routage financeur** (CMA contre FAFCEA transverse, sur sources primaires) avant la phase 3. Le code le laisse volontairement gelé.
+- 🟠 **Ajouter un champ « nom de l'entreprise » au formulaire Meta Lead Ads** avant la première campagne : sans lui, la résolution automatique du SIREN tombe à 0 % (§7quater).
+- 🟠 **Reprendre `D1` avec les 34 % d'opposition à la prospection** (§7quater) : l'économie du sourcing sortant est calculée sur une liste un tiers trop large.
 - Étude de marché PDF (à fournir).
 - Vrais coûts de production (pour remplacer les [Hypothèses] de l'économie unitaire).
 - Relecture juridique du montage et des contrats.
