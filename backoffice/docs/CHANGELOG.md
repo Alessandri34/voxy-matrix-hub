@@ -9,3 +9,48 @@
   restauration avec dump de sécurité préalable et confirmation tapée
 - 12 tests, `ruff check` et `ruff format` conformes
 - `check --deploy` ne signale que les valeurs absentes du `.env`
+
+## Phase 1 — CRM, pipeline et leads entrants (09/11/2026)
+
+### Ajoute
+- **`apps/crm`** : Entreprise (SIREN unique conditionnel), Contact, Lead,
+  Activite (lien generique), Opposition. Formes normalisees stockees en
+  colonnes indexees — email, telephone, nom, SIREN.
+- **Dedoublonnage a deux certitudes.** Signal fort (identifiant Meta, email,
+  telephone) : aucun second lead, le premier est enrichi sans qu'aucun champ
+  rempli soit ecrase. Signal faible (meme nom chez la meme entreprise) : le
+  lead est ecrit mais marque doublon, hors pipeline, pour qu'un humain
+  tranche.
+- **Resolution SIREN** par l'API Recherche d'entreprises, avec notation des
+  candidats et motifs de la note. Ne rattache jamais sur un signal ambigu.
+- **`apps/pipeline`** : Opportunite (11 etapes), PassageEtape (temps par
+  etape), Kanban avec glisser-deposer sans bibliotheque.
+- **`apps/integrations`** : webhook Meta Lead Ads — signature
+  `X-Hub-Signature-256` verifiee a temps constant, corps brut conserve,
+  traitement differe et rejouable, idempotence sur `leadgen_id`.
+- **`apps/audit`** : journal de toutes les creations, modifications et
+  suppressions, avec les valeurs avant/apres. Entrees non modifiables.
+- **Import CSV** : apercu par defaut, encodage et separateur devines,
+  en-tetes approximatifs reconnus.
+- Trois commandes : `importer_leads`, `rejouer_receptions`, `peupler_demo`.
+- 214 tests.
+
+### Corrige en cours de route
+- `changer_etape` refuse laissait l'objet en memoire portant deja la nouvelle
+  etape : l'appel suivant croyait n'avoir rien a faire. Un utilisateur
+  corrigeant son motif apres l'erreur voyait son changement disparaitre.
+- Le journal d'audit ecrivait une ligne a CHAQUE `save()`, meme sans
+  changement : `modifie_le` est un champ `auto_now`, donc toujours different.
+- Le Kanban ne posait aucun jeton CSRF : le glisser-deposer etait refuse en
+  403 dans un vrai navigateur. Invisible aux tests Django, dont le client
+  desactive la verification CSRF.
+- Les commentaires `{# … #}` sur plusieurs lignes s'affichaient en clair dans
+  la page : cette syntaxe Django ne vaut que pour une seule ligne.
+- `first_name` figurait a la fois dans la table de correspondance Meta et
+  dans le recollage prenom + nom : le nom de famille etait perdu.
+- Le lien de l'alerte des 24 h etait illisible en mode sombre.
+
+### Decide
+Voir `DECISIONS.md` D7 a D13. Les deux points qui engagent au-dela du code :
+le formulaire Meta doit comporter un champ « nom de l'entreprise », et un
+tiers des TPE heraultaises refuse formellement la prospection commerciale.

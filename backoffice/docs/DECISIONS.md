@@ -40,3 +40,103 @@ artisan. Détail dans `PRD.md`. **La phase 3 ne démarre pas avant l'arbitrage.*
 secret (`.env` est ignoré par Git), donc rien n'est exposé aujourd'hui. **Mais
 la phase 1 introduit des données de prospects.** À régler avant : dépôt privé,
 ou déplacement du back-office dans son propre dépôt privé.
+
+---
+
+## 2026-11-09 — Phase 1 : ce que les sources primaires ont impose
+
+### D7. Le routage financeur reste gele, le champ existe
+
+`Opportunite.financeur_probable` est **informatif**. Aucune regle ne le
+remplit automatiquement. L'arbitrage CMA contre FAFCEA transverse n'est pas
+tranche sur sources primaires, et le site public a deja annonce la FAFCEA a
+35 €/h alors que le numerique y est transverse a 25 €/h. Ecrire une regle de
+routage avant cet arbitrage figerait dans le code un taux deja faux une fois.
+
+### D8. La resolution SIREN ne rattache jamais sur un signal ambigu
+
+Mesure faite le 09/11/2026 sur **30 entreprises reelles de l'Herault dont le
+SIREN etait connu**, contre l'API Recherche d'entreprises, avec le code de
+`apps/crm/services/recherche_entreprises.py` :
+
+| Ce que le formulaire Meta transmet | Juste | **Faux** | Ambigu | Aucun |
+|---|---|---|---|---|
+| Nom d'entreprise exact + email pro | 90 % | **0 %** | 10 % | 0 % |
+| Nom tape a la main (abrege, sans accent) | 87 % | **0 %** | 13 % | 0 % |
+| Gmail, mais nom d'entreprise rempli | 87 % | **0 %** | 13 % | 0 % |
+| Aucun nom, email professionnel seul | 80 % | **0 %** | 13 % | 7 % |
+| **Aucun nom, Gmail** | **0 %** | 0 % | 0 % | 100 % |
+
+**Aucun rattachement faux dans aucun scenario.** Les cas douteux sont marques
+« ambigu » et laisses a un humain. C'est le but : un faux SIREN sur un
+dossier de financement se decouvre au depot, apres que le client a signe.
+
+🔴 **Consequence operationnelle, a appliquer avant la premiere campagne :
+le formulaire Meta DOIT comporter un champ « nom de l'entreprise ».** Sans
+lui ni email professionnel, la resolution tombe a 0 % et le critere de sortie
+de 70 % devient inatteignable. Ce n'est pas un reglage du code, c'est un
+reglage du formulaire.
+
+⚠️ Reserve de methode : le scenario « email professionnel seul » emploie un
+domaine fabrique a partir de la raison sociale. Un vrai domaine ne lui
+ressemble pas toujours (`contact@letaxi34.fr` pour « TAXI HERAULT
+TRANSFERT »). Ce 80 % est donc optimiste ; les quatre autres lignes ne le
+sont pas.
+
+### D9. Un tiers des TPE heraultaises refuse la prospection commerciale
+
+Mesure sur **106 entreprises dont le siege est dans l'Herault**, sur les codes
+NAF vises par les offres (restauration, coiffure, BTP, commerce, taxi) :
+
+- **34 % sont formellement opposees** a la reutilisation de leurs donnees a
+  des fins de prospection (`opposition_diffusion_commerciale: true` — RGPD
+  art. 21 §2, art. R.123-320 du Code de commerce) ;
+- 65 % ne le sont pas ; 1 % sont absentes du RNE, ce qui n'est pas une
+  absence d'opposition ;
+- 32 % sont inscrites au Registre des Metiers — critere d'eligibilite FAFCEA.
+
+⚠️ Echantillon de convenance (premiere page de resultats par code NAF), pas
+tirage aleatoire : l'ordre de grandeur vaut, la decimale non.
+
+**Consequence pour la phase 5 (sourcing et sequences)** : un tiers d'une
+liste de prospection heraultaise est hors d'atteinte en demarchage a froid.
+Toute economie de sourcing batie sur 100 % de la liste est fausse d'un tiers.
+L'opposition est donc relevee a chaque resolution SIREN et inscrite
+automatiquement au registre des oppositions.
+
+### D10. Le critere « moins d'1 minute » se mesure a partir de notre reception
+
+La documentation Meta annonce elle-meme que ses notifications arrivent « avec
+un delai pouvant aller jusqu'a quelques minutes ». Mesurer le trajet complet
+depuis l'envoi du formulaire reviendrait a mesurer le reseau de Meta.
+`ReceptionWebhook.delai_de_traitement_secondes` compte donc de **notre**
+reception a l'ecriture du lead.
+
+Fait verifie, qui change l'architecture : **la charge utile du webhook ne
+contient aucune reponse du prospect**, seulement `leadgen_id`, `page_id`,
+`form_id`, `adgroup_id`, `ad_id`, `created_time`. Les reponses demandent un
+appel Graph API avec les permissions `leads_retrieval` et `pages_manage_ads`,
+**soumises a App Review**. Les noms de campagne et d'ensemble demandent un
+appel de plus. D'ou : corps brut conserve, traitement differe, rejouable.
+
+### D11. La file SIREN a un seul consommateur
+
+La specification de l'API Recherche d'entreprises annonce **7 requetes par
+seconde et par adresse IP** et previent : « Il est donc probable de faire face
+a cette limite sur les cloud publics. » Le VPS en est un.
+
+Un compteur local serait faux des qu'une seconde instance de worker demarre.
+La resolution part donc sur une file Celery dediee, servie par **un seul**
+worker (`--queue siren --concurrency 1`), plafonnee a 4 appels/seconde.
+
+### D12. `activite_principale_naf25` est un champ temporaire
+
+La specification de l'API annonce sa **suppression au 1er janvier 2027**. Le
+champ `Entreprise.naf_2025` est alimente tant qu'il existe, mais rien de
+durable ne doit en dependre. A reverifier avant cette date.
+
+### D13. Le glisser-deposer sans bibliotheque
+
+L'API Drag and Drop du navigateur suffit. SortableJS pesait 45 Ko et un CDN
+de plus a joindre, pour un comportement que le navigateur sait deja faire —
+et le back-office doit s'ouvrir meme quand le reseau sortant est coupe.
