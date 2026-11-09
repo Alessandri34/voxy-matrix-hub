@@ -17,3 +17,6 @@ __pycache__/
 *.egg-info/
 build/
 dist/
+
+# Residu possible d une bascule de branche depuis le depot d origine.
+/backoffice/
