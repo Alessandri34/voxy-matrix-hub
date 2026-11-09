@@ -54,3 +54,30 @@
 Voir `DECISIONS.md` D7 a D13. Les deux points qui engagent au-dela du code :
 le formulaire Meta doit comporter un champ « nom de l'entreprise », et un
 tiers des TPE heraultaises refuse formellement la prospection commerciale.
+
+## Phase 2 — Mise en production (09/11/2026)
+
+### Corrige — deux defauts de la phase 1, invisibles aux tests
+- **Aucune tache Celery n'etait enregistree** : `autodiscover_tasks()`
+  cherche `tasks`, nos modules s'appellent `taches`. Resolution SIREN et
+  traitement des webhooks Meta ne tournaient pas, sans aucune erreur
+  visible cote application.
+- **La file `siren` n'avait pas de consommateur** : la pile ne lancait
+  qu'un worker, sur la file par defaut.
+
+### Modifie
+- **Caddy sort de la pile par defaut** (`compose.autonome.yaml`). Il
+  reclamait 80 et 443, que nginx occupe pour `vformations.fr` sur le VPS.
+- `web` n'ecoute que sur `127.0.0.1` ; nginx est le mandataire.
+- Deux workers : `worker` (file par defaut) et `worker-siren`
+  (file `siren`, `--concurrency 1`).
+
+### Ajoute
+- `/sante/` : interroge la base et Redis, exempte de la redirection HTTPS.
+- Modeles nginx Hestia `deploiement/backoffice.{tpl,stpl}`.
+- `deploiement/premiere-installation.md`.
+- Workflow `Déployer le back-office` : declenchement manuel, sauvegarde
+  avant migration, retour aux images precedentes si le demarrage echoue.
+- `tests/test_decouverte_taches.py` et `tests/test_files_celery.py` —
+  les deux verifies en remettant le defaut.
+- 231 tests.

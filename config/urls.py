@@ -11,8 +11,12 @@ from django.urls import include, path
 
 from apps.accounts.admin import admin_site
 from apps.integrations.meta import vues as vues_meta
+from config.sante import sante
 
 urlpatterns = [
+    # Sans authentification, par necessite : un conteneur doit pouvoir se
+    # tester lui-meme. Il ne revele que deux booleens.
+    path("sante/", sante, name="sante"),
     path("admin/", admin_site.urls),
     path("integrations/meta/webhook/", vues_meta.webhook, name="webhook-meta"),
     path("pipeline/", include("apps.pipeline.urls")),

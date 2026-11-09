@@ -45,9 +45,37 @@ Critères de sortie, repris du PRD :
 > renvoyait le webhook Meta en phase 2. Le PRD le place en phase 1 — ses deux
 > premiers critères de sortie en dépendent. Recalé.
 
-## Phase 2 — Mise en production  ◄ suivante
-Déploiement sur le VPS, domaine, certificats, sauvegarde nocturne réelle.
-Les trois cases du VPS restées ouvertes en phase 0 se cochent ici.
+## Phase 2 — Mise en production  ◄ code fait, serveur à faire
+
+Tout ce qui pouvait être écrit et éprouvé hors du serveur l'est :
+
+- [x] Pile de production **sans Caddy** : plus aucun conteneur ne réclame
+      les ports 80/443, que nginx occupe pour `vformations.fr`. Caddy reste
+      dans `compose.autonome.yaml`, pour un serveur nu.
+- [x] Modèles nginx Hestia (`deploiement/backoffice.{tpl,stpl}`), syntaxe
+      validée par un vrai nginx, et chaîne **nginx → gunicorn → Django**
+      éprouvée de bout en bout contre PostgreSQL 17 et Redis 8 réels.
+- [x] Point de santé `/sante/` qui interroge la base et Redis, exempté de
+      la redirection HTTPS pour que le healthcheck du conteneur passe.
+- [x] Workflow `Déployer le back-office` : tests, style, `check --deploy`,
+      refus des ports 80/443, sauvegarde de la base, puis retour aux
+      images précédentes si le point de santé ne répond pas.
+- [x] Procédure de première installation : `deploiement/premiere-installation.md`.
+
+Ce qui demande le serveur, et n'a donc pas pu être vérifié d'ici :
+
+- [ ] Enregistrement DNS `backoffice.vformations.fr`
+- [ ] Domaine et certificat Let's Encrypt déclarés dans Hestia
+- [ ] `.env` de production rempli sur le serveur (secrets, jamais au dépôt)
+- [ ] Première installation jouée, les 10 contrôles finaux passés
+- [ ] **Une sauvegarde restaurée pour de vrai** — sans quoi il n'y a pas
+      de sauvegarde
+- [ ] App Review Meta (`leads_retrieval`, `pages_manage_ads`) puis test de
+      bout en bout d'un vrai lead
+
+🔴 **Prérequis hors technique : le dépôt est public.** Il porte désormais le
+code qui traite des données de prospects. À passer en privé, ou à sortir
+dans son propre dépôt privé, avant la mise en service.
 
 ## Phase 3 — Financement
 ⚠️ **Ne pas démarrer avant d'avoir tranché le bloc gelé de `PRD.md`.**

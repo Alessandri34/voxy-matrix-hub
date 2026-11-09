@@ -1,4 +1,16 @@
-# Toute la stack demarre avec : docker compose up -d
+# Pile de production, telle qu'elle tourne sur le VPS.
+#
+#     docker compose up -d
+#
+# ⚠️ **Aucun service ne prend les ports 80 ni 443.** Le VPS fait tourner
+# HestiaCP avec nginx, qui sert deja vformations.fr sur ces ports. Un
+# conteneur qui les reclamerait ferait tomber le site. `web` n'ecoute donc
+# que sur 127.0.0.1 : c'est nginx qui l'expose, en mandataire, sur le
+# sous-domaine du back-office, avec le certificat gere par Hestia.
+#
+# Pour un serveur nu, sans panneau ni nginx, ajouter Caddy :
+#     docker compose -f compose.yaml -f compose.autonome.yaml up -d
+#
 # Les images sont epinglees sur une version majeure : une mise a jour se
 # decide, elle ne s'impose pas au redemarrage.
 
@@ -34,25 +46,56 @@ services:
     build: .
     restart: unless-stopped
     env_file: .env
+    # Sur 127.0.0.1 seulement : rien ne doit joindre gunicorn sans passer
+    # par nginx, qui porte le TLS et les en-tetes de securite.
+    ports: ["127.0.0.1:${PORT_WEB:-8000}:8000"]
     # Les migrations passent avant que gunicorn n'accepte une requete :
     # un demarrage ne doit jamais servir un schema en retard.
     command: >
       sh -c "python manage.py migrate --noinput &&
              python manage.py collectstatic --noinput &&
-             gunicorn config.wsgi:application --bind 0.0.0.0:8000 --workers 3"
+             gunicorn config.wsgi:application --bind 0.0.0.0:8000 --workers 3
+                      --access-logfile - --error-logfile -"
+    volumes:
+      - media:/app/media
+      - statiques:/app/staticfiles
+    healthcheck:
+      # Interroge l'application, pas le port : un gunicorn qui accepte la
+      # connexion mais ne peut pas joindre PostgreSQL n'est pas « sain ».
+      test: ["CMD", "python", "-c",
+             "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8000/sante/', timeout=5).status == 200 else 1)"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 90s
+    depends_on:
+      db: {condition: service_healthy}
+      redis: {condition: service_healthy}
+
+  # File par defaut : webhooks, envois, taches courtes.
+  worker:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    command: ["celery", "-A", "config", "worker", "--queues", "celery", "--loglevel=info"]
     volumes:
       - media:/app/media
     depends_on:
       db: {condition: service_healthy}
       redis: {condition: service_healthy}
 
-  worker:
+  # ⚠️ File « siren », UN SEUL consommateur, UNE SEULE execution a la fois.
+  # L'API Recherche d'entreprises plafonne a 7 requetes/seconde par adresse
+  # IP et sa specification previent que les cloud publics l'atteignent. Un
+  # compteur dans le code serait faux des qu'un second worker demarrerait :
+  # c'est la topologie des files qui tient la cadence, pas le code.
+  # Ne jamais passer ce service a l'echelle ni augmenter sa concurrence.
+  worker-siren:
     build: .
     restart: unless-stopped
     env_file: .env
-    command: ["celery", "-A", "config", "worker", "--loglevel=info"]
-    volumes:
-      - media:/app/media
+    command: ["celery", "-A", "config", "worker",
+              "--queues", "siren", "--concurrency", "1", "--loglevel=info"]
     depends_on:
       db: {condition: service_healthy}
       redis: {condition: service_healthy}
@@ -65,20 +108,8 @@ services:
     depends_on:
       redis: {condition: service_healthy}
 
-  caddy:
-    image: caddy:2-alpine
-    restart: unless-stopped
-    ports: ["80:80", "443:443", "443:443/udp"]
-    env_file: .env
-    volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile:ro
-      - caddydata:/data
-      - caddyconfig:/config
-    depends_on: [web]
-
 volumes:
   pgdata:
   redisdata:
   media:
-  caddydata:
-  caddyconfig:
+  statiques:

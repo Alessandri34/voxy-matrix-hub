@@ -118,3 +118,81 @@ make restore FICHIER=backups/backoffice-20261109T031500Z.sql.gz.gpg
 
 Une sauvegarde qu'on n'a jamais restaurée n'est pas une sauvegarde : ce test
 est le troisième critère de sortie de la phase 0.
+
+---
+
+## Déploiement (phase 2)
+
+### Architecture en production
+
+```
+internet ──▶ nginx (HestiaCP, 443, Let's Encrypt)
+                 │  backoffice.vformations.fr
+                 ▼
+         127.0.0.1:8000  gunicorn (conteneur web)
+```
+
+🔴 **Aucun conteneur ne prend les ports 80 ni 443.** Le VPS fait tourner
+nginx sous HestiaCP, qui sert `vformations.fr`. Un conteneur qui les
+réclamerait ferait tomber le site vitrine. Le workflow de déploiement
+refuse de partir si `compose.yaml` les réclame.
+
+Caddy existe toujours, dans `compose.autonome.yaml`, pour un serveur nu.
+**Ne jamais l'employer sur ce VPS.**
+
+### Première installation
+
+Une seule fois, à la main : `deploiement/premiere-installation.md`.
+
+### Déploiements suivants
+
+Onglet **Actions** du dépôt → *Déployer le back-office* → taper `DEPLOYER`.
+
+Le workflow, dans l'ordre : suite de tests, style, `check --deploy`, refus
+des ports 80/443, **sauvegarde de la base**, envoi du code, construction,
+démarrage, attente du point de santé (90 s), et **retour aux images
+précédentes** si le point de santé ne répond pas.
+
+Le déclenchement est manuel, délibérément : un déploiement applique des
+migrations sur des données de prospects, et une migration ne se repose pas
+comme une page HTML.
+
+### Les commandes du quotidien
+
+```bash
+cd /opt/backoffice
+
+docker compose ps                      # état des 6 services
+docker compose logs -f web             # journal de l'application
+docker compose logs -f worker-siren    # résolution SIREN
+
+curl -s http://127.0.0.1:8000/sante/   # {"etat": "ok", "base": true, "redis": true}
+
+# Importer un fichier de leads : aperçu d'abord, toujours.
+docker compose exec web python manage.py importer_leads /tmp/leads.csv
+docker compose exec web python manage.py importer_leads /tmp/leads.csv --appliquer
+
+# Rejouer les webhooks Meta qui n'ont pas abouti.
+docker compose exec web python manage.py rejouer_receptions
+docker compose exec web python manage.py rejouer_receptions --appliquer
+```
+
+### Quand quelque chose ne va pas
+
+| Symptôme | Où regarder |
+|---|---|
+| `/sante/` renvoie 503 | `docker compose ps` — `db` ou `redis` est tombé |
+| `/admin/` renvoie 500 | `docker compose logs web \| grep -i static` : `collectstatic` n'a pas abouti |
+| Boucle de redirection HTTPS | nginx ne transmet pas `X-Forwarded-Proto` (voir le modèle `backoffice.stpl`) |
+| Toutes les pages en 400 | `ALLOWED_HOSTS` du `.env` ne contient pas le sous-domaine |
+| Leads sans SIREN résolu | `docker compose logs worker-siren` — et vérifier que la file `siren` a bien son worker |
+| Webhooks Meta non traités | `/admin/` → *Réceptions de webhooks* : l'état et le message d'erreur y sont |
+| `vformations.fr` est tombé | `nginx -t`, puis l'archive `/var/backups/nginx-avant-backoffice-*.tar.gz` |
+
+### Le piège des files Celery
+
+Un worker lancé avec `--queues siren` **ne lit plus la file par défaut**.
+La pile déclare donc deux workers, et `tests/test_files_celery.py` vérifie
+que toute file routée a bien un consommateur. Ne jamais retirer un worker
+sans retirer la règle de routage correspondante : les tâches partiraient
+dans Redis sans jamais en sortir, **sans la moindre erreur visible**.
