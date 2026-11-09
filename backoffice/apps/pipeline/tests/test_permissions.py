@@ -257,3 +257,30 @@ def test_aucune_balise_de_gabarit_ne_fuit_dans_la_page(client, route):
     corps = contenu.split("<main>", 1)[-1]
     for balise in ("{#", "#}", "{%", "%}", "{{", "}}"):
         assert balise not in corps, f"« {balise} » apparait dans la page rendue"
+
+
+# --------------------------------------------------------------------------
+# Module financement
+# --------------------------------------------------------------------------
+
+
+@pytest.mark.parametrize(
+    "role,attendu",
+    [
+        (Role.ADMIN, 200),
+        # L'administratif monte les dossiers de financement : c'est son metier.
+        (Role.ADMINISTRATIF, 200),
+        # Le commercial vend, il ne depose pas les dossiers.
+        (Role.COMMERCIAL, 403),
+        (Role.FORMATEUR, 403),
+        (Role.LECTURE, 403),
+    ],
+)
+def test_acces_au_financement_par_role(client, role, attendu):
+    ClientVerifie.connecter(client, utilisateur(role))
+    assert client.get(reverse("pipeline:financement")).status_code == attendu
+
+
+def test_le_financement_exige_aussi_la_2fa(client):
+    ClientVerifie.connecter(client, utilisateur(Role.ADMIN), avec_2fa=False)
+    assert client.get(reverse("pipeline:financement")).status_code == 403

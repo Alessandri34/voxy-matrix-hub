@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "apps.crm",
     "apps.pipeline",
     "apps.integrations",
+    "apps.financement",
 ]
 
 # Modeles dont chaque creation, modification et suppression est inscrite au
@@ -49,6 +50,7 @@ AUDIT_MODELES = [
     "crm.Lead",
     "crm.Opposition",
     "pipeline.Opportunite",
+    "financement.Dossier",
 ]
 
 MIDDLEWARE = [
@@ -140,6 +142,13 @@ CELERY_TASK_ROUTES = {
 }
 
 CELERY_BEAT_SCHEDULE = {
+    "alerte-fenetres-de-depot": {
+        "task": "apps.financement.taches.alerter_fenetres_de_depot",
+        # Une fois par jour : une fenetre de depot se compte en jours, pas
+        # en heures, et une alerte horaire deviendrait du bruit.
+        "schedule": 86400.0,
+        "kwargs": {"jours": 7},
+    },
     "alerte-leads-sans-contact": {
         "task": "apps.crm.taches.alerter_leads_sans_contact",
         # Toutes les heures : un lead entre a 9 h 05 doit declencher l'alerte

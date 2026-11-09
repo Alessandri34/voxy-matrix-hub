@@ -226,3 +226,75 @@ documentation ; la construction de l'image Docker, bloquee ici par le
 certificat du mandataire de ce bac a sable — refuser de desactiver la
 verification TLS dans le Dockerfile etait preferable a une regression de
 securite expediee en production.
+
+---
+
+## 2026-11-09 — Phase 3 : le financement
+
+### D19. L'arbitrage gele en phase 1 n'avait plus d'objet
+
+La question posee etait : pour un artisan, le dossier part-il au FAFCEA au
+taux transverse, ou au Conseil de la Formation de sa Chambre de Metiers ?
+
+**Le Conseil de la Formation n'existe plus.** Loi n° 2022-172 du 14/02/2022
+(supprime la ventilation de la contribution) · decret n° 2022-956 du
+29/06/2022 (abroge les articles correspondants) · arrete du 29/08/2022
+(agrement du FAFCEA, **seul agree** pour gerer la contribution des chefs
+d'entreprise inscrits au repertoire des metiers, hors parts CPF et CEP).
+Le FAFCEA a repris les formations transverses. La CMA reste un lieu de
+depot et de conseil, pas un financeur.
+
+Detail et citations : `livrables/D-strategie/D4_Financement_Arbitrage.md`.
+
+### D20. Les baremes sont dates, sources et versionnes
+
+`apps/financement/bareme.py` est le seul endroit ou un taux est ecrit. Chaque
+bareme porte sa date d'effet, l'URL du document officiel, l'instance qui l'a
+valide et la date de lecture.
+
+`bareme_applicable()` choisit par la **date de debut de la formation**, pas
+par la date du devis : les financeurs raisonnent en « formations debutant a
+compter du... ». Une date anterieure au plus ancien bareme **leve une
+exception** plutot que de se replier sur le plus proche — un repli
+silencieux donnerait un reste a charge faux, annonce a un client.
+
+Trois faits releves sur les documents officiels et absents de nos notes :
+
+1. **Un troisieme taux FAFCEA a 15 €/h** pour les « autres modalites »
+   (FOAD sans formateur). Notre AFEST avec formateur reste a 25 €/h.
+2. **Action de moins de 4 heures : pas de prise en charge** (FAFCEA).
+3. **Action en distanciel de plus de 12 stagiaires : pas de prise en
+   charge** (FAFCEA), quand l'AGEFICE en tolere 25.
+
+### D21. La TVA n'est financee par personne
+
+Le document du FAFCEA porte « Cout horaire maximum (Hors TVA - non financé) »
+en toutes lettres. `D1` calculait les restes a charge en HT : pour un
+micro-entrepreneur non assujetti qui ne recupere rien, le reste a charge
+reel d'un Integral n'est pas 380 € mais **960 €** (2 900 € HT → 3 480 € TTC,
+moins 2 520 € d'AGEFICE). L'exoneration DREETS, si elle est obtenue,
+ramene bien ce cas a 380 €.
+
+La simulation calcule donc en TTC et signale toute TVA non exoneree.
+
+### D22. On ne route jamais sur une inscription non etablie
+
+`inscrite_repertoire_metiers` vaut `None` quand l'API Recherche
+d'entreprises ne dit rien — ce qui est le cas le plus frequent : sur
+l'echantillon heraultais, 32 % seulement portaient cette information.
+**Nul ne vaut pas « non inscrit ».** Le routage renvoie alors
+« indetermine » et demande l'extrait D1 ou l'attestation URSSAF.
+
+Un dossier parti au mauvais guichet revient refuse apres plusieurs semaines,
+delai pendant lequel la fenetre de depot de l'autre financeur peut s'etre
+fermee.
+
+### D23. Le calcul est fige sur le dossier
+
+Le bareme applique, le taux, la prise en charge et le detail du calcul sont
+inscrits sur le dossier au moment du calcul. Recalculer a la lecture
+donnerait, six mois plus tard, un montant different de celui annonce au
+client et accepte par le financeur.
+
+`detail_calcul` conserve les limites, les blocages et les avertissements :
+c'est ce qui permet d'expliquer un montant longtemps apres.

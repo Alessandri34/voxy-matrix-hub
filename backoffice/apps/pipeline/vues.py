@@ -139,3 +139,42 @@ def file_leads(request):
             "recents": list(base.filter(doublon_de__isnull=True).order_by("-date_reception")[:20]),
         },
     )
+
+
+@exige_module("financement")
+def dossiers_financement(request):
+    """Les dossiers, tries par urgence de depot.
+
+    L'ordre est volontaire : une fenetre fermee d'abord, puis ce qui se
+    ferme bientot. Trier par date de creation mettrait en haut ce qui n'est
+    pas urgent.
+    """
+    from apps.financement.models import Dossier, EtatDossier
+
+    dossiers = Dossier.objects.select_related(
+        "opportunite__entreprise", "opportunite__contact"
+    ).order_by("date_debut_formation")
+
+    en_cours = [d for d in dossiers if d.etat in (EtatDossier.BROUILLON, EtatDossier.A_DEPOSER)]
+    fermes = [d for d in en_cours if d.depot_en_retard]
+    urgents = [
+        d
+        for d in en_cours
+        if not d.depot_en_retard
+        and d.jours_avant_cloture is not None
+        and d.jours_avant_cloture <= 7
+    ]
+    autres = [d for d in en_cours if d not in fermes and d not in urgents]
+
+    return render(
+        request,
+        "pipeline/financement.html",
+        {
+            "fermes": fermes,
+            "urgents": urgents,
+            "autres": autres,
+            "deposes": [
+                d for d in dossiers if d.etat not in (EtatDossier.BROUILLON, EtatDossier.A_DEPOSER)
+            ][:30],
+        },
+    )

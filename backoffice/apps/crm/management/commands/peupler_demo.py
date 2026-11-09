@@ -23,15 +23,19 @@ from apps.crm.models import Entreprise, Lead, SourceLead
 from apps.pipeline.models import Etape, Financeur, MotifPerte, Opportunite
 from apps.pipeline.services import changer_etape, promouvoir_lead
 
+#: Le dernier champ dit l'inscription au Repertoire des Metiers, qui decide
+#: du financeur : artisan -> FAFCEA a 25 €/h, commercant -> AGEFICE a 42 €/h.
+#: `None` represente le cas le plus frequent dans la realite — l'API ne dit
+#: rien, et nul ne vaut pas « non inscrit ».
 ENTREPRISES = [
-    ("Le Comptoir de la Loge", "552032534", "34000", "Montpellier", "56.10A", "Restauration"),
-    ("Coiffure Melanie", "356000000", "34070", "Montpellier", "96.02A", "Coiffure"),
-    ("BTP Benali & Fils", "843105230", "34080", "Montpellier", "43.32A", "Menuiserie"),
-    ("Garage des Arceaux", "812841324", "34000", "Montpellier", "45.20A", "Reparation auto"),
-    ("Fleurs de Sete", "519986157", "34200", "Sete", "47.76Z", "Fleuriste"),
-    ("Studio Pilates Lattes", "878998562", "34970", "Lattes", "93.13Z", "Sport"),
-    ("Boulangerie du Peyrou", "487703602", "34000", "Montpellier", "10.71C", "Boulangerie"),
-    ("Taxi Herault Transfert", "792377236", "34400", "Lunel", "49.32Z", "Taxi"),
+    ("Le Comptoir de la Loge", "552032534", "34000", "Montpellier", "56.10A", "Resto", False),
+    ("Coiffure Melanie", "356000000", "34070", "Montpellier", "96.02A", "Coiffure", True),
+    ("BTP Benali & Fils", "843105230", "34080", "Montpellier", "43.32A", "Menuiserie", True),
+    ("Garage des Arceaux", "812841324", "34000", "Montpellier", "45.20A", "Reparation auto", True),
+    ("Fleurs de Sete", "519986157", "34200", "Sete", "47.76Z", "Fleuriste", None),
+    ("Studio Pilates Lattes", "878998562", "34970", "Lattes", "93.13Z", "Sport", False),
+    ("Boulangerie du Peyrou", "487703602", "34000", "Montpellier", "10.71C", "Boulangerie", True),
+    ("Taxi Herault Transfert", "792377236", "34400", "Lunel", "49.32Z", "Taxi", None),
 ]
 
 CONTACTS = [
@@ -100,7 +104,7 @@ class Command(BaseCommand):
                 self.stdout.write("Donnees CRM effacees.")
 
             maintenant = timezone.now()
-            for index, (nom, siren, cp, commune, naf, activite) in enumerate(ENTREPRISES):
+            for index, (nom, siren, cp, commune, naf, activite, artisan) in enumerate(ENTREPRISES):
                 entreprise, _ = Entreprise.objects.get_or_create(
                     siren=siren,
                     defaults={
@@ -111,6 +115,7 @@ class Command(BaseCommand):
                         "naf_libelle": activite,
                         "etat_administratif": "A",
                         "tranche_effectif": hasard.choice(["00", "01", "02", "03"]),
+                        "inscrite_repertoire_metiers": artisan,
                         "source_resolution": "peupler-demo",
                     },
                 )
@@ -170,6 +175,8 @@ class Command(BaseCommand):
                         maintenant=min(instant, maintenant),
                     )
 
+            self._dossiers(hasard)
+
         self.stdout.write(
             self.style.SUCCESS(
                 f"{Entreprise.objects.count()} entreprises, {Lead.objects.count()} leads, "
@@ -178,3 +185,42 @@ class Command(BaseCommand):
                 "sans contact — l'alerte des 24 h doit apparaitre."
             )
         )
+
+    def _dossiers(self, hasard):
+        """Quelques dossiers de financement, dont un dont la fenetre est
+        fermee : c'est le cas qu'il faut pouvoir voir a l'ecran."""
+        from apps.financement.bareme import Modalite
+        from apps.financement.models import Dossier, EtatDossier
+        from apps.financement.routage import router_entreprise
+        from apps.financement.services import figer_calcul
+
+        aujourd_hui = timezone.localdate()
+        cas = [
+            # (jours avant le debut, etat, exonere_tva)
+            (45, EtatDossier.A_DEPOSER, True),
+            (5, EtatDossier.A_DEPOSER, False),  # AGEFICE : fenetre fermee
+            (90, EtatDossier.BROUILLON, True),
+            (20, EtatDossier.DEPOSE, True),
+        ]
+        affaires = list(Opportunite.objects.select_related("entreprise")[: len(cas)])
+        for affaire, (jours, etat, exonere) in zip(affaires, cas, strict=False):
+            routage = router_entreprise(affaire.entreprise)
+            connus = ("fafcea", "agefice")
+            financeur = routage.financeur if routage.financeur in connus else "agefice"
+            dossier = Dossier.objects.create(
+                opportunite=affaire,
+                financeur=financeur,
+                etat=etat,
+                date_debut_formation=aujourd_hui + timezone.timedelta(days=jours),
+                heures=affaire.duree_heures or 21,
+                modalite=Modalite.PRESENTIEL,
+                nb_stagiaires=hasard.choice([1, 1, 2]),
+                prix_ht_centimes=affaire.montant_estime_centimes or 150000,
+                cfp_centimes=hasard.choice([None, 9000, 12000, 500]),
+                exonere_tva=exonere,
+                point_accueil="CCI Herault — Montpellier" if etat == EtatDossier.DEPOSE else "",
+                date_depot=aujourd_hui - timezone.timedelta(days=3)
+                if etat == EtatDossier.DEPOSE
+                else None,
+            )
+            figer_calcul(dossier)

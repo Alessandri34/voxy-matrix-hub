@@ -77,10 +77,41 @@ Ce qui demande le serveur, et n'a donc pas pu être vérifié d'ici :
 code qui traite des données de prospects. À passer en privé, ou à sortir
 dans son propre dépôt privé, avant la mise en service.
 
-## Phase 3 — Financement
-⚠️ **Ne pas démarrer avant d'avoir tranché le bloc gelé de `PRD.md`.**
-Barèmes versionnés en base, routage comme fonction pure testée sur chaque cas,
-dossiers et échéances.
+## Phase 3 — Financement  ◄ code fait
+
+L'arbitrage qui bloquait cette phase est tranché : **le Conseil de la
+Formation des chambres de métiers n'existe plus depuis le 1er septembre
+2022**, et le FAFCEA est le guichet unique des artisans, formations
+transverses comprises. Voir `DECISIONS.md` D19 et
+`livrables/D-strategie/D4_Financement_Arbitrage.md`.
+
+- [x] Barèmes FAFCEA et AGEFICE, **datés, sourcés, versionnés par date
+      d'effet**. Un dossier garde les conditions en vigueur à la date de
+      début de sa formation, pas celles du jour où on le relit.
+- [x] Routage : artisan → FAFCEA, commerçant → AGEFICE, profession
+      libérale → FIF PL (sans chiffrage), salarié → OPCO. **Inscription
+      non établie → aucun routage** : nul ne vaut pas « non inscrit ».
+- [x] Simulation du reste à charge, **TVA comprise** — les financeurs ne
+      la financent pas, et `D1` la calculait en HT.
+- [x] Règles bloquantes vérifiées avant toute promesse : 4 h minimum
+      (FAFCEA), 12 stagiaires en distanciel (FAFCEA) contre 25 (AGEFICE),
+      Qualiopi, plafonds annuels en heures et en euros.
+- [x] Fenêtres de dépôt et alerte quotidienne : AGEFICE de 4 mois à 15
+      jours avant, FAFCEA jusqu'au jour du début, FIF PL jusqu'à 10 jours
+      après.
+- [x] Écran `/pipeline/financement/`, trié par urgence de dépôt.
+
+Ce qui reste, et qui ne dépend pas du code :
+
+- [ ] **FIF PL** : barème propre à chaque profession, revu chaque année.
+      Aucun chiffrage automatique possible sans la fiche du code NAF.
+- [ ] **Constructys** : 19 €/h annoncé, 24 €/h sous 11 salariés — non
+      revérifié sur source primaire.
+- [ ] **Exonération de TVA (DREETS)** : tant qu'elle n'est pas obtenue,
+      le reste à charge réel d'un Intégral est de 960 € et non 380 €.
+- [ ] Référencement FAFCEA « parcours individualisé » (80 €/h contre
+      25 €/h transverse) — démarche distincte de Qualiopi.
+
 
 ## Phase 4 — Formation et Qualiopi
 Catalogue, sessions, inscriptions, émargement, évaluations, documents PDF,

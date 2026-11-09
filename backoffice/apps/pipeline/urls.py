@@ -10,4 +10,5 @@ urlpatterns = [
     path("", vues.kanban, name="kanban"),
     path("deplacer/<int:pk>/", vues.deplacer, name="deplacer"),
     path("leads/", vues.file_leads, name="leads"),
+    path("financement/", vues.dossiers_financement, name="financement"),
 ]

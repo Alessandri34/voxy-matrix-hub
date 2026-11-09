@@ -81,3 +81,25 @@ tiers des TPE heraultaises refuse formellement la prospection commerciale.
 - `tests/test_decouverte_taches.py` et `tests/test_files_celery.py` —
   les deux verifies en remettant le defaut.
 - 231 tests.
+
+## Phase 3 — Financement (09/11/2026)
+
+### Ajoute
+- **`apps/financement`** : baremes dates et sources (FAFCEA, AGEFICE),
+  routage, simulation du reste a charge, dossiers avec fenetres de depot.
+- **Routage degele** : l'arbitrage FAFCEA / CMA est tranche — le Conseil de
+  la Formation n'existe plus depuis le 01/09/2022.
+- **Simulation TVA comprise** : les financeurs ne financent pas la TVA.
+  Le reste a charge d'un Integral passe de 380 € a 960 € sans exoneration.
+- Regles bloquantes verifiees avant toute promesse : 4 h minimum FAFCEA,
+  12 stagiaires en distanciel contre 25 chez l'AGEFICE, Qualiopi, plafonds.
+- Alerte quotidienne sur les fenetres de depot qui se ferment.
+- Ecran `/pipeline/financement/`, trie par urgence.
+- 291 tests.
+
+### Trouve en chemin
+- Trois faits absents de nos notes : le taux FAFCEA a 15 €/h en « autres
+  modalites », le minimum de 4 heures, et la limite de 12 stagiaires en
+  distanciel.
+- A prix de vente egal, un artisan paie **357 € de plus** qu'un commercant
+  sur 21 h (525 € de FAFCEA contre 882 € d'AGEFICE). `D1` ne le dit pas.
