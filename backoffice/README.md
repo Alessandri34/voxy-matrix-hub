@@ -18,6 +18,7 @@ prospection commerciale.
 | Comprendre ce qui est construit et pourquoi | `docs/PRD.md` |
 | Savoir où on en est | `docs/ROADMAP.md` |
 | Comprendre un choix technique | `docs/DECISIONS.md` |
+| Savoir de quoi ça dépend, et ce qui reste à ouvrir | `docs/ARCHITECTURE.md` |
 | Exploiter, déboguer, déployer | `docs/RUNBOOK.md` |
 | Installer sur le serveur, la première fois | `deploiement/premiere-installation.md` |
 

@@ -2,6 +2,9 @@
 
 > Toute reprise commence ici, puis par `docs/DECISIONS.md`, qui dit **pourquoi**
 > chaque choix a été fait. Les décisions y sont numérotées et datées.
+> `docs/ARCHITECTURE.md` dit **de quoi ça dépend** : la pile, les sources de
+> données publiques et celles qui sont écartées, les drapeaux, et ce qui
+> reste à ouvrir côté serveur.
 
 ## Le contexte en trois lignes
 
