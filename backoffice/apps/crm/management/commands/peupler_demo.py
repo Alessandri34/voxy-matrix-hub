@@ -178,6 +178,7 @@ class Command(BaseCommand):
             self._dossiers(hasard)
             self._publicite(hasard)
             self._sequences()
+            self._oppositions(hasard)
 
         self.stdout.write(
             self.style.SUCCESS(
@@ -187,6 +188,60 @@ class Command(BaseCommand):
                 "sans contact — l'alerte des 24 h doit apparaitre."
             )
         )
+
+    def _oppositions(self, hasard):
+        """Le registre des oppositions, et les deux facons d'etre hors
+        prospection.
+
+        Les deux sources ne se remplacent pas, et c'est tout l'objet de
+        l'ecran de conformite : le registre recense ceux qui nous ont dit
+        non, le champ `opposition_diffusion_commerciale` porte l'opposition
+        declaree au RNE, que personne ne nous a jamais ecrite. La proportion
+        tiree ici suit la mesure du 09/11/2026 sur l'Herault : 34 % des TPE
+        des NAF cibles la portent.
+        """
+        from apps.crm.models import CanalOpposition, Contact, Opposition
+
+        entreprises = list(Entreprise.objects.order_by("pk"))
+        for entreprise in entreprises:
+            # 34 % opposees, 1 % hors RNE (nul : l'API ne dit rien, ce qui
+            # n'est PAS une absence d'opposition), le reste non opposees.
+            tirage = hasard.random()
+            if tirage < 0.34:
+                entreprise.opposition_diffusion_commerciale = True
+            elif tirage < 0.35:
+                entreprise.opposition_diffusion_commerciale = None
+            else:
+                entreprise.opposition_diffusion_commerciale = False
+            entreprise.save(update_fields=["opposition_diffusion_commerciale"])
+
+        canaux = [
+            (CanalOpposition.DESABONNEMENT, "clic sur le lien de desabonnement"),
+            (CanalOpposition.DEMANDE_DIRECTE, "a repondu « ne plus me contacter »"),
+            (CanalOpposition.APPEL, "demande formulee pendant l'appel"),
+            (CanalOpposition.RETOUR_TECHNIQUE, "adresse en erreur permanente"),
+        ]
+        for contact in Contact.objects.order_by("pk")[:6]:
+            canal, note = hasard.choice(canaux)
+            Opposition.objects.create(
+                email_normalise=contact.email_normalise,
+                telephone_normalise=(
+                    contact.telephone_normalise if canal == CanalOpposition.APPEL else ""
+                ),
+                canal=canal,
+                note=note,
+            )
+            contact.oppose = True
+            contact.save(update_fields=["oppose"])
+
+        # Une opposition qui porte sur un SIREN entier, sans email : le cas
+        # qui justifie une table a part plutot qu'une case sur le contact.
+        if entreprises:
+            Opposition.objects.create(
+                siren=entreprises[0].siren,
+                canal=CanalOpposition.DEMANDE_DIRECTE,
+                note="courrier du gerant : plus aucune sollicitation, tout etablissement",
+            )
 
     def _dossiers(self, hasard):
         """Quelques dossiers de financement, dont un dont la fenetre est

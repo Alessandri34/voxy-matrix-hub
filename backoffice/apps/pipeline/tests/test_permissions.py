@@ -247,6 +247,9 @@ def test_un_deplacement_avec_le_jeton_du_gabarit_passe(affaire):
         "pipeline:accueil",
         "pipeline:publicite",
         "pipeline:sourcing",
+        "pipeline:entreprises",
+        "pipeline:conformite",
+        "pipeline:journal",
         "pipeline:sequences",
         "pipeline:kanban",
         "pipeline:leads",
@@ -396,6 +399,9 @@ def test_un_visiteur_anonyme_ne_voit_aucune_navigation():
         "pipeline:financement",
         "pipeline:sequences",
         "pipeline:sourcing",
+        "pipeline:entreprises",
+        "pipeline:conformite",
+        "pipeline:journal",
     ],
 )
 def test_aucune_virgule_decimale_dans_un_attribut_style(client, route):
@@ -424,6 +430,9 @@ def test_aucune_virgule_decimale_dans_un_attribut_style(client, route):
         "pipeline:financement",
         "pipeline:sequences",
         "pipeline:sourcing",
+        "pipeline:entreprises",
+        "pipeline:conformite",
+        "pipeline:journal",
     ],
 )
 def test_aucun_montant_en_centimes_n_est_affiche(client, route):
@@ -434,3 +443,238 @@ def test_aucun_montant_en_centimes_n_est_affiche(client, route):
     corps = contenu.split("<main>", 1)[-1]
     assert "centimes" not in corps.lower() or "en centimes" in corps.lower()
     assert "_centimes" not in corps
+
+
+# --------------------------------------------------------------------------
+# Repertoire, fiches de detail, conformite et journal
+# --------------------------------------------------------------------------
+
+
+@pytest.fixture
+def entreprise_garnie():
+    """Une entreprise avec de quoi remplir chaque panneau de sa fiche.
+
+    Les fiches de detail sont les gabarits les plus exposes aux attributs
+    absents : un `{{ objet.champ }}` qui n'existe pas ne leve rien en Django,
+    il rend une chaine vide. On garnit donc tout ce que la page affiche, pour
+    que le test traverse reellement chaque branche.
+    """
+    from apps.crm.models import Activite, Contact, Lead, TypeActivite
+
+    entreprise = Entreprise.objects.create(
+        denomination="Garage Bellefeuille",
+        siren="552032534",
+        commune="Lunel",
+        code_postal="34400",
+        naf="45.20A",
+        naf_libelle="Entretien et reparation de vehicules",
+        inscrite_repertoire_metiers=True,
+        tranche_effectif="01",
+    )
+    contact = Contact.objects.create(
+        entreprise=entreprise,
+        nom="Bellefeuille",
+        prenom="Karim",
+        fonction="Gerant",
+        statut="gerant_majoritaire",
+        email="karim@garage-bellefeuille.fr",
+        base_legale="interet_legitime",
+    )
+    lead = Lead.objects.create(
+        entreprise=entreprise,
+        contact=contact,
+        source="meta_lead_ads",
+        nom_declare="Karim Bellefeuille",
+        entreprise_declaree="Garage Bellefeuille",
+        email_declare="karim@garage-bellefeuille.fr",
+        certitude_resolution="certain",
+        motif_resolution="SIREN declare et verifie",
+        candidats_siren=[
+            {
+                "siren": "552032534",
+                "denomination": "GARAGE BELLEFEUILLE",
+                "commune": "Lunel",
+                "code_postal": "34400",
+                "naf": "45.20A",
+                "etat": "A",
+                "note": 95,
+                "motifs": ["SIREN declare", "commune coherente"],
+            }
+        ],
+    )
+    affaire = Opportunite.objects.create(
+        entreprise=entreprise,
+        contact=contact,
+        lead=lead,
+        intitule="Visibilite locale 21 h",
+        duree_heures=21,
+    )
+    Activite.objects.create(
+        type=TypeActivite.NOTE,
+        objet=affaire,
+        contenu="Premier echange : veut travailler sa page Google.",
+    )
+    return entreprise, lead
+
+
+@pytest.mark.parametrize(
+    "role,attendu",
+    [
+        (Role.ADMIN, 200),
+        (Role.COMMERCIAL, 200),
+        (Role.ADMINISTRATIF, 200),
+        (Role.FORMATEUR, 403),
+        # La lecture seule n'a que « reporting » : le repertoire porte des
+        # donnees nominatives de prospects, il n'en fait pas partie.
+        (Role.LECTURE, 403),
+    ],
+)
+def test_acces_au_repertoire_par_role(client, role, attendu):
+    ClientVerifie.connecter(client, utilisateur(role))
+    assert client.get(reverse("pipeline:entreprises")).status_code == attendu
+
+
+@pytest.mark.parametrize(
+    "role,attendu",
+    [
+        (Role.ADMIN, 200),
+        # Le journal d'audit est le seul ecran reserve a l'admin : c'est lui
+        # qui dit qui a fait quoi, y compris aux autres roles.
+        (Role.COMMERCIAL, 403),
+        (Role.ADMINISTRATIF, 403),
+        (Role.LECTURE, 403),
+    ],
+)
+def test_acces_au_journal_par_role(client, role, attendu):
+    ClientVerifie.connecter(client, utilisateur(role))
+    assert client.get(reverse("pipeline:journal")).status_code == attendu
+
+
+def test_la_fiche_entreprise_affiche_ses_panneaux(client, entreprise_garnie):
+    entreprise, _ = entreprise_garnie
+    ClientVerifie.connecter(client, utilisateur(Role.ADMIN))
+    reponse = client.get(reverse("pipeline:fiche_entreprise", args=[entreprise.pk]))
+    assert reponse.status_code == 200
+    page = reponse.content.decode()
+    assert "Garage Bellefeuille" in page
+    assert "552032534" in page
+    assert "Bellefeuille" in page  # le contact
+    assert "Visibilite locale 21 h" in page  # l'affaire
+    assert "FAFCEA" in page  # le routage : artisan inscrit au RM
+    assert "page Google" in page  # la chronologie
+
+
+def test_la_fiche_lead_affiche_ses_candidats(client, entreprise_garnie):
+    _, lead = entreprise_garnie
+    ClientVerifie.connecter(client, utilisateur(Role.ADMIN))
+    reponse = client.get(reverse("pipeline:fiche_lead", args=[lead.pk]))
+    assert reponse.status_code == 200
+    page = reponse.content.decode()
+    assert "Karim Bellefeuille" in page
+    assert "95/100" in page  # la note du candidat SIREN
+    assert "commune coherente" in page  # les motifs de la note
+
+
+def test_une_fiche_inexistante_renvoie_404(client):
+    ClientVerifie.connecter(client, utilisateur(Role.ADMIN))
+    assert client.get(reverse("pipeline:fiche_entreprise", args=[999999])).status_code == 404
+    assert client.get(reverse("pipeline:fiche_lead", args=[999999])).status_code == 404
+
+
+def test_la_fiche_previent_quand_l_entreprise_est_opposee(client):
+    """L'avertissement est la raison d'etre de la page : une opposition
+    invisible est une opposition qu'on finit par enfreindre."""
+    entreprise = Entreprise.objects.create(
+        denomination="Boulangerie Taillade",
+        siren="529897711",
+        opposition_diffusion_commerciale=True,
+    )
+    ClientVerifie.connecter(client, utilisateur(Role.ADMIN))
+    page = client.get(reverse("pipeline:fiche_entreprise", args=[entreprise.pk])).content.decode()
+    assert "oppos" in page.lower()
+    assert "R.123-320" in page
+
+
+def test_la_fiche_ne_route_pas_sur_une_inscription_non_etablie(client):
+    """Nul ne vaut pas « non inscrit » : la fiche doit le dire, sinon le
+    champ vide se lit comme un commercant."""
+    entreprise = Entreprise.objects.create(
+        denomination="Atelier Sans Registre",
+        siren="552032534",
+        inscrite_repertoire_metiers=None,
+    )
+    ClientVerifie.connecter(client, utilisateur(Role.ADMIN))
+    page = client.get(reverse("pipeline:fiche_entreprise", args=[entreprise.pk])).content.decode()
+    assert "non établi" in page.lower()
+
+
+def test_la_conformite_rappelle_les_deux_sources_d_opposition(client):
+    """La page sert a comprendre pourquoi quelqu'un est hors prospection.
+    Le registre interne et le champ du RNE ne se remplacent pas."""
+    ClientVerifie.connecter(client, utilisateur(Role.ADMIN))
+    page = client.get(reverse("pipeline:conformite")).content.decode()
+    assert "R.123-320" in page
+    assert "21 §2" in page
+    assert "opposition_diffusion_commerciale" in page
+
+
+def test_le_journal_filtre_par_action(client):
+    from apps.audit.models import Action, EntreeJournal
+
+    EntreeJournal.objects.create(action=Action.EXPORT, libelle_objet="export des leads")
+    EntreeJournal.objects.create(action=Action.CONNEXION, libelle_objet="ouverture de session")
+
+    ClientVerifie.connecter(client, utilisateur(Role.ADMIN))
+    page = client.get(reverse("pipeline:journal"), {"action": "export"}).content.decode()
+    corps = page.split("<main>", 1)[-1]
+    assert "export des leads" in corps
+    assert "ouverture de session" not in corps
+
+
+def test_le_repertoire_cherche_par_nom_commune_et_siren(client, entreprise_garnie):
+    Entreprise.objects.create(denomination="Autre Chose", siren="529897711", commune="Sete")
+    ClientVerifie.connecter(client, utilisateur(Role.ADMIN))
+
+    for terme in ("Bellefeuille", "Lunel", "552032534"):
+        corps = (
+            client.get(reverse("pipeline:entreprises"), {"q": terme})
+            .content.decode()
+            .split("<main>", 1)[-1]
+        )
+        assert "Garage Bellefeuille" in corps, terme
+        assert "Autre Chose" not in corps, terme
+
+
+def test_le_journal_distingue_faux_de_vide(client):
+    """Non-regression.
+
+    `|default` remplace aussi False et la chaine vide, pas seulement None.
+    Un passage de False a True s'affichait « — → — » : un journal d'audit
+    qui dit « rien n'a change » sur un changement reel ne vaut rien.
+    """
+    from apps.audit.models import Action, EntreeJournal
+
+    EntreeJournal.objects.create(
+        action=Action.MODIFICATION,
+        libelle_objet="entreprise · Garage Essai",
+        changements={"opposition_diffusion_commerciale": [False, True]},
+    )
+    ClientVerifie.connecter(client, utilisateur(Role.ADMIN))
+    corps = client.get(reverse("pipeline:journal")).content.decode().split("<main>", 1)[-1]
+    assert "False" in corps and "True" in corps
+
+
+def test_le_journal_note_le_nul_comme_tel(client):
+    """Nul et faux ne sont pas la meme chose, et c'est precisement la
+    distinction qui porte le routage financeur."""
+    from apps.audit.models import Action, EntreeJournal
+
+    EntreeJournal.objects.create(
+        action=Action.MODIFICATION,
+        libelle_objet="entreprise · Garage Essai",
+        changements={"inscrite_repertoire_metiers": [None, False]},
+    )
+    ClientVerifie.connecter(client, utilisateur(Role.ADMIN))
+    corps = client.get(reverse("pipeline:journal")).content.decode().split("<main>", 1)[-1]
+    assert "nul" in corps
+    assert "False" in corps

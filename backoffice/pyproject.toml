@@ -20,6 +20,11 @@ dependencies = [
   # ses delais d'attente sont obligatoires par defaut. requests n'en pose aucun,
   # et un appel suspendu bloquerait un worker Celery indefiniment.
   "httpx==0.28.1",
+  # Verrouillage apres echecs de connexion. Une dependance plutot qu'un
+  # verrou maison : le chemin d'authentification est le dernier endroit ou
+  # improviser. Version 8.3.1 et non 9.0.0, publiee depuis onze jours
+  # seulement — un changement majeur se laisse murir.
+  "django-axes==8.3.1",
 ]
 
 [project.optional-dependencies]

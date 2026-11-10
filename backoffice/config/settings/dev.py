@@ -16,3 +16,13 @@ STORAGES = {
 # WhiteNoise previent quand STATIC_ROOT n'existe pas encore ; en
 # developpement il sert les fichiers depuis les apps, sans collectstatic.
 WHITENOISE_AUTOREFRESH = True
+
+# Cache local : le developpement et les tests ne doivent pas exiger Redis.
+# ⚠️ Un cache par processus rend la limitation de debit et les verrous de
+# connexion approximatifs — c'est acceptable ici, pas en production.
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+        "LOCATION": "backoffice-dev",
+    }
+}

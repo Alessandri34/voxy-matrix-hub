@@ -1,0 +1,82 @@
+{% extends "pipeline/base.html" %}
+{% block titre %}Journal{% endblock %}
+{% block entete %}Journal d'audit{% endblock %}
+{% block sous_titre %}<p class="sous">Qui a changé quoi, et depuis où.
+  {{ total }} entrée{{ total|pluralize }} au total.</p>{% endblock %}
+
+{% block style %}
+  .filtres{display:flex; flex-wrap:wrap; gap:.5rem; align-items:center;
+    margin-bottom:1rem}
+  .filtres a{font-size:.82rem; padding:.3rem .7rem; border-radius:999px;
+    border:1px solid var(--trait); text-decoration:none; color:var(--texte)}
+  .filtres a.actif{background:var(--accent); border-color:var(--accent); color:#fff}
+  .filtres span.sep{width:1px; height:20px; background:var(--trait); margin:0 .3rem}
+  .chgt{font-size:.8rem; color:var(--doux); margin:0}
+  .chgt b{color:var(--texte); font-weight:600}
+{% endblock %}
+
+{% block contenu %}
+
+<div class="filtres">
+  <a href="{% url 'pipeline:journal' %}" class="{% if not action and not origine %}actif{% endif %}">Tout</a>
+  {% for a in par_action %}
+    <a href="?action={{ a.action }}" class="{% if action == a.action %}actif{% endif %}">{{ a.libelle }} ({{ a.nombre }})</a>
+  {% endfor %}
+  {% if par_origine %}<span class="sep"></span>{% endif %}
+  {% for o in par_origine %}
+    <a href="?origine={{ o.origine }}" class="{% if origine == o.origine %}actif{% endif %}">{{ o.origine }} ({{ o.nombre }})</a>
+  {% endfor %}
+</div>
+
+<p class="avis">Le journal est <strong>en écriture seule</strong> : aucune
+  ligne n'est modifiée ni supprimée après coup, et <code>libelle_objet</code>
+  garde la représentation textuelle de l'objet au moment de l'action, pour
+  que la trace survive à sa suppression. C'est ce qu'un auditeur Qualiopi
+  recalcule, et ce qui permet de savoir, trois mois plus tard, qui a changé
+  une étape ou un montant.</p>
+
+<div class="panneau">
+  <h2>Les {{ entrees|length }} dernières entrées</h2>
+  <div class="defile">
+    <table>
+      <thead><tr><th>Date</th><th>Acteur</th><th>Origine</th><th>Action</th>
+        <th>Objet</th><th>Ce qui a changé</th><th>IP</th></tr></thead>
+      <tbody>
+      {% for e in entrees %}
+        <tr>
+          <td class="num">{{ e.date|date:"d/m/y H:i:s" }}</td>
+          <td>{% if e.acteur %}{{ e.acteur.get_username }}
+              {% else %}<span class="badge">automatique</span>{% endif %}</td>
+          <td><span class="badge">{{ e.origine }}</span></td>
+          <td><span class="badge{% if e.action == 'suppression' %} alerte{% elif e.action == 'export' %} attention{% endif %}">{{ e.get_action_display }}</span></td>
+          <td>{% if e.type_objet %}{{ e.type_objet.name }} · {% endif %}{{ e.libelle_objet|default:e.id_objet|truncatechars:34 }}</td>
+          <td>
+            {% comment %}
+              `default` et non `default_if_none` serait faux ici : `default`
+              remplace aussi False et la chaine vide, qui sont des valeurs.
+              Un passage de False a True s'affichait « — → — », c'est-a-dire
+              « rien n'a change » — le contraire de ce qu'un journal d'audit
+              doit dire. Seul le nul se note « nul ».
+            {% endcomment %}
+            {% for champ, valeurs in e.changements.items %}
+              <p class="chgt"><b>{{ champ }}</b> :
+                {{ valeurs.0|default_if_none:"nul"|stringformat:"s"|truncatechars:28 }}
+                → {{ valeurs.1|default_if_none:"nul"|stringformat:"s"|truncatechars:28 }}</p>
+            {% empty %}
+              <span style="color:var(--doux)">—</span>
+            {% endfor %}
+          </td>
+          <td class="num">{{ e.adresse_ip|default:"—" }}</td>
+        </tr>
+      {% empty %}
+        <tr><td colspan="7" class="vide">Aucune entrée pour ce filtre.</td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% if total > entrees|length %}
+    <p class="note">Affichage limité à 150 lignes. L'historique complet est
+      dans l'administration, filtrable par objet et par acteur.</p>
+  {% endif %}
+</div>
+{% endblock %}

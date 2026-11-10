@@ -15,4 +15,9 @@ urlpatterns = [
     path("publicite/", vues.publicite, name="publicite"),
     path("sourcing/", vues.sourcing, name="sourcing"),
     path("sequences/", vues.sequences, name="sequences"),
+    path("entreprises/", vues.entreprises, name="entreprises"),
+    path("entreprises/<int:pk>/", vues.fiche_entreprise, name="fiche_entreprise"),
+    path("leads/<int:pk>/", vues.fiche_lead, name="fiche_lead"),
+    path("conformite/", vues.conformite, name="conformite"),
+    path("journal/", vues.journal, name="journal"),
 ]

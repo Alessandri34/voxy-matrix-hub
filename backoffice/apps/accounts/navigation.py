@@ -51,7 +51,14 @@ NAVIGATION = [
     Section(
         "Commercial",
         [
-            Entree("Leads", "pipeline:leads", "entonnoir", "crm"),
+            Entree("Leads", "pipeline:leads", "entonnoir", "crm", aussi=("pipeline:fiche_lead",)),
+            Entree(
+                "Entreprises",
+                "pipeline:entreprises",
+                "immeuble",
+                "crm",
+                aussi=("pipeline:fiche_entreprise",),
+            ),
             Entree("Pipeline", "pipeline:kanban", "colonnes", "pipeline"),
         ],
     ),
@@ -64,6 +71,8 @@ NAVIGATION = [
     Section(
         "Système",
         [
+            Entree("Conformité", "pipeline:conformite", "bouclier", "crm"),
+            Entree("Journal", "pipeline:journal", "liste", "audit"),
             Entree("Administration", "", "reglages", "crm", chemin="/admin/"),
         ],
     ),

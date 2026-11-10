@@ -133,3 +133,45 @@ Migrations, contraintes et index sur PostgreSQL 17 ; les six tâches Celery
 enregistrées ; la chaîne complète d'une séquence par un vrai worker — un
 prospect reçoit son message, un autre est arrêté sur une opposition arrivée
 après son inscription, et zéro message n'est parti.
+
+## Pages de consultation, et deux défauts que la vraie pile a révélés (10/11/2026)
+
+### Ajoute
+- **Répertoire des entreprises** (`/entreprises/`) : recherche par nom,
+  commune ou SIREN, quatre compteurs (fiches, artisans, opposées, sans
+  SIREN), statut par ligne.
+- **Fiche entreprise** : identité, routage financeur avec son motif,
+  contacts, affaires, dossiers de financement, leads, et la chronologie des
+  quarante derniers événements tous objets confondus. Avertissement en tête
+  si l'entreprise s'est opposée à la prospection.
+- **Fiche lead** : ce qui a été déclaré, le rattachement et **les candidats
+  SIREN avec la note qui a décidé**, l'origine publicitaire, les séquences,
+  les doublons rattachés.
+- **Conformité** (`/conformite/`) : le registre des oppositions, la
+  répartition par canal, les bases légales, et le rappel que le registre
+  interne et le champ `opposition_diffusion_commerciale` du RNE sont **deux
+  sources qui ne se remplacent pas**.
+- **Journal d'audit** (`/journal/`) : les 150 dernières entrées, filtrables
+  par action et par origine, avec le détail des changements.
+- La file des leads et le Kanban mènent désormais aux fiches.
+- `peupler_demo` crée des oppositions et répartit
+  `opposition_diffusion_commerciale` selon la mesure héraultaise (34 %).
+
+### Corrige
+- 🔴 **Le journal d'audit faisait échouer les suppressions en cascade.**
+  `str(instance)` sans filet dans `_ecrire`, et un `__str__` qui lisait une
+  relation déjà supprimée. Voir D29.
+- 🔴 **La page Kanban n'avait plus de navigation** : elle redéfinissait
+  `.rail`, la classe de la barre latérale, et réutilisait son identifiant.
+  Voir D30.
+- **Conformité** : classes CSS inexistantes et `.barre` écrasée. Voir D30.
+- **Journal** : `|default` confondait `False`, `None` et chaîne vide — un
+  passage de `False` à `True` s'affichait « — → — ». Seul le nul se note
+  « nul ».
+- `.defile` hors `.panneau` : la variante remonte dans le squelette sous
+  `.defile.seul`, au lieu d'être recopiée dans `leads.html` et
+  `financement.html`.
+
+**507 tests**, `ruff check` et `ruff format` conformes. Les cinq pages
+vérifiées dans un vrai navigateur, en 1440 px et en 390 px : aucun
+débordement, aucune erreur console, aucune balise de gabarit en clair.

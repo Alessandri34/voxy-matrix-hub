@@ -4,7 +4,11 @@
 {% block sous_titre %}<p class="sous">Onze étapes, de « Nouveau » à « Payé ».</p>{% endblock %}
 
 {% block style %}
-  .rail{display:flex;gap:.75rem;overflow-x:auto;padding-bottom:1rem;
+  /* Surtout PAS `.rail` : c'est la barre laterale du squelette. La
+     redefinir ici faisait disparaitre la navigation et logeait les onze
+     colonnes dans ses 244 px — sur cette page seulement, et sans la
+     moindre erreur. */
+  .colonnes{display:flex;gap:.75rem;overflow-x:auto;padding-bottom:1rem;
     scroll-snap-type:x proximity}
   .colonne{flex:0 0 250px;scroll-snap-align:start;background:var(--carte);
     border:1px solid var(--trait);border-radius:10px;display:flex;flex-direction:column;
@@ -22,15 +26,12 @@
   .carte.deplacee{opacity:.4}
   .carte b{display:block;font-weight:600}
   .carte small{color:var(--doux);display:block;margin-top:.15rem;font-size:.78rem}
+  /* Le lien vers la fiche reste discret : une carte ou le nom de
+     l'entreprise crie en bleu souligne detourne l'oeil du titre, qui est
+     l'information que l'on cherche en parcourant une colonne. */
+  .carte small a{color:inherit;text-decoration:none}
+  .carte small a:hover,.carte small a:focus-visible{text-decoration:underline;color:var(--accent)}
   .montant{font-variant-numeric:tabular-nums;font-weight:600}
-  .avis{margin:0 0 1rem;padding:.6rem .75rem;border-radius:8px;font-size:.88rem;
-    border:1px solid var(--trait);background:var(--carte)}
-  .avis.alerte{border-color:#fda29b;background:#fef3f2;color:var(--alerte)}
-  /* Le lien heritait de --accent, un bleu illisible sur fond rouge sombre.
-     Il prend la couleur de l'alerte et garde son soulignement pour rester
-     identifiable comme lien sans dependre de la couleur seule. */
-  .avis.alerte a{color:inherit;text-decoration:underline;font-weight:600}
-  @media (prefers-color-scheme:dark){.avis.alerte{background:#2d1a18;border-color:#5c2622}}
   dialog{border:1px solid var(--trait);border-radius:10px;background:var(--carte);
     color:var(--texte);padding:1rem;max-width:420px;width:92vw}
   dialog::backdrop{background:rgba(0,0,0,.45)}
@@ -54,7 +55,7 @@
   </p>
 {% endif %}
 
-<div class="rail" id="rail">
+<div class="colonnes" id="colonnes">
   {% for colonne in colonnes %}
     <section class="colonne{% if colonne.finale %} finale{% endif %}"
              data-etape="{{ colonne.code }}">
@@ -70,7 +71,14 @@
         {% for affaire in colonne.affaires %}
           <article class="carte" draggable="true" data-id="{{ affaire.pk }}">
             <b>{{ affaire.intitule }}</b>
-            <small>{{ affaire.entreprise.denomination }}</small>
+            {% comment %}
+              `draggable="false"` sur le lien : sans lui, le navigateur
+              lance son propre glisser de lien et le glisser-deposer de la
+              carte ne part jamais. Le clic, lui, reste un clic.
+            {% endcomment %}
+            <small><a draggable="false"
+              href="{% url 'pipeline:fiche_entreprise' affaire.entreprise.pk %}"
+              >{{ affaire.entreprise.denomination }}</a></small>
             <small>
               {% if affaire.montant_estime_centimes %}
                 <span class="montant">{{ affaire.montant_estime }} € HT</span> ·

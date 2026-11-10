@@ -65,6 +65,16 @@ non-régression refuse tout champ qui les stockerait. → D26.
   navigateur, invisible aux tests Django dont le client désactive CSRF.
 - **`{# … #}` de Django ne vaut que pour UNE ligne** : sur plusieurs, le
   commentaire s'affiche en clair aux utilisateurs.
+- **Le journal d'audit faisait échouer les suppressions qu'il traçait.**
+  `str(instance)` appelé sans filet, sur un `__str__` qui lisait une
+  relation déjà emportée par la cascade. → D29.
+- **Une page qui redéfinit une classe du squelette le casse chez elle
+  seule, en silence.** `kanban.html` redéfinissait `.rail` : plus aucune
+  navigation sur la page du pipeline, et un 200 en réponse. Le CSS n'a
+  aucune erreur à lever. → D30, `apps/pipeline/tests/test_gabarits.py`.
+- **`|default` n'est pas `|default_if_none`** : il remplace aussi `False`
+  et la chaîne vide. Dans le journal, un passage de `False` à `True`
+  s'affichait « — → — ».
 - **Un test qui dépend de l'heure réelle est instable.** Le moteur de
   séquences refuse d'envoyer hors de la fenêtre ouvrable : un test qui passe
   par `traiter_echeances` doit forcer les échéances dans le passé, sinon il

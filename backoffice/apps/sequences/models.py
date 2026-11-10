@@ -31,7 +31,7 @@ sequence vers un prospect entrant repose, elle, sur son consentement.
 from __future__ import annotations
 
 from django.conf import settings
-from django.core.exceptions import ValidationError
+from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.db import models
 from django.utils import timezone
 
@@ -232,8 +232,23 @@ class Inscription(models.Model):
         indexes = [models.Index(fields=["etat", "prochaine_echeance"])]
 
     def __str__(self) -> str:
-        qui = self.contact or self.lead
-        return f"{qui} · {self.sequence.nom} · etape {self.etape_courante}"
+        # Les relations sont lues par identifiant, pas par dereferencement :
+        # pendant une suppression en cascade, la ligne liee peut deja avoir
+        # disparu, et un `__str__` qui lance une exception fait echouer la
+        # suppression elle-meme (le journal d'audit l'appelle).
+        qui = "inconnu"
+        if self.contact_id:
+            qui = str(self.contact) if self._relation_vivante("contact") else "contact supprime"
+        elif self.lead_id:
+            qui = str(self.lead) if self._relation_vivante("lead") else "lead supprime"
+        sequence = self.sequence.nom if self._relation_vivante("sequence") else "sequence supprimee"
+        return f"{qui} · {sequence} · etape {self.etape_courante}"
+
+    def _relation_vivante(self, nom: str) -> bool:
+        try:
+            return getattr(self, nom) is not None
+        except ObjectDoesNotExist:
+            return False
 
     @property
     def email(self) -> str:

@@ -15,14 +15,15 @@ from __future__ import annotations
 from datetime import datetime
 from decimal import Decimal
 
-from django.db.models import Count, Sum
+from django.contrib.contenttypes.models import ContentType
+from django.db.models import Count, Q, Sum
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.utils import timezone
 from django.views.decorators.http import require_POST
 
 from apps.accounts.permissions import exige_module
-from apps.crm.models import Lead
+from apps.crm.models import Entreprise, Lead
 from apps.pipeline.models import ETAPES_FINALES, Etape, MotifPerte, Opportunite
 from apps.pipeline.services import changer_etape
 
@@ -392,6 +393,232 @@ def sequences(request):
             "envoyes": Envoi.objects.filter(etat=EtatEnvoi.ENVOYE).count(),
             "derniers": list(
                 Envoi.objects.select_related("inscription__sequence").order_by("-prevu_le")[:15]
+            ),
+        },
+    )
+
+
+# ==========================================================================
+# Entreprises et fiches
+# ==========================================================================
+
+
+@exige_module("crm")
+def entreprises(request):
+    """Le repertoire. Cherchable, parce qu'on arrive toujours par un nom."""
+    recherche = (request.GET.get("q") or "").strip()
+    liste = Entreprise.objects.annotate(
+        nb_contacts=Count("contacts", distinct=True),
+        nb_leads=Count("leads", distinct=True),
+        nb_affaires=Count("opportunites", distinct=True),
+    ).order_by("denomination")
+
+    if recherche:
+        from apps.crm.normalisation import normaliser_nom, normaliser_siren
+
+        siren = normaliser_siren(recherche)
+        if siren:
+            liste = liste.filter(siren=siren)
+        else:
+            liste = liste.filter(
+                Q(denomination__icontains=recherche)
+                | Q(nom_commercial__icontains=recherche)
+                | Q(commune__icontains=recherche)
+                | Q(denomination_normalisee__contains=normaliser_nom(recherche))
+            )
+
+    return render(
+        request,
+        "pipeline/entreprises.html",
+        {
+            "recherche": recherche,
+            "entreprises": list(liste[:120]),
+            "total": liste.count(),
+            "artisans": Entreprise.objects.filter(inscrite_repertoire_metiers=True).count(),
+            "opposees": Entreprise.objects.filter(opposition_diffusion_commerciale=True).count(),
+            "sans_siren": Entreprise.objects.filter(siren="").count(),
+        },
+    )
+
+
+@exige_module("crm")
+def fiche_entreprise(request, pk: int):
+    """Tout ce qu'on sait d'une entreprise, sur une page.
+
+    L'ordre suit la question qu'on se pose en l'ouvrant : puis-je la
+    demarcher, qui y travaille, ou en sont les affaires.
+    """
+    from apps.crm.models import Activite, Opposition
+    from apps.financement.models import Dossier
+    from apps.financement.routage import router_entreprise
+
+    entreprise = get_object_or_404(Entreprise, pk=pk)
+    contacts = list(entreprise.contacts.order_by("nom", "prenom"))
+    affaires = list(
+        entreprise.opportunites.select_related("contact").order_by("-date_entree_etape")
+    )
+    types_objets = ContentType.objects.get_for_models(Entreprise, Lead, Opportunite)
+    filtres = Q(type_objet=types_objets[Entreprise], id_objet=str(entreprise.pk))
+    identifiants_leads = [str(x) for x in entreprise.leads.values_list("pk", flat=True)]
+    if identifiants_leads:
+        filtres |= Q(type_objet=types_objets[Lead], id_objet__in=identifiants_leads)
+    identifiants_affaires = [str(a.pk) for a in affaires]
+    if identifiants_affaires:
+        filtres |= Q(type_objet=types_objets[Opportunite], id_objet__in=identifiants_affaires)
+
+    return render(
+        request,
+        "pipeline/fiche_entreprise.html",
+        {
+            "entreprise": entreprise,
+            "routage": router_entreprise(entreprise, contacts[0] if contacts else None),
+            "opposee": Opposition.est_oppose(siren=entreprise.siren)
+            or entreprise.opposition_diffusion_commerciale is True,
+            "contacts": contacts,
+            "leads": list(entreprise.leads.select_related("campagne").order_by("-date_reception")),
+            "affaires": affaires,
+            "dossiers": list(
+                Dossier.objects.filter(opportunite__entreprise=entreprise).select_related(
+                    "opportunite"
+                )
+            ),
+            "activites": list(
+                Activite.objects.filter(filtres).select_related("auteur").order_by("-date")[:40]
+            ),
+        },
+    )
+
+
+@exige_module("crm")
+def fiche_lead(request, pk: int):
+    """Une demande, et tout ce qui lui est arrive."""
+    from apps.crm.models import Activite
+
+    lead = get_object_or_404(
+        Lead.objects.select_related("entreprise", "contact", "campagne", "doublon_de"), pk=pk
+    )
+    type_lead = ContentType.objects.get_for_model(Lead)
+    return render(
+        request,
+        "pipeline/fiche_lead.html",
+        {
+            "lead": lead,
+            "affaire": getattr(lead, "opportunite", None),
+            "inscriptions": list(
+                lead.inscriptions.select_related("sequence").order_by("-inscrit_le")
+            ),
+            "activites": list(
+                Activite.objects.filter(type_objet=type_lead, id_objet=str(lead.pk))
+                .select_related("auteur")
+                .order_by("-date")[:30]
+            ),
+            "doublons": list(lead.doublons.all()),
+        },
+    )
+
+
+# ==========================================================================
+# Conformité et journal
+# ==========================================================================
+
+
+@exige_module("crm")
+def conformite(request):
+    """Le registre des oppositions, et ce qui en depend.
+
+    Cette page existe parce qu'une opposition invisible est une opposition
+    qu'on finit par enfreindre. Elle repond a une question precise : qui ne
+    doit pas etre demarche, et comment le sait-on.
+    """
+    from apps.crm.models import BaseLegale, CanalOpposition, Contact, Opposition
+    from apps.sequences.models import EtatInscription, Inscription
+
+    oppositions = Opposition.objects.order_by("-date")
+
+    # Les libelles sont resolus ici et non dans le gabarit : une agregation
+    # `values()` ne rend que le code stocke, et « desabonnement » affiche brut
+    # dans une page de conformite se lit comme une fuite de base de donnees.
+    canaux = dict(CanalOpposition.choices)
+    par_canal = [
+        {
+            "canal": ligne["canal"],
+            "libelle": canaux.get(ligne["canal"], ligne["canal"]),
+            "nombre": ligne["nombre"],
+        }
+        for ligne in oppositions.values("canal").annotate(nombre=Count("id")).order_by("-nombre")
+    ]
+    legales = dict(BaseLegale.choices)
+
+    return render(
+        request,
+        "pipeline/conformite.html",
+        {
+            "total": oppositions.count(),
+            "par_canal": par_canal,
+            "recentes": list(oppositions[:40]),
+            "contacts_opposes": Contact.objects.filter(oppose=True).count(),
+            "entreprises_opposees": Entreprise.objects.filter(
+                opposition_diffusion_commerciale=True
+            ).count(),
+            "entreprises_connues": Entreprise.objects.exclude(
+                opposition_diffusion_commerciale=None
+            ).count(),
+            "relances_arretees": Inscription.objects.filter(
+                etat=EtatInscription.ARRETEE, motif_arret="opposition"
+            ).count(),
+            "emails_devines": Contact.objects.filter(email_devine=True).count(),
+            "bases_legales": [
+                {
+                    "base": ligne["base_legale"],
+                    "libelle": legales.get(
+                        ligne["base_legale"], ligne["base_legale"] or "non renseignee"
+                    ),
+                    "nombre": ligne["nombre"],
+                }
+                for ligne in Contact.objects.values("base_legale")
+                .annotate(nombre=Count("id"))
+                .order_by("-nombre")
+            ],
+        },
+    )
+
+
+@exige_module("audit")
+def journal(request):
+    """Qui a changé quoi. Lisible sans ouvrir l'administration."""
+    from apps.audit.models import Action, EntreeJournal
+
+    actions = dict(Action.choices)
+    entrees = EntreeJournal.objects.select_related("acteur", "type_objet")
+    action = (request.GET.get("action") or "").strip()
+    origine = (request.GET.get("origine") or "").strip()
+    if action:
+        entrees = entrees.filter(action=action)
+    if origine:
+        entrees = entrees.filter(origine=origine)
+
+    return render(
+        request,
+        "pipeline/journal.html",
+        {
+            "entrees": list(entrees.order_by("-date")[:150]),
+            "total": EntreeJournal.objects.count(),
+            "action": action,
+            "origine": origine,
+            "par_action": [
+                {
+                    "action": ligne["action"],
+                    "libelle": actions.get(ligne["action"], ligne["action"]),
+                    "nombre": ligne["nombre"],
+                }
+                for ligne in EntreeJournal.objects.values("action")
+                .annotate(nombre=Count("id"))
+                .order_by("-nombre")
+            ],
+            "par_origine": list(
+                EntreeJournal.objects.values("origine")
+                .annotate(nombre=Count("id"))
+                .order_by("-nombre")[:8]
             ),
         },
     )

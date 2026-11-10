@@ -32,6 +32,8 @@ INSTALLED_APPS = [
     "django_otp",
     "django_otp.plugins.otp_totp",
     "django_otp.plugins.otp_static",
+    # Verrouillage apres echecs de connexion repetes.
+    "axes",
     "apps.accounts",
     "apps.audit",
     "apps.crm",
@@ -75,7 +77,29 @@ MIDDLEWARE = [
     # Apres AuthenticationMiddleware : il lui faut request.user.
     "apps.audit.middleware.middleware_acteur",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    # En DERNIER, comme sa documentation l'exige : il doit voir l'echec
+    # d'authentification une fois que tout le reste a tourne.
+    "axes.middleware.AxesMiddleware",
 ]
+
+# `AxesBackend` en PREMIER : il refuse les identifiants d'un compte verrouille
+# avant que le backend normal ne verifie le mot de passe. Place apres, il
+# laisserait le mot de passe etre teste malgre le verrou.
+AUTHENTICATION_BACKENDS = [
+    "axes.backends.AxesStandaloneBackend",
+    "django.contrib.auth.backends.ModelBackend",
+]
+
+# Cinq tentatives par couple (identifiant, adresse), puis trente minutes.
+# Verrouiller sur l'identifiant SEUL permettrait a n'importe qui de bloquer
+# le compte de Pierre depuis n'importe ou ; verrouiller sur l'adresse seule
+# bloquerait tout un bureau pour une faute de frappe d'une personne.
+AXES_FAILURE_LIMIT = 5
+AXES_COOLOFF_TIME = 0.5  # en heures
+AXES_LOCKOUT_PARAMETERS = [["username", "ip_address"]]
+AXES_RESET_ON_SUCCESS = True
+AXES_CLIENT_IP_CALLABLE = "apps.integrations.debit.adresse_client"
+AXES_VERBOSE = True
 
 ROOT_URLCONF = "config.urls"
 WSGI_APPLICATION = "config.wsgi.application"
@@ -103,6 +127,18 @@ DATABASES = {
 }
 
 AUTH_USER_MODEL = "accounts.Utilisateur"
+
+# Le cache porte les compteurs de debit et les verrous de connexion. En
+# memoire de processus, ils seraient remis a zero a chaque redemarrage et
+# compteraient separement dans chaque worker gunicorn — soit trois fois le
+# plafond annonce. Redis est deja dans la pile.
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": env("REDIS_URL", default="redis://localhost:6379/0"),
+        "KEY_PREFIX": "backoffice",
+    }
+}
 
 # Departement de la zone commerciale. Sert a filtrer la resolution SIREN :
 # l'API Recherche d'entreprises filtre sur les etablissements, donc une
@@ -154,6 +190,13 @@ CELERY_TASK_ROUTES = {
 }
 
 CELERY_BEAT_SCHEDULE = {
+    "veille-bodacc": {
+        "task": "apps.sourcing.taches.veiller_les_creations",
+        # Une fois par jour : le BODACC publie en continu, et une
+        # immatriculation reperee le jour meme laisse le temps d'appeler.
+        "schedule": 86400.0,
+        "kwargs": {"jours": 2, "pages": 3},
+    },
     "rapprocher-les-campagnes": {
         "task": "apps.publicite.taches.rapprocher_campagnes",
         # Toutes les heures : un lead qui arrive doit etre rattachable le
@@ -211,6 +254,13 @@ SEQUENCES_ENVOI_REEL = env.bool("SEQUENCES_ENVOI_REEL", default=False)
 # ne doivent pas entrer en base. Le scraping de Maps est interdit.
 # Sans cle, le sourcing fonctionne — avec les seules donnees publiques.
 GOOGLE_PLACES_API_KEY = env("GOOGLE_PLACES_API_KEY", default="")
+
+# --- Veille BODACC ---------------------------------------------------------
+# Faux par defaut : la tache releve, qualifie et journalise ce qu'elle AURAIT
+# cree, sans rien ecrire. Verser quarante prospects par jour dans le CRM sans
+# avoir regarde ce que le filtre laisse passer se decide une fois, en
+# connaissance de cause.
+VEILLE_BODACC_AUTOMATIQUE = env.bool("VEILLE_BODACC_AUTOMATIQUE", default=False)
 
 # --- Courriel -------------------------------------------------------------
 EMAIL_HOST = env("EMAIL_HOST", default="")

@@ -1,0 +1,72 @@
+{% extends "pipeline/base.html" %}
+{% block titre %}Entreprises{% endblock %}
+{% block entete %}Entreprises{% endblock %}
+{% block sous_titre %}<p class="sous">{{ total }} fiche{{ total|pluralize }} — on arrive toujours par un nom.</p>{% endblock %}
+
+{% block style %}
+  .chercher{display:flex; gap:.5rem; margin-bottom:1rem; flex-wrap:wrap}
+  .chercher input{flex:1 1 260px; min-width:0; padding:.5rem .7rem;
+    border:1px solid var(--trait); border-radius:8px; background:var(--carte);
+    color:var(--texte); font:inherit}
+  .chercher button{padding:.5rem .9rem; border-radius:8px; border:1px solid var(--accent);
+    background:var(--accent); color:#fff; font:inherit; font-weight:600; cursor:pointer}
+  tbody tr:hover{background:var(--accent-pale)}
+  td a{text-decoration:none; font-weight:600}
+{% endblock %}
+
+{% block contenu %}
+<div class="cartes">
+  <div class="kpi"><span>Fiches</span><b>{{ total }}</b></div>
+  <div class="kpi"><span>Artisans</span><b>{{ artisans }}</b>
+    <small>Répertoire des Métiers → FAFCEA</small></div>
+  <div class="kpi"><span>Opposées</span><b>{{ opposees }}</b>
+    <small>ne pas démarcher</small></div>
+  <div class="kpi"><span>Sans SIREN</span><b>{{ sans_siren }}</b>
+    <small>à identifier</small></div>
+</div>
+
+<form class="chercher" method="get">
+  <input type="search" name="q" value="{{ recherche }}" id="q"
+         placeholder="Nom, commune ou SIREN…" aria-label="Rechercher une entreprise">
+  <button type="submit">Chercher</button>
+</form>
+
+<div class="panneau">
+  <div class="defile">
+    <table>
+      <thead><tr><th>Entreprise</th><th>SIREN</th><th>Commune</th><th>NAF</th>
+        <th>Statut</th><th>Contacts</th><th>Leads</th><th>Affaires</th></tr></thead>
+      <tbody>
+      {% for e in entreprises %}
+        <tr>
+          <td><a href="{% url 'pipeline:fiche_entreprise' e.pk %}">{{ e.denomination|truncatechars:38 }}</a></td>
+          <td class="num">{{ e.siren|default:"—" }}</td>
+          <td>{{ e.commune|default:"—" }}</td>
+          <td class="num">{{ e.naf|default:"—" }}</td>
+          <td>
+            {% if e.opposition_diffusion_commerciale %}<span class="badge alerte">opposée</span>
+            {% elif e.etat_administratif == "C" %}<span class="badge alerte">cessée</span>
+            {% elif e.inscrite_repertoire_metiers %}<span class="badge succes">artisan</span>
+            {% elif e.inscrite_repertoire_metiers is False %}<span class="badge">commerçant</span>
+            {% else %}<span class="badge attention">à qualifier</span>{% endif %}
+          </td>
+          <td class="num">{{ e.nb_contacts }}</td>
+          <td class="num">{{ e.nb_leads }}</td>
+          <td class="num">{{ e.nb_affaires }}</td>
+        </tr>
+      {% empty %}
+        <tr><td colspan="8" class="vide">
+          {% if recherche %}Aucune entreprise pour « {{ recherche }} ».
+          {% else %}Aucune entreprise. Elles se créent par la résolution SIREN
+            des leads, ou par le sourcing.{% endif %}</td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% if total > entreprises|length %}
+    <p class="note" style="margin:.7rem 0 0">
+      {{ entreprises|length }} affichées sur {{ total }}. Affiner la recherche
+      pour voir les autres.</p>
+  {% endif %}
+</div>
+{% endblock %}

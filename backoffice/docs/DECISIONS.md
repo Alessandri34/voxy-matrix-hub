@@ -378,3 +378,50 @@ auditeur Qualiopi (indicateurs 4 et 8).
 Construire 100 heures parce que l'enveloppe permet 100 heures, et non parce
 que l'apprenant en a besoin, est précisément ce que vise la loi anti-fraude
 n° 2026-534 — et ce que la règle d'or du projet interdit.
+
+### D29. Le journal d'audit ne doit jamais faire échouer ce qu'il trace
+
+`_ecrire` appelait `str(instance)` sans filet pour remplir `libelle_objet`.
+Or un `__str__` de modèle Django traverse librement ses relations :
+`Inscription.__str__` lisait son contact. Pendant une **suppression en
+cascade**, la ligne liée pouvait déjà avoir disparu, l'exception remontait
+depuis le signal `post_delete`, et **la suppression entière échouait**. Le
+témoin cassait l'opération.
+
+Deux corrections, à deux étages :
+
+1. `_libelle()` attrape tout et retombe sur `label#pk`, qui reste
+   identifiant. Aucune exception ne sort du journal.
+2. `Inscription.__str__` lit ses relations par identifiant et dit
+   « contact supprimé » plutôt que de lever.
+
+Le premier est le filet générique — il couvre tous les `__str__` du projet,
+y compris ceux qui n'existent pas encore. Le second corrige le cas connu.
+
+Trouvé en vidant les données de démonstration, pas par les tests : aucun des
+501 ne supprimait un contact dont une inscription partait dans la même
+cascade. Deux tests de non-régression le couvrent désormais.
+
+### D30. Une page ne redéfinit jamais une classe du squelette
+
+Le CSS échoue en silence : une classe inconnue ne fait rien, un sélecteur
+redéfini écrase. Les deux se sont produits le même jour.
+
+- `kanban.html` redéfinissait **`.rail`**, qui est la barre latérale. Sur
+  cette page, la navigation disparaissait et les onze colonnes se logeaient
+  dans ses 244 px. La page renvoyait 200, et l'identifiant `rail` était en
+  double dans le document.
+- `conformite.html` redéfinissait **`.barre`** (la barre de titre) et posait
+  `class="kpis"`, `etiquette`, `detail` — trois noms qui n'existent nulle
+  part. Les cartes de chiffres s'empilaient en pleine largeur.
+
+Règle : le squelette possède `.rail .zone .barre .marque .cartes .kpi
+.panneau .defile .badge .avis .vide .sous`. Une page qui a besoin d'autre
+chose le nomme autrement. La variante d'un élément partagé remonte dans le
+squelette (`.defile.seul` pour un tableau posé hors d'un `.panneau`, qui
+était recopié à l'identique dans deux gabarits) plutôt que d'être réécrite
+page par page.
+
+`apps/pipeline/tests/test_gabarits.py` lit le CSS comme du texte et refuse :
+une classe du squelette redéfinie, une classe employée sans être définie
+nulle part, un identifiant du squelette réutilisé.

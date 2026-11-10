@@ -24,6 +24,12 @@ from django.http import HttpRequest, HttpResponse, HttpResponseForbidden, JsonRe
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
 
+from apps.integrations.debit import (
+    PLAFOND_NON_SIGNEES,
+    PLAFOND_SIGNEES,
+    adresse_client,
+    compter,
+)
 from apps.integrations.meta.signature import ENTETE, SignatureInvalide, verifier
 from apps.integrations.models import EtatReception, ReceptionWebhook
 
@@ -89,10 +95,34 @@ def _recevoir(request: HttpRequest) -> HttpResponse:
     corps_brut = request.body
     signature = request.META.get(ENTETE)
     entetes = {c: request.META.get(c) for c in ENTETES_UTILES if request.META.get(c)}
+    adresse = adresse_client(request)
+
+    # Plafond large d'abord : il protege du volume, pas du contenu. Une
+    # rafale legitime de Meta passe ; un deluge ne passe pas.
+    autorise, compte = compter("meta", adresse, PLAFOND_SIGNEES)
+    if not autorise:
+        logger.warning(
+            "Webhook Meta : plafond de debit atteint pour %s (%s requetes).",
+            adresse,
+            compte,
+        )
+        return HttpResponse("trop de requetes", status=429)
 
     try:
         verifier(corps_brut, signature, getattr(settings, "META_APP_SECRET", ""))
     except SignatureInvalide as erreur:
+        # Plafond serre sur les requetes MAL signees : elles ne viennent pas
+        # de Meta, et chacune coute une ecriture en base. Au-dela, on refuse
+        # sans meme conserver la trace — sinon le journal devient l'arme.
+        sous_plafond, tentatives = compter("meta-invalide", adresse, PLAFOND_NON_SIGNEES)
+        if not sous_plafond:
+            logger.warning(
+                "Webhook Meta : %s signatures invalides depuis %s — "
+                "trace non conservee au-dela du plafond.",
+                tentatives,
+                adresse,
+            )
+            return HttpResponse("trop de requetes", status=429)
         # La ligne est conservee : une serie de signatures invalides signale
         # un secret desynchronise ou une tentative d'injection de faux leads.
         ReceptionWebhook.objects.create(

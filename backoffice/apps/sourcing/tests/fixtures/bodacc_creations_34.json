@@ -1,0 +1,83 @@
+{
+ "total_count": 1667,
+ "results": [
+  {
+   "id": "A202600501441",
+   "dateparution": "2026-11-08",
+   "familleavis": "creation",
+   "familleavis_lib": "Créations",
+   "commercant": "Durand, Camille",
+   "cp": "34170",
+   "ville": "Castelnau-le-Lez",
+   "numerodepartement": "34",
+   "departement_nom_officiel": "Hérault",
+   "registre": [
+    "899 000 004",
+    "899000004"
+   ],
+   "listepersonnes": "{\"personne\": {\"formeJuridique\": \"Entrepreneur individuel\"}}",
+   "url_complete": "https://www.bodacc.fr/pages/annonces-commerciales-detail/?q.id=id:A202600501441",
+   "typeavis_lib": "Avis initial"
+  },
+  {
+   "id": "A202600501442",
+   "dateparution": "2026-11-08",
+   "familleavis": "creation",
+   "commercant": "LGAC LA FERRADE",
+   "cp": "34970",
+   "ville": "Lattes",
+   "numerodepartement": "34",
+   "registre": [
+    "132 435 934",
+    "132435934"
+   ],
+   "listepersonnes": "{\"personne\": {\"formeJuridique\": \"Soci\\u00e9t\\u00e9 civile immobili\\u00e8re\"}}",
+   "url_complete": "https://www.bodacc.fr/x",
+   "typeavis_lib": "Avis initial"
+  },
+  {
+   "id": "A202600501443",
+   "dateparution": "2026-11-07",
+   "familleavis": "creation",
+   "commercant": "LE FOURNIL DES ARCEAUX",
+   "cp": "34000",
+   "ville": "Montpellier",
+   "numerodepartement": "34",
+   "registre": [
+    "951 204 337",
+    "951204337"
+   ],
+   "listepersonnes": "{\"personne\": {\"formeJuridique\": \"Soci\\u00e9t\\u00e9 \\u00e0 responsabilit\\u00e9 limit\\u00e9e\"}}",
+   "url_complete": "https://www.bodacc.fr/y",
+   "typeavis_lib": "Avis initial"
+  },
+  {
+   "id": "A202600501444",
+   "dateparution": "2026-11-07",
+   "familleavis": "creation",
+   "commercant": "SCI DIEGO",
+   "cp": "34120",
+   "ville": "Tourbes",
+   "numerodepartement": "34",
+   "registre": [
+    "132 399 577"
+   ],
+   "listepersonnes": "{\"personne\": {\"formeJuridique\": \"Soci\\u00e9t\\u00e9 civile immobili\\u00e8re\"}}",
+   "url_complete": "https://www.bodacc.fr/z",
+   "typeavis_lib": "Avis initial"
+  },
+  {
+   "id": "A202600501445",
+   "dateparution": "2026-11-06",
+   "familleavis": "creation",
+   "commercant": "SANS REGISTRE",
+   "cp": "34200",
+   "ville": "Sète",
+   "numerodepartement": "34",
+   "registre": [],
+   "listepersonnes": null,
+   "url_complete": "https://www.bodacc.fr/w",
+   "typeavis_lib": "Avis initial"
+  }
+ ]
+}

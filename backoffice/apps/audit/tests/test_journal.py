@@ -141,3 +141,85 @@ def test_seuls_les_modeles_declares_sont_surveilles():
     assert "crm.Activite" not in settings.AUDIT_MODELES
     assert "pipeline.PassageEtape" not in settings.AUDIT_MODELES
     assert "crm.Lead" in settings.AUDIT_MODELES
+
+
+# --------------------------------------------------------------------------
+# Le journal ne doit jamais faire echouer l'action qu'il trace
+# --------------------------------------------------------------------------
+
+
+def test_une_suppression_en_cascade_ne_casse_pas_sur_un_libelle_illisible():
+    """Non-regression, trouvee en vidant les donnees de demonstration.
+
+    `_ecrire` appelait `str(instance)` sans filet. Or `Inscription.__str__`
+    lisait son contact, et pendant une suppression en cascade le contact
+    pouvait deja avoir disparu : l'exception remontait depuis le signal et
+    **faisait echouer la suppression entiere**. Le journal d'audit cassait
+    l'operation dont il n'est que le temoin.
+
+    Aucun des 501 tests ne le voyait, parce qu'aucun ne supprimait un contact
+    dont une inscription partait dans la meme cascade. C'est exactement la
+    classe de defaut que la vraie pile trouve et que les tests ne voient pas.
+    """
+    from apps.crm.models import Contact, Entreprise
+    from apps.sequences.models import Canal, EtapeSequence, Inscription, Sequence
+    from apps.sequences.moteur import inscrire
+
+    entreprise = Entreprise.objects.create(denomination="Garage Bellefeuille", siren="552032534")
+    contact = Contact.objects.create(
+        entreprise=entreprise, nom="Bellefeuille", prenom="Karim", email="karim@exemple.fr"
+    )
+    sequence = Sequence.objects.create(nom="Relance a froid", active=True)
+    EtapeSequence.objects.create(
+        sequence=sequence, ordre=1, delai_jours=0, canal=Canal.EMAIL, objet="Bonjour", corps="…"
+    )
+    inscrire(sequence, contact=contact)
+
+    # La cascade emporte le contact ET son inscription.
+    entreprise.delete()
+
+    assert not Inscription.objects.exists()
+    assert not Contact.objects.exists()
+
+
+def test_un_libelle_incalculable_laisse_quand_meme_une_trace_identifiante():
+    """Le repli n'est pas un libelle vide : le modele et la cle primaire
+    suffisent a retrouver l'objet dans une sauvegarde."""
+    from apps.audit.signaux import _libelle
+    from apps.crm.models import Entreprise
+
+    entreprise = Entreprise.objects.create(denomination="Essai", siren="552032534")
+
+    class Casse(Entreprise):
+        class Meta:
+            proxy = True
+
+        def __str__(self):
+            raise RuntimeError("relation disparue")
+
+    casse = Casse.objects.get(pk=entreprise.pk)
+    libelle = _libelle(casse)
+    assert "Casse" in libelle or "crm." in libelle
+    assert str(entreprise.pk) in libelle
+
+
+def test_une_inscription_orpheline_reste_affichable():
+    """Son `__str__` est lu par l'administration et par le journal : il doit
+    tenir meme quand la relation n'est plus la."""
+    from apps.crm.models import Contact, Entreprise
+    from apps.sequences.models import Inscription, Sequence
+
+    entreprise = Entreprise.objects.create(denomination="Essai", siren="552032534")
+    contact = Contact.objects.create(entreprise=entreprise, nom="Durand", prenom="Lea")
+    sequence = Sequence.objects.create(nom="Relance", active=True)
+    inscription = Inscription.objects.create(sequence=sequence, contact=contact)
+
+    # On reproduit l'etat transitoire d'une cascade : l'objet Python porte
+    # encore un identifiant, la ligne visee n'est plus en base. On ne peut pas
+    # y arriver en supprimant le contact, puisque la cascade emporterait aussi
+    # l'inscription — c'est bien pour cela que le defaut etait invisible.
+    orpheline = Inscription.objects.get(pk=inscription.pk)
+    orpheline.contact_id = 999999
+    orpheline._state.fields_cache.pop("contact", None)
+    assert "supprime" in str(orpheline)
+    assert "Relance" in str(orpheline)

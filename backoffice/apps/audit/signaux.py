@@ -13,6 +13,8 @@ montant devient faux.
 
 from __future__ import annotations
 
+import logging
+
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
@@ -38,6 +40,9 @@ def _surveille(sender) -> bool:
     except AttributeError:
         return False
     return etiquette in _modeles_surveilles()
+
+
+logger = logging.getLogger(__name__)
 
 
 def _lisible(valeur):
@@ -70,6 +75,33 @@ def _valeurs(instance) -> dict:
     return valeurs
 
 
+def _libelle(instance) -> str:
+    """Le `__str__` de l'objet, ou un repli si on ne peut pas le calculer.
+
+    Un `__str__` de modele Django traverse librement ses relations. Pendant
+    une suppression en cascade, la ligne liee peut deja avoir disparu :
+    `Inscription.__str__` lit son contact, et le contact n'est plus la. Sans
+    ce garde-fou, l'exception remonte depuis le signal et **fait echouer la
+    suppression entiere** — le journal d'audit casse l'operation qu'il a pour
+    seul role d'enregistrer. Trouve en vidant les donnees de demonstration ;
+    aucun des 501 tests ne le voyait, parce qu'aucun ne supprimait une
+    inscription dont le contact partait dans la meme cascade.
+
+    Le repli reste identifiant : le nom du modele et la cle primaire suffisent
+    a retrouver ce dont il s'agit.
+    """
+    try:
+        return _lisible(instance)[:200]
+    except Exception:  # noqa: BLE001 — aucune exception ne doit passer
+        logger.warning(
+            "Libelle illisible pour %s#%s : la trace est ecrite sans lui.",
+            instance._meta.label,
+            instance.pk,
+            exc_info=True,
+        )
+        return f"{instance._meta.label}#{instance.pk}"
+
+
 def _ecrire(instance, action: str, changements: dict | None = None) -> None:
     EntreeJournal.objects.create(
         acteur=acteur_courant(),
@@ -77,7 +109,7 @@ def _ecrire(instance, action: str, changements: dict | None = None) -> None:
         action=action,
         type_objet=ContentType.objects.get_for_model(instance.__class__),
         id_objet=str(instance.pk) if instance.pk is not None else "",
-        libelle_objet=_lisible(instance)[:200],
+        libelle_objet=_libelle(instance),
         changements=changements or {},
         adresse_ip=ip_courante(),
     )

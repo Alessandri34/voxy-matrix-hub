@@ -14,12 +14,6 @@
   .montant{font-variant-numeric:tabular-nums;font-weight:600}
   h2{font-size:.98rem;margin:1.6rem 0 .3rem;font-weight:650}
   h2:first-of-type{margin-top:0}
-  /* `margin:0 0 .6rem` et non seulement `margin-bottom` : la regle de base
-     porte des marges laterales NEGATIVES, prevues pour un .defile place
-     dans un .panneau qui les compense. Utilise seul, il depassait de 35 px
-     et faisait deborder toute la page sur telephone. */
-  .defile{overflow-x:auto;background:var(--carte);border:1px solid var(--trait);
-    border-radius:10px;padding:.2rem .9rem;margin:0 0 .6rem}
 {% endblock %}
 
 {% block contenu %}
@@ -27,15 +21,15 @@
 <p class="note">Le compte part de la reception du lead. Un lead marque doublon
   n'y figure pas : il n'a pas a etre appele.</p>
 {% if en_retard %}
-  <div class="defile"><table>
+  <div class="defile seul"><table>
     <thead><tr><th>Recu le</th><th>Qui</th><th>Entreprise</th><th>Campagne</th><th>Attente</th></tr></thead>
     <tbody>
     {% for lead in en_retard %}
       <tr>
-        <td>{{ lead.date_reception|date:"d/m/Y H:i" }}</td>
+        <td><a href="{% url 'pipeline:fiche_lead' lead.pk %}">{{ lead.date_reception|date:"d/m/Y H:i" }}</a></td>
         <td>{{ lead.nom_declare|default:"—" }}<br>
             <span class="puce">{{ lead.telephone_normalise|default:lead.email_normalise|default:"aucun contact" }}</span></td>
-        <td>{{ lead.entreprise.denomination|default:lead.entreprise_declaree|default:"—" }}</td>
+        <td>{% if lead.entreprise %}<a href="{% url 'pipeline:fiche_entreprise' lead.entreprise.pk %}">{{ lead.entreprise.denomination }}</a>{% else %}{{ lead.entreprise_declaree|default:"—" }}{% endif %}</td>
         <td>{{ lead.meta_campagne_nom|default:lead.get_source_display }}</td>
         <td class="retard">{{ lead.date_reception|timesince }}</td>
       </tr>
@@ -52,12 +46,12 @@
   plutot que tire au hasard, parce qu'un faux SIREN sur un dossier de
   financement se decouvre au depot, apres signature.</p>
 {% if a_resoudre %}
-  <div class="defile"><table>
+  <div class="defile seul"><table>
     <thead><tr><th>Recu le</th><th>Qui</th><th>Declare</th><th>Certitude</th><th>Ce qui a ete tente</th></tr></thead>
     <tbody>
     {% for lead in a_resoudre %}
       <tr>
-        <td>{{ lead.date_reception|date:"d/m/Y H:i" }}</td>
+        <td><a href="{% url 'pipeline:fiche_lead' lead.pk %}">{{ lead.date_reception|date:"d/m/Y H:i" }}</a></td>
         <td>{{ lead.nom_declare|default:"—" }}</td>
         <td>{{ lead.entreprise_declaree|default:"—" }}<br>
             <span class="puce">{{ lead.email_normalise|default:"—" }}</span></td>
@@ -82,12 +76,12 @@
   chez la meme entreprise. Si ce n'est pas un doublon, vider le champ
   « doublon de » dans l'administration le remet dans le circuit.</p>
 {% if doublons %}
-  <div class="defile"><table>
+  <div class="defile seul"><table>
     <thead><tr><th>Recu le</th><th>Qui</th><th>Doublon de</th><th>Source</th></tr></thead>
     <tbody>
     {% for lead in doublons %}
       <tr>
-        <td>{{ lead.date_reception|date:"d/m/Y H:i" }}</td>
+        <td><a href="{% url 'pipeline:fiche_lead' lead.pk %}">{{ lead.date_reception|date:"d/m/Y H:i" }}</a></td>
         <td>{{ lead.nom_declare|default:"—" }}</td>
         <td>#{{ lead.doublon_de_id }} — {{ lead.doublon_de.nom_declare|default:"—" }}</td>
         <td>{{ lead.get_source_display }}</td>
@@ -100,14 +94,14 @@
 {% endif %}
 
 <h2>Les 20 derniers leads</h2>
-<div class="defile"><table>
+<div class="defile seul"><table>
   <thead><tr><th>Recu le</th><th>Qui</th><th>Entreprise</th><th>Source</th><th>Contacte</th></tr></thead>
   <tbody>
   {% for lead in recents %}
     <tr>
-      <td>{{ lead.date_reception|date:"d/m/Y H:i" }}</td>
+      <td><a href="{% url 'pipeline:fiche_lead' lead.pk %}">{{ lead.date_reception|date:"d/m/Y H:i" }}</a></td>
       <td>{{ lead.nom_declare|default:"—" }}</td>
-      <td>{{ lead.entreprise.denomination|default:lead.entreprise_declaree|default:"—" }}</td>
+      <td>{% if lead.entreprise %}<a href="{% url 'pipeline:fiche_entreprise' lead.entreprise.pk %}">{{ lead.entreprise.denomination }}</a>{% else %}{{ lead.entreprise_declaree|default:"—" }}{% endif %}</td>
       <td>{{ lead.get_source_display }}</td>
       <td>{% if lead.date_premier_contact %}{{ lead.date_premier_contact|date:"d/m H:i" }}{% else %}<span class="retard">non</span>{% endif %}</td>
     </tr>
