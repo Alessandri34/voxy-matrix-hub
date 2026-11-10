@@ -1,13 +1,25 @@
 {% extends "pipeline/base.html" %}
 {% block titre %}Financement{% endblock %}
+{% block entete %}Financement{% endblock %}
+{% block sous_titre %}<p class="sous">Trié par urgence de dépôt.</p>{% endblock %}
 
 {% block style %}
+  .retard{color:var(--alerte);font-weight:600}
   .urgent{color:var(--attention);font-weight:600}
   .ferme{color:var(--alerte);font-weight:600}
-  .note{color:var(--doux);font-size:.82rem;margin:.1rem 0 .9rem;max-width:66ch}
-  .puce{font-size:.74rem;padding:.05rem .4rem;border-radius:99px;border:1px solid var(--trait);
-    background:var(--fond);color:var(--doux);white-space:nowrap}
+  .note{color:var(--doux);font-size:.83rem;margin:.1rem 0 .9rem;max-width:68ch}
+  .puce{font-size:.74rem;padding:.05rem .4rem;border-radius:99px;
+    border:1px solid var(--trait);background:var(--fond);color:var(--doux);
+    white-space:nowrap}
   .montant{font-variant-numeric:tabular-nums;font-weight:600}
+  h2{font-size:.98rem;margin:1.6rem 0 .3rem;font-weight:650}
+  h2:first-of-type{margin-top:0}
+  /* `margin:0 0 .6rem` et non seulement `margin-bottom` : la regle de base
+     porte des marges laterales NEGATIVES, prevues pour un .defile place
+     dans un .panneau qui les compense. Utilise seul, il depassait de 35 px
+     et faisait deborder toute la page sur telephone. */
+  .defile{overflow-x:auto;background:var(--carte);border:1px solid var(--trait);
+    border-radius:10px;padding:.2rem .9rem;margin:0 0 .6rem}
 {% endblock %}
 
 {% block contenu %}
@@ -17,7 +29,7 @@
   quatorzième jour n'est pas instruit. Si le client a signé, c'est l'organisme qui
   porte la différence : le prévenir avant le démarrage, pas après.</p>
 {% if fermes %}
-  <table>
+  <div class="defile"><table>
     <thead><tr><th>Début</th><th>Affaire</th><th>Financeur</th><th>Heures</th>
       <th>Prise en charge</th><th>Fermée depuis</th></tr></thead>
     <tbody>
@@ -33,12 +45,12 @@
       </tr>
     {% endfor %}
     </tbody>
-  </table>
+  </table></div>
 {% else %}<p class="vide">Aucun.</p>{% endif %}
 
 <h2>À déposer sous 7 jours <span class="badge">{{ urgents|length }}</span></h2>
 {% if urgents %}
-  <table>
+  <div class="defile"><table>
     <thead><tr><th>Début</th><th>Affaire</th><th>Financeur</th><th>À déposer avant</th>
       <th>Reste</th><th>Point d'accueil</th></tr></thead>
     <tbody>
@@ -55,12 +67,12 @@
       </tr>
     {% endfor %}
     </tbody>
-  </table>
+  </table></div>
 {% else %}<p class="vide">Aucun.</p>{% endif %}
 
 <h2>Autres dossiers en préparation <span class="badge">{{ autres|length }}</span></h2>
 {% if autres %}
-  <table>
+  <div class="defile"><table>
     <thead><tr><th>Début</th><th>Affaire</th><th>Financeur</th><th>Heures</th>
       <th>Prise en charge</th><th>Reste à charge</th><th>Dépôt possible</th></tr></thead>
     <tbody>
@@ -78,11 +90,11 @@
       </tr>
     {% endfor %}
     </tbody>
-  </table>
+  </table></div>
 {% else %}<p class="vide">Aucun.</p>{% endif %}
 
 <h2>Déposés et décidés</h2>
-<table>
+<div class="defile"><table>
   <thead><tr><th>Début</th><th>Affaire</th><th>Financeur</th><th>État</th>
     <th>Demandé</th><th>Accordé</th></tr></thead>
   <tbody>
@@ -102,5 +114,5 @@
     <tr><td colspan="6" class="vide">Aucun dossier déposé pour l'instant.</td></tr>
   {% endfor %}
   </tbody>
-</table>
+</table></div>
 {% endblock %}

@@ -176,6 +176,8 @@ class Command(BaseCommand):
                     )
 
             self._dossiers(hasard)
+            self._publicite(hasard)
+            self._sequences()
 
         self.stdout.write(
             self.style.SUCCESS(
@@ -224,3 +226,247 @@ class Command(BaseCommand):
                 else None,
             )
             figer_calcul(dossier)
+
+    def _publicite(self, hasard):
+        """Des campagnes et leurs depenses, pour que la chaine ait des
+        chiffres en face de chaque maillon."""
+
+        from apps.publicite.attribution import rapprocher_les_leads
+        from apps.publicite.models import Campagne, Depense, Plateforme
+
+        # (identifiant, nom, offre, depense/mois, impressions, clics, leads/mois)
+        campagnes = [
+            (
+                "23851000000000001",
+                "Visibilite locale — Herault",
+                "OFFRE-3",
+                92000,
+                210000,
+                2600,
+                22,
+            ),
+            ("23851000000000002", "IA generative — dirigeants 34", "IA", 54000, 118000, 1400, 9),
+            ("23851000000000003", "Site internet — artisans", "SITE", 38000, 96000, 980, 4),
+        ]
+        aujourd_hui = timezone.localdate()
+        for identifiant, nom, offre, depense, impressions, clics, _par_mois in campagnes:
+            campagne, _ = Campagne.objects.get_or_create(
+                plateforme=Plateforme.META,
+                identifiant_externe=identifiant,
+                defaults={"nom": nom, "offre": offre, "date_debut": aujourd_hui.replace(day=1)},
+            )
+            for recul in range(3):
+                mois = (aujourd_hui.replace(day=1) - timezone.timedelta(days=31 * recul)).replace(
+                    day=1
+                )
+                part = hasard.uniform(0.75, 1.15)
+                Depense.objects.get_or_create(
+                    campagne=campagne,
+                    mois=mois,
+                    jour=None,
+                    defaults={
+                        "montant_centimes": int(depense * part),
+                        "impressions": int(impressions * part),
+                        "clics": int(clics * part),
+                    },
+                )
+
+        # Les leads existants rejoignent la premiere campagne, et chaque
+        # campagne recoit son volume : sans leads en face de la depense,
+        # l'ecran n'a aucun cout a montrer.
+        principale = Campagne.objects.get(identifiant_externe=campagnes[0][0])
+        Lead.objects.filter(source=SourceLead.META_LEAD_ADS).update(
+            meta_campagne_id=principale.identifiant_externe,
+            meta_campagne_nom=principale.nom,
+        )
+        self._leads_publicitaires(hasard, campagnes)
+        rapprocher_les_leads()
+
+    def _leads_publicitaires(self, hasard, campagnes):
+        """Le volume de leads en face de la depense, avec sa suite : une
+        partie devient des affaires, une poignee est payee."""
+        from apps.pipeline.models import Etape
+        from apps.pipeline.services import changer_etape, promouvoir_lead
+        from apps.publicite.models import Campagne
+
+        prenoms = [
+            "Camille",
+            "Yanis",
+            "Noa",
+            "Lina",
+            "Hugo",
+            "Sarah",
+            "Malo",
+            "Jade",
+            "Rayan",
+            "Elsa",
+            "Theo",
+            "Ines",
+            "Nathan",
+            "Maya",
+        ]
+        noms = [
+            "Roux",
+            "Fabre",
+            "Garcia",
+            "Lopez",
+            "Martinez",
+            "Bonnet",
+            "Vidal",
+            "Serre",
+            "Alibert",
+            "Caussade",
+            "Pagès",
+            "Teissier",
+        ]
+        communes = [
+            "Montpellier",
+            "Sete",
+            "Lattes",
+            "Lunel",
+            "Beziers",
+            "Frontignan",
+            "Castelnau-le-Lez",
+            "Mauguio",
+        ]
+        maintenant = timezone.now()
+        promues = []
+
+        for identifiant, nom_campagne, _offre, _d, _i, _c, par_mois in campagnes:
+            campagne = Campagne.objects.get(identifiant_externe=identifiant)
+            for recul in range(3):
+                for n in range(par_mois):
+                    age = timezone.timedelta(days=recul * 30 + hasard.randint(0, 28))
+                    prenom = hasard.choice(prenoms)
+                    patronyme = hasard.choice(noms)
+                    lead = Lead.objects.create(
+                        source=SourceLead.META_LEAD_ADS,
+                        nom_declare=f"{prenom} {patronyme}",
+                        email_declare=f"{prenom.lower()}.{patronyme.lower()}{recul}{n}@exemple-34.fr",
+                        telephone_declare=f"06{hasard.randint(10000000, 99999999)}",
+                        entreprise_declaree=(
+                            f"{hasard.choice(['Atelier', 'Maison', 'Studio', 'Garage'])}"
+                            f" {patronyme}"
+                        ),
+                        campagne=campagne,
+                        meta_campagne_id=identifiant,
+                        meta_campagne_nom=nom_campagne,
+                        meta_ensemble_nom=hasard.choice(communes),
+                        date_reception=maintenant - age,
+                        date_premier_contact=maintenant - age + timezone.timedelta(hours=3)
+                        if hasard.random() < 0.85
+                        else None,
+                    )
+                    # Environ un lead sur cinq devient une affaire.
+                    if hasard.random() < 0.2 and lead.entreprise_id is None:
+                        entreprise, _ = Entreprise.objects.get_or_create(
+                            denomination=lead.entreprise_declaree,
+                            defaults={
+                                "commune": hasard.choice(communes),
+                                "source_resolution": "peupler-demo",
+                            },
+                        )
+                        lead.entreprise = entreprise
+                        lead.save()
+                        affaire = promouvoir_lead(
+                            lead,
+                            intitule=nom_campagne,
+                            montant_estime_centimes=hasard.choice([49000, 118000, 195000]),
+                        )
+                        promues.append((affaire, recul))
+
+        # Les affaires les plus anciennes sont allees au bout.
+        for affaire, recul in promues:
+            parcours = [Etape.CONTACTE, Etape.QUALIFIE]
+            if recul >= 1:
+                parcours += [Etape.RDV_DIAGNOSTIC, Etape.PROPOSITION_ENVOYEE]
+            if recul >= 2 and hasard.random() < 0.5:
+                parcours += [
+                    Etape.DOSSIER_DEPOSE,
+                    Etape.ACCORD_FINANCEUR,
+                    Etape.INSCRIT,
+                    Etape.FORME,
+                    Etape.PAYE,
+                ]
+            for etape in parcours:
+                changer_etape(affaire, etape)
+
+            # Une affaire qui depasse « dossier depose » a forcement un
+            # dossier : sans lui, l'entonnoir afficherait des clients payes
+            # sans dossier en amont, ce qui se lit comme un bogue.
+            if Etape.DOSSIER_DEPOSE in parcours:
+                self._dossier_pour(affaire, hasard)
+
+    def _dossier_pour(self, affaire, hasard):
+        from apps.financement.bareme import Modalite
+        from apps.financement.models import Dossier, EtatDossier
+        from apps.financement.routage import router_entreprise
+        from apps.financement.services import figer_calcul
+        from apps.pipeline.models import Etape
+
+        routage = router_entreprise(affaire.entreprise)
+        financeur = routage.financeur if routage.financeur in ("fafcea", "agefice") else "agefice"
+        etat = EtatDossier.SOLDE if affaire.etape == Etape.PAYE else EtatDossier.ACCORDE
+        dossier, cree = Dossier.objects.get_or_create(
+            opportunite=affaire,
+            defaults={
+                "financeur": financeur,
+                "etat": etat,
+                "date_debut_formation": timezone.localdate()
+                - timezone.timedelta(days=hasard.randint(5, 50)),
+                "heures": hasard.choice([14, 21, 35]),
+                "modalite": Modalite.PRESENTIEL,
+                "prix_ht_centimes": affaire.montant_estime_centimes or 150000,
+                "cfp_centimes": hasard.choice([9000, 12000, 500]),
+                "exonere_tva": True,
+                "point_accueil": "CCI Herault — Montpellier",
+                "date_depot": timezone.localdate()
+                - timezone.timedelta(days=hasard.randint(20, 70)),
+            },
+        )
+        if cree:
+            figer_calcul(dossier)
+
+    def _sequences(self):
+        """Une sequence de relance, avec ses inscriptions."""
+        from apps.crm.models import Contact
+        from apps.sequences.models import Canal, CibleSequence, EtapeSequence, Sequence
+        from apps.sequences.moteur import inscrire, preparer_prochain_envoi
+
+        sequence, creee = Sequence.objects.get_or_create(
+            nom="Visibilite locale — relance a froid",
+            defaults={"cible": CibleSequence.SOURCING, "active": True},
+        )
+        if creee:
+            EtapeSequence.objects.create(
+                sequence=sequence,
+                ordre=1,
+                delai_jours=0,
+                canal=Canal.EMAIL,
+                objet="{entreprise} : une question sur votre visibilite locale",
+                corps="Bonjour {prenom},\n\nJe vois que {entreprise} est a {ville}.",
+            )
+            EtapeSequence.objects.create(
+                sequence=sequence,
+                ordre=2,
+                delai_jours=4,
+                canal=Canal.EMAIL,
+                objet="Relance — {entreprise}",
+                corps="Bonjour {prenom}, je reviens vers vous.",
+            )
+            EtapeSequence.objects.create(
+                sequence=sequence,
+                ordre=3,
+                delai_jours=6,
+                canal=Canal.APPEL,
+                objet="",
+                corps="Appeler {prenom} chez {entreprise}.",
+            )
+
+        for contact in Contact.objects.all()[:5]:
+            try:
+                inscription = inscrire(sequence, contact=contact)
+            except Exception:
+                continue
+            if inscription.etat == "active":
+                preparer_prochain_envoi(inscription)

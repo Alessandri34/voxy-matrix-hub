@@ -1,11 +1,25 @@
 {% extends "pipeline/base.html" %}
 {% block titre %}Leads{% endblock %}
+{% block entete %}Leads{% endblock %}
+{% block sous_titre %}<p class="sous">Ce qui attend, et pourquoi.</p>{% endblock %}
 
 {% block style %}
   .retard{color:var(--alerte);font-weight:600}
-  .note{color:var(--doux);font-size:.82rem;margin:.1rem 0 .9rem;max-width:60ch}
-  .puce{font-size:.74rem;padding:.05rem .4rem;border-radius:99px;border:1px solid var(--trait);
-    background:var(--fond);color:var(--doux);white-space:nowrap}
+  .urgent{color:var(--attention);font-weight:600}
+  .ferme{color:var(--alerte);font-weight:600}
+  .note{color:var(--doux);font-size:.83rem;margin:.1rem 0 .9rem;max-width:68ch}
+  .puce{font-size:.74rem;padding:.05rem .4rem;border-radius:99px;
+    border:1px solid var(--trait);background:var(--fond);color:var(--doux);
+    white-space:nowrap}
+  .montant{font-variant-numeric:tabular-nums;font-weight:600}
+  h2{font-size:.98rem;margin:1.6rem 0 .3rem;font-weight:650}
+  h2:first-of-type{margin-top:0}
+  /* `margin:0 0 .6rem` et non seulement `margin-bottom` : la regle de base
+     porte des marges laterales NEGATIVES, prevues pour un .defile place
+     dans un .panneau qui les compense. Utilise seul, il depassait de 35 px
+     et faisait deborder toute la page sur telephone. */
+  .defile{overflow-x:auto;background:var(--carte);border:1px solid var(--trait);
+    border-radius:10px;padding:.2rem .9rem;margin:0 0 .6rem}
 {% endblock %}
 
 {% block contenu %}
@@ -13,7 +27,7 @@
 <p class="note">Le compte part de la reception du lead. Un lead marque doublon
   n'y figure pas : il n'a pas a etre appele.</p>
 {% if en_retard %}
-  <table>
+  <div class="defile"><table>
     <thead><tr><th>Recu le</th><th>Qui</th><th>Entreprise</th><th>Campagne</th><th>Attente</th></tr></thead>
     <tbody>
     {% for lead in en_retard %}
@@ -27,7 +41,7 @@
       </tr>
     {% endfor %}
     </tbody>
-  </table>
+  </table></div>
 {% else %}
   <p class="vide">Aucun. Tous les leads ont ete contactes dans les 24 h.</p>
 {% endif %}
@@ -38,7 +52,7 @@
   plutot que tire au hasard, parce qu'un faux SIREN sur un dossier de
   financement se decouvre au depot, apres signature.</p>
 {% if a_resoudre %}
-  <table>
+  <div class="defile"><table>
     <thead><tr><th>Recu le</th><th>Qui</th><th>Declare</th><th>Certitude</th><th>Ce qui a ete tente</th></tr></thead>
     <tbody>
     {% for lead in a_resoudre %}
@@ -58,7 +72,7 @@
       </tr>
     {% endfor %}
     </tbody>
-  </table>
+  </table></div>
 {% else %}
   <p class="vide">Aucun.</p>
 {% endif %}
@@ -68,7 +82,7 @@
   chez la meme entreprise. Si ce n'est pas un doublon, vider le champ
   « doublon de » dans l'administration le remet dans le circuit.</p>
 {% if doublons %}
-  <table>
+  <div class="defile"><table>
     <thead><tr><th>Recu le</th><th>Qui</th><th>Doublon de</th><th>Source</th></tr></thead>
     <tbody>
     {% for lead in doublons %}
@@ -80,13 +94,13 @@
       </tr>
     {% endfor %}
     </tbody>
-  </table>
+  </table></div>
 {% else %}
   <p class="vide">Aucun.</p>
 {% endif %}
 
 <h2>Les 20 derniers leads</h2>
-<table>
+<div class="defile"><table>
   <thead><tr><th>Recu le</th><th>Qui</th><th>Entreprise</th><th>Source</th><th>Contacte</th></tr></thead>
   <tbody>
   {% for lead in recents %}
@@ -101,5 +115,5 @@
     <tr><td colspan="5" class="vide">Aucun lead pour l'instant.</td></tr>
   {% endfor %}
   </tbody>
-</table>
+</table></div>
 {% endblock %}

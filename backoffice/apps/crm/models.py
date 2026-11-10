@@ -321,6 +321,19 @@ class Lead(models.Model):
     meta_publicite_id = models.CharField(max_length=64, blank=True)
     meta_publicite_nom = models.CharField(max_length=200, blank=True)
 
+    campagne = models.ForeignKey(
+        "publicite.Campagne",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="leads",
+        help_text="Rattachement a la campagne qui a produit ce lead. Rempli "
+        "par le rapprochement, a partir de `meta_campagne_id` — ou a la main "
+        "pour une regie qui ne transmet pas d'identifiant. C'est ce lien qui "
+        "permet de calculer un cout par client, et non seulement un cout par "
+        "lead.",
+    )
+
     payload_origine = models.JSONField(
         default=dict,
         blank=True,

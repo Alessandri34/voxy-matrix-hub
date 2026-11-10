@@ -241,7 +241,18 @@ def test_un_deplacement_avec_le_jeton_du_gabarit_passe(affaire):
     assert affaire.etape == "qualifie"
 
 
-@pytest.mark.parametrize("route", ["pipeline:kanban", "pipeline:leads"])
+@pytest.mark.parametrize(
+    "route",
+    [
+        "pipeline:accueil",
+        "pipeline:publicite",
+        "pipeline:sourcing",
+        "pipeline:sequences",
+        "pipeline:kanban",
+        "pipeline:leads",
+        "pipeline:financement",
+    ],
+)
 def test_aucune_balise_de_gabarit_ne_fuit_dans_la_page(client, route):
     """Non-regression.
 
@@ -284,3 +295,142 @@ def test_acces_au_financement_par_role(client, role, attendu):
 def test_le_financement_exige_aussi_la_2fa(client):
     ClientVerifie.connecter(client, utilisateur(Role.ADMIN), avec_2fa=False)
     assert client.get(reverse("pipeline:financement")).status_code == 403
+
+
+# --------------------------------------------------------------------------
+# Les écrans ajoutés avec la barre latérale
+# --------------------------------------------------------------------------
+
+
+@pytest.mark.parametrize(
+    "route,role,attendu",
+    [
+        # Le tableau de bord et la publicité relèvent du reporting : tout le
+        # monde sauf le formateur, qui n'a rien à y faire.
+        ("pipeline:accueil", Role.ADMIN, 200),
+        ("pipeline:accueil", Role.COMMERCIAL, 200),
+        ("pipeline:accueil", Role.LECTURE, 200),
+        ("pipeline:accueil", Role.FORMATEUR, 403),
+        ("pipeline:publicite", Role.ADMIN, 200),
+        ("pipeline:publicite", Role.COMMERCIAL, 200),
+        ("pipeline:publicite", Role.FORMATEUR, 403),
+        # Le sourcing touche aux données de prospects : pas la lecture seule.
+        ("pipeline:sourcing", Role.COMMERCIAL, 200),
+        ("pipeline:sourcing", Role.LECTURE, 403),
+        # Les séquences n'appartiennent qu'au commercial et à l'admin.
+        ("pipeline:sequences", Role.COMMERCIAL, 200),
+        ("pipeline:sequences", Role.ADMINISTRATIF, 403),
+        ("pipeline:sequences", Role.LECTURE, 403),
+    ],
+)
+def test_acces_aux_nouveaux_ecrans(client, route, role, attendu):
+    ClientVerifie.connecter(client, utilisateur(role))
+    assert client.get(reverse(route)).status_code == attendu
+
+
+def test_la_navigation_ne_montre_que_ce_qui_est_accessible(client):
+    """Un menu écrit en dur montre des rubriques que la moitié des rôles ne
+    peut pas ouvrir : on clique, on prend un 403, on ne comprend pas."""
+    from apps.accounts.navigation import navigation_pour
+
+    formateur = utilisateur(Role.FORMATEUR)
+    libelles = {e.libelle for s in navigation_pour(formateur) for e in s.entrees}
+    assert "Publicité" not in libelles
+    assert "Séquences" not in libelles
+
+    admin = utilisateur(Role.ADMIN)
+    libelles_admin = {e.libelle for s in navigation_pour(admin) for e in s.entrees}
+    assert {
+        "Tableau de bord",
+        "Publicité",
+        "Sourcing",
+        "Séquences",
+        "Leads",
+        "Pipeline",
+        "Financement",
+    } <= libelles_admin
+
+
+def test_chaque_entree_de_navigation_mene_quelque_part(client):
+    """Une faute de frappe dans un nom de route donnerait un menu qui plante
+    au rendu, pour tout le monde, d'un coup."""
+    from django.urls import NoReverseMatch
+    from django.urls import reverse as resoudre
+
+    from apps.accounts.navigation import NAVIGATION
+
+    for section in NAVIGATION:
+        for entree in section.entrees:
+            if entree.chemin:
+                assert entree.chemin.startswith("/")
+                continue
+            try:
+                resoudre(entree.route)
+            except NoReverseMatch:  # pragma: no cover
+                raise AssertionError(
+                    f"la route « {entree.route} » de l'entree « {entree.libelle} » n'existe pas"
+                ) from None
+
+
+def test_un_visiteur_anonyme_ne_voit_aucune_navigation():
+    from django.contrib.auth.models import AnonymousUser
+
+    from apps.accounts.navigation import navigation_pour
+
+    assert navigation_pour(AnonymousUser()) == []
+    assert navigation_pour(None) == []
+
+
+# --------------------------------------------------------------------------
+# Rendu des gabarits
+# --------------------------------------------------------------------------
+
+
+@pytest.mark.parametrize(
+    "route",
+    [
+        "pipeline:accueil",
+        "pipeline:publicite",
+        "pipeline:leads",
+        "pipeline:kanban",
+        "pipeline:financement",
+        "pipeline:sequences",
+        "pipeline:sourcing",
+    ],
+)
+def test_aucune_virgule_decimale_dans_un_attribut_style(client, route):
+    """Non-regression.
+
+    En locale francaise, Django ecrit « 36,0 » la ou le CSS attend « 36.0 ».
+    Un `style="width:36,0%"` est une declaration invalide, silencieusement
+    ignoree : la barre de repartition restait vide sans la moindre erreur.
+    Le filtre `unlocalize` le corrige, et ce test empeche l'oubli.
+    """
+    import re
+
+    ClientVerifie.connecter(client, utilisateur(Role.ADMIN))
+    contenu = client.get(reverse(route)).content.decode()
+    for style in re.findall(r'style="([^"]*)"', contenu):
+        fautifs = re.findall(r"(?:width|height|opacity|flex)\s*:\s*[\d  ]*,\d", style)
+        assert not fautifs, f"{route} : nombre localise dans un style — {style}"
+
+
+@pytest.mark.parametrize(
+    "route",
+    [
+        "pipeline:accueil",
+        "pipeline:publicite",
+        "pipeline:leads",
+        "pipeline:financement",
+        "pipeline:sequences",
+        "pipeline:sourcing",
+    ],
+)
+def test_aucun_montant_en_centimes_n_est_affiche(client, route):
+    """« 13010 c. » n'est pas un montant : c'est une fuite de representation
+    interne. Les gabarits lisent des euros."""
+    ClientVerifie.connecter(client, utilisateur(Role.ADMIN))
+    contenu = client.get(reverse(route)).content.decode()
+    corps = contenu.split("<main>", 1)[-1]
+    assert "centimes" not in corps.lower() or "en centimes" in corps.lower()
+    assert "_centimes" not in corps

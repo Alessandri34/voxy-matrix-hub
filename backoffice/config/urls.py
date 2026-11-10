@@ -19,5 +19,7 @@ urlpatterns = [
     path("sante/", sante, name="sante"),
     path("admin/", admin_site.urls),
     path("integrations/meta/webhook/", vues_meta.webhook, name="webhook-meta"),
-    path("pipeline/", include("apps.pipeline.urls")),
+    # Monte a la racine : le back-office EST l'application, il n'a pas a
+    # vivre dans un sous-chemin.
+    path("", include("apps.pipeline.urls")),
 ]

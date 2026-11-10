@@ -1,0 +1,73 @@
+{% extends "pipeline/base.html" %}
+{% block titre %}Sourcing{% endblock %}
+{% block entete %}Sourcing{% endblock %}
+{% block sous_titre %}<p class="sous">Constitution d'une liste de prospection, sur données publiques.</p>{% endblock %}
+
+{% block contenu %}
+<div class="cartes">
+  <div class="kpi"><span>Prospects sourcés</span><b>{{ total }}</b></div>
+  <div class="kpi"><span>Entreprise identifiée</span><b>{{ rattaches }}</b>
+    <small>SIREN résolu</small></div>
+  <div class="kpi"><span>En séquence</span><b>{{ en_sequence }}</b></div>
+  <div class="kpi"><span>Familles ciblables</span><b>{{ familles|length }}</b>
+    <small>codes NAF regroupés</small></div>
+</div>
+
+<div class="panneau">
+  <h2>Pourquoi il n'y a pas de scraper</h2>
+  <p class="note" style="max-width:76ch">
+    Les conditions de Google Maps Platform <strong>interdisent explicitement
+    le scraping</strong> et n'accordent aucune exception de cache au nom, à
+    l'adresse, à la note ni aux avis : seul l'identifiant de lieu est
+    conservable. Pappers et <code>societe.com</code> vendent une API pour les
+    mêmes données que l'API publique Recherche d'entreprises, gratuite.
+    Et surtout : <strong>seule l'API officielle porte le drapeau d'opposition
+    à la prospection</strong>, que 34 % des TPE héraultaises des codes NAF
+    visés portent. Une liste constituée autrement démarche ces 34 % sans le
+    savoir — le sourcing les écarte d'office.
+  </p>
+  <p class="note" style="margin-bottom:0">
+    La commande&nbsp;:
+    <code>manage.py sourcer --famille restauration --pages 2</code> pour un
+    aperçu, puis <code>--appliquer</code> pour écrire.
+  </p>
+</div>
+
+<div class="panneau">
+  <h2>Familles ciblables</h2>
+  <p class="note">Chaque famille regroupe les codes NAF d'un metier. Le ciblage
+    se fait par famille ou par code precis.</p>
+  <div style="display:flex;flex-wrap:wrap;gap:.4rem">
+    {% for f in familles %}
+      <span class="badge">{{ f.nom }} · {{ f.codes }} code{{ f.codes|pluralize }}</span>
+    {% endfor %}
+  </div>
+</div>
+
+<div class="panneau">
+  <h2>Derniers prospects sourcés</h2>
+  <div class="defile">
+    <table>
+      <thead><tr><th>Ajouté le</th><th>Entreprise</th><th>Commune</th><th>NAF</th>
+        <th>Registre des Métiers</th><th>Étape</th></tr></thead>
+      <tbody>
+      {% for lead in recents %}
+        <tr>
+          <td class="num">{{ lead.date_reception|date:"d/m/Y" }}</td>
+          <td>{{ lead.entreprise.denomination|default:lead.entreprise_declaree|truncatechars:34 }}</td>
+          <td>{{ lead.entreprise.commune|default:"—" }}</td>
+          <td class="num">{{ lead.entreprise.naf|default:"—" }}</td>
+          <td>{% if lead.entreprise.inscrite_repertoire_metiers %}<span class="badge succes">artisan</span>
+              {% elif lead.entreprise.inscrite_repertoire_metiers is False %}<span class="badge">commerçant</span>
+              {% else %}<span class="badge attention">non établi</span>{% endif %}</td>
+          <td>{% if lead.etape_amont %}<span class="badge">{{ lead.get_etape_amont_display }}</span>{% else %}—{% endif %}</td>
+        </tr>
+      {% empty %}
+        <tr><td colspan="6" class="vide">Aucun prospect sourcé. Lancer
+          <code>manage.py sourcer</code> pour en constituer une liste.</td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

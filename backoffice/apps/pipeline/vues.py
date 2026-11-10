@@ -12,6 +12,7 @@ gain nul a cette echelle, et la page se recharge en moins d'une seconde.
 
 from __future__ import annotations
 
+from datetime import datetime
 from decimal import Decimal
 
 from django.db.models import Count, Sum
@@ -176,5 +177,221 @@ def dossiers_financement(request):
             "deposes": [
                 d for d in dossiers if d.etat not in (EtatDossier.BROUILLON, EtatDossier.A_DEPOSER)
             ][:30],
+        },
+    )
+
+
+# ==========================================================================
+# Tableau de bord
+# ==========================================================================
+
+
+@exige_module("reporting")
+def accueil(request):
+    """Ce qu'il faut savoir en ouvrant l'outil.
+
+    L'ordre est volontaire : d'abord ce qui bloque, ensuite ce qui avance.
+    Un tableau de bord qui ouvre sur les totaux du mois laisse passer le
+    dossier dont la fenetre de depot se ferme demain.
+    """
+    from apps.financement.models import Dossier, EtatDossier
+    from apps.publicite.attribution import attribuer
+    from apps.sequences.models import EtatInscription, Inscription
+
+    maintenant = timezone.now()
+    debut_mois = timezone.localdate().replace(day=1)
+
+    leads_mois = Lead.objects.filter(doublon_de__isnull=True, date_reception__date__gte=debut_mois)
+    affaires = Opportunite.objects.exclude(etape__in=ETAPES_FINALES)
+    dossiers = Dossier.objects.filter(
+        etat__in=[EtatDossier.BROUILLON, EtatDossier.A_DEPOSER]
+    ).select_related("opportunite__entreprise")
+
+    fenetres_fermees = [d for d in dossiers if d.depot_en_retard]
+    fenetres_urgentes = [
+        d
+        for d in dossiers
+        if not d.depot_en_retard
+        and d.jours_avant_cloture is not None
+        and d.jours_avant_cloture <= 7
+    ]
+
+    pipeline_centimes = affaires.aggregate(total=Sum("montant_estime_centimes"))["total"] or 0
+    publicite = attribuer(depuis=debut_mois)
+
+    return render(
+        request,
+        "pipeline/accueil.html",
+        {
+            "leads_mois": leads_mois.count(),
+            "leads_en_retard": _leads_en_retard().count(),
+            "affaires_ouvertes": affaires.count(),
+            "pipeline": (Decimal(pipeline_centimes) / 100).quantize(Decimal("0.01")),
+            "fenetres_fermees": fenetres_fermees,
+            "fenetres_urgentes": fenetres_urgentes,
+            "a_resoudre": Lead.objects.filter(
+                entreprise__isnull=True, doublon_de__isnull=True
+            ).count(),
+            "inscriptions_actives": Inscription.objects.filter(etat=EtatInscription.ACTIVE).count(),
+            "publicite": publicite,
+            "colonnes": _repartition_pipeline(),
+            "derniers_leads": list(
+                Lead.objects.filter(doublon_de__isnull=True)
+                .select_related("entreprise", "campagne")
+                .order_by("-date_reception")[:8]
+            ),
+            "maintenant": maintenant,
+        },
+    )
+
+
+def _repartition_pipeline():
+    """Le nombre et le montant par etape, pour la barre de repartition."""
+    lignes = (
+        Opportunite.objects.values("etape")
+        .annotate(nombre=Count("id"), montant=Sum("montant_estime_centimes"))
+        .order_by()
+    )
+    par_etape = {ligne["etape"]: ligne for ligne in lignes}
+    total = sum(ligne["nombre"] for ligne in lignes) or 1
+    resultat = []
+    for etape, libelle in Etape.choices:
+        ligne = par_etape.get(etape, {})
+        nombre = ligne.get("nombre", 0)
+        resultat.append(
+            {
+                "code": etape,
+                "libelle": libelle,
+                "nombre": nombre,
+                "part": round(nombre * 100 / total, 1),
+                "montant": (Decimal(ligne.get("montant") or 0) / 100).quantize(Decimal("0.01")),
+                "finale": etape in ETAPES_FINALES,
+            }
+        )
+    return resultat
+
+
+# ==========================================================================
+# Publicité
+# ==========================================================================
+
+
+@exige_module("reporting")
+def publicite(request):
+    """La chaine complete, de l'euro depense au client forme.
+
+    C'est le chiffre que la regie ne sait pas donner : elle ignore ce qui se
+    passe apres le formulaire.
+    """
+    from apps.publicite.attribution import attribuer, par_campagne
+    from apps.publicite.models import Campagne, Depense
+
+    debut = request.GET.get("depuis") or ""
+    depuis = None
+    if debut:
+        try:
+            depuis = datetime.strptime(debut, "%Y-%m-%d").date()
+        except ValueError:
+            depuis = None
+
+    total = attribuer(depuis=depuis)
+    lignes = [
+        ligne for ligne in par_campagne(depuis=depuis) if ligne.leads or ligne.depense_centimes
+    ]
+
+    return render(
+        request,
+        "pipeline/publicite.html",
+        {
+            "total": total,
+            "lignes": lignes,
+            "depuis": debut,
+            "nb_campagnes": Campagne.objects.count(),
+            "nb_depenses": Depense.objects.count(),
+            "dernieres_depenses": list(
+                Depense.objects.select_related("campagne").order_by("-mois", "-jour")[:10]
+            ),
+            "leads_sans_campagne": Lead.objects.filter(
+                doublon_de__isnull=True, campagne__isnull=True, source="meta_lead_ads"
+            ).count(),
+        },
+    )
+
+
+# ==========================================================================
+# Sourcing et séquences
+# ==========================================================================
+
+
+@exige_module("crm")
+def sourcing(request):
+    """Les prospects issus du sourcing, et ce que la derniere campagne a donne."""
+    from apps.sourcing.ciblage import FAMILLES_NAF
+
+    sources = Lead.objects.filter(source="sourcing").select_related("entreprise")
+    return render(
+        request,
+        "pipeline/sourcing.html",
+        {
+            "total": sources.count(),
+            "rattaches": sources.filter(entreprise__isnull=False).count(),
+            "en_sequence": sources.filter(inscriptions__isnull=False).distinct().count(),
+            "recents": list(sources.order_by("-date_reception")[:40]),
+            # Une liste de couples plutot qu'un dictionnaire : un gabarit
+            # Django ne sait pas chercher une cle dynamique.
+            "familles": [
+                {"nom": nom, "codes": len(codes)} for nom, codes in sorted(FAMILLES_NAF.items())
+            ],
+        },
+    )
+
+
+@exige_module("sequences")
+def sequences(request):
+    """L'etat des sequences : ce qui part, ce qui s'est arrete, et pourquoi."""
+    from django.conf import settings
+
+    from apps.sequences.models import (
+        Envoi,
+        EtatEnvoi,
+        EtatInscription,
+        Inscription,
+        Sequence,
+    )
+
+    liste = []
+    for sequence in Sequence.objects.prefetch_related("etapes"):
+        inscriptions = Inscription.objects.filter(sequence=sequence)
+        liste.append(
+            {
+                "sequence": sequence,
+                "etapes": sequence.etapes.filter(active=True).count(),
+                "actives": inscriptions.filter(etat=EtatInscription.ACTIVE).count(),
+                "terminees": inscriptions.filter(etat=EtatInscription.TERMINEE).count(),
+                "arretees": inscriptions.filter(etat=EtatInscription.ARRETEE).count(),
+                "envois": Envoi.objects.filter(inscription__sequence=sequence).count(),
+            }
+        )
+
+    motifs = (
+        Inscription.objects.filter(etat=EtatInscription.ARRETEE)
+        .exclude(motif_arret="")
+        .values("motif_arret")
+        .annotate(nombre=Count("id"))
+        .order_by("-nombre")
+    )
+
+    return render(
+        request,
+        "pipeline/sequences.html",
+        {
+            "lignes": liste,
+            "motifs": list(motifs),
+            "envoi_reel": getattr(settings, "SEQUENCES_ENVOI_REEL", False),
+            "prets": Envoi.objects.filter(etat=EtatEnvoi.A_ENVOYER).count(),
+            "envoyes": Envoi.objects.filter(etat=EtatEnvoi.ENVOYE).count(),
+            "derniers": list(
+                Envoi.objects.select_related("inscription__sequence").order_by("-prevu_le")[:15]
+            ),
         },
     )

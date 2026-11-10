@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "apps.sequences",
     "apps.sourcing",
     "apps.documents",
+    "apps.publicite",
 ]
 
 # Modeles dont chaque creation, modification et suppression est inscrite au
@@ -57,6 +58,8 @@ AUDIT_MODELES = [
     "sequences.Sequence",
     "sequences.Inscription",
     "documents.Piece",
+    "publicite.Campagne",
+    "publicite.Depense",
 ]
 
 MIDDLEWARE = [
@@ -87,6 +90,9 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                # La navigation laterale se construit d'apres le role :
+                # une entree invisible est une entree inaccessible.
+                "apps.accounts.navigation.contexte_navigation",
             ],
         },
     },
@@ -148,6 +154,12 @@ CELERY_TASK_ROUTES = {
 }
 
 CELERY_BEAT_SCHEDULE = {
+    "rapprocher-les-campagnes": {
+        "task": "apps.publicite.taches.rapprocher_campagnes",
+        # Toutes les heures : un lead qui arrive doit etre rattachable le
+        # jour meme, sinon le tableau de bord publicitaire ment.
+        "schedule": 3600.0,
+    },
     "avancer-les-sequences": {
         "task": "apps.sequences.taches.faire_avancer_sequences",
         # Toutes les heures : le moteur refuse de toute facon d'envoyer hors
