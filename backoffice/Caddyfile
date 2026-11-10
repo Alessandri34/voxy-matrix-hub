@@ -1,8 +1,0 @@
-# Caddy obtient et renouvelle le certificat tout seul. Le domaine vient du
-# .env : une seule ligne a changer entre la preproduction et la production.
-{$SITE_DOMAIN} {
-	encode zstd gzip
-	# Les fichiers statiques sont servis par WhiteNoise depuis Django :
-	# un seul chemin de verite, pas de volume partage a resynchroniser.
-	reverse_proxy web:8000
-}

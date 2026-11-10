@@ -98,7 +98,9 @@ A = 10 scripts UGC (**fait** : fiche signal + 10 angles + 10 scripts + plan de t
 - **Structure de rétention [23/10/2026 — `A5`]** : l'arc en 5 temps dit *ce qui est transmis*, il ne disait pas *pourquoi le spectateur reste*. Tout script porte désormais **deux boucles décalées** : B s'ouvre avant que A se referme, et **A se referme au temps 4 (la nuance), jamais au temps 3**. Les 30 scripts de `A2` et `A4` sont repris ; `controle-scripts.py` le vérifie (règles L1-L3) et refuse « restez jusqu'à la fin ».
 - ❌ **Appât à commentaire automatisé (ManyChat & co) : refusé.** Recommandé par le guide Orcalynx au motif qu'il *« trompe l'algorithme »*. Même catégorie que les backlinks automatiques (§6bis) : Meta démote l'appât à engagement, le risque porte sur le compte qui finance les ADS, et collecter des contacts par message privé automatisé pose un problème de base légale RGPD pour un organisme de formation.
 
-## 7ter. Chantier D — back-office (branche `claude/new-session-nefcch`, dossier `backoffice/`)
+## 7ter. Chantier D — back-office (dépôt privé `Alessandri34/vformationsBO`)
+
+> 🔒 **[10/11/2026] Le back-office a quitté ce dépôt.** Il vit dans le dépôt **privé** `Alessandri34/vformationsBO`, branche `main` — code, tests, documentation et workflow de déploiement. Le dossier `backoffice/` et `deploy-backoffice.yml` sont retirés d'ici : ce dépôt est public, et le back-office traite des données de prospects. Les anciens commits restent lisibles dans l'historique de cette branche ; ils ne contiennent que du code, aucune donnée. Ce qui suit décrit l'état au moment du départ ; la référence à jour est le `CLAUDE.md` du nouveau dépôt.
 
 Django 5.2 LTS, PostgreSQL 17, Redis 8, Celery, nginx. **Phases 0 à 3 écrites et testées — 291 tests.** Détail dans `backoffice/docs/{PRD,ROADMAP,DECISIONS,CHANGELOG,RUNBOOK}.md`.
 
@@ -112,7 +114,7 @@ Django 5.2 LTS, PostgreSQL 17, Redis 8, Celery, nginx. **Phases 0 à 3 écrites 
 
 ✅ **Le routage financeur est dégelé** depuis l'arbitrage du 09/11/2026 (§5 et `livrables/D-strategie/D4_Financement_Arbitrage.md`). Le champ `inscrite_repertoire_metiers` décide : artisan → FAFCEA à 25 €/h transverse, commerçant → AGEFICE. ⚠️ Ce champ est nul quand l'API ne dit rien, et **nul ne vaut pas « non inscrit »** : un prospect dont l'inscription n'est pas établie n'est pas routé automatiquement. Sur l'échantillon héraultais, 32 % seulement portent une activité au Registre des Métiers.
 
-🔴 **Le dépôt est public et porte désormais le code qui traite des données de prospects.** Il doit passer en privé, ou le back-office partir dans son propre dépôt privé, **avant la mise en service**. C'est le seul prérequis non technique qui reste. Voir `livrables/INVENTAIRE_EXPOSITION_PUBLIQUE.md`.
+✅ **[10/11/2026] Fait : le back-office est sorti dans son propre dépôt privé.** Reste à recréer les secrets `VPS_HOST`, `VPS_USER`, `VPS_SSH_KEY` dans le nouveau dépôt avant le premier déploiement.
 
 ## 7quater. Deux constats de la phase 1 qui dépassent le chantier D [09/11/2026]
 
@@ -230,7 +232,7 @@ Plus le n° de certificat **VFO12912026001** et le certificateur **evolve** (1 r
 - 🔴 **Trancher « AFAQ ISO »** : retiré du site le 21/10 faute de preuve. Si la certification existe, dire laquelle et par qui ; sinon, ne pas la remettre.
 - 🟠 **Demander le référencement FAFCEA « parcours individualisé »** si le dispositif est jugé intéressant : 80 €/h contre 25 €/h transverse. C'est une démarche distincte de Qualiopi.
 - 🟠 **Tester la structure de rétention** : 6 Reels, 3 en boucle unique / 3 en boucles décalées, même sujet et même format. Relever la rétention **à 15 s et à 40 s**, pas les vues. Protocole dans `A5` §6. ⚠️ Six vidéos ne font pas un test statistique — faisceau d'indices, jamais un résultat à publier.
-- 🔴 **Chantier D — le dépôt est public et le back-office porte désormais des données de prospects.** À passer en privé, ou à sortir dans son propre dépôt privé, **avant la mise en production** (phase 2).
+- 🟠 **Chantier D — recréer les secrets de déploiement** (`VPS_HOST`, `VPS_USER`, `VPS_SSH_KEY`) dans le dépôt privé `vformationsBO`, puis dérouler `deploiement/premiere-installation.md`.
 - 🟠 **Ajouter un champ « nom de l'entreprise » au formulaire Meta Lead Ads** avant la première campagne : sans lui, la résolution automatique du SIREN tombe à 0 % (§7quater).
 - 🟠 **Reprendre `D1` avec les 34 % d'opposition à la prospection** (§7quater) : l'économie du sourcing sortant est calculée sur une liste un tiers trop large.
 - 🟠 **Reprendre `D1` : un artisan et un commerçant n'ont pas le même reste à charge.** 21 h vendues = 525 € de FAFCEA (25 €/h) contre 882 € d'AGEFICE (42 €/h présentiel). Pour un même prix, l'artisan paie **357 € de plus**. `D1` ne distingue pas les deux. Voir `D4` §5.
