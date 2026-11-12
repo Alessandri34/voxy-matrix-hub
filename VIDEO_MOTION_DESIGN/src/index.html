@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>VOXY Formation — Film motion design</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="stage">
+
+  <!-- ───────── Fond : halos colorés + grille + vignette ───────── -->
+  <div id="bg">
+    <div class="orb orb-cool"></div>
+    <div class="orb orb-red"></div>
+    <div class="orb orb-amber"></div>
+    <div class="orb orb-orange"></div>
+    <div class="orb orb-rose"></div>
+    <div class="orb orb-sky"></div>
+    <div class="orb orb-green"></div>
+    <div id="grid"></div>
+    <div id="vignette"></div>
+  </div>
+
+  <!-- ───────── S0 · HOOK (0 → 4 s) ───────── -->
+  <section class="scene" id="s0"><div class="cam">
+    <h1 class="h-xl abs-c" id="s0-h1" style="top:400px">Chaque année, vous cotisez<br>pour la <em class="acc">formation.</em></h1>
+    <div class="meter glass" id="s0-meter">
+      <div class="meter-top"><span class="eyebrow">Vos droits formation</span><span class="pct" id="s0-pct">100 %</span></div>
+      <div class="meter-track"><div class="meter-fill" id="s0-fill"></div></div>
+      <div class="meter-bot"><span>Début d'exercice</span><span>Fin d'exercice</span></div>
+    </div>
+    <h2 class="h-lg abs-c" id="s0-h2" style="top:740px">Non utilisé, ce budget est <span class="danger">perdu.</span></h2>
+  </div></section>
+
+  <!-- ───────── S1 · L'AGENCE (4 → 8 s) ───────── -->
+  <section class="scene" id="s1"><div class="cam">
+    <div class="col-left" style="top:300px">
+      <div class="eyebrow" id="s1-eb">Pendant ce temps</div>
+      <h2 class="h-lg2" id="s1-h">Une agence<br>vous <em class="acc red">facture.</em></h2>
+      <ul class="xlist" id="s1-list">
+        <li><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>Payé sur votre trésorerie</li>
+        <li><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>Abonnement de maintenance</li>
+        <li><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>Les actifs restent à l'agence</li>
+      </ul>
+    </div>
+    <div class="vis3d" style="left:1010px;top:150px;width:760px;height:780px">
+      <div class="tilt" id="s1-tilt">
+        <div class="invoice" id="s1-inv">
+          <div class="inv-head"><div><b>FACTURE</b><span>Agence web</span></div><div class="inv-no mono">N° 2026-0417</div></div>
+          <div class="inv-rows">
+            <div class="inv-row"><span>Site vitrine</span><i></i><span class="mono">5 000 €</span></div>
+            <div class="inv-row"><span>Maintenance</span><i></i><span class="mono">Abonnement</span></div>
+            <div class="inv-row"><span>Propriété des actifs</span><i></i><span class="mono">Agence</span></div>
+          </div>
+          <div class="inv-total"><span>Total HT</span><b class="mono"><span id="s1-total">0</span> €</b></div>
+          <div class="stamp" id="s1-stamp">À votre charge</div>
+        </div>
+      </div>
+    </div>
+  </div></section>
+
+  <!-- ───────── S2 · RÉVÉLATION (8 → 12 s) ───────── -->
+  <section class="scene" id="s2"><div class="cam">
+    <div class="ring" id="s2-r1"></div><div class="ring" id="s2-r2"></div>
+    <div class="logo-wrap" id="s2-logo">
+      <div class="logo-x" id="s2-x">VOXY</div>
+      <div class="logo-f" id="s2-f">FORMATION</div>
+    </div>
+    <div class="pill abs-pill" id="s2-pill" style="top:730px"><i class="dot"></i>Certifié Qualiopi</div>
+    <h2 class="h-lg abs-c" id="s2-l1" style="top:462px">Nous construisons votre<br><em class="acc">infrastructure digitale.</em></h2>
+    <h2 class="h-md abs-c dim2" id="s2-l2" style="top:700px">Pendant que nous vous formons à la piloter.</h2>
+  </div></section>
+
+  <!-- ───────── S3 · 0 € (12 → 16 s) ───────── -->
+  <section class="scene" id="s3"><div class="cam">
+    <div class="ring amber" id="s3-r1"></div><div class="ring amber" id="s3-r2"></div>
+    <div class="eyebrow abs-c" id="s3-eb" style="top:150px">Reste à charge</div>
+    <div class="giant abs-c" id="s3-giant" style="top:215px"><span id="s3-num">5 000</span><span class="eur"> €</span><sup>*</sup></div>
+    <h2 class="h-md abs-c" id="s3-h" style="top:690px">100 % pris en charge par votre <em class="acc">OPCO.</em></h2>
+    <div class="chips abs-c" id="s3-chips" style="top:810px">
+      <span class="pill"><i class="dot"></i>Organisme certifié Qualiopi</span>
+      <span class="pill">Financé par vos cotisations</span>
+      <span class="pill">Subrogation directe</span>
+    </div>
+    <p class="fine abs-c" id="s3-fine" style="top:980px">*Reste à charge après prise en charge OPCO, sous réserve d'éligibilité et d'accord de votre financeur.</p>
+  </div></section>
+
+  <!-- ───────── S4 · E-COM COMMANDO (16 → 22 s) ───────── -->
+  <section class="scene prog t1" id="s4"><div class="cam">
+    <div class="prog-text">
+      <div class="eyebrow tagline"><b>Formation 01</b><span>E-commerce</span></div>
+      <h2 class="h-prog">E-Com<br><em class="acc">Commando</em></h2>
+      <p class="prog-sub">Boutique &amp; SEO autonome.</p>
+      <ul class="bul">
+        <li><i><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i>Infrastructure Shopify</li>
+        <li><i><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i>50 fiches produits IA SEO</li>
+        <li><i><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i>Synchronisation Make.com 24/7</li>
+      </ul>
+      <div class="price"><b>0 €<sup>*</sup></b><span>Prise en charge OPCO</span></div>
+    </div>
+    <div class="vis3d prog-vis">
+      <div class="tilt" id="s4-tilt">
+        <div class="browser">
+          <div class="br-bar"><i></i><i></i><i></i><div class="br-url"><svg viewBox="0 0 24 24"><path d="M7 11V8a5 5 0 0110 0v3M6 11h12v9H6z"/></svg>votre-boutique.fr</div></div>
+          <div class="br-body">
+            <div class="br-side"><b></b><span class="on"></span><span></span><span></span><span></span><span></span></div>
+            <div class="br-main">
+              <div class="br-top"><div class="br-title">Catalogue</div><div class="pill sm seo"><i class="dot"></i>Fiches optimisées IA&nbsp;&nbsp;<b class="mono"><span id="s4-count">0</span>/50</b></div></div>
+              <div class="pgrid" id="s4-grid"></div>
+            </div>
+          </div>
+        </div>
+        <div class="insert glass ins-flow" id="s4-flow">
+          <div class="ins-h"><span class="ins-ico bolt"><svg viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg></span><div><b>Make.com</b><span>Synchronisation 24/7</span></div></div>
+          <div class="flow"><i class="n"></i><u></u><i class="n"></i><u></u><i class="n"></i><em id="s4-pulse"></em></div>
+        </div>
+        <div class="insert glass ins-toast" id="s4-toast">
+          <span class="ins-ico ok"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><div><b>Nouvelle commande</b><span>Paiement confirmé</span></div>
+        </div>
+      </div>
+    </div>
+  </div></section>
+
+  <!-- ───────── S5 · OUTBOUND HYBRIDE (22 → 28 s) ───────── -->
+  <section class="scene prog t2" id="s5"><div class="cam">
+    <div class="prog-text">
+      <div class="eyebrow tagline"><b>Formation 02</b><span>Prospection B2B</span></div>
+      <h2 class="h-prog">Outbound<br><em class="acc">Hybride</em></h2>
+      <p class="prog-sub">Votre usine à leads.</p>
+      <ul class="bul">
+        <li><i><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i>Media buying stratégique</li>
+        <li><i><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i>Agent vocal IA · rappel en 4 s</li>
+        <li><i><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i>Closing &amp; suivi scientifique</li>
+      </ul>
+      <div class="price"><b>0 €<sup>*</sup></b><span>Prise en charge OPCO</span></div>
+    </div>
+    <div class="vis3d prog-vis">
+      <div class="tilt" id="s5-tilt">
+        <div class="phone" id="s5-phone">
+          <div class="ph-notch"></div>
+          <div class="ph-screen">
+            <div class="ph-status"><span class="mono">9:41</span><span class="ph-sig"><i></i><i></i><i></i><i></i></span></div>
+            <div class="notif glass" id="s5-notif"><span class="ins-ico sky"><svg viewBox="0 0 24 24"><path d="M12 3a6 6 0 00-6 6v4l-2 3h16l-2-3V9a6 6 0 00-6-6zM10 19a2 2 0 004 0"/></svg></span><div><b>Nouveau lead</b><span>Formulaire Google Ads</span></div></div>
+            <div class="timer" id="s5-timer">
+              <svg viewBox="0 0 200 200"><circle cx="100" cy="100" r="88" class="tr"/><circle cx="100" cy="100" r="88" class="tp" id="s5-arc"/></svg>
+              <div class="timer-in"><b class="mono"><span id="s5-sec">0,0</span> s</b><span>Rappel automatique</span></div>
+            </div>
+            <div class="call" id="s5-call">
+              <div class="call-orb"><i></i><i></i><svg viewBox="0 0 24 24"><path d="M6.6 10.8a15 15 0 006.6 6.6l2.2-2.2a1 1 0 011-.25 11.4 11.4 0 003.6.6 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1 11.4 11.4 0 00.6 3.6 1 1 0 01-.25 1z"/></svg></div>
+              <b>Agent vocal IA</b><span>Appel en cours</span>
+              <div class="wave" id="s5-wave"></div>
+            </div>
+            <div class="qual" id="s5-qual"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Lead qualifié</div>
+          </div>
+        </div>
+        <div class="insert glass ins-pipe" id="s5-pipe">
+          <div class="ins-h"><span class="ins-ico amber"><svg viewBox="0 0 24 24"><path d="M4 19V9M10 19V5M16 19v-7M22 19H2"/></svg></span><div><b>Campagnes Ads</b><span>Google · Meta</span></div></div>
+          <div class="bars" id="s5-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        </div>
+        <div class="insert glass ins-rdv" id="s5-rdv">
+          <span class="ins-ico ok"><svg viewBox="0 0 24 24"><path d="M7 3v4M17 3v4M4 9h16M5 5h14a1 1 0 011 1v13a1 1 0 01-1 1H5a1 1 0 01-1-1V6a1 1 0 011-1z"/></svg></span><div><b>RDV confirmé</b><span>Jeudi · 10:30</span></div>
+        </div>
+      </div>
+    </div>
+  </div></section>
+
+  <!-- ───────── S6 · DRIVE-TO-STORE (28 → 34 s) ───────── -->
+  <section class="scene prog t3" id="s6"><div class="cam">
+    <div class="prog-text">
+      <div class="eyebrow tagline"><b>Formation 03</b><span>Visibilité locale</span></div>
+      <h2 class="h-prog">Drive-to-<br><em class="acc">Store</em></h2>
+      <p class="prog-sub">Viralité locale, clé en main.</p>
+      <ul class="bul">
+        <li><i><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i>Tournage sur place · 2 h</li>
+        <li><i><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i>30 shorts créés par IA</li>
+        <li><i><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i>90 jours de diffusion programmés</li>
+      </ul>
+      <div class="price"><b>0 €<sup>*</sup></b><span>Prise en charge OPCO</span></div>
+    </div>
+    <div class="vis3d prog-vis">
+      <div class="tilt" id="s6-tilt">
+        <div class="phone short ph-l" id="s6-pl"><div class="ph-screen"><div class="vid v2"><div class="cap"><i></i><i></i></div></div></div></div>
+        <div class="phone short ph-r" id="s6-pr"><div class="ph-screen"><div class="vid v3"><div class="cap"><i></i><i></i></div></div></div></div>
+        <div class="phone short ph-c" id="s6-pc"><div class="ph-notch"></div><div class="ph-screen">
+          <div class="vid v1">
+            <div class="vid-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            <div class="vid-side"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9.3-9A5.2 5.2 0 0112 6.6 5.2 5.2 0 0121.3 12C19 16.4 12 21 12 21z"/></svg><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></svg><svg viewBox="0 0 24 24"><path d="M14 4l7 7-7 7v-4c-6 0-9 2-11 5 1-7 4-11 11-11z"/></svg></div>
+            <div class="subs" id="s6-subs"><span>VOTRE</span> <span>COMMERCE</span> <span>EN</span> <span>VIDÉO</span></div>
+            <div class="vid-prog"><i id="s6-vp"></i></div>
+          </div>
+        </div></div>
+        <div class="insert glass ins-shorts" id="s6-shorts">
+          <div class="ins-h"><span class="ins-ico green"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><div><b><span id="s6-count" class="mono">0</span> shorts générés</b><span>Montage IA</span></div></div>
+          <div class="sgrid" id="s6-sgrid"></div>
+        </div>
+        <div class="insert glass ins-maps" id="s6-maps">
+          <div class="map"><u></u><u></u><u></u><u></u><div class="pin" id="s6-pin"><svg viewBox="0 0 24 24"><path d="M12 22s7-6.2 7-12a7 7 0 10-14 0c0 5.800 7 12 7 12z"/><circle cx="12" cy="10" r="2.6"/></svg></div><i class="pin-pulse" id="s6-pulse"></i></div>
+          <div class="maps-b"><b>Votre établissement</b><div class="stars" id="s6-stars"></div><span>Fiche Google optimisée</span></div>
+        </div>
+        <div class="insert glass ins-plan" id="s6-plan">
+          <div class="plan-h"><b>Diffusion programmée</b><span class="days"><span id="s6-days">0</span> jours</span></div>
+          <div class="plan-track"><i id="s6-planfill"></i></div>
+        </div>
+      </div>
+    </div>
+  </div></section>
+
+  <!-- ───────── S7 · PROCESSUS (34 → 40 s) ───────── -->
+  <section class="scene" id="s7"><div class="cam">
+    <div class="eyebrow abs-c" id="s7-eb" style="top:176px">Le processus</div>
+    <h2 class="h-lg abs-c" id="s7-h" style="top:228px">De l'audit à <em class="acc">l'autonomie.</em></h2>
+    <div class="rail"><div class="rail-fill" id="s7-rail"></div>
+      <i class="node" style="left:0%"></i><i class="node" style="left:33.333%"></i><i class="node" style="left:66.666%"></i><i class="node" style="left:100%"></i>
+    </div>
+    <div class="steps">
+      <div class="step glass"><span class="step-n">01</span><b>Audit &amp; ingénierie</b><p>Vos fonds OPCO vérifiés en 10&nbsp;minutes.</p></div>
+      <div class="step glass"><span class="step-n">02</span><b>Construction<br>Done-With-You</b><p>Votre actif déployé pendant la formation.</p></div>
+      <div class="step glass"><span class="step-n">03</span><b>Transfert de compétence</b><p>Vous apprenez à piloter la machine.</p></div>
+      <div class="step glass"><span class="step-n">04</span><b>Autonomie</b><p>Certifié, et 100&nbsp;% propriétaire de vos actifs.</p></div>
+    </div>
+  </div></section>
+
+  <!-- ───────── S8 · PREUVES (40 → 44 s) ───────── -->
+  <section class="scene" id="s8"><div class="cam">
+    <div class="eyebrow abs-c" id="s8-eb" style="top:248px">Concrètement</div>
+    <div class="stats">
+      <div class="stat"><b>0&nbsp;€<sup>*</sup></b><span>Reste à charge</span></div>
+      <i class="div"></i>
+      <div class="stat"><b>100&nbsp;%</b><span>Propriétaire de vos actifs</span></div>
+      <i class="div"></i>
+      <div class="stat"><b>10&nbsp;min</b><span>Pour vérifier vos droits</span></div>
+    </div>
+    <p class="fine abs-c" id="s8-fine" style="top:980px">*Reste à charge après prise en charge OPCO, sous réserve d'éligibilité et d'accord de votre financeur.</p>
+  </div></section>
+
+  <!-- ───────── S9 · APPEL À L'ACTION (44 → 52 s) ───────── -->
+  <section class="scene" id="s9"><div class="cam">
+    <div class="ring amber" id="s9-r1"></div><div class="ring amber" id="s9-r2"></div>
+    <div class="end-logo" id="s9-logo"><span>VOXY</span><i>FORMATION</i></div>
+    <div id="s9-group">
+      <div class="pill abs-pill warn" id="s9-pill" style="top:196px"><i class="dot"></i>Vos droits OPCO se réinitialisent bientôt</div>
+      <h1 class="h-xxl abs-c" id="s9-h" style="top:286px">Vérifiez votre<br><em class="acc">éligibilité.</em></h1>
+      <div class="cta-wrap" id="s9-cta"><div class="cta" id="s9-btn"><span>Audit de financement gratuit</span><em>10 min</em><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg><i class="ripple" id="s9-rip"></i></div></div>
+      <p class="sub abs-c" id="s9-sub" style="top:852px">Sans engagement · Centre de formation certifié Qualiopi</p>
+    </div>
+    <svg id="cursor" viewBox="0 0 32 32"><path d="M6 3l19 11.500-8.500 2.200L12.200 25z"/></svg>
+  </div></section>
+
+  <div id="flash"></div>
+  <div id="grain"></div>
+  <div id="fade"></div>
+</div>
+
+<div id="player"><button id="play">▶ Lecture avec le son</button></div>
+
+<script src="vendor/gsap.min.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
