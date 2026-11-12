@@ -48,14 +48,14 @@ for c in cues:
     if only and c['id'] not in only:
         continue
     text = c.get('tts', c['text'])
-    d = os.path.join(work, c['id'])
+    seed = a.seed + int(c['id'])
+    d = os.path.join(work, c['id'], f'seed{seed}')
     shutil.rmtree(d, ignore_errors=True); os.makedirs(d)
     subprocess.run([sys.executable, '-m', 'fish_speech.models.text2semantic.inference',
                     '--text', text, '--prompt-text', a.ref_text, '--prompt-tokens', os.path.abspath(a.ref_codes),
-                    '--checkpoint-path', a.ckpt, '--device', 'cpu', '--seed', str(a.seed + int(c['id'])),
+                    '--checkpoint-path', a.ckpt, '--device', 'cpu', '--seed', str(seed),
                     '--num-samples', str(a.takes), '--chunk-length', '400', '--output-dir', d],
                    cwd=a.fish_src, check=True, capture_output=True)
-    takes = []
     for i in range(a.takes):
         wav = os.path.join(d, f'take_{i}.wav')
         subprocess.run([sys.executable, '-m', 'fish_speech.models.vqgan.inference', '-i', os.path.join(d, f'codes_{i}.npy'),
@@ -63,7 +63,14 @@ for c in cues:
                        cwd=a.fish_src, check=True, capture_output=True)
         q = analyse(c['text'], wav)
         q['speech'] = round(speech_len(wav), 2)
-        takes.append((wav, q))
+        q['text'] = c['text']
+        json.dump(q, open(wav[:-4] + '.qa.json', 'w'), ensure_ascii=False)
+    # toutes les prises déjà générées pour ce texte (toutes passes confondues)
+    takes = []
+    for qa_file in glob.glob(os.path.join(work, c['id'], '*', '*.qa.json')):
+        q = json.load(open(qa_file))
+        if q.get('text') == c['text']:
+            takes.append((qa_file.replace('.qa.json', '.wav'), q))
     slot = c['end'] - c['start']
     best_wer = min(q['wer'] for _, q in takes)
     ok = [t for t in takes if t[1]['wer'] <= best_wer + 0.05]
@@ -71,8 +78,8 @@ for c in cues:
     ok.sort(key=lambda t: (t[1]['speech'] > slot * 1.10, abs(t[1]['speech'] - slot * 0.88)))
     wav, q = ok[0]
     shutil.copy(wav, os.path.join(out_dir, f"{c['id']}.wav"))
-    line = f"{c['id']}  retenue={os.path.basename(wav)}  wer={q['wer']}  parole={q['speech']}s/créneau {slot:.2f}s  « {q['hyp']} »"
+    line = f"{c['id']}  retenue={os.path.relpath(wav, work)}  ({len(takes)} prises)  wer={q['wer']}  parole={q['speech']}s/créneau {slot:.2f}s  « {q['hyp']} »"
     print(line, flush=True)
-    report.append({'id': c['id'], 'chosen': os.path.basename(wav), 'takes': [q for _, q in takes]})
+    report.append({'id': c['id'], 'chosen': os.path.relpath(wav, work), 'takes': [q for _, q in takes]})
 
-json.dump(report, open(os.path.join(work, 'rapport.json'), 'w'), ensure_ascii=False, indent=1)
+json.dump(report, open(os.path.join(work, 'rapport_%s.json' % (a.only.replace(',', '-') or 'all')), 'w'), ensure_ascii=False, indent=1)

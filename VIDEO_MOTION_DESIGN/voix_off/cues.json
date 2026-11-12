@@ -18,7 +18,8 @@
   "start": 8.15,
   "end": 11.55,
   "text": "Et si votre formation construisait enfin votre machine à clients ?",
-  "note": "Ça remonte : curiosité, sourire dans la voix. Appuyer « machine à clients »."
+  "note": "Ça remonte : curiosité, sourire dans la voix. Appuyer « machine à clients ».",
+  "hard_end": 11.72
  },
  {
   "id": "04",
@@ -36,7 +37,7 @@
  },
  {
   "id": "06",
-  "start": 20.3,
+  "start": 20.15,
   "end": 25.6,
   "text": "Une boutique qui vend, jour et nuit. Fiches produits par l'IA, paniers relancés automatiquement.",
   "note": "Fluide, énergique, on déroule une démo.",
@@ -46,9 +47,8 @@
   "id": "07",
   "start": 26.3,
   "end": 31.6,
-  "text": "Votre agenda se remplit, sans vous. L'IA rappelle chaque prospect en moins de trente secondes.",
-  "note": "Appuyer « sans vous ». « Trente secondes » bien détaché.",
-  "tts": "Votre agenda se remplit, sans vous. L'I.A. rappelle chaque prospect en moins de trente secondes."
+  "text": "Votre agenda se remplit, sans vous. Chaque prospect est rappelé en moins de trente secondes.",
+  "note": "Appuyer « sans vous ». « Trente secondes » bien détaché."
  },
  {
   "id": "08",
@@ -69,22 +69,24 @@
   "id": "10",
   "start": 44.2,
   "end": 47.6,
-  "text": "Trois étapes. Zéro paperasse. On monte votre dossier pour vous.",
-  "note": "Rassurant, simple, chaleureux."
+  "text": "Trois étapes, et zéro administratif. On s'occupe de tout.",
+  "note": "Rassurant, simple, chaleureux. « On s'occupe de tout » avec le sourire."
  },
  {
   "id": "11",
   "start": 48.2,
   "end": 51.5,
   "text": "Seulement cinq entreprises par mois. Sur dossier.",
-  "note": "Plus lent, plus grave. Exclusif, pas agressif."
+  "note": "Plus lent, plus grave. Exclusif, pas agressif.",
+  "hard_end": 51.72
  },
  {
   "id": "12",
   "start": 52.2,
   "end": 55.8,
   "text": "Vérifiez votre éligibilité. L'audit est offert.",
-  "note": "Appel direct, souriant, on regarde la personne dans les yeux."
+  "note": "Appel direct, souriant, on regarde la personne dans les yeux.",
+  "hard_end": 56.0
  },
  {
   "id": "13",

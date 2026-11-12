@@ -69,18 +69,20 @@ for k, c in enumerate(cues):
     x = trim(load(files[0]))
     slot = c['end'] - c['start']
     nxt = cues[k + 1]['start'] - 0.12 if k + 1 < len(cues) else 59.6
-    room = nxt - c['start']
+    room = min(nxt, c.get('hard_end', 99)) - c['start']
     L = len(x) / SR
     tempo = 1.0
     if L > slot:
-        tempo = min(L / slot, 1.10)  # accélération imperceptible max 10 %
-        if L / tempo > room:
-            tempo = min(L / room, 1.15)
+        # déborde un peu du créneau : légère accélération (inaudible jusqu'à ~6 %)
+        tempo = min(L / slot, 1.06)
+        if L / tempo > room:      # empiéterait sur la réplique / l'impact suivant
+            tempo = min(L / room, 1.13)
+    if tempo > 1.0:
         x = trim(load(files[0], filters=f'atempo={tempo:.4f}'))
     i0 = int((c['start'] - 0.035) * SR)
     seg = x[: max(0, min(len(x), N - i0))]
     vo[i0 : i0 + len(seg)] += seg
-    report.append(f"{c['id']}  {L:5.2f}s → {len(x)/SR:5.2f}s (créneau {slot:.2f}s, tempo ×{tempo:.3f})" + ('  ⚠ déborde' if len(x) / SR > room else ''))
+    report.append(f"{c['id']}  {L:5.2f}s → {len(x)/SR:5.2f}s (créneau {slot:.2f}s, tempo ×{tempo:.3f})" + ('  ⚠ déborde' if len(x) / SR > room + 0.15 else ''))
 
 print('\n'.join(report))
 os.makedirs('build', exist_ok=True)
