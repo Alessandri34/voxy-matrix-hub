@@ -26,6 +26,8 @@ ap.add_argument('--ref-text', required=True)
 ap.add_argument('--takes', type=int, default=3)
 ap.add_argument('--seed', type=int, default=1234)
 ap.add_argument('--only', default='')
+ap.add_argument('--f0', type=float, default=118.0, help='hauteur médiane cible (Hz) pour un timbre homogène')
+ap.add_argument('--pick-only', action='store_true', help='ne génère rien, re-sélectionne parmi les prises existantes')
 a = ap.parse_args()
 
 cues = json.load(open(os.path.join(ROOT, 'voix_off/cues.json')))
@@ -50,13 +52,14 @@ for c in cues:
     text = c.get('tts', c['text'])
     seed = a.seed + int(c['id'])
     d = os.path.join(work, c['id'], f'seed{seed}')
-    shutil.rmtree(d, ignore_errors=True); os.makedirs(d)
-    subprocess.run([sys.executable, '-m', 'fish_speech.models.text2semantic.inference',
+    if not a.pick_only:
+     shutil.rmtree(d, ignore_errors=True); os.makedirs(d)
+     subprocess.run([sys.executable, '-m', 'fish_speech.models.text2semantic.inference',
                     '--text', text, '--prompt-text', a.ref_text, '--prompt-tokens', os.path.abspath(a.ref_codes),
                     '--checkpoint-path', a.ckpt, '--device', 'cpu', '--seed', str(seed),
                     '--num-samples', str(a.takes), '--chunk-length', '400', '--output-dir', d],
                    cwd=a.fish_src, check=True, capture_output=True)
-    for i in range(a.takes):
+    for i in range(0 if a.pick_only else a.takes):
         wav = os.path.join(d, f'take_{i}.wav')
         subprocess.run([sys.executable, '-m', 'fish_speech.models.vqgan.inference', '-i', os.path.join(d, f'codes_{i}.npy'),
                         '-o', wav, '--checkpoint-path', decoder, '--device', 'cpu'],
@@ -75,7 +78,7 @@ for c in cues:
     best_wer = min(q['wer'] for _, q in takes)
     ok = [t for t in takes if t[1]['wer'] <= best_wer + 0.05]
     # parmi les prises les mieux articulées : celle qui tient dans le créneau, au débit le plus naturel
-    ok.sort(key=lambda t: (t[1]['speech'] > slot * 1.10, abs(t[1]['speech'] - slot * 0.88)))
+    ok.sort(key=lambda t: (abs(t[1]['f0'] - a.f0) > 0.14 * a.f0, t[1]['speech'] > slot * 1.10, abs(t[1]['speech'] - slot * 0.88)))
     wav, q = ok[0]
     shutil.copy(wav, os.path.join(out_dir, f"{c['id']}.wav"))
     line = f"{c['id']}  retenue={os.path.relpath(wav, work)}  ({len(takes)} prises)  wer={q['wer']}  parole={q['speech']}s/créneau {slot:.2f}s  « {q['hyp']} »"
