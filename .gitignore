@@ -31,6 +31,12 @@ livrables/C-site/dist/
 
 # Film de presentation : les fichiers video et son sont generes (voir son LISEZMOI)
 livrables/A-marketing/film-presentation/sortie/
+# ...et les bruitages de banque ne se redistribuent pas : leur licence l'interdit,
+# et ce depot est public. `sons/banque.json` dit lesquels, `telecharger-sons.py` les recupere.
+livrables/A-marketing/film-presentation/sons/*
+!livrables/A-marketing/film-presentation/sons/banque.json
+# La voix enregistree, quand elle existera : la prestation d'un comedien, pas une source.
+livrables/A-marketing/film-presentation/voix/
 
 # Python
 __pycache__/

@@ -1,0 +1,123 @@
+{
+ "_lisezmoi": "Les bruitages qui viennent d'une banque. Les fichiers eux-memes ne sont PAS dans le depot : la licence interdit de redistribuer un son seul ou avec des fichiers source. `python3 telecharger-sons.py` les recupere un par un.",
+ "banque": "Mixkit (Envato)",
+ "licence": "Mixkit Sound Effects Free License",
+ "url_licence": "https://mixkit.co/license/#sfxFree",
+ "lue_le": "2026-11-12",
+ "ce_que_dit_la_licence": [
+  "Sound Effects under the Free license can be used in [...] Online marketing ads [...] Commercial projects",
+  "Items under the Mixkit Sound Effects Free License can be used in your commercial and non-commercial projects for free.",
+  "You can’t redistribute the Item on its own, as stock, in a tool or template, or with source files.",
+  "You’re also not allowed to claim them as your own or register them on any rights management service."
+ ],
+ "sons": {
+  "souffle-1": {
+   "id": 1490,
+   "titre": "Fast whoosh transition",
+   "page": "https://mixkit.co/free-sound-effects/whoosh/",
+   "fichier": "https://assets.mixkit.co/active_storage/sfx/1490/1490.wav",
+   "local": "mixkit-1490.wav",
+   "sha256": "2f914dcec1276107b888557e2e33043396cff10adad9e7b6f6adf93cc011c08b",
+   "emploi": "raccord entre deux plans"
+  },
+  "souffle-2": {
+   "id": 2637,
+   "titre": "Fast air transition sweep",
+   "page": "https://mixkit.co/free-sound-effects/sweep/",
+   "fichier": "https://assets.mixkit.co/active_storage/sfx/2637/2637.wav",
+   "local": "mixkit-2637.wav",
+   "sha256": "bf420218cc392048f1893845499984416fb321bc28c6f4df5cf41995abea9bb6",
+   "emploi": "raccord entre deux plans"
+  },
+  "souffle-3": {
+   "id": 174,
+   "titre": "Fast sweep transition",
+   "page": "https://mixkit.co/free-sound-effects/sweep/",
+   "fichier": "https://assets.mixkit.co/active_storage/sfx/174/174.wav",
+   "local": "mixkit-174.wav",
+   "sha256": "46540ed9b38cf894d1f3ddcafc781c89c40a963f28333cc443d34175560b36ac",
+   "emploi": "raccord entre deux plans"
+  },
+  "souffle-doux-1": {
+   "id": 175,
+   "titre": "Short transition sweep",
+   "page": "https://mixkit.co/free-sound-effects/sweep/",
+   "fichier": "https://assets.mixkit.co/active_storage/sfx/175/175.wav",
+   "local": "mixkit-175.wav",
+   "sha256": "6b3d6d71c6724c27c155149ed6eb6a00543f7908657cf58cd24cdbf67f5994ea",
+   "emploi": "petit mouvement a l'interieur d'un plan"
+  },
+  "souffle-doux-2": {
+   "id": 3115,
+   "titre": "Fast transitions swoosh",
+   "page": "https://mixkit.co/free-sound-effects/swoosh/",
+   "fichier": "https://assets.mixkit.co/active_storage/sfx/3115/3115.wav",
+   "local": "mixkit-3115.wav",
+   "sha256": "5b2178b9362306ab0febfd4884abb2b084651cc1c32b4af47fbb3a62578414cd",
+   "emploi": "petit mouvement a l'interieur d'un plan"
+  },
+  "impact": {
+   "id": 498,
+   "titre": "Deep heartbeat impact",
+   "page": "https://mixkit.co/free-sound-effects/impact/",
+   "fichier": "https://assets.mixkit.co/active_storage/sfx/498/498.wav",
+   "local": "mixkit-498.wav",
+   "sha256": "6097c4b9350beb3f6af7cc078bc81c0dd28ba381315eca066063a1cf85507db2",
+   "emploi": "arrivee d'un titre, changement de plan"
+  },
+  "clic": {
+   "id": 1113,
+   "titre": "Mouse click close",
+   "page": "https://mixkit.co/free-sound-effects/click/",
+   "fichier": "https://assets.mixkit.co/active_storage/sfx/1113/1113.wav",
+   "local": "mixkit-1113.wav",
+   "sha256": "fe535fd085fe27f4397e2e6ab2e5798f66636f1d7244b559018aed85fa99348b",
+   "emploi": "le clic sur le bouton, a 49 s"
+  },
+  "touche-1": {
+   "id": 2533,
+   "titre": "Single key type",
+   "page": "https://mixkit.co/free-sound-effects/keyboard/",
+   "fichier": "https://assets.mixkit.co/active_storage/sfx/2533/2533.wav",
+   "local": "mixkit-2533.wav",
+   "sha256": "516d9aa5b41e0e260a41170230c815dbc02fe3284f4cac0e5e178c539d6f1756",
+   "emploi": "frappe dans la barre de recherche"
+  },
+  "touche-2": {
+   "id": 2542,
+   "titre": "Hard single key press in a laptop",
+   "page": "https://mixkit.co/free-sound-effects/keyboard/",
+   "fichier": "https://assets.mixkit.co/active_storage/sfx/2542/2542.wav",
+   "local": "mixkit-2542.wav",
+   "sha256": "1658f41d4a3eb696daeaf4c73c50df3f9fa1a262f3b1371604dbd86b9beabe25",
+   "emploi": "frappe dans la barre de recherche"
+  },
+  "touche-3": {
+   "id": 2541,
+   "titre": "Single key press in a laptop",
+   "page": "https://mixkit.co/free-sound-effects/keyboard/",
+   "fichier": "https://assets.mixkit.co/active_storage/sfx/2541/2541.wav",
+   "local": "mixkit-2541.wav",
+   "sha256": "af65bf3a69bea2b56451f260289ebb04fa32d67766c704c98962ae0417d54d8e",
+   "emploi": "frappe dans la barre de recherche"
+  },
+  "tic": {
+   "id": 2568,
+   "titre": "Cool interface click tone",
+   "page": "https://mixkit.co/free-sound-effects/click/",
+   "fichier": "https://assets.mixkit.co/active_storage/sfx/2568/2568.wav",
+   "local": "mixkit-2568.wav",
+   "sha256": "248312c2ef619427ef7024126a846e4210fe37e39038cfd32c73b1fb854a8086",
+   "emploi": "petites apparitions"
+  },
+  "coche": {
+   "id": 1120,
+   "titre": "Modern click box check",
+   "page": "https://mixkit.co/free-sound-effects/click/",
+   "fichier": "https://assets.mixkit.co/active_storage/sfx/1120/1120.wav",
+   "local": "mixkit-1120.wav",
+   "sha256": "1a7789372a284b2dc2f106da1375b4a3aa4ef3e794c5cbc1b404a1096a6aa467",
+   "emploi": "les cases qui se cochent"
+  }
+ }
+}

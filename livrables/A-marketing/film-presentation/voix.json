@@ -1,0 +1,339 @@
+{
+ "_lisezmoi": "Le script de voix off du film, pour la machine. Le document du comédien est VOIX_OFF.md : les deux doivent dire la même chose, mot pour mot, et controler-texte.py le vérifie. Les temps sont en secondes depuis le début du film ; ils valent pour les deux formats, qui partagent la même ligne de temps.",
+ "duree": 54,
+ "debit": {
+  "syllabes_par_seconde": 4.4,
+  "pourquoi": "Une voix posée, pas une voix de publicité. Le compteur de controler-texte.py sous-estime d'une syllabe par phrase au plus (« votre » devant consonne, « quatre »), ce qui laisse 4,4 à 4,8 syllabes réelles par seconde."
+ },
+ "silences": [
+  [
+   11.5,
+   12.5,
+   "la musique monte, puis l'impact de la révélation : c'est le film qui parle"
+  ],
+  [
+   44.5,
+   46.3,
+   "le carillon du devis, la montée, puis l'impact du dernier plan"
+  ],
+  [
+   48.95,
+   50.25,
+   "le clic du bouton, puis l'impact du logo"
+  ],
+  [
+   52.2,
+   54.0,
+   "le logo respire, puis le fondu au noir"
+  ]
+ ],
+ "boucles": {
+  "A": {
+   "question": "Quand quelqu'un cherche votre métier, que trouve-t-il de vous ?",
+   "ouvre": "P1",
+   "ferme": "P7a",
+   "type": "la question rendue (A5 §3) : le spectateur doit se situer",
+   "pourquoi": "Le film ne peut pas connaître la réponse pour ce dirigeant-là, et ne doit rien lui promettre. Il lui rend donc la question avec le moyen d'y répondre en dix secondes, sans nous : faire la recherche. Le diagnostic vient après, comme l'étape suivante — pas comme le prix de la réponse. La question est redite juste avant, sur les mêmes derniers mots, pour que la réponse s'entende comme une réponse."
+  },
+  "B": {
+   "question": "Quel est ce but unique des quatre temps ?",
+   "ouvre": "P3",
+   "ferme": "P4-4",
+   "type": "la condition suspendue",
+   "pourquoi": "Ouverte trente-trois secondes avant que A se referme, fermée au quatrième temps. La réponse — vous passer de nous — est aussi ce qui distingue une formation d'une agence."
+  },
+  "C": {
+   "question": "Et le coût ?",
+   "ouvre": "P5b",
+   "ferme": "P6b",
+   "type": "relais",
+   "pourquoi": "Entre 30 et 46 secondes, A est la seule question ouverte, et elle dort depuis vingt-cinq secondes : c'est là que le spectateur part. La voix pose alors la question qu'il se pose vraiment à cet instant. Elle dit qu'il y a un coût ; la réponse dit qu'un fonds peut en financer une partie, jamais plus."
+  }
+ },
+ "repliques": [
+  {
+   "repere": "P1",
+   "plan": "La recherche",
+   "de": 0.6,
+   "a": 5.2,
+   "fenetre": [
+    0.4,
+    5.6
+   ],
+   "texte": "En ce moment, quelqu'un cherche votre métier. Et qu'est-ce qu'il trouve de vous ?",
+   "ecran": "La barre de recherche se remplit ; « Vos clients vous cherchent. » à 2,0 s, « Qui trouvent-ils ? » à 3,5 s, puis les trois résultats. La case « Vous ? » s'avance à 4,5 s.",
+   "intention": "Un constat, puis une vraie question, posée en face. Ni alerte ni menace : on demande, et on attend la réponse.",
+   "intonation": "Première phrase à plat, qui descend sur « métier ». Une respiration. La question monte franchement et finit sur « de vous », au moment où la case « Vous ? » s'avance. Elle reste ouverte : c'est la boucle A.",
+   "appuis": [
+    "En ce moment",
+    "de vous"
+   ],
+   "eviter": "Le ton d'alarme. Le sourire. La question rhétorique : celle-ci attend une réponse."
+  },
+  {
+   "repere": "P2",
+   "plan": "Le problème",
+   "de": 6.3,
+   "a": 9.4,
+   "fenetre": [
+    6.2,
+    11.4
+   ],
+   "texte": "Vous savez faire. Montrer, c'est un autre métier.",
+   "ecran": "« Votre métier, vous le maîtrisez. » à 6,0 s, « Le montrer en ligne ? » à 8,0 s, puis trois tampons à 9,0 · 9,75 · 10,5 s : pas le temps, pas la méthode, pas envie de dépendre d'une agence.",
+   "intention": "Rendre justice avant de nommer le manque. « Vous savez faire » est un compliment sincère, pas une précaution oratoire.",
+   "intonation": "« Vous savez faire. » plein, affirmatif, descendant. « Montrer, » isolé, la virgule tenue. « c'est un autre métier. » redescend, sans reproche, et finit avant le deuxième tampon.",
+   "appuis": [
+    "faire",
+    "Montrer",
+    "autre"
+   ],
+   "eviter": "Le « mais » sous-entendu entre les deux phrases. Toute nuance de reproche sur « autre »."
+  },
+  {
+   "repere": "P3",
+   "plan": "La révélation",
+   "de": 12.6,
+   "a": 15.2,
+   "fenetre": [
+    12.6,
+    15.4
+   ],
+   "texte": "Montrer s'apprend. Quatre temps, un but.",
+   "ecran": "Le logo se construit ; « La formation-action. » à 13,2 s, « Vous apprenez en le faisant. Sur votre propre entreprise. » à 14,0 s. Deux claquements à 15,5 et 15,75 s.",
+   "intention": "La bonne nouvelle, dite sans emphase. C'est le seul endroit du film où la voix s'éclaire.",
+   "intonation": "« Montrer » sur la même attaque qu'au plan 2 : l'oreille doit reconnaître le mot par-dessus l'impact. « s'apprend. » clair, presque souriant. « Quatre temps, un but. » posé ; « but » se dit avec son t, reste légèrement ouvert, et sort avant les claquements : c'est la boucle B.",
+   "appuis": [
+    "s'apprend",
+    "un but"
+   ],
+   "eviter": "L'enthousiasme. Fermer la voix sur « but ». Dire « bu » : le mot revient au plan 4, il doit être reconnu."
+  },
+  {
+   "repere": "P4-1",
+   "plan": "La méthode — Diagnostic",
+   "de": 16.3,
+   "a": 18.3,
+   "fenetre": [
+    16.3,
+    19.6
+   ],
+   "texte": "D'abord, votre point de départ.",
+   "ecran": "« Diagnostic. Votre situation, vos objectifs, votre marché local. »",
+   "intention": "Première marche d'un escalier de quatre. Les quatre répliques partent de la même hauteur et gardent le même pas : on doit pouvoir les compter.",
+   "intonation": "Simple, régulier, les consonnes nettes. La voix descend sur « départ ».",
+   "appuis": [
+    "D'abord",
+    "départ"
+   ],
+   "eviter": "Dire « diagnostic » : le film garde ce mot pour le rendez-vous de la fin."
+  },
+  {
+   "repere": "P4-2",
+   "plan": "La méthode — Pratique terrain",
+   "de": 21.0,
+   "a": 22.8,
+   "fenetre": [
+    20.3,
+    23.6
+   ],
+   "texte": "Ensuite, c'est vous qui faites.",
+   "ecran": "« Pratique terrain. Vous faites, on accompagne. Chez vous, sur vos vrais cas. » Un bip de caméra à 20,5 s, avant la réplique.",
+   "intention": "La règle du film, et celle de l'organisme : personne ne fera à la place du dirigeant.",
+   "intonation": "Même départ que la précédente. « vous » nettement détaché, puis « qui faites » descend.",
+   "appuis": [
+    "Ensuite",
+    "vous"
+   ],
+   "eviter": "La dire comme une évidence : c'est une exigence."
+  },
+  {
+   "repere": "P4-3",
+   "plan": "La méthode — Phase réflexive",
+   "de": 24.5,
+   "a": 26.5,
+   "fenetre": [
+    24.3,
+    27.6
+   ],
+   "texte": "Puis on s'arrête, pour comprendre.",
+   "ecran": "« Phase réflexive. On prend du recul ensemble : ce qui marche, ce qu'il faut ajuster. »",
+   "intention": "Le temps que les formations pressées n'ont pas. La voix ralentit à mesure qu'elle le dit.",
+   "intonation": "D'un seul souffle. La voix reste suspendue sur « s'arrête » sans tomber, puis « pour comprendre » descend, plus lent. Pas de liaison à « Puis on ».",
+   "appuis": [
+    "Puis",
+    "comprendre"
+   ],
+   "eviter": "Couper après « s'arrête » : on entendrait que la formation s'interrompt."
+  },
+  {
+   "repere": "P4-4",
+   "plan": "La méthode — Autonomie",
+   "de": 28.3,
+   "a": 30.5,
+   "fenetre": [
+    28.3,
+    31.6
+   ],
+   "texte": "Et le but : vous passer de nous.",
+   "ecran": "« Autonomie. Vous repartez avec vos livrables et vos compétences. » Un carillon sonne à 30,5 s, à la fin de la réplique.",
+   "intention": "La phrase la plus importante du film : un organisme qui annonce qu'il veut se rendre inutile. « Et » dit que c'est le dernier des quatre temps ; « le but » referme la boucle B.",
+   "intonation": "« Et le but » sur la hauteur des trois autres marches, « but » avec son t, comme au plan 3. Un temps. « vous passer de nous. » lent, détaché, descendant. Puis le silence : le carillon ponctue.",
+   "appuis": [
+    "but",
+    "de nous"
+   ],
+   "eviter": "Le futur (« vous vous passerez de nous ») : ce serait une promesse. C'est un but, pas un résultat."
+  },
+  {
+   "repere": "P5a",
+   "plan": "Le catalogue",
+   "de": 32.4,
+   "a": 33.5,
+   "fenetre": [
+    32.3,
+    35.2
+   ],
+   "texte": "Six thèmes au choix.",
+   "ecran": "« Six formations. Une seule méthode. » à 32,0 s, puis les six tuiles une à une, de 33,0 à 34,3 s.",
+   "intention": "On tourne la page : après la méthode, ce à quoi elle s'applique. La voix annonce, l'écran montre.",
+   "intonation": "Léger, simple, dit avant que les tuiles finissent de se poser.",
+   "appuis": [
+    "Six"
+   ],
+   "eviter": "Énumérer : l'écran montre les six."
+  },
+  {
+   "repere": "P5b",
+   "plan": "Le catalogue",
+   "de": 35.5,
+   "a": 37.7,
+   "fenetre": [
+    35.3,
+    37.8
+   ],
+   "texte": "On vient chez vous. Reste le coût.",
+   "ecran": "« En présentiel · Dans votre entreprise · Montpellier · Béziers · Sète et environs » à 35,5 s. La musique commence à monter à 37,0 s.",
+   "intention": "D'abord un service rendu. Puis la voix dit tout haut ce que le dirigeant pense tout bas à cet instant. Nommer le coût avant lui, c'est ce qui rend la suite croyable.",
+   "intonation": "« On vient chez vous. » chaleureux, descendant. Une respiration. « Reste le coût. » plus bas, franc, sans s'excuser — et la voix ne retombe pas tout à fait : la réponse arrive au plan suivant.",
+   "appuis": [
+    "chez vous",
+    "coût"
+   ],
+   "eviter": "Le ton du slogan sur « chez vous ». Le drame sur « coût » : c'est une question pratique."
+  },
+  {
+   "repere": "P6a",
+   "plan": "Le cadre",
+   "de": 38.5,
+   "a": 39.8,
+   "fenetre": [
+    38.4,
+    40.3
+   ],
+   "texte": "C'est une formation.",
+   "ecran": "« Organisme certifié Qualiopi, au titre des actions de formation » · « Formateur à vos côtés · Évaluations tracées · Suivi à 90 jours ».",
+   "intention": "La réponse commence par la nature de ce qu'on propose : une formation, pas une prestation. C'est parce que c'en est une que la phrase suivante est possible.",
+   "intonation": "Plus grave, factuel, comme on précise un point de droit. Quatre mots, puis on laisse l'écran montrer le cadre.",
+   "appuis": [
+    "formation"
+   ],
+   "eviter": "Dire « Qualiopi » : l'écran le montre avec sa catégorie d'action, et la voix ne peut pas le dire à moitié."
+  },
+  {
+   "repere": "P6b",
+   "plan": "Le cadre — financement",
+   "de": 40.9,
+   "a": 44.3,
+   "fenetre": [
+    40.4,
+    44.4
+   ],
+   "texte": "Votre fonds de formation peut en financer une partie.",
+   "ecran": "La réplique commence sur la fin du carton Qualiopi et passe sur le suivant, à 42,0 s : « Vous cotisez déjà à un fonds de formation. Il peut financer une partie de votre parcours. » · AGEFICE · FAFCEA · OPCO, « selon votre statut ». À 44,5 s, un carillon et le devis : « Reste à charge — Annoncé avant toute inscription ».",
+   "intention": "Une information, pas un argument. C'est la phrase que la loi regarde : elle se dit comme un artisan annonce un délai, sans gourmandise. Elle répond à « Reste le coût ».",
+   "intonation": "Débit régulier, d'un seul souffle, neutre. Liaison à « peut en » (« peu-t-en »). « peut » et « une partie » se détachent à peine, mais ils s'entendent — et « une partie » est finie avant le carillon.",
+   "appuis": [
+    "peut",
+    "une partie"
+   ],
+   "eviter": "Appuyer « financer ». Accélérer sur « une partie ». Ajouter quoi que ce soit : ni « largement », ni « souvent », ni « jusqu'à »."
+  },
+  {
+   "repere": "P7a",
+   "plan": "L'appel",
+   "de": 46.5,
+   "a": 48.9,
+   "fenetre": [
+    46.3,
+    48.95
+   ],
+   "texte": "Ce qu'on trouve de vous ? Faites la recherche.",
+   "ecran": "« Voyons ce que ça donne sur votre cas. » à 46,0 s, le bouton « Réserver un diagnostic » à 47,5 s. Il est cliqué à 49,0 s : le clic ponctue la réplique.",
+   "intention": "Rendre la question du début, avec le moyen d'y répondre seul, tout de suite. On donne une clé, pas un ordre. La boucle A se referme ici.",
+   "intonation": "« Ce qu'on trouve de vous ? » finit sur les mêmes mots et la même mélodie que la question du plan 1 : c'est ce rappel que l'oreille reconnaît. Lier « ce-qu'on-trouve ». « Faites la recherche. » simple, presque en passant, généreux.",
+   "appuis": [
+    "de vous",
+    "recherche"
+   ],
+   "eviter": "Le défi (« allez-y, cherchez »). Le film ne provoque pas : il rend service."
+  },
+  {
+   "repere": "P7b",
+   "plan": "L'appel",
+   "de": 50.3,
+   "a": 52.0,
+   "fenetre": [
+    50.25,
+    52.2
+   ],
+   "texte": "Réservez votre diagnostic.",
+   "ecran": "Le logo à 50,0 s, « Réservez votre diagnostic », puis « vformations.fr » à 51,0 s.",
+   "intention": "La seule demande du film, et elle vient en second : d'abord vous regardez par vous-même, ensuite on regarde ensemble.",
+   "intonation": "Après le clic et l'impact du logo, dans l'air qu'ils laissent. Posé, descendant sur « diagnostic ». Huit syllabes : c'est la réplique qu'on est tenté de presser, et celle qu'il ne faut pas presser.",
+   "appuis": [
+    "diagnostic"
+   ],
+   "eviter": "L'urgence. Le nom de l'organisme : l'écran le porte, et un nom enregistré ne se corrige pas comme un logo."
+  }
+ ],
+ "variantes_accroche": [
+  {
+   "nom": "retenue",
+   "texte": "En ce moment, quelqu'un cherche votre métier. Et qu'est-ce qu'il trouve de vous ?",
+   "pari": "L'immédiat : quelqu'un, maintenant."
+  },
+  {
+   "nom": "le geste",
+   "texte": "Quelqu'un vient de taper votre métier. Et qu'est-ce qu'il trouve de vous ?",
+   "pari": "La voix décrit ce que l'écran fait : la barre de recherche finit de se remplir sur « métier »."
+  },
+  {
+   "nom": "sobre",
+   "texte": "Sur internet, on cherche votre métier. Et qu'est-ce qu'on trouve de vous ?",
+   "pari": "Aucun effet, et le lieu est dit : la seule qui se comprend sans l'image."
+  }
+ ],
+ "prises_de_secours": [
+  {
+   "repere": "P4-4",
+   "texte": "Et le but : faire sans nous.",
+   "quand": "Si « vous passer de nous » pèse en bouche. Articuler le n : entendu « sans vous », c'est le contraire de ce que dit le film."
+  },
+  {
+   "repere": "P5a",
+   "texte": "Six formations au choix.",
+   "quand": "Si « thèmes » paraît vague à l'écoute."
+  },
+  {
+   "repere": "P5b",
+   "texte": "On vient chez vous.",
+   "quand": "Si « Reste le coût » sonne trop sec : le film tient sans, la question du début dort seulement plus longtemps."
+  },
+  {
+   "repere": "P6b",
+   "texte": "Votre fonds de formation peut y contribuer.",
+   "quand": "Si la réplique principale ne tient pas dans ses 3,4 secondes."
+  }
+ ]
+}

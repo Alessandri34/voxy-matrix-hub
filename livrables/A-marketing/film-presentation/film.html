@@ -261,6 +261,99 @@
   #redite{top:664px;font-size:38px;color:rgba(255,255,255,.8);letter-spacing:-.01em}
   #adresse{top:722px;font-size:84px;font-weight:600;letter-spacing:-.035em}
   #mention{top:952px;font-size:25px;color:rgba(255,255,255,.62);letter-spacing:.005em}
+  /* =====================================================================
+     FORMAT VERTICAL — 1080 x 1920, pour les reseaux sociaux.
+     Meme film, meme ligne de temps, meme son : seule la mise en page change.
+
+     LA ZONE SURE est celle que Meta publie pour les publicites Reels
+     (Instagram et Facebook), lue le 12/11/2026 : laisser libres 14 % en haut,
+     35 % en bas, 6 % de chaque cote. Sur 1080 x 1920 : x de 65 a 1015,
+     y de 269 a 1248. https://www.facebook.com/business/ads-guide/update/video/instagram-reels
+     Tout texte qui compte — titres, promesse, financement, appel, mention —
+     tient dans cette zone. Les inserts du plan 4 debordent jusqu'a y = 1500 :
+     visibles en publication ordinaire, en partie couverts par la legende et
+     le bouton d'une publicite.
+     ===================================================================== */
+  #cadre.vertical{width:1080px;height:1920px}
+  .vertical .centre{width:1080px}
+  br.v{display:none}
+  .vertical br.v{display:inline}
+
+  .vertical #barre{left:90px;top:760px;width:900px}
+  .vertical #t1a{top:430px;font-size:104px}
+  .vertical #t1b{top:652px;font-size:104px}
+  .vertical #resultats{left:110px;top:790px;flex-direction:column;gap:14px}
+  .vertical .carte{width:860px;height:144px;padding:16px 22px;gap:22px}
+  .vertical .vignette{width:110px;height:110px;border-radius:20px}
+  .vertical .carte h3{font-size:32px;margin-bottom:8px}
+  .vertical .etoiles svg{width:21px;height:21px}
+  .vertical .puce{margin-top:8px;padding:5px 13px;font-size:20px}
+  .vertical #c3 .vignette{font-size:60px}
+  .vertical #c3 .ligne{height:11px;margin-bottom:8px}
+
+  .vertical .vue{width:300px;height:460px}
+  .vertical #v1{left:120px !important;top:356px !important}
+  .vertical #v2{left:390px !important;top:300px !important}
+  .vertical #v3{left:660px !important;top:372px !important}
+  .vertical #p2a{left:70px;top:900px;font-size:104px}
+  .vertical #lueur2{left:-60px;top:300px;height:1000px}
+  .vertical #question{top:700px;font-size:128px}
+  .vertical .tampon{top:700px;font-size:128px}
+  .vertical #tp3{top:650px;font-size:124px}
+
+  .vertical #logo3{left:240px;top:520px}
+  .vertical #onde3{left:240px;top:430px}
+  .vertical #slogan{top:640px;font-size:148px}
+  .vertical #sous3{top:990px;font-size:46px;line-height:1.36}
+
+  .vertical #entete4{display:none}
+  .vertical #etapes{right:auto;left:70px;top:290px;gap:8px}
+  .vertical .pastille{height:50px;padding:0 15px 0 6px;font-size:22px;gap:9px}
+  .vertical .pastille i{width:38px;height:38px;font-size:19px}
+  .vertical #rail{left:70px;top:358px;width:940px}
+  .vertical .etape{left:70px;top:394px;width:940px}
+  .vertical .etape .sur{font-size:30px;margin-bottom:16px}
+  .vertical .etape h2{font-size:96px}
+  .vertical .etape p{font-size:40px;margin-top:26px;max-width:940px;text-wrap:balance}
+  .vertical #scene4{left:140px;top:696px;transform:scale(1.08);transform-origin:50% 0}
+
+  .vertical #t5{top:284px;font-size:92px}
+  .vertical #grille{left:70px;top:506px;grid-template-columns:repeat(2,460px);gap:20px}
+  .vertical .tuile{height:186px;padding:22px 24px;border-radius:30px}
+  .vertical .tuile .icone{width:54px;height:54px;border-radius:16px;margin-bottom:14px}
+  .vertical .tuile .icone svg{width:28px;height:28px}
+  .vertical .tuile h3{font-size:32px}
+  .vertical .tuile p{display:none}
+  .vertical #lieux{top:1128px;flex-wrap:wrap;gap:12px;padding:0 70px}
+  .vertical #lieux span{font-size:26px;padding:11px 22px}
+
+  .vertical #fond6{width:1080px;height:1920px;opacity:.46;
+    -webkit-mask-image:linear-gradient(180deg,transparent 22%,#000 78%);mask-image:linear-gradient(180deg,transparent 22%,#000 78%)}
+  .vertical #voile6{background:linear-gradient(180deg,var(--nuit) 38%,rgba(5,9,20,.42) 100%)}
+  .vertical .bloc6{left:70px;top:330px;width:940px}
+  .vertical #b6a h2{font-size:100px}
+  .vertical #b6a p{font-size:42px}
+  .vertical .verres{flex-wrap:wrap;gap:12px;margin-top:44px}
+  .vertical .verre{font-size:27px;padding:13px 24px}
+  .vertical #b6b h2{font-size:78px}
+  .vertical #b6b p{font-size:44px;max-width:940px;line-height:1.28}
+  .vertical #b6b .verres{margin-top:34px}
+  .vertical #scene6{left:170px;top:780px;width:740px;height:470px}
+  .vertical #devis{padding:32px 36px 30px}
+  .vertical #devis .tete{margin-bottom:20px}
+  .vertical .poste{height:70px;font-size:29px}
+  .vertical .poste.total{font-size:33px}
+  .vertical #annonce{height:66px;font-size:26px;margin-top:14px}
+
+  .vertical #t7{top:520px;font-size:116px}
+  .vertical #bouton,.vertical #ride{left:160px;top:960px;width:760px;height:120px;border-radius:60px}
+  .vertical #bouton{font-size:46px}
+  .vertical #legende7{top:1124px;font-size:35px;line-height:1.36}
+  .vertical #logo7{left:240px;top:400px}
+  .vertical #redite{top:876px;font-size:40px}
+  .vertical #adresse{top:932px;font-size:92px}
+  .vertical #mention{top:1094px;font-size:28px;line-height:1.5}
+  .vertical .paysage{display:none}
 </style>
 </head>
 <body>
@@ -276,7 +369,7 @@
         <div class="rl">restaurant à Sète</div>
       </div></div>
     </div>
-    <h1 class="titre centre" id="t1a" data-mots>Vos clients vous cherchent.</h1>
+    <h1 class="titre centre" id="t1a" data-mots>Vos clients <br class="v">vous cherchent.</h1>
     <h1 class="titre centre" id="t1b" data-mots="degrade">Qui trouvent-ils ?</h1>
     <div id="resultats">
       <div class="carte"><div class="vignette"><img src="../../C-site/img/formation-video.jpg" style="object-position:8% 50%"><span class="lecture"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></span></div>
@@ -297,10 +390,10 @@
     </div>
     <div class="halo" id="lueur2"></div>
     <h1 class="titre" id="p2a" data-mots>Votre métier,<br>vous le maîtrisez.</h1>
-    <h1 class="titre centre" id="question" data-mots="degrade">Le montrer en ligne ?</h1>
+    <h1 class="titre centre" id="question" data-mots="degrade">Le montrer <br class="v">en ligne ?</h1>
     <h1 class="titre centre tampon" id="tp1">Pas le temps.</h1>
     <h1 class="titre centre tampon" id="tp2">Pas la méthode.</h1>
-    <h1 class="titre centre tampon" id="tp3">Pas envie de dépendre<br>d'une agence.</h1>
+    <h1 class="titre centre tampon" id="tp3">Pas envie <br class="v">de dépendre<br>d'une agence.</h1>
   </div></section>
 
   <!-- ============ 3. LA REVELATION (12 – 16 s) ============ -->
@@ -310,8 +403,8 @@
       <img class="barre-logo" src="ressources/sigle-blue-1.png"><img class="barre-logo" src="ressources/sigle-blue-2.png"><img class="barre-logo" src="ressources/sigle-blue-3.png">
       <img id="mot3" src="ressources/mot-blue.png">
     </div>
-    <h1 class="titre centre" id="slogan"><span class="mot">La </span><span class="mot">formation-</span><span class="mot degrade-bleu">action.</span></h1>
-    <p class="centre" id="sous3">Vous apprenez <b>en le faisant</b>. Sur votre propre entreprise.</p>
+    <h1 class="titre centre" id="slogan"><span class="mot">La </span><span class="mot">formation-</span><br class="v"><span class="mot degrade-bleu">action.</span></h1>
+    <p class="centre" id="sous3">Vous apprenez <b>en le faisant</b>. <br class="v">Sur votre propre entreprise.</p>
   </div></section>
 
   <!-- ============ 4. LA METHODE, EN 4 TEMPS (16 – 32 s) ============ -->
@@ -324,9 +417,9 @@
 
     <div class="etape" id="e1"><div class="sur">Étape 1 sur 4</div><h2 data-mots>Diagnostic.</h2>
       <p>Votre situation, vos objectifs, <b>votre marché local</b>.</p></div>
-    <div class="etape" id="e2"><div class="sur">Étape 2 sur 4</div><h2 data-mots>Pratique<br>terrain.</h2>
+    <div class="etape" id="e2"><div class="sur">Étape 2 sur 4</div><h2 data-mots>Pratique <br class="h">terrain.</h2>
       <p><b>Vous faites, on accompagne.</b> Chez vous, sur vos vrais cas.</p></div>
-    <div class="etape" id="e3"><div class="sur">Étape 3 sur 4</div><h2 data-mots>Phase<br>réflexive.</h2>
+    <div class="etape" id="e3"><div class="sur">Étape 3 sur 4</div><h2 data-mots>Phase <br class="h">réflexive.</h2>
       <p>On prend du recul ensemble : ce qui marche, <b>ce qu'il faut ajuster</b>.</p></div>
     <div class="etape" id="e4"><div class="sur">Étape 4 sur 4</div><h2 data-mots>Autonomie.</h2>
       <p>Vous repartez avec <b>vos livrables et vos compétences</b>.</p></div>
@@ -382,7 +475,7 @@
 
   <!-- ============ 5. LE CATALOGUE (32 – 38 s) ============ -->
   <section class="plan clair" id="p5"><div class="cam">
-    <h1 class="titre centre" id="t5"><span class="mot">Six </span><span class="mot">formations. </span><span class="mot degrade-bleu">Une </span><span class="mot degrade-bleu">seule </span><span class="mot degrade-bleu">méthode.</span></h1>
+    <h1 class="titre centre" id="t5"><span class="mot">Six </span><span class="mot">formations. </span><br class="v"><span class="mot degrade-bleu">Une </span><span class="mot degrade-bleu">seule </span><span class="mot degrade-bleu">méthode.</span></h1>
     <div id="grille">
       <div class="tuile"><span class="icone" style="background:#E5ECFB"><svg viewBox="0 0 24 24"><rect x="3" y="6.5" width="12.5" height="11" rx="2.6"/><path d="M15.5 10.500l5.500-3v9l-5.500-3z"/></svg></span><h3>Visibilité locale par la vidéo</h3><p>Filmer, monter et diffuser</p></div>
       <div class="tuile"><span class="icone" style="background:#E2F5EF"><svg viewBox="0 0 24 24"><rect x="3" y="4.500" width="18" height="15" rx="2.800"/><path d="M3 9h18M6.500 6.800h.01M9.300 6.800h.01"/></svg></span><h3>Site internet professionnel</h3><p>Concevoir, mettre en ligne, piloter</p></div>
@@ -417,10 +510,10 @@
   <section class="plan" id="p7"><div class="cam">
     <div id="fond7"><img src="../../C-site/img/formation-prospection.jpg"></div>
     <div id="appel">
-      <h1 class="titre centre" id="t7" data-mots>Voyons ce que ça donne<br>sur votre cas.</h1>
+      <h1 class="titre centre" id="t7" data-mots>Voyons ce que <br class="v">ça donne<br>sur votre cas.</h1>
       <div id="ride"></div>
       <div id="bouton">Réserver un diagnostic<svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-      <p class="centre" id="legende7">30 minutes pour regarder votre situation, concrètement.</p>
+      <p class="centre" id="legende7">30 minutes pour regarder <br class="v">votre situation, concrètement.</p>
       <svg id="fleche" viewBox="0 0 24 24"><path d="M5 3l14 8.200-6.300 1.500-2.800 5.900z" fill="#fff" stroke="#0B1A45" stroke-width="1.400" stroke-linejoin="round"/></svg>
     </div>
     <div id="fin">
@@ -430,7 +523,7 @@
       </div>
       <p class="centre" id="redite">Réservez votre diagnostic</p>
       <div class="titre centre" id="adresse">vformations.fr</div>
-      <p class="centre" id="mention">Organisme de formation certifié Qualiopi au titre des actions de formation · Montpellier · Béziers · Sète et environs</p>
+      <p class="centre" id="mention">Organisme de formation certifié Qualiopi <br class="v">au titre des actions de formation<span class="paysage"> · </span><br class="v">Montpellier · Béziers · Sète et environs</p>
     </div>
   </div></section>
 
@@ -441,6 +534,17 @@
 <script>
 "use strict";
 const DUREE = 54, IPS = 60;
+/* Deux formats, une seule composition. `?format=vertical` change la mise en
+   page (feuille de style) et les quelques positions animees ci-dessous ;
+   la ligne de temps et les reperes sonores sont les memes. */
+const VERTICAL = new URLSearchParams(location.search).get("format") === "vertical";
+const LARGEUR = VERTICAL ? 1080 : 1920, HAUTEUR = VERTICAL ? 1920 : 1080;
+document.getElementById("cadre").classList.toggle("vertical", VERTICAL);
+const POSE = VERTICAL
+  ? { barreY: -470, barreEch: 0.8, questionY: -266, questionEch: 0.42, logoY: -300, logoEch: 0.5, flecheDe: [930, 1560], flecheA: [736, 1030], vousEch: 1.045 }
+  : { barreY: -372, barreEch: 0.68, questionY: -186, questionEch: 0.4, logoY: -262, logoEch: 0.44, flecheDe: [1560, 1010], flecheA: [1160, 706], vousEch: 1.07 };
+// Une coupure de ligne ne vaut que pour son format : les autres sortent du document.
+document.querySelectorAll(VERTICAL ? "br.h" : "br.v").forEach((b) => b.remove());
 const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
 
 /* ---- Decoupe en mots -------------------------------------------------
@@ -466,6 +570,15 @@ for (const el of $$("[data-mots]")) {
     }
   };
   marcher(el);
+}
+// Un mot suivi d'une coupure de ligne perd son espace finale : sinon la ligne,
+// centree avec cette espace, se decale d'une demi-lettre vers la gauche.
+for (const coupure of $$("#cadre br")) {
+  const avant = coupure.previousSibling;
+  if (avant && avant.textContent !== undefined) {
+    const cible = avant.nodeType === 1 ? (avant.lastChild || avant) : avant;
+    cible.textContent = cible.textContent.replace(/\s+$/, "");
+  }
 }
 
 /* ---- Outils d'animation ---------------------------------------------- */
@@ -526,7 +639,7 @@ tl.to("#curseur", { autoAlpha: 0, duration: 0.08 }, 1.26);
 tl.to("#rouleau", { y: -64, duration: 0.3, ease: "expo.inOut" }, 1.3);
 tl.to("#rouleau", { y: -128, duration: 0.3, ease: "expo.inOut" }, 1.64);
 son(1.34, "roule"); son(1.68, "roule");
-tl.to("#barre", { y: -372, scale: 0.68, duration: 0.7, ease: "expo.inOut" }, 1.82);
+tl.to("#barre", { y: POSE.barreY, scale: POSE.barreEch, duration: 0.7, ease: "expo.inOut" }, 1.82);
 son(1.84, "souffle", { doux: 1 });
 entre("#t1a .mot", 2.0, { pas: 0.075 });
 son(2.0, "impact", { doux: 1 });
@@ -536,7 +649,7 @@ entre("#resultats .carte", 3.62, { pas: 0.15, y: 70, d: 0.85 });
 son(3.66, "pop", { note: 0 }); son(3.81, "pop", { note: 2 }); son(3.96, "pop", { note: 4 });
 // Le regard se pose sur la case vide : les deux concurrents s'effacent, « Vous ? » avance.
 tl.to("#resultats .carte:not(#c3)", { opacity: 0.38, scale: 0.97, duration: 0.6, ease: "power2.out" }, 4.5);
-tl.to("#c3", { scale: 1.07, duration: 0.7, ease: "back.out(1.6)" }, 4.5);
+tl.to("#c3", { scale: POSE.vousEch, duration: 0.7, ease: "back.out(1.6)" }, 4.5);
 tl.fromTo(".anneau", { opacity: 0.95, scale: 1 }, { opacity: 0, scale: 1.1, duration: 0.7, ease: "power2.out", repeat: 1, repeatDelay: 0.05, immediateRender: false }, 4.5);
 son(4.5, "creux");
 
@@ -555,7 +668,7 @@ tl.to(".vue", { y: -260, x: 240, rotation: "+=16", autoAlpha: 0, filter: "blur(1
 son(7.72, "souffle");
 entre("#question .mot", 8.0, { pas: 0.08, y: 60 });
 son(8.0, "impact", { doux: 1 });
-tl.to("#question", { y: -186, scale: 0.4, duration: 0.5, ease: "expo.inOut" }, 8.66);
+tl.to("#question", { y: POSE.questionY, scale: POSE.questionEch, duration: 0.5, ease: "expo.inOut" }, 8.66);
 [["#tp1", 9.0, 0.62], ["#tp2", 9.75, 0.62], ["#tp3", 10.5, 0]].forEach(([id, t, tenue], i) => {
   tl.fromTo(id, { autoAlpha: 0, scale: 1.26, filter: "blur(20px)" }, { autoAlpha: 1, scale: 1, filter: "blur(0px)", duration: 0.42, ease: DOUX }, t);
   // Trois coups a 0,75 s d'ecart, et non un par seconde : le dernier, six mots sur deux lignes,
@@ -579,7 +692,7 @@ tl.fromTo("#onde3", { opacity: 0.9, scale: 0.25 }, { opacity: 0, scale: 2.6, dur
 tl.fromTo("#logo3 .barre-logo", { autoAlpha: 0, x: -110, y: 110 }, { autoAlpha: 1, x: 0, y: 0, duration: 0.85, ease: DOUX, stagger: 0.095 }, 12.06);
 son(12.08, "trait", { rang: 0 }); son(12.175, "trait", { rang: 1 }); son(12.27, "trait", { rang: 2 });
 entre("#mot3", 12.42, { y: 18, d: 0.7 });
-tl.to("#logo3", { y: -262, scale: 0.44, duration: 0.8, ease: "expo.inOut" }, 12.9);
+tl.to("#logo3", { y: POSE.logoY, scale: POSE.logoEch, duration: 0.8, ease: "expo.inOut" }, 12.9);
 son(12.94, "souffle", { doux: 1 });
 entre("#slogan .mot", 13.18, { pas: 0.1, y: 70, d: 1.0 });
 son(13.5, "pop", { note: 4 });
@@ -714,7 +827,7 @@ entre("#t7 .mot", 46.1, { pas: 0.08, y: 66 });
 tl.fromTo("#bouton", { autoAlpha: 0, scale: 0.7, y: 30 }, { autoAlpha: 1, scale: 1, y: 0, duration: 0.7, ease: "back.out(1.8)" }, 47.5);
 son(47.5, "pop", { note: 4, clair: 1 });
 entre("#legende7", 47.85, { y: 20, d: 0.7 });
-tl.fromTo("#fleche", { autoAlpha: 0, x: 1560, y: 1010 }, { autoAlpha: 1, x: 1160, y: 706, duration: 0.78, ease: "power3.inOut" }, 48.18);
+tl.fromTo("#fleche", { autoAlpha: 0, x: POSE.flecheDe[0], y: POSE.flecheDe[1] }, { autoAlpha: 1, x: POSE.flecheA[0], y: POSE.flecheA[1], duration: 0.78, ease: "power3.inOut" }, 48.18);
 tl.to("#bouton", { scale: 0.955, duration: 0.07, ease: "power2.in" }, 48.98).to("#bouton", { scale: 1, duration: 0.5, ease: "back.out(2.2)" }, 49.06);
 tl.to("#fleche", { scale: 0.86, transformOrigin: "20% 12%", duration: 0.07 }, 48.98).to("#fleche", { scale: 1, duration: 0.25 }, 49.06);
 tl.fromTo("#ride", { opacity: 0.7, scale: 1 }, { opacity: 0, scale: 1.18, duration: 0.75, ease: "power2.out", immediateRender: false }, 49.0);
@@ -743,7 +856,7 @@ function image(t) {
 }
 
 window.FILM = {
-  duree: DUREE, ips: IPS, reperes: REPERES,
+  duree: DUREE, ips: IPS, reperes: REPERES, largeur: LARGEUR, hauteur: HAUTEUR,
   aller(t) { tl.time(Math.max(0, Math.min(DUREE, t)), false); image(t); },
 };
 FILM.aller(0);
@@ -752,10 +865,10 @@ FILM.aller(0);
 if (!new URLSearchParams(location.search).has("rendu")) {
   const cadre = $("#cadre");
   const ajuster = () => {
-    const e = Math.min(innerWidth / 1920, innerHeight / 1080);
+    const e = Math.min(innerWidth / LARGEUR, innerHeight / HAUTEUR);
     cadre.style.transform = `scale(${e})`;
-    cadre.style.left = (innerWidth - 1920 * e) / 2 + "px";
-    cadre.style.top = (innerHeight - 1080 * e) / 2 + "px";
+    cadre.style.left = (innerWidth - LARGEUR * e) / 2 + "px";
+    cadre.style.top = (innerHeight - HAUTEUR * e) / 2 + "px";
   };
   addEventListener("resize", ajuster); ajuster();
   let t = +(new URLSearchParams(location.search).get("t") || 0), joue = true, avant = performance.now();

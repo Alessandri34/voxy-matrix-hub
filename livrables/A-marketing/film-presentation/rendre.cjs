@@ -25,14 +25,20 @@ catch { ({ chromium } = require("/opt/node-tools/node_modules/playwright")); }
 
 const ICI = __dirname;
 const SORTIE = path.join(ICI, "sortie");
-const PAGE = "file://" + path.join(ICI, "film.html") + "?rendu";
 const arg = (nom, defaut) => {
   const i = process.argv.indexOf("--" + nom);
   return i < 0 ? defaut : process.argv[i + 1];
 };
+// Deux formats, une composition : --format vertical rend en 1080 x 1920.
+const FORMAT = arg("format", "paysage");
+if (!["paysage", "vertical"].includes(FORMAT)) { console.error("format inconnu : " + FORMAT); process.exit(1); }
+const VERTICAL = FORMAT === "vertical";
+const TAILLE = VERTICAL ? { width: 1080, height: 1920 } : { width: 1920, height: 1080 };
+const SUFFIXE = VERTICAL ? "-vertical" : "";
+const PAGE = "file://" + path.join(ICI, "film.html") + "?rendu" + (VERTICAL ? "&format=vertical" : "");
 
 async function ouvrir(navigateur) {
-  const contexte = await navigateur.newContext({ viewport: { width: 1920, height: 1080 }, deviceScaleFactor: 1 });
+  const contexte = await navigateur.newContext({ viewport: TAILLE, deviceScaleFactor: 1 });
   const page = await contexte.newPage();
   const erreurs = [];
   page.on("pageerror", (e) => erreurs.push(e.message));
@@ -66,11 +72,16 @@ async function capturer(page, client, t, format = "png") {
   const premiere = await ouvrir(navigateur);
   const { duree, ips, reperes } = await premiere.evaluate(() => ({ duree: FILM.duree, ips: FILM.ips, reperes: FILM.reperes }));
   // Les reperes sonores sortent de la composition : le son se cale sur l'image, jamais l'inverse.
-  fs.writeFileSync(path.join(ICI, "reperes.json"),
-    JSON.stringify({ duree, cadence: 120, reperes: reperes.sort((a, b) => a.t - b.t) }, null, 1) + "\n");
+  const contenu = JSON.stringify({ duree, cadence: 120, reperes: reperes.sort((a, b) => a.t - b.t) }, null, 1) + "\n";
+  const chemin = path.join(ICI, "reperes.json");
+  if (VERTICAL) {
+    // Le son est commun aux deux formats : le vertical ne doit pas deplacer un seul repere.
+    if (fs.existsSync(chemin) && fs.readFileSync(chemin, "utf8") !== contenu)
+      throw new Error("Le format vertical produit des reperes sonores differents du paysage : les deux films ne partageraient plus le meme son.");
+  } else fs.writeFileSync(chemin, contenu);
 
   if (process.argv.includes("--apercu")) {
-    const dossier = path.join(SORTIE, "apercu");
+    const dossier = path.join(SORTIE, "apercu" + SUFFIXE);
     fs.rmSync(dossier, { recursive: true, force: true });
     fs.mkdirSync(dossier, { recursive: true });
     const demande = arg("apercu", "");
@@ -97,7 +108,7 @@ async function capturer(page, client, t, format = "png") {
   const troncons = await Promise.all(Array.from({ length: ouvriers }, async (_, n) => {
     const i0 = de + n * part, i1 = Math.min(a, i0 + part);
     if (i0 >= i1) return null;
-    const fichier = path.join(SORTIE, `troncon-${n}.mp4`);
+    const fichier = path.join(SORTIE, `troncon${SUFFIXE}-${n}.mp4`);
     const encodeur = spawn("ffmpeg", ["-y", "-loglevel", "error", "-f", "image2pipe", "-c:v", "png", "-framerate", String(ips), "-i", "-",
       "-c:v", "libx264", "-preset", "slow", "-crf", qualite, "-pix_fmt", "yuv420p", "-profile:v", "high",
       "-colorspace", "bt709", "-color_primaries", "bt709", "-color_trc", "bt709", "-color_range", "tv",
@@ -119,10 +130,10 @@ async function capturer(page, client, t, format = "png") {
   }));
   await navigateur.close();
 
-  const liste = path.join(SORTIE, "troncons.txt");
+  const liste = path.join(SORTIE, `troncons${SUFFIXE}.txt`);
   const presents = troncons.filter(Boolean);
   fs.writeFileSync(liste, presents.map((f) => `file '${f}'`).join("\n") + "\n");
-  const muet = path.join(SORTIE, "film-muet.mp4");
+  const muet = path.join(SORTIE, `film-muet${SUFFIXE}.mp4`);
   const colle = spawnSync("ffmpeg", ["-y", "-loglevel", "error", "-f", "concat", "-safe", "0", "-i", liste, "-c", "copy", "-movflags", "+faststart", muet], { stdio: "inherit" });
   if (colle.status !== 0) throw new Error("le recollage des troncons a echoue");
   for (const f of [...presents, liste]) fs.rmSync(f);

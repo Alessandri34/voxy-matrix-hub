@@ -1,12 +1,21 @@
-"""La bande-son du film : musique et bruitages, entierement synthetises.
+"""La bande-son du film : la musique, et les bruitages.
 
-    python3 son.py          ->  sortie/son.wav   (48 kHz, stereo)
+    python3 son.py                 ->  sortie/son.wav            (48 kHz, stereo)
+    python3 son.py --sans-banque   ->  sortie/son-synthese.wav   (tout synthetise, pour comparer)
 
-Aucun echantillon, aucune banque de sons : chaque note et chaque bruitage est
-calcule ici. Deux raisons. Il n'y a donc **aucun droit a verifier** avant de
-diffuser le film en publicite. Et le son se cale sur l'image au millieme :
-les instants viennent de `reperes.json`, que `rendre.cjs` ecrit a partir de
-la composition. On ne deplace jamais un bruitage a la main.
+**La musique est entierement synthetisee** : chaque note est calculee ici.
+
+**Les bruitages viennent de deux endroits.** Ceux qui sont des notes — les
+apparitions, les cases cochees, le carillon — restent synthetises, parce
+qu'ils sont accordes sur la musique (fa majeur). Ceux qui sont des bruits —
+souffles de raccord, impacts, clic de souris, frappe au clavier — sont pris
+dans une banque de sons enregistres quand elle est presente (`sons/`,
+voir `sons/banque.json` et `telecharger-sons.py`). Si elle manque, le script
+synthetise tout, comme a l'origine : le film se monte dans les deux cas.
+
+Le son se cale sur l'image au millieme : les instants viennent de
+`reperes.json`, que `rendre.cjs` ecrit a partir de la composition. On ne
+deplace jamais un bruitage a la main.
 
 La musique est a 120 a la minute, en fa majeur : un temps toutes les 0,5 s,
 une mesure toutes les 2 s. Les changements de plan tombent sur les mesures.
@@ -26,7 +35,10 @@ pas sur ce qui s'entend. Une ecoute humaine reste necessaire.
 
 from __future__ import annotations
 
+import hashlib
 import json
+import subprocess
+import sys
 import wave
 from pathlib import Path
 
@@ -538,20 +550,131 @@ def composer() -> np.ndarray:
     return sum(pupitres.values())
 
 
+# -------------------------------------------------------- la banque de sons
+
+SANS_BANQUE = "--sans-banque" in sys.argv
+DOSSIER_SONS = ICI / "sons"
+
+
+def enveloppe(x: np.ndarray, fenetre: float) -> np.ndarray:
+    """Le niveau du signal, lisse sur `fenetre` secondes."""
+    n = max(1, int(fenetre * FE))
+    mono = x.mean(1) if x.ndim == 2 else x
+    return np.sqrt(np.convolve(mono**2, np.ones(n) / n, "same"))
+
+
+def force(x: np.ndarray) -> float:
+    """Le niveau du passage le plus fort (50 ms) : ce que l'oreille retient d'un bruit bref."""
+    return float(enveloppe(x, 0.05).max())
+
+
+def a_niveau(x: np.ndarray, modele: np.ndarray, rapport: float = 1.0) -> np.ndarray:
+    """Met un son enregistre au niveau du son synthetise qu'il remplace.
+
+    L'equilibre du mixage a ete regle sur les sons synthetises. Un son de
+    banque arrive avec son propre niveau, sans rapport : on le cale sur celui
+    de son modele, et le mixage tient sans etre refait.
+    """
+    return x * (rapport * force(modele) / max(force(x), 1e-9))
+
+
+def etirer(x: np.ndarray, rapport: float) -> np.ndarray:
+    """Rejoue un son un peu plus vite ou plus lentement (donc plus aigu ou plus grave)."""
+    n = int(len(x) / rapport)
+    grille = np.linspace(0, len(x) - 1, n)
+    return np.stack([np.interp(grille, np.arange(len(x)), x[:, c]) for c in range(2)], 1)
+
+
+def charger_banque() -> dict[str, tuple[np.ndarray, float]]:
+    """Les bruitages enregistres, prets a poser : {cle: (signal, instant de son pic)}.
+
+    Chaque fichier est verifie par son empreinte : un son remplace a la source
+    sous le meme nom ne doit pas entrer dans le film sans qu'on le sache.
+    Le silence du debut est retire, pour que l'attaque tombe sur le repere.
+    """
+    table = DOSSIER_SONS / "banque.json"
+    if SANS_BANQUE or not table.exists():
+        return {}
+    banque, absents = {}, []
+    for cle, son in json.loads(table.read_text())["sons"].items():
+        fichier = DOSSIER_SONS / son["local"]
+        if not fichier.exists():
+            absents.append(son["local"])
+            continue
+        if hashlib.sha256(fichier.read_bytes()).hexdigest() != son["sha256"]:
+            raise SystemExit(f"{fichier.name} ne correspond plus a l'empreinte de banque.json : fichier change a la source ? Le film ne l'utilise pas sans verification.")
+        brut = subprocess.run(["ffmpeg", "-v", "error", "-i", str(fichier), "-f", "f32le", "-ac", "2", "-ar", str(FE), "-"],
+                              capture_output=True, check=True).stdout
+        x = np.frombuffer(brut, np.float32).reshape(-1, 2).astype(np.float64)
+        fin_env, court = enveloppe(x, 0.01), enveloppe(x, 0.002)
+        debut = max(int(np.argmax(court > court.max() * 0.03)) - int(0.002 * FE), 0)
+        vivant = np.where(fin_env > fin_env.max() * 0.04)[0]
+        queue = 1.3 if cle == "impact" else 0.25
+        fin = min(int(vivant[-1]) + int(queue * FE), len(x))
+        x = x[debut:fin].copy()
+        fondu = min(int(0.06 * FE), len(x) // 3)
+        x[-fondu:] *= np.linspace(1, 0, fondu)[:, None]
+        x[: int(0.001 * FE)] *= np.linspace(0, 1, int(0.001 * FE))[:, None]
+        banque[cle] = (x / np.abs(x).max(), float(np.argmax(enveloppe(x, 0.01))) / FE)
+    if absents:
+        print(f"banque incomplete, {len(absents)} son(s) absents (python3 telecharger-sons.py) : ils sont synthetises a la place")
+    return banque
+
+
 def bruiter() -> np.ndarray:
     sec, mouille = piste(), piste()
+    banque = charger_banque()
+    pris: dict[str, int] = {}
+
+    def de_banque(cles: tuple[str, ...], rang: int):
+        """Le son de banque de ce rang, ou rien s'il manque : on alterne pour ne pas repeter."""
+        presents = [c for c in cles if c in banque]
+        if not presents:
+            return None
+        cle = presents[rang % len(presents)]
+        pris[cle] = pris.get(cle, 0) + 1
+        return banque[cle]
+
+    # Les modeles : le son synthetise que chaque son de banque remplace, pour le niveau.
+    modele = {"touche": touche(), "souffle": souffle(0.62), "souffle_doux": souffle(0.5, doux=True), "impact": impact(),
+              "impact_doux": impact(doux=True), "impact_fort": impact(fort=True), "clic": clic_souris(), "tic": tic(), "coche": bulle(hz("C6"))}
+    rangs = {"touche": 0, "souffle": 0, "souffle_doux": 0}
+
     for r in REPERES["reperes"]:
         t, sorte = r["t"], r["type"]
         if sorte == "touche":
-            poser(sec, touche(), t, 0.11, alea.uniform(-0.25, 0.25))
+            son = de_banque(("touche-1", "touche-2", "touche-3"), rangs["touche"])
+            rangs["touche"] += 1
+            if son:                                                   # chaque touche un peu differente, comme sous de vrais doigts
+                x = etirer(son[0], alea.uniform(0.94, 1.07))
+                poser(sec, a_niveau(x, modele["touche"], 1.25), t - 0.002, 0.11 * alea.uniform(0.7, 1.0), alea.uniform(-0.25, 0.25))
+            else:
+                poser(sec, touche(), t, 0.11, alea.uniform(-0.25, 0.25))
         elif sorte == "roule":
             poser(sec, souffle(0.3, doux=True), t - 0.05, 0.5)
             poser(sec, tic(1500), t + 0.2, 0.12)
         elif sorte == "souffle":
-            x = souffle(0.5 if r.get("doux") else 0.62, doux=bool(r.get("doux")))
-            poser(mouille, x, t, 0.34)
+            doux = bool(r.get("doux"))
+            genre = "souffle_doux" if doux else "souffle"
+            son = de_banque(("souffle-doux-1", "souffle-doux-2") if doux else ("souffle-1", "souffle-2", "souffle-3"), rangs[genre])
+            rangs[genre] += 1
+            if son:
+                # Le pic du souffle tombe la ou tombait celui du souffle synthetise :
+                # au milieu de sa duree, c'est-a-dire sur le changement de plan.
+                milieu = 0.25 if doux else 0.31
+                poser(mouille, a_niveau(son[0], modele[genre]), t + milieu - son[1], 0.34)
+            else:
+                poser(mouille, souffle(0.5 if doux else 0.62, doux=doux), t, 0.34)
         elif sorte == "impact":
-            poser(mouille, impact(doux=bool(r.get("doux")), fort=bool(r.get("fort"))), t, 0.62)
+            doux, fort = bool(r.get("doux")), bool(r.get("fort"))
+            genre = "impact_fort" if fort else "impact_doux" if doux else "impact"
+            son = de_banque(("impact",), 0)
+            if son:
+                poser(mouille, a_niveau(son[0], modele[genre]), t - 0.002, 0.62)
+                if fort:                                              # la revelation et l'appel gardent leur grave synthetise
+                    poser(mouille, impact(fort=True), t, 0.62 * 0.6)
+            else:
+                poser(mouille, impact(doux=doux, fort=fort), t, 0.62)
         elif sorte == "coup":
             poser(mouille, coup(r["rang"]), t, 0.7)
         elif sorte == "montee":
@@ -564,17 +687,28 @@ def bruiter() -> np.ndarray:
         elif sorte == "pas":
             poser(mouille, bulle(hz(("F4", "G4", "A4", "C5")[r["rang"]])), t, 0.26)
         elif sorte == "tic":
-            poser(sec, tic(), t, 0.1, 0.2)
+            son = de_banque(("tic",), 0)
+            if son:
+                poser(sec, a_niveau(son[0], modele["tic"], 1.1), t - 0.002, 0.1, 0.2)
+            else:
+                poser(sec, tic(), t, 0.1, 0.2)
         elif sorte == "coche":
             decalage = r.get("note", 0)
+            son = de_banque(("coche",), 0)
+            if son:                                                   # le bruit de la case, sous les deux notes
+                poser(sec, a_niveau(son[0], modele["coche"], 0.9), t - 0.002, 0.15, 0.3)
             for k, note in enumerate((("C6", "F6"), ("D6", "G6"), ("F6", "A6"))[decalage % 3]):
-                poser(mouille, bulle(hz(note)), t + k * 0.055, 0.15, 0.3)
+                poser(mouille, bulle(hz(note)), t + k * 0.055, 0.15 * (0.75 if son else 1.0), 0.3)
         elif sorte == "carillon":
             notes = ("A5", "C6") if r.get("petit") else ("A5", "C6", "F6")
             for k, note in enumerate(notes):
                 poser(mouille, cloche(hz(note), 1.6), t + k * 0.07, 0.12 if r.get("petit") else 0.16, -0.3 + 0.3 * k)
         elif sorte == "clic":
-            poser(sec, clic_souris(), t, 0.3)
+            son = de_banque(("clic",), 0)
+            if son:
+                poser(sec, a_niveau(son[0], modele["clic"], 1.3), t - 0.002, 0.3)
+            else:
+                poser(sec, clic_souris(), t, 0.3)
         elif sorte == "glisse":
             poser(mouille, glisse(r.get("haut", 0)), t, 0.1, -0.2 + 0.2 * r.get("haut", 0))
         elif sorte == "creux":
@@ -587,6 +721,12 @@ def bruiter() -> np.ndarray:
             poser(mouille, trait(r["rang"]), t, 0.28, -0.5 + 0.5 * r["rang"])
         else:
             raise ValueError(f"repere sonore inconnu : {sorte}")
+
+    total = len(REPERES["reperes"])
+    if pris:
+        print(f"banque : {sum(pris.values())} bruitages sur {total} viennent de sons enregistres ({len(pris)} fichiers) ; les autres sont synthetises")
+    else:
+        print(f"banque absente ou ecartee : les {total} bruitages sont synthetises")
     return sec + reverberer(mouille, 0.22)
 
 
@@ -680,7 +820,7 @@ if __name__ == "__main__":
     mixage = limiter(raboter(mixage))
     sortie = ICI / "sortie"
     sortie.mkdir(exist_ok=True)
-    ecrire(sortie / "son.wav", mixage)
+    ecrire(sortie / ("son-synthese.wav" if SANS_BANQUE else "son.wav"), mixage)
 
     # ---- ce qui se mesure ----
     assert np.isfinite(mixage).all(), "le mixage contient des valeurs non finies"
