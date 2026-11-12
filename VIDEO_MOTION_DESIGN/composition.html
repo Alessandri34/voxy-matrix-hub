@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Voxy Matrix — Motion</title>
+<style>
+@font-face { font-family: 'Outfit'; src: url('assets/Outfit.woff2') format('woff2'); font-weight: 100 900; }
+:root{
+  --ink:#0A0A0C; --ink2:#1D1D1F; --gray:#6E6E73; --gray2:#86868B; --line:#E5E5EA; --soft:#F5F5F7;
+  --blue:#2563EB; --blue2:#3B82F6; --sky:#0EA5E9; --rose:#F43F5E; --green:#16A34A; --green2:#22C55E;
+  --display:'Inter Display','Inter',system-ui,sans-serif; --brand:'Outfit',sans-serif; --mono:'JetBrains Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1920px;height:1080px;overflow:hidden;background:#000}
+body{font-family:var(--display);-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision}
+#stage{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden;background:#000}
+#cam{position:absolute;inset:0;transform-origin:50% 50%}
+.layer{position:absolute;inset:0}
+#bgDark{background:radial-gradient(1200px 700px at 50% 120%, rgba(37,99,235,.22), transparent 60%), #000}
+#bgDark .grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:80px 80px;-webkit-mask-image:radial-gradient(900px 600px at 50% 50%,#000 20%,transparent 75%)}
+#bgLight{background:#FFFFFF}
+#bgLight .grid{position:absolute;inset:0;background-image:linear-gradient(rgba(10,10,12,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(10,10,12,.04) 1px,transparent 1px);background-size:80px 80px;-webkit-mask-image:radial-gradient(1000px 650px at 50% 45%,#000 10%,transparent 75%)}
+.glow{position:absolute;width:1400px;height:1400px;border-radius:50%;filter:blur(40px);opacity:0}
+.scene{position:absolute;inset:0;display:none}
+.abs{position:absolute}
+.center-x{left:0;right:0;text-align:center}
+.mono{font-family:var(--mono);font-size:19px;letter-spacing:.22em;text-transform:uppercase;font-weight:500}
+.hxl{font-weight:700;font-size:128px;letter-spacing:-0.045em;line-height:1.02}
+.hl{font-weight:700;font-size:100px;letter-spacing:-0.04em;line-height:1.04}
+.hm{font-weight:600;font-size:68px;letter-spacing:-0.03em;line-height:1.1}
+.sub{font-weight:500;font-size:32px;letter-spacing:-0.01em;line-height:1.4}
+.w{display:inline-block;overflow:hidden;vertical-align:bottom;padding:0 .02em .12em;margin-bottom:-.12em}
+.wi{display:inline-block;will-change:transform}
+.ch{display:inline-block;white-space:pre}
+.white{color:#fff}.ink{color:var(--ink)}.gray{color:var(--gray)}.gray2{color:var(--gray2)}.blue{color:var(--blue)}
+.grad .wi{background:linear-gradient(92deg,#2563EB 0%,#38BDF8 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.gradD .wi{background:linear-gradient(92deg,#60A5FA 0%,#A5F3FC 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* ---- Dark glass card ---- */
+.dcard{position:absolute;border-radius:28px;background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.025));border:1px solid rgba(255,255,255,.10);box-shadow:0 30px 80px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.08)}
+/* ---- Light window ---- */
+.win{position:absolute;border-radius:26px;background:#fff;border:1px solid #E3E3E8;box-shadow:0 2px 6px rgba(0,0,0,.04),0 40px 100px -20px rgba(15,23,42,.28),0 18px 40px -18px rgba(15,23,42,.18);overflow:hidden}
+.winbar{height:56px;border-bottom:1px solid #EFEFF2;display:flex;align-items:center;padding:0 22px;gap:9px;background:#FBFBFD}
+.tl{width:13px;height:13px;border-radius:50%}
+.url{margin-left:auto;margin-right:auto;transform:translateX(-30px);height:32px;padding:0 18px;border-radius:9px;background:#F0F0F3;display:flex;align-items:center;gap:8px;font-size:16px;color:#6E6E73;font-weight:500}
+.chip{display:inline-flex;align-items:center;gap:10px;height:42px;padding:0 18px;border-radius:999px;font-weight:600;font-size:19px;letter-spacing:.02em}
+.chip .dot{width:9px;height:9px;border-radius:50%}
+.sys-title{font-weight:700;font-size:96px;letter-spacing:-0.045em;line-height:1.02;color:var(--ink);margin-top:26px}
+.sys-sub{font-weight:500;font-size:34px;letter-spacing:-0.015em;color:var(--gray);margin-top:18px;line-height:1.3}
+.sys-list{list-style:none;margin-top:46px}
+.sys-list li{display:flex;align-items:center;gap:16px;font-size:26px;font-weight:500;color:var(--ink2);margin-bottom:20px;letter-spacing:-0.01em}
+.ck{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex:none}
+.notif{position:absolute;width:420px;height:92px;border-radius:22px;background:rgba(255,255,255,.86);backdrop-filter:blur(20px);border:1px solid rgba(0,0,0,.06);box-shadow:0 20px 50px -12px rgba(15,23,42,.30);display:flex;align-items:center;gap:16px;padding:0 20px}
+.notif .ic{width:54px;height:54px;border-radius:14px;flex:none;display:flex;align-items:center;justify-content:center}
+.notif .t1{font-size:18px;font-weight:700;color:#111}
+.notif .t2{font-size:17px;font-weight:500;color:#555;margin-top:2px}
+.notif .tm{position:absolute;right:20px;top:16px;font-size:14px;color:#999;font-weight:500}
+.pill{display:inline-flex;align-items:center;gap:10px;height:54px;padding:0 24px;border-radius:999px;border:1px solid var(--line);background:#fff;font-size:21px;font-weight:600;color:var(--ink2);box-shadow:0 6px 20px -10px rgba(0,0,0,.12)}
+#grain{position:absolute;inset:-100px;pointer-events:none;mix-blend-mode:overlay;opacity:.10}
+#vig{position:absolute;inset:0;pointer-events:none;background:radial-gradient(1300px 800px at 50% 50%,transparent 60%,rgba(0,0,0,.18) 100%)}
+</style>
+</head>
+<body>
+<div id="stage"><div id="cam">
+  <div class="layer" id="bgDark"><div class="grid"></div></div>
+  <div class="layer" id="bgLight"><div class="grid"></div><div class="glow" id="glowA"></div><div class="glow" id="glowB"></div></div>
+
+  <!-- S1 HOOK -->
+  <div class="scene" id="s1">
+    <div class="abs center-x mono gray2" id="s1lab" style="top:208px">Budget formation · Exercice 2026</div>
+    <div class="abs center-x hxl gray2 split" id="s1a" style="top:276px">Chaque année,</div>
+    <div class="abs center-x hxl white split" id="s1b" style="top:410px">votre budget formation</div>
+    <div class="abs center-x hxl white" id="s1c" style="top:544px">s'évapore.</div>
+    <div class="abs" id="s1bar" style="left:560px;top:770px;width:800px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+        <div style="font-size:22px;color:#A1A1A9;font-weight:500">Droits formation non utilisés</div>
+        <div style="display:flex;align-items:center;gap:14px">
+          <div id="s1pct" style="font-size:24px;color:#fff;font-weight:600;font-variant-numeric:tabular-nums">100 %</div>
+          <div id="s1pill" style="height:34px;padding:0 14px;border-radius:999px;display:flex;align-items:center;font-size:16px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">Actif</div>
+        </div>
+      </div>
+      <div style="height:10px;border-radius:99px;background:rgba(255,255,255,.1);overflow:hidden"><div id="s1fill" style="height:100%;width:100%;border-radius:99px"></div></div>
+    </div>
+  </div>
+
+  <!-- S2 PROBLEM -->
+  <div class="scene" id="s2">
+    <div class="abs center-x hm white split" id="s2t" style="top:190px">On vous a vendu…</div>
+    <div class="dcard s2c" style="left:190px;top:360px;width:470px;height:330px"></div>
+    <div class="dcard s2c" style="left:725px;top:360px;width:470px;height:330px"></div>
+    <div class="dcard s2c" style="left:1260px;top:360px;width:470px;height:330px"></div>
+    <div class="abs center-x sub split" id="s2r" style="top:790px;color:#A1A1A9">Résultat : votre chiffre d'affaires ne bouge pas.</div>
+  </div>
+
+  <!-- S3 QUESTION -->
+  <div class="scene" id="s3"><div class="abs" id="s3g" style="inset:0">
+    <div class="abs center-x hxl white split" id="s3a" style="top:292px">Et si votre formation</div>
+    <div class="abs center-x hxl white split" id="s3b" style="top:426px">construisait votre</div>
+    <div class="abs center-x hxl gradD split" id="s3c" style="top:560px">machine à clients ?</div>
+  </div></div>
+
+  <!-- S4 LOGO -->
+  <div class="scene" id="s4"><div class="abs" id="s4g" style="inset:0">
+    <div class="abs" id="s4mark" style="left:899px;top:300px;width:122px;height:122px"></div>
+    <div class="abs center-x" id="s4word" style="top:458px;font-family:var(--brand);font-weight:800;font-size:132px;letter-spacing:.01em;line-height:1"></div>
+    <div class="abs center-x sub gray split" id="s4tag" style="top:614px;font-size:36px">Centre d'Implémentation Qualiopi</div>
+    <div class="abs center-x" id="s4pills" style="top:716px;display:flex;justify-content:center;gap:16px">
+      <div class="pill"><svg width="22" height="22" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#2563EB"/><path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Certifié Qualiopi</div>
+      <div class="pill"><span style="width:10px;height:10px;border-radius:50%;background:#16A34A"></span>Finançable OPCO · FAFCEA</div>
+      <div class="pill"><span style="width:10px;height:10px;border-radius:50%;background:#F43F5E"></span>Montpellier · Occitanie</div>
+    </div>
+  </div></div>
+
+  <!-- S5 VALUE -->
+  <div class="scene" id="s5">
+    <div class="abs hxl ink split" id="s5a" style="left:150px;top:300px;font-size:116px">Zéro théorie.</div>
+    <div class="abs hxl grad split" id="s5b" style="left:150px;top:426px;font-size:116px">Que de l'exécution.</div>
+    <div class="abs sub gray split" id="s5c" style="left:156px;top:596px;width:820px">Pas de cours magistraux. Nous construisons votre infrastructure d'acquisition — avec vous, en direct.</div>
+    <div class="abs" id="s5ring" style="left:1290px;top:250px;width:500px;height:500px">
+      <svg width="500" height="500" viewBox="0 0 500 500" style="position:absolute;inset:0;transform:rotate(-90deg)">
+        <defs><linearGradient id="rg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2563EB"/><stop offset="1" stop-color="#38BDF8"/></linearGradient></defs>
+        <circle cx="250" cy="250" r="220" fill="none" stroke="#EEF2FF" stroke-width="22"/>
+        <circle id="s5arc" cx="250" cy="250" r="220" fill="none" stroke="url(#rg)" stroke-width="22" stroke-linecap="round" stroke-dasharray="1382.3" stroke-dashoffset="1382.3"/>
+      </svg>
+      <div class="abs center-x" style="top:150px;font-size:150px;font-weight:700;letter-spacing:-0.05em;color:var(--ink)"><span id="s5num">0</span><span style="font-size:84px">%</span></div>
+      <div class="abs center-x" style="top:340px;font-size:26px;font-weight:600;color:var(--gray)">finançable*</div>
+    </div>
+    <div class="abs sub" id="s5cap" style="left:1198px;width:684px;top:790px;text-align:center;font-size:28px;color:var(--ink2);font-weight:600">par votre OPCO ou le FAFCEA</div>
+    <div class="abs" id="s5foot" style="left:1198px;width:684px;top:838px;text-align:center;font-size:19px;color:var(--gray2)">*selon l'éligibilité de votre entreprise</div>
+  </div>
+
+  <!-- S6 ECOM -->
+  <div class="scene" id="s6">
+    <div class="abs sysText" style="left:150px;top:262px;width:680px">
+      <div class="chip" style="background:#FFF1F3;color:#E11D48"><span class="dot" style="background:#F43F5E"></span>Système 01</div>
+      <div class="sys-title split">E-Com Commando</div>
+      <div class="sys-sub split">Votre boutique qui vend. Jour et nuit.</div>
+      <ul class="sys-list">
+        <li><span class="ck" style="background:#FFE4E6"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="#E11D48" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>50 fiches produits SEO générées par IA</li>
+        <li><span class="ck" style="background:#FFE4E6"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="#E11D48" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Relance automatique des paniers abandonnés</li>
+        <li><span class="ck" style="background:#FFE4E6"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="#E11D48" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Objectif : première vente sous 14 jours</li>
+      </ul>
+    </div>
+    <div class="abs" id="s6persp" style="left:880px;top:170px;width:920px;height:740px;perspective:2200px">
+      <div class="win" id="s6win" style="left:0;top:0;width:920px;height:740px;transform-origin:30% 50%">
+        <div class="winbar"><div class="tl" style="background:#FF5F57"></div><div class="tl" style="background:#FEBC2E"></div><div class="tl" style="background:#28C840"></div>
+          <div class="url"><svg width="13" height="13" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="11" rx="2" fill="#8E8E93"/><path d="M8 10V7a4 4 0 018 0v3" stroke="#8E8E93" stroke-width="2.4" fill="none"/></svg>votre-boutique.fr</div></div>
+        <div style="padding:26px 30px 0">
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <div style="font-family:var(--brand);font-weight:700;font-size:26px;letter-spacing:.02em;color:#111">ATELIER<span style="color:#F43F5E">.</span></div>
+            <div style="display:flex;gap:26px;font-size:16px;color:#6E6E73;font-weight:500"><span>Nouveautés</span><span>Collections</span><span>Contact</span><span>Panier (0)</span></div>
+          </div>
+          <div style="margin-top:22px;height:64px;border-radius:16px;background:#FAFAFB;border:1px solid #EFEFF2;display:flex;align-items:center;padding:0 20px;gap:14px">
+            <div style="width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,#F43F5E,#FF7E67);display:flex;align-items:center;justify-content:center"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M12 2l2.4 6.6L21 11l-6.6 2.4L12 20l-2.4-6.6L3 11l6.6-2.4z" fill="#fff"/></svg></div>
+            <div style="font-size:17px;font-weight:600;color:#111">IA · Génération des fiches produits</div>
+            <div style="flex:1;height:8px;border-radius:99px;background:#F1F1F4;overflow:hidden;margin:0 10px"><div id="s6prog" style="height:100%;width:0;background:linear-gradient(90deg,#F43F5E,#FF7E67);border-radius:99px"></div></div>
+            <div style="font-size:18px;font-weight:700;color:#111;font-variant-numeric:tabular-nums;width:74px;text-align:right"><span id="s6cnt">0</span>/50</div>
+          </div>
+          <div id="s6grid" style="margin-top:22px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px"></div>
+        </div>
+      </div>
+    </div>
+    <div id="s6notifs"></div>
+  </div>
+
+  <!-- S7 OUTBOUND -->
+  <div class="scene" id="s7">
+    <div class="abs" id="s7persp" style="left:110px;top:170px;width:940px;height:740px;perspective:2200px">
+      <div class="win" id="s7win" style="left:0;top:0;width:940px;height:740px;transform-origin:70% 50%">
+        <div class="winbar"><div class="tl" style="background:#FF5F57"></div><div class="tl" style="background:#FEBC2E"></div><div class="tl" style="background:#28C840"></div>
+          <div class="url">Agenda · Semaine 46</div></div>
+        <div style="padding:22px 26px 0;display:flex;align-items:center;justify-content:space-between">
+          <div style="font-size:26px;font-weight:700;color:#111;letter-spacing:-0.02em">Novembre 2026</div>
+          <div style="display:flex;align-items:center;gap:10px;height:40px;padding:0 16px;border-radius:12px;background:#F0F9FF;color:#0369A1;font-weight:700;font-size:17px"><span style="width:9px;height:9px;border-radius:50%;background:#0EA5E9"></span>RDV qualifiés cette semaine : <span id="s7cnt" style="font-variant-numeric:tabular-nums">0</span></div>
+        </div>
+        <div id="s7cal" style="position:absolute;left:26px;top:136px;width:888px;height:580px"></div>
+      </div>
+    </div>
+    <div class="dcard" id="s7call" style="left:640px;top:690px;width:470px;height:168px;background:#0B0B10;border-color:rgba(255,255,255,.08)">
+      <div style="position:absolute;left:24px;top:22px;display:flex;align-items:center;gap:12px">
+        <div style="width:46px;height:46px;border-radius:13px;background:linear-gradient(135deg,#0EA5E9,#6366F1);display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3" fill="#fff"/><path d="M6 11a6 6 0 0012 0M12 17v4" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+        <div><div style="font-size:19px;font-weight:700;color:#fff">Agent vocal IA</div><div id="s7status" style="font-size:15px;font-weight:600;color:#4ADE80;margin-top:2px">● Appel en cours</div></div>
+      </div>
+      <div id="s7timer" style="position:absolute;right:24px;top:30px;font-family:var(--mono);font-size:20px;color:#A1A1A9">00:00</div>
+      <div id="s7wave" style="position:absolute;left:24px;right:24px;bottom:22px;height:52px;display:flex;align-items:center;gap:5px"></div>
+      <div id="s7done" style="position:absolute;left:24px;right:24px;bottom:24px;height:48px;border-radius:12px;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.35);display:flex;align-items:center;gap:10px;padding:0 16px;color:#4ADE80;font-weight:700;font-size:18px;opacity:0">✓ Lead rappelé en 28 s — RDV confirmé jeudi 14h</div>
+    </div>
+    <div class="abs sysText" style="left:1150px;top:262px;width:700px">
+      <div class="chip" style="background:#F0F9FF;color:#0284C7"><span class="dot" style="background:#0EA5E9"></span>Système 02</div>
+      <div class="sys-title split">Outbound Autonome</div>
+      <div class="sys-sub split">Votre agenda se remplit. Sans vous.</div>
+      <ul class="sys-list">
+        <li><span class="ck" style="background:#E0F2FE"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="#0284C7" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Prospection IA ultra-personnalisée</li>
+        <li><span class="ck" style="background:#E0F2FE"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="#0284C7" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Vos leads rappelés en moins de 30 s</li>
+        <li><span class="ck" style="background:#E0F2FE"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="#0284C7" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>RDV qualifiés livrés dans votre agenda</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- S8 DRIVE TO STORE -->
+  <div class="scene" id="s8">
+    <div class="abs sysText" style="left:150px;top:262px;width:680px">
+      <div class="chip" style="background:#F0FDF4;color:#15803D"><span class="dot" style="background:#22C55E"></span>Système 03</div>
+      <div class="sys-title split">Drive-to-Store</div>
+      <div class="sys-sub split">Dominez Google Maps dans votre ville.</div>
+      <ul class="sys-list">
+        <li><span class="ck" style="background:#DCFCE7"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="#15803D" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Visibilité locale dans le top Google Maps</li>
+        <li><span class="ck" style="background:#DCFCE7"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="#15803D" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Boucle d'avis 5 étoiles automatisée</li>
+        <li><span class="ck" style="background:#DCFCE7"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="#15803D" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Des clients chauds, dans votre zone</li>
+      </ul>
+    </div>
+    <div class="abs" id="s8persp" style="left:880px;top:170px;width:920px;height:740px;perspective:2200px">
+      <div class="win" id="s8win" style="left:0;top:0;width:920px;height:740px;transform-origin:30% 50%;background:#EEF1F4">
+        <div id="s8map" style="position:absolute;inset:0;transform-origin:60% 50%"></div>
+        <div id="s8panel" style="position:absolute;left:24px;top:24px;width:400px;height:692px;border-radius:20px;background:#fff;box-shadow:0 20px 50px -16px rgba(15,23,42,.3);overflow:hidden">
+          <div style="margin:18px;height:52px;border-radius:14px;background:#F2F2F5;display:flex;align-items:center;gap:12px;padding:0 16px">
+            <svg width="20" height="20" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5" stroke="#6E6E73" stroke-width="2.4" fill="none"/><path d="M15.5 15.5L21 21" stroke="#6E6E73" stroke-width="2.4" stroke-linecap="round"/></svg>
+            <div id="s8q" style="font-size:18px;color:#111;font-weight:500;white-space:nowrap"></div><div id="s8caret" style="width:2px;height:22px;background:#2563EB;margin-left:-8px"></div>
+          </div>
+          <div style="padding:0 18px;font-size:14px;color:#8E8E93;font-weight:600;letter-spacing:.08em;text-transform:uppercase">Résultats à proximité</div>
+          <div id="s8list" style="position:relative;margin:12px 0 0;height:520px"></div>
+        </div>
+      </div>
+    </div>
+    <div id="s8notif"></div>
+  </div>
+
+  <!-- S9 PROOF -->
+  <div class="scene" id="s9">
+    <div class="abs mono" id="s9lab" style="left:150px;top:178px;color:#A1A1A9;display:flex;align-items:center;gap:14px"><span style="width:10px;height:10px;border-radius:50%;background:#3B82F6;box-shadow:0 0 18px #3B82F6"></span>Cas client · Entreprise du BTP · Hérault (34)</div>
+    <div class="abs" id="s9big" style="left:140px;top:226px;font-size:236px;font-weight:700;letter-spacing:-0.055em;line-height:1;background:linear-gradient(180deg,#fff 30%,#93C5FD 100%);-webkit-background-clip:text;background-clip:text;color:transparent;font-variant-numeric:tabular-nums">+0 %</div>
+    <div class="abs sub split" id="s9sub" style="left:152px;top:486px;width:760px;color:#D4D4D8;font-size:38px">de demandes de devis via Google, en 2 mois.</div>
+    <div class="dcard" id="s9chart" style="left:1000px;top:200px;width:780px;height:520px">
+      <div style="position:absolute;left:34px;top:30px;font-size:20px;font-weight:600;color:#fff">Demandes de devis / semaine</div>
+      <div style="position:absolute;right:34px;top:30px;font-size:16px;font-weight:600;color:#A1A1A9">Source : Google Business Profile</div>
+      <svg id="s9svg" width="780" height="520" viewBox="0 0 780 520" style="position:absolute;inset:0">
+        <defs><linearGradient id="ag" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3B82F6" stop-opacity=".45"/><stop offset="1" stop-color="#3B82F6" stop-opacity="0"/></linearGradient>
+        <filter id="gl"><feGaussianBlur stdDeviation="6"/></filter></defs>
+        <g stroke="rgba(255,255,255,.07)" stroke-width="1"><line x1="40" x2="740" y1="140" y2="140"/><line x1="40" x2="740" y1="230" y2="230"/><line x1="40" x2="740" y1="320" y2="320"/><line x1="40" x2="740" y1="410" y2="410"/></g>
+        <path id="s9area" fill="url(#ag)" opacity="0"/>
+        <path id="s9lineGlow" fill="none" stroke="#3B82F6" stroke-width="10" filter="url(#gl)" opacity=".6"/>
+        <path id="s9line" fill="none" stroke="#60A5FA" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle id="s9dot" r="9" fill="#fff" opacity="0"/>
+        <g id="s9x" fill="#71717A" font-size="15" font-family="Inter" font-weight="500"></g>
+      </svg>
+      <div id="s9tip" style="position:absolute;height:40px;padding:0 14px;border-radius:10px;background:#2563EB;color:#fff;font-weight:700;font-size:18px;display:flex;align-items:center;opacity:0;box-shadow:0 10px 30px rgba(37,99,235,.5)">×4 en 8 semaines</div>
+    </div>
+    <div class="dcard s9tile" style="left:150px;top:626px;width:390px;height:150px"><div style="position:absolute;left:30px;top:24px;font-size:56px;font-weight:700;color:#fff;letter-spacing:-0.03em">2 h<span style="font-size:30px;color:#A1A1A9;font-weight:600"> / semaine</span></div><div style="position:absolute;left:32px;top:100px;font-size:19px;color:#A1A1A9;font-weight:500">Temps investi par le dirigeant</div></div>
+    <div class="dcard s9tile" style="left:570px;top:626px;width:390px;height:150px"><div style="position:absolute;left:30px;top:24px;font-size:56px;font-weight:700;color:#fff;letter-spacing:-0.03em">100 %</div><div style="position:absolute;left:32px;top:100px;font-size:19px;color:#A1A1A9;font-weight:500">Du solde FAFCEA mobilisé</div></div>
+    <div class="abs" id="s9foot" style="left:150px;top:880px;font-size:18px;color:#71717A;font-weight:500">Résultat observé sur un client accompagné. Les résultats varient selon l'activité et l'implication.</div>
+  </div>
+
+  <!-- S10 PROCESS -->
+  <div class="scene" id="s10">
+    <div class="abs center-x hl ink split" id="s10t" style="top:196px">3 étapes. <span class="grad">Zéro paperasse.</span></div>
+    <div class="abs" style="left:360px;top:544px;width:1200px;height:6px;border-radius:9px;background:#EEF0F4;overflow:hidden"><div id="s10line" style="height:100%;width:0;background:linear-gradient(90deg,#2563EB,#38BDF8)"></div></div>
+    <div id="s10nodes"></div>
+  </div>
+
+  <!-- S11 SCARCITY -->
+  <div class="scene" id="s11"><div class="abs" id="s11g" style="inset:0;transform-origin:960px 610px">
+    <div class="abs center-x hxl white split" id="s11a" style="top:300px">5 entreprises par mois.</div>
+    <div class="abs" id="s11slots" style="left:0;right:0;top:520px;display:flex;justify-content:center;gap:26px"></div>
+    <div class="abs center-x sub split" id="s11b" style="top:690px;color:#fff;font-size:40px;font-weight:600">Sélection sur dossier.</div>
+    <div class="abs center-x sub split" id="s11c" style="top:752px;color:#A1A1A9;font-size:28px">Pour garantir l'impact de chaque accompagnement.</div>
+  </div></div>
+
+  <!-- S12 CTA -->
+  <div class="scene" id="s12">
+    <div class="abs" id="s12g" style="inset:0">
+      <div class="abs center-x mono blue" id="s12eb" style="top:232px">Audit stratégique &amp; financement · Offert</div>
+      <div class="abs center-x hxl ink split" id="s12a" style="top:292px">Vérifiez votre éligibilité.</div>
+      <div class="abs center-x sub gray split" id="s12b" style="top:450px;left:360px;right:360px">15 minutes au téléphone. Vous saurez exactement ce que vos droits formation peuvent financer cette année.</div>
+      <div class="abs" id="s12btn" style="left:660px;top:640px;width:600px;height:112px;border-radius:999px;background:#2563EB;box-shadow:0 24px 60px -12px rgba(37,99,235,.55),inset 0 1px 0 rgba(255,255,255,.25);overflow:hidden">
+        <div id="s12btnOk" style="position:absolute;inset:0;background:#16A34A;opacity:0"></div>
+        <div id="s12rip" style="position:absolute;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.45);left:280px;top:36px;opacity:0"></div>
+        <div id="s12lab1" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:14px;color:#fff;font-size:34px;font-weight:600;letter-spacing:-0.01em">Réserver mon audit offert <svg width="30" height="30" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div id="s12lab2" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:14px;color:#fff;font-size:34px;font-weight:600;opacity:0">✓ Demande envoyée</div>
+      </div>
+      <div class="abs center-x" id="s12note" style="top:786px;font-size:21px;color:var(--gray2);font-weight:500">Sans engagement · Réponse sous 24 h</div>
+    </div>
+    <svg id="s12cur" width="44" height="56" viewBox="0 0 22 28" style="position:absolute;left:0;top:0;filter:drop-shadow(0 4px 8px rgba(0,0,0,.3))"><path d="M2 1.5v21.5l5.6-5.2 3.6 8.2 3.6-1.6-3.5-8h7.6z" fill="#111" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg>
+    <div class="abs" id="s12end" style="inset:0">
+      <div class="abs" id="s12mark" style="left:899px;top:286px;width:122px;height:122px"></div>
+      <div class="abs center-x" id="s12word" style="top:444px;font-family:var(--brand);font-weight:800;font-size:132px;letter-spacing:.01em;line-height:1"></div>
+      <div class="abs center-x sub gray split" id="s12tag" style="top:600px;font-size:36px">Centre d'Implémentation Qualiopi</div>
+      <div class="abs center-x" id="s12cta" style="top:700px;display:flex;justify-content:center">
+        <div style="height:68px;padding:0 34px;border-radius:999px;background:#0A0A0C;color:#fff;display:flex;align-items:center;gap:12px;font-size:24px;font-weight:600">Réservez votre audit offert <svg width="22" height="22" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+      <div class="abs center-x" id="s12small" style="top:812px;font-size:20px;color:var(--gray2);font-weight:500;letter-spacing:.01em">Certifié Qualiopi  ·  Finançable OPCO / FAFCEA  ·  5 places par mois</div>
+    </div>
+  </div>
+
+  <div id="flash" class="layer" style="background:#fff;opacity:0;pointer-events:none"></div>
+</div>
+<canvas id="grain" width="2120" height="1280"></canvas>
+<div id="vig"></div>
+</div>
+
+<script>
+/* ================= UTIL ================= */
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lerp=(a,b,k)=>a+(b-a)*k;
+const E={
+  lin:t=>t,
+  outExpo:t=>t>=1?1:1-Math.pow(2,-10*t),
+  inExpo:t=>t<=0?0:Math.pow(2,10*t-10),
+  outCubic:t=>1-Math.pow(1-t,3),
+  inCubic:t=>t*t*t,
+  inOutCubic:t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2,
+  outQuint:t=>1-Math.pow(1-t,5),
+  inOutExpo:t=>t<=0?0:t>=1?1:t<.5?Math.pow(2,20*t-10)/2:(2-Math.pow(2,-20*t+10))/2,
+  outBack:t=>{const c1=1.5,c3=c1+1;return 1+c3*Math.pow(t-1,3)+c1*Math.pow(t-1,2)},
+};
+const P=(t,a,b,e=E.outExpo)=>e(clamp((t-a)/(b-a)));
+// damped spring 0->1
+const spring=(t,f=2.2,z=0.42)=>{ if(t<=0)return 0; const w=2*Math.PI*f, wd=w*Math.sqrt(1-z*z); return 1-Math.exp(-z*w*t)*(Math.cos(wd*t)+(z*w/wd)*Math.sin(wd*t)); };
+function T(el,{x=0,y=0,s=1,sx,sy,r=0,o,blur=0,rx=0,ry=0,z=0}={}){
+  if(!el)return;
+  let tr=`translate3d(${x}px,${y}px,${z}px)`;
+  if(rx)tr+=` rotateX(${rx}deg)`; if(ry)tr+=` rotateY(${ry}deg)`;
+  if(r)tr+=` rotate(${r}deg)`;
+  tr+= (sx!==undefined||sy!==undefined)?` scale(${sx??s},${sy??s})`:` scale(${s})`;
+  el.style.transform=tr;
+  if(o!==undefined)el.style.opacity=o;
+  el.style.filter=blur>0.05?`blur(${blur}px)`:'none';
+}
+const fmt=n=>Math.round(n).toLocaleString('fr-FR').replace(/ | /g,' ');
+// split words of elements with .split (keep nested spans' classes)
+function splitWords(el){
+  const walk=(node,cls)=>{
+    const out=[];
+    node.childNodes.forEach(c=>{
+      if(c.nodeType===3){ c.textContent.split(/(\s+)/).forEach(tok=>{ if(!tok)return; if(/^\s+$/.test(tok)) out.push(document.createTextNode(' ')); else { const w=document.createElement('span'); w.className='w'+(cls?' '+cls:''); const wi=document.createElement('span'); wi.className='wi'; wi.textContent=tok; w.appendChild(wi); out.push(w);} }); }
+      else if(c.nodeType===1){ if(c.tagName==='SUP'||c.tagName==='SVG'){out.push(c);} else out.push(...walk(c,c.className)); }
+    });
+    return out;
+  };
+  const parts=walk(el,''); el.innerHTML=''; parts.forEach(p=>el.appendChild(p));
+}
+$$('.split').forEach(splitWords);
+// gradient class on nested span -> words have class grad; make inner apply
+$$('.w.grad').forEach(w=>{w.classList.remove('grad'); w.querySelector('.wi').style.cssText+='background:linear-gradient(92deg,#2563EB 0%,#38BDF8 100%);-webkit-background-clip:text;background-clip:text;color:transparent';});
+function words(el){ return [...el.querySelectorAll('.wi')]; }
+// reveal words upward with stagger
+function rev(el,lt,t0,{st=0.06,d=0.7,dy=105,blur=8,out=null}={}){
+  const ws=words(el);
+  ws.forEach((w,i)=>{
+    const k=P(lt,t0+i*st,t0+i*st+d,E.outExpo);
+    let o=k, y=(1-k)*dy, b=(1-k)*blur;
+    if(out){ const ko=P(lt,out[0]+i*(out[2]??0.03),out[0]+i*(out[2]??0.03)+out[1],E.inCubic); y-=ko*dy*0.8; o*=1-ko; b+=ko*blur; }
+    w.style.transform=`translateY(${y}%)`; w.style.opacity=o; w.style.filter=b>0.1?`blur(${b}px)`:'none';
+  });
+}
+function show(el,v){ el.style.display=v?'block':'none'; }
+
+/* ================= BUILD DYNAMIC DOM ================= */
+// S1 letters
+(()=>{ const el=$('#s1c'); const txt=el.textContent; el.innerHTML=''; [...txt].forEach(c=>{const s=document.createElement('span'); s.className='ch'; s.textContent=c; el.appendChild(s);}); })();
+// S2 cards
+const s2data=[
+  {ic:'<rect x="3" y="4" width="18" height="15" rx="2.5" stroke="#A1A1A9" stroke-width="1.8" fill="none"/><path d="M3 8.5h18" stroke="#A1A1A9" stroke-width="1.8"/><circle cx="6" cy="6.3" r=".8" fill="#A1A1A9"/><circle cx="8.6" cy="6.3" r=".8" fill="#A1A1A9"/>',t:'Un site vitrine',v:'5 000 €',f:'0 client en plus'},
+  {ic:'<path d="M4 5.5A2.5 2.5 0 016.5 3H20v15H6.5A2.5 2.5 0 004 20.5z" stroke="#A1A1A9" stroke-width="1.8" fill="none"/><path d="M4 20.5A2.5 2.5 0 016.5 18H20v3H6.5" stroke="#A1A1A9" stroke-width="1.8" fill="none"/>',t:'Une formation théorique',v:'40 heures',f:'0 mise en pratique'},
+  {ic:'<path d="M3 10v4h3l6 4V6L6 10z" stroke="#A1A1A9" stroke-width="1.8" fill="none" stroke-linejoin="round"/><path d="M16 9a4 4 0 010 6M18.5 6.5a7.5 7.5 0 010 11" stroke="#A1A1A9" stroke-width="1.8" fill="none" stroke-linecap="round"/>',t:'Une agence marketing',v:'12 mois',f:'0 résultat mesurable'},
+];
+$$('.s2c').forEach((c,i)=>{const d=s2data[i]; c.innerHTML=`
+  <div class="in" style="position:absolute;inset:0">
+  <div style="position:absolute;left:34px;top:34px;width:58px;height:58px;border-radius:16px;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center"><svg width="30" height="30" viewBox="0 0 24 24">${d.ic}</svg></div>
+  <div style="position:absolute;left:36px;top:122px;font-size:26px;color:#D4D4D8;font-weight:500">${d.t}</div>
+  <div style="position:absolute;left:34px;top:160px;font-size:72px;color:#fff;font-weight:700;letter-spacing:-0.04em">${d.v}</div>
+  <div class="ft" style="position:absolute;left:36px;top:262px;font-family:var(--mono);font-size:17px;letter-spacing:.12em;text-transform:uppercase;color:#71717A">→ ${d.f}</div></div>
+  <svg class="strike" width="470" height="330" style="position:absolute;inset:0;overflow:visible"><line x1="-10" y1="300" x2="480" y2="34" stroke="#F43F5E" stroke-width="7" stroke-linecap="round" stroke-dasharray="560" stroke-dashoffset="560" style="filter:drop-shadow(0 0 10px rgba(244,63,94,.7))"/></svg>
+  <div class="xb" style="position:absolute;right:-16px;top:-16px;width:48px;height:48px;border-radius:50%;background:#F43F5E;display:flex;align-items:center;justify-content:center;opacity:0;box-shadow:0 8px 24px rgba(244,63,94,.5)"><svg width="20" height="20" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke="#fff" stroke-width="3.2" stroke-linecap="round"/></svg></div>`;});
+// Logo mark builder
+const VPIX=[[1,0,1],[1,0,1],[0,1,0]];
+function buildMark(el){ el.innerHTML=''; for(let r=0;r<3;r++)for(let c=0;c<3;c++){ const d=document.createElement('div'); d.className='px'; const on=VPIX[r][c]; d.style.cssText=`position:absolute;left:${c*44}px;top:${r*44}px;width:34px;height:34px;border-radius:10px;background:${on?'linear-gradient(135deg,#2563EB,#38BDF8)':'#E4E4E7'};${on?'box-shadow:0 6px 16px -4px rgba(37,99,235,.55)':''}`; d.dataset.r=r; d.dataset.c=c; el.appendChild(d);} }
+function buildWord(el){ el.innerHTML=''; const txt='VOXY MATRIX'; [...txt].forEach((c,i)=>{const s=document.createElement('span'); s.className='ch'; s.textContent=c; s.style.color=i>=5?'#2563EB':'#0A0A0C'; el.appendChild(s);}); }
+buildMark($('#s4mark')); buildWord($('#s4word')); buildMark($('#s12mark')); buildWord($('#s12word'));
+// S6 product grid
+const prods=[['Bougie Ambre','34,00 €','#FDE68A','#F59E0B'],['Savon d\'Atelier','12,90 €','#FBCFE8','#EC4899'],['Céramique Sable','64,00 €','#E7E5E4','#A8A29E'],['Huile d\'Olive Bio','18,50 €','#D9F99D','#65A30D'],['Carnet Cuir','42,00 €','#FED7AA','#C2410C'],['Tote Lin Naturel','29,00 €','#E0E7FF','#6366F1']];
+$('#s6grid').innerHTML=prods.map((p,i)=>`<div class="pc" style="position:relative;height:236px;border-radius:18px;border:1px solid #EFEFF2;overflow:hidden;background:#fff">
+  <div class="sk" style="position:absolute;inset:0;padding:14px"><div style="height:128px;border-radius:12px;background:#F2F2F5"></div><div style="margin-top:16px;height:14px;width:70%;border-radius:6px;background:#F2F2F5"></div><div style="margin-top:12px;height:14px;width:36%;border-radius:6px;background:#F2F2F5"></div><div class="sh" style="position:absolute;top:0;bottom:0;width:120px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.85),transparent)"></div></div>
+  <div class="fl" style="position:absolute;inset:0;padding:14px;opacity:0">
+    <div class="img" style="height:128px;border-radius:12px;background:radial-gradient(circle at 35% 30%,${p[2]},${p[3]}22 70%),${p[2]};position:relative;overflow:hidden"><div style="position:absolute;left:50%;top:50%;width:62px;height:62px;margin:-31px 0 0 -31px;border-radius:${i%2?'50%':'16px'};background:linear-gradient(135deg,#fff8,${p[3]});box-shadow:0 10px 20px -6px ${p[3]}aa"></div>
+    <div style="position:absolute;left:8px;top:8px;height:24px;padding:0 9px;border-radius:7px;background:#fff;font-size:12px;font-weight:700;color:#E11D48;display:flex;align-items:center;gap:4px">✦ SEO 98</div></div>
+    <div style="margin-top:12px;font-size:17px;font-weight:700;color:#111">${p[0]}</div>
+    <div style="margin-top:4px;display:flex;justify-content:space-between;align-items:center"><span style="font-size:16px;color:#6E6E73;font-weight:600">${p[1]}</span><span style="font-size:12px;color:#16A34A;font-weight:700">● En stock</span></div>
+  </div></div>`).join('');
+// S6 notifs
+const orders=[['Nouvelle commande','Céramique Sable · 64,00 €'],['Nouvelle commande','Bougie Ambre ×2 · 68,00 €'],['Panier récupéré','Relance auto · 42,00 €']];
+$('#s6notifs').innerHTML=orders.map((o,i)=>`<div class="notif n6" style="left:1440px;top:46px"><div class="ic" style="background:linear-gradient(135deg,#F43F5E,#FF7E67)"><svg width="26" height="26" viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7z" fill="#fff"/><path d="M9 8V6a3 3 0 016 0v2" stroke="#fff" stroke-width="2" fill="none"/></svg></div><div><div class="t1">${o[0]}</div><div class="t2">${o[1]}</div></div><div class="tm">maintenant</div></div>`).join('');
+// S7 calendar
+(()=>{ const days=['Lun 9','Mar 10','Mer 11','Jeu 12','Ven 13']; const cal=$('#s7cal'); const colW=(888-56)/5, rowH=64; let h='';
+  days.forEach((d,i)=>h+=`<div style="position:absolute;left:${56+i*colW}px;top:0;width:${colW}px;text-align:center;font-size:16px;font-weight:700;color:${i===3?'#0284C7':'#3A3A3C'}">${d}</div>`);
+  for(let r=0;r<8;r++){h+=`<div style="position:absolute;left:0;top:${40+r*rowH-8}px;font-size:13px;color:#A1A1A9;font-weight:600">${9+r}h</div><div style="position:absolute;left:56px;right:0;top:${40+r*rowH}px;height:1px;background:#F0F0F3"></div>`;}
+  for(let i=0;i<=5;i++)h+=`<div style="position:absolute;top:40px;bottom:18px;left:${56+i*colW}px;width:1px;background:#F4F4F6"></div>`;
+  const ev=[[0,0,1,'Sophie M.'],[2,1,1,'Karim B.'],[1,2,1,'Julie R.'],[3,5,1,'Marc L.'],[4,0.5,1,'Élodie P.'],[0,3,1,'Thomas G.'],[2,4,1,'Nadia K.'],[1,5.5,1,'Lucas D.'],[3,1.5,1,'Claire V.'],[4,3.5,1,'Hugo F.'],[0,6,1,'Inès T.'],[2,6.5,1,'Paul A.']];
+  ev.forEach((e,i)=>{ h+=`<div class="ev" style="position:absolute;left:${56+e[0]*colW+6}px;top:${40+e[1]*rowH+4}px;width:${colW-12}px;height:${e[2]*rowH-8}px;border-radius:11px;background:${i%3===1?'#E0E7FF':'#E0F2FE'};border-left:4px solid ${i%3===1?'#6366F1':'#0EA5E9'};padding:8px 12px;transform-origin:0 50%">
+    <div style="font-size:14px;font-weight:700;color:${i%3===1?'#3730A3':'#075985'}">RDV qualifié</div><div style="font-size:13px;font-weight:500;color:${i%3===1?'#4F46E5':'#0369A1'}">${e[3]} · Démo</div></div>`; });
+  cal.innerHTML=h;
+  $('#s7wave').innerHTML=Array.from({length:44},()=>'<div style="flex:1;border-radius:4px;background:linear-gradient(180deg,#38BDF8,#6366F1);height:10px"></div>').join('');
+})();
+// S8 map
+(()=>{ const m=$('#s8map'); m.innerHTML=`<svg width="920" height="740" viewBox="0 0 920 740">
+  <rect width="920" height="740" fill="#EEF1F4"/>
+  <path d="M600 -20 C 640 120, 760 180, 940 200 L 940 -20 Z" fill="#CFE6F7"/>
+  <rect x="470" y="430" width="170" height="130" rx="24" fill="#D7EED9"/><rect x="760" y="560" width="200" height="200" rx="30" fill="#D7EED9"/>
+  <g stroke="#fff" stroke-linecap="round" fill="none">
+   <path d="M-20 300 L 960 250" stroke-width="22"/><path d="M-20 520 L 960 610" stroke-width="18"/>
+   <path d="M520 -20 L 560 760" stroke-width="20"/><path d="M760 -20 L 700 760" stroke-width="16"/>
+   <path d="M430 -20 L 470 760" stroke-width="10"/><path d="M640 -20 L 650 760" stroke-width="10"/><path d="M-20 400 L 960 420" stroke-width="10"/><path d="M-20 680 L 960 700" stroke-width="10"/><path d="M-20 140 L 960 110" stroke-width="10"/>
+  </g>
+  <path d="M-20 300 L 960 250" stroke="#FDE68A" stroke-width="10" stroke-linecap="round"/>
+  <text x="600" y="232" font-family="Inter" font-size="14" font-weight="600" fill="#9CA3AF">Av. de la Liberté</text>
+  <text x="760" y="60" font-family="Inter" font-size="14" font-weight="600" fill="#60A5FA">Le Lez</text>
+  </svg>
+  ${[[600,180],[820,360],[700,520],[580,640],[860,470]].map(p=>`<div class="cpin" style="position:absolute;left:${p[0]-15}px;top:${p[1]-38}px;width:30px;height:38px"><svg width="30" height="38" viewBox="0 0 30 38"><path d="M15 37C15 37 2 22 2 14a13 13 0 0126 0c0 8-13 23-13 23z" fill="#9CA3AF" stroke="#fff" stroke-width="2"/><circle cx="15" cy="14" r="5" fill="#fff"/></svg></div>`).join('')}
+  <div id="s8rip" style="position:absolute;left:665px;top:364px;width:0;height:0"></div>
+  <div id="s8pin" style="position:absolute;left:640px;top:300px;width:50px;height:66px;transform-origin:50% 100%"><svg width="50" height="66" viewBox="0 0 30 40"><path d="M15 39C15 39 1.5 23 1.5 14a13.5 13.5 0 0127 0c0 9-13.5 25-13.5 25z" fill="#16A34A" stroke="#fff" stroke-width="2"/><path d="M15 7.5l2 4.3 4.6.5-3.4 3.1 1 4.6L15 17.6 10.8 20l1-4.6-3.4-3.1 4.6-.5z" fill="#fff"/></svg></div>
+  <div id="s8tag" style="position:absolute;left:548px;top:236px;height:40px;padding:0 14px;border-radius:12px;background:#fff;box-shadow:0 10px 24px -8px rgba(0,0,0,.3);display:flex;align-items:center;gap:8px;font-size:16px;font-weight:700;color:#111;white-space:nowrap">Votre entreprise <span style="color:#F59E0B">★ 4,9</span></div>`;
+  const rows=[['Votre entreprise',1],['Plomberie Dupont',0],['Hérault Services',0],['SOS Dépannage 34',0]];
+  $('#s8list').innerHTML=rows.map((r,i)=>`<div class="lr" data-me="${r[1]}" style="position:absolute;left:12px;right:12px;top:0;height:112px;border-radius:16px;padding:16px 16px;${r[1]?'background:#F0FDF4;border:1.5px solid #86EFAC':'border:1.5px solid transparent'}">
+    <div style="display:flex;justify-content:space-between;align-items:center"><div style="font-size:19px;font-weight:700;color:#111">${r[0]}</div>${r[1]?'<div class="b1" style="height:28px;padding:0 10px;border-radius:8px;background:#16A34A;color:#fff;font-size:14px;font-weight:800;display:flex;align-items:center">#1</div>':''}</div>
+    <div style="margin-top:6px;display:flex;align-items:center;gap:8px;font-size:16px;color:#3A3A3C;font-weight:600"><span class="rt">${r[1]?'4,1':['4,3','4,2','4,0'][i-1]}</span><span class="stars" style="color:#F59E0B;letter-spacing:1px">★★★★★</span><span style="color:#8E8E93">(<span class="rc">${r[1]?'12':['87','54','31'][i-1]}</span>)</span></div>
+    <div style="margin-top:6px;font-size:15px;color:#8E8E93;font-weight:500">${r[1]?'Ouvert · Montpellier · 1,2 km':'Ouvert · '+['2,8','3,4','4,1'][i-1]+' km'}</div></div>`).join('');
+  $('#s8notif').innerHTML=`<div class="notif" id="s8n" style="left:1390px;top:120px;width:450px"><div class="ic" style="background:linear-gradient(135deg,#22C55E,#16A34A)"><svg width="26" height="26" viewBox="0 0 24 24"><path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.5 6.6 19.5l1.2-6L3.3 9.3l6.1-.7z" fill="#fff"/></svg></div><div><div class="t1">Nouvel avis ★★★★★</div><div class="t2">« Travail impeccable, je recommande ! »</div></div><div class="tm">maintenant</div></div>`;
+})();
+// S9 chart
+const chartPts=(()=>{ const vals=[11,12,14,13,19,24,33,40,46]; const x0=60,x1=730,yB=440,yT=110,mx=48; return vals.map((v,i)=>[x0+(x1-x0)*i/(vals.length-1), yB-(yB-yT)*v/mx]); })();
+function smoothPath(pts){ let d=`M${pts[0][0]},${pts[0][1]}`; for(let i=0;i<pts.length-1;i++){const p0=pts[i-1]||pts[i],p1=pts[i],p2=pts[i+1],p3=pts[i+2]||p2; const c1=[p1[0]+(p2[0]-p0[0])/6,p1[1]+(p2[1]-p0[1])/6], c2=[p2[0]-(p3[0]-p1[0])/6,p2[1]-(p3[1]-p1[1])/6]; d+=` C${c1[0]},${c1[1]} ${c2[0]},${c2[1]} ${p2[0]},${p2[1]}`;} return d; }
+(()=>{ const d=smoothPath(chartPts); $('#s9line').setAttribute('d',d); $('#s9lineGlow').setAttribute('d',d); $('#s9area').setAttribute('d',d+` L730,470 L60,470 Z`);
+  $('#s9x').innerHTML=chartPts.map((p,i)=>`<text x="${p[0]}" y="490" text-anchor="middle">S${i}</text>`).join('');
+})();
+const lineLen=()=>$('#s9line').getTotalLength();
+// S10 nodes
+const steps=[['Audit stratégique','15 min · offert<br>sans engagement'],['Financement','Nous montons votre dossier<br>OPCO / FAFCEA'],['Implémentation','Votre système construit<br>avec vous, en direct']];
+$('#s10nodes').innerHTML=steps.map((s,i)=>`<div class="nd" style="position:absolute;left:${360+i*600-210}px;top:500px;width:420px;text-align:center">
+  <div class="cir" style="margin:0 auto;width:94px;height:94px;border-radius:50%;background:#fff;border:2px solid #E4E4E7;display:flex;align-items:center;justify-content:center;font-size:34px;font-weight:700;color:#0A0A0C;box-shadow:0 14px 34px -12px rgba(37,99,235,.35)"><span>0${i+1}</span></div>
+  <div class="tt" style="margin-top:34px;font-size:36px;font-weight:700;color:#0A0A0C;letter-spacing:-0.025em">${s[0]}</div>
+  <div class="ts" style="margin-top:10px;font-size:23px;font-weight:500;color:#6E6E73;line-height:1.35">${s[1]}</div></div>`).join('');
+$$('.nd').forEach(n=>{ n.style.top='497px'; });
+// S11 slots
+$('#s11slots').innerHTML=Array.from({length:5},(_,i)=>`<div class="sl" style="width:104px;height:104px;border-radius:28px;border:2px solid rgba(255,255,255,.18);position:relative;overflow:hidden"><div class="slf" style="position:absolute;inset:0;background:linear-gradient(135deg,#2563EB,#38BDF8);opacity:0"></div><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:700;color:#fff">${i+1}</div></div>`).join('');
+
+/* ================= GRAIN ================= */
+const gc=$('#grain').getContext('2d'); const gimg=gc.createImageData(2120,1280);
+function grain(seed){ let s=seed*9301+49297; const d=gimg.data; for(let i=0;i<d.length;i+=4){ s=(s*1103515245+12345)&0x7fffffff; const v=(s>>16)&255; d[i]=d[i+1]=d[i+2]=v; d[i+3]=255;} gc.putImageData(gimg,0,0); }
+const GRAIN_FRAMES=[]; // precomputed offsets instead of regen each frame (perf)
+grain(7);
+
+/* ================= SCENES ================= */
+const SC=[];
+const S=(id,a,b,fn)=>SC.push({el:$('#'+id),a,b,fn});
+
+function markAnim(el,lt,t0,{scatter=1}={}){
+  [...el.children].forEach((d,i)=>{ const r=+d.dataset.r,c=+d.dataset.c; const seed=Math.sin(i*12.9898)*43758.5453; const rx=(seed-Math.floor(seed))-.5; const ry=(Math.sin(i*78.233)*12345.678%1);
+    const k=spring(lt-(t0+i*0.045),1.6,0.5); const ko=clamp(k);
+    T(d,{x:(1-k)*rx*520*scatter,y:(1-k)*(ry*400-120)*scatter,s:lerp(0.2,1,clamp(k,0,1.2)),r:(1-k)*rx*180,o:P(lt,t0+i*0.045,t0+i*0.045+0.25,E.outCubic)});
+  });
+}
+function wordAnim(el,lt,t0){ [...el.children].forEach((s,i)=>{ const k=P(lt,t0+i*0.04,t0+i*0.04+0.8,E.outExpo); T(s,{y:(1-k)*60,o:k,blur:(1-k)*14}); }); }
+function shine(el,lt,t0){ const k=P(lt,t0,t0+0.9,E.inOutCubic); [...el.children].forEach((s,i)=>{ const pos=k*14-2-i; const g=Math.exp(-pos*pos*0.6); s.style.textShadow=g>0.02?`0 0 ${30*g}px rgba(56,189,248,${0.8*g})`:'none'; }); }
+
+// ---- S1 HOOK 0-4
+S('s1',0,4,(lt)=>{
+  const out=P(lt,3.55,4.0,E.inCubic);
+  T($('#s1lab'),{y:(1-P(lt,0.05,0.8))*14,o:P(lt,0.05,0.8)*(1-out)});
+  rev($('#s1a'),lt,0.12,{st:0.07});
+  rev($('#s1b'),lt,0.55,{st:0.07});
+  // letters of s'évapore
+  [...$('#s1c').children].forEach((c,i)=>{ const k=P(lt,1.25+i*0.035,1.25+i*0.035+0.7); const ev=P(lt,2.45+i*0.07,2.45+i*0.07+0.9,E.inCubic); const sd=Math.sin(i*91.7); T(c,{x:ev*sd*30,y:(1-k)*70-ev*(90+sd*40),r:ev*sd*25,o:k*(1-ev),blur:(1-k)*10+ev*16}); });
+  ['#s1a','#s1b'].forEach(s=>T($(s),{y:-out*30,o:1-out,blur:out*10}));
+  // bar
+  const bi=P(lt,1.55,2.1,E.outCubic); T($('#s1bar'),{y:(1-bi)*30,o:bi*(1-out),blur:out*8});
+  const dr=P(lt,1.9,3.3,E.inOutCubic); const pct=100*(1-dr);
+  $('#s1fill').style.width=pct+'%';
+  $('#s1fill').style.background=`linear-gradient(90deg, rgb(${lerp(59,244,dr)},${lerp(130,63,dr)},${lerp(246,94,dr)}), rgb(${lerp(96,251,dr)},${lerp(165,113,dr)},${lerp(250,133,dr)}))`;
+  $('#s1pct').textContent=Math.round(pct)+' %';
+  const exp=lt>=3.3; const pill=$('#s1pill');
+  pill.textContent=exp?'Expiré':'Actif'; pill.style.background=exp?'rgba(244,63,94,.16)':'rgba(34,197,94,.14)'; pill.style.color=exp?'#FB7185':'#4ADE80';
+  const sh=exp?Math.sin((lt-3.3)*60)*Math.exp(-(lt-3.3)*9)*10:0; T(pill,{x:sh,s:exp?1+0.15*Math.exp(-(lt-3.3)*10):1});
+});
+// ---- S2 PROBLEM 4-8
+S('s2',4,8,(lt)=>{
+  const out=P(lt,3.55,4.0,E.inCubic);
+  rev($('#s2t'),lt,0.05,{st:0.08});
+  T($('#s2t'),{o:1-out,y:-out*30,blur:out*8});
+  $$('.s2c').forEach((c,i)=>{
+    const k=spring(lt-(0.35+i*0.22),1.5,0.62); const o=P(lt,0.35+i*0.22,0.75+i*0.22,E.outCubic);
+    const ts=1.55+i*0.32; const st=P(lt,ts,ts+0.22,E.outCubic);
+    const hit=lt>ts?Math.exp(-(lt-ts)*10):0; const shake=Math.sin((lt-ts)*70)*hit*9;
+    T(c,{x:shake,y:(1-k)*120-out*40,s:lerp(.9,1,clamp(k))*(1-0.03*st),o:o*(1-out),blur:out*10+(1-o)*6});
+    c.querySelector('line').style.strokeDashoffset=560*(1-st);
+    c.querySelector('.in').style.opacity=1-0.62*st;
+    c.querySelector('.ft').style.color=st>0.5?'#FB7185':'#71717A';
+    const xk=spring(lt-(ts+0.08),2.4,0.45); T(c.querySelector('.xb'),{s:clamp(xk,0,1.3),o:clamp(xk*3)});
+    c.style.borderColor=`rgba(${lerp(255,244,st)},${lerp(255,63,st)},${lerp(255,94,st)},${lerp(.10,.45,st)})`;
+  });
+  rev($('#s2r'),lt,2.75,{st:0.05});
+  T($('#s2r'),{o:1-out,blur:out*8});
+});
+// ---- S3 QUESTION 8-12
+S('s3',8,12,(lt)=>{
+  rev($('#s3a'),lt,0.1,{st:0.08,d:0.8});
+  rev($('#s3b'),lt,0.65,{st:0.08,d:0.8});
+  rev($('#s3c'),lt,1.2,{st:0.1,d:0.9});
+  const push=P(lt,2.1,3.9,E.inExpo);
+  T($('#s3g'),{s:1+push*0.9+P(lt,0,2.2,E.lin)*0.04,o:1-P(lt,3.35,3.85,E.inCubic),blur:push*22});
+});
+// ---- S4 LOGO 12-16
+S('s4',12,16,(lt)=>{
+  markAnim($('#s4mark'),lt,0.02);
+  const up=P(lt,0.75,1.4,E.inOutCubic);
+  T($('#s4mark'),{y:-up*10, s:1+0.25*(1-P(lt,0,0.9,E.outExpo))});
+  wordAnim($('#s4word'),lt,0.85); shine($('#s4word'),lt,1.9);
+  rev($('#s4tag'),lt,1.45,{st:0.06});
+  [...$('#s4pills').children].forEach((p,i)=>{ const k=P(lt,2.05+i*0.12,2.75+i*0.12); T(p,{y:(1-k)*30,o:k,blur:(1-k)*6}); });
+  const out=P(lt,3.55,4.0,E.inCubic);
+  T($('#s4g'),{s:1+P(lt,0,4,E.lin)*0.03-out*0.06,o:1-out,blur:out*12});
+});
+// ---- S5 VALUE 16-20
+S('s5',16,20,(lt)=>{
+  const out=P(lt,3.55,4.0,E.inCubic);
+  rev($('#s5a'),lt,0.05,{st:0.08});
+  rev($('#s5b'),lt,0.45,{st:0.08});
+  rev($('#s5c'),lt,1.0,{st:0.025,d:0.6,dy:100,blur:4});
+  const ri=P(lt,0.5,1.3); T($('#s5ring'),{s:lerp(.85,1,ri),o:ri,blur:(1-ri)*10});
+  const c=P(lt,0.9,2.3,E.inOutCubic); $('#s5arc').style.strokeDashoffset=1382.3*(1-c); $('#s5num').textContent=Math.round(c*100);
+  const ca=P(lt,2.0,2.6); T($('#s5cap'),{y:(1-ca)*20,o:ca}); T($('#s5foot'),{y:(1-P(lt,2.2,2.8))*20,o:P(lt,2.2,2.8)});
+  const pop=lt>2.3?Math.exp(-(lt-2.3)*6)*0.06:0; T($('#s5ring'),{s:lerp(.85,1,ri)+pop,o:ri*(1),blur:(1-ri)*10});
+  $('#s5').style.opacity=1-out; $('#s5').style.transform=`translateX(${-out*80}px)`; $('#s5').style.filter=out>0.01?`blur(${out*10}px)`:'none';
+});
+// ---- System text helper
+function sysText(root,lt,t0){
+  const chip=root.querySelector('.chip'); const k=P(lt,t0,t0+0.6); T(chip,{y:(1-k)*24,o:k});
+  rev(root.querySelector('.sys-title'),lt,t0+0.12,{st:0.08});
+  rev(root.querySelector('.sys-sub'),lt,t0+0.5,{st:0.04,blur:4});
+  [...root.querySelectorAll('li')].forEach((li,i)=>{ const k=P(lt,t0+0.95+i*0.16,t0+1.6+i*0.16); T(li,{x:(1-k)*-30,o:k,blur:(1-k)*5}); const ck=li.querySelector('.ck'); const s=spring(lt-(t0+1.05+i*0.16),2.2,0.45); T(ck,{s:clamp(s,0,1.3)}); });
+}
+function winIn(el,lt,t0,ryFrom,ryTo){
+  const k=P(lt,t0,t0+1.1,E.outExpo); const drift=P(lt,t0,6,E.lin);
+  T(el,{y:(1-k)*160,rx:(1-k)*24,ry:lerp(ryFrom,ryTo,drift),s:lerp(.86,1,k),o:P(lt,t0,t0+0.5,E.outCubic)});
+}
+function sceneOut(el,lt,dur,dir){ const out=P(lt,dur-0.45,dur,E.inCubic); el.style.opacity=1-out; el.style.transform=`translateX(${dir*out*90}px) scale(${1-out*0.02})`; el.style.filter=out>0.01?`blur(${out*10}px)`:'none'; }
+// ---- S6 ECOM 20-26
+S('s6',20,26,(lt)=>{
+  sysText($('#s6 .sysText'),lt,0.05);
+  winIn($('#s6win'),lt,0.15,-16,-7);
+  const gen=P(lt,0.9,3.2,E.inOutCubic); $('#s6prog').style.width=(gen*100)+'%'; $('#s6cnt').textContent=Math.round(gen*50);
+  $$('#s6 .pc').forEach((pc,i)=>{ const t0=1.0+i*0.32; const k=P(lt,t0,t0+0.55,E.outCubic);
+    const sh=pc.querySelector('.sh'); sh.style.left=(((lt*1.3+i*0.2)%1)*400-140)+'px';
+    pc.querySelector('.sk').style.opacity=1-k; const fl=pc.querySelector('.fl'); fl.style.opacity=k; T(fl.querySelector('.img'),{s:lerp(1.08,1,k)});
+    pc.style.boxShadow=k>0&&k<1?`0 0 0 ${2*(1-k)}px rgba(244,63,94,${0.5*(1-k)})`:'none';
+  });
+  const ns=$$('.n6'); ns.forEach((n,i)=>{ const t0=3.35+i*0.6; const k=spring(lt-t0,1.6,0.6); const later=ns.slice(i+1).reduce((a,_,j)=>a+P(lt,3.35+(i+1+j)*0.6,3.35+(i+1+j)*0.6+0.5,E.outExpo),0);
+    const gone=clamp(later-1); T(n,{x:(1-clamp(k,0,1.2))*60,y:Math.min(later,1)*100+gone*40,s:lerp(.8,1,clamp(k,0,1.1))*(1-Math.min(later,1)*0.03),o:clamp(P(lt,t0,t0+0.25,E.outCubic)-gone),blur:gone*6}); n.style.zIndex=10+i; });
+  sceneOut($('#s6'),lt,6,-1);
+});
+// ---- S7 OUTBOUND 26-32
+S('s7',26,32,(lt)=>{
+  sysText($('#s7 .sysText'),lt,0.1);
+  winIn($('#s7win'),lt,0.05,16,7);
+  const evs=$$('#s7 .ev'); let n=0; evs.forEach((e,i)=>{ const t0=1.0+i*0.24; const k=spring(lt-t0,2.0,0.55); if(lt>t0)n++; T(e,{sx:clamp(k,0,1.15),sy:1,o:P(lt,t0,t0+0.15,E.lin)}); });
+  $('#s7cnt').textContent=n;
+  const ci=spring(lt-1.6,1.4,0.6); T($('#s7call'),{y:(1-clamp(ci,0,1.2))*120,o:P(lt,1.6,1.9,E.outCubic),s:lerp(.9,1,clamp(ci))});
+  const sec=Math.max(0,(lt-1.7))*7.2; const tt=Math.min(28,sec); $('#s7timer').textContent=`00:${String(Math.floor(tt)).padStart(2,'0')}`;
+  const done=P(lt,4.45,4.8,E.outCubic);
+  $$('#s7wave > div').forEach((b,i)=>{ const a=(Math.sin(lt*9+i*0.7)*0.5+0.5)*(Math.sin(lt*5.3+i*1.9)*0.5+0.5); const env=Math.sin(i/43*Math.PI); b.style.height=(6+a*env*46*(lt>1.7?1:0.1))+'px'; });
+  $('#s7wave').style.opacity=1-done; $('#s7done').style.opacity=done; T($('#s7done'),{y:(1-done)*12,o:done});
+  $('#s7status').textContent=done>0.5?'● Appel terminé':'● Appel en cours'; $('#s7status').style.color=done>0.5?'#A1A1A9':'#4ADE80';
+  sceneOut($('#s7'),lt,6,-1);
+});
+// ---- S8 D2S 32-38
+const QUERY='plombier montpellier';
+S('s8',32,38,(lt)=>{
+  sysText($('#s8 .sysText'),lt,0.05);
+  winIn($('#s8win'),lt,0.1,-16,-7);
+  T($('#s8map'),{s:1+P(lt,0,6,E.lin)*0.07});
+  const nq=Math.floor(clamp((lt-0.7)/1.0)*QUERY.length); $('#s8q').textContent=QUERY.slice(0,nq); $('#s8caret').style.opacity=(Math.floor(lt*2.5)%2||nq<QUERY.length)?1:0;
+  // pin drop
+  const pd=1.75; const fall=P(lt,pd,pd+0.35,E.inCubic); const land=lt>pd+0.35?spring(lt-(pd+0.35),2.4,0.35):0;
+  const sq=lt>pd+0.35?Math.exp(-(lt-pd-0.35)*8)*Math.cos((lt-pd-0.35)*30)*0.25:0;
+  T($('#s8pin'),{y:-(1-fall)*300,sx:1+sq,sy:1-sq,o:P(lt,pd,pd+0.1,E.lin)});
+  const rp=$('#s8rip'); const rk=P(lt,pd+0.35,pd+1.6,E.outCubic); rp.innerHTML=[0,0.25].map(d=>{const k=P(lt,pd+0.35+d,pd+1.5+d,E.outCubic); return `<div style="position:absolute;left:${-k*110}px;top:${-k*40}px;width:${k*220}px;height:${k*80}px;border-radius:50%;border:3px solid rgba(22,163,74,${0.6*(1-k)})"></div>`}).join('');
+  const tg=P(lt,pd+0.55,pd+1.0); T($('#s8tag'),{x:(1-tg)*-10,o:tg,s:lerp(.9,1,tg)});
+  $$('#s8 .cpin').forEach((p,i)=>{ const k=P(lt,0.6+i*0.08,1.0+i*0.08,E.outBack); T(p,{s:k,o:clamp(k)*(1-0.5*P(lt,pd+0.4,pd+1,E.lin))}); p.style.transformOrigin='50% 100%'; });
+  // list reorder
+  const rk2=P(lt,2.6,3.4,E.inOutExpo); const rows=$$('#s8 .lr');
+  const startIdx=[3,0,1,2], endIdx=[0,1,2,3];
+  rows.forEach((r,i)=>{ const y=lerp(startIdx[i],endIdx[i],rk2)*124; const li=P(lt,0.9+startIdx[i]*0.1,1.4+startIdx[i]*0.1); T(r,{y:y+(1-li)*20,o:li,s:i===0?1+Math.sin(rk2*Math.PI)*0.04:1}); r.style.zIndex=i===0?5:1;
+    if(i===0){ r.style.boxShadow=`0 ${10+20*Math.sin(rk2*Math.PI)}px ${30+20*Math.sin(rk2*Math.PI)}px -14px rgba(22,163,74,${0.25+0.3*Math.sin(rk2*Math.PI)})`;
+      const rc=P(lt,2.7,4.2,E.inOutCubic); r.querySelector('.rc').textContent=Math.round(lerp(12,148,rc)); r.querySelector('.rt').textContent=(lerp(4.1,4.9,rc)).toFixed(1).replace('.',',');
+      const b=spring(lt-3.4,2.2,0.45); T(r.querySelector('.b1'),{s:clamp(b,0,1.3),o:clamp(b*3)}); } });
+  const nk=spring(lt-3.55,1.6,0.6); T($('#s8n'),{x:(1-clamp(nk,0,1.2))*60,s:lerp(.8,1,clamp(nk,0,1.1)),o:P(lt,3.55,3.8,E.outCubic)});
+  sceneOut($('#s8'),lt,6,-1);
+});
+// ---- S9 PROOF 38-44
+S('s9',38,44,(lt)=>{
+  const out=P(lt,5.55,6.0,E.inCubic);
+  const li=P(lt,0.1,0.7); T($('#s9lab'),{y:(1-li)*16,o:li});
+  const bi=P(lt,0.3,0.9); const cnt=P(lt,0.5,2.3,E.outCubic); $('#s9big').textContent='+'+Math.round(cnt*300)+' %';
+  const pop=lt>2.3?Math.exp(-(lt-2.3)*6)*0.05:0;
+  T($('#s9big'),{y:(1-bi)*40,o:bi,blur:(1-bi)*12,s:1+pop}); $('#s9big').style.transformOrigin='0 70%';
+  rev($('#s9sub'),lt,0.9,{st:0.05,blur:4});
+  const ck=P(lt,0.35,1.1); T($('#s9chart'),{y:(1-ck)*50,o:ck,s:lerp(.95,1,ck)});
+  const L=lineLen(); const dk=P(lt,0.7,2.6,E.inOutCubic);
+  $('#s9line').style.strokeDasharray=L; $('#s9line').style.strokeDashoffset=L*(1-dk);
+  $('#s9lineGlow').style.strokeDasharray=L; $('#s9lineGlow').style.strokeDashoffset=L*(1-dk);
+  $('#s9area').style.opacity=P(lt,1.2,2.8,E.outCubic);
+  const pt=$('#s9line').getPointAtLength(L*dk); const dot=$('#s9dot'); dot.setAttribute('cx',pt.x); dot.setAttribute('cy',pt.y); dot.style.opacity=dk>0.01?1:0;
+  dot.setAttribute('r',9+(dk>=1?Math.sin(lt*6)*2:0));
+  const tp=P(lt,2.6,3.0); const tip=$('#s9tip'); tip.style.left=(pt.x-196)+'px'; tip.style.top=(pt.y-62)+'px'; T(tip,{y:(1-tp)*10,o:tp,s:lerp(.9,1,tp)});
+  $$('.s9tile').forEach((t,i)=>{ const k=P(lt,1.6+i*0.15,2.3+i*0.15); T(t,{y:(1-k)*40,o:k}); });
+  T($('#s9foot'),{o:P(lt,2.6,3.2)});
+  $('#s9').style.opacity=1-out; $('#s9').style.filter=out>0.01?`blur(${out*10}px)`:'none'; $('#s9').style.transform=`scale(${1-out*0.04})`;
+});
+// ---- S10 PROCESS 44-48
+S('s10',44,48,(lt)=>{
+  const out=P(lt,3.55,4.0,E.inCubic);
+  rev($('#s10t'),lt,0.05,{st:0.07});
+  $('#s10line').style.width=(P(lt,0.45,2.0,E.inOutCubic)*100)+'%';
+  $$('.nd').forEach((n,i)=>{ const t0=0.5+i*0.5; const k=spring(lt-t0,1.8,0.5); const o=P(lt,t0,t0+0.3,E.outCubic);
+    T(n.querySelector('.cir'),{s:clamp(k,0,1.25),o});
+    const filled=lt>t0+0.15; const c=n.querySelector('.cir'); c.style.background=filled?'linear-gradient(135deg,#2563EB,#38BDF8)':'#fff'; c.style.color=filled?'#fff':'#0A0A0C'; c.style.borderColor=filled?'transparent':'#E4E4E7';
+    const tk=P(lt,t0+0.15,t0+0.8); T(n.querySelector('.tt'),{y:(1-tk)*26,o:tk,blur:(1-tk)*6}); const sk=P(lt,t0+0.28,t0+0.9); T(n.querySelector('.ts'),{y:(1-sk)*22,o:sk});
+  });
+  $('#s10').style.opacity=1-out; $('#s10').style.filter=out>0.01?`blur(${out*10}px)`:'none'; $('#s10').style.transform=`scale(${1+out*0.03})`;
+});
+// ---- S11 SCARCITY 48-52
+S('s11',48,52,(lt)=>{
+  rev($('#s11a'),lt,0.12,{st:0.08});
+  $$('#s11 .sl').forEach((s,i)=>{ const t0=0.7+i*0.12; const k=spring(lt-t0,2.0,0.5); T(s,{s:clamp(k,0,1.2),o:P(lt,t0,t0+0.2)}); const f=P(lt,1.0+i*0.12,1.3+i*0.12,E.outCubic); s.querySelector('.slf').style.opacity=f; s.style.borderColor=`rgba(255,255,255,${0.18*(1-f)})`; s.style.boxShadow=f>0?`0 0 ${40*f}px rgba(59,130,246,${0.45*f})`:'none'; });
+  rev($('#s11b'),lt,1.55,{st:0.07});
+  rev($('#s11c'),lt,1.9,{st:0.04,blur:4});
+  const push=P(lt,2.85,3.95,E.inExpo);
+  T($('#s11g'),{s:1+push*2.2,o:1-P(lt,3.55,3.95,E.lin),blur:push*14});
+});
+// ---- S12 CTA 52-60
+S('s12',52,60,(lt)=>{
+  const toEnd=P(lt,4.0,4.6,E.inOutCubic);
+  const eb=P(lt,0.05,0.6); T($('#s12eb'),{y:(1-eb)*16,o:eb});
+  rev($('#s12a'),lt,0.12,{st:0.07});
+  rev($('#s12b'),lt,0.6,{st:0.022,blur:4});
+  const bk=spring(lt-1.25,1.6,0.55); const press=P(lt,2.95,3.03,E.outCubic)-P(lt,3.03,3.25,E.outCubic);
+  const breathe=lt>1.8&&lt<2.9?Math.sin((lt-1.8)*5)*0.012:0;
+  T($('#s12btn'),{y:(1-clamp(bk,0,1.1))*50,s:lerp(.85,1,clamp(bk,0,1.1))-press*0.05+breathe,o:P(lt,1.25,1.5,E.outCubic)});
+  T($('#s12note'),{o:P(lt,1.6,2.1)});
+  const rk=P(lt,3.0,3.6,E.outCubic); T($('#s12rip'),{s:rk*22,o:(1-rk)*(lt>3?1:0)});
+  const ok=P(lt,3.2,3.45,E.outCubic); $('#s12btnOk').style.opacity=ok; $('#s12lab1').style.opacity=1-ok; T($('#s12lab2'),{y:(1-ok)*20,o:ok});
+  // cursor
+  const ck=P(lt,1.9,2.85,E.inOutCubic); const cx=lerp(1560,1010,ck)+Math.sin(ck*Math.PI)*-40, cy=lerp(1100,700,ck)+Math.sin(ck*Math.PI)*30;
+  T($('#s12cur'),{x:cx,y:cy,s:1-press*0.15,o:P(lt,1.9,2.1)*(1-P(lt,3.5,3.8))});
+  T($('#s12g'),{y:-toEnd*60,o:1-toEnd,blur:toEnd*12});
+  // end card
+  const ek=lt-4.35; $('#s12end').style.opacity=ek>-0.1?1:0;
+  markAnim($('#s12mark'),ek,0.0,{scatter:0.6}); wordAnim($('#s12word'),ek,0.35); shine($('#s12word'),ek,1.3);
+  rev($('#s12tag'),ek,0.85,{st:0.06});
+  const ct=spring(ek-1.25,1.5,0.6); T($('#s12cta'),{y:(1-clamp(ct,0,1.1))*30,o:P(ek,1.25,1.5)});
+  T($('#s12small'),{o:P(ek,1.6,2.2)});
+  T($('#s12end'),{s:1+P(ek,0,3.7,E.lin)*0.025});
+  const fin=P(lt,7.55,8.0,E.inCubic); $('#s12').style.opacity=1-fin*0; // hold end card
+});
+
+/* ================= GLOBAL ================= */
+function bgState(t){
+  // returns lightness 0..1 and circle radius for dark->light reveals
+  const L=$('#bgLight');
+  let clip='none', op=1;
+  if(t<11.55){ op=0; }
+  else if(t<12.05){ const k=P(t,11.55,12.05,E.inOutCubic); clip=`circle(${k*1150}px at 50% 50%)`; }
+  else if(t<37.6){ op=1; }
+  else if(t<38.05){ op=1-P(t,37.6,38.05,E.inOutCubic); }
+  else if(t<43.6){ op=0; }
+  else if(t<44.05){ op=P(t,43.6,44.05,E.inOutCubic); }
+  else if(t<47.6){ op=1; }
+  else if(t<48.05){ op=1-P(t,47.6,48.05,E.inOutCubic); }
+  else if(t<51.55){ op=0; }
+  else if(t<52.05){ const k=P(t,51.55,52.05,E.inOutCubic); clip=`circle(${k*1150}px at 50% 56%)`; }
+  L.style.opacity=op; L.style.clipPath=clip;
+  // glows
+  const gA=$('#glowA'), gB=$('#glowB');
+  let col='37,99,235', a=0.0;
+  if(t>=12&&t<20){col='37,99,235';a=0.10;} else if(t>=20&&t<26){col='244,63,94';a=0.13;} else if(t>=26&&t<32){col='14,165,233';a=0.14;} else if(t>=32&&t<38){col='34,197,94';a=0.13;} else if(t>=44){col='37,99,235';a=0.10;}
+  gA.style.background=`radial-gradient(circle, rgba(${col},${a}) 0%, transparent 60%)`; gA.style.opacity=1;
+  gA.style.left=(900+Math.sin(t*0.3)*200)+'px'; gA.style.top=(-500+Math.cos(t*0.25)*120)+'px';
+  gB.style.background=`radial-gradient(circle, rgba(${col},${a*0.7}) 0%, transparent 60%)`; gB.style.opacity=1;
+  gB.style.left=(-500+Math.cos(t*0.27)*160)+'px'; gB.style.top=(300+Math.sin(t*0.31)*120)+'px';
+}
+// light-theme scene clip for S4 during reveal & S12 during reveal
+function camShake(t){ let x=0,y=0,s=1; [[12.0,10],[40.3,4],[52.0,9],[56.35,5]].forEach(([t0,amp])=>{ if(t>=t0){ const d=t-t0, e=Math.exp(-d*9); x+=Math.sin(d*55)*amp*e; y+=Math.cos(d*47)*amp*e*0.7; s+=0.012*amp/10*e; } }); return {x,y,s}; }
+window.seek=function(t){
+  bgState(t);
+  SC.forEach(sc=>{ const on=t>=sc.a-0.001&&t<sc.b+0.001; show(sc.el,on); if(on){ sc.fn(t-sc.a); } });
+  // during circle reveals, clip light scenes too
+  if(t>=11.55&&t<12.05){ const k=P(t,11.55,12.05,E.inOutCubic); }
+  if(t>=51.55&&t<52.05){}
+  const cs=camShake(t); $('#cam').style.transform=`translate(${cs.x}px,${cs.y}px) scale(${cs.s})`;
+  // flash on impacts
+  const f=[12.0,52.0].reduce((a,t0)=>a+(t>=t0?Math.exp(-(t-t0)*14)*0.0:0),0); $('#flash').style.opacity=f;
+  // grain jitter
+  const fr=Math.floor(t*30); const gx=((fr*137)%200)-100, gy=((fr*71)%200)-100; $('#grain').style.transform=`translate(${gx}px,${gy}px)`;
+  const dark=(t<12||(t>=38&&t<44)||(t>=48&&t<52)); $('#grain').style.opacity=dark?0.16:0.06; $('#vig').style.opacity=dark?1:0.12;
+};
+window.DURATION=60;
+window.READY=document.fonts.ready.then(()=>{ seek(0); return true; });
+const q=new URLSearchParams(location.search); if(q.has('t')) document.fonts.ready.then(()=>seek(parseFloat(q.get('t'))));
+</script>
+</body>
+</html>
