@@ -1,0 +1,12 @@
+{
+  "name": "film-presentation-vformations",
+  "private": true,
+  "description": "Film de presentation VFormations : composition HTML rendue image par image.",
+  "scripts": {
+    "apercu": "node rendre.cjs --apercu",
+    "rendu": "node rendre.cjs"
+  },
+  "dependencies": {
+    "gsap": "3.13.0"
+  }
+}

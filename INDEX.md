@@ -1,17 +1,17 @@
 # INDEX — carte du projet
 
-> Genere par `outils/index-projet.py`. **218 fichiers · 5329 Ko.**
+> Genere par `outils/index-projet.py`. **218 fichiers · 5320 Ko.**
 > Une ligne par fichier : de quoi localiser sans ouvrir. Relancer apres tout ajout.
 
-## (racine) — 7 fichiers, 179 Ko
+## (racine) — 7 fichiers, 170 Ko
 
 | Ko | Fichier | Contenu |
 |---:|---|---|
 | 0 | `.gitignore` | Secrets / environnement (règle 9 : jamais dans Git) |
-| 34 | `CLAUDE.md` | CLAUDE.md — Mémoire de projet |
+| 35 | `CLAUDE.md` | CLAUDE.md — Mémoire de projet |
 | 31 | `CODEX_IA.html` | VOXY MATRIX | CODEX IA - Master Prompting |
 | 32 | `Hub_Documentaire.html` | VOXY MATRIX | Command Center Élite |
-| 32 | `INDEX.md` | INDEX — carte du projet |
+| 21 | `INDEX.md` | INDEX — carte du projet |
 | 33 | `index.html` | VOXY MATRIX | Command Center Élite |
 | 14 | `passation.md` | Passation |
 

@@ -28,3 +28,10 @@ build/
 
 # Produit du build du site (regenere par build.mjs)
 livrables/C-site/dist/
+
+# Film de presentation : les fichiers video et son sont generes (voir son LISEZMOI)
+livrables/A-marketing/film-presentation/sortie/
+
+# Python
+__pycache__/
+*.pyc

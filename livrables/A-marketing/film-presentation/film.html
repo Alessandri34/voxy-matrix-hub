@@ -1,0 +1,776 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>VFormations — film de présentation</title>
+<!--
+  Film de presentation VFormations — composition.
+
+  Tout est une fonction du temps : `FILM.aller(t)` pose l'image de la
+  seconde t, sans rien jouer. C'est ce qui permet de rendre le film image
+  par image (rendre.cjs) et d'obtenir deux fois le meme fichier.
+
+  Le texte vient du site (`livrables/C-site/site.html`) : la methode en
+  4 temps, le catalogue, la phrase sur le financement. Aucun prix, aucun
+  « gratuit », aucun resultat promis, pas de logo Qualiopi — voir LISEZMOI.
+
+  Cadence : 120 a la minute, soit un temps toutes les 0,5 s et une mesure
+  toutes les 2 s. Chaque changement de plan tombe sur une mesure, chaque
+  apparition importante sur un temps : c'est ce qui cale l'image sur le son.
+-->
+<style>
+  :root{
+    --nuit:#050914; --bleu:#1A3C86; --bleu-fonce:#0F2A63; --bleu-vif:#2F6BD8;
+    --creme:#F5F3F1; --blanc:#FFFFFF; --encre:#15131B; --doux:#6E6670; --trait:#E6E1DE;
+    --ciel:#AEDCF6; --lavande:#C8D4F5; --menthe:#9EE7D4; --orange:#F3A63D;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%;background:#000;overflow:hidden}
+  #cadre{
+    position:absolute;left:0;top:0;width:1920px;height:1080px;overflow:hidden;
+    background:var(--nuit);color:var(--blanc);transform-origin:0 0;
+    font-family:"Inter Display","Inter",system-ui,sans-serif;font-weight:400;
+    -webkit-font-smoothing:antialiased;text-rendering:geometricPrecision;font-kerning:normal;
+  }
+  .plan{position:absolute;inset:0;visibility:hidden;opacity:0;overflow:hidden}
+  .cam{position:absolute;inset:0;transform-origin:50% 50%}
+  .sombre{background:radial-gradient(1200px 800px at 18% 12%,#12265C 0%,rgba(18,38,92,0) 62%),
+                     radial-gradient(1100px 760px at 86% 92%,#0D2C5E 0%,rgba(13,44,94,0) 60%),var(--nuit)}
+  .clair{background:radial-gradient(1300px 820px at 82% 8%,#FFFFFF 0%,rgba(255,255,255,0) 62%),
+                    radial-gradient(1000px 700px at 6% 96%,#E7ECF9 0%,rgba(231,236,249,0) 62%),var(--creme);color:var(--encre)}
+  .halo{position:absolute;border-radius:50%;pointer-events:none}
+  .lueur{position:absolute;width:1300px;height:1300px;border-radius:50%;pointer-events:none}
+  .lueur.a{left:-420px;top:-520px;background:radial-gradient(closest-side,rgba(47,107,216,.34),rgba(47,107,216,0))}
+  .lueur.b{right:-460px;bottom:-560px;background:radial-gradient(closest-side,rgba(158,231,212,.13),rgba(158,231,212,0))}
+
+  /* ---------- Typographie ---------- */
+  .titre{font-weight:600;letter-spacing:-.035em;line-height:1.02}
+  .centre{position:absolute;left:0;width:1920px;text-align:center}
+  .mot{display:inline-block;white-space:pre}
+  .degrade{background:linear-gradient(100deg,var(--ciel) 0%,#DCE6FF 45%,var(--menthe) 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+  .degrade-bleu{background:linear-gradient(100deg,var(--bleu) 0%,var(--bleu-vif) 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+  .sur{font-weight:600;letter-spacing:.01em}
+
+  /* ---------- Plan 1 : la recherche ---------- */
+  #barre{position:absolute;left:530px;top:490px;width:860px;height:100px;border-radius:50px;
+    background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.18);
+    box-shadow:0 30px 90px rgba(4,10,30,.6),inset 0 1px 0 rgba(255,255,255,.12);
+    display:flex;align-items:center;padding:0 38px;gap:24px}
+  #barre svg{flex:none;width:40px;height:40px;stroke:rgba(255,255,255,.7);fill:none;stroke-width:2.4;stroke-linecap:round}
+  #saisie{height:64px;overflow:hidden;flex:1}
+  .rl{height:64px;line-height:64px;font-size:42px;font-weight:500;letter-spacing:-.015em;white-space:nowrap}
+  #curseur{display:inline-block;width:3px;height:44px;background:var(--ciel);vertical-align:-7px;margin-left:5px;border-radius:2px}
+  #t1a{top:292px;font-size:112px}
+  #t1b{top:418px;font-size:112px}
+  #resultats{position:absolute;left:174px;top:640px;display:flex;gap:36px}
+  .carte{position:relative;width:500px;height:206px;border-radius:34px;padding:28px;display:flex;gap:24px;align-items:center;
+    background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.14);box-shadow:0 30px 80px rgba(3,8,24,.5)}
+  .vignette{position:relative;flex:none;width:150px;height:150px;border-radius:24px;overflow:hidden;background:#101a36}
+  .vignette img{width:100%;height:100%;object-fit:cover}
+  .lecture{position:absolute;right:10px;bottom:10px;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.92);
+    display:grid;place-items:center}
+  .lecture svg{width:18px;height:18px;fill:var(--bleu);margin-left:3px}
+  .carte h3{font-size:31px;white-space:nowrap;font-weight:600;letter-spacing:-.02em;line-height:1.1;margin-bottom:12px}
+  .etoiles{display:flex;gap:4px;align-items:center;font-size:24px;font-weight:500;color:rgba(255,255,255,.82)}
+  .etoiles svg{width:22px;height:22px;fill:var(--orange)}
+  .etoiles b{font-weight:500;margin-left:8px}
+  .puce{display:inline-flex;align-items:center;gap:8px;margin-top:14px;padding:7px 14px;border-radius:999px;font-size:21px;font-weight:500;
+    background:rgba(158,231,212,.16);color:var(--menthe)}
+  #c3{background:transparent;border:2.5px dashed rgba(255,255,255,.34);box-shadow:none}
+  #c3 .vignette{background:transparent;border:2.5px dashed rgba(255,255,255,.3);display:grid;place-items:center;
+    font-size:74px;font-weight:600;color:rgba(255,255,255,.45)}
+  #c3 h3{color:var(--orange)}
+  #c3 .ligne{height:14px;border-radius:7px;background:rgba(255,255,255,.16);margin-bottom:12px}
+  #c3 .puce{background:rgba(255,255,255,.1);color:rgba(255,255,255,.62)}
+  .anneau{position:absolute;inset:-3px;border-radius:36px;border:3px solid var(--orange);opacity:0}
+
+  /* ---------- Plan 2 : le probleme ---------- */
+  #eventail{position:absolute;inset:0}
+  .vue{position:absolute;width:350px;height:530px;border-radius:36px;overflow:hidden;
+    box-shadow:0 50px 120px rgba(2,6,20,.7),0 0 0 1.5px rgba(255,255,255,.12)}
+  .vue img{position:absolute;width:100%;height:100%;object-fit:cover}
+  .vue::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,9,20,0) 45%,rgba(5,9,20,.55) 100%)}
+  #lueur2{left:360px;top:140px;width:1200px;height:800px;opacity:0;background:radial-gradient(closest-side,rgba(47,107,216,.5),rgba(47,107,216,0))}
+  #p2a{position:absolute;left:140px;top:368px;font-size:112px}
+  #question{top:438px;font-size:150px}
+  .tampon{top:434px;font-size:176px}
+  #tp3{top:408px;font-size:136px;line-height:1.04}
+
+  /* ---------- Raccords ---------- */
+  #eclair,#noir{position:absolute;inset:0;visibility:hidden;opacity:0;pointer-events:none}
+  #eclair{background:#fff}
+  #noir{background:#000}
+  #grain{position:absolute;inset:0;background:url(ressources/grain.png);background-size:1920px 1080px;
+    mix-blend-mode:overlay;opacity:.07;pointer-events:none}
+
+  /* ---------- Plan 3 : la revelation ---------- */
+  #onde3{left:660px;top:160px;width:600px;height:600px;border:3px solid rgba(26,60,134,.35);opacity:0}
+  #logo3{position:absolute;left:660px;top:250px;width:600px;height:420px}
+  .barre-logo{position:absolute;left:90px;top:0;width:420px}
+  #mot3{position:absolute;left:40px;top:330px;width:520px}
+  #slogan{top:404px;font-size:160px;color:var(--encre)}
+  #sous3{top:650px;font-size:50px;color:var(--doux);letter-spacing:-.015em}
+  #sous3 b{color:var(--encre);font-weight:600}
+
+  /* ---------- Plan 4 : la methode ---------- */
+  #entete4{position:absolute;left:140px;top:74px;display:flex;align-items:center;gap:18px;font-size:30px;font-weight:600;letter-spacing:-.01em}
+  #entete4 img{width:64px}
+  #etapes{position:absolute;right:140px;top:70px;display:flex;gap:12px}
+  .pastille{display:flex;align-items:center;gap:12px;height:56px;padding:0 22px 0 8px;border-radius:28px;font-size:25px;font-weight:600;
+    background:rgba(26,60,134,0);color:#8C8690;box-shadow:inset 0 0 0 1.5px #D9D3CE;letter-spacing:-.01em}
+  .pastille i{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;font-style:normal;font-size:21px;
+    background:#E9E4E0;color:#8C8690}
+  #rail{position:absolute;left:140px;top:1002px;width:1640px;height:5px;border-radius:3px;background:#E3DDD8;overflow:hidden}
+  #rail b{display:block;height:100%;width:100%;background:linear-gradient(90deg,var(--bleu),var(--bleu-vif));transform-origin:0 50%}
+  .etape{position:absolute;left:140px;top:236px;width:800px}
+  .etape .sur{font-size:32px;color:var(--bleu);margin-bottom:22px}
+  .etape h2{font-size:128px;font-weight:600;letter-spacing:-.04em;line-height:1;color:var(--encre)}
+  .etape p{font-size:44px;line-height:1.28;color:var(--doux);letter-spacing:-.015em;margin-top:38px;max-width:740px}
+  .etape p b{color:var(--encre);font-weight:600}
+  #scene4{position:absolute;left:962px;top:176px;width:800px;height:760px;perspective:1700px;transform:scale(1.06);transform-origin:60% 50%}
+  .insert{position:absolute;inset:0;transform-style:preserve-3d}
+  .fiche{position:absolute;background:#fff;border-radius:38px;box-shadow:0 50px 120px rgba(26,34,70,.16),0 4px 14px rgba(26,34,70,.06);color:var(--encre)}
+  .tete{display:flex;align-items:center;gap:22px;margin-bottom:34px}
+  .icone{flex:none;display:grid;place-items:center;width:76px;height:76px;border-radius:22px;background:#E5ECFB}
+  .icone svg{width:38px;height:38px;fill:none;stroke:var(--bleu);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+  .tete h4{font-size:36px;font-weight:600;letter-spacing:-.025em;line-height:1.1}
+  .tete small{display:block;font-size:23px;color:var(--doux);margin-top:6px;font-weight:400;letter-spacing:-.005em}
+
+  /* 1 — diagnostic */
+  #f1{left:40px;top:30px;width:720px;padding:44px 46px 46px}
+  .jauge{display:grid;grid-template-columns:210px 1fr 170px;align-items:center;gap:22px;height:66px;font-size:26px;font-weight:500}
+  .piste{height:14px;border-radius:7px;background:#ECE8E4;overflow:hidden}
+  .piste b{display:block;height:100%;border-radius:7px;background:linear-gradient(90deg,var(--bleu),var(--bleu-vif));transform-origin:0 50%}
+  .jauge span{font-size:22px;color:var(--doux);text-align:right;font-weight:400}
+  #carteMarche{position:relative;height:196px;border-radius:26px;overflow:hidden;margin-top:26px}
+  #carteMarche img{position:absolute;width:100%;height:150%;top:-34%;object-fit:cover}
+  #carteMarche .libelle{position:absolute;left:18px;bottom:16px;padding:9px 18px;border-radius:999px;background:rgba(255,255,255,.94);
+    font-size:22px;font-weight:600;color:var(--bleu)}
+  .onde{position:absolute;left:422px;top:62px;width:70px;height:70px;border-radius:50%;border:3px solid #fff;opacity:0}
+
+  /* 2 — pratique terrain */
+  #prise{position:absolute;left:0;top:26px;width:800px;height:540px;border-radius:40px;overflow:hidden;
+    box-shadow:0 60px 130px rgba(20,28,60,.28)}
+  #prise img{position:absolute;width:100%;height:100%;object-fit:cover}
+  #prise::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,12,28,.34) 0%,rgba(8,12,28,0) 30%,rgba(8,12,28,0) 62%,rgba(8,12,28,.5) 100%)}
+  #rec{position:absolute;z-index:2;left:28px;top:26px;display:flex;align-items:center;gap:12px;padding:10px 20px 10px 16px;border-radius:999px;
+    background:rgba(10,12,22,.62);font-size:25px;font-weight:600;color:#fff;font-variant-numeric:tabular-nums;letter-spacing:.02em}
+  #rec i{width:16px;height:16px;border-radius:50%;background:#FF3B30}
+  #lieu{position:absolute;z-index:2;right:28px;top:26px;padding:11px 22px;border-radius:999px;background:rgba(255,255,255,.94);
+    font-size:24px;font-weight:600;color:var(--encre)}
+  #mobile{position:absolute;left:-46px;top:330px;width:206px;height:412px;border-radius:44px;background:#0B0D14;padding:10px;
+    box-shadow:0 50px 100px rgba(10,14,34,.45),inset 0 0 0 2px #2A2E3A}
+  #mobile div{position:relative;width:100%;height:100%;border-radius:34px;overflow:hidden}
+  #mobile img{position:absolute;height:100%;width:340%;left:-12%;object-fit:cover}
+  #mobile i{position:absolute;left:50%;top:14px;width:62px;height:18px;margin-left:-31px;border-radius:9px;background:#0B0D14;z-index:2}
+  #accomp{left:404px;top:488px;width:396px;padding:28px 30px;display:flex;gap:20px;align-items:center}
+  #accomp .icone{width:66px;height:66px;border-radius:50%}
+  #accomp b{display:block;font-size:30px;font-weight:600;letter-spacing:-.02em}
+  #accomp span{font-size:24px;color:var(--doux)}
+
+  /* 3 — phase reflexive */
+  #f3{left:40px;top:24px;width:720px;padding:44px 44px 42px}
+  .colonnes{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .col{border-radius:26px;padding:24px 24px 14px}
+  .col h5{font-size:23px;font-weight:600;letter-spacing:.01em;margin-bottom:14px}
+  .col div{display:flex;align-items:center;gap:12px;font-size:25px;font-weight:500;height:50px;letter-spacing:-.01em}
+  .col svg{flex:none;width:28px;height:28px;fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+  .ok{background:#E6F7F1}.ok h5{color:#0B5240}.ok svg{stroke:#0E7A5F}
+  .aj{background:#FDF1DE}.aj h5{color:#6E3C00}.aj svg{stroke:#B86A0A}
+  .essais{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:22px}
+  .essai{position:relative;height:150px;border-radius:22px;overflow:hidden}
+  .essai img{position:absolute;width:260%;height:160%;object-fit:cover}
+  .essai span{position:absolute;left:10px;bottom:10px;padding:5px 12px;border-radius:999px;background:rgba(10,12,22,.66);color:#fff;font-size:19px;font-weight:600}
+  .essai b{position:absolute;right:10px;top:10px;width:42px;height:42px;border-radius:50%;background:var(--bleu);display:grid;place-items:center}
+  .essai b svg{width:24px;height:24px;fill:none;stroke:#fff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+  #retenue{box-shadow:0 0 0 4px var(--bleu)}
+
+  /* 4 — autonomie */
+  #f4{left:40px;top:24px;width:720px;padding:44px 46px 44px}
+  .acquis{display:flex;align-items:center;gap:24px;height:104px;border-top:1.5px solid #EEEAE6}
+  .acquis:first-of-type{border-top:0}
+  .rond{flex:none;display:grid;place-items:center;width:52px;height:52px;border-radius:50%;background:#EDE9E5}
+  .rond svg{width:28px;height:28px;fill:none;stroke:#fff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+  .acquis b{display:block;font-size:32px;font-weight:600;letter-spacing:-.02em}
+  .acquis span{font-size:23px;color:var(--doux)}
+  #suivi{display:flex;align-items:center;justify-content:center;gap:14px;height:76px;border-radius:22px;margin-top:22px;
+    background:linear-gradient(100deg,var(--bleu),var(--bleu-vif));color:#fff;font-size:28px;font-weight:600;letter-spacing:-.01em}
+  #suivi svg{width:30px;height:30px;fill:none;stroke:#fff;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+
+  /* ---------- Plan 5 : le catalogue ---------- */
+  #t5{top:112px;font-size:98px;color:var(--encre)}
+  #grille{position:absolute;left:150px;top:300px;display:grid;grid-template-columns:repeat(3,520px);gap:30px}
+  .tuile{height:268px;padding:36px 36px 30px;border-radius:38px;background:#fff;color:var(--encre);
+    box-shadow:0 30px 80px rgba(26,34,70,.11),0 2px 8px rgba(26,34,70,.05)}
+  .tuile .icone{margin-bottom:26px}
+  .tuile h3{font-size:36px;font-weight:600;letter-spacing:-.028em;line-height:1.08}
+  .tuile p{font-size:24px;color:var(--doux);margin-top:10px;letter-spacing:-.005em}
+  #lieux{top:920px;display:flex;justify-content:center;gap:16px}
+  #lieux span{padding:14px 28px;border-radius:999px;background:#fff;font-size:28px;font-weight:600;color:var(--bleu);
+    box-shadow:0 10px 30px rgba(26,34,70,.08);letter-spacing:-.01em}
+
+  /* ---------- Plan 6 : cadre et financement ---------- */
+  #fond6{position:absolute;right:0;top:0;width:1240px;height:1080px;opacity:.44;
+    -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 52%);mask-image:linear-gradient(90deg,transparent 0%,#000 52%)}
+  #fond6 img{position:absolute;width:100%;height:100%;object-fit:cover}
+  #voile6{position:absolute;inset:0;background:linear-gradient(90deg,var(--nuit) 30%,rgba(5,9,20,.5) 100%)}
+  .bloc6{position:absolute;left:140px;top:262px}
+  .bloc6 .sur{font-size:30px;color:var(--ciel);text-transform:uppercase;letter-spacing:.12em;margin-bottom:28px}
+  #b6a h2{font-size:132px;font-weight:600;letter-spacing:-.04em;line-height:1}
+  #b6a p{font-size:46px;color:rgba(255,255,255,.74);margin-top:30px;letter-spacing:-.015em}
+  .verres{display:flex;gap:14px;margin-top:58px}
+  .verre{padding:15px 28px;border-radius:999px;background:rgba(255,255,255,.09);border:1.5px solid rgba(255,255,255,.18);
+    font-size:29px;font-weight:600;letter-spacing:-.01em}
+  #b6b h2{font-size:90px;font-weight:600;letter-spacing:-.038em;line-height:1.04}
+  #b6b p{font-size:47px;margin-top:34px;letter-spacing:-.02em;font-weight:500}
+  #b6b .verres{margin-top:52px;align-items:center}
+  #b6b em{font-style:normal;font-size:28px;color:rgba(255,255,255,.62);margin-left:10px}
+  #scene6{position:absolute;left:1262px;top:268px;width:530px;height:560px;perspective:1700px}
+  #devis{position:absolute;left:0;top:0;width:100%;border-radius:38px;padding:42px 40px 40px;background:rgba(18,28,58,.78);
+    border:1.5px solid rgba(255,255,255,.2);box-shadow:0 60px 130px rgba(1,4,14,.7),inset 0 1px 0 rgba(255,255,255,.14)}
+  #devis .tete h4{color:#fff}
+  #devis .icone{background:rgba(174,220,246,.16)}
+  #devis .icone svg{stroke:var(--ciel)}
+  .poste{display:flex;align-items:center;justify-content:space-between;height:84px;font-size:27px;font-weight:500;color:rgba(255,255,255,.84);
+    border-top:1.5px solid rgba(255,255,255,.12)}
+  .poste i{display:block;height:16px;border-radius:8px;background:rgba(255,255,255,.26);transform-origin:100% 50%}
+  .poste.total{font-weight:600;color:#fff;font-size:31px}
+  .poste.total i{background:#fff}
+  #annonce{display:flex;align-items:center;justify-content:center;gap:12px;height:70px;border-radius:20px;margin-top:18px;
+    background:var(--menthe);color:#0B3F32;font-size:25px;font-weight:600;letter-spacing:-.01em}
+  #annonce svg{width:28px;height:28px;fill:none;stroke:#0B3F32;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+
+  /* ---------- Plan 7 : l'appel ---------- */
+  #p7{background:radial-gradient(1200px 800px at 80% 10%,#2C59BD 0%,rgba(44,89,189,0) 60%),
+                 radial-gradient(1000px 760px at 10% 100%,#0A1F52 0%,rgba(10,31,82,0) 62%),linear-gradient(135deg,#1A3C86 0%,#0F2A63 100%)}
+  #fond7{position:absolute;inset:0;opacity:.13;mix-blend-mode:luminosity;-webkit-mask-image:radial-gradient(1300px 800px at 50% 50%,#000 0%,transparent 78%);mask-image:radial-gradient(1300px 800px at 50% 50%,#000 0%,transparent 78%)}
+  #fond7 img{position:absolute;width:100%;height:100%;object-fit:cover}
+  #t7{top:286px;font-size:124px;line-height:1.04}
+  #bouton{position:absolute;left:630px;top:640px;width:660px;height:116px;border-radius:58px;background:#fff;color:var(--bleu);
+    display:flex;align-items:center;justify-content:center;gap:18px;font-size:44px;font-weight:600;letter-spacing:-.022em;
+    box-shadow:0 30px 80px rgba(3,10,36,.45)}
+  #bouton svg{width:40px;height:40px;fill:none;stroke:var(--bleu);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+  #ride{position:absolute;left:630px;top:640px;width:660px;height:116px;border-radius:58px;border:3px solid #fff;opacity:0}
+  #legende7{top:806px;font-size:35px;color:rgba(255,255,255,.78);letter-spacing:-.012em}
+  #fleche{position:absolute;left:0;top:0;width:54px;height:54px;visibility:hidden}
+  #fin{position:absolute;inset:0}
+  #logo7{position:absolute;left:660px;top:176px;width:600px;height:420px}
+  #mot7{position:absolute;left:30px;top:340px;width:540px}
+  #redite{top:664px;font-size:38px;color:rgba(255,255,255,.8);letter-spacing:-.01em}
+  #adresse{top:722px;font-size:84px;font-weight:600;letter-spacing:-.035em}
+  #mention{top:952px;font-size:25px;color:rgba(255,255,255,.62);letter-spacing:.005em}
+</style>
+</head>
+<body>
+<div id="cadre">
+
+  <!-- ============ 1. LA RECHERCHE (0 – 6 s) ============ -->
+  <section class="plan sombre" id="p1"><div class="lueur a"></div><div class="lueur b"></div><div class="cam">
+    <div id="barre">
+      <svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.6 15.6 21 21"/></svg>
+      <div id="saisie"><div id="rouleau">
+        <div class="rl"><span id="frappe"></span><i id="curseur"></i></div>
+        <div class="rl">coiffeur à Béziers</div>
+        <div class="rl">restaurant à Sète</div>
+      </div></div>
+    </div>
+    <h1 class="titre centre" id="t1a" data-mots>Vos clients vous cherchent.</h1>
+    <h1 class="titre centre" id="t1b" data-mots="degrade">Qui trouvent-ils ?</h1>
+    <div id="resultats">
+      <div class="carte"><div class="vignette"><img src="../../C-site/img/formation-video.jpg" style="object-position:8% 50%"><span class="lecture"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></span></div>
+        <div><h3>Un concurrent</h3><div class="etoiles"><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7.2.8-5.4 4.9 1.5 7.1L12 17.8 5.7 21.4l1.5-7.1L1.8 9.4 9 8.6z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7.2.8-5.4 4.9 1.5 7.1L12 17.8 5.7 21.4l1.5-7.1L1.8 9.4 9 8.6z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7.2.8-5.4 4.9 1.5 7.1L12 17.8 5.7 21.4l1.5-7.1L1.8 9.4 9 8.6z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7.2.8-5.4 4.9 1.5 7.1L12 17.8 5.7 21.4l1.5-7.1L1.8 9.4 9 8.6z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7.2.8-5.4 4.9 1.5 7.1L12 17.8 5.7 21.4l1.5-7.1L1.8 9.4 9 8.6z"/></svg></div><span class="puce">Vidéos publiées</span></div></div>
+      <div class="carte"><div class="vignette"><img src="../../C-site/img/mag-clients-locaux.jpg" style="object-position:6% 50%"><span class="lecture"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></span></div>
+        <div><h3>Un autre concurrent</h3><div class="etoiles"><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7.2.8-5.4 4.9 1.5 7.1L12 17.8 5.7 21.4l1.5-7.1L1.8 9.4 9 8.6z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7.2.8-5.4 4.9 1.5 7.1L12 17.8 5.7 21.4l1.5-7.1L1.8 9.4 9 8.6z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7.2.8-5.4 4.9 1.5 7.1L12 17.8 5.7 21.4l1.5-7.1L1.8 9.4 9 8.6z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7.2.8-5.4 4.9 1.5 7.1L12 17.8 5.7 21.4l1.5-7.1L1.8 9.4 9 8.6z"/></svg></div><span class="puce">Fiche à jour</span></div></div>
+      <div class="carte" id="c3"><span class="anneau"></span><div class="vignette">?</div>
+        <div style="flex:1"><h3>Vous ?</h3><div class="ligne" style="width:86%"></div><div class="ligne" style="width:58%"></div><span class="puce">Aucune vidéo</span></div></div>
+    </div>
+  </div></section>
+
+  <!-- ============ 2. LE PROBLEME (6 – 12 s) ============ -->
+  <section class="plan sombre" id="p2"><div class="lueur a"></div><div class="lueur b"></div><div class="cam">
+    <div id="eventail">
+      <div class="vue" id="v1" style="left:1110px;top:296px"><img src="../../C-site/img/formation-video.jpg" style="object-position:10% 50%"></div>
+      <div class="vue" id="v2" style="left:1330px;top:236px"><img src="../../C-site/img/mag-clients-locaux.jpg" style="object-position:4% 50%"></div>
+      <div class="vue" id="v3" style="left:1548px;top:316px"><img src="../../C-site/img/mag-filmer-smartphone.jpg" style="object-position:12% 50%"></div>
+    </div>
+    <div class="halo" id="lueur2"></div>
+    <h1 class="titre" id="p2a" data-mots>Votre métier,<br>vous le maîtrisez.</h1>
+    <h1 class="titre centre" id="question" data-mots="degrade">Le montrer en ligne ?</h1>
+    <h1 class="titre centre tampon" id="tp1">Pas le temps.</h1>
+    <h1 class="titre centre tampon" id="tp2">Pas la méthode.</h1>
+    <h1 class="titre centre tampon" id="tp3">Pas envie de dépendre<br>d'une agence.</h1>
+  </div></section>
+
+  <!-- ============ 3. LA REVELATION (12 – 16 s) ============ -->
+  <section class="plan clair" id="p3"><div class="cam">
+    <div class="halo" id="onde3"></div>
+    <div id="logo3">
+      <img class="barre-logo" src="ressources/sigle-blue-1.png"><img class="barre-logo" src="ressources/sigle-blue-2.png"><img class="barre-logo" src="ressources/sigle-blue-3.png">
+      <img id="mot3" src="ressources/mot-blue.png">
+    </div>
+    <h1 class="titre centre" id="slogan"><span class="mot">La </span><span class="mot">formation-</span><span class="mot degrade-bleu">action.</span></h1>
+    <p class="centre" id="sous3">Vous apprenez <b>en le faisant</b>. Sur votre propre entreprise.</p>
+  </div></section>
+
+  <!-- ============ 4. LA METHODE, EN 4 TEMPS (16 – 32 s) ============ -->
+  <section class="plan clair" id="p4"><div class="cam">
+    <div id="entete4"><img src="../../C-site/img/logo-mark-blue.png">La méthode, en 4 temps</div>
+    <div id="etapes">
+      <div class="pastille"><i>1</i>Diagnostic</div><div class="pastille"><i>2</i>Pratique terrain</div>
+      <div class="pastille"><i>3</i>Phase réflexive</div><div class="pastille"><i>4</i>Autonomie</div>
+    </div>
+
+    <div class="etape" id="e1"><div class="sur">Étape 1 sur 4</div><h2 data-mots>Diagnostic.</h2>
+      <p>Votre situation, vos objectifs, <b>votre marché local</b>.</p></div>
+    <div class="etape" id="e2"><div class="sur">Étape 2 sur 4</div><h2 data-mots>Pratique<br>terrain.</h2>
+      <p><b>Vous faites, on accompagne.</b> Chez vous, sur vos vrais cas.</p></div>
+    <div class="etape" id="e3"><div class="sur">Étape 3 sur 4</div><h2 data-mots>Phase<br>réflexive.</h2>
+      <p>On prend du recul ensemble : ce qui marche, <b>ce qu'il faut ajuster</b>.</p></div>
+    <div class="etape" id="e4"><div class="sur">Étape 4 sur 4</div><h2 data-mots>Autonomie.</h2>
+      <p>Vous repartez avec <b>vos livrables et vos compétences</b>.</p></div>
+
+    <div id="scene4">
+      <!-- 1 -->
+      <div class="insert" id="i1"><div class="fiche" id="f1">
+        <div class="tete"><span class="icone"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5M11 8.5v5M8.5 11h5"/></svg></span>
+          <h4>Diagnostic de départ<small>Avant de commencer, on regarde où vous en êtes.</small></h4></div>
+        <div class="jauge">Visibilité locale<div class="piste"><b id="j1" style="width:58%"></b></div><span>à consolider</span></div>
+        <div class="jauge">Vidéo<div class="piste"><b id="j2" style="width:22%"></b></div><span>à construire</span></div>
+        <div class="jauge">Outils<div class="piste"><b id="j3" style="width:44%"></b></div><span>à compléter</span></div>
+        <div id="carteMarche"><img src="../../C-site/img/mag-google-business.jpg"><span class="onde"></span><span class="onde"></span><span class="libelle">Votre marché local</span></div>
+      </div></div>
+      <!-- 2 -->
+      <div class="insert" id="i2">
+        <div id="prise"><img id="prisePhoto" src="../../C-site/img/formation-video.jpg">
+          <span id="rec"><i></i>REC <span id="chrono">00:00</span></span><span id="lieu">Tournage dans votre commerce</span></div>
+        <div id="mobile"><div><i></i><img src="../../C-site/img/mag-clients-locaux.jpg"></div></div>
+        <div class="fiche" id="accomp"><span class="icone"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.4"/><path d="M2.8 19c.6-3.4 3.1-5.2 6.2-5.2s5.6 1.8 6.2 5.2M16.5 5.2a3.4 3.4 0 0 1 0 5.8M18.6 13.9c1.5.8 2.4 2.5 2.7 5.1"/></svg></span>
+          <div><b>Vous faites.</b><span>Le formateur accompagne.</span></div></div>
+      </div>
+      <!-- 3 -->
+      <div class="insert" id="i3"><div class="fiche" id="f3">
+        <div class="tete"><span class="icone"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9.5h8M8 12.5h5"/></svg></span>
+          <h4>Débrief avec votre formateur<small>On regarde ensemble ce que vous venez de faire.</small></h4></div>
+        <div class="colonnes">
+          <div class="col ok"><h5>CE QUI MARCHE</h5>
+            <div class="point"><svg viewBox="0 0 24 24"><path d="M5 13l4.5 4.5L19 7.5"/></svg>Une accroche claire</div>
+            <div class="point"><svg viewBox="0 0 24 24"><path d="M5 13l4.5 4.5L19 7.5"/></svg>La lumière naturelle</div></div>
+          <div class="col aj"><h5>À AJUSTER</h5>
+            <div class="point"><svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 0 1 13.7-5.6M20 4v4h-4M20 12a8 8 0 0 1-13.7 5.6M4 20v-4h4"/></svg>Le cadrage</div>
+            <div class="point"><svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 0 1 13.7-5.6M20 4v4h-4M20 12a8 8 0 0 1-13.7 5.6M4 20v-4h4"/></svg>Le rythme</div></div>
+        </div>
+        <div class="essais">
+          <div class="essai"><img src="../../C-site/img/mag-filmer-smartphone.jpg" style="left:-10%;top:-20%"><span>Prise 1</span></div>
+          <div class="essai"><img src="../../C-site/img/mag-filmer-smartphone.jpg" style="left:-60%;top:-36%"><span>Prise 2</span></div>
+          <div class="essai" id="retenue"><img src="../../C-site/img/mag-filmer-smartphone.jpg" style="left:-118%;top:-30%"><span>Prise 3</span><b id="coche3"><svg viewBox="0 0 24 24"><path d="M5 13l4.5 4.5L19 7.5"/></svg></b></div>
+        </div>
+      </div></div>
+      <!-- 4 -->
+      <div class="insert" id="i4"><div class="fiche" id="f4">
+        <div class="tete"><span class="icone"><svg viewBox="0 0 24 24"><path d="M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6L12 16.5 6.700 19.4l1.200-6L3.400 9.3l6-.700z"/></svg></span>
+          <h4>Vous repartez avec<small>Exemple : Visibilité locale par la vidéo</small></h4></div>
+        <div class="acquis"><span class="rond"><svg viewBox="0 0 24 24"><path d="M5 13l4.5 4.5L19 7.5"/></svg></span><div><b>Vos vidéos</b><span>tournées par vous, dans votre commerce</span></div></div>
+        <div class="acquis"><span class="rond"><svg viewBox="0 0 24 24"><path d="M5 13l4.5 4.5L19 7.5"/></svg></span><div><b>Votre plan de contenu</b><span>calé sur votre activité, sur 90 jours</span></div></div>
+        <div class="acquis"><span class="rond"><svg viewBox="0 0 24 24"><path d="M5 13l4.5 4.5L19 7.5"/></svg></span><div><b>Votre fiche Google</b><span>optimisée pour la visibilité locale</span></div></div>
+        <div id="suivi"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>Évaluation des acquis à 90 jours</div>
+      </div></div>
+    </div>
+    <div id="rail"><b></b></div>
+  </div></section>
+
+  <!-- ============ 5. LE CATALOGUE (32 – 38 s) ============ -->
+  <section class="plan clair" id="p5"><div class="cam">
+    <h1 class="titre centre" id="t5"><span class="mot">Six </span><span class="mot">formations. </span><span class="mot degrade-bleu">Une </span><span class="mot degrade-bleu">seule </span><span class="mot degrade-bleu">méthode.</span></h1>
+    <div id="grille">
+      <div class="tuile"><span class="icone" style="background:#E5ECFB"><svg viewBox="0 0 24 24"><rect x="3" y="6.5" width="12.5" height="11" rx="2.6"/><path d="M15.5 10.500l5.500-3v9l-5.500-3z"/></svg></span><h3>Visibilité locale par la vidéo</h3><p>Filmer, monter et diffuser</p></div>
+      <div class="tuile"><span class="icone" style="background:#E2F5EF"><svg viewBox="0 0 24 24"><rect x="3" y="4.500" width="18" height="15" rx="2.800"/><path d="M3 9h18M6.500 6.800h.01M9.300 6.800h.01"/></svg></span><h3>Site internet professionnel</h3><p>Concevoir, mettre en ligne, piloter</p></div>
+      <div class="tuile"><span class="icone" style="background:#FDF1DE"><svg viewBox="0 0 24 24"><path d="M5 8h14l-1.200 11.500H6.200zM9 8V6.500a3 3 0 0 1 6 0V8"/></svg></span><h3>Boutique en ligne</h3><p>De la création à la première vente</p></div>
+      <div class="tuile"><span class="icone" style="background:#E1F1FB"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.500"/><circle cx="12" cy="12" r="4.300"/><circle cx="12" cy="12" r=".700"/></svg></span><h3>Prospection B2B</h3><p>Ciblage, prise de contact, relance</p></div>
+      <div class="tuile"><span class="icone" style="background:#ECE9FB"><svg viewBox="0 0 24 24"><path d="M10 3.500l1.800 4.700L16.500 10l-4.700 1.800L10 16.500l-1.800-4.700L3.500 10l4.700-1.800zM17.500 14l.900 2.600 2.600.900-2.600.900-.900 2.600-.900-2.600-2.600-.900 2.600-.900z"/></svg></span><h3>IA générative en entreprise</h3><p>Formuler, construire, encadrer ses données</p></div>
+      <div class="tuile"><span class="icone" style="background:#E5ECFB"><svg viewBox="0 0 24 24"><rect x="3.500" y="4" width="17" height="6.500" rx="2"/><rect x="3.500" y="13.500" width="17" height="6.500" rx="2"/><path d="M7 7.250h.01M7 16.750h.01M11 7.250h6M11 16.750h6"/></svg></span><h3>Héberger son IA en interne</h3><p>Un modèle ouvert, sur votre matériel</p></div>
+    </div>
+    <div class="centre" id="lieux"><span>En présentiel</span><span>Dans votre entreprise</span><span>Montpellier · Béziers · Sète et environs</span></div>
+  </div></section>
+
+  <!-- ============ 6. LE CADRE ET LE FINANCEMENT (38 – 46 s) ============ -->
+  <section class="plan sombre" id="p6"><div class="lueur a"></div><div class="lueur b"></div><div class="cam">
+    <div id="fond6"><img src="../../C-site/img/mag-financement.jpg"></div><div id="voile6"></div>
+    <div class="bloc6" id="b6a"><div class="sur">Un cadre clair</div>
+      <h2 data-mots>Organisme certifié<br>Qualiopi</h2><p>au titre des actions de formation</p>
+      <div class="verres"><span class="verre">Formateur à vos côtés</span><span class="verre">Évaluations tracées</span><span class="verre">Suivi à 90 jours</span></div></div>
+    <div class="bloc6" id="b6b"><div class="sur">Le financement</div>
+      <h2 data-mots>Vous cotisez déjà<br>à un fonds de formation.</h2>
+      <p class="degrade" style="display:inline-block">Il peut financer une partie de votre parcours.</p>
+      <div class="verres"><span class="verre">AGEFICE</span><span class="verre">FAFCEA</span><span class="verre">OPCO</span><em>selon votre statut</em></div></div>
+    <div id="scene6"><div id="devis">
+      <div class="tete"><span class="icone"><svg viewBox="0 0 24 24"><path d="M6.500 3.500h8l3.500 3.500v13.500H6.500zM14 3.500V7.500h4M9.500 12h5.500M9.500 15.500h5.500"/></svg></span><h4>Votre devis</h4></div>
+      <div class="poste">Formation<i style="width:150px"></i></div>
+      <div class="poste">Prise en charge estimée<i style="width:112px;background:var(--menthe)"></i></div>
+      <div class="poste total">Reste à charge<i style="width:92px"></i></div>
+      <div id="annonce"><svg viewBox="0 0 24 24"><path d="M5 13l4.500 4.500L19 7.500"/></svg>Annoncé avant toute inscription</div>
+    </div></div>
+  </div></section>
+
+  <!-- ============ 7. L'APPEL (46 – 54 s) ============ -->
+  <section class="plan" id="p7"><div class="cam">
+    <div id="fond7"><img src="../../C-site/img/formation-prospection.jpg"></div>
+    <div id="appel">
+      <h1 class="titre centre" id="t7" data-mots>Voyons ce que ça donne<br>sur votre cas.</h1>
+      <div id="ride"></div>
+      <div id="bouton">Réserver un diagnostic<svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+      <p class="centre" id="legende7">30 minutes pour regarder votre situation, concrètement.</p>
+      <svg id="fleche" viewBox="0 0 24 24"><path d="M5 3l14 8.200-6.300 1.500-2.800 5.900z" fill="#fff" stroke="#0B1A45" stroke-width="1.400" stroke-linejoin="round"/></svg>
+    </div>
+    <div id="fin">
+      <div id="logo7">
+        <img class="barre-logo" src="ressources/sigle-white-1.png"><img class="barre-logo" src="ressources/sigle-white-2.png"><img class="barre-logo" src="ressources/sigle-white-3.png">
+        <img id="mot7" src="ressources/mot-white.png">
+      </div>
+      <p class="centre" id="redite">Réservez votre diagnostic</p>
+      <div class="titre centre" id="adresse">vformations.fr</div>
+      <p class="centre" id="mention">Organisme de formation certifié Qualiopi au titre des actions de formation · Montpellier · Béziers · Sète et environs</p>
+    </div>
+  </div></section>
+
+  <div id="eclair"></div><div id="noir"></div><div id="grain"></div>
+</div>
+
+<script src="node_modules/gsap/dist/gsap.min.js"></script>
+<script>
+"use strict";
+const DUREE = 54, IPS = 60;
+const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
+
+/* ---- Decoupe en mots -------------------------------------------------
+   Chaque mot devient un bloc qu'on peut faire monter separement. La classe
+   de degrade se pose sur le MOT et non sur la ligne : un degrade decoupe
+   au texte (`background-clip:text`) ne traverse pas un enfant transforme,
+   et la ligne entiere deviendrait invisible. */
+for (const el of $$("[data-mots]")) {
+  const classe = el.dataset.mots;
+  const marcher = (noeud) => {
+    for (const enfant of [...noeud.childNodes]) {
+      if (enfant.nodeType === 3) {
+        const morceaux = enfant.textContent.match(/\S+\s*/g) || [];
+        const fragment = document.createDocumentFragment();
+        for (const m of morceaux) {
+          const s = document.createElement("span");
+          s.className = "mot" + (classe ? " " + classe : "");
+          s.textContent = m;
+          fragment.appendChild(s);
+        }
+        enfant.replaceWith(fragment);
+      } else if (enfant.nodeType === 1 && enfant.tagName !== "BR") marcher(enfant);
+    }
+  };
+  marcher(el);
+}
+
+/* ---- Outils d'animation ---------------------------------------------- */
+const tl = gsap.timeline({ paused: true, defaults: { overwrite: false } });
+const DOUX = "expo.out";
+const REPERES = [];                       // les sons, cales sur l'image
+const son = (t, type, plus = {}) => REPERES.push({ t: +t.toFixed(3), type, ...plus });
+
+function entre(cible, t, o = {}) {
+  const { y = 46, x = 0, flou = 14, d = 0.9, pas = 0, ech = 1, ease = DOUX } = o;
+  tl.fromTo(cible, { autoAlpha: 0, y, x, scale: ech, filter: `blur(${flou}px)` },
+    { autoAlpha: 1, y: 0, x: 0, scale: 1, filter: "blur(0px)", duration: d, ease, stagger: pas }, t);
+}
+function sort(cible, t, o = {}) {
+  const { y = -34, x = 0, flou = 12, d = 0.32, pas = 0, ech = 1 } = o;
+  tl.to(cible, { autoAlpha: 0, y, x, scale: ech, filter: `blur(${flou}px)`, duration: d, ease: "power2.in", stagger: pas }, t);
+}
+function saute(cible, t, o = {}) {       // petite apparition elastique
+  const { d = 0.55, pas = 0, y = 26, ech = 0.86 } = o;
+  tl.fromTo(cible, { autoAlpha: 0, y, scale: ech }, { autoAlpha: 1, y: 0, scale: 1, duration: d, ease: "back.out(1.7)", stagger: pas }, t);
+}
+/* Le raccord entre deux plans : le sortant avance et se floute, l'entrant
+   se pose par-dessus en reculant. Le son porte un souffle au meme instant.
+
+   Deux regles, apprises sur les images : le plan sortant reste OPAQUE
+   jusqu'a ce que l'entrant le couvre — sinon le fond sombre du cadre
+   transparait une fraction de seconde entre deux plans clairs. Et l'entrant
+   ne descend jamais sous l'echelle 1 : a 0,93, ses bords laissaient voir
+   une bordure sombre tout autour de l'image. */
+function raccord(de, vers, t) {
+  tl.to(de, { scale: 1.1, filter: "blur(22px)", duration: 0.36, ease: "power2.in" }, t - 0.3);
+  tl.fromTo(vers, { autoAlpha: 0, scale: 1.12, filter: "blur(24px)" },
+    { autoAlpha: 1, scale: 1, filter: "blur(0px)", duration: 0.75, ease: DOUX }, t - 0.06);
+  tl.set(de, { autoAlpha: 0 }, t + 0.45);
+  son(t - 0.28, "souffle");
+}
+const derive = (plan, debut, fin, ampleur = 1.035) => {
+  tl.fromTo(`${plan} .cam`, { scale: 1 }, { scale: ampleur, duration: fin - debut, ease: "none" }, debut);
+  // Dans les plans sombres, deux lumieres glissent lentement : un fond immobile fait « diapositive ».
+  if ($(`${plan} .lueur`)) {
+    tl.fromTo(`${plan} .lueur.a`, { x: -60, y: -30 }, { x: 220, y: 110, duration: fin - debut, ease: "sine.inOut" }, debut);
+    tl.fromTo(`${plan} .lueur.b`, { x: 80, y: 40 }, { x: -240, y: -120, duration: fin - debut, ease: "sine.inOut" }, debut);
+  }
+};
+
+/* =====================================================================
+   1. LA RECHERCHE — 0 a 6 s
+   ===================================================================== */
+const REQUETE = "boulangerie à Montpellier", T_FRAPPE = 0.2, PAS_FRAPPE = 0.04;
+gsap.set("#p1", { autoAlpha: 1 });      // hors de la ligne de temps : un reglage pose a t = 0 n'est pas rendu a t = 0
+derive("#p1", 0, 6);
+/* La barre est la des la premiere image : un film qui s'ouvre sur du noir
+   perd la seconde ou l'on decide de rester. Et la premiere phrase arrive
+   a 2 s, pas a 3. */
+tl.fromTo("#barre", { scale: 0.94 }, { scale: 1, duration: 0.6, ease: DOUX }, 0);
+for (let i = 0; i < REQUETE.length; i++) if (REQUETE[i] !== " ") son(T_FRAPPE + i * PAS_FRAPPE, "touche");
+tl.to("#curseur", { autoAlpha: 0, duration: 0.08 }, 1.26);
+tl.to("#rouleau", { y: -64, duration: 0.3, ease: "expo.inOut" }, 1.3);
+tl.to("#rouleau", { y: -128, duration: 0.3, ease: "expo.inOut" }, 1.64);
+son(1.34, "roule"); son(1.68, "roule");
+tl.to("#barre", { y: -372, scale: 0.68, duration: 0.7, ease: "expo.inOut" }, 1.82);
+son(1.84, "souffle", { doux: 1 });
+entre("#t1a .mot", 2.0, { pas: 0.075 });
+son(2.0, "impact", { doux: 1 });
+entre("#t1b .mot", 3.5, { pas: 0.085 });
+son(3.5, "impact", { doux: 1 });
+entre("#resultats .carte", 3.62, { pas: 0.15, y: 70, d: 0.85 });
+son(3.66, "pop", { note: 0 }); son(3.81, "pop", { note: 2 }); son(3.96, "pop", { note: 4 });
+// Le regard se pose sur la case vide : les deux concurrents s'effacent, « Vous ? » avance.
+tl.to("#resultats .carte:not(#c3)", { opacity: 0.38, scale: 0.97, duration: 0.6, ease: "power2.out" }, 4.5);
+tl.to("#c3", { scale: 1.07, duration: 0.7, ease: "back.out(1.6)" }, 4.5);
+tl.fromTo(".anneau", { opacity: 0.95, scale: 1 }, { opacity: 0, scale: 1.1, duration: 0.7, ease: "power2.out", repeat: 1, repeatDelay: 0.05, immediateRender: false }, 4.5);
+son(4.5, "creux");
+
+/* =====================================================================
+   2. LE PROBLEME — 6 a 12 s
+   ===================================================================== */
+raccord("#p1", "#p2", 6.0);
+derive("#p2", 6, 12, 1.04);
+gsap.set("#v1", { rotation: -6 }); gsap.set("#v2", { rotation: 2 }); gsap.set("#v3", { rotation: 8 });
+tl.fromTo(".vue", { autoAlpha: 0, y: 150 }, { autoAlpha: 1, y: 0, duration: 1.1, ease: DOUX, stagger: 0.11 }, 6.02);
+tl.fromTo(".vue img", { scale: 1.1 }, { scale: 1.3, duration: 6, ease: "none" }, 6.0);   // mouvement de camera dans l'image
+entre("#p2a .mot", 6.12, { pas: 0.085 });
+son(6.0, "impact");
+sort("#p2a", 7.72);
+tl.to(".vue", { y: -260, x: 240, rotation: "+=16", autoAlpha: 0, filter: "blur(10px)", duration: 0.55, ease: "power3.in", stagger: 0.07 }, 7.56);
+son(7.72, "souffle");
+entre("#question .mot", 8.0, { pas: 0.08, y: 60 });
+son(8.0, "impact", { doux: 1 });
+tl.to("#question", { y: -186, scale: 0.4, duration: 0.5, ease: "expo.inOut" }, 8.66);
+[["#tp1", 9.0, 0.62], ["#tp2", 9.75, 0.62], ["#tp3", 10.5, 0]].forEach(([id, t, tenue], i) => {
+  tl.fromTo(id, { autoAlpha: 0, scale: 1.26, filter: "blur(20px)" }, { autoAlpha: 1, scale: 1, filter: "blur(0px)", duration: 0.42, ease: DOUX }, t);
+  // Trois coups a 0,75 s d'ecart, et non un par seconde : le dernier, six mots sur deux lignes,
+  // ne restait que 0,6 s a l'ecran. Il en a maintenant 1,1.
+  if (tenue) tl.to(id, { autoAlpha: 0, scale: 0.95, filter: "blur(10px)", duration: 0.12, ease: "power2.in" }, t + tenue);
+  tl.fromTo("#lueur2", { opacity: 0.55, scale: 0.8 }, { opacity: 0, scale: 1.5, duration: 0.9, ease: "power2.out", immediateRender: false }, t);
+  son(t, "coup", { rang: i });
+});
+tl.to("#tp3", { scale: 1.34, filter: "blur(16px)", duration: 0.36, ease: "power3.in" }, 11.62);
+son(11.0, "montee", { d: 1.0 });
+
+/* =====================================================================
+   3. LA REVELATION — 12 a 16 s
+   ===================================================================== */
+tl.fromTo("#eclair", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.09, ease: "power2.in" }, 11.9);
+tl.set("#p2", { autoAlpha: 0 }, 12.0).set("#p3", { autoAlpha: 1 }, 12.0);
+tl.to("#eclair", { autoAlpha: 0, duration: 0.8, ease: "power2.out" }, 12.0);
+son(12.0, "impact", { fort: 1 }); son(12.0, "scintille");
+derive("#p3", 12, 16, 1.03);
+tl.fromTo("#onde3", { opacity: 0.9, scale: 0.25 }, { opacity: 0, scale: 2.6, duration: 1.3, ease: "power2.out", immediateRender: false }, 12.0);
+tl.fromTo("#logo3 .barre-logo", { autoAlpha: 0, x: -110, y: 110 }, { autoAlpha: 1, x: 0, y: 0, duration: 0.85, ease: DOUX, stagger: 0.095 }, 12.06);
+son(12.08, "trait", { rang: 0 }); son(12.175, "trait", { rang: 1 }); son(12.27, "trait", { rang: 2 });
+entre("#mot3", 12.42, { y: 18, d: 0.7 });
+tl.to("#logo3", { y: -262, scale: 0.44, duration: 0.8, ease: "expo.inOut" }, 12.9);
+son(12.94, "souffle", { doux: 1 });
+entre("#slogan .mot", 13.18, { pas: 0.1, y: 70, d: 1.0 });
+son(13.5, "pop", { note: 4 });
+entre("#sous3", 14.0, { y: 30 });
+son(14.0, "tic");
+
+/* =====================================================================
+   4. LA METHODE — 16 a 32 s, quatre temps de 4 s
+   ===================================================================== */
+raccord("#p3", "#p4", 16.0);
+derive("#p4", 16, 32, 1.02);
+tl.fromTo("#rail b", { scaleX: 0 }, { scaleX: 1, duration: 16, ease: "none" }, 16);
+const pastilles = $$(".pastille");
+function etape(k, t) {
+  const p = pastilles[k - 1], rond = p.querySelector("i");
+  tl.to(p, { backgroundColor: "#1A3C86", color: "#FFFFFF", boxShadow: "inset 0 0 0 1.5px #1A3C86", duration: 0.4, ease: "power2.out" }, t);
+  tl.to(rond, { backgroundColor: "#FFFFFF", color: "#1A3C86", duration: 0.4 }, t);
+  if (k > 1) {
+    const q = pastilles[k - 2];
+    tl.to(q, { backgroundColor: "#DDE5F8", color: "#1A3C86", boxShadow: "inset 0 0 0 1.5px #DDE5F8", duration: 0.4 }, t);
+    tl.to(q.querySelector("i"), { backgroundColor: "#1A3C86", color: "#FFFFFF", duration: 0.4 }, t);
+  }
+  entre(`#e${k} .sur`, t + 0.04, { y: 22, d: 0.6 });
+  entre(`#e${k} h2 .mot`, t + 0.1, { pas: 0.09, y: 64 });
+  entre(`#e${k} p`, t + 0.36, { y: 30 });
+  tl.fromTo(`#i${k}`, { autoAlpha: 0, x: 170, y: 36, rotationY: -22, rotationX: 7, scale: 0.9, filter: "blur(12px)" },
+    { autoAlpha: 1, x: 0, y: 0, rotationY: -7, rotationX: 2.5, scale: 1, filter: "blur(0px)", duration: 1.05, ease: DOUX }, t + 0.08);
+  tl.to(`#i${k}`, { rotationY: -2.5, rotationX: 0.8, duration: 2.7, ease: "sine.inOut" }, t + 1.0);
+  if (k < 4) {
+    sort(`#e${k} > *`, t + 3.66, { pas: 0.03 });
+    tl.to(`#i${k}`, { autoAlpha: 0, x: -150, rotationY: 14, filter: "blur(12px)", duration: 0.32, ease: "power2.in" }, t + 3.66);
+    son(t + 3.7, "souffle", { doux: 1 });
+  }
+  son(t, "pas", { rang: k - 1 });
+}
+gsap.set(".insert", { autoAlpha: 0 });
+[16, 20, 24, 28].forEach((t, i) => etape(i + 1, t));
+
+// 1 — les jauges se remplissent, puis le marche local
+tl.fromTo("#j1, #j2, #j3", { scaleX: 0 }, { scaleX: 1, duration: 1.0, ease: "power3.out", stagger: 0.16 }, 16.75);
+tl.fromTo(".jauge span", { autoAlpha: 0, x: -12 }, { autoAlpha: 1, x: 0, duration: 0.5, stagger: 0.16 }, 17.3);
+son(16.78, "glisse"); son(16.94, "glisse", { haut: 1 }); son(17.1, "glisse", { haut: 2 });
+entre("#carteMarche", 17.5, { y: 30, d: 0.8 });
+tl.fromTo("#carteMarche img", { scale: 1.02 }, { scale: 1.16, duration: 2.6, ease: "none" }, 17.4);
+tl.fromTo(".onde", { opacity: 0.9, scale: 0.4 }, { opacity: 0, scale: 2.5, duration: 1.1, ease: "power2.out", stagger: 0.38, repeat: 1, immediateRender: false }, 18.0);
+son(18.0, "sonar");
+
+// 2 — la prise de vue, le mobile, le formateur
+tl.fromTo("#prisePhoto", { scale: 1.06, xPercent: 1.5 }, { scale: 1.2, xPercent: -1.5, duration: 4.2, ease: "none" }, 20.0);
+tl.fromTo("#mobile", { autoAlpha: 0, y: 90, rotation: -14 }, { autoAlpha: 1, y: 0, rotation: -7, duration: 1.0, ease: DOUX }, 20.7);
+tl.to("#mobile", { y: -16, duration: 2.4, ease: "sine.inOut" }, 21.5);
+saute("#accomp", 21.5, { y: 40 });
+son(20.5, "rec"); son(20.74, "souffle", { doux: 1 }); son(21.5, "pop", { note: 2 });
+
+// 3 — le debrief : ce qui marche, ce qu'il faut ajuster, la prise retenue
+entre("#f3 .col", 24.7, { pas: 0.16, y: 30, d: 0.7 });
+tl.fromTo("#f3 .point", { autoAlpha: 0, x: -16 }, { autoAlpha: 1, x: 0, duration: 0.45, ease: "power3.out", stagger: 0.25 }, 25.0);
+son(25.0, "coche"); son(25.25, "coche"); son(25.5, "tic"); son(25.75, "tic");
+entre("#f3 .essai", 26.0, { pas: 0.13, y: 30, d: 0.7 });
+tl.fromTo("#retenue", { boxShadow: "0 0 0 0px #1A3C86" }, { boxShadow: "0 0 0 4px #1A3C86", duration: 0.35 }, 27.0);
+saute("#coche3", 27.0, { y: 0, ech: 0.3 });
+son(27.0, "carillon", { petit: 1 });
+
+// 4 — ce avec quoi on repart
+gsap.set("#f4 .acquis div", { opacity: 0.34 });
+[28.75, 29.25, 29.75].forEach((t, i) => {
+  const ligne = $$("#f4 .acquis")[i];
+  tl.to(ligne.querySelector(".rond"), { backgroundColor: "#1A3C86", scale: 1.0, duration: 0.3, ease: "back.out(2.4)" }, t);
+  tl.fromTo(ligne.querySelector(".rond"), { scale: 0.7 }, { scale: 1, duration: 0.45, ease: "back.out(2.6)" }, t);
+  tl.to(ligne.querySelector("div"), { opacity: 1, duration: 0.35 }, t);
+  son(t, "coche", { note: i });
+});
+saute("#suivi", 30.5, { y: 22 });
+son(30.5, "carillon");
+
+/* =====================================================================
+   5. LE CATALOGUE — 32 a 38 s
+   ===================================================================== */
+raccord("#p4", "#p5", 32.0);
+derive("#p5", 32, 38, 1.025);
+entre("#t5 .mot", 32.1, { pas: 0.075, y: 54 });
+son(32.0, "impact", { doux: 1 });
+$$(".tuile").forEach((tuile, i) => {
+  const t = 33.0 + i * 0.25;
+  tl.fromTo(tuile, { autoAlpha: 0, y: 64, scale: 0.9 }, { autoAlpha: 1, y: 0, scale: 1, duration: 0.7, ease: "back.out(1.5)" }, t);
+  son(t, "pop", { note: i, clair: 1 });
+});
+saute("#lieux span", 35.5, { pas: 0.25 });
+son(35.5, "tic"); son(35.75, "tic"); son(36.0, "tic");
+son(37.0, "montee", { d: 1.0, doux: 1 });
+
+/* =====================================================================
+   6. LE CADRE ET LE FINANCEMENT — 38 a 46 s
+   ===================================================================== */
+raccord("#p5", "#p6", 38.0);
+derive("#p6", 38, 46, 1.025);
+son(38.0, "impact");
+tl.fromTo("#fond6 img", { scale: 1.08 }, { scale: 1.24, duration: 8, ease: "none" }, 38);
+entre("#b6a .sur", 38.06, { y: 22, d: 0.6 });
+entre("#b6a h2 .mot", 38.14, { pas: 0.085, y: 62 });
+entre("#b6a p", 38.75, { y: 26 });
+saute("#b6a .verre", 39.5, { pas: 0.5 });
+son(39.5, "pop", { note: 0 }); son(40.0, "pop", { note: 2 }); son(40.5, "pop", { note: 4 });
+sort("#b6a > *", 41.66, { pas: 0.03 });
+son(41.7, "souffle", { doux: 1 });
+gsap.set("#b6b", { autoAlpha: 1 });
+entre("#b6b .sur", 42.0, { y: 22, d: 0.6 });
+entre("#b6b h2 .mot", 42.06, { pas: 0.07, y: 56 });
+son(42.0, "pas", { rang: 0 });
+tl.fromTo("#devis", { autoAlpha: 0, x: 150, rotationY: -24, rotationX: 6, scale: 0.92, filter: "blur(12px)" },
+  { autoAlpha: 1, x: 0, rotationY: -8, rotationX: 2, scale: 1, filter: "blur(0px)", duration: 1.1, ease: DOUX }, 42.3);
+tl.to("#devis", { rotationY: -3, rotationX: 0.6, duration: 2.6, ease: "sine.inOut" }, 43.3);
+entre("#b6b p", 43.0, { y: 26 });
+son(43.0, "tic");
+tl.fromTo(".poste i", { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: "power3.out", stagger: 0.3 }, 43.25);
+son(43.25, "glisse"); son(43.55, "glisse", { haut: 1 }); son(43.85, "glisse", { haut: 2 });
+saute("#b6b .verre", 43.5, { pas: 0.25 });
+entre("#b6b em", 44.2, { y: 0, x: -14, d: 0.5 });
+saute("#annonce", 44.5, { y: 16 });
+son(44.5, "carillon");
+son(45.0, "montee", { d: 1.0 });
+
+/* =====================================================================
+   7. L'APPEL — 46 a 54 s
+   ===================================================================== */
+raccord("#p6", "#p7", 46.0);
+derive("#p7", 46, 54, 1.03);
+tl.fromTo("#fond7 img", { scale: 1.06 }, { scale: 1.2, duration: 8, ease: "none" }, 46);
+tl.to("#fond7", { opacity: 0.05, duration: 0.5 }, 49.7);
+son(46.0, "impact", { fort: 1 });
+entre("#t7 .mot", 46.1, { pas: 0.08, y: 66 });
+tl.fromTo("#bouton", { autoAlpha: 0, scale: 0.7, y: 30 }, { autoAlpha: 1, scale: 1, y: 0, duration: 0.7, ease: "back.out(1.8)" }, 47.5);
+son(47.5, "pop", { note: 4, clair: 1 });
+entre("#legende7", 47.85, { y: 20, d: 0.7 });
+tl.fromTo("#fleche", { autoAlpha: 0, x: 1560, y: 1010 }, { autoAlpha: 1, x: 1160, y: 706, duration: 0.78, ease: "power3.inOut" }, 48.18);
+tl.to("#bouton", { scale: 0.955, duration: 0.07, ease: "power2.in" }, 48.98).to("#bouton", { scale: 1, duration: 0.5, ease: "back.out(2.2)" }, 49.06);
+tl.to("#fleche", { scale: 0.86, transformOrigin: "20% 12%", duration: 0.07 }, 48.98).to("#fleche", { scale: 1, duration: 0.25 }, 49.06);
+tl.fromTo("#ride", { opacity: 0.7, scale: 1 }, { opacity: 0, scale: 1.18, duration: 0.75, ease: "power2.out", immediateRender: false }, 49.0);
+son(49.0, "clic"); son(49.12, "carillon");
+tl.to("#appel", { autoAlpha: 0, scale: 0.92, filter: "blur(16px)", duration: 0.34, ease: "power2.in" }, 49.62);
+son(49.64, "souffle");
+
+gsap.set("#fin", { autoAlpha: 1 });
+tl.fromTo("#logo7 .barre-logo", { autoAlpha: 0, x: -110, y: 110 }, { autoAlpha: 1, x: 0, y: 0, duration: 0.9, ease: DOUX, stagger: 0.1 }, 50.0);
+son(50.0, "impact"); son(50.0, "scintille");
+son(50.02, "trait", { rang: 0 }); son(50.12, "trait", { rang: 1 }); son(50.22, "trait", { rang: 2 });
+entre("#mot7", 50.42, { y: 18, d: 0.7 });
+entre("#redite", 50.8, { y: 20, d: 0.7 });
+entre("#adresse", 51.0, { y: 34 });
+son(51.0, "pop", { note: 5, clair: 1 });
+entre("#mention", 51.5, { y: 14, d: 0.8, flou: 6 });
+tl.fromTo("#noir", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.55, ease: "power2.inOut" }, 53.4);
+
+/* ---- Ce qui se calcule a la main, image par image --------------------- */
+function image(t) {
+  const n = Math.max(0, Math.min(REQUETE.length, Math.floor((t - T_FRAPPE) / PAS_FRAPPE) + 1));
+  $("#frappe").textContent = t < T_FRAPPE ? "" : REQUETE.slice(0, n);
+  const s = Math.max(0, Math.floor((t - 20.4) * 1 + 7));                    // le chrono de la prise
+  $("#chrono").textContent = "00:" + String(Math.min(59, s)).padStart(2, "0");
+  $("#rec i").style.opacity = t % 1 < 0.68 ? 1 : 0.3;
+}
+
+window.FILM = {
+  duree: DUREE, ips: IPS, reperes: REPERES,
+  aller(t) { tl.time(Math.max(0, Math.min(DUREE, t)), false); image(t); },
+};
+FILM.aller(0);
+
+/* ---- Lecture a l'ecran (hors rendu) : espace = pause, fleches = 1 s ---- */
+if (!new URLSearchParams(location.search).has("rendu")) {
+  const cadre = $("#cadre");
+  const ajuster = () => {
+    const e = Math.min(innerWidth / 1920, innerHeight / 1080);
+    cadre.style.transform = `scale(${e})`;
+    cadre.style.left = (innerWidth - 1920 * e) / 2 + "px";
+    cadre.style.top = (innerHeight - 1080 * e) / 2 + "px";
+  };
+  addEventListener("resize", ajuster); ajuster();
+  let t = +(new URLSearchParams(location.search).get("t") || 0), joue = true, avant = performance.now();
+  const audio = new Audio("sortie/son.wav");
+  audio.addEventListener("canplay", () => { audio.currentTime = t; if (joue) audio.play().catch(() => {}); }, { once: true });
+  addEventListener("keydown", (e) => {
+    if (e.code === "Space") { joue = !joue; joue ? audio.play().catch(() => {}) : audio.pause(); }
+    if (e.code === "ArrowRight") { t = Math.min(DUREE, t + 1); audio.currentTime = t; }
+    if (e.code === "ArrowLeft") { t = Math.max(0, t - 1); audio.currentTime = t; }
+  });
+  (function boucle(maintenant) {
+    if (joue) t = (t + (maintenant - avant) / 1000) % DUREE;
+    avant = maintenant; FILM.aller(t); requestAnimationFrame(boucle);
+  })(avant);
+}
+</script>
+</body>
+</html>
