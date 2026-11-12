@@ -8,14 +8,14 @@
  },
  {
   "id": "02",
-  "start": 4.25,
+  "start": 4.15,
   "end": 7.95,
   "text": "Des sites vitrines. Des formations théoriques. Sans résultat.",
   "note": "Un peu las, ironique. Deux coups secs, puis « Sans résultat » tombe à plat."
  },
  {
   "id": "03",
-  "start": 8.15,
+  "start": 8.02,
   "end": 11.55,
   "text": "Et si votre formation construisait enfin votre machine à clients ?",
   "note": "Ça remonte : curiosité, sourire dans la voix. Appuyer « machine à clients ».",
@@ -61,9 +61,9 @@
   "id": "09",
   "start": 38.3,
   "end": 43.5,
-  "text": "Un artisan du BTP : plus trois cents pour cent de devis. En deux mois.",
-  "note": "Factuel, pas de survente. Le chiffre est fort, il suffit de le poser. Pause avant « En deux mois ».",
-  "tts": "Un artisan du B.T.P. : plus trois cents pour cent de devis. En deux mois."
+  "text": "Un artisan du BTP : ses devis ont quadruplé. En deux mois.",
+  "note": "Factuel, pas de survente. Appuyer « quadruplé ». Pause avant « En deux mois ».",
+  "tts": "Un artisan du B.T.P. : ses devis ont quadruplé. En deux mois."
  },
  {
   "id": "10",
