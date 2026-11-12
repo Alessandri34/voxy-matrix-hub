@@ -93,21 +93,21 @@
   {
    "repere": "P3",
    "plan": "La révélation",
-   "de": 12.6,
-   "a": 15.2,
+   "de": 12.5,
+   "a": 15.3,
    "fenetre": [
-    12.6,
+    12.5,
     15.4
    ],
-   "texte": "Montrer s'apprend. Quatre temps, un but.",
+   "texte": "Un métier qui s'apprend. Quatre temps, un but.",
    "ecran": "Le logo se construit ; « La formation-action. » à 13,2 s, « Vous apprenez en le faisant. Sur votre propre entreprise. » à 14,0 s. Deux claquements à 15,5 et 15,75 s.",
-   "intention": "La bonne nouvelle, dite sans emphase. C'est le seul endroit du film où la voix s'éclaire.",
-   "intonation": "« Montrer » sur la même attaque qu'au plan 2 : l'oreille doit reconnaître le mot par-dessus l'impact. « s'apprend. » clair, presque souriant. « Quatre temps, un but. » posé ; « but » se dit avec son t, reste légèrement ouvert, et sort avant les claquements : c'est la boucle B.",
+   "intention": "La bonne nouvelle, dite sans emphase. La voix reprend le dernier mot du plan 2 — « métier » — de l'autre côté de l'impact : c'est ce mot qui fait le pont. C'est le seul endroit du film où la voix s'éclaire.",
+   "intonation": "« Un métier qui s'apprend. » d'un seul geste, sans pause avant « qui », clair, presque souriant. « Quatre temps, un but. » posé ; « but » se dit avec son t, reste légèrement ouvert, et sort avant les claquements : c'est la boucle B.",
    "appuis": [
     "s'apprend",
     "un but"
    ],
-   "eviter": "L'enthousiasme. Fermer la voix sur « but ». Dire « bu » : le mot revient au plan 4, il doit être reconnu."
+   "eviter": "L'enthousiasme. Fermer la voix sur « but ». Dire « bu » : le mot revient au plan 4, il doit être reconnu. Revenir à « Montrer s'apprend » : à l'oreille, c'est « Montrez, ça prend »."
   },
   {
    "repere": "P4-1",
@@ -194,14 +194,14 @@
     32.3,
     35.2
    ],
-   "texte": "Six thèmes au choix.",
+   "texte": "Six thèmes possibles.",
    "ecran": "« Six formations. Une seule méthode. » à 32,0 s, puis les six tuiles une à une, de 33,0 à 34,3 s.",
-   "intention": "On tourne la page : après la méthode, ce à quoi elle s'applique. La voix annonce, l'écran montre.",
+   "intention": "On tourne la page : après la méthode, ce à quoi elle s'applique. La voix annonce, l'écran montre. « Possibles », pas « au choix » : deux des six formations ont des prérequis.",
    "intonation": "Léger, simple, dit avant que les tuiles finissent de se poser.",
    "appuis": [
     "Six"
    ],
-   "eviter": "Énumérer : l'écran montre les six."
+   "eviter": "Énumérer : l'écran montre les six. Dire « au choix » : ce serait annoncer un accès que deux fiches conditionnent."
   },
   {
    "repere": "P5b",
@@ -243,8 +243,8 @@
   {
    "repere": "P6b",
    "plan": "Le cadre — financement",
-   "de": 40.9,
-   "a": 44.3,
+   "de": 40.5,
+   "a": 43.9,
    "fenetre": [
     40.4,
     44.4
@@ -252,7 +252,7 @@
    "texte": "Votre fonds de formation peut en financer une partie.",
    "ecran": "La réplique commence sur la fin du carton Qualiopi et passe sur le suivant, à 42,0 s : « Vous cotisez déjà à un fonds de formation. Il peut financer une partie de votre parcours. » · AGEFICE · FAFCEA · OPCO, « selon votre statut ». À 44,5 s, un carillon et le devis : « Reste à charge — Annoncé avant toute inscription ».",
    "intention": "Une information, pas un argument. C'est la phrase que la loi regarde : elle se dit comme un artisan annonce un délai, sans gourmandise. Elle répond à « Reste le coût ».",
-   "intonation": "Débit régulier, d'un seul souffle, neutre. Liaison à « peut en » (« peu-t-en »). « peut » et « une partie » se détachent à peine, mais ils s'entendent — et « une partie » est finie avant le carillon.",
+   "intonation": "Débit régulier, d'un seul souffle, neutre. Liaison à « peut en » (« peu-t-en »). « peut » et « une partie » se détachent à peine, mais ils s'entendent — et « une partie » est finie une demi-seconde avant le carillon de 44,5 s.",
    "appuis": [
     "peut",
     "une partie"
@@ -322,8 +322,8 @@
   },
   {
    "repere": "P5a",
-   "texte": "Six formations au choix.",
-   "quand": "Si « thèmes » paraît vague à l'écoute."
+   "texte": "Six formations.",
+   "quand": "Si « thèmes » paraît vague à l'écoute. C'est le titre de l'écran, dit tel quel."
   },
   {
    "repere": "P5b",

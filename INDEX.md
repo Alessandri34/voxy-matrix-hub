@@ -1,17 +1,17 @@
 # INDEX — carte du projet
 
-> Genere par `outils/index-projet.py`. **241 fichiers · 6008 Ko.**
+> Genere par `outils/index-projet.py`. **241 fichiers · 6013 Ko.**
 > Une ligne par fichier : de quoi localiser sans ouvrir. Relancer apres tout ajout.
 
-## (racine) — 7 fichiers, 174 Ko
+## (racine) — 7 fichiers, 175 Ko
 
 | Ko | Fichier | Contenu |
 |---:|---|---|
 | 1 | `.gitignore` | Secrets / environnement (règle 9 : jamais dans Git) |
-| 37 | `CLAUDE.md` | CLAUDE.md — Mémoire de projet |
+| 38 | `CLAUDE.md` | CLAUDE.md — Mémoire de projet |
 | 31 | `CODEX_IA.html` | VOXY MATRIX | CODEX IA - Master Prompting |
 | 32 | `Hub_Documentaire.html` | VOXY MATRIX | Command Center Élite |
-| 23 | `INDEX.md` | INDEX — carte du projet |
+| 24 | `INDEX.md` | INDEX — carte du projet |
 | 33 | `index.html` | VOXY MATRIX | Command Center Élite |
 | 14 | `passation.md` | Passation |
 
@@ -155,7 +155,7 @@
 | 1 | `landing_page/script.js` | document.addEventListener("DOMContentLoaded", () => { |
 | 9 | `landing_page/style.css` | --surface: rgba(12, 12, 16, 0.7); |
 
-## livrables — 126 fichiers, 5015 Ko
+## livrables — 126 fichiers, 5018 Ko
 
 | Ko | Fichier | Contenu |
 |---:|---|---|
@@ -171,7 +171,7 @@
 | 18 | `A-marketing/A_scripts_ugc_v2.md` | A — 10 scripts UGC · V2 (propos & valeur développés) |
 | 5 | `A-marketing/controle-scripts.py` | Controle de conformite des scripts, avant livraison.""" |
 | 15 | `A-marketing/film-presentation/LISEZMOI.md` | Film de présentation VFormations |
-| 20 | `A-marketing/film-presentation/VOIX_OFF.md` | Voix off du film de présentation |
+| 22 | `A-marketing/film-presentation/VOIX_OFF.md` | Voix off du film de présentation |
 | 11 | `A-marketing/film-presentation/controler-texte.py` | Relit tout le texte du film — a l'ecran et a la voix — avant de le monter. |
 | 60 | `A-marketing/film-presentation/film.html` | VFormations — film de présentation |
 | 2 | `A-marketing/film-presentation/monter.sh` | Assemble l'image et le son, puis tire la version legere — pour chaque format rendu. |

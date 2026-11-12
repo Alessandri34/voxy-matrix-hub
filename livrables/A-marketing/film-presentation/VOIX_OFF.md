@@ -1,8 +1,8 @@
 # Voix off du film de présentation
 
-> 13 répliques, 83 mots, 30 secondes de parole sur 54. Écrit le 12/11/2026 pour le film de `film.html`, qui ne change pas : la voix se pose sur l'image, dans les deux formats.
+> 13 répliques, 84 mots, 30 secondes de parole sur 54. Écrit le 12/11/2026 pour le film de `film.html`, qui ne change pas : la voix se pose sur l'image, dans les deux formats.
 > Ce document est celui du **comédien** et de la personne qui le dirige. `voix.json` dit la même chose à la machine ; `controler-texte.py` vérifie que les deux s'accordent mot pour mot, et que chaque réplique tient dans son temps.
-> ⚠️ **Il n'existe pas de voix enregistrée.** Ce script n'a été ni dit ni entendu : il a été compté, puis relu par trois regards indépendants (§10). La première lecture à voix haute décidera de ce qui reste.
+> ⚠️ **Il n'existe pas de voix enregistrée.** Ce script n'a été ni dit ni entendu : il a été compté, puis relu par des regards indépendants, en deux passes (§10). La première lecture à voix haute décidera de ce qui reste.
 
 ## 1. Ce que fait la voix — et ce qu'elle ne fait pas
 
@@ -28,15 +28,15 @@ Les temps sont en secondes depuis le début du film. **Début – fin** est la p
 | **P1** | 0,6 – 5,2 | « En ce moment, quelqu'un cherche votre métier. Et qu'est-ce qu'il trouve de vous ? » | La barre de recherche se remplit. « Vos clients vous cherchent. » à 2,0 s, « Qui trouvent-ils ? » à 3,5 s, puis trois résultats. La case « Vous ? » s'avance à 4,5 s. |
 | **P2** | 6,3 – 9,4 | « Vous savez faire. Montrer, c'est un autre métier. » | « Votre métier, vous le maîtrisez. » puis « Le montrer en ligne ? » et trois tampons. |
 | — | 11,5 – 12,5 | *silence imposé* | La musique monte, l'impact, le logo : c'est le film qui parle. |
-| **P3** | 12,6 – 15,2 | « Montrer s'apprend. Quatre temps, un but. » | « La formation-action. Vous apprenez en le faisant. Sur votre propre entreprise. » |
+| **P3** | 12,5 – 15,3 | « Un métier qui s'apprend. Quatre temps, un but. » | « La formation-action. Vous apprenez en le faisant. Sur votre propre entreprise. » |
 | **P4-1** | 16,3 – 18,3 | « D'abord, votre point de départ. » | « Diagnostic. Votre situation, vos objectifs, votre marché local. » |
 | **P4-2** | 21,0 – 22,8 | « Ensuite, c'est vous qui faites. » | « Pratique terrain. Vous faites, on accompagne. » |
 | **P4-3** | 24,5 – 26,5 | « Puis on s'arrête, pour comprendre. » | « Phase réflexive. On prend du recul ensemble. » |
 | **P4-4** | 28,3 – 30,5 | « Et le but : vous passer de nous. » | « Autonomie. Vous repartez avec vos livrables et vos compétences. » Un carillon à 30,5 s. |
-| **P5a** | 32,4 – 33,5 | « Six thèmes au choix. » | « Six formations. Une seule méthode. » Les six tuiles se posent. |
+| **P5a** | 32,4 – 33,5 | « Six thèmes possibles. » | « Six formations. Une seule méthode. » Les six tuiles se posent. |
 | **P5b** | 35,5 – 37,7 | « On vient chez vous. Reste le coût. » | « En présentiel · Dans votre entreprise · Montpellier · Béziers · Sète et environs » |
 | **P6a** | 38,5 – 39,8 | « C'est une formation. » | « Organisme certifié Qualiopi, au titre des actions de formation » |
-| **P6b** | 40,9 – 44,3 | « Votre fonds de formation peut en financer une partie. » | À 42,0 s : « Vous cotisez déjà à un fonds de formation. » |
+| **P6b** | 40,5 – 43,9 | « Votre fonds de formation peut en financer une partie. » | À 42,0 s : « Vous cotisez déjà à un fonds de formation. » |
 | — | 44,5 – 46,3 | *silence imposé* | Un carillon et le devis : « Reste à charge — Annoncé avant toute inscription ». Puis la montée et l'impact. |
 | **P7a** | 46,5 – 48,9 | « Ce qu'on trouve de vous ? Faites la recherche. » | « Voyons ce que ça donne sur votre cas. » Le bouton est cliqué à 49,0 s. |
 | — | 49,0 – 50,2 | *silence imposé* | Le clic, puis l'impact du logo. |
@@ -47,9 +47,9 @@ Les temps sont en secondes depuis le début du film. **Début – fin** est la p
 
 > En ce moment, quelqu'un cherche votre métier. Et qu'est-ce qu'il trouve de vous ?
 > Vous savez faire. Montrer, c'est un autre métier.
-> Montrer s'apprend. Quatre temps, un but.
+> Un métier qui s'apprend. Quatre temps, un but.
 > D'abord, votre point de départ. Ensuite, c'est vous qui faites. Puis on s'arrête, pour comprendre. Et le but : vous passer de nous.
-> Six thèmes au choix. On vient chez vous. Reste le coût.
+> Six thèmes possibles. On vient chez vous. Reste le coût.
 > C'est une formation. Votre fonds de formation peut en financer une partie.
 > Ce qu'on trouve de vous ? Faites la recherche.
 > Réservez votre diagnostic.
@@ -84,12 +84,12 @@ Ce que le script s'interdit : « restez jusqu'à la fin », une boucle sur un r�
 - **Appuis.** *faire* · *Montrer* · *autre*.
 - **À éviter.** Le « mais » sous-entendu entre les deux phrases. Toute nuance de reproche sur « autre ».
 
-### P3 — « Montrer s'apprend. Quatre temps, un but. »
-- **Intention.** La bonne nouvelle, dite sans emphase. C'est le seul endroit du film où la voix s'éclaire.
-- **Intonation.** « Montrer » sur **la même attaque qu'au plan 2** : l'oreille doit reconnaître le mot par-dessus l'impact. « s'apprend. » clair, presque souriant. « Quatre temps, un but. » posé — et « un but » reste **légèrement ouvert** : c'est la boucle B.
+### P3 — « Un métier qui s'apprend. Quatre temps, un but. »
+- **Intention.** La bonne nouvelle, dite sans emphase. La voix reprend le dernier mot du plan 2 — *métier* — de l'autre côté de l'impact : c'est ce mot qui fait le pont. C'est le seul endroit du film où la voix s'éclaire.
+- **Intonation.** « Un métier qui s'apprend. » **d'un seul geste**, sans pause avant « qui », clair, presque souriant. « Quatre temps, un but. » posé — et « un but » reste **légèrement ouvert** : c'est la boucle B.
 - **Appuis.** *s'apprend* · *un but*.
 - **Diction.** « but » se dit **avec son t**. Le mot revient au plan 4 : dit de deux façons, il n'est plus reconnu.
-- **À éviter.** L'enthousiasme. Fermer la voix sur « but ».
+- **À éviter.** L'enthousiasme. Fermer la voix sur « but ». 🔴 **Revenir à « Montrer s'apprend »** : à l'oreille, c'est « Montrez, ça prend » — une promesse de résultat que personne n'a écrite, et qu'un sous-titrage automatique écrirait.
 
 ### P4-1 à P4-4 — les quatre marches
 Quatre répliques qui partent de la **même hauteur** et gardent le **même pas** : on doit pouvoir les compter. *D'abord · Ensuite · Puis · Et.* La quatrième se pose.
@@ -99,11 +99,11 @@ Quatre répliques qui partent de la **même hauteur** et gardent le **même pas*
 - **P4-3 — « Puis on s'arrête, pour comprendre. »** D'un seul souffle. La voix reste suspendue sur « s'arrête » **sans tomber**, puis « pour comprendre » descend, plus lent. Ne pas couper après « s'arrête » : on entendrait que la formation s'interrompt. Pas de liaison à « Puis on ».
 - **P4-4 — « Et le but : vous passer de nous. »** « Et le but » sur la hauteur des trois autres marches, *but* avec son t. Un temps. « vous passer de nous. » lent, détaché, descendant. Puis rien : un carillon ponctue à 30,5 s. **Jamais au futur** (« vous vous passerez de nous ») : ce serait une promesse. C'est un but, pas un résultat.
 
-### P5a — « Six thèmes au choix. »
+### P5a — « Six thèmes possibles. »
 - **Intention.** On tourne la page : après la méthode, ce à quoi elle s'applique. La voix annonce, l'écran montre.
 - **Intonation.** Léger, simple, dit avant que les tuiles finissent de se poser.
 - **Appuis.** *Six*.
-- **À éviter.** Énumérer les six : l'écran les montre.
+- **À éviter.** Énumérer les six : l'écran les montre. Dire « au choix » : deux des six formations ont des prérequis (une activité B2B pour l'une, la formation IA générative et une machine de 16 Go pour l'autre). « Possibles » dit qu'elles existent, pas qu'elles sont ouvertes à tous.
 
 ### P5b — « On vient chez vous. Reste le coût. »
 - **Intention.** D'abord un service rendu. Puis la voix nomme le coût **avant** que le dirigeant le fasse.
@@ -119,8 +119,8 @@ Quatre répliques qui partent de la **même hauteur** et gardent le **même pas*
 
 ### P6b — « Votre fonds de formation peut en financer une partie. »
 - **Intention.** Une information, pas un argument. Elle répond à « Reste le coût ».
-- **Intonation.** Débit régulier, d'un seul souffle, neutre. Aucune gourmandise. La réplique commence une seconde **avant** que l'écran change de carton : la voix annonce, l'image confirme.
-- **Appuis.** *peut* · *une partie* — à peine détachés, mais ils **s'entendent**, et « une partie » est finie avant le carillon de 44,5 s.
+- **Intonation.** Débit régulier, d'un seul souffle, neutre. Aucune gourmandise. La réplique commence une seconde et demie **avant** que l'écran change de carton : la voix annonce, l'image confirme.
+- **Appuis.** *peut* · *une partie* — à peine détachés, mais ils **s'entendent**, et « une partie » est finie une demi-seconde avant le carillon de 44,5 s.
 - **Diction.** Liaison à « peut en » : *peu-t-en*.
 - **À éviter.** Appuyer « financer ». Accélérer sur « une partie ». **Ajouter quoi que ce soit** — ni « largement », ni « souvent », ni « jusqu'à ». Ces deux réserves sont la phrase.
 
@@ -166,7 +166,7 @@ Les départager se fait en diffusion, pas en réunion : même film, même audien
 | Repère | Texte | Quand s'en servir |
 |---|---|---|
 | P4-4 | « Et le but : faire sans nous. » | Si « vous passer de nous » pèse en bouche. Articuler le *n* : entendu « sans vous », c'est le contraire de ce que dit le film. |
-| P5a | « Six formations au choix. » | Si « thèmes » paraît vague à l'écoute. |
+| P5a | « Six formations. » | Si « thèmes » paraît vague à l'écoute. C'est le titre de l'écran, dit tel quel. |
 | P5b | « On vient chez vous. » | Si « Reste le coût » sonne trop sec : le film tient sans, la question du début dort seulement plus longtemps. |
 | P6b | « Votre fonds de formation peut y contribuer. » | Si la réplique principale ne tient pas dans ses 3,4 secondes. |
 
@@ -180,11 +180,12 @@ Les départager se fait en diffusion, pas en réunion : même film, même audien
 | « Qualiopi » | Dit à l'oral, il faudrait dire aussi « au titre des actions de formation ». L'écran le porte en entier. |
 | « on s'occupe de tout », « on le fait pour vous » | La règle d'or (§2) : c'est le dirigeant qui fait. Ce qu'on ferait à sa place ne serait pas de la formation. |
 | « VFormations » | Le nom commercial n'est pas arrêté (`CLAUDE.md` §1), et un nom enregistré ne se corrige pas comme un logo. L'écran le porte deux fois. |
+| « au choix », « pour tous », « sans prérequis » | Deux des six formations ont des conditions d'accès. La publicité d'un organisme de formation ne doit pas induire en erreur sur elles (Code du travail, art. L.6352-13). |
 | « restez jusqu'à la fin » | La manœuvre annoncée au lieu d'être tenue (`A5` §3). |
 
 `controler-texte.py` refuse les formulations bannies, les promesses, les montants et « Qualiopi » sans sa catégorie, avant chaque montage.
 
-⚠️ **Ne jamais couper le film après le plan 2.** « Montrer, c'est un autre métier », sans « Montrer s'apprend » derrière, est un argument d'agence : exactement ce que l'organisme n'est pas. Une version courte commence au plan 1 et va au moins jusqu'au plan 3.
+⚠️ **Ne jamais couper le film après le plan 2.** « Montrer, c'est un autre métier », sans « Un métier qui s'apprend » derrière, est un argument d'agence : exactement ce que l'organisme n'est pas. Une version courte commence au plan 1 et va au moins jusqu'au plan 3.
 
 ## 8. Livraison de l'enregistrement
 
@@ -192,12 +193,14 @@ Les départager se fait en diffusion, pas en réunion : même film, même audien
 - **Niveau.** Crêtes autour de −6 dB. Dix secondes de silence de la pièce en fin de séance.
 - **Prises.** Trois par réplique, puis **une lecture d'une traite sur l'image** : le fichier `sortie/voix.srt` (`python3 controler-texte.py --sous-titres`) affiche chaque réplique à son instant dans n'importe quel lecteur.
 - **Fichiers.** Un par réplique, nommé par son repère (`P1.wav`, `P4-3.wav`…), dans un dossier `voix/` — qui reste hors Git.
+- **Sous-titres.** Si le film est publié avec des sous-titres de la voix, **fournir les siens** : ne jamais laisser un réseau les générer. Une machine écrit ce qu'elle entend, et c'est elle qui écrirait la promesse que le script évite. `sortie/voix.srt` en est la base, à recaler sur la voix enregistrée.
 
 ## 9. Ce qui reste à faire
 
 1. **Lire le script à voix haute, chronomètre en main, film en fond.** Cinq minutes, et c'est le seul contrôle qui compte. Les temps sont calculés sur un compte de syllabes, qui se trompe d'une syllabe par phrase au plus. Les trois répliques les plus justes sont **P4-4** (2,2 s), **P7a** (2,4 s) et **P7b** (1,7 s pour huit syllabes).
 2. **Choisir le comédien** sur un essai de quatre répliques : P2, P4-4, P5b, P6b.
 3. **Poser la voix.** La musique devra baisser sous chaque réplique — `voix.json` donne les treize fenêtres — puis l'ensemble repasser par le limiteur de `son.py`. **Ce réglage n'est pas écrit** : sans voix, il ne se vérifie pas.
+4. **Écouter le carillon de 44,5 s au mixage.** Il marque à l'image le devis et « Annoncé avant toute inscription ». Mais il sonne une demi-seconde après « une partie » : pour qui écoute sans regarder, il peut ponctuer le financement comme une bonne nouvelle. S'il sonne ainsi, le baisser sous la voix.
 
 ## 10. Comment ce script a été relu
 
@@ -209,4 +212,9 @@ Une première version de douze répliques a été soumise à trois relecteurs in
 | **Rétention** | **Non enregistrable** : la boucle A ne se refermait pas | « On le regarde ensemble » renvoyait la réponse derrière la réservation → « **Faites la recherche.** » Trou de seize secondes sans question vivante → « **Reste le coût.** » Le pronom de « Il s'apprend » flottait après l'impact → « **Montrer** s'apprend ». Le quatrième temps n'était pas marqué → « **Et** le but ». |
 | **Oralité** | **Non enregistrable** : le plan 7 ne tenait pas | « Réservez votre diagnostic » : trois mots, **huit syllabes**, pour 1,2 s → le débit se compte désormais en syllabes, et la réplique a 1,7 s. « sans nous » pouvait s'entendre « sans vous » → « vous **passer de** nous ». « on part de vous » s'entendait « on parle de vous » → « votre point de départ ». La réserve « une partie » tombait sous un carillon → la réplique est avancée de 1,3 s. |
 
-⚠️ Les phrases nées de ces corrections — « Reste le coût », « Faites la recherche », « vous passer de nous » — n'ont pas été vues par ces trois relecteurs : elles viennent d'eux, ou de leurs remarques. Une quatrième relecture, côté conformité, porte sur elles.
+**Deuxième passe.** Les phrases nées de ces corrections n'avaient été vues par aucun des trois : elles venaient d'eux. Un quatrième relecteur les a relues côté conformité. Cinq questions sur sept ont tenu — dont « Reste le coût », qui renforce la réserve au lieu de l'affaiblir. Deux ont cédé :
+
+| Réplique | La faute | La correction |
+|---|---|---|
+| « Montrer s'apprend. » | Se prononce exactement comme « Montrez, ça prend » : une promesse de résultat à l'oreille, et dans tout sous-titrage automatique. | « **Un métier qui** s'apprend. » — qui reprend aussi le dernier mot du plan 2. |
+| « Six thèmes au choix. » | Deux des six formations ont des prérequis (vérifié dans les fiches du site et dans `B4`). « Au choix » annonçait un accès qu'elles conditionnent. | « Six thèmes **possibles**. » |
