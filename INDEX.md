@@ -1,6 +1,6 @@
 # INDEX — carte du projet
 
-> Genere par `outils/index-projet.py`. **241 fichiers · 6022 Ko.**
+> Genere par `outils/index-projet.py`. **241 fichiers · 6024 Ko.**
 > Une ligne par fichier : de quoi localiser sans ouvrir. Relancer apres tout ajout.
 
 ## (racine) — 7 fichiers, 177 Ko
@@ -155,7 +155,7 @@
 | 1 | `landing_page/script.js` | document.addEventListener("DOMContentLoaded", () => { |
 | 9 | `landing_page/style.css` | --surface: rgba(12, 12, 16, 0.7); |
 
-## livrables — 126 fichiers, 5025 Ko
+## livrables — 126 fichiers, 5028 Ko
 
 | Ko | Fichier | Contenu |
 |---:|---|---|
@@ -171,7 +171,7 @@
 | 18 | `A-marketing/A_scripts_ugc_v2.md` | A — 10 scripts UGC · V2 (propos & valeur développés) |
 | 5 | `A-marketing/controle-scripts.py` | Controle de conformite des scripts, avant livraison.""" |
 | 15 | `A-marketing/film-presentation/LISEZMOI.md` | Film de présentation VFormations |
-| 27 | `A-marketing/film-presentation/VOIX_OFF.md` | Voix off du film de présentation |
+| 29 | `A-marketing/film-presentation/VOIX_OFF.md` | Voix off du film de présentation |
 | 11 | `A-marketing/film-presentation/controler-texte.py` | Relit tout le texte du film — a l'ecran et a la voix — avant de le monter. |
 | 60 | `A-marketing/film-presentation/film.html` | VFormations — film de présentation |
 | 2 | `A-marketing/film-presentation/monter.sh` | Assemble l'image et le son, puis tire la version legere — pour chaque format rendu. |
@@ -192,7 +192,7 @@
 | 38 | `A-marketing/film-presentation/son.py` | La bande-son du film : la musique, et les bruitages. |
 | 5 | `A-marketing/film-presentation/sons/banque.json` | 7 cles : _lisezmoi, banque, licence, url_licence, lue_le… |
 | 2 | `A-marketing/film-presentation/telecharger-sons.py` | Recupere les bruitages de la banque, un par un, dans `sons/`. |
-| 17 | `A-marketing/film-presentation/voix.json` | 10 cles : _lisezmoi, duree, debit, silences, boucles… |
+| 18 | `A-marketing/film-presentation/voix.json` | 10 cles : _lisezmoi, duree, debit, silences, boucles… |
 | 24 | `A-marketing/test-nettoyage-montpellier.html` | Fiches de tournage nettoyage |
 | 0 | `A-marketing/veille-ads/LISEZMOI.md` | Données brutes de la veille publicitaire |
 | 11 | `A-marketing/veille-ads/corpus.json` | 3 cles : L'agence Paid, L'agence Short, Youdji… |

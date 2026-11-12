@@ -2,7 +2,7 @@
 
 > 13 répliques, 84 mots, 31 secondes de parole sur 54. Écrit le 12/11/2026 pour le film de `film.html`, qui ne change pas : la voix se pose sur l'image, dans les deux formats.
 > Ce document est celui du **comédien** et de la personne qui le dirige. `voix.json` dit la même chose à la machine ; `controler-texte.py` vérifie que les deux s'accordent mot pour mot, et que chaque réplique tient dans son temps.
-> ⚠️ **Il n'existe pas de voix enregistrée.** Ce script n'a été ni dit ni entendu : il a été compté, puis relu par des regards indépendants, en trois passes (§10). La première lecture à voix haute décidera de ce qui reste.
+> ⚠️ **Il n'existe pas de voix enregistrée.** Ce script n'a été ni dit ni entendu : il a été compté, puis relu par des regards indépendants, en quatre passes (§10). La première lecture à voix haute décidera de ce qui reste.
 
 ## 1. Ce que fait la voix — et ce qu'elle ne fait pas
 
@@ -73,6 +73,7 @@ Ce que le script s'interdit : « restez jusqu'à la fin », une boucle sur un r�
 **Le fil d'ensemble.** Un constat et une question (P1), un respect (P2), une bonne nouvelle (P3), quatre marches (P4), une page qu'on tourne et une franchise (P5), un cadre (P6), une clé qu'on rend, puis une invitation (P7). La voix ne monte jamais plus haut qu'en P3 ; elle ne descend jamais plus bas qu'en P4-4.
 
 **Deux pronoms, deux rôles.** Dans ce film, « on » et « nous » sont l'organisme ; les gens qui cherchent sont « quelqu'un ». Ne jamais dire « on » pour les clients : l'oreille recollerait « on cherche… on trouve… on vient chez vous », et le film promettrait des clients.
+**Une seule exception, et elle est voulue** : « Ce que **l'on** trouve de vous ? » (P7a). C'est le « on » de tout le monde, et c'est pour cela qu'il se dit « l'on », atone, impersonnel — jamais « ce qu'on », jamais « ce que nous trouvons ».
 
 ### P1 — « En ce moment, quelqu'un cherche votre métier. Et qu'est-ce qu'il trouve de vous ? »
 - **Intention.** Un constat, puis une vraie question, posée en face. Ni alerte ni menace : on demande, et on attend la réponse.
@@ -81,14 +82,14 @@ Ce que le script s'interdit : « restez jusqu'à la fin », une boucle sur un r�
 - **À éviter.** Le ton d'alarme. Le sourire. La question rhétorique : celle-ci attend une réponse. Remplacer « quelqu'un » par « on ».
 
 ### P2 — « Vous savez faire. Montrer, c'est tout un métier. »
-- **Intention.** Rendre justice avant de nommer le manque. « Vous savez faire » est un compliment sincère, pas une précaution oratoire.
-- **Intonation.** « Vous savez faire. » plein, affirmatif, descendant. « Montrer, » isolé, la virgule tenue. « c'est tout un métier. » redescend, sans reproche, « tout-un » lié, et finit avant le deuxième tampon (9,75 s).
-- **Appuis.** *faire* · *Montrer* · *tout*.
-- **À éviter.** Le « mais » sous-entendu entre les deux phrases. Toute nuance de reproche. 🔴 **Revenir à « c'est un autre métier »** : la liaison y fabrique « notre », et « Montrer, c'est notre métier » est la phrase d'une agence.
+- **Intention.** Rendre justice avant de nommer le manque. « Vous savez faire » est un compliment sincère, pas une précaution oratoire. La seconde phrase concède, elle ne plaide pas : un constat complice, pas un verdict.
+- **Intonation.** « Vous savez faire. » plein, affirmatif, descendant. « Montrer, » isolé, la virgule tenue. « c'est tout un métier. » **d'un seul souffle**, la liaison « tout-un » faite, et finit sur « métier » avant le deuxième tampon (9,75 s).
+- **Appuis.** *faire* · *Montrer* · *métier*.
+- **À éviter.** Le « mais » sous-entendu entre les deux phrases. Toute nuance de reproche. Appuyer « tout », ou respirer après : on entendrait « Montrer, c'est tout. » 🔴 **Revenir à « c'est un autre métier »** : la liaison y fabrique « notre », et « Montrer, c'est notre métier » est la phrase d'une agence.
 
 ### P3 — « Un métier qui s'apprend. Quatre temps, un but. »
 - **Intention.** La bonne nouvelle, dite sans emphase. La voix reprend le dernier mot du plan 2 — *métier* — de l'autre côté de l'impact : c'est ce mot qui fait le pont. C'est le seul endroit du film où la voix s'éclaire.
-- **Intonation.** « Un métier qui s'apprend. » **d'un seul geste**, clair, presque souriant. « Quatre temps, un but. » posé — et « un but » reste **légèrement ouvert** : c'est la boucle B.
+- **Intonation.** « Un métier » repris **sur la même note** que le « métier » du plan 2 : c'est cette reprise qui retourne la phrase. « Un métier qui s'apprend. » **d'un seul geste**, clair, presque souriant. « Quatre temps, un but. » posé — et « un but » reste **légèrement ouvert** : c'est la boucle B.
 - **Appuis.** *s'apprend* · *un but*.
 - **Diction.** « qui-s'apprend » en un bloc, le *i* de « qui » bien dit ; l'appui porté par la durée de « -prend », jamais par une attaque sur « s'a- ». « Quatre » en entier, le *t* de « temps » frappé : sinon on entend « quatre ans ». « but » **avec son t** : le mot revient au plan 4, il doit être reconnu.
 - **À éviter.** L'enthousiasme. Fermer la voix sur « but ». 🔴 **Toute variante sans « qui »** — « Ça s'apprend », « Ce métier s'apprend », « Montrer s'apprend » : à l'oreille, elles donnent toutes « ça prend », une promesse de résultat que personne n'a écrite.
@@ -108,10 +109,10 @@ Quatre répliques qui partent de la **même hauteur** et gardent le **même pas*
 - **À éviter.** Énumérer les six : l'écran les montre. Ajouter « au choix », « possibles », « pour tous » : deux des six formations ont des prérequis (une activité B2B pour l'une, la formation IA générative et une machine de 16 Go pour l'autre). La voix compte ; elle ne dit rien de l'accès.
 
 ### P5b — « Nous venons chez vous. Reste le coût. »
-- **Intention.** D'abord un service rendu : c'est le formateur qui se déplace. Puis la voix nomme le coût **avant** que le dirigeant le fasse.
-- **Intonation.** « Nous venons chez vous. » chaleureux, descendant, le *v* de « vous » net. Une respiration. « Reste le coût. » plus bas, franc, sans s'excuser — et la voix ne retombe pas tout à fait : la réponse arrive au plan suivant. La musique commence à monter dessous.
+- **Intention.** La modalité des six formations, dite comme une information pratique : c'est le formateur qui se déplace. Puis la voix nomme le coût **avant** que le dirigeant le fasse.
+- **Intonation.** « Nous venons chez vous. » à plat, dans la continuité de « Six formations », le *v* de « vous » net, et **un point franc**. Une respiration. « Reste le coût. » plus bas, franc, sans s'excuser — et la voix ne retombe pas tout à fait : la réponse arrive au plan suivant. La musique commence à monter dessous.
 - **Appuis.** *chez vous* · *coût*.
-- **À éviter.** Le ton du slogan sur « chez vous ». Le drame sur « coût » : c'est une question pratique. 🔴 **Dire « On vient chez vous »** : pour un commerçant, c'est la façon ordinaire de dire que des clients entrent — une promesse que le film ne fait pas.
+- **À éviter.** Le ton de l'offre ou du slogan sur « chez vous » : c'est une modalité, pas un service de plus. Enchaîner les deux phrases : on entendrait « chez vous reste le coût ». Le drame sur « coût » : c'est une question pratique. 🔴 **Dire « On vient chez vous »** : pour un commerçant, c'est la façon ordinaire de dire que des clients entrent — une promesse que le film ne fait pas.
 
 ### P6a — « C'est une formation. »
 - **Intention.** La réponse commence par la nature de ce qu'on propose : une formation, pas une prestation. C'est parce que c'en est une que la phrase suivante est possible.
@@ -128,9 +129,10 @@ Quatre répliques qui partent de la **même hauteur** et gardent le **même pas*
 
 ### P7a — « Ce que l'on trouve de vous ? Faites la recherche. »
 - **Intention.** Rendre la question du début, avec le moyen d'y répondre seul, tout de suite. On donne une clé, pas un ordre.
-- **Intonation.** « Ce que l'on trouve de vous ? » finit sur **les mêmes mots et la même mélodie** que la question du plan 1 : c'est ce rappel que l'oreille reconnaît. « Faites la recherche. » simple, presque en passant, généreux. Le clic du bouton ponctue.
+- **Intonation.** « Ce que l'on trouve de vous ? » **monte franchement** sur « vous », sur la mélodie de la question du plan 1 : c'est ce rappel que l'oreille reconnaît. Un silence court. « Faites la recherche. » descendant, simple, généreux. Le clic du bouton ponctue.
 - **Appuis.** *de vous* · *recherche*.
-- **À éviter.** Le défi (« allez-y, cherchez »). Le film ne provoque pas : il rend service. Dire « ce qu'on trouve » : un sous-titrage automatique y écrit autre chose.
+- **Diction.** « l'on » est **obligatoire**, et atone. Le *v* de « vous » tenu. Ne pas avaler « Ce que ».
+- **À éviter.** Le défi (« allez-y, cherchez »). Le film ne provoque pas : il rend service. Dire « ce qu'on trouve » : c'est le réflexe de l'oral, et une machine de sous-titrage y écrit une grossièreté. La question dite à plat : elle semblerait annoncer une réponse au lieu de rendre la question.
 
 ### P7b — « Réservez votre diagnostic. »
 - **Intention.** La seule demande du film, et elle vient en second : d'abord vous regardez par vous-même, ensuite on regarde ensemble.
@@ -166,7 +168,7 @@ Les départager se fait en diffusion, pas en réunion : même film, même audien
 
 | Repère | Texte | Quand s'en servir |
 |---|---|---|
-| P4-4 | « Et le but : faire seul. » | Si « vous passer de nous » pèse en bouche. Jamais « faire sans nous » : à une consonne près, c'est « faire sans vous ». |
+| P4-4 | « Et le but : faire seul. » | Si « vous passer de nous » pèse en bouche. « seul » posé comme une réussite, pas lâché comme un abandon. Jamais « faire sans nous » : à une consonne près, c'est « faire sans vous ». Au montage, « Six formations » reste à 32,4 s : ne pas refermer le silence. |
 | P5b | « Nous venons chez vous. » | Si « Reste le coût » sonne trop sec : le film tient sans, la question du début dort seulement plus longtemps. |
 | P6b | « Votre fonds de formation peut y contribuer. » | Si « une partie » ne sort pas nette au mixage. Ici la réserve est dans le verbe : elle ne peut pas être coupée. |
 
@@ -254,14 +256,8 @@ Le script a été relu en trois passes. À chaque passe, des relecteurs indépen
 
 Aucune de ces fautes n'était visible à la lecture, et aucun contrôle automatique ne les aurait trouvées.
 
-🔴 **Ce qui n'a pas été relu.** À chaque passe, les fautes sont entrées par les phrases écrites pour corriger les précédentes. Les cinq phrases nées de la troisième passe devaient donc être relues à leur tour, par deux relecteurs indépendants : cette quatrième passe **n'a pas abouti** (limite d'utilisation atteinte, aucun rapport rendu). Elles n'ont été relues que par leur auteur, qui n'y a rien trouvé de grave — ce qui ne vaut pas une relecture indépendante :
+**Quatrième passe — les phrases nées de la troisième.** À chaque passe, les fautes étaient entrées par les phrases écrites pour corriger les précédentes. Deux relecteurs ont donc relu les cinq dernières — « c'est tout un métier », « Nous venons chez vous », « Ce que l'on trouve de vous ? », la prise de secours « faire seul », l'accroche « Sur internet, quelqu'un » — l'un par ce qu'on entend, l'autre par ce qu'on comprend. **Verdict des deux : rien de grave, texte inchangé.** Aucune n'a d'homophone qui soit un tour courant, et aucune ne tient son sens à une seule consonne. Leurs remarques sont des consignes de diction, reportées au §4 ; la seule phrase de remplacement essayée (« votre autonomie ») a aussitôt montré un voisin gênant (« votre économie »), et n'a pas été retenue.
 
-- « Montrer, c'est **tout un** métier. » (P2)
-- « **Nous venons** chez vous. » (P5b)
-- « Ce **que l'on** trouve de vous ? » (P7a)
-- « Et le but : faire **seul**. » (prise de secours P4-4)
-- « **Sur internet, quelqu'un** cherche votre métier. » (accroche sobre)
-
-À faire avant la séance d'enregistrement : les dire à voix haute, et les passer dans un moteur de sous-titrage (§9, point 5).
+⚠️ **Ce que quatre passes ne remplacent pas.** Ce sont des relectures sur papier : aucune voix n'existe, aucun sous-titrage automatique n'a tourné. Le vrai contrôle reste de passer les prises enregistrées dans un moteur de sous-titrage (§9, point 5).
 
 **Ce que la troisième passe a trouvé hors du film.** Le film dit vrai là où le site se contredit : six formations au catalogue mais « 4 parcours finançables » à l'accueil et quatre thèmes au formulaire ; « c'est vous qui faites » dans la méthode mais « On vient filmer dans votre commerce » sur la fiche vidéo. Ces lignes sont à corriger sur le site avant de diffuser le film, qui y renvoie.
