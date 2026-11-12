@@ -68,7 +68,7 @@
     "En ce moment",
     "de vous"
    ],
-   "eviter": "Le ton d'alarme. Le sourire. La question rhétorique : celle-ci attend une réponse."
+   "eviter": "Le ton d'alarme. Le sourire. La question rhétorique : celle-ci attend une réponse. Remplacer « quelqu'un » par « on » : dans ce film, « on » est l'organisme."
   },
   {
    "repere": "P2",
@@ -79,16 +79,16 @@
     6.2,
     11.4
    ],
-   "texte": "Vous savez faire. Montrer, c'est un autre métier.",
+   "texte": "Vous savez faire. Montrer, c'est tout un métier.",
    "ecran": "« Votre métier, vous le maîtrisez. » à 6,0 s, « Le montrer en ligne ? » à 8,0 s, puis trois tampons à 9,0 · 9,75 · 10,5 s : pas le temps, pas la méthode, pas envie de dépendre d'une agence.",
    "intention": "Rendre justice avant de nommer le manque. « Vous savez faire » est un compliment sincère, pas une précaution oratoire.",
-   "intonation": "« Vous savez faire. » plein, affirmatif, descendant. « Montrer, » isolé, la virgule tenue. « c'est un autre métier. » redescend, sans reproche, et finit avant le deuxième tampon.",
+   "intonation": "« Vous savez faire. » plein, affirmatif, descendant. « Montrer, » isolé, la virgule tenue. « c'est tout un métier. » redescend, sans reproche, « tout-un » lié, et finit avant le deuxième tampon.",
    "appuis": [
     "faire",
     "Montrer",
-    "autre"
+    "tout"
    ],
-   "eviter": "Le « mais » sous-entendu entre les deux phrases. Toute nuance de reproche sur « autre »."
+   "eviter": "Le « mais » sous-entendu entre les deux phrases. Toute nuance de reproche. Revenir à « c'est un autre métier » : la liaison y fabrique « notre », et « Montrer, c'est notre métier » est la phrase d'une agence."
   },
   {
    "repere": "P3",
@@ -102,12 +102,12 @@
    "texte": "Un métier qui s'apprend. Quatre temps, un but.",
    "ecran": "Le logo se construit ; « La formation-action. » à 13,2 s, « Vous apprenez en le faisant. Sur votre propre entreprise. » à 14,0 s. Deux claquements à 15,5 et 15,75 s.",
    "intention": "La bonne nouvelle, dite sans emphase. La voix reprend le dernier mot du plan 2 — « métier » — de l'autre côté de l'impact : c'est ce mot qui fait le pont. C'est le seul endroit du film où la voix s'éclaire.",
-   "intonation": "« Un métier qui s'apprend. » d'un seul geste, sans pause avant « qui », clair, presque souriant. « Quatre temps, un but. » posé ; « but » se dit avec son t, reste légèrement ouvert, et sort avant les claquements : c'est la boucle B.",
+   "intonation": "« Un métier qui s'apprend. » d'un seul geste, « qui-s'apprend » en un bloc, le i de « qui » bien dit, l'appui porté par la durée de « -prend » et jamais par une attaque sur « s'a- ». Clair, presque souriant. « Quatre temps, un but. » posé : « quatre » en entier, le t de « temps » frappé ; « but » avec son t, légèrement ouvert, avant les claquements : c'est la boucle B.",
    "appuis": [
     "s'apprend",
     "un but"
    ],
-   "eviter": "L'enthousiasme. Fermer la voix sur « but ». Dire « bu » : le mot revient au plan 4, il doit être reconnu. Revenir à « Montrer s'apprend » : à l'oreille, c'est « Montrez, ça prend »."
+   "eviter": "L'enthousiasme. Fermer la voix sur « but ». Dire « bu ». Toute variante sans « qui » (« Ça s'apprend », « Ce métier s'apprend », « Montrer s'apprend ») : à l'oreille, elles donnent toutes « ça prend ». Avaler le t de « temps » : on entendrait « quatre ans »."
   },
   {
    "repere": "P4-1",
@@ -194,33 +194,33 @@
     32.3,
     35.2
    ],
-   "texte": "Six thèmes possibles.",
+   "texte": "Six formations.",
    "ecran": "« Six formations. Une seule méthode. » à 32,0 s, puis les six tuiles une à une, de 33,0 à 34,3 s.",
-   "intention": "On tourne la page : après la méthode, ce à quoi elle s'applique. La voix annonce, l'écran montre. « Possibles », pas « au choix » : deux des six formations ont des prérequis.",
-   "intonation": "Léger, simple, dit avant que les tuiles finissent de se poser.",
+   "intention": "On tourne la page : après la méthode, ce à quoi elle s'applique. Un simple compte, celui de l'écran : la voix ne dit rien de l'accès, que deux fiches conditionnent.",
+   "intonation": "Léger, simple, dit avant que les tuiles finissent de se poser. « Six » sans s final.",
    "appuis": [
     "Six"
    ],
-   "eviter": "Énumérer : l'écran montre les six. Dire « au choix » : ce serait annoncer un accès que deux fiches conditionnent."
+   "eviter": "Énumérer : l'écran montre les six. Ajouter « au choix », « possibles », « pour tous » : deux des six formations ont des prérequis."
   },
   {
    "repere": "P5b",
    "plan": "Le catalogue",
-   "de": 35.5,
+   "de": 35.4,
    "a": 37.7,
    "fenetre": [
     35.3,
     37.8
    ],
-   "texte": "On vient chez vous. Reste le coût.",
+   "texte": "Nous venons chez vous. Reste le coût.",
    "ecran": "« En présentiel · Dans votre entreprise · Montpellier · Béziers · Sète et environs » à 35,5 s. La musique commence à monter à 37,0 s.",
-   "intention": "D'abord un service rendu. Puis la voix dit tout haut ce que le dirigeant pense tout bas à cet instant. Nommer le coût avant lui, c'est ce qui rend la suite croyable.",
-   "intonation": "« On vient chez vous. » chaleureux, descendant. Une respiration. « Reste le coût. » plus bas, franc, sans s'excuser — et la voix ne retombe pas tout à fait : la réponse arrive au plan suivant.",
+   "intention": "D'abord un service rendu : c'est le formateur qui se déplace. Puis la voix dit tout haut ce que le dirigeant pense tout bas à cet instant. Nommer le coût avant lui, c'est ce qui rend la suite croyable.",
+   "intonation": "« Nous venons chez vous. » chaleureux, descendant, le v de « vous » net. Une respiration. « Reste le coût. » plus bas, franc, sans s'excuser — et la voix ne retombe pas tout à fait : la réponse arrive au plan suivant.",
    "appuis": [
     "chez vous",
     "coût"
    ],
-   "eviter": "Le ton du slogan sur « chez vous ». Le drame sur « coût » : c'est une question pratique."
+   "eviter": "Le ton du slogan sur « chez vous ». Le drame sur « coût ». Dire « On vient chez vous » : pour un commerçant, c'est la façon ordinaire de dire que des clients entrent — une promesse que le film ne fait pas."
   },
   {
    "repere": "P6a",
@@ -234,7 +234,7 @@
    "texte": "C'est une formation.",
    "ecran": "« Organisme certifié Qualiopi, au titre des actions de formation » · « Formateur à vos côtés · Évaluations tracées · Suivi à 90 jours ».",
    "intention": "La réponse commence par la nature de ce qu'on propose : une formation, pas une prestation. C'est parce que c'en est une que la phrase suivante est possible.",
-   "intonation": "Plus grave, factuel, comme on précise un point de droit. Quatre mots, puis on laisse l'écran montrer le cadre.",
+   "intonation": "Plus grave, factuel, comme on précise un point de droit. « une » bref, le f attaqué, l'appui sur « for- ». Quatre mots, puis on laisse l'écran montrer le cadre.",
    "appuis": [
     "formation"
    ],
@@ -243,8 +243,8 @@
   {
    "repere": "P6b",
    "plan": "Le cadre — financement",
-   "de": 40.5,
-   "a": 43.9,
+   "de": 40.6,
+   "a": 44.0,
    "fenetre": [
     40.4,
     44.4
@@ -252,7 +252,7 @@
    "texte": "Votre fonds de formation peut en financer une partie.",
    "ecran": "La réplique commence sur la fin du carton Qualiopi et passe sur le suivant, à 42,0 s : « Vous cotisez déjà à un fonds de formation. Il peut financer une partie de votre parcours. » · AGEFICE · FAFCEA · OPCO, « selon votre statut ». À 44,5 s, un carillon et le devis : « Reste à charge — Annoncé avant toute inscription ».",
    "intention": "Une information, pas un argument. C'est la phrase que la loi regarde : elle se dit comme un artisan annonce un délai, sans gourmandise. Elle répond à « Reste le coût ».",
-   "intonation": "Débit régulier, d'un seul souffle, neutre. Liaison à « peut en » (« peu-t-en »). « peut » et « une partie » se détachent à peine, mais ils s'entendent — et « une partie » est finie une demi-seconde avant le carillon de 44,5 s.",
+   "intonation": "Débit régulier, d'un seul souffle, neutre. Le v de « Votre » attaqué franchement : entendu « Notre fonds », ce serait l'organisme qui finance. Liaison à « peut en » (« peu-t-en »). « une partie » : deux syllabes entières à « par-tie », le p frappé, sans chute de voix — ce sont les trois syllabes que la loi regarde.",
    "appuis": [
     "peut",
     "une partie"
@@ -262,16 +262,16 @@
   {
    "repere": "P7a",
    "plan": "L'appel",
-   "de": 46.5,
-   "a": 48.9,
+   "de": 46.3,
+   "a": 48.95,
    "fenetre": [
     46.3,
     48.95
    ],
-   "texte": "Ce qu'on trouve de vous ? Faites la recherche.",
+   "texte": "Ce que l'on trouve de vous ? Faites la recherche.",
    "ecran": "« Voyons ce que ça donne sur votre cas. » à 46,0 s, le bouton « Réserver un diagnostic » à 47,5 s. Il est cliqué à 49,0 s : le clic ponctue la réplique.",
    "intention": "Rendre la question du début, avec le moyen d'y répondre seul, tout de suite. On donne une clé, pas un ordre. La boucle A se referme ici.",
-   "intonation": "« Ce qu'on trouve de vous ? » finit sur les mêmes mots et la même mélodie que la question du plan 1 : c'est ce rappel que l'oreille reconnaît. Lier « ce-qu'on-trouve ». « Faites la recherche. » simple, presque en passant, généreux.",
+   "intonation": "« Ce que l'on trouve de vous ? » finit sur les mêmes mots et la même mélodie que la question du plan 1 : c'est ce rappel que l'oreille reconnaît. « Faites la recherche. » simple, presque en passant, généreux. Le clic du bouton ponctue.",
    "appuis": [
     "de vous",
     "recherche"
@@ -310,30 +310,74 @@
   },
   {
    "nom": "sobre",
-   "texte": "Sur internet, on cherche votre métier. Et qu'est-ce qu'on trouve de vous ?",
+   "texte": "Sur internet, quelqu'un cherche votre métier. Et qu'est-ce qu'il trouve de vous ?",
    "pari": "Aucun effet, et le lieu est dit : la seule qui se comprend sans l'image."
   }
  ],
  "prises_de_secours": [
   {
    "repere": "P4-4",
-   "texte": "Et le but : faire sans nous.",
-   "quand": "Si « vous passer de nous » pèse en bouche. Articuler le n : entendu « sans vous », c'est le contraire de ce que dit le film."
-  },
-  {
-   "repere": "P5a",
-   "texte": "Six formations.",
-   "quand": "Si « thèmes » paraît vague à l'écoute. C'est le titre de l'écran, dit tel quel."
+   "texte": "Et le but : faire seul.",
+   "quand": "Si « vous passer de nous » pèse en bouche. Jamais « faire sans nous » : à une consonne près, c'est « faire sans vous »."
   },
   {
    "repere": "P5b",
-   "texte": "On vient chez vous.",
+   "texte": "Nous venons chez vous.",
    "quand": "Si « Reste le coût » sonne trop sec : le film tient sans, la question du début dort seulement plus longtemps."
   },
   {
    "repere": "P6b",
    "texte": "Votre fonds de formation peut y contribuer.",
-   "quand": "Si la réplique principale ne tient pas dans ses 3,4 secondes."
+   "quand": "Si « une partie » ne sort pas nette au mixage. Ici la réserve est dans le verbe : elle ne peut pas être coupée."
   }
+ ],
+ "mixage": {
+  "_lisezmoi": "Les bruitages du film qui tombent, au débit prévu, sous une syllabe porteuse. Instants lus dans reperes.json. À baisser sous la voix, ou la réplique à glisser de quelques dixièmes.",
+  "points": [
+   {
+    "t": 8.0,
+    "son": "impact doux",
+    "replique": "P2",
+    "sous": "« c'est tout un »"
+   },
+   {
+    "t": 12.94,
+    "son": "souffle doux",
+    "replique": "P3",
+    "sous": "« qui »"
+   },
+   {
+    "t": 13.5,
+    "son": "bulle",
+    "replique": "P3",
+    "sous": "la jointure de « s'ap-prend »"
+   },
+   {
+    "t": 40.5,
+    "son": "bulle",
+    "replique": "P6b",
+    "sous": "juste avant le v de « Votre »"
+   },
+   {
+    "t": 43.25,
+    "son": "trois glissés (43,25 · 43,55 · 43,85 s)",
+    "replique": "P6b",
+    "sous": "« une partie »"
+   },
+   {
+    "t": 44.5,
+    "son": "carillon",
+    "replique": "P6b",
+    "sous": "une demi-seconde après « une partie » : sans l'image du devis, il peut sonner comme une bonne nouvelle"
+   }
+  ]
+ },
+ "coupes": [
+  "P2 jamais sans P3 : « Montrer, c'est tout un métier », seule, est un argument d'agence.",
+  "Aucune version courte ne commence à P3 : « Un métier qui s'apprend », sans P2, promet un métier.",
+  "« Nous venons chez vous » jamais sans P4-2 avant ou P6a après : seule, elle annonce un service à domicile.",
+  "P6b jamais sans P6a juste avant : c'est P6a qui dit que ce qu'on finance est une formation.",
+  "Toute version courte contient P4-2 (« c'est vous qui faites ») ou P6a (« C'est une formation »).",
+  "Tiennent seules : P1, P4-2, P4-4, P6a."
  ]
 }
