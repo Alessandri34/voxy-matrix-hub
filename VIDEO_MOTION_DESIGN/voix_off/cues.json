@@ -1,0 +1,96 @@
+[
+ {
+  "id": "01",
+  "start": 0.3,
+  "end": 3.45,
+  "text": "Chaque année, votre budget formation… s'évapore.",
+  "note": "Posé, presque confidentiel. Laisser un silence avant « s'évapore », le dire plus bas."
+ },
+ {
+  "id": "02",
+  "start": 4.25,
+  "end": 7.95,
+  "text": "Des sites vitrines. Des formations théoriques. Sans résultat.",
+  "note": "Un peu las, ironique. Deux coups secs, puis « Sans résultat » tombe à plat."
+ },
+ {
+  "id": "03",
+  "start": 8.15,
+  "end": 11.55,
+  "text": "Et si votre formation construisait enfin votre machine à clients ?",
+  "note": "Ça remonte : curiosité, sourire dans la voix. Appuyer « machine à clients »."
+ },
+ {
+  "id": "04",
+  "start": 12.7,
+  "end": 15.5,
+  "text": "Voxy Matrix. Le centre d'implémentation Qualiopi.",
+  "note": "Fier, assuré, sans crier. Petite pause après « Voxy Matrix »."
+ },
+ {
+  "id": "05",
+  "start": 16.1,
+  "end": 19.5,
+  "text": "Zéro théorie. Que de l'exécution. Et c'est finançable.",
+  "note": "Rythme keynote : trois phrases courtes et nettes. Le dernier mot est un cadeau."
+ },
+ {
+  "id": "06",
+  "start": 20.3,
+  "end": 25.6,
+  "text": "Une boutique qui vend, jour et nuit. Fiches produits par l'IA, paniers relancés automatiquement.",
+  "note": "Fluide, énergique, on déroule une démo.",
+  "tts": "Une boutique qui vend, jour et nuit. Fiches produits par l'I.A., paniers relancés automatiquement."
+ },
+ {
+  "id": "07",
+  "start": 26.3,
+  "end": 31.6,
+  "text": "Votre agenda se remplit, sans vous. L'IA rappelle chaque prospect en moins de trente secondes.",
+  "note": "Appuyer « sans vous ». « Trente secondes » bien détaché.",
+  "tts": "Votre agenda se remplit, sans vous. L'I.A. rappelle chaque prospect en moins de trente secondes."
+ },
+ {
+  "id": "08",
+  "start": 32.3,
+  "end": 37.6,
+  "text": "Sur Google Maps, vous passez devant vos concurrents. Et les avis cinq étoiles s'accumulent.",
+  "note": "Complice, un peu de jubilation sur « devant vos concurrents »."
+ },
+ {
+  "id": "09",
+  "start": 38.3,
+  "end": 43.5,
+  "text": "Un artisan du BTP : plus trois cents pour cent de devis. En deux mois.",
+  "note": "Factuel, pas de survente. Le chiffre est fort, il suffit de le poser. Pause avant « En deux mois ».",
+  "tts": "Un artisan du B.T.P. : plus trois cents pour cent de devis. En deux mois."
+ },
+ {
+  "id": "10",
+  "start": 44.2,
+  "end": 47.6,
+  "text": "Trois étapes. Zéro paperasse. On monte votre dossier pour vous.",
+  "note": "Rassurant, simple, chaleureux."
+ },
+ {
+  "id": "11",
+  "start": 48.2,
+  "end": 51.5,
+  "text": "Seulement cinq entreprises par mois. Sur dossier.",
+  "note": "Plus lent, plus grave. Exclusif, pas agressif."
+ },
+ {
+  "id": "12",
+  "start": 52.2,
+  "end": 55.8,
+  "text": "Vérifiez votre éligibilité. L'audit est offert.",
+  "note": "Appel direct, souriant, on regarde la personne dans les yeux."
+ },
+ {
+  "id": "13",
+  "start": 56.5,
+  "end": 59.2,
+  "text": "Voxy Matrix. Passez à l'exécution.",
+  "note": "Signature. Calme, sûr de soi, dernière syllabe qui retombe."
+ }
+]

@@ -15,7 +15,8 @@ BEAT = 0.5
 
 music = np.zeros((N, 2))
 sfx = np.zeros((N, 2))
-verb_send = np.zeros((N, 2))
+verb_send = np.zeros((N, 2))   # reverb send from SFX
+verb_m = np.zeros((N, 2))      # reverb send from music
 kick_env = np.zeros(N)
 
 
@@ -50,7 +51,7 @@ def add(buf, t0, sig, gain=1.0, pan=0.0, send=0.0):
         return
     buf[i0:i1] += sig[: i1 - i0] * gain
     if send:
-        verb_send[i0:i1] += sig[: i1 - i0] * gain * send
+        (verb_m if buf is music else verb_send)[i0:i1] += sig[: i1 - i0] * gain * send
 
 
 def env_ad(n, a, d, curve=6.0):
@@ -515,24 +516,32 @@ irR = rng.standard_normal(len(ir_t)) * np.exp(-ir_t / 0.55)
 irL = filt(irL, 'low', 6000); irR = filt(irR, 'low', 6000)
 irL[: int(0.012 * SR)] = 0; irR[: int(0.017 * SR)] = 0
 irL /= np.sqrt(np.sum(irL ** 2)); irR /= np.sqrt(np.sum(irR ** 2))
-send = filt(verb_send, 'high', 250)
-wet = np.stack([fftconvolve(send[:, 0], irL)[:N], fftconvolve(send[:, 1], irR)[:N]], 1) * 0.55
+def reverb(snd):
+    snd = filt(snd, 'high', 250)
+    return np.stack([fftconvolve(snd[:, 0], irL)[:N], fftconvolve(snd[:, 1], irR)[:N]], 1) * 0.55
+
+wet_m, wet_s = reverb(verb_m), reverb(verb_send)
 
 # stereo delay on music (dotted 8th)
 dly = int(0.375 * SR)
 md = np.zeros_like(music_sc)
 md[dly:] = filt(music_sc[:-dly, ::-1], 'band', [600, 5000]) * 0.12
 
-mix = music_sc * 0.9 + md + sfx * 1.0 + wet
-mix = filt(mix, 'high', 28)
-# gentle glue: soft clip
-mix /= np.max(np.abs(mix)) + 1e-9
-mix = np.tanh(mix * 1.6) / np.tanh(1.6)
-# final fade out
+stem_music = filt(music_sc * 0.9 + md + wet_m, 'high', 28)
+stem_sfx = filt(sfx * 1.0 + wet_s, 'high', 28)
 fo = int(1.6 * SR)
-mix[-fo:] *= np.linspace(1, 0, fo)[:, None] ** 1.5
 fi = int(0.02 * SR)
-mix[:fi] *= np.linspace(0, 1, fi)[:, None]
-mix *= 0.89
-wavfile.write(sys.argv[1] if len(sys.argv) > 1 else 'sound.wav', SR, (mix * 32767).astype(np.int16))
+for st in (stem_music, stem_sfx):
+    st[-fo:] *= np.linspace(1, 0, fo)[:, None] ** 1.5
+    st[:fi] *= np.linspace(0, 1, fi)[:, None]
+mix = stem_music + stem_sfx
+g = 1.0 / (np.max(np.abs(mix)) + 1e-9)
+# gentle glue: soft clip
+mix = np.tanh(mix * g * 1.6) / np.tanh(1.6) * 0.89
+out = sys.argv[1] if len(sys.argv) > 1 else 'sound.wav'
+wavfile.write(out, SR, (mix * 32767).astype(np.int16))
+# stems (same gain staging, no soft clip) for the voice-over mix
+base = out[:-4] if out.endswith('.wav') else out
+wavfile.write(base + '_music.wav', SR, (stem_music * g * 0.89).astype(np.float32))
+wavfile.write(base + '_sfx.wav', SR, (stem_sfx * g * 0.89).astype(np.float32))
 print('ok', mix.shape, float(np.max(np.abs(mix))))
