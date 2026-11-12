@@ -61,9 +61,9 @@
   "id": "09",
   "start": 38.3,
   "end": 43.5,
-  "text": "Un artisan du BTP : ses devis ont quadruplé. En deux mois.",
-  "note": "Factuel, pas de survente. Appuyer « quadruplé ». Pause avant « En deux mois ».",
-  "tts": "Un artisan du B.T.P. : ses devis ont quadruplé. En deux mois."
+  "text": "Un artisan du BTP : plus trois cents pour cent de devis. En deux mois.",
+  "note": "Factuel, pas de survente. Le chiffre est fort, il suffit de le poser. Pause avant « En deux mois ».",
+  "tts": "Un artisan du B.T.P. : plus trois cents pour cent de devis. En deux mois."
  },
  {
   "id": "10",

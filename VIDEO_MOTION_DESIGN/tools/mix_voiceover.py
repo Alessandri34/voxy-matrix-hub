@@ -110,7 +110,7 @@ sfx = load('build/sound_raw_sfx.wav', 2)[:N]
 env = smooth_env(vo)
 env = np.clip(env / (np.percentile(env[env > 1e-4], 70) + 1e-9), 0, 1) if (env > 1e-4).any() else env
 music *= (1 - 0.62 * env)[:, None]             # ducking musique ≈ -8 dB sous la voix
-sfx *= (1 - 0.55 * env)[:, None]               # effets ≈ -7 dB sous la voix
+sfx *= (1 - 0.75 * env)[:, None]               # effets ≈ -12 dB sous la voix (la voix est prioritaire)
 sos = butter(2, [1500, 4500], btype='bandstop', fs=SR, output='sos')
 carve = sosfilt(sos, music, axis=0)            # creuse la bande de la voix dans la musique
 music = music * (1 - 0.35 * env)[:, None] + carve * (0.35 * env)[:, None]

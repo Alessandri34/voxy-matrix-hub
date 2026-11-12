@@ -22,7 +22,7 @@ _model = None
 def model():
     global _model
     if _model is None:
-        _model = WhisperModel('small', device='cpu', compute_type='int8')
+        _model = WhisperModel('medium', device='cpu', compute_type='int8')
     return _model
 
 def analyse(ref, path):
